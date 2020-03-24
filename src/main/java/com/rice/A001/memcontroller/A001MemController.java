@@ -26,7 +26,6 @@ public class A001MemController {
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 		public String login(Model model, HttpServletRequest request, HttpServletResponse response) {
-			
 			return "login";
 			
 		}
@@ -34,7 +33,6 @@ public class A001MemController {
 		
 	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
 	public String list(Model model, HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("list");
 		String id = request.getParameter("id");
 		List<A001MemVO> listMem = a001MemService.selectMem(id);
 		

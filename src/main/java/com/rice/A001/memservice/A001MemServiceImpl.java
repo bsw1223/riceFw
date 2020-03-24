@@ -16,7 +16,6 @@ public class A001MemServiceImpl implements A001MemService {
 	
 	@Override
 	public List<A001MemVO> selectMem(String id) {
-		System.out.println("service");
 		List memlist=null;
 		memlist = a001MemDAO.getList(id);
 		

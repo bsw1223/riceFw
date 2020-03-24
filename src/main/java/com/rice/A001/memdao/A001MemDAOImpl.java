@@ -17,7 +17,6 @@ public class A001MemDAOImpl implements A001MemDAO {
 	
 	@Override
 	public List<A001MemVO> getList(String id) {
-		System.out.println("memdao");
 		List<A001MemVO> memList = null;
 		memList= sqlsession.selectList("mapper.member.selectMem",id);
 		
