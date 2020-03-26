@@ -7,6 +7,8 @@
 <typeAliases>
 
 <typeAlias alias="A001MemVO" type="com.rice.A001.memvo.A001MemVO"/>
+<typeAlias alias="B001AttendVO" type="com.rice.B001.attendvo.B001AttendVO"/>
+
 
 </typeAliases>
 
