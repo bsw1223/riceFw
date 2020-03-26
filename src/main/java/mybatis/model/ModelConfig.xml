@@ -7,7 +7,7 @@
 <typeAliases>
 
 <typeAlias alias="A001MemVO" type="com.rice.A001.memvo.A001MemVO"/>
-
+<typeAlias alias="C001BoardVO" type="com.rice.C001.boardvo.C001BoardVO"/>
 </typeAliases>
 
 </configuration>
