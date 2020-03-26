@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board">
+	<resultMap id="boardResult" type="C001BoardVO">
+		<result property="bno" column="bno" />
+        <result property="title" column="title" />
+        <result property="content" column="content" />
+         <result property="writer" column="writer"/>
+
+	</resultMap> 
+
+
+
+	<select id="listBoard" resultType="C001BoardVO" parameterType="String">
+      <![CDATA[
+         select * from tbl_board
+      ]]>
+	</select>
+	
+	<insert id="insert" parameterType="C001BoardVO">
+		insert into tbl_board (bno, title, content, writer)
+		values(seq_board.nextval, #{title}, #{content}, #{writer})
+	</insert>
+	
+	</mapper>
