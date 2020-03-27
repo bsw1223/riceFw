@@ -26,4 +26,22 @@
 		values(seq_board.nextval, #{title}, #{content}, #{writer})
 	</insert>
 	
+	
+	<select id ="read" resultType="C001BoardVO">
+		select bno,title,content,writer,updateDate
+		from tbl_board
+		where bno =${bno}
+	</select>
+	
+	<delete id ="delete">
+		delete from tbl_board where bno =#{bno}
+	</delete>
+	
+	<update id="update">
+		update tbl_board
+		set title=#{title},content=#{content},updateDate=#{updateDate}
+		where bno =#{bno}
+	</update>
+	
+	
 	</mapper>

@@ -35,12 +35,12 @@
               <!-- text input -->
                 <div class="form-group">
                   <label>Text</label>
-                  <input type="text" class="form-control" placeholder="Enter ...">
+                  <input type="text" class="form-control" placeholder="Enter ..." name ="title">
                 </div>
             
            		 <div class="box-body pad">
              	 	<form>
-               	    	 <textarea id="editor1" name="editor1" rows="10" cols="80">
+               	    	 <textarea id="editor1" name="editor1" rows="10" cols="80"name ="content">
                                             This is my textarea to be replaced with CKEditor.
                     	</textarea>
               		</form>
@@ -48,7 +48,7 @@
 	          		 
 	             <div class="form-group">
 	                	  <label for="exampleInputFile">File input</label>
-	                  <input type="file" id="exampleInputFile">
+	                  <input type="file" id="exampleInputFile" name ="file">
 	              </div>
 	              
 	               <div class="box-footer">
@@ -69,5 +69,27 @@
 
 
 <%@ include file = "footer.jsp" %>
+<script type="text/javascript">
+
+/* $(document).ready(function(){
+
+	$("title").attr("readonly",true);
+	
+	$("title").removeAttr("readonly");
+	
+	$("content").attr("readonly",true);
+	
+	$("content").removeAttr("readonly");
+	
+	$("file").attr("readonly",true);
+	
+	$("title").removeAttr("readonly");
+})
+ */
+
+
+</script>
+
+
 </body>
 </html>

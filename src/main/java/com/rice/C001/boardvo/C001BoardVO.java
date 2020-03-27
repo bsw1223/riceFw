@@ -6,6 +6,45 @@ public class C001BoardVO {
 	private Long bno;
 	private String title, content, writer;
 	private Date regdate, updateDate;
+	
+
+	
+	
+	
+	public C001BoardVO() {
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "C001BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer
+				+ ", regdate=" + regdate + ", updateDate=" + updateDate + "]";
+	}
+
+
+
+	public C001BoardVO(Long bno, String title, String content, String writer, Date regdate, Date updateDate) {
+		this.bno = bno;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.regdate = regdate;
+		this.updateDate = updateDate;
+	}
+	
+	
+	
+	public C001BoardVO(Long bno, String title, String content, String writer, Date updateDate) {
+		this.bno = bno;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.updateDate = updateDate;
+	}
+
+
+
 	public Long getBno() {
 		return bno;
 	}
