@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rice.C001.boarddao.C001BoardDAO;
-import com.rice.C001.boarddto.PageDTO;
 import com.rice.C001.boardvo.C001BoardVO;
 
 @Service
@@ -15,25 +14,47 @@ public class C001BoardServiceImpl implements C001BoardService {
 	@Autowired
 	private C001BoardDAO c001BoardDAO;
 	
-	
+	/*
+	 * @Override public List<C001BoardVO> listBoard() { List boardlist=null;
+	 * boardlist = c001BoardDAO.boardList();
+	 * 
+	 * return boardlist; }
+	 */
+
+
 	@Override
-	public List<C001BoardVO> listBoard() {
-		List boardlist=null;
-		boardlist = c001BoardDAO.boardList();
+	public boolean delete(Long bno) throws Exception {
 		
-		return boardlist;
+		c001BoardDAO.delete(bno);
+		return false;
 	}
-	
-	@Override
-	public void register(C001BoardVO vo) {
-		c001BoardDAO.insertSelectKey(vo);
 
+	@Override
+	public boolean update(C001BoardVO boardvo) throws Exception {
+
+		c001BoardDAO.update(boardvo);
+		return false;
 	}
-	
-	@Override
-	 public int getTotal() {
-	      return c001BoardDAO.getTotal();
-	   }
 
+	@Override
+	public void create(C001BoardVO boardvo) throws Exception {
+
+		c001BoardDAO.create(boardvo);
+	}
+
+	@Override
+	public C001BoardVO read(Long bno) throws Exception {
+
+		return c001BoardDAO.read(bno);
+	}
+
+	@Override
+	public List<C001BoardVO> listBoard() throws Exception {
+
+		return c001BoardDAO.listBoard();
+	}
+
+
+	
 
 }
