@@ -5,7 +5,7 @@ import java.util.Date;
 public class C001BoardVO {
 	private Long bno;
 	private String title, content, writer;
-	private Date regdate, updateDate;
+	private String regdate, updateDate;
 	public Long getBno() {
 		return bno;
 	}
@@ -25,21 +25,22 @@ public class C001BoardVO {
 		this.content = content;
 	}
 	public String getWriter() {
+		
 		return writer;
 	}
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public Date getRegdate() {
+	public String getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(Date regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	public Date getUpdateDate() {
+	public String getUpdateDate() {
 		return updateDate;
 	}
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
 	

@@ -6,13 +6,21 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.rice.C001.boarddto.PageDTO;
 import com.rice.C001.boardvo.C001BoardVO;
+
+
+
 
 @Repository
 public class C001BoardDAOImpl implements C001BoardDAO {
 	
+	
+	
 	@Autowired
 	private SqlSession sqlsession;
+	private C001BoardDAO c001BoardDAO;
+	
 	
 	
 	@Override
@@ -24,11 +32,28 @@ public class C001BoardDAOImpl implements C001BoardDAO {
 
 		return list;
 	}
-	
+
+
 	@Override
-	public void registerBoard(C001BoardVO boardvo) {
+	public void insertSelectKey(C001BoardVO vo) {
 		
-		sqlsession.insert("mapper.board.insert");
+	
+
+		
+		
+		System.out.println("AAA");
+		
+		
+		sqlsession.insert("mapper.board.insertSelectKey");
+	}
+
+	@Override
+	public int getTotal() {
+		// TODO Auto-generated method stub
+		int page;
+		page=sqlsession.selectOne("mapper.board.getTotal");
+		
+		return page;
 	}
 
 }

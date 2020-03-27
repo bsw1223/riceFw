@@ -56,6 +56,25 @@
           
                 </tbody>
               </table>
+              
+               <div>
+                 <ul class="pagination">
+                
+                      <c:if test="${pageUtil.prev}">
+                         <li class="page-item"><a class="page-link" href="/board.do?page=${pageUtil.start-1 }&amount=${ pageUtil.dto.amount}">Previous</a></li>
+                      </c:if>
+                      
+                      <c:forEach begin="${pageUtil.start }" end="${pageUtil.end }" var="pnum">
+                      		<li class="page-item ${pnum == pageUtil.dto.page? "active":"" }"><a class="page-link" href="/board/list?page=${pnum }&amount=${ pageUtil.dto.amount}">${pnum}</a></li>
+               		</c:forEach>
+               		
+                   <c:if test="${pageUtil.next}">
+                      <li class="page-item"><a class="page-link" href="/board.do?page=${pageUtil.end+1 }&amount=${ pageUtil.dto.amount}">Next</a></li>
+                   </c:if>
+
+				  </ul>
+                </div>
+              
             </div>
             <!-- /.box-body -->
           </div>
@@ -64,7 +83,7 @@
  				<td>
                     <button type="submit" class="btn btn-block btn-default">게시글 작성</button>
                  </td>
-       </form>
+     	  </form>
             </div>
             <!-- /.box-body -->
           </div>

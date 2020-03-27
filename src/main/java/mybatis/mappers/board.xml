@@ -9,8 +9,9 @@
 		<result property="bno" column="bno" />
         <result property="title" column="title" />
         <result property="content" column="content" />
-         <result property="writer" column="writer"/>
-
+        <result property="writer" column="writer"/>
+       <!--  <result property="regdate" column="regdate"/>
+        <result property="updateDate" column="updateDate"/> -->
 	</resultMap> 
 
 
@@ -21,9 +22,21 @@
       ]]>
 	</select>
 	
-	<insert id="insert" parameterType="C001BoardVO">
-		insert into tbl_board (bno, title, content, writer)
-		values(seq_board.nextval, #{title}, #{content}, #{writer})
+	<select id="getTotal" resultType="int">
+		<![CDATA[
+         select count(bno) from tbl_board
+      ]]>
+	</select>
+	
+	<insert id="insertSelectKey" parameterType="C001BoardVO">
+		<selectKey keyProperty="bno" order="BEFORE" resultType="long" >
+		
+			select seq_board.nextval from dual
+			
+		</selectKey>
+		 <![CDATA[ 
+		insert into tbl_board(bno,title,content,writer) values(50004,#{title},#{content},#{writer})
+	 ]]>
 	</insert>
 	
-	</mapper>
+</mapper>
