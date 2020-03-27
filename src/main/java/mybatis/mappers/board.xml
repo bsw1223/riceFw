@@ -35,7 +35,7 @@
 			
 		</selectKey>
 		 <![CDATA[ 
-		insert into tbl_board(bno,title,content,writer) values(50004,#{title},#{content},#{writer})
+		insert into tbl_board(bno,title,content,writer) values(#{bno},#{title},#{content},#{writer})
 	 ]]>
 	</insert>
 	

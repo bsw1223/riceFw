@@ -20,6 +20,7 @@ public class C001BoardDAOImpl implements C001BoardDAO {
 	@Autowired
 	private SqlSession sqlsession;
 	private C001BoardDAO c001BoardDAO;
+
 	
 	
 	
@@ -37,14 +38,7 @@ public class C001BoardDAOImpl implements C001BoardDAO {
 	@Override
 	public void insertSelectKey(C001BoardVO vo) {
 		
-	
-
-		
-		
-		System.out.println("AAA");
-		
-		
-		sqlsession.insert("mapper.board.insertSelectKey");
+			sqlsession.insert("mapper.board.insertSelectKey",vo);
 	}
 
 	@Override

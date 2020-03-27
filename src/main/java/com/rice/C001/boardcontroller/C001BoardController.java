@@ -51,18 +51,13 @@ public class C001BoardController {
 	@RequestMapping(value = "/boardRegister.do", method = RequestMethod.GET)
 	public String Register(C001BoardVO boardvo,  RedirectAttributes rttr, HttpServletRequest request, HttpServletResponse response) {
 		
-		String writer= request.getParameter("writer");
-		String title= request.getParameter("title");
-		String content= request.getParameter("content");
-		System.out.println("글쓴이 :" +writer);
-		System.out.println("제목 :" +title);
-		System.out.println("내용 :" +content);
+//		String writer= request.getParameter("writer");
+//		String title= request.getParameter("title");
+//		String content= request.getParameter("content");
+//	
 		
 		c001BoardService.register(boardvo);
-//		System.out.println( "voBno : " + boardvo.getBno().toString() );
-		System.out.println( "voWriter : " + boardvo.getWriter().toString() );
-		System.out.println( "voTitle : " + boardvo.getTitle().toString() );
-		System.out.println( "votent : " + boardvo.getContent().toString() );
+
 		
 		return "redirect:/board.do";
 	}	
