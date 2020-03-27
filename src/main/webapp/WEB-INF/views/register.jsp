@@ -35,16 +35,10 @@
               <!-- text input -->
               <form action="/boardRegister.do">  
                 <div class="form-group">
-<<<<<<< HEAD
                   <label>Title</label>
                   <input type="text" class="form-control" placeholder="Enter ..." name="title">
-=======
-                  <label>Text</label>
-                  <input type="text" class="form-control" placeholder="Enter ..." name ="title">
->>>>>>> refs/remotes/origin/master
                 </div>
             
-<<<<<<< HEAD
                     	
                    <div class="form-group">
 						<label>Text area</label>
@@ -56,19 +50,10 @@
                   <label>Writer</label>
                   <input type="text" class="form-control" placeholder="Enter ..." name="writer">
                 </div>
-=======
-           		 <div class="box-body pad">
-             	 	<form>
-               	    	 <textarea id="editor1" name="editor1" rows="10" cols="80"name ="content">
-                                            This is my textarea to be replaced with CKEditor.
-                    	</textarea>
-              		</form>
-          		 </div>
->>>>>>> refs/remotes/origin/master
 	          		 
 	             <div class="form-group">
 	                	  <label for="exampleInputFile">File input</label>
-	                  <input type="file" id="exampleInputFile" name ="file">
+	                  <input type="file" id="exampleInputFile">
 	              </div>
 	               <div class="box-footer">
                 		<button type="submit" class="btn btn-primary">Submit</button>
@@ -90,27 +75,5 @@
 
 
 <%@ include file = "footer.jsp" %>
-<script type="text/javascript">
-
-/* $(document).ready(function(){
-
-	$("title").attr("readonly",true);
-	
-	$("title").removeAttr("readonly");
-	
-	$("content").attr("readonly",true);
-	
-	$("content").removeAttr("readonly");
-	
-	$("file").attr("readonly",true);
-	
-	$("title").removeAttr("readonly");
-})
- */
-
-
-</script>
-
-
 </body>
 </html>

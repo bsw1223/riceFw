@@ -1,5 +1,6 @@
 package com.rice.C001.boardcontroller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rice.C001.boarddao.C001BoardDAO;
@@ -19,8 +19,6 @@ import com.rice.C001.boarddto.PageDTO;
 import com.rice.C001.boarddto.PageUtil;
 import com.rice.C001.boardservice.C001BoardService;
 import com.rice.C001.boardvo.C001BoardVO;
-
-import oracle.net.ano.Service;
 
 @Controller
 @RequestMapping("/")
@@ -53,12 +51,9 @@ public class C001BoardController {
 	@RequestMapping(value = "/boardRegister.do", method = RequestMethod.GET)
 	public String Register(C001BoardVO boardvo,  RedirectAttributes rttr, HttpServletRequest request, HttpServletResponse response) {
 		
-//		String writer= request.getParameter("writer");
-//		String title= request.getParameter("title");
-//		String content= request.getParameter("content");
-//	
-		
+		c001BoardService.register(boardvo);
 
+		
 		
 		return "redirect:/board.do";
 	}	
