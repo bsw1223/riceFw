@@ -17,8 +17,8 @@ public class C001BoardDAOImpl implements C001BoardDAO {
 	
 	@Autowired
 	private SqlSession sqlsession;
-	private C001BoardDAO c001BoardDAO;
 
+	private C001BoardDAO c001BoardDAO;
 	
 	@Override
 	public List<C001BoardVO> boardList() {
@@ -29,6 +29,7 @@ public class C001BoardDAOImpl implements C001BoardDAO {
 
 		return list;
 	}
+
 
 
 	@Override
@@ -78,4 +79,12 @@ public class C001BoardDAOImpl implements C001BoardDAO {
 		return sqlsession.selectList("mapper.board.getListWithPaging",cri);
 	}
 
+
+	@Override
+	public List<C001BoardVO> getSelectOne(int bno) {
+		List<C001BoardVO> c001BoardDAO = null;
+		System.out.println("dao �뙆�씪誘명꽣:"+bno);
+		c001BoardDAO = sqlsession.selectList("mapper.board.getSelectOne", bno);
+		return c001BoardDAO;
+	}
 }

@@ -29,10 +29,15 @@ public class A001MemController {
 			return "login";
 			
 		}
+	@RequestMapping(value = "/boardContent.do", method = RequestMethod.GET)
+	public String boardContent(Model model, HttpServletRequest request, HttpServletResponse response) {
+		return "boardContent";
 		
+	}	
 		
 	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
 	public String list(Model model, HttpServletRequest request, HttpServletResponse response) {
+		
 		String id = request.getParameter("id");
 		List<A001MemVO> listMem = a001MemService.selectMem(id);
 		
@@ -41,8 +46,14 @@ public class A001MemController {
 		return "list";
 		
 	}	
-		
-		
+	
+	
+	 @RequestMapping(value = "/index.do", method = RequestMethod.GET) public
+	  String index(Model model, HttpServletRequest request, HttpServletResponse
+	  response) { return "index";
+	  
+	  }
+	 
 		
 		
 }

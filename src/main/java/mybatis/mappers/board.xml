@@ -32,8 +32,13 @@
       ]]>
 	</select>
 	
+	<insert id="insert" parameterType="C001BoardVO">
+		insert into tbl_board (bno, title, content, writer)
+		values(seq_board.nextval, #{title}, #{content}, #{writer})
+	</insert>
+	
 	<select id="getTotal" resultType="int">
-		<![CDATA[
+	<![CDATA[
          select count(bno) from tbl_board
       ]]>
 	</select>
@@ -48,7 +53,7 @@
 		insert into tbl_board(bno,title,content,writer) values(#{bno},#{title},#{content},#{writer})
 	 ]]>
 	</insert>
-	
+
 	<select id="read" resultType="C001BoardVO">
 		select * from  tbl_board where bno=#{bno}
 	</select>
@@ -65,4 +70,12 @@
 		updateDate=sysdate
 		where bno=#{bno}
 	</update>
+
+	<select id="getSelectOne" parameterType="int" resultType="C001BoardVO">
+	<![CDATA[
+         select * from tbl_board where bno=#{number}
+      ]]>
+	</select>
+	
+
 </mapper>

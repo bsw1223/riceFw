@@ -26,6 +26,7 @@ public class C001BoardController {
 		private C001BoardService c001BoardService;
 	
 	@RequestMapping(value = "/board.do", method = RequestMethod.GET)
+
 	public String list(Model model,Criteria cri,HttpServletRequest request, HttpServletResponse response) {
 			
 		List<C001BoardVO> listBoard = c001BoardService.getList(cri);
@@ -54,11 +55,29 @@ public class C001BoardController {
 	
 	@RequestMapping(value= "/get.do",method=RequestMethod.GET)
 	public String get(@RequestParam("bno") Long bno, Model model) {
+
 		
 		model.addAttribute("board",c001BoardService.read(bno));
 		
 		return "get";
 	}
+
+@RequestMapping(value = "/boardContents.do", method = RequestMethod.GET) public
+String boardContents(Model model, HttpServletRequest request, HttpServletResponse
+response) 
+{ 
+	 System.out.println("踰⑤쪟�꽆�뼱�삤�굹�슂"+request.getParameter("value"));
+	 
+	 int value =Integer.parseInt(request.getParameter("value"));
+	 //�럹�씠吏�踰덊샇 諛쏆쓬
+	 List<C001BoardVO> oneValue= null;
+	 oneValue = c001BoardService.getSelectOne(value);
+	 model.addAttribute("value",oneValue);
+	 
+	 
+	 return "boardContent";
+
+}	
 	
 	@RequestMapping(value="/update.do", method=RequestMethod.GET)
 	public String update(@RequestParam("bno") Long bno, Model model) {

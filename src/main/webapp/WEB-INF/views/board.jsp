@@ -2,7 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<script>
+	//페이지 값 넘겨서 상세 글 보기
+	function pageMove(number){
+		
+	var value=number;
+		console.log(value);	
+		
+		location.href="boardContents.do?value="+value;
+		
+	}
+	
+	
+</script>
 
+
+  
+<style>
+<!-- 말줄임-->
+.textReduce {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 300px;
+  height: 20px;
+  display: inline-bloSck; 
+}
+
+</style>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -43,7 +74,8 @@
                 <tbody>
               		
               		
-			<c:forEach var="listB" items="${listB}" > 
+
+			<c:forEach var="listB" items="${listB}" >
 			  
 				 <tr>
 	                  <td><c:out value="${listB.bno}"/></td>
@@ -53,6 +85,16 @@
 	                  <td><c:out value="${listB.writer}"/></td>
 	                  <td><c:out value="${listB.regdate}"/></td>
 	                  <td><c:out value="${listB.updateDate}"/></td>
+			</c:forEach>
+ 			<c:forEach var="listB" items="${listB}" >   
+			 <tr class="boardContents" onClick="pageMove('${listB.bno}')"  style="cursor:pointer;">
+	 		      <td>${listB.bno}</td>
+                  <td><p class="textReduce">${listB.title}</p></td>
+                  <td><p class="textReduce">${listB.content}</p></td>
+                  <td>${listB.writer}</td>
+                  <td>${listB.regdate}</td>
+                  <td>${ listB.updateDate}</td>
+
                 </tr>
   			</c:forEach>   
           

@@ -15,8 +15,10 @@ public class C001BoardServiceImpl implements C001BoardService {
 	@Autowired
 	private C001BoardDAO c001BoardDAO;
 	
+
 	
 	@Override
+
 	public List<C001BoardVO> listBoard() {
 		List boardlist=null;
 		boardlist = c001BoardDAO.boardList();
@@ -36,6 +38,7 @@ public class C001BoardServiceImpl implements C001BoardService {
 	   }
 
 	@Override
+
 	public C001BoardVO read(Long bno) {
 
 		return c001BoardDAO.read(bno);
@@ -58,7 +61,14 @@ public class C001BoardServiceImpl implements C001BoardService {
 	public List<C001BoardVO> getList(Criteria cri) {
 		// TODO Auto-generated method stub
 		return c001BoardDAO.getListWithPaging(cri);
+
 	}
+	public List<C001BoardVO> getSelectOne(int bno) {
+		List<C001BoardVO> selectOne=null;
+		selectOne=c001BoardDAO.getSelectOne(bno);
+		
+		return selectOne;
+		}
 
 
 }
