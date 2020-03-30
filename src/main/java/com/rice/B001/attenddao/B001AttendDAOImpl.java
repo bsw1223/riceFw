@@ -20,4 +20,6 @@ public class B001AttendDAOImpl implements B001AttendDAO {
 		return b001AttendDAO;
 	}
 
+
+
 }

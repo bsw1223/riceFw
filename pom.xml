@@ -21,7 +21,7 @@
 	    <artifactId>commons-beanutils</artifactId>
 	    <version>1.9.3</version>
 	</dependency>
-		<!-- 1111111111https://mvnrepository.com/artifact/cglib/cglib-nodep -->
+		<!-- https://mvnrepository.com/artifact/cglib/cglib-nodep -->
 	<dependency>
 	    <groupId>cglib</groupId>
 	    <artifactId>cglib-nodep</artifactId>
@@ -148,6 +148,12 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.zaxxer</groupId>
+		    <artifactId>HikariCP</artifactId>
+		    <version>3.3.1</version>
 		</dependency>
 	
 		<!-- Test -->

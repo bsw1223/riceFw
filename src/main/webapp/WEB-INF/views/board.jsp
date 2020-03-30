@@ -2,7 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<script>
+	//페이지 값 넘겨서 상세 글 보기
+	function pageMove(number){
+		
+	var value=number;
+		console.log(value);	
+		
+		location.href="boardContents.do?value="+value;
+		
+	}
+	
+	
+</script>
 
+
+  
+<style>
+<!-- 말줄임-->
+.textReduce {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 300px;
+  height: 20px;
+  display: inline-bloSck; 
+}
+
+</style>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -43,19 +74,39 @@
                 <tbody>
               		
               		
- <c:forEach var="listB" items="${listB}" >   
-	 <tr>
-                  <td>${listB.bno}</td>
-                  <td>${listB.title}</td>
-                  <td>${listB.content}</td>
+ 			<c:forEach var="listB" items="${listB}" >   
+			 <tr class="boardContents" onClick="pageMove('${listB.bno}')"  style="cursor:pointer;">
+	 		      <td>${listB.bno}</td>
+                  <td><p class="textReduce">${listB.title}</p></td>
+                  <td><p class="textReduce">${listB.content}</p></td>
                   <td>${listB.writer}</td>
                   <td>${listB.regdate}</td>
                   <td>${ listB.updateDate}</td>
+				
                 </tr>
   				</c:forEach>   
           
                 </tbody>
               </table>
+              
+               <div>
+                 <ul class="pagination">
+                
+                      <c:if test="${pageUtil.prev}">
+                         <li class="page-item"><a class="page-link" href="/board.do?page=${pageUtil.start-1 }&amount=${ pageUtil.dto.amount}">Previous</a></li>
+                      </c:if>
+                      
+                      <c:forEach begin="${pageUtil.start }" end="${pageUtil.end }" var="pnum">
+                      		<li class="page-item ${pnum == pageUtil.dto.page? "active":"" }"><a class="page-link" href="/board/list?page=${pnum }&amount=${ pageUtil.dto.amount}">${pnum}</a></li>
+               		</c:forEach>
+               		
+                   <c:if test="${pageUtil.next}">
+                      <li class="page-item"><a class="page-link" href="/board.do?page=${pageUtil.end+1 }&amount=${ pageUtil.dto.amount}">Next</a></li>
+                   </c:if>
+
+				  </ul>
+                </div>
+              
             </div>
             <!-- /.box-body -->
           </div>
@@ -64,7 +115,7 @@
  				<td>
                     <button type="submit" class="btn btn-block btn-default">게시글 작성</button>
                  </td>
-       </form>
+     	  </form>
             </div>
             <!-- /.box-body -->
           </div>

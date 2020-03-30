@@ -26,4 +26,27 @@
 		values(seq_board.nextval, #{title}, #{content}, #{writer})
 	</insert>
 	
-	</mapper>
+	<select id="getTotal" resultType="int">
+	<![CDATA[
+         select count(bno) from tbl_board
+      ]]>
+	</select>
+	
+	<insert id="insertSelectKey" parameterType="C001BoardVO">
+		<selectKey keyProperty="bno" order="BEFORE" resultType="long" >
+		
+			select seq_board.nextval from dual
+			
+		</selectKey>
+		 <![CDATA[ 
+		insert into tbl_board(bno,title,content,writer) values(#{bno},#{title},#{content},#{writer})
+	 ]]>
+	</insert>
+	
+	<select id="getSelectOne" parameterType="int" resultType="C001BoardVO">
+	<![CDATA[
+         select * from tbl_board where bno=#{number}
+      ]]>
+	</select>
+	
+</mapper>

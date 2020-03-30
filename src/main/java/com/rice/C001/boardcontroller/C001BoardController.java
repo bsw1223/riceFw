@@ -9,11 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rice.C001.boarddao.C001BoardDAO;
+import com.rice.C001.boarddto.PageDTO;
+import com.rice.C001.boarddto.PageUtil;
 import com.rice.C001.boardservice.C001BoardService;
 import com.rice.C001.boardvo.C001BoardVO;
 
@@ -27,10 +30,13 @@ public class C001BoardController {
 		private C001BoardDAO c001BoardDAO;
 	
 	@RequestMapping(value = "/board.do", method = RequestMethod.GET)
-		public String list(Model model, HttpServletRequest request, HttpServletResponse response) {
-		
+
+	
+		public String list(Model model, @ModelAttribute("pageDTO") PageDTO dto,HttpServletRequest request, HttpServletResponse response) {
+			
 		List<C001BoardVO> listBoard = c001BoardService.listBoard();
 		model.addAttribute("listB",listBoard);
+		model.addAttribute("pageUtil", new PageUtil(dto, c001BoardService.getTotal()));
 			return "board";
 			
 		}
@@ -38,20 +44,39 @@ public class C001BoardController {
 		
 	@RequestMapping(value = "/register.do", method = RequestMethod.GET)
 	public String Register1(C001BoardVO boardvo,  RedirectAttributes rttr) {
-		
-		c001BoardService.register(boardvo);
-
+	
 		return "register";
 	}	
 	
 	
 	@RequestMapping(value = "/boardRegister.do", method = RequestMethod.GET)
-	public String Register(C001BoardVO boardvo,  RedirectAttributes rttr) {
+	public String Register(C001BoardVO boardvo,  RedirectAttributes rttr, HttpServletRequest request, HttpServletResponse response) {
 		
 		c001BoardService.register(boardvo);
 
-		return "board";
+
+		
+
+		
+		return "redirect:/board.do";
 	}	
+	
+	 @RequestMapping(value = "/boardContents.do", method = RequestMethod.GET) public
+	  String boardContents(Model model, HttpServletRequest request, HttpServletResponse
+	  response) 
+	 { 
+		 System.out.println("벨류넘어오나요"+request.getParameter("value"));
+		 
+		 int value =Integer.parseInt(request.getParameter("value"));
+		 //페이지번호 받음
+		 List<C001BoardVO> oneValue= null;
+		 oneValue = c001BoardService.getSelectOne(value);
+		 model.addAttribute("value",oneValue);
+		 
+		 
+		 return "boardContent";
+	  
+	  }	
 		
 		
 		

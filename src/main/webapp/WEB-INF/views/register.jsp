@@ -33,27 +33,33 @@
             </div>
             <!-- /.box-header -->
               <!-- text input -->
+              <form action="/boardRegister.do">  
                 <div class="form-group">
-                  <label>Text</label>
-                  <input type="text" class="form-control" placeholder="Enter ...">
+                  <label>Title</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." name="title">
                 </div>
             
-           		 <div class="box-body pad">
-             	 	<form>
-               	    	 <textarea id="editor1" name="editor1" rows="10" cols="80">
-                                            This is my textarea to be replaced with CKEditor.
-                    	</textarea>
-              		</form>
-          		 </div>
+                    	
+                   <div class="form-group">
+						<label>Text area</label>
+						<textarea class="form-control" rows="3" name="content"></textarea>
+					</div>
+
+          		 
+          		<div class="form-group">
+                  <label>Writer</label>
+                  <input type="text" class="form-control" placeholder="Enter ..." name="writer">
+                </div>
 	          		 
 	             <div class="form-group">
 	                	  <label for="exampleInputFile">File input</label>
 	                  <input type="file" id="exampleInputFile">
 	              </div>
-	              
 	               <div class="box-footer">
-                	<button type="submit" class="btn btn-primary">Submit</button>
-             	</div> 
+                		<button type="submit" class="btn btn-primary">Submit</button>
+                		<button type="reset" class="btn btn-primary">Reset</button>
+             		</div>
+             	</form> 
           </div>
           <!-- /.box -->
         </div>

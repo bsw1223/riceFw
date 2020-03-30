@@ -6,4 +6,5 @@ public interface B001AttendDAO {
 	
 	public List<B001AttendDAO> getList();
 
+
 }
