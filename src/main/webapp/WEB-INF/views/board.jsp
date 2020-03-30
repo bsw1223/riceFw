@@ -43,16 +43,18 @@
                 <tbody>
               		
               		
- <c:forEach var="listB" items="${listB}" >   
-	 <tr>
-                  <td>${listB.bno}</td>
-                  <td>${listB.title}</td>
-                  <td>${listB.content}</td>
-                  <td>${listB.writer}</td>
-                  <td>${listB.regdate}</td>
-                  <td>${ listB.updateDate}</td>
+			<c:forEach var="listB" items="${listB}" > 
+			  
+				 <tr>
+	                  <td><c:out value="${listB.bno}"/></td>
+	                  <td><a href='/get.do?bno=<c:out value="${listB.bno}"/>'>
+	                  <c:out value="${listB.title}"/></a></td>
+	                  <td><c:out value="${listB.content}"/></td>
+	                  <td><c:out value="${listB.writer}"/></td>
+	                  <td><c:out value="${listB.regdate}"/></td>
+	                  <td><c:out value="${listB.updateDate}"/></td>
                 </tr>
-  				</c:forEach>   
+  			</c:forEach>   
           
                 </tbody>
               </table>
@@ -60,21 +62,20 @@
                <div>
                  <ul class="pagination">
                 
-                      <c:if test="${pageUtil.prev}">
-                         <li class="page-item"><a class="page-link" href="/board.do?page=${pageUtil.start-1 }&amount=${ pageUtil.dto.amount}">Previous</a></li>
-                      </c:if>
+                     <c:if test="${pageMaker.prev}">
+                         <li class="page-item"><a class="page-link" href="/board.do?page=${pageMaker.start-1 }&amount=${ pageMaker.cri.amount}">Previous</a></li>
+                     </c:if>
                       
-                      <c:forEach begin="${pageUtil.start }" end="${pageUtil.end }" var="pnum">
-                      		<li class="page-item ${pnum == pageUtil.dto.page? "active":"" }"><a class="page-link" href="/board/list?page=${pnum }&amount=${ pageUtil.dto.amount}">${pnum}</a></li>
-               		</c:forEach>
+                     <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pnum">
+                      	<li class="page-item ${pageMaker.cri.page == pnum ?"active":""}"><a class="page-link" href="/board.do?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a></li>
+               		 </c:forEach>
                		
-                   <c:if test="${pageUtil.next}">
-                      <li class="page-item"><a class="page-link" href="/board.do?page=${pageUtil.end+1 }&amount=${ pageUtil.dto.amount}">Next</a></li>
-                   </c:if>
+                     <c:if test="${pageMaker.next}">
+                       <li class="page-item"><a class="page-link" href="/board.do?page=${pageMaker.endPage+1 }&amount=${ pageMaker.cri.amount}">Next</a></li>
+                     </c:if>
 
-				  </ul>
-                </div>
-              
+				 </ul>
+               </div>   
             </div>
             <!-- /.box-body -->
           </div>
@@ -95,6 +96,64 @@
     </section>
     <!-- /.content -->
   </div>
+ 
+<!-- modal 추가 -->
+        <div class="modal fade" id="mymodal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                <p>처리가 완료되었습니다.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal --> 
+ 
+<form id="actionForm" action="/board.do" method='get'>
+	<input type="hidden" name="page" value='${pageMaker.cri.page}' >
+	<input type="hidden" name="amount" value='${pageMaker.cri.amount}' >
+</form>  
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+	/* 	var result ='<c:out value="${result}"/>';
+		
+		checkModal(result);
+		
+		function checkModal(result){
+			
+			if(result === ''){
+				return;
+			}
+			if(parseInt(result) > 0){
+				$(".modal-body").html("게시글"+parseInt(result)+"번이 등록되었습니다.");
+			}
+			$("#mymodal").modal("show");
+		} */
+		
+		var actionForm =$("actionForm");
+		
+		$(".page-item").on("click",function(e){
+			e.preventDafault();
+			
+			console.log('click');
+			actionForm.find("input[name='page']").val($(this).attr("href"));
+			actionForm.submit();
+		});
+		
+	})
+</script>
 <%@ include file = "footer.jsp" %>
 
 </body>

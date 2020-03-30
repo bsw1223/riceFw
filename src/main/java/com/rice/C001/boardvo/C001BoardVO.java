@@ -6,6 +6,8 @@ public class C001BoardVO {
 	private Long bno;
 	private String title, content, writer;
 	private String regdate, updateDate;
+	
+	
 	public Long getBno() {
 		return bno;
 	}
