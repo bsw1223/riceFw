@@ -22,4 +22,21 @@ public class A001MemServiceImpl implements A001MemService {
 		return memlist;
 	}
 
+	// 회원가입
+	@Override
+	public void signup(A001MemVO vo) throws Exception {
+		a001MemDAO.signup(vo);
+	}
+
+	// 로그인
+	@Override
+	public A001MemVO login(A001MemVO vo) throws Exception {
+		return a001MemDAO.login(vo);
+	}
+
+	@Override
+	public int idCheck(String memId) throws Exception {
+		int result = a001MemDAO.idCheck(memId);
+		return result;
+	}
 }
