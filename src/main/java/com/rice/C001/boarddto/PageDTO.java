@@ -1,30 +1,58 @@
 package com.rice.C001.boarddto;
 
-
-
 public class PageDTO {
+	private int startPage;
+	private int endPage;
+	private boolean prev, next;
 	
-	private int page;
-	private int amount;
+	private int total;
+	private Criteria cri;
 	
-	public int getPage() {
-		return page;
+	public PageDTO(Criteria cri, int total) {
+		
+		this.cri= cri;
+		this.total=total;
+		
+		this.endPage=(int)(Math.ceil(cri.getPage()/10.0))*10;
+		this.startPage=this.endPage-9;
+		int realEnd=(int)(Math.ceil((total*1.0)/cri.getAmount()));
+		
+		if(realEnd<=this.endPage) {
+			this.endPage=realEnd;
+		}
+		this.prev = this.startPage>1;
+		this.next = this.endPage<realEnd;
 	}
 
-	public void setPage(int page) {
-		this.page = page;
+	public int getStartPage() {
+		return startPage;
 	}
 
-	public int getAmount() {
-		return amount;
+	public int getEndPage() {
+		return endPage;
 	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public boolean isPrev() {
+		return prev;
 	}
 
-	public PageDTO() {
-		page = 1 ;
-		amount = 10 ;
+	public boolean isNext() {
+		return next;
 	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public Criteria getCri() {
+		return cri;
+	}
+
+	@Override
+	public String toString() {
+		return "PageDTO [startPage=" + startPage + ", endPage=" + endPage + ", prev=" + prev + ", next=" + next
+				+ ", total=" + total + ", cri=" + cri + "]";
+	}
+
+
 }

@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.rice.C001.boarddto.PageDTO;
+import com.rice.C001.boarddto.Criteria;
 import com.rice.C001.boardvo.C001BoardVO;
 
 
@@ -15,15 +15,10 @@ import com.rice.C001.boardvo.C001BoardVO;
 @Repository
 public class C001BoardDAOImpl implements C001BoardDAO {
 	
-	
-	
 	@Autowired
 	private SqlSession sqlsession;
 
 	private C001BoardDAO c001BoardDAO;
-
-
-	
 	
 	@Override
 	public List<C001BoardVO> boardList() {
@@ -41,11 +36,7 @@ public class C001BoardDAOImpl implements C001BoardDAO {
 	public void insertSelectKey(C001BoardVO vo) {
 		
 	
-
-		
-		
 		System.out.println("AAA");
-		
 		
 		sqlsession.insert("mapper.board.insertSelectKey",vo);
 	}
@@ -59,12 +50,41 @@ public class C001BoardDAOImpl implements C001BoardDAO {
 		return page;
 	}
 
+
+	@Override
+	public C001BoardVO read(Long bno) {
+
+		return sqlsession.selectOne("mapper.board.read",bno);
+	
+		
+	}
+
+
+	@Override
+	public int delete(Long bno) {
+
+		return sqlsession.delete("mapper.board.delete",bno);
+	
+	}
+	
+	@Override
+	public int update(C001BoardVO vo) {
+		return sqlsession.update("mapper.board.update",vo);
+	}
+
+
+	@Override
+	public List<C001BoardVO> getListWithPaging(Criteria cri) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList("mapper.board.getListWithPaging",cri);
+	}
+
+
 	@Override
 	public List<C001BoardVO> getSelectOne(int bno) {
 		List<C001BoardVO> c001BoardDAO = null;
-		System.out.println("dao 파라미터:"+bno);
+		System.out.println("dao �뙆�씪誘명꽣:"+bno);
 		c001BoardDAO = sqlsession.selectList("mapper.board.getSelectOne", bno);
 		return c001BoardDAO;
 	}
-	
 }

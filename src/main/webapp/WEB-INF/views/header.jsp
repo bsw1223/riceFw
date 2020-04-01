@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +68,7 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img  class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team

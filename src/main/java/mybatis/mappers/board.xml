@@ -9,11 +9,22 @@
 		<result property="bno" column="bno" />
         <result property="title" column="title" />
         <result property="content" column="content" />
-         <result property="writer" column="writer"/>
-
+        <result property="writer" column="writer"/>
 	</resultMap> 
 
-
+		<select id="getListWithPaging" resultType="C001BoardVO">
+	<![CDATA[
+		select  bno,title, content, writer, regdate
+	from(
+	    select rownum rn, bno,title, content, writer, regdate
+	    from tbl_board
+	    where rownum <= (#{page}*#{amount})
+	    and bno > 0
+	    order by bno desc
+	    )
+	where rn > ((#{page}-1)*#{amount})
+	]]>
+	</select>
 
 	<select id="listBoard" resultType="C001BoardVO" parameterType="String">
       <![CDATA[
@@ -42,11 +53,29 @@
 		insert into tbl_board(bno,title,content,writer) values(#{bno},#{title},#{content},#{writer})
 	 ]]>
 	</insert>
+
+	<select id="read" resultType="C001BoardVO">
+		select * from  tbl_board where bno=#{bno}
+	</select>
 	
+	<delete id="delete">
+		delete from tbl_board where bno=#{bno}
+	</delete>
+	
+	<update id="update">
+		update tbl_board
+		set title=#{title},
+		content=#{content},
+		writer=#{writer},
+		updateDate=sysdate
+		where bno=#{bno}
+	</update>
+
 	<select id="getSelectOne" parameterType="int" resultType="C001BoardVO">
 	<![CDATA[
          select * from tbl_board where bno=#{number}
       ]]>
 	</select>
 	
+
 </mapper>
