@@ -2,9 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ include file = "header.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="/resources/bower_components/ckeditor/ckeditor.js"></script>
 <html>
 <head>
+
+
+<script type="text/javascript"> 
+window.onload=function(){ 
+	CKEDITOR.replace('content'); 
+	} 
+</script>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

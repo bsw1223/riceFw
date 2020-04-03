@@ -18,7 +18,6 @@ public class C001BoardServiceImpl implements C001BoardService {
 
 	
 	@Override
-
 	public List<C001BoardVO> listBoard() {
 		List boardlist=null;
 		boardlist = c001BoardDAO.boardList();

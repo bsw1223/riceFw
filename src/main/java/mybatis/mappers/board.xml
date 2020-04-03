@@ -10,7 +10,16 @@
         <result property="title" column="title" />
         <result property="content" column="content" />
         <result property="writer" column="writer"/>
-	</resultMap> 
+     </resultMap> 
+     <resultMap id="ReplyResult" type="list">
+		<result property="boNum" column="boNum" />
+        <result property="comtNum" column="comtNum" />
+        <result property="parentNum" column="parentNum" />
+        <result property="userId" column="userId"/>
+		<result property="comtRegDate" column="comtRegDate" />
+        <result property="comtContent" column="comtContent" />
+        <result property="comtUpdateDate" column="comtUpdateDate" />
+     </resultMap>
 
 		<select id="getListWithPaging" resultType="C001BoardVO">
 	<![CDATA[
@@ -76,6 +85,12 @@
          select * from tbl_board where bno=#{number}
       ]]>
 	</select>
+<!-- 	
+	<insert id="insertReply" parameterType="String">
+		INSERT INTO COMMCOMMENT(boNum,comtNum,parentNum,userId,comtRegDate,comtContent,comtUpdateDate)
+  		 VALUES('#{boNum}','#{comtNum}','#{parentNum}','#{userId}','#{comtRegDate}','#{comtContent}','#{comtUpdateDate}');
+
+	</insert> -->
 	
 
 </mapper>

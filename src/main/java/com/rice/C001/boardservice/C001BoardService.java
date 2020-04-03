@@ -9,21 +9,18 @@ public interface C001BoardService {
 
 	public List<C001BoardVO> listBoard();
 
-	
-	
 	public void register(C001BoardVO boardvo);
-	
+
 	public int getTotal();
-	
+
 	public C001BoardVO read(Long bno);
-	
+
 	public boolean delete(Long bno);
-	
+
 	public boolean update(C001BoardVO boardvo);
-	
+
 	public List<C001BoardVO> getList(Criteria cri);
-	
+
 	public List<C001BoardVO> getSelectOne(int bno);
 
-	
 }

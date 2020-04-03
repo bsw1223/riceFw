@@ -10,6 +10,8 @@
 <typeAlias alias="B001AttendVO" type="com.rice.B001.attendvo.B001AttendVO"/>
 
 <typeAlias alias="C001BoardVO" type="com.rice.C001.boardvo.C001BoardVO"/>
+<typeAlias alias="C001ReplyVO" type="com.rice.C001.replyvo.C001ReplyVO"/>
 </typeAliases>
+
 
 </configuration>
