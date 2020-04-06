@@ -41,7 +41,7 @@
     <p class="login-box-msg">간편하게 회원가입 </p>
 
 	<div class="social-auth-links text-center">
-      <a href="/member/signup.do" class="btn btn-block btn-social btn-primary btn-flat"><i class="fa fa-facebook"></i> Rice 회원가입</a>
+      <a href="/member/signup" class="btn btn-block btn-social btn-primary btn-flat"><i class="fa fa-facebook"></i> Rice 회원가입</a>
     </div>
     
     <div class="social-auth-links text-center">
