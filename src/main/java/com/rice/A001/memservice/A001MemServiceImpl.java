@@ -87,28 +87,9 @@ public class A001MemServiceImpl implements A001MemService {
 
 	@Override
 	public String findPwd(A001MemVO vo) throws Exception {
-		String memNum = a001MemDAO.findNumforPwd(vo);	// 회원번호 검색
-		if(memNum != null) {
-			vo.setMemNum(memNum);							// 비밀번호 update를 위한 회원번호
-			vo.setMemPwd(getRamdomPassword(10));			// random하게 만든 새 비밀번호
-			a001MemDAO.updatePwd(vo);
-		}
-		return vo.getMemPwd();	// 업데이트한 pwd return 
+		return a001MemDAO.findNumforPwd(vo);	// 회원번호 검색
 	}
 
-	public static String getRamdomPassword(int len) { 
-		char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
-				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-				'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' 
-				}; 
-		int idx = 0; 
-		StringBuffer sb = new StringBuffer();  
-		for (int i = 0; i < len; i++) {
-			idx = (int) (charSet.length * Math.random()); // 36 * 생성된 난수를 Int로 추출 (소숫점제거) 
-			sb.append(charSet[idx]); 
-		} 
-		logger.info(sb.toString());
-		return sb.toString(); 
-	}
+	
 
 }

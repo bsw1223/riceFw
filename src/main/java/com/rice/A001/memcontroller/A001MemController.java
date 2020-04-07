@@ -56,6 +56,15 @@ public class A001MemController {
 		return "redirect:/";
 	}
 	
+	// GET 로그아웃, 로그아웃 후 메인페이지 이동
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String getLogout(Model model, HttpServletRequest request, HttpServletResponse response) {
+		logger.info("get logout");
+		HttpSession session = request.getSession();
+		session.invalidate();
+		return "redirect:/";
+	}
+	
 	// GET Account 회원가입 선택
 	@RequestMapping(value = "/account", method = RequestMethod.GET)
 	public String account(Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -288,14 +297,35 @@ public class A001MemController {
 	public String postFindPwd(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("post FindPwd");
 		try {
-			String newpwd = a001MemService.findPwd(vo);
-			if(newpwd != null) {
-				mailService.sendMail(vo.getMemEmail(), "RiceLMS 임시 비밀번호 발급", newpwd + " 임시 비밀번호 입니다.");
+			String memNum = a001MemService.findPwd(vo);
+			if(memNum != null) {
+				vo.setMemNum(memNum);							// 비밀번호 update를 위한 회원번호
+				String newpwd = getRamdomPassword(10);
+				vo.setMemPwd(newpwd);			// random하게 만든 새 비밀번호
+				Integer update_result = a001MemService.updatePwd(vo);
+				if(update_result != 0) {
+					mailService.sendMail(vo.getMemEmail(), "RiceLMS 임시 비밀번호 발급", newpwd + " 임시 비밀번호 입니다.");
+				}
 			}
 		} catch (Exception e) {	// 비밀번호 찾기 실패 했을 경우
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "Alogin";
+	}
+	
+	public static String getRamdomPassword(int len) { 
+		char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
+				'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+				'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' 
+				}; 
+		int idx = 0; 
+		StringBuffer sb = new StringBuffer();  
+		for (int i = 0; i < len; i++) {
+			idx = (int) (charSet.length * Math.random()); // 36 * 생성된 난수를 Int로 추출 (소숫점제거) 
+			sb.append(charSet[idx]); 
+		} 
+		logger.info(sb.toString());
+		return sb.toString(); 
 	}
 }
