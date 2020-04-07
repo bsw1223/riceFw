@@ -3,26 +3,6 @@
 <%@ include file="header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
-$("#insertButton").click(function(e){
-	 e.preventDefault();
-	alert("aa");
-	 $.ajax({
-			type : 'post',
-			url : '/replies/replyInsert',
-			data : "reply"=reply&"replyer"=replyer ,
-			contentType : "application/json; charset=utf-8",
-			success:function(){
-				alert("ok");
-				}
-			}) ;
-			
-
-
-});
-
-</script>
-
 
 <html>
 <head>
@@ -71,7 +51,7 @@ $("#insertButton").click(function(e){
 						<label>Content</label>
 						<textarea class="form-control" rows="3" name="content"
 							readonly="readonly">
-						<c:out value="${board.content}" escapeXml="false"/>
+						<c:out value="${board.content}" escapeXml="false" />
 						</textarea>
 					</div>
 
@@ -114,15 +94,17 @@ $("#insertButton").click(function(e){
 						<div class="box-body"></div>
 						<!-- /.box-body -->
 
-							<div class="col-lg-12">
-								<!-- PANEL -->
-								<div class="box box-priamry">
-									<div class="box-header with-border">
-										<i class="fa fa-fw fa-comments"></i>
-										<h3 class="box-title">댓글작성</h3>
-									</div>
+						<div class="col-lg-12">
+							<!-- PANEL -->
+							<div class="box box-priamry">
+								<div class="box-header with-border">
+									<i class="fa fa-fw fa-comments"></i>
+									<h3 class="box-title">댓글작성</h3>
+								</div>
+								<form>
+									 <input type="hidden" id='bno' name='bno' value='<c:out value ="${board.bno}"/>'>
 									<div class="box-body">
-									 	<div class="form-group">
+										<div class="form-group">
 											<label for="reply">댓글내용</label> <input class="form-control"
 												id="reply" name="reply" placeholder="reply...">
 										</div>
@@ -131,59 +113,60 @@ $("#insertButton").click(function(e){
 												class="form-control" id="replyer" name="replyer"
 												placeholder="replyer">
 										</div>
-										<input type="button" id="insertButton" value ="전송">
-											
+										<input type="submit" id="insertButton" value="전송">
+								</form>
+
+							</div>
+							<div class="box-footer">
+								<ul id="replies">
+
+								</ul>
+							</div>
+							<div class="box-footer">
+								<div class="text-center">
+									<ul class="pagination pagination-sm no-margin">
+
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class='row'>
+							<div class="col-lg-12">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<i class="fa fa-comments fa-fw"></i>Reply
 									</div>
-									<div class="box-footer">
-										<ul id="replies">
+
+									<div class="panel-body">
+										<ul class='chat'>
 
 										</ul>
 									</div>
-									<div class="box-footer">
-										<div class="text-center">
-											<ul class="pagination pagination-sm no-margin">
+								</div>
 
-											</ul>
-										</div>
-									</div>
-								</div>
-								<div class='row'>
-									<div class="col-lg-12">
-										<div class="panel panel-default">
-											<div class="panel-heading">
-												<i class="fa fa-comments fa-fw"></i>Reply
-											</div>
-											
-											<div class="panel-body">
-												<ul class='chat'>
-													
-												</ul>
-											</div>
-										</div>
-									
-									</div>
-								</div>
 							</div>
-							<!-- /end row -->
-							<!-- /.box-footer -->
-							<div class="box-footer">
-								<form action="#" method="post">
-									<img class="img-responsive img-circle img-sm"
-										src="/resources/dist/img/user4-128x128.jpg" alt="Alt Text">
-									<!-- .img-push is used to add margin to elements next to floating images -->
-									<div class="img-push">
-										<input type="text" class="form-control input-sm"
-											placeholder="reply">
-									</div>
-								</form>
-							</div>
-							<!-- /.box-footer -->
+						</div>
 					</div>
-					<!-- /.box -->
+					<!-- /end row -->
+					<!-- /.box-footer -->
+					<div class="box-footer">
+						<form action="#" method="post">
+							<img class="img-responsive img-circle img-sm"
+								src="/resources/dist/img/user4-128x128.jpg" alt="Alt Text">
+							<!-- .img-push is used to add margin to elements next to floating images -->
+							<div class="img-push">
+								<input type="text" class="form-control input-sm"
+									placeholder="reply">
+							</div>
+						</form>
+					</div>
+					<!-- /.box-footer -->
 				</div>
-				<!-- /.col -->
+				<!-- /.box -->
 			</div>
-			<!-- /.row -->
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
 	</section>
 	<!-- /.content -->
 </div>
@@ -247,21 +230,24 @@ $("#insertButton").click(function(e){
 						}); */
 						
 						
-
+						$("#insertButton").on("click",function(e){
+							console.log("hi");
+							var reply = {
+									reply: reply.val(),
+									replyer: replyer.val(),
+									bno: bnoValue
+							};
+							replyerService.add(reply, function(result){
+								console.log("success");
+							})
+						});
 						
 						
-						
-						
-
-					});
-	
-	 	
-		})
-		
+					}); 	
+	/* 		});
 		};
-	
-	
-	
+	 */
+
 </script>
 <%@ include file="footer.jsp"%>
 </body>

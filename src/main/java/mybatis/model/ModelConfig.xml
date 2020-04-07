@@ -8,9 +8,12 @@
 
 <typeAlias alias="A001MemVO" type="com.rice.A001.memvo.A001MemVO"/>
 <typeAlias alias="B001AttendVO" type="com.rice.B001.attendvo.B001AttendVO"/>
-
 <typeAlias alias="C001BoardVO" type="com.rice.C001.boardvo.C001BoardVO"/>
 <typeAlias alias="C001ReplyVO" type="com.rice.C001.replyvo.C001ReplyVO"/>
+<typeAlias alias="D001BuildingVO" type="com.rice.D001.buildingvo.D001BuildingVO"/>
+<typeAlias alias="D001ClassVO" type="com.rice.D001.buildingvo.D001ClassVO"/>
+<typeAlias alias="E001CommVO" type="com.rice.E001.commvo.E001CommVO"/>
+<typeAlias alias="E001CommBoardVO" type="com.rice.E001.commvo.E001CommBoardVO"/>
 </typeAliases>
 
 

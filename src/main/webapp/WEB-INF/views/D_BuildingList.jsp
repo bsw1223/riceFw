@@ -11,9 +11,7 @@
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>
-			Data Tables <small>advanced tables</small>
-		</h1>
+		<h1>건물관리</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li><a href="#">Tables</a></li>
@@ -27,7 +25,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Hover Data Table</h3>
+						<h3 class="box-title">건물리스트</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -44,123 +42,100 @@
 							</select>
 						</div>
 						<!-- 옵션선택 끝 -->
-
-
-						<table id="example2" class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th>글번호</th>
-									<th>제목</th>
-									<th>내용</th>
-									<th>작성자</th>
-									<th>작성날짜</th>
-									<th>업데이트날짜</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="listB" items="${listB}">
-
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover" id="example2"
+								class="table table-bordered table-hover">
+								<thead>
 									<tr>
-										<td><c:out value="${listB.bno}" /></td>
-										<td><a href='/get.do?bno=<c:out value="${listB.bno}"/>'>
-												<c:out value="${listB.title}" />
-										</a></td>
-										<td><c:out value="${listB.content}" /></td>
-										<td><c:out value="${listB.writer}" /></td>
-										<td><c:out value="${listB.regdate}" /></td>
-										<td><c:out value="${listB.updateDate}" /></td>
-								</c:forEach>
-
-							</tbody>
-						</table>
+										<th>건물이름</th>
+										<th>건물관리자</th>
+										<th>건물번호</th>
+										<th>건물주소</th>
+										<th>강의실층</th>
+										<th>강의실번호</th>
+										<th>비고</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="listB" items="${listB}">
+										<tr>
+											<td><a
+												href='/classMng/MngBld/Blddesc?bulId=<c:out value="${listB.bulId}"/>'>
+													<c:out value="${listB.bulName}" />
+											</a></td>
+											<td><c:out value="${listB.bulMgr}" /></td>
+											<td><c:out value="${listB.bulPhoneNum}" /></td>
+											<td><c:out value="${listB.bulAddress}" /></td>
+											<td><c:out value="${listB.bulFloor}" /></td>
+											<td><c:out value="${listB.bulClassNum}" /></td>
+											<td><c:out value="${listB.bulRemark}" /></td>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
 
 						<div>
 							<ul class="pagination">
 
 								<c:if test="${pageMaker.prev}">
 									<li class="page-item"><a class="page-link"
-										href="/board.do?page=${pageMaker.startPage-1 }&amount=${ pageMaker.cri.amount}">Previous</a></li>
+										href="/classMng/MngBld/Bld?page=${pageMaker.startPage-1 }&amount=${ pageMaker.cri.amount}">Previous</a></li>
 								</c:if>
 
 								<c:forEach begin="${pageMaker.startPage }"
 									end="${pageMaker.endPage }" var="pnum">
 									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-									<a class="page-link"
-										href="/board.do?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a></li>
+										<a class="page-link"
+										href="/classMng/MngBld/Bld?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
+									</li>
 								</c:forEach>
 								<c:if test="${pageMaker.next}">
 									<li class="page-item"><a class="page-link"
-										href="/board.do?page=${pageMaker.endPage+1 }&amount=${ pageMaker.cri.amount}">Next</a></li>
+										href="/classMng/MngBld/Bld?page=${pageMaker.endPage+1 }&amount=${ pageMaker.cri.amount}">Next</a></li>
 								</c:if>
-
-
 							</ul>
 						</div>
-						<form action="/register.do">
-					<div>
-						<button type="submit" class="btn btn-block btn-default">게시글
-							작성</button>
+						<div class="offset-md-8">
+							<form action="#" method="get" class="sidebar-form">
+								<div class="input-group">
+									<input type="text" name="q" class="form-control"
+										placeholder="Search..."> <span class="input-group-btn">
+										<button type="submit" name="search" id="search-btn"
+											class="btn btn-flat">
+											<i class="fa fa-search"></i>
+										</button>
+									</span>
+								</div>
+							</form>
+						</div>
+						<div class="offset-md-8">
+							<form action="/register.do">
+								<button type="submit" class="btn pull-right">건물등록</button>
+							</form>
+						</div>
+						<!-- /.box-body -->
 					</div>
-				</form>
-					</div>
-					<!-- /.box-body -->
+					<!-- /.box -->
 				</div>
-				<!-- /.box -->
+				<!-- /.box-body -->
 			</div>
-			<!-- /.box-body -->
+			<!-- /.box -->
 		</div>
-		<!-- /.box -->
-	</section>
+		<!-- /.col -->
+
+</section>
 <!-- /.content -->
 </div>
 
-<!-- modal 추가 -->
-<div class="modal fade" id="mymodal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Modal title</h4>
-			</div>
-			<div class="modal-body">
-				<p>처리가 완료되었습니다.</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left"
-					data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
-<form id="actionForm" action="/board.do" method='get'>
+
+<form id="actionForm" action="/classMng/MngBld/Bld" method='get'>
 	<input type="hidden" name="page" value='${pageMaker.cri.page}'>
 	<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
 </form>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		/* 	var result ='<c:out value="${result}"/>';
-			
-			checkModal(result);
-			
-			function checkModal(result){
-				
-				if(result === ''){
-					return;
-				}
-				if(parseInt(result) > 0){
-					$(".modal-body").html("게시글"+parseInt(result)+"번이 등록되었습니다.");
-				}
-				$("#mymodal").modal("show");
-			} */
 
 		var actionForm = $("actionForm");
 
@@ -175,8 +150,9 @@
 
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
-		var page=1;
-		location.href = "board.do?page="+page+"&amount=" + sel;
+		var page = 1;
+		location.href = "/classMng/MngBld/Bld?page=" + page + "&amount="
+				+ sel;
 
 	}
 </script>

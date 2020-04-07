@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,18 +15,18 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${contextPath}/resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="resources/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${contextPath}/resources/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="resources/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="${contextPath}/resources/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="resources/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${contextPath}/resources/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="resources/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="${contextPath}/resources/dist/css/skins/_all-skins.min.css">
   <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <link rel="stylesheet" href="${contextPath}/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,7 +42,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="resources/index2.html" class="logo">
+    <a href="${contextPath}/resources/index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -84,10 +87,11 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="resources/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="${contextPath}/resources/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         AdminLTE Design Team
+                   
                         <small><i class="fa fa-clock-o"></i> 2 hours</small>
                       </h4>
                       <p>Why not buy a new awesome theme?</p>
@@ -96,7 +100,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="resources/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="${contextPath}/resources/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Developers
@@ -108,7 +112,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="resources/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="${contextPath}/resources/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Sales Department
@@ -120,7 +124,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="resources/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="${contextPath}/resources/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Reviewers
@@ -254,14 +258,11 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+             
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
                 <p>
                   Alexander Pierce - Web Developer
                   <small>Member since Nov. 2012</small>

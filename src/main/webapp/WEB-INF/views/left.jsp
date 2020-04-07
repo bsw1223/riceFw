@@ -15,7 +15,7 @@
 	var sideListDetailMenu3 = ["과목7","과목8"];
 	var sideListDetailMenu4 = ["과목9","과목10","11","22"];
 	var sideListDetailMenu5 = ["과목11","과목12"];
-	var detailForm="<li><a href=\"resources/pages/layout/top-nav.html\"><i class=\"fa fa-circle-o\"></i> Top Navigation</a></li>"
+	var detailForm="<li><a href=\"../../resources/pages/layout/top-nav.html\"><i class=\"fa fa-circle-o\"></i> Top Navigation</a></li>"
 	
 	var repeatWordings =" <ul class=\"sidebar-menu\" data-widget=\"tree\"><li class=\"treeview\">"
 					     +" <a href=\"#\"><i class=\"fa fa-files-o\"></i>     <span class=\"side\">  </span>      <span class=\"pull-right-container\">"

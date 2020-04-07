@@ -21,8 +21,7 @@ public class A001MemController {
 
 	@Autowired
 		private A001MemService a001MemService;
-	@Autowired
-		private A001MemDAO a001MemDAO;
+
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 		public String login(Model model, HttpServletRequest request, HttpServletResponse response) {

@@ -17,7 +17,7 @@
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li class="active">커뮤니티 게시판</li>
 		</ol>
 	</section>
 
@@ -27,7 +27,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Hover Data Table</h3>
+						<h3 class="box-title">커뮤니티 게시판</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -54,34 +54,31 @@
 									<th>내용</th>
 									<th>작성자</th>
 									<th>작성날짜</th>
-									<th>업데이트날짜</th>
+									<th>조회수</th>
+									<th>좋아요수</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="listB" items="${listB}">
-
+								<c:forEach var="commboardlist" items="${commboardlist}">
 									<tr>
-										<td><c:out value="${listB.bno}" /></td>
-										<td><a href='/get.do?bno=<c:out value="${listB.bno}"/>'>
-												<c:out value="${listB.title}" />
+										<td><c:out value="${commboardlist.boNum}" /></td>
+										<td><a href='/comm/viewwritings?bno=<c:out value="${commboardlist.boNum}"/>'>
+												<c:out value="${commboardlist.boTitle}" />
 										</a></td>
-										<td><c:out value="${listB.content}" /></td>
-										<td><c:out value="${listB.writer}" /></td>
-										<td><c:out value="${listB.regdate}" /></td>
-										<td><c:out value="${listB.updateDate}" /></td>
+										<td><c:out value="${commboardlist.boContent}" /></td>
+										<td><c:out value="${commboardlist.memNum}" /></td>
+										<td><c:out value="${commboardlist.boRegDate}" /></td>
+										<td><c:out value="${commboardlist.boLikes}" /></td>
+									</tr>
 								</c:forEach>
-
 							</tbody>
 						</table>
-
 						<div>
 							<ul class="pagination">
-
 								<c:if test="${pageMaker.prev}">
 									<li class="page-item"><a class="page-link"
 										href="/board.do?page=${pageMaker.startPage-1 }&amount=${ pageMaker.cri.amount}">Previous</a></li>
 								</c:if>
-
 								<c:forEach begin="${pageMaker.startPage }"
 									end="${pageMaker.endPage }" var="pnum">
 									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
@@ -92,17 +89,26 @@
 									<li class="page-item"><a class="page-link"
 										href="/board.do?page=${pageMaker.endPage+1 }&amount=${ pageMaker.cri.amount}">Next</a></li>
 								</c:if>
-
-
 							</ul>
 						</div>
-						<form action="/register.do">
-					<div>
-						<button type="submit" class="btn btn-block btn-default">게시글
-							작성</button>
-					</div>
-				</form>
-					</div>
+						<div class="offset-md-8">
+							<form action="#" method="get" class="sidebar-form">
+								<div class="input-group">
+									<input type="text" name="q" class="form-control"
+										placeholder="Search..."> <span class="input-group-btn">
+										<button type="submit" name="search" id="search-btn"
+											class="btn btn-flat">
+											<i class="fa fa-search"></i>
+										</button>
+									</span>
+								</div>
+							</form>
+						</div>
+						<div class="offset-md-8">
+							<form action="/register.do">
+								<button type="submit" class="btn pull-right">글쓰기</button>
+							</form>
+						</div>
 					<!-- /.box-body -->
 				</div>
 				<!-- /.box -->
