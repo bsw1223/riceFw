@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" /> <!-- 메일을 발송하는 SMTP서버 -->
+		<property name="port" value="587" /> <!-- SMTP서버 포트 -->
+		<property name="username" value="delaywdev@gmail.com" /> <!-- 구글계정 -->
+		<property name="password" value="#030911$" />
+		<property name="javaMailProperties"> <!-- 메일전달 프로토콜 설정 -->
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- You can have some pre-configured messagess also which are ready to send -->
+	<bean id="preConfiguredMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="to" value="yeon8462@naver.com"></property>
+		<property name="from" value="delaywdev@gmail.com"></property>
+		<property name="subject" value="테스트 메일입니다." />
+	</bean>
+</beans>
