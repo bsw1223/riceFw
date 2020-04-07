@@ -69,11 +69,20 @@ public class A001MemDAOImpl implements A001MemDAO {
 	}	// 비밀번호 수정하기
 
 	@Override
-	public Integer updateAuth(A001MemVO vo) throws Exception {
-		if(sqlsession.insert("mapper.member.updateMemAuth", vo) != 0) {
-			return sqlsession.insert("mapper.member.updateMatchAuth", vo);
-		}
-		return null;
-	}	// 강사로 권한 변경하기 //////////////////////////// transaction 처리 필요
+	public Integer updateMemAuth(A001MemVO vo) throws Exception {
+		return sqlsession.update("mapper.member.updateMemAuth", vo);
+	}	// 강사로 권한 변경하기 MEMBER TABLE
+	@Override
+	public Integer updateMatchAuth(A001MemVO vo) throws Exception {
+		return sqlsession.update("mapper.member.updateMatchAuth", vo);
+	}	// 강사로 권한 변경하기 AUTHMEMBER TABLE
+	@Override
+	public String findId(A001MemVO vo) throws Exception {
+		return sqlsession.selectOne("mapper.member.findId", vo);
+	}	// 아이디 찾기
+	@Override
+	public String findNumforPwd(A001MemVO vo) throws Exception {
+		return sqlsession.selectOne("mapper.member.findNumforPwd", vo);
+	}
 	
 }

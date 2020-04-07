@@ -25,6 +25,12 @@ public interface A001MemDAO {
 	public Integer updateInfo(A001MemVO vo) throws Exception;
 	// 비밀번호 수정하기
 	public Integer updatePwd(A001MemVO vo) throws Exception;
-	// 회원 권한 변경하기
-	public Integer updateAuth(A001MemVO vo) throws Exception;
+	// 회원 권한 변경하기 member table
+	public Integer updateMemAuth(A001MemVO vo) throws Exception;
+	// 회원 권한 변경하기 Auth member table
+	public Integer updateMatchAuth(A001MemVO vo) throws Exception;
+	// 아이디 찾기
+	public String findId(A001MemVO vo) throws Exception;
+	// 비밀번호 재설정을 위한 회원 검색
+	public String findNumforPwd(A001MemVO vo) throws Exception;
 }

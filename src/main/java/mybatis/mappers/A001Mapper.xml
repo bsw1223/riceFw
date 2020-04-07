@@ -38,7 +38,7 @@
     	</selectKey>
 		<![CDATA[
 			INSERT INTO SCOTT.AUTHMEMBER(authId,memNum)
-				VALUES(#{authId},#{memNum});
+				VALUES(#{authId},#{memNum})
 		]]>
 	</insert>
 	
@@ -114,14 +114,6 @@
 	</update>
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 	<!-- SNS 아이디 중복체크-->
 	<select id="snsIdCheck" parameterType="String" resultType="Integer">
 		<![CDATA[
@@ -158,4 +150,34 @@
 	</select>
 	
 	
+	<!-- 이름/ 전화번호로 아이디 찾기 -->
+	<select id="findId" resultType="String" parameterType="com.rice.A001.memvo.A001MemVO">
+      <![CDATA[
+        	select
+        		memId
+        	from
+        		scott.member
+      ]]>
+        	where memName = #{memName}
+        	<if test="memTel != null">
+        		and memTel = #{memTel}
+        	</if>
+        	<if test="memEmail != null">
+        		and memEmail = #{memEmail}
+        	</if>
+	</select>	
+	
+	
+	<!--  비밀번호 재설정, 회원번호 찾기-->
+	<select id="findNumforPwd" resultType="String" parameterType="com.rice.A001.memvo.A001MemVO">
+      <![CDATA[
+        	SELECT
+        		memNum
+        	FROM
+        		scott.member
+        	WHERE memName = #{memName}
+        		and memId = #{memId}
+        		and memEmail = #{memEmail}
+      ]]>
+	</select>
 </mapper>	

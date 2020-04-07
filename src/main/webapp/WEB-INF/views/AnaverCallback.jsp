@@ -67,7 +67,8 @@
 									memEmail : memEmail,
 									memName : memName,
 									memId : snsId+'@n',
-									snsType: "naver"
+									snsType: "naver",
+									authId: '1001'
 	                        		}),
 							contentType : "application/json; charset=UTF-8",
 							dataType : "json",

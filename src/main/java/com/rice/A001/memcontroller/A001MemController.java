@@ -14,19 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.rice.A001.memdao.A001MemDAO;
 import com.rice.A001.memservice.A001MemService;
 import com.rice.A001.memvo.A001MemVO;
+import com.rice.M001.mailservice.M001MailService;
 
 @Controller
 @RequestMapping("/member/*")
 public class A001MemController { 
 	private static final Logger logger = LoggerFactory.getLogger(A001MemController.class);
-	
 	@Autowired
 	private A001MemService a001MemService;
-	@Autowired
-	private A001MemDAO a001MemDAO;
+	@Autowired 
+	private M001MailService mailService;
 	
 	// GET 로그인, 로그인 페이지 이동
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -245,17 +244,58 @@ public class A001MemController {
 	
 	// POST /modify/auth 강사로 권한 변경
 	@RequestMapping(value = "/modify/auth", method = RequestMethod.POST)
-	public String postModifyAuth(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Integer result = 0;
+	public String postModifyAuth(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) {
+		logger.info("post /modify/auth");
+		
 		if(vo != null) {
-			result = a001MemService.updateAuth(vo);
-		}
-		if(result != 0) {
-			model.addAttribute("modifyMsg", "auth");
-		} else {
-			model.addAttribute("modifyMsg", false);
+			try {
+				a001MemService.updateAuth(vo);
+				model.addAttribute("modifyMsg", "auth");
+			} catch (Exception e) {
+				e.printStackTrace();
+				model.addAttribute("modifyMsg", false);
+			}
 		}
 		return "redirect:/member/modify/info";
 	}
 	
+	
+	// GET find/id, 아이디 찾기
+	@RequestMapping(value = "/find/id", method = RequestMethod.GET)
+	public String getFindId(Model model, HttpServletRequest request, HttpServletResponse response) {
+		logger.info("get FindId");
+		return "Afindid";
+	}
+	
+	// POST find/id, 아이디 찾기
+	@RequestMapping(value = "/find/id", method = RequestMethod.POST)
+	public String postFindId(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.info("post /find/id");
+		String resultid = a001MemService.findId(vo);
+		model.addAttribute("resultid", resultid);
+		return "Aidresult";
+	}
+	
+	// GET find/pwd, 아이디 찾기
+	@RequestMapping(value = "/find/pwd", method = RequestMethod.GET)
+	public String getFindPwd(Model model, HttpServletRequest request, HttpServletResponse response) {
+		logger.info("get FindPwd");
+		return "Afindpwd";
+	}
+	
+	// POST find/pwd, 아이디 찾기
+	@RequestMapping(value = "/find/pwd", method = RequestMethod.POST)
+	public String postFindPwd(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) {
+		logger.info("post FindPwd");
+		try {
+			String newpwd = a001MemService.findPwd(vo);
+			if(newpwd != null) {
+				mailService.sendMail(vo.getMemEmail(), "RiceLMS 임시 비밀번호 발급", newpwd + " 임시 비밀번호 입니다.");
+			}
+		} catch (Exception e) {	// 비밀번호 찾기 실패 했을 경우
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "Alogin";
+	}
 }

@@ -24,5 +24,9 @@ public interface A001MemService {
 	// 비밀번호 수정
 	public Integer updatePwd(A001MemVO vo) throws Exception;
 	// 강사로 권한 변경
-	public Integer updateAuth(A001MemVO vo) throws Exception;
+	public void updateAuth(A001MemVO vo) throws Exception;
+	// 아이디 찾기
+	public String findId(A001MemVO vo) throws Exception;
+	// 비밀번호 재설정을 위한 회원번호 검색
+	public String findPwd(A001MemVO vo) throws Exception;
 }

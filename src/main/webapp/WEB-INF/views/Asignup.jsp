@@ -63,7 +63,6 @@
       
       <div class="form-group has-feedback">
         <input type="text" class="form-control" name="memId" placeholder="아이디를 입력하여주세요">
-<!--         <span class="glyphicon glyphicon-user form-control-feedback"></span> -->
       </div>   
       <div class="font-weight-bold" id="id_check"> </div>
       <!-- ID -->
@@ -94,20 +93,7 @@
       <div class="font-weight-bold text-danger" id="email_check"> </div>
       <!-- 이메일  -->
       
-      <div class="row">
-      
-      	<!--  로그인 정보 저장 -->
-      	<!--
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> I agree to the <a href="#">terms</a>
-            </label>
-          </div>
-        </div>
-        -->
-        <!--  로그인 정보 저장 -->
-        
+      <div class="row">        
         <!-- /.col -->
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
@@ -115,8 +101,6 @@
         <!-- /.col -->
       </div>
     </form>
-
-    <a href="/member/login" class="text-center">I already have a membership</a>
   </div>
   <!-- /.form-box -->
 </div>
@@ -264,7 +248,7 @@
 				return false;
 			}
 		}		
-
+		
 		$("input[name='memName']").blur(function() {
 			nameCheck();
 		});

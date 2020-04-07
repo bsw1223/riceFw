@@ -3,11 +3,11 @@ package com.rice.A001.memvo;
 public class A001MemVO {
 	/*
 	    memNum    VARCHAR2(20) DEFAULT '1000' NOT NULL,
-	    memId    VARCHAR2(30),
+	    memId    VARCHAR2(30) NOT NULL,
 	    memPwd    VARCHAR2(20),
 	    memName    VARCHAR2(50) NOT NULL,
 	    memTel    VARCHAR2(30),
-	    memEmail    VARCHAR2(100) NOT NULL,
+	    memEmail    VARCHAR2(100),
 	    memJoinDate    VARCHAR2(30) DEFAULT SYSDATE,
 	    memModifyDate    VARCHAR2(30) DEFAULT SYSDATE,
 	    memLevel    INTEGER DEFAULT 1,
@@ -32,6 +32,7 @@ public class A001MemVO {
 	private String memStateCode;
 	private String snsId;
 	private String snsType;
+	
 	public String getMemNum() {
 		return memNum;
 	}

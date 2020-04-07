@@ -82,7 +82,8 @@
     </div>
     <!-- /.social-auth-links -->
 
-    <a href="#">비밀번호 재설정</a><br>
+	<a href="/member/find/id">아이디찾기</a><br>
+    <a href="/member/find/pwd">비밀번호 재설정</a><br>
     <a href="/member/account" class="text-center">회원가입</a>
 
   </div>
@@ -98,7 +99,6 @@
 <script src="${contextPath}/resources/plugins/iCheck/icheck.min.js"></script>
 
 <!-- KAKAO SDK -->
-<%-- <script src="${contextPath}/resources/api/js/kakao.js"></script> --%>
 <script src="${contextPath}/resources/api/js/kakao.min.js"></script>
 
 <!-- NAVER LOGIN -->
@@ -137,18 +137,11 @@
         $("#kakao-login-btn").on("click", function(){
             //1. 로그인 시도
             Kakao.Auth.login({
-                  success: function(authObj) {
-// 	                  console.log(JSON.stringify(authObj));
-// 	                  console.log(Kakao.Auth.getAccessToken());
-	                
+                  success: function(authObj) {	                
 	                  // 2. 로그인 성공시, API를 호출합니다.
 	                  Kakao.API.request({
 	                	  url: '/v2/user/me',
 	                	  success: function(res) {
-// 	                		  console.log(JSON.stringify(res.id));
-// 							  console.log(JSON.stringify(res.kaccount_email));	                	
-// 	                		  console.log(JSON.stringify(res.properties.profile_image));
-// 	                		  console.log(JSON.stringify(res.properties.nickname));
 							  $.ajax({
 	                    	  	async : true,
 								type : "POST",
@@ -157,7 +150,8 @@
 									snsId : res.id,
 									memName : res.properties.nickname,
 									memId : res.id+'@k',
-									snsType: "kakao"
+									snsType: "kakao",
+									authId: '1001'
 	                      			}),
 	              			    contentType : "application/json; charset=UTF-8",
 	                 			dataType : "json",
