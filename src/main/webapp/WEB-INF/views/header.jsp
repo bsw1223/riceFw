@@ -298,4 +298,4 @@
       </div>
     </nav>
   </header>
- <%@ include file = "left.jsp" %>
+ <%@ include file = "sidebar.jsp" %>

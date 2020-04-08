@@ -47,7 +47,7 @@
 	<select id="login" resultType="com.rice.A001.memvo.A001MemVO" parameterType="com.rice.A001.memvo.A001MemVO">
       <![CDATA[
         	select
-        		memId, memName, memEmail
+        		memId, memName, memEmail, authId
         	from
         		scott.member
         	where memId = #{memId}

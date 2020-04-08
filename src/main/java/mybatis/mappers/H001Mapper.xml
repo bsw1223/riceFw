@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.Home">
+	<resultMap id="HomeResult" type="java.util.HashMap">
+		<result property="menuId" column="menuId" />
+        <result property="menuName" column="menuName" />
+        <result property="parentMenuId" column="parentMenuId" />
+        
+		<result property="menuOrder" column="menuOrder" />
+        <result property="menuURL" column="menuURL" />
+        <result property="authId" column="authId" />
+        
+		<result property="authName" column="authName" />
+        <result property="memNum" column="memNum" />
+        <result property="memId" column="memId" />
+
+		<result property="memPwd" column="memPwd" />
+        <result property="memEmail" column="memEmail" />
+        <result property="memTel" column="memTel" />
+        <result property="memJoinDate" column="memJoinDate" />
+        <result property="openClassname" column="openClassname" />
+        
+	</resultMap> 
+	
+
+
+	<select id="getMenuList" parameterType="String" resultMap="HomeResult">
+      <![CDATA[
+      select * from menu a, menumatch b where a.menuid=b.menuid and b.authId=#{authid}
+      ]]>
+	</select>
+
+	<select id="getSubList" parameterType="String" resultMap="HomeResult">
+      <![CDATA[
+		 select a.openclassname  from
+		 ( 
+		 select memnum,openclassid, openclassName from ENROLMENT 
+		 union
+		 select memnum, openclassid,openclassname from openclass
+		 )
+		 a, MEMBER b where a.memnum=b.memnum and b.memnum=#{memnum}
+      ]]>
+	</select>
+	</mapper>
+	
+	
