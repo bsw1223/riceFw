@@ -10,8 +10,8 @@ import com.rice.D001.buildingdao.D001BuildingDAO;
 import com.rice.D001.buildingvo.D001BuildingVO;
 
 @Service
-public class D001BuildingServiceImpl implements D001BuildingService{
-	
+public class D001BuildingServiceImpl implements D001BuildingService {
+
 	@Autowired
 	private D001BuildingDAO d001BuildingDAO;
 
@@ -24,13 +24,13 @@ public class D001BuildingServiceImpl implements D001BuildingService{
 	@Override
 	public boolean delete(String bulId) {
 		// TODO Auto-generated method stub
-		return d001BuildingDAO.delete(bulId)==1;
+		return d001BuildingDAO.delete(bulId) == 1;
 	}
 
 	@Override
 	public boolean update(D001BuildingVO buildingvo) {
 		// TODO Auto-generated method stub
-		return d001BuildingDAO.update(buildingvo)==1;
+		return d001BuildingDAO.update(buildingvo) == 1;
 	}
 
 	@Override
@@ -44,5 +44,5 @@ public class D001BuildingServiceImpl implements D001BuildingService{
 		// TODO Auto-generated method stub
 		return d001BuildingDAO.getTotal();
 	}
-	
+
 }

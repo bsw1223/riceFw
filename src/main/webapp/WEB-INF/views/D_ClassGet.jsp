@@ -34,8 +34,9 @@
 					<!-- /.box-header -->
 					<!-- bulName -->
 					<div class="form-group">
-						<label>ClassCode</label> <input class="form-control" name="ClassCode"
-							value='<c:out value ="${class.classCode}"/>' readonly="readonly" />
+						<label>ClassCode</label> <input class="form-control"
+							name="ClassCode" value='<c:out value ="${class.classCode}"/>'
+							readonly="readonly" />
 					</div>
 
 					<!-- bulMgr -->
@@ -47,18 +48,20 @@
 
 					<!-- bulPhoneNum -->
 					<div class="form-group">
-						<label>classFloorNum</label> <input type="text" class="form-control"
-							name="classFloorNum" value='<c:out value ="${class.classFloorNum}"/>'
+						<label>classFloorNum</label> <input type="text"
+							class="form-control" name="classFloorNum"
+							value='<c:out value ="${class.classFloorNum}"/>'
 							readonly="readonly" />
 					</div>
-					
+
 					<!-- bulAddress -->
 					<div class="form-group">
-						<label>classCapacity</label> <input type="text" class="form-control"
-							name="classCapacity" value='<c:out value ="${class.classCapacity}"/>'
+						<label>classCapacity</label> <input type="text"
+							class="form-control" name="classCapacity"
+							value='<c:out value ="${class.classCapacity}"/>'
 							readonly="readonly" />
 					</div>
-					
+
 					<!-- bulClassNum -->
 					<div class="form-group">
 						<label>bulId</label> <input type="text" class="form-control"
@@ -72,7 +75,7 @@
 							name="classId" value='<c:out value ="${class.classId}"/>'
 							readonly="readonly" />
 					</div>
-					
+
 					<!-- bulRemark -->
 					<div class="form-group">
 						<label>classRemark</label> <input type="text" class="form-control"

@@ -85,8 +85,9 @@
 								<c:forEach begin="${pageMaker.startPage }"
 									end="${pageMaker.endPage }" var="pnum">
 									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-									<a class="page-link"
-										href="/board.do?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a></li>
+										<a class="page-link"
+										href="/board.do?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
+									</li>
 								</c:forEach>
 								<c:if test="${pageMaker.next}">
 									<li class="page-item"><a class="page-link"
@@ -97,11 +98,11 @@
 							</ul>
 						</div>
 						<form action="/register.do">
-					<div>
-						<button type="submit" class="btn btn-block btn-default">게시글
-							작성</button>
-					</div>
-				</form>
+							<div>
+								<button type="submit" class="btn btn-block btn-default">게시글
+									작성</button>
+							</div>
+						</form>
 					</div>
 					<!-- /.box-body -->
 				</div>
@@ -111,7 +112,7 @@
 		</div>
 		<!-- /.box -->
 	</section>
-<!-- /.content -->
+	<!-- /.content -->
 </div>
 
 <!-- modal 추가 -->
@@ -175,8 +176,8 @@
 
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
-		var page=1;
-		location.href = "board.do?page="+page+"&amount=" + sel;
+		var page = 1;
+		location.href = "board.do?page=" + page + "&amount=" + sel;
 
 	}
 </script>

@@ -123,8 +123,8 @@
 		</div>
 		<!-- /.col -->
 
-</section>
-<!-- /.content -->
+	</section>
+	<!-- /.content -->
 </div>
 
 
@@ -151,8 +151,7 @@
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
 		var page = 1;
-		location.href = "/classMng/MngBld/Bld?page=" + page + "&amount="
-				+ sel;
+		location.href = "/classMng/MngBld/Bld?page=" + page + "&amount=" + sel;
 
 	}
 </script>

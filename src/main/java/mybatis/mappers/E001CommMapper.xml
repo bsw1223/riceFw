@@ -6,11 +6,11 @@
 <mapper namespace="mapper.comm">
 	<resultMap id="commResult" type="E001CommVO">
 		<result property="commId" column="commId" />
-        <result property="commName" column="commName" />
-        <result property="commDesc" column="commDesc" />
-        <result property="CommLevel" column="CommLevel"/>
-        <result property="memId"  column="memId"/>
-     </resultMap> 
+		<result property="commName" column="commName" />
+		<result property="commDesc" column="commDesc" />
+		<result property="CommLevel" column="CommLevel" />
+		<result property="memId" column="memId" />
+	</resultMap>
 
 	<select id="getListWithPaging" resultType="E001CommVO">
 		<![CDATA[
@@ -29,10 +29,11 @@
          select count(commId) from community
       ]]>
 	</select>
-	
+
 
 	<select id="read" resultType="E001CommVO">
-		select * from  community where commId=#{commId}
+		select * from community where
+		commId=#{commId}
 	</select>
 
 </mapper>

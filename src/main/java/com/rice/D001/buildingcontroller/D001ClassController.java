@@ -17,13 +17,12 @@ import com.rice.C001.boarddto.PageDTO;
 import com.rice.D001.buildingservice.D001ClassService;
 import com.rice.D001.buildingvo.D001ClassVO;
 
-
 @Controller
 @RequestMapping("/classMng/MngBld/*")
 public class D001ClassController {
 	@Autowired
 	private D001ClassService d001ClassService;
-	
+
 	@RequestMapping(value = "/classr", method = RequestMethod.GET)
 	public String list(Model model, Criteria cri, HttpServletRequest request, HttpServletResponse response) {
 
@@ -33,7 +32,7 @@ public class D001ClassController {
 		return "D_ClassList";
 
 	}
-	
+
 	@RequestMapping(value = "/classrdesc", method = RequestMethod.GET)
 	public String get(@RequestParam("classId") String classId, Model model) {
 

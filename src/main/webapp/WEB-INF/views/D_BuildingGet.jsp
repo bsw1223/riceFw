@@ -19,7 +19,7 @@
 			<li class="active">건물관리</li>
 		</ol>
 	</section>
-	
+
 
 	<!-- Main content -->
 	<section class="content">
@@ -49,21 +49,24 @@
 					<!-- bulPhoneNum -->
 					<div class="form-group">
 						<label>bulPhoneNum</label> <input type="text" class="form-control"
-							name="bulPhoneNum" value='<c:out value ="${building.bulPhoneNum}"/>'
+							name="bulPhoneNum"
+							value='<c:out value ="${building.bulPhoneNum}"/>'
 							readonly="readonly" />
 					</div>
-					
+
 					<!-- bulAddress -->
 					<div class="form-group">
 						<label>bulAddress</label> <input type="text" class="form-control"
-							name="bulAddress" value='<c:out value ="${building.bulAddress}"/>'
+							name="bulAddress"
+							value='<c:out value ="${building.bulAddress}"/>'
 							readonly="readonly" />
 					</div>
-					
+
 					<!-- bulClassNum -->
 					<div class="form-group">
 						<label>bulClassNum</label> <input type="text" class="form-control"
-							name="bulClassNum" value='<c:out value ="${building.bulClassNum}"/>'
+							name="bulClassNum"
+							value='<c:out value ="${building.bulClassNum}"/>'
 							readonly="readonly" />
 					</div>
 
@@ -73,7 +76,7 @@
 							name="bulId" value='<c:out value ="${building.bulId}"/>'
 							readonly="readonly" />
 					</div>
-					
+
 					<!-- bulRemark -->
 					<div class="form-group">
 						<label>bulRemark</label> <input type="text" class="form-control"

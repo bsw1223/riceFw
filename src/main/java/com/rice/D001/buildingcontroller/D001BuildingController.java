@@ -17,15 +17,13 @@ import com.rice.C001.boarddto.PageDTO;
 import com.rice.D001.buildingservice.D001BuildingService;
 import com.rice.D001.buildingvo.D001BuildingVO;
 
-
-
 @Controller
 @RequestMapping("/classMng/MngBld/*")
 public class D001BuildingController {
-	
+
 	@Autowired
 	private D001BuildingService d001BuildingService;
-	
+
 	@RequestMapping(value = "/Bld", method = RequestMethod.GET)
 	public String list(Model model, Criteria cri, HttpServletRequest request, HttpServletResponse response) {
 
@@ -35,7 +33,7 @@ public class D001BuildingController {
 		return "D_BuildingList";
 
 	}
-	
+
 	@RequestMapping(value = "/Blddesc", method = RequestMethod.GET)
 	public String get(@RequestParam("bulId") String bulId, Model model) {
 

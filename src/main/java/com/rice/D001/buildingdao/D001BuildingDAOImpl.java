@@ -9,10 +9,9 @@ import org.springframework.stereotype.Repository;
 import com.rice.C001.boarddto.Criteria;
 import com.rice.D001.buildingvo.D001BuildingVO;
 
-
 @Repository
-public class D001BuildingDAOImpl implements D001BuildingDAO{
-	
+public class D001BuildingDAOImpl implements D001BuildingDAO {
+
 	@Autowired
 	private SqlSession sqlsession;
 

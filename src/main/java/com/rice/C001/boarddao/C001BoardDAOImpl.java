@@ -15,7 +15,6 @@ public class C001BoardDAOImpl implements C001BoardDAO {
 	@Autowired
 	private SqlSession sqlsession;
 
-
 	@Override
 	public List<C001BoardVO> boardList() {
 

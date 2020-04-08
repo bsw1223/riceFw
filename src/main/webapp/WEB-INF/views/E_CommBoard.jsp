@@ -62,7 +62,8 @@
 								<c:forEach var="commboardlist" items="${commboardlist}">
 									<tr>
 										<td><c:out value="${commboardlist.boNum}" /></td>
-										<td><a href='/comm/viewwritings?bno=<c:out value="${commboardlist.boNum}"/>'>
+										<td><a
+											href='/comm/viewwritings?boNum=<c:out value="${commboardlist.boNum}"/>'>
 												<c:out value="${commboardlist.boTitle}" />
 										</a></td>
 										<td><c:out value="${commboardlist.boContent}" /></td>
@@ -82,8 +83,9 @@
 								<c:forEach begin="${pageMaker.startPage }"
 									end="${pageMaker.endPage }" var="pnum">
 									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-									<a class="page-link"
-										href="/board.do?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a></li>
+										<a class="page-link"
+										href="/board.do?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
+									</li>
 								</c:forEach>
 								<c:if test="${pageMaker.next}">
 									<li class="page-item"><a class="page-link"
@@ -109,15 +111,15 @@
 								<button type="submit" class="btn pull-right">글쓰기</button>
 							</form>
 						</div>
-					<!-- /.box-body -->
+						<!-- /.box-body -->
+					</div>
+					<!-- /.box -->
 				</div>
-				<!-- /.box -->
+				<!-- /.box-body -->
 			</div>
-			<!-- /.box-body -->
-		</div>
-		<!-- /.box -->
+			<!-- /.box -->
 	</section>
-<!-- /.content -->
+	<!-- /.content -->
 </div>
 
 <!-- modal 추가 -->
@@ -153,20 +155,6 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		/* 	var result ='<c:out value="${result}"/>';
-			
-			checkModal(result);
-			
-			function checkModal(result){
-				
-				if(result === ''){
-					return;
-				}
-				if(parseInt(result) > 0){
-					$(".modal-body").html("게시글"+parseInt(result)+"번이 등록되었습니다.");
-				}
-				$("#mymodal").modal("show");
-			} */
 
 		var actionForm = $("actionForm");
 
@@ -181,8 +169,8 @@
 
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
-		var page=1;
-		location.href = "board.do?page="+page+"&amount=" + sel;
+		var page = 1;
+		location.href = "board.do?page=" + page + "&amount=" + sel;
 
 	}
 </script>

@@ -11,7 +11,7 @@ import com.rice.D001.buildingvo.D001ClassVO;
 
 @Service
 public class D001ClassServiceImpl implements D001ClassService {
-	
+
 	@Autowired
 	private D001ClassDAO d001ClassDAO;
 
@@ -24,13 +24,13 @@ public class D001ClassServiceImpl implements D001ClassService {
 	@Override
 	public boolean delete(String classId) {
 		// TODO Auto-generated method stub
-		return d001ClassDAO.delete(classId)==1;
+		return d001ClassDAO.delete(classId) == 1;
 	}
 
 	@Override
 	public boolean update(D001ClassVO classvo) {
 		// TODO Auto-generated method stub
-		return d001ClassDAO.update(classvo)==1;
+		return d001ClassDAO.update(classvo) == 1;
 	}
 
 	@Override
@@ -44,5 +44,5 @@ public class D001ClassServiceImpl implements D001ClassService {
 		// TODO Auto-generated method stub
 		return d001ClassDAO.getTotal();
 	}
-	
+
 }

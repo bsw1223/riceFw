@@ -7,17 +7,17 @@
 <mapper namespace="mapper.building">
 	<resultMap id="buildingResult" type="D001BuildingVO">
 		<result property="bulName" column="bulName" />
-        <result property="bulMgr" column="bulMgr" />
-        <result property="bulPhoneNum" column="bulPhoneNum" />
-        <result property="bulAddress" column="bulAddress"/>
-        <result property="bulClassNum" column="bulClassNum"/>
-        <result property="bulFloor" column="bulFloor"/>
-        <result property="bulId" column="bulId"/>
-        <result property="bulRemark" column="bulRemark"/>
-     </resultMap> 
+		<result property="bulMgr" column="bulMgr" />
+		<result property="bulPhoneNum" column="bulPhoneNum" />
+		<result property="bulAddress" column="bulAddress" />
+		<result property="bulClassNum" column="bulClassNum" />
+		<result property="bulFloor" column="bulFloor" />
+		<result property="bulId" column="bulId" />
+		<result property="bulRemark" column="bulRemark" />
+	</resultMap>
 
 
-		<select id="getListWithPaging" resultType="D001BuildingVO">
+	<select id="getListWithPaging" resultType="D001BuildingVO">
 	<![CDATA[
 		select  bulName,bulMgr, bulPhoneNum, bulAddress, bulClassNum,bulFloor,bulId,bulRemark
 	from(
@@ -30,27 +30,29 @@
 	]]>
 	</select>
 
-	<select id="listBuilding" resultType="D001BuildingVO" parameterType="String">
+	<select id="listBuilding" resultType="D001BuildingVO"
+		parameterType="String">
       <![CDATA[
          select * from building
       ]]>
 	</select>
-	
+
 	<select id="getTotal" resultType="int">
 	<![CDATA[
          select count(bulId) from building
       ]]>
 	</select>
-	
+
 
 	<select id="read" resultType="D001BuildingVO">
-		select * from  building where bulId=#{bulId}
+		select * from building where
+		bulId=#{bulId}
 	</select>
-	
+
 	<delete id="delete">
 		delete from building where bulId=#{bulId}
 	</delete>
-	
+
 	<update id="update">
 		update building
 		set bulName=#{bulName},

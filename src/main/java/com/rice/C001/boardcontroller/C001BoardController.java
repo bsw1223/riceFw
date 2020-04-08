@@ -81,7 +81,7 @@ public class C001BoardController {
 
 	@RequestMapping(value = "/updateBoard.do", method = RequestMethod.GET)
 	public String updateBoard(C001BoardVO boardvo, HttpServletRequest request, HttpServletResponse response) {
-		
+
 		c001BoardService.update(boardvo);
 
 		return "redirect:/board.do";

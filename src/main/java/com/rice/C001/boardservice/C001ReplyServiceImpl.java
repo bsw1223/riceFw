@@ -9,17 +9,15 @@ import com.rice.C001.boarddao.C001ReplyDAO;
 import com.rice.C001.boarddto.Criteria;
 import com.rice.C001.replyvo.C001ReplyVO;
 
-
-
 @Service
-public class C001ReplyServiceImpl implements C001ReplyService{
+public class C001ReplyServiceImpl implements C001ReplyService {
 
 	@Autowired
 	private C001ReplyDAO c001ReplyDAO;
 
 	@Override
 	public int register(C001ReplyVO vo) {
-		
+
 		return c001ReplyDAO.insert(vo);
 	}
 
@@ -44,8 +42,7 @@ public class C001ReplyServiceImpl implements C001ReplyService{
 	@Override
 	public List<C001ReplyVO> getList(Criteria cri, Long bno) {
 		// TODO Auto-generated method stub
-		return c001ReplyDAO.getListWithPaging(cri,bno);
+		return c001ReplyDAO.getListWithPaging(cri, bno);
 	}
-	
-	
+
 }
