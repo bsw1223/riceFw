@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.comm">
+	<resultMap id="commResult" type="E001CommVO">
+		<result property="commId" column="commId" />
+		<result property="commName" column="commName" />
+		<result property="commDesc" column="commDesc" />
+		<result property="CommLevel" column="CommLevel" />
+		<result property="memId" column="memId" />
+	</resultMap>
+
+	<select id="getListWithPaging" resultType="E001CommVO">
+		<![CDATA[
+			select  commId, commName, commDesc, CommLevel, memId
+		from(
+		    select rownum rn, commId, commName, commDesc, CommLevel, memId
+		    from community
+		    order by commId desc
+		    )
+		where rn > ((#{page}-1)*#{amount})
+		]]>
+	</select>
+
+	<select id="getTotal" resultType="int">
+	<![CDATA[
+         select count(commId) from community
+      ]]>
+	</select>
+
+
+	<select id="read" resultType="E001CommVO">
+		select * from community where
+		commId=#{commId}
+	</select>
+
+</mapper>

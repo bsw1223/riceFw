@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.reply">
+	<resultMap id="ReplyResult" type="C001ReplyVO">
+		<result property="rno" column="rno" />
+		<result property="bno" column="bno" />
+		<result property="reply" column="reply" />
+		<result property="replyer" column="replyer" />
+	</resultMap>
+
+	<insert id="insert">
+		insert into tbl_reply(rno, bno, reply,replyer)
+		values
+		(seq_reply.nextval, #{bno},#{reply},#{replyer})
+	</insert>
+
+	<select id="read" resultType="C001ReplyVO">
+		select * from tbl_reply where
+		bno=#{bno}
+	</select>
+
+	<delete id="delete">
+		delete from tbl_reply where rno=#{rno}
+	</delete>
+
+	<update id="update">
+		update tbl_reply set reply=#{reply}, updateDate =
+		sysdate where rno =#{rno}
+	</update>
+
+	<select id="getListWithPaging" resultType="C001ReplyVO">
+		select rno, bno,
+		reply, replyer, replyDate, updateDate
+		from tbl_reply
+		where bno=#{bno}
+		order by rno asc
+	</select>
+</mapper>

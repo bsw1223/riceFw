@@ -1,0 +1,45 @@
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.class">
+	<resultMap id="classResult" type="D001ClassVO">
+		<result property="classCode" column="classCode" />
+		<result property="classNumber" column="classNumber" />
+		<result property="classFloorNum" column="classFloorNum" />
+		<result property="classCapacity" column="classCapacity" />
+		<result property="bulId" column="bulId" />
+		<result property="classId" column="classId" />
+		<result property="classRemark" column="classRemark" />
+	</resultMap>
+
+
+	<select id="getListWithPaging" resultType="D001ClassVO">
+	<![CDATA[
+		select  classCode, classNumber, classFloorNum, classCapacity, bulId, classId,classRemark
+	from(
+	    select rownum rn, classCode, classNumber, classFloorNum, classCapacity, bulId, classId,classRemark
+	    from classroom
+	    where rownum <= (#{page}*#{amount})
+	    order by classId desc
+	    )
+	where rn > ((#{page}-1)*#{amount})
+	]]>
+	</select>
+
+	<select id="getTotal" resultType="int">
+	<![CDATA[
+         select count(classId) from classroom
+      ]]>
+	</select>
+
+
+	<select id="read" resultType="D001ClassVO">
+		select * from classroom where
+		classId=#{classId}
+	</select>
+
+
+
+</mapper>

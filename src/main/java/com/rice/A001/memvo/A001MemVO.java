@@ -1,19 +1,21 @@
 package com.rice.A001.memvo;
 
-
 public class A001MemVO {
 	/*
 	    memNum    VARCHAR2(20) DEFAULT '1000' NOT NULL,
-	    memId    VARCHAR2(20) NOT NULL,
-	    memPwd    VARCHAR2(20) NOT NULL,
-	    memName    VARCHAR2(30) NOT NULL,
-	    memTel    VARCHAR2(30) NOT NULL,
-	    memEmail    VARCHAR2(50) NOT NULL,
-	    memJoinDate    VARCHAR2(30) DEFAULT SYSDATE NOT NULL,
+	    memId    VARCHAR2(30) NOT NULL,
+	    memPwd    VARCHAR2(20),
+	    memName    VARCHAR2(50) NOT NULL,
+	    memTel    VARCHAR2(30),
+	    memEmail    VARCHAR2(100),
+	    memJoinDate    VARCHAR2(30) DEFAULT SYSDATE,
+	    memModifyDate    VARCHAR2(30) DEFAULT SYSDATE,
 	    memLevel    INTEGER DEFAULT 1,
 	    memPoint    INTEGER DEFAULT 0,
-	    authId    VARCHAR2(10) NOT NULL,
-	    memStateCode    VARCHAR2(20) DEFAULT '1100' NOT NULL
+	    authId    VARCHAR2(10) DEFAULT '1001' NOT NULL,
+	    memStateCode    VARCHAR2(20) DEFAULT '1100' NOT NULL,
+	    snsId    VARCHAR2(255),
+	    snsType    VARCHAR2(10)
 	 */
 	
 	private String memNum;
@@ -23,10 +25,13 @@ public class A001MemVO {
 	private String memTel;
 	private String memEmail;
 	private String memJoinDate;
+	private String memModifyDate;
 	private Long memLevel;
 	private Long memPoint;
 	private String authId;
 	private String memStateCode;
+	private String snsId;
+	private String snsType;
 	
 	public String getMemNum() {
 		return memNum;
@@ -70,6 +75,12 @@ public class A001MemVO {
 	public void setMemJoinDate(String memJoinDate) {
 		this.memJoinDate = memJoinDate;
 	}
+	public String getMemModifyDate() {
+		return memModifyDate;
+	}
+	public void setMemModifyDate(String memModifyDate) {
+		this.memModifyDate = memModifyDate;
+	}
 	public Long getMemLevel() {
 		return memLevel;
 	}
@@ -94,4 +105,18 @@ public class A001MemVO {
 	public void setMemStateCode(String memStateCode) {
 		this.memStateCode = memStateCode;
 	}
+	public String getSnsId() {
+		return snsId;
+	}
+	public void setSnsId(String snsId) {
+		this.snsId = snsId;
+	}
+	public String getSnsType() {
+		return snsType;
+	}
+	public void setSnsType(String snsType) {
+		this.snsType = snsType;
+	}
+	
+	
 }

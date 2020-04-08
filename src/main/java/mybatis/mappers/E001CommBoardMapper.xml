@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.commboard">
+	<resultMap id="communityResult" type="E001CommBoardVO">
+		<result property="boNum" column="boNum" />
+		<result property="boContent" column="boContent" />
+		<result property="boRegDate" column="boRegDate" />
+		<result property="boTitle" column="boTitle" />
+		<result property="boUpdateDate" column="boUpdateDate" />
+		<result property="boViews" column="boViews" />
+		<result property="boLikes" column="boLikes" />
+		<result property="boURL" column="boURL" />
+		<result property="memNum" column="memNum" />
+
+	</resultMap>
+
+
+	<select id="getListWithPaging" resultType="E001CommBoardVO">
+		<![CDATA[
+			select  boNum, boContent, boRegDate, boTitle, boUpdateDate, boViews, boLikes, boURL, memNum
+		from(
+		    select rownum rn, boNum, boContent, boRegDate, boTitle, boUpdateDate, boViews, boLikes, boURL, memNum
+		    from commboard
+		    where rownum <= (#{page}*#{amount})
+		    order by boNum desc
+		    )
+		where rn > ((#{page}-1)*#{amount})
+		]]>
+	</select>
+
+	<select id="getTotal" resultType="int">
+	<![CDATA[
+         select count(boNum) from commboard
+      ]]>
+	</select>
+
+
+	<select id="read" resultType="E001CommBoardVO">
+		select * from commboard where
+		boNum=#{boNum}
+	</select>
+
+	<insert id="insert" parameterType="E001CommBoardVO">
+		insert into commboard (boNum,
+		boContent, boTitle, boURL, memNum)
+		values(seq_board.nextval,
+		#{boContent}, #{boTitle}, #{boURL}, #{memNum})
+	</insert>
+
+	<delete id="delete">
+		delete from commboard where boNum=#{boNum}
+	</delete>
+
+	<update id="update">
+		update commboard
+		set boContent=#{boContent},
+		boTitle=#{boTitle},
+		boURL=#{boURL},
+		memNum=#{memNum}
+		boUpdateDate=sysdate
+		where boNum=#{boNum}
+	</update>
+
+
+</mapper>

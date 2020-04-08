@@ -30,8 +30,20 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  
+  <!-- Naver Login  -->
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	 
 </head>
 <body class="hold-transition login-page">
+<c:if test="${param.loginMsg eq 'false'}">
+	<script>
+		alert("잘못된 아이디 패스워드 입니다")
+	</script>
+</c:if>
 <div class="login-box">
   <div class="login-logo">
     <a href="/"><b>Rice</b>LMS</a>
@@ -39,7 +51,7 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Rice 계정으로 로그인</p>
-    <form action="/member/login.do" method="post">
+    <form action="/member/login" method="post">
       <div class="form-group has-feedback">
         <input name="memId" type="text" class="form-control" placeholder="USER ID">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -49,14 +61,6 @@
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
-<!--         <div class="col-xs-8"> -->
-<!--           <div class="checkbox icheck"> -->
-<!--             <label> -->
-<!--               <input type="checkbox"> Remember Me -->
-<!--             </label> -->
-<!--           </div> -->
-<!--         </div> -->
-        <!-- /.col 로그인 정보 남기기 -->
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary btn-block btn-flat">로그인</button>
         </div>
@@ -66,13 +70,21 @@
 
     <div class="social-auth-links text-center">
       <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> 네이버로 시작하기</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> 카카오로 시작하기</a>
+      <!-- naver로그인 버튼 -->
+      <div id="naverIdLogin">
+      		<a class="btn btn-block" id="naver-login-btn" href="#" role="button"></a>
+      </div>
+      <div id="kakaoLogin" align="center">
+    		<a class="btn btn-block" id="kakao-login-btn">
+		    	<img src="//k.kakaocdn.net/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="80%"/>
+		    </a>
+	  </div>
     </div>
     <!-- /.social-auth-links -->
 
-    <a href="#">비밀번호 재설정</a><br>
-    <a href="/member/account.do" class="text-center">회원가입</a>
+	<a href="/member/find/id">아이디찾기</a><br>
+    <a href="/member/find/pwd">비밀번호 재설정</a><br>
+    <a href="/member/account" class="text-center">회원가입</a>
 
   </div>
   <!-- /.login-box-body -->
@@ -85,14 +97,85 @@
 <script src="${contextPath}/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="${contextPath}/resources/plugins/iCheck/icheck.min.js"></script>
+
+<!-- KAKAO SDK -->
+<script src="${contextPath}/resources/api/js/kakao.min.js"></script>
+
+<!-- NAVER LOGIN -->
+<!-- /container -->
+<script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- (2) LoginWithNaverId Javscript SDK -->
+<script src="${contextPath}/resources/api/js/naveridlogin_js_sdk_2.0.0.js"></script>
+
+<!-- (3) LoginWithNaverId Javscript 설정 정보 및 초기화 -->
 <script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
-  });
+	$(function() {
+		var naverLogin = new naver.LoginWithNaverId({
+			clientId : "KGTXKoI7gwy_zGWcbPAH",
+			callbackUrl : "http://"+ window.location.hostname+((location.port == "" || location.port == undefined) ? "" : ":"
+				+ location.port)+ "/member/naverlogin",
+			isPopup : true, /* 팝업을 통한 연동처리 여부 */
+			loginButton: {color: "green", type: 3, height: 50} /* 로그인 버튼의 타입을 지정 */
+		});	// 네이버 로그인
+
+		/* 설정정보를 초기화하고 연동을 준비 */
+		naverLogin.init();
+		
+		
+		//////////////// kakao
+		// SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('ef74bb20977f51965ba61e30b85eb616');
+
+        // SDK 초기화 여부를 판단합니다.
+        console.log(Kakao.isInitialized());
+        
+    	var snsId = null;
+    	var memName = null;
+    	
+        $("#kakao-login-btn").on("click", function(){
+            //1. 로그인 시도
+            Kakao.Auth.login({
+                  success: function(authObj) {	                
+	                  // 2. 로그인 성공시, API를 호출합니다.
+	                  Kakao.API.request({
+	                	  url: '/v2/user/me',
+	                	  success: function(res) {
+							  $.ajax({
+	                    	  	async : true,
+								type : "POST",
+								url : '/member/kakaologin',
+								data : JSON.stringify({
+									snsId : res.id,
+									memName : res.properties.nickname,
+									memId : res.id+'@k',
+									snsType: "kakao",
+									authId: '1001'
+	                      			}),
+	              			    contentType : "application/json; charset=UTF-8",
+	                 			dataType : "json",
+	                            success : function(data){
+	                            	if(data == 'false') {
+		                               location.href="/member/login";
+									} else {
+										console.log("success");
+										location.href="/";
+									}
+	                            }
+		                      });   // ajax end
+	                	  },
+	                	  fail: function(error) {
+	                		  alert(JSON.stringify(error));
+	                	  }
+			          });
+                },
+                fail: function(err) {
+                  alert(JSON.stringify(err));
+                }
+           });            
+        }); // kakao end
+	})
 </script>
 </body>
 </html>

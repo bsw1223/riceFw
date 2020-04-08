@@ -10,7 +10,8 @@
         <result property="title" column="title" />
         <result property="content" column="content" />
         <result property="writer" column="writer"/>
-	</resultMap> 
+     </resultMap> 
+
 
 		<select id="getListWithPaging" resultType="C001BoardVO">
 	<![CDATA[
@@ -76,6 +77,12 @@
          select * from tbl_board where bno=#{number}
       ]]>
 	</select>
+<!-- 	
+	<insert id="insertReply" parameterType="String">
+		INSERT INTO COMMCOMMENT(boNum,comtNum,parentNum,userId,comtRegDate,comtContent,comtUpdateDate)
+  		 VALUES('#{boNum}','#{comtNum}','#{parentNum}','#{userId}','#{comtRegDate}','#{comtContent}','#{comtUpdateDate}');
+
+	</insert> -->
 	
 
 </mapper>

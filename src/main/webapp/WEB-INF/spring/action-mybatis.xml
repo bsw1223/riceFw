@@ -31,7 +31,6 @@
 	</bean>
 	 -->
 	<!-- 수정된 부분 -->
-	
 	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
       <property name="driver" value="${jdbc.driverClassName}" />
       <property name="url" value="${jdbc.url}" />
@@ -51,10 +50,10 @@
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 
-
-	<!-- <bean id="memberDAO"
-		class="com.spring.member.dao.MemberDAOImpl">
-		<property name="sqlSession" ref="sqlSession"></property>
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
 	</bean>
- -->
+	
+	<tx:annotation-driven transaction-manager="txManager"/>
+	
 </beans>

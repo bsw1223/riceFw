@@ -29,7 +29,7 @@
           <h3 class="box-title"> <!-- Title -->
               <!-- session에 로그인 정보가 있을 경우 login TEST -->
 			    <c:if test="${not empty member}">
-			    	<p class="login-box-msg">${member.memName}님 환영합니다.</p>
+			    	<p class="login-box-msg"> 환영합니다.</p>
 				</c:if>
           </h3>
 
