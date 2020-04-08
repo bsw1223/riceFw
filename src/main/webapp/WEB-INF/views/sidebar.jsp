@@ -11,7 +11,6 @@
 	var sideList = new Array();
 	/* var authId = ${member.authId}; */
 	var authId = "1001";
-	console.log("authId : "+authId);
 	var memnum = "2";
 	 
 	/* 	if(${member.authId}==1000)//관리자(1000),학생(1001),강사(1002) */
@@ -27,10 +26,7 @@
 			url: "/sublist",
 			data: {memnum:memnum},
 			success: function(mapListSub){
-					console.log("sucess sublist");
 					newMapListSub = JSON.parse(mapListSub);
-					console.log("mapList : " +mapListSub);
-		
 					}
 				});
 			});
@@ -43,9 +39,6 @@
 		url: "/main.do",
 		data: {authId:authId},
 		success: function(mapList){
-						console.log("sucess");
-						console.log(mapList);
-						
 						//newMapList : 자바스크립트 객체를 담은 배열
 						var newMapList = JSON.parse(mapList);//전체 리스트
 						var topMenu= new Array();
@@ -88,12 +81,6 @@
 										},[]);//상위메뉴가 없는 리스트(top메뉴)
 					//-----------------------중복값 제거 끝--------------------	 
 							
-//--------------------------------메뉴추가-----------------------------------------
-			//topMenuN --> top메뉴
-			//topMenuN중  topMenuT에 있으면 treeTop2,Menu메뉴 사용 , 
-			//menuId이 14이면 3단TREE사용
-			//아니면nonTreeTopMenu 사용
-	
 
 
 							
@@ -182,22 +169,7 @@ for(var i in newMapList)
 	}
 //-----------3단중 2단------------								 
 
-
-
 //부모가 14번 인것 들 넣기 thirdone클래스에 li.thirdone > a
-
-
-
-
-
-
-
-
-
-
-
-
-
 //newMapListSub[i].openClassname
 
 for(var i in newMapListSub)
@@ -223,39 +195,6 @@ for(var i =0 ; i< tempCount-1; i++)
 	}
 }
 
-
-
-
-
-
-
-/* 
-for(var i in newMapList)
-	{
-		var parentMenuId = newMapList[i].parentMenuId;
-		if(parentMenuId=="14"||parentMenuId=="30")
-			{
-			  $('li.thirdone').append(tree3TopMenuM);
-			break;
-			}
-	}
-	
-var tempCount = 0;
-for(var i in newMapList)
-{
-	var parentMenuId = newMapList[i].parentMenuId;
-	if(parentMenuId=="14"||parentMenuId=="30")
-		{
-			tempCount++;
-		}
-}
-
-for(var i =0 ; i< tempCount-1; i++)
-	{
-		{
-			$('.thirdtwo').append(tree3TopMenuMAdd);
-		}
-	} */
 //-----------3단중 3단------------
 
 for(var i in newMapList)
@@ -366,70 +305,6 @@ if(authId == "1002")
 			}
 		 } 
 }	 
-
-	 
-	 
-/* for(var i in topMenuN)
-{
- if(authId == "1001"||authId == "1000")
-		 {
-	var checkMenId = newMapList[i].menuId;
-	 if(checkMenId!="14")
-		 {
-	  var check = false;
-		for(var j in topMenuT)
-			{
-				if(topMenuN[i]==topMenuT[j])
-					{
-						check = true;	
-					}
-				
-			}
-		if(check ==true)
-			{
-				//tree메뉴
-				$('.start').append(tree2TopMenu);
-										
-				}
-									
-		if(check ==false)
-			{
-				//nontree메뉴
-				$('.start').append(tree1TopMenu);
-			}
-		}
-	 }
- 
-if(authId == "1002")
-	 {
-	var checkMenId = newMapList[i].menuId;
-		 if(checkMenId!="30")
-			 {
-		  var check = false;
-			for(var j in topMenuT)
-				{
-					if(topMenuN[i]==topMenuT[j])
-						{
-							check = true;	
-						}
-					
-				}
-			if(check ==true)
-				{
-					//tree메뉴
-					$('.start').append(tree2TopMenu);
-											
-					}
-										
-			if(check ==false)
-				{
-					//nontree메뉴
-					$('.start').append(tree1TopMenu);
-				}
-			}
-		 } 
-}	 
-	 */
 //--------------------------클래스추가---------------------------
 //배열의 id를 이용하여 클래스를 넣는다.TOP
 var tempJ =0;
@@ -457,8 +332,6 @@ for(i in topMenuT)
 					tempJ++;
 	  			}	
 	  }
-	
-	
 }
 var remainTopMenu = $(topMenuN).not(topMenuT).get();//트리없는 TOP메뉴 리스트
 var tempT = 0;
@@ -531,22 +404,12 @@ for(i in newMapList)
 			if($('li').hasClass(classId))
 				{
 					$(eval(path)).text(name); 
-					console.log("name : "+name);
-					console.log("path : "+path);
-					console.log("$(eval(path0)).length : "+ $(eval(path0)).length);
-					console.log("$(eval(path2)).length : "+ $(eval(path2)).length);
-					console.log("tempC : "+ tempC);
-					console.log("tempD : "+ tempD);
-					console.log("tempE : "+ tempE);
-					
-				
 					 if($(eval(path0)).length>0)
 						{
 							tempC++;
 							tempD++;
 							tempE++;
 						}
-				
 						if($(eval(path2)).length==0)
 							{
 							tempE=2;
@@ -554,15 +417,11 @@ for(i in newMapList)
 							tempC=0;
 							}
 					 }
-				 }
-			}
-	
-
+		 }
+}
 
 //3단일때
 
-//여기인듯 여기
-//	newMapListSub[i].openClassname
 
  var tempZ= 0;
  var path= null;
@@ -590,36 +449,6 @@ for(i in newMapListSub)
 						
 			
  }
-			
-
- /* var tempZ= 0;
-
-for(i in newMapList)
-{
-	var classId = "a"+newMapList[i].parentMenuId;
-	if(classId=='a14'||classId=='a30')
-		{
-			var path="'li."+classId+" > ul > li.text:eq("+tempZ+") > a'";
-			var name = newMapList[i].menuName;
-			if($('li').hasClass(classId))
-				{
-					$(eval(path)).text(name); 
-					if(($(eval(path)).length)+1>0)
-						{
-							tempZ++;
-						}else
-						{
-							tempZ=0;
-						}
-						
-			
-				 }
-			
-		} 
- 
-} */
-
-
 //----------마지막 하나 삭제------
  for(i in newMapList)
 {
@@ -853,8 +682,6 @@ for(i in newMapList)
 				}
 		}
 		
-		
-		
 	}
 
 //-------------------------------3단 링크 걸기--------------------------------------
@@ -875,10 +702,7 @@ for(i in newMapList)
 							var pathCount="'li.a14 > ul > li.text:eq("+i+") > ul > li'";
 							if($('li').hasClass("a14"))
 								{
-									console.log("classId : "+"i : "+i+" j : "+j+" "+" tempF : "+tempH+" "+classId);
-									console.log(" path : "+ path); 
 									$(eval(path)).attr('href',URL); 
-									console.log("$(eval(path)).length : "+ $(eval(path)).length)
 									if(($(eval(pathCount)).length)+2>0)
 										{
 												tempH++;
@@ -887,7 +711,6 @@ for(i in newMapList)
 										{
 												tempH=0;
 										}
-										
 								}
 							}
 					}
@@ -901,10 +724,7 @@ for(i in newMapList)
 						var pathCount="'li.a30 > ul > li.text:eq("+i+") > ul > li'";
 						if($('li').hasClass("a30"))
 							{
-								console.log("classId : "+"i : "+i+" j : "+j+" "+" tempF : "+tempH+" "+classId);
-								console.log(" path : "+ path); 
 								$(eval(path)).attr('href',URL); 
-								console.log("$(eval(path)).length : "+ $(eval(path)).length)
 								if(($(eval(pathCount)).length)+2>0)
 									{
 											tempH++;
@@ -957,38 +777,11 @@ for(i in newMapList)
 				 }
 			}
 }
-
-
-
-
-
-
-
-
-
-for(i in newMapListSub)
-	{
-		console.log("newMapList : "+newMapListSub[i].openClassname);	
-	
-	}
-
-
-
-
-
-
-											 
-				 
-											 
 					}
 		} );
-	});
- 
-	
-
-
-	
-	</script>
+});
+ 	
+</script>
 
 	
 	

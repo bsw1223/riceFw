@@ -29,7 +29,6 @@ public class H001HomeDAOImpl implements H001HomeDAO {
 	public List<Map<String, Object>> getSubList(String memnum) {
 		List<Map<String, Object>> list = null;
 		list= sqlsession.selectList("mapper.Home.getSubList",memnum);
-		System.out.println("dao");
 		
 		return list;
 	}

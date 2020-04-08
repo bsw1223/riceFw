@@ -24,15 +24,8 @@ $(document).ready(function(){
 		success: function(mapList)
 					{
 						//강의실정보 불러오기
-						console.log("success");			
 						//newMapList : 자바스크립트 객체를 담은 배열
 						 var clRInfo = JSON.parse(mapList);//전체 리스트
-					
-						 for(i in clRInfo)
-							 {
-							  console.log("clRInfo : "+clRInfo[i]);
-							 }
-						 
 						 for(i in clRInfo)
 						 {
 						 var clRKind = "<option>"+clRInfo[i].codeName+"</option>";
@@ -55,13 +48,9 @@ $(document).ready(function(){
 		success: function(mapList)
 					{
 						//건물명 불러오기
-						 console.log("success builName");			
 						 var bulName = JSON.parse(mapList);//전체 리스트
-						 console.log("mapList : "+mapList);
-						 
 						 for(i in bulName)
 						 {
-							 console.log("bulName[i].BULID : "+bulName[i].BULID);
 							 var bulNameAdd = "<option VALUE=\""+ bulName[i].BULID+"\">"+bulName[i].BULNAME+"</option>";
 							 $('select.bulId').append(bulNameAdd);						 
 						 
@@ -90,7 +79,6 @@ $(document).on("click","#building",function(){
 						},
 					success: function(bulName)
 								{
-									//			
 									console.log("in posting bulname : " + bulName);
 								}
 			

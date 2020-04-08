@@ -21,9 +21,7 @@ public class D001BuildDAOImpl implements D001BuildDAO {
 	public List<Map<String, Object>> getInfo(String bulId) {
 
 		List<Map<String, Object>> list = null;
-		
 		list= sqlsession.selectList("mapper.Build.getBuildInfo",bulId);
-		System.out.println("dao");
 		return list;
 		
 	}
@@ -34,8 +32,6 @@ public class D001BuildDAOImpl implements D001BuildDAO {
 				
 		List<Map<String, Object>> list = null;
 		list= sqlsession.selectList("mapper.Build.getClassInfo",classId);
-		System.out.println("dao");
-		
 		return list;
 	}
 	
@@ -45,7 +41,6 @@ public class D001BuildDAOImpl implements D001BuildDAO {
 	public List<Map<String, Object>> getInfoClR() {
 		List<Map<String, Object>> list = null;
 		list= sqlsession.selectList("mapper.Build.getClRInfo");
-		System.out.println("dao");
 		return list;
 	}
 
@@ -53,7 +48,6 @@ public class D001BuildDAOImpl implements D001BuildDAO {
 	public List<Map<String, Object>> getInfoBUL() {
 		List<Map<String, Object>> list = null;
 		list= sqlsession.selectList("mapper.Build.getBULInfo");
-		System.out.println("dao");
 		return list;
 	}
 
@@ -63,7 +57,6 @@ public class D001BuildDAOImpl implements D001BuildDAO {
 	public List<Map<String, Object>> getBulName() {
 		List<Map<String, Object>> list = null;
 		list= sqlsession.selectList("mapper.Build.getBuildName");
-		System.out.println("dao");
 		return list;
 	}
 	
@@ -72,7 +65,6 @@ public class D001BuildDAOImpl implements D001BuildDAO {
 	public void insertClR(D001BuildVO d001BuildVO) {
 		sqlsession.selectList("mapper.Build.insertClRInfo",d001BuildVO);
 		String getBulId = d001BuildVO.getBulId();
-				System.out.println("getBulId : "+getBulId);
 			
 	}
 

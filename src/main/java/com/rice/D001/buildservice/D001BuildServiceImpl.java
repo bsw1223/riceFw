@@ -57,10 +57,8 @@ public class D001BuildServiceImpl implements D001BuildService {
 	//강의실 등록하기
 	@Override
 	public void insertClR(D001BuildVO d001BuildVO) {
-
 		d001BuildDAO.insertClR(d001BuildVO);
 		String getBulId = d001BuildVO.getBulId();
-		System.out.println("service - getBulId : "+getBulId);
 	}
 	
 

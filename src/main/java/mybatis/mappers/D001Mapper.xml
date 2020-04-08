@@ -58,7 +58,8 @@
       <![CDATA[
   
   		 SELECT a.classCode, a.classNumber, a.classFloorNum, a.classCapacity, a.bulId, a.classId, a.classRemark, b.bulname
-	  	 FROM scott.CLASSROOM  a, building b      where a.bulid=b.bulid and classId = #{classId,jdbcType=VARCHAR}
+	  	 FROM scott.CLASSROOM  a, building b      
+	  	 where a.bulid=b.bulid and classId = #{classId,jdbcType=VARCHAR}
       ]]>
 	</select>
 	

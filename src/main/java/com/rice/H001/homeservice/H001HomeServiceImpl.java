@@ -21,14 +21,8 @@ public class H001HomeServiceImpl implements H001HomeService{
 	
 	@Override
 	public List<Map<String, Object>> getMenuList(String authId) {
-		
-		System.out.println("service 진행 authId :"+ authId);
-		
 		List<Map<String, Object>> menuList = new ArrayList<Map<String,Object>>();
 		menuList= h001HomeDAO.menuGetList(authId);
-		
-		
-		System.out.println(menuList);
 		
 		return menuList;
 	}

@@ -52,15 +52,9 @@ public class H001HomeController {
 	public String main(Model model, HttpServletRequest request) throws JsonProcessingException {
 		
 		ObjectMapper mapper = new ObjectMapper();
-		
 		String authId= request.getParameter("authId");
 		System.out.println(authId);
 		List<Map<String, Object>>map = h001HomeService.getMenuList((String)authId);//1000은 테스트용  authId로 변경해야함
-		
-		//model.addAttribute("jsonlist", JSONArray.fromObject(map));
-		
-		//return "index";
-				
 		String mapList = mapper.writeValueAsString(map);
 
 		
@@ -76,13 +70,7 @@ public class H001HomeController {
 		String memnum= request.getParameter("memnum");
 		System.out.println(memnum);
 		List<Map<String, Object>>map = h001HomeService.selectSubjectList((String)memnum);//1000은 테스트용  authId로 변경해야함
-		
-		//model.addAttribute("jsonlist", JSONArray.fromObject(map));
-		
-		//return "index";
-		
 		String mapListSub = mapper.writeValueAsString(map);
-		System.out.println("sucess3");
 		
 		return  mapListSub;
 	}

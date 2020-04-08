@@ -12,7 +12,7 @@
 	<script>
 	var infoList = new Array();
 	/* var bulId  = ${build.bulId }; */
-	var classId  = 'AA';
+	var classId  = '8';
 	
 	$(document).ready(function(){
 		$.ajax({
@@ -23,20 +23,10 @@
 		data: {classId:classId},
 		success: function(mapList)
 					{
-						console.log("success");			
 						//newMapList : 자바스크립트 객체를 담은 배열
 						 var DClassDetail = JSON.parse(mapList);//전체 리스트
-					  
-				/* 			console.log(DClassDetail[0].classCode);
-							console.log(DClassDetail[0].classNumber);
-							console.log(DClassDetail[0].bulName);
-							console.log(DClassDetail[0].classFloorNum);
-							console.log(DClassDetail[0].classCapacity);
-							console.log(DClassDetail[0].bulId); 
-							console.log(DClassDetail[0].classId); 
-							console.log(DClassDetail[0].classRemark);  */
 							
-							var bulName = DClassDetail[0].bulName;
+							var bulName = DClassDetail[0].BULNAME;
 							var classCode = DClassDetail[0].classCode;
 							var classNumber = DClassDetail[0].classNumber;
 							var classFloorNum = DClassDetail[0].classFloorNum;
@@ -115,7 +105,7 @@
         <div class="col-xs-12">
           <h2 class="page-header">
             <i class="fa fa-globe"></i> 강의실상세 보기
-            <small class="pull-right">Date: 2/10/2014</small>
+            <small class="pull-right"></small>
           </h2>
         </div>
         <!-- /.col -->
