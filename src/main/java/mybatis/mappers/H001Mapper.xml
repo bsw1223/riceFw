@@ -29,7 +29,7 @@
 
 	<select id="getMenuList" parameterType="String" resultMap="HomeResult">
       <![CDATA[
-      select * from menu a, menumatch b where a.menuid=b.menuid and b.authId=#{authid}
+      select * from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
       ]]>
 	</select>
 

@@ -83,7 +83,7 @@
 	
 	
 	
-	<insert id="insertClRInfo" parameterType="D001BuildVO">
+	<insert id="insertClRInfo" parameterType="D001BuildingVO">
 			 <![CDATA[ 
 				insert into classroom
 				(classId, classCapacity,classCode,classNumber, classRemark,bulId) 
@@ -101,7 +101,7 @@
 
 	
 	
-	<insert id="insertBulInfo" parameterType="D001BuildVO">
+	<insert id="insertBulInfo" parameterType="D001BuildingVO">
 		<selectKey keyProperty="builName" order="BEFORE" resultType="String" >
 			select build_board.nextval from dual
 		</selectKey>
@@ -110,6 +110,34 @@
 		values(#{classId},#{builName},#{classCapacity},#{classCode},#{classNumber},#{buildName},#{classRemark})
 	 ]]>
 	</insert>
+	
+	
+	
+	
+	
+	
+	
+		<!-- 
+				insert into classroom
+				(classId, classCapacity,classCode,classNumber, classRemark,bulId) 
+				values
+				(
+				(clR_board.nextval), 
+				 #{classCapacity,jdbcType=VARCHAR},
+				 #{classCode,jdbcType=VARCHAR}, 
+				 #{classNumber,jdbcType=INTEGER},  
+				 #{classRemark,jdbcType=VARCHAR}, 
+				 #{bulId,jdbcType=VARCHAR}
+				 )
+			 -->
+	
+	<insert id="insertBuildingInfo" parameterType="D001BuildingVO">
+			 <![CDATA[ 
+				INSERT INTO BUILDING(bulName,bulMgr,bulPhoneNum,bulAddress,bulClassNum,bulFloor,bulId,bulRemark)
+				VALUES(#{bulName},#{bulMgr},#{bulPhoneNum},#{bulAddress},#{bulClassNum},#{bulFloor},(build_board.nextval),#{bulRemark});
+			 ]]>
+	</insert>
+	 
 	
 	
 	</mapper>

@@ -1,33 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<%-- <%@ include file = "header.jsp" %> --%>
+<%@ include file = "header.jsp" %>
 <script
   src="https://code.jquery.com/jquery-2.2.4.js"
   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
   crossorigin="anonymous"></script>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-
 	<script>
 	var infoList = new Array();
-	/* var bulId  = ${build.bulId }; */
-	var bulId  = 'AA';
-	
+	/* var bulId  = ; */
+	var bulId  = {bulId:"${building}"};
+	console.log(bulId);
 	$(document).ready(function(){
 		$.ajax({
 		type : "post",
 		async: true,
 		datatype:"text; charset=utf-8",
-		url: "/mngbld/blddesc",
-		data: {bulId:bulId},
+		url: "/classMng/MngBld/BlddescInfo",
+		data: bulId,
 		success: function(mapList)
 					{
 						console.log("success");			
 						//newMapList : 자바스크립트 객체를 담은 배열
 						 var DBuildingDetail = JSON.parse(mapList);//전체 리스트
-					   
-							
 							var bulPhoneNum = DBuildingDetail[0].bulPhoneNum;
 							var bulName = DBuildingDetail[0].bulName;
 							var bulAddress = DBuildingDetail[0].bulAddress;
@@ -57,28 +53,11 @@
 							$('div.add').append(addText);
 					},
 		});
-		
 	});
-	
-	
-
-	function delete_one(){
-		$.ajax({
-			type : "post",
-			async: true,
-			datatype:"text; charset=utf-8",
-			url: "/classrMng/MngBld/Blddesc",
-			data: {bulId:bulId},
-			success: function(mapList)
-						{
-						}
-				});
-			}
-		
-	
 	</script>
 <html>
 <head>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Invoice</title>
@@ -115,13 +94,9 @@
         RICE LMS
         <small></small>
       </h1>
-     
     </section>
-
     <div class="pad margin no-print">
-     
     </div>
-
     <!-- Main content -->
     <section class="invoice">
       <!-- title row -->
@@ -133,23 +108,16 @@
           </h2>
         </div>
         <!-- /.col -->
-
-
       <!-- Table row -->
       <div class="row">
         <div class="col-xs-12 table-responsive add">
-         
         </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
-
-  
-
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">
-          
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
             <i class=""></i> 수정
           </button>
@@ -173,19 +141,7 @@
     <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
     reserved.
   </footer>
-
-  
 <!-- ./wrapper -->
-
-<!-- jQuery 3 -->
-<script src="${contextPath}/resources/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="${contextPath}/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="${contextPath}/resources/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="${contextPath}/resources/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${contextPath}/resources/dist/js/demo.js"></script>
+<%@ include file = "footer.jsp" %>
 </body>
 </html>

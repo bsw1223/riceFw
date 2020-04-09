@@ -9,9 +9,12 @@
 	<script>
 	/*1,1000/2,1001/3,1002*/
 	var sideList = new Array();
-	/* var authId = ${member.authId}; */
-	var authId = "1001";
-	var memnum = "2";
+	var authId = ${member.authId};
+	console.log(authId);
+	/* var authId = "1001"; */
+	var memnum = ${member.memNum};
+	console.log(memnum);
+	 /* var memnum = "2"; */
 	 
 	/* 	if(${member.authId}==1000)//관리자(1000),학생(1001),강사(1002) */
 	/* var authId= ${member.authId}; */
@@ -792,7 +795,7 @@ for(i in newMapList)
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="/${contextPath}resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
