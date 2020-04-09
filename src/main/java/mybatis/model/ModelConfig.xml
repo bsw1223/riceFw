@@ -14,6 +14,7 @@
 <typeAlias alias="D001ClassVO" type="com.rice.D001.buildingvo.D001ClassVO"/>
 <typeAlias alias="E001CommVO" type="com.rice.E001.commvo.E001CommVO"/>
 <typeAlias alias="E001CommBoardVO" type="com.rice.E001.commvo.E001CommBoardVO"/>
+<typeAlias alias="E001PostReportVO" type="com.rice.E001.commvo.E001PostReportVO"/>
 </typeAliases>
 
 

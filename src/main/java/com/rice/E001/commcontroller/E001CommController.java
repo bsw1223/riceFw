@@ -1,13 +1,17 @@
 package com.rice.E001.commcontroller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,12 +40,15 @@ public class E001CommController {
 	}
 
 	@RequestMapping(value = "/viewwritings", method = RequestMethod.GET)
-	public String get(@RequestParam("boNum") String boNum, Model model) {
+	public String get(@RequestParam("boNum") String boNum, Model model,  HttpServletRequest request, HttpServletResponse response) {
 
+		e001CommBoardService.updateViewCnt(boNum); 
 		model.addAttribute("comm", e001CommBoardService.read(boNum));
 
 		return "E_CommBoardGet";
-	}
+		}
+		
+
 
 	@RequestMapping(value = "/viewupdate", method = RequestMethod.GET)
 	public String updateBoard(E001CommBoardVO boardvo, HttpServletRequest request, HttpServletResponse response) {

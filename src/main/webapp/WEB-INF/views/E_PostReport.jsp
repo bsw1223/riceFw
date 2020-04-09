@@ -17,7 +17,7 @@
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li><a href="#">Tables</a></li>
-			<li class="active">커뮤니티 게시판</li>
+			<li class="active">게시글 신고 목록</li>
 		</ol>
 	</section>
 
@@ -27,7 +27,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">커뮤니티 게시판</h3>
+						<h3 class="box-title">게시글 신고 목록</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -50,28 +50,25 @@
 							<thead>
 								<tr>
 									<th>글번호</th>
-									<th>제목</th>
-									<th>내용</th>
-									<th>작성자</th>
-									<th>작성날짜</th>
-									<th>조회수</th>
-									<th>좋아요수</th>
+									<th>반응</th>
+									<th>신고사유</th>
+									<th>게시글작성날짜</th>
+									<th>신고날짜</th>
+									<th>신고회원</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="commboardlist" items="${commboardlist}">
+								<c:forEach var="pstReportlist" items="${pstReportlist}">
 									<tr>
-										<td><c:out value="${commboardlist.boNum}" /></td>
+										<td><c:out value="${pstReportlist.boNum}" /></td>
 										<td><a
-											href='/comm/viewwritings?boNum=<c:out value="${commboardlist.boNum}"/>'>
-												<c:out value="${commboardlist.boTitle}" />
+											href='/comm/postreportdetail?boNum=<c:out value="${pstReportlist.boNum}"/>'>
+												<c:out value="${pstReportlist.responseCode}" />
 										</a></td>
-										<td><c:out value="${commboardlist.boContent}" /></td>
-										<td><c:out value="${commboardlist.memNum}" /></td>
-										<td><c:out value="${commboardlist.boRegDate}" /></td>
-										<td><c:out value="${commboardlist.boViews}" /></td>
-										<td><c:out value="${commboardlist.boLikes}" /></td>
-										
+										<td><c:out value="${pstReportlist.reportCode}" /></td>
+										<td><c:out value="${pstReportlist.responseDate}" /></td>
+										<td><c:out value="${pstReportlist.reportDate}" /></td>
+										<td><c:out value="${pstReportlist.memNum}" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -98,19 +95,12 @@
 						<div class="offset-md-8">
 							<form action="#" method="get" class="sidebar-form">
 								<div class="input-group">
-									<input type="text" name="q" class="form-control"
-										placeholder="Search..."> <span class="input-group-btn">
-										<button type="submit" name="search" id="search-btn"
-											class="btn btn-flat">
+									<input type="text" name="q" class="form-control"placeholder="Search..."> <span class="input-group-btn">
+										<button type="submit" name="search" id="search-btn" class="btn btn-flat">
 											<i class="fa fa-search"></i>
 										</button>
 									</span>
 								</div>
-							</form>
-						</div>
-						<div class="offset-md-8">
-							<form action="/register.do">
-								<button type="submit" class="btn pull-right">글쓰기</button>
 							</form>
 						</div>
 						<!-- /.box-body -->
@@ -123,6 +113,7 @@
 	</section>
 	<!-- /.content -->
 </div>
+
 
 <form id="actionForm" action="/board.do" method='get'>
 	<input type="hidden" name="page" value='${pageMaker.cri.page}'>
@@ -146,7 +137,7 @@
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
 		var page = 1;
-		location.href = "board.do?page=" + page + "&amount=" + sel;
+		location.href = "/postreportMng/postreportlist?page=" + page + "&amount=" + sel;
 
 	}
 </script>

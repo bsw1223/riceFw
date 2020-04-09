@@ -19,4 +19,5 @@ public interface E001CommBoardDAO {
 
 	public void insertSelectKey(E001CommBoardVO vo);
 
+	public int updateViewCnt(String boNum);
 }

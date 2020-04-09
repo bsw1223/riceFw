@@ -21,6 +21,5 @@ public interface C001BoardDAO {
 
 	public int update(C001BoardVO vo);
 
-	public List<C001BoardVO> getSelectOne(int bno);
 
 }
