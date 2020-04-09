@@ -11,7 +11,7 @@
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>건물관리</h1>
+		<h1>장소관리</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li><a href="#">Tables</a></li>
@@ -25,7 +25,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">건물리스트</h3>
+						<h3 class="box-title">강의실 리스트</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -61,10 +61,9 @@
 										<tr>
 											<td><c:out value="${listC.classCode}" /></td>
 											<td><a
-												href='/classMng/MngBld/Blddesc?bulId=<c:out value="${listC.classId}"/>'>
+												href='../../classMng/MngBld/classrdesc?classId=<c:out value="${listC.classId}"/>'>
 													<c:out value="${listC.classNumber}" />
 											</a></td>
-											<td><c:out value="${listC.classNumber}" /></td>
 											<td><c:out value="${listC.classFloorNum}" /></td>
 											<td><c:out value="${listC.classCapacity}" /></td>
 											<td><c:out value="${listC.bulId}" /></td>
@@ -80,19 +79,19 @@
 
 								<c:if test="${pageMaker.prev}">
 									<li class="page-item"><a class="page-link"
-										href="/classMng/MngBld/Bld?page=${pageMaker.startPage-1 }&amount=${ pageMaker.cri.amount}">Previous</a></li>
+										href="/classMng/MngBld/classr?page=${pageMaker.startPage-1 }&amount=${ pageMaker.cri.amount}">Previous</a></li>
 								</c:if>
 
 								<c:forEach begin="${pageMaker.startPage }"
 									end="${pageMaker.endPage }" var="pnum">
 									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
 										<a class="page-link"
-										href="/classMng/MngBld/Bld?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
+										href="/classMng/MngBld/classr?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
 									</li>
 								</c:forEach>
 								<c:if test="${pageMaker.next}">
 									<li class="page-item"><a class="page-link"
-										href="/classMng/MngBld/Bld?page=${pageMaker.endPage+1 }&amount=${ pageMaker.cri.amount}">Next</a></li>
+										href="/classMng/MngBld/classr?page=${pageMaker.endPage+1 }&amount=${ pageMaker.cri.amount}">Next</a></li>
 								</c:if>
 							</ul>
 						</div>
@@ -110,7 +109,7 @@
 							</form>
 						</div>
 						<div class="offset-md-8">
-							<form action="/register.do">
+							<form action="/classMng/MngBld/classadd">
 								<button type="submit" class="btn pull-right">강의실등록</button>
 							</form>
 						</div>
@@ -130,7 +129,7 @@
 
 
 
-<form id="actionForm" action="/classMng/MngBld/Bld" method='get'>
+<form id="actionForm" action="/classMng/MngBld/classr" method='get'>
 	<input type="hidden" name="page" value='${pageMaker.cri.page}'>
 	<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
 </form>
@@ -162,3 +161,4 @@
 
 </body>
 </html>
+
