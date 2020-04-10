@@ -60,7 +60,7 @@
 									<c:forEach var="listB" items="${listB}">
 										<tr>
 											<td><a
-												href='/classMng/MngBld/Blddesc?bulId=<c:out value="${listB.bulId}"/>'>
+												href='../../classMng/MngBld/Blddesc?bulId=<c:out value="${listB.bulId}"/>'>
 													<c:out value="${listB.bulName}" />
 											</a></td>
 											<td><c:out value="${listB.bulMgr}" /></td>

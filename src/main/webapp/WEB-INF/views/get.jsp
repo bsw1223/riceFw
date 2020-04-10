@@ -113,7 +113,7 @@
 												class="form-control" id="replyer" name="replyer"
 												placeholder="replyer">
 										</div>
-										<input type="submit" id="insertButton" value="전송">
+										<input type="button" id="insertButton" value="전송" onclick="replysubmit()">
 								</form>
 
 							</div>
@@ -147,20 +147,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- /end row -->
-					<!-- /.box-footer -->
-					<div class="box-footer">
-						<form action="#" method="post">
-							<img class="img-responsive img-circle img-sm"
-								src="/resources/dist/img/user4-128x128.jpg" alt="Alt Text">
-							<!-- .img-push is used to add margin to elements next to floating images -->
-							<div class="img-push">
-								<input type="text" class="form-control input-sm"
-									placeholder="reply">
-							</div>
-						</form>
-					</div>
-					<!-- /.box-footer -->
 				</div>
 				<!-- /.box -->
 			</div>
@@ -170,6 +156,12 @@
 	</section>
 	<!-- /.content -->
 </div>
+<form id='openForm' action="/modify.do" method="get">
+	<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
+	<input type='hidden' id='page' name='page' value='<c:out value="${cri.page}"/>'>
+	<input type='hidden' id='amount' name='amount' value='<c:out value="${cri.amount}"/>'>
+	<input type='hidden' id='keyword' name='keyword' value='<c:out value="${cri.keyword}"/>'>
+	<input type='hidden' id='type' name='type' value='<c:out value="${cri.type}"/>'>
 </form>
 
 <script type="text/javascript"
@@ -194,59 +186,41 @@
 									return "";
 								}
 								for(var i=0, len=list.length||0; i <len ; i++){
-									str+="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-									str+="<div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
-									str+="<small class='pull-right text-muted'>"+list[i].replyDate+"</small></div>";
-									str+="<p>"+list[i].reply+"</p>";
-									str+="<div class='col-md-3'><td><input type='button' style='width:40pt;height:20pt;display:inline-block;' class='btn btn-block btn-primary' value='수정'></td>";
-				                	str+="<td><input type='button' style='width:40pt;height:20pt;display:inline-block;' class='btn btn-block btn-default' value='삭제'></td></div></div></li>"
+									str+="<li class='left clearfix' data-rno='"+list[i].rno+"'name='rno' id='rno'>";
+									str+="<div><div class='header'><strong class='primary-font' id='replyer'>"+list[i].replyer+"</strong>";
+									str+="<small class='pull-right text-muted' id='replyDate'>"+list[i].replyDate+"</small></div>";
+									str+="<p id='reply'>"+list[i].reply+"</p>";
+									str+="<div class='col-md-3'><td><input type='button' style='width:40pt;height:20pt;display:inline-block;' class='btn btn-block btn-primary' value='수정' id='modify' onclick='replymodify()'></td>";
+				                	str+="<td><input type='button' style='width:40pt;height:20pt;display:inline-block;' class='btn btn-block btn-default' value='삭제' id='remove' onclick='replyremove()'></td></div></div></li>"
 								};
 								replyUL.html(str);
 							})
 						}
-
-						/* 	replyService.getList({bno:bnoValue, page:1, amount: 3}, function(list){
-								
-								for(var i = 0, len = list.length||0; i <len; i++){
-									console.log(list[i]);
-								}
-							}) */
-
-						/*  replyService.remove(2, function(count){
-							console.log(count);
-							if(count=="success"){
-								alert("remove!!!!!");
-							}
-						},function(err){
-							alert('Error!!!!');
-						});  */
-						/* 
-						replyService.update({
-							rno:2,
-							bno: bnoValue,
-							reply: "Modified Reply!"
-						}, function(result){
-							alert("수정완료");
-						}); */
-						
-						
-						$("#insertButton").on("click",function(e){
-							console.log("hi");
-							var reply = {
-									reply: reply.val(),
-									replyer: replyer.val(),
-									bno: bnoValue
-							};
-							replyerService.add(reply, function(result){
-								console.log("success");
-							})
-						});
-						
 						
 					}); 	
-	/* 		});
-		};
-	 */
+function replysubmit(){
+	replyService.add(
+			
+			{reply:$('input#reply').val(),replyer:$('input#replyer').val(),bno:$('input#bno').val()},
+			function(result){
+			location.reload();
+	});
+	
+};
+
+function replyremove(){
+	var rno = $('li#rno').data("rno");
+	replyService.remove(rno,function(result){
+		location.reload();
+	});
+}
+
+function replymodify(){
+	var str="";
+	var rno = $('li#rno').data("rno");
+ 	replyService.get(rno, function(result){
+ 	})
+}
 
 </script>
 <%@ include file="footer.jsp"%>

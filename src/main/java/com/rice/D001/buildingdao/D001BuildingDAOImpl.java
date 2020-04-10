@@ -1,6 +1,7 @@
 package com.rice.D001.buildingdao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,30 @@ public class D001BuildingDAOImpl implements D001BuildingDAO {
 
 		return sqlsession.update("mapper.building.update", vo);
 	}
+	
+	//----------------------------------------------------
+
+	
+	@Override
+	public List<Map<String, Object>> getInfo(String bulId) {
+
+		List<Map<String, Object>> list = null;
+		list= sqlsession.selectList("mapper.Build.getBuildInfo",bulId);
+		return list;
+		
+	}
+
+
+	@Override
+	public List<Map<String, Object>> getInfoBUL() {
+		List<Map<String, Object>> list = null;
+		list= sqlsession.selectList("mapper.Build.getBULInfo");
+		return list;
+	}
+
+
+
+	
+	
 
 }

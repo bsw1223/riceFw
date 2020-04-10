@@ -63,5 +63,10 @@
 		where boNum=#{boNum}
 	</update>
 
+	<update id="updateViewCnt">
+		update commboard
+		set boViews=boViews+1
+		where boNum=#{boNum} 
+	</update>
 
 </mapper>

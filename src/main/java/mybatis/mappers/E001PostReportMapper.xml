@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.post">
+	<resultMap id="postResult" type="E001PostReportVO">
+		<result property="boNum" column="boNum" />
+		<result property="responseCode" column="responseCode" />
+		<result property="reportCode" column="reportCode" />
+		<result property="responseDate" column="responseDate" />
+		<result property="reportDate" column="reportDate" />
+		<result property="memNum" column="memNum" />
+	</resultMap>
+
+	<select id="getListWithPaging" resultType="E001PostReportVO">
+		<![CDATA[
+			select  boNum, responseCode, reportCode, responseDate, reportDate, memNum
+		from(
+		    select rownum rn,  boNum, responseCode, reportCode, responseDate, reportDate, memNum
+		    from response
+		    order by responseDate desc
+		    )
+		where rn > ((#{page}-1)*#{amount})
+		]]>
+	</select>
+
+	<select id="getTotal" resultType="int">
+	<![CDATA[
+         select count(boNum) from response
+      ]]>
+	</select>
+
+
+</mapper>

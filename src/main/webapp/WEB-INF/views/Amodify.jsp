@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <%@ include file = "header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
 
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <c:if test="${param.modifyMsg eq 'false'}">
 	<script>
 		alert("회원정보 수정에 실패했습니다")
@@ -154,16 +157,6 @@
 
 <%@ include file = "footer.jsp" %>
 
-<!-- jQuery 3 -->
-<script src="${contextPath}/resources/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="${contextPath}/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="${contextPath}/resources/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="${contextPath}/resources/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${contextPath}/resources/dist/js/demo.js"></script>
 <script>
 	function nameCheck() {
 		var memName = $("input[name='memName']").val();

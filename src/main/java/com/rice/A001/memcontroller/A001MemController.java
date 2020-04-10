@@ -28,7 +28,7 @@ public class A001MemController {
 	@Autowired 
 	private M001MailService mailService;
 
-	
+
 	// GET 로그인, 로그인 페이지 이동
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLogin(Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -80,7 +80,7 @@ public class A001MemController {
 		logger.info("get signup");
 		return "Asignup";
 	}
-	
+
 	// 회원가입 POST, 회원가입 시도
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String postSignup(A001MemVO vo,Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -109,12 +109,14 @@ public class A001MemController {
 		return idCheck;
 	}
 
+
 	// GET NAVER callback page 넘기기
 	@RequestMapping(value = "/naverlogin", method = RequestMethod.GET)
 	public String getNaver(Model model, HttpServletRequest request, HttpServletResponse response) {
 		return "AnaverCallback";
 	}
 	
+
 	// POST NAVER 로그인
 	@RequestMapping(value = "/naverlogin", method = RequestMethod.POST)
 	@ResponseBody
@@ -145,7 +147,6 @@ public class A001MemController {
 			}
 		} else {	// 이미 가입된 SNS ID 일 경우
 			login = a001MemService.snsLogin(vo);
-			
 			if(login == null) {	// 로그인 실패
 				logger.info("login fail");
 				session.setAttribute("loginMem", null);
@@ -189,7 +190,6 @@ public class A001MemController {
 			}
 		} else {	// 이미 가입된 SNS ID 일 경우
 			login = a001MemService.snsLogin(vo);
-			
 			if(login == null) {	// 로그인 실패
 				logger.info("login fail");
 				session.setAttribute("loginMem", null);
@@ -203,8 +203,7 @@ public class A001MemController {
 		
 		return "true";
 	}
-	
-	
+
 	// GET modify/info, 회원정보수정 페이지 이동
 	@RequestMapping(value = "/modify/info", method = RequestMethod.GET)
 	public String getModifyInfo(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -222,7 +221,7 @@ public class A001MemController {
 		}
 		return "Amodify";
 	}
-	
+
 	// POST /modify/info 회원 정보 수정
 	@RequestMapping(value = "/modify/info", method = RequestMethod.POST)
 	public String postModifyInfo(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -254,6 +253,7 @@ public class A001MemController {
 		return "redirect:/member/modify/info";
 	}
 	
+
 	// POST /modify/auth 강사로 권한 변경
 	@RequestMapping(value = "/modify/auth", method = RequestMethod.POST)
 	public String postModifyAuth(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -270,7 +270,6 @@ public class A001MemController {
 		}
 		return "redirect:/member/modify/info";
 	}
-	
 	
 	// GET find/id, 아이디 찾기
 	@RequestMapping(value = "/find/id", method = RequestMethod.GET)
@@ -312,7 +311,6 @@ public class A001MemController {
 				}
 			}
 		} catch (Exception e) {	// 비밀번호 찾기 실패 했을 경우
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "redirect:/member/login";

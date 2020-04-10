@@ -28,8 +28,8 @@
 	</delete>
 
 	<update id="update">
-		update tbl_reply set reply=#{reply}, updateDate =
-		sysdate where rno =#{rno}
+		update tbl_reply set reply=#{reply}, updateDate =sysdate 
+		where rno =#{rno}
 	</update>
 
 	<select id="getListWithPaging" resultType="C001ReplyVO">
@@ -37,6 +37,6 @@
 		reply, replyer, replyDate, updateDate
 		from tbl_reply
 		where bno=#{bno}
-		order by rno asc
+		order by rno desc
 	</select>
 </mapper>

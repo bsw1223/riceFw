@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,28 +52,15 @@ public class C001BoardController {
 
 	@RequestMapping(value = "/get.do", method = RequestMethod.GET)
 	public String get(@RequestParam("bno") Long bno, Model model) {
-
+		
 		model.addAttribute("board", c001BoardService.read(bno));
 
 		return "get";
 	}
 
-	@RequestMapping(value = "/boardContents.do", method = RequestMethod.GET)
-	public String boardContents(Model model, HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("踰⑤쪟�꽆�뼱�삤�굹�슂" + request.getParameter("value"));
-
-		int value = Integer.parseInt(request.getParameter("value"));
-		// �럹�씠吏�踰덊샇 諛쏆쓬
-		List<C001BoardVO> oneValue = null;
-		oneValue = c001BoardService.getSelectOne(value);
-		model.addAttribute("value", oneValue);
-
-		return "boardContent";
-
-	}
 
 	@RequestMapping(value = "/update.do", method = RequestMethod.GET)
-	public String update(@RequestParam("bno") Long bno, Model model) {
+	public String update(@RequestParam("bno") Long bno, Model model,Criteria cri,RedirectAttributes rttr) {
 
 		model.addAttribute("board", c001BoardService.read(bno));
 
@@ -80,19 +68,29 @@ public class C001BoardController {
 	}
 
 	@RequestMapping(value = "/updateBoard.do", method = RequestMethod.GET)
-	public String updateBoard(C001BoardVO boardvo, HttpServletRequest request, HttpServletResponse response) {
-
-		c001BoardService.update(boardvo);
+	public String updateBoard(C001BoardVO boardvo, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+		if(c001BoardService.update(boardvo)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("Keyword", cri.getKeyword());
 
 		return "redirect:/board.do";
 	}
 
 	@RequestMapping(value = "/delete.do", method = RequestMethod.GET)
-	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
+	public String remove(@RequestParam("bno") Long bno, Criteria cri,RedirectAttributes rttr) {
 
-		if (c001BoardService.delete(bno)) {
+		if(c001BoardService.delete(bno)) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("Keyword", cri.getKeyword());
+
 		return "redirect:/board.do";
 	}
 
