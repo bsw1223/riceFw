@@ -54,9 +54,9 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
 $(document).ready(function(){
-var memName ="${member.memName}";
-var memLevel =" ${member.memLevel}";
-var authId ="${member.authId}";
+var memName ="${loginMem.memName}";
+var memLevel =" ${loginMem.memLevel}";
+var authId ="${loginMem.authId}";
 var authName ='';
 console.log(memName);
 console.log(memLevel);
@@ -105,7 +105,7 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 				   +" </div></li></ul></li>";
 				   
 
-	if(eval("${member.memNum}")==undefined)
+	if(eval("${loginMem.memNum}")==undefined)
 		{
 			$('li#insertTag').after(preLogInTag);
 		}else{

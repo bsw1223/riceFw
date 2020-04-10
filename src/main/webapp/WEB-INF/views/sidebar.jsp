@@ -9,13 +9,13 @@
 	<script>
 	/*1,1000/2,1001/3,1002*/
 	var sideList = new Array();
-	var authId = "${member.authId}";
+	var authId = "${loginMem.authId}";
 	console.log(authId);
 	/* var authId = "1001"; */
-	var memnum = "${member.memNum}";
+	var memnum = "${loginMem.memNum}";
 	console.log(memnum);
 	 /* var memnum = "2"; */
- 	var authId ="${member.authId}";
+ 	var authId ="${loginMem.authId}";
 	var authName ='';
 
 
