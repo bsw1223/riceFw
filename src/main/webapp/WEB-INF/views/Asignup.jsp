@@ -81,7 +81,7 @@
       <!-- 비밀번호 check -->
       
       <div class="form-group has-feedback">
-        <input type="tel" class="form-control" name="memTel" placeholder="숫자만 입력해주세요">
+        <input type="tel" class="form-control" name="memTel" placeholder="전화번호는 숫자만 입력해주세요">
         <span class="glyphicon glyphicon-earphone form-control-feedback"></span>
       </div>
       <div class="font-weight-bold text-danger" id="tel_check"> </div>

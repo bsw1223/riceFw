@@ -99,8 +99,7 @@
 						</div>
 						<form action="/register.do">
 							<div>
-								<button type="submit" class="btn btn-block btn-default">게시글
-									작성</button>
+								<button type="submit" class="btn btn-block btn-default">게시글 작성</button>
 							</div>
 						</form>
 					</div>
@@ -110,58 +109,39 @@
 			</div>
 			<!-- /.box-body -->
 		</div>
+		
+<div class='row'>
+	<div class='col-lg-12'>
+		<form id='searchForm' action="/board.do" method='get'>
+			<select name='type'>
+				<option value="TCW" <c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>전체</option>
+				<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
+				<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
+				<option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자</option>
+			</select> 
+			<input type='text' name='keyword'> 
+			<input type="hidden" name="page" value='<c:out value="${pageMaker.cri.page}"/>'> 
+			<input type="hidden" name="amount" value='<c:out value="${pageMaker.cri.amount}"/>'>
+			<button class='btn btn-default'>Search</button>
+		</form>
+	</div>
+</div>
+		
 		<!-- /.box -->
 	</section>
 	<!-- /.content -->
 </div>
 
-<!-- modal 추가 -->
-<div class="modal fade" id="mymodal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">Modal title</h4>
-			</div>
-			<div class="modal-body">
-				<p>처리가 완료되었습니다.</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left"
-					data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div>
-		<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
 <form id="actionForm" action="/board.do" method='get'>
 	<input type="hidden" name="page" value='${pageMaker.cri.page}'>
 	<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
+	<input type="hidden" name="type" value="<c:out value='${pageMaker.cri.type}'/>">
+	<input type="hidden" name="keyword" value="<c:out value='${pageMaker.cri.keyword}'/>">
 </form>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		/* 	var result ='<c:out value="${result}"/>';
-			
-			checkModal(result);
-			
-			function checkModal(result){
-				
-				if(result === ''){
-					return;
-				}
-				if(parseInt(result) > 0){
-					$(".modal-body").html("게시글"+parseInt(result)+"번이 등록되었습니다.");
-				}
-				$("#mymodal").modal("show");
-			} */
 
 		var actionForm = $("actionForm");
 
@@ -172,6 +152,19 @@
 			actionForm.find("input[name='page']").val($(this).attr("href"));
 			actionForm.submit();
 		});
+		
+		var searchForm =$("searchForm");
+
+		$("#searchForm button").on("click", function(e){
+			if(!searchForm.find("input[name='keyword']").val()){
+				alert("키워드를 입력하세요");
+				return false;
+			}
+			searchForm.find("input[name='page']").val("1");
+			e.preventDafault();
+			searchForm.submit();
+			
+		});
 	});
 
 	function selChange() {
@@ -180,6 +173,8 @@
 		location.href = "board.do?page=" + page + "&amount=" + sel;
 
 	}
+	
+
 </script>
 
 

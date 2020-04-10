@@ -117,6 +117,4 @@ public class A001MemVO {
 	public void setSnsType(String snsType) {
 		this.snsType = snsType;
 	}
-	
-	
 }

@@ -43,19 +43,14 @@
 							readonly="readonly" />
 					</div>
 
-					<!-- bulPhoneNum -->
-					<div class="form-group">
-						<label>boViews</label> <input type="text" class="form-control"
-							name="boViews" value='<c:out value ="${comm.boViews}"/>'
-							readonly="readonly" />
-					</div>
-
-					<!-- bulAddress -->
-					<div class="form-group">
-						<label>boLikes</label> <input type="text" class="form-control"
-							name="boLikes" value='<c:out value ="${comm.boLikes}"/>'
-							readonly="readonly" />
-					</div>
+					<button type="button" class="btn btn-default btn-xs">
+						<i class="fa fa-eye"></i>
+						<c:out value="${comm.boViews}" />
+					</button>
+					<button type="button" class="btn btn-default btn-xs">
+						<i class="fa fa-thumbs-o-up"></i>
+						<c:out value="${comm.boLikes}" />
+					</button>
 
 					<button data-oper="submit" class="btn btn-primary"
 						onclick="location.href='/viewupdate?boNum=<c:out value="${comm.boNum}"/>'">수정</button>

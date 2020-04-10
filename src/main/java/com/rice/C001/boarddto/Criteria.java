@@ -54,7 +54,7 @@ public class Criteria {
 		this.keyword = keyword;
 	}
 
-//	public String[] getTypeArr() {
-//	
-//	}
+	public String[] getTypeArr() {
+		return type==null? new String[] {}:type.split("");
+	}
 }

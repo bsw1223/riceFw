@@ -24,13 +24,12 @@ public class E001CommBoardServiceImpl implements E001CommBoardService {
 
 	@Override
 	public E001CommBoardVO read(String boNum) {
-
+		//e001CommBoardDAO.updateViewCnt(boNum);
 		return e001CommBoardDAO.read(boNum);
 	}
 
 	@Override
 	public List<E001CommBoardVO> getList(Criteria cri) {
-
 		return e001CommBoardDAO.getListWithPaging(cri);
 	}
 
@@ -43,6 +42,12 @@ public class E001CommBoardServiceImpl implements E001CommBoardService {
 	public boolean update(E001CommBoardVO vo) {
 		// TODO Auto-generated method stub
 		return e001CommBoardDAO.update(vo) == 1;
+	}
+
+	@Override
+	public int updateViewCnt(String boNum) {
+		// TODO Auto-generated method stub
+		return e001CommBoardDAO.updateViewCnt(boNum);
 	}
 
 }

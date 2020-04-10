@@ -51,10 +51,12 @@
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#info" data-toggle="tab">회원정보 수정</a></li>
-              <c:if test="${member.snsId eq null || member.snsId == ''}">
+              <c:if test="${loginMem.snsId eq null || member.snsId == ''}">
 				<li><a href="#pwd" data-toggle="tab">비밀번호 변경</a></li>
               </c:if>
-              <li><a href="#auth" data-toggle="tab">권한 변경</a></li>
+              <c:if test="${loginMem.authId ne '1000'}">
+              	<li><a href="#auth" data-toggle="tab">권한 변경</a></li>
+              </c:if>
             </ul>
             
             <!-- form  -->
@@ -88,7 +90,7 @@
                   </div>
                   <div class="col-sm-offset-2 col-sm-10 font-weight-bold text-danger" id="email_check"> </div>
                   <!-- 전화번호 -->
-                  <input type="hidden" name="memNum" value="${member.memNum}">    <!-- 회원 번호 -->       
+                  <input type="hidden" name="memNum" value="${loginMem.memNum}">    <!-- 회원 번호 -->       
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                       <button type="submit" class="btn btn-danger">회원정보 번경</button>
@@ -118,7 +120,7 @@
                   </div>
                   <div class="col-sm-offset-2 col-sm-10 font-weight-bold" id="pwd_check2"> </div>
                   <!-- 비밀번호 확인 -->
-                  <input type="hidden" name="memNum" value="${member.memNum}">    <!-- 회원 번호 --> 
+                  <input type="hidden" name="memNum" value="${loginMem.memNum}">    <!-- 회원 번호 --> 
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                       <button type="submit" class="btn btn-danger">비밀번호 변경</button>
@@ -130,7 +132,7 @@
               
               <div class="tab-pane" id="auth">
                 <form class="form-horizontal" action="/member/modify/auth" method="post" onsubmit="return modifyAuth()">
-                  <input type="hidden" name="memNum" value="${member.memNum}">    <!-- 회원 번호 --> 
+                  <input type="hidden" name="memNum" value="${loginMem.memNum}">    <!-- 회원 번호 --> 
                   <input type="hidden" name="authId" value="1002">    <!-- 변경 권한 강사 --> 
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">

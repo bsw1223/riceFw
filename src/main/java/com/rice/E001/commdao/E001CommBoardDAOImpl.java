@@ -54,4 +54,11 @@ public class E001CommBoardDAOImpl implements E001CommBoardDAO {
 		sqlsession.insert("mapper.commboard.insertSelectKey", vo);
 	}
 
+	@Override
+	public int updateViewCnt(String boNum) {
+		
+		return sqlsession.update("mapper.commboard.updateViewCnt",boNum);
+		
+	}
+
 }

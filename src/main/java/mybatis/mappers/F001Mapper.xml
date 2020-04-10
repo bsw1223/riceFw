@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+		memNum    VARCHAR2(20) DEFAULT '1000' NOT NULL,
+	    memId    VARCHAR2(30) NOT NULL,
+	    memPwd    VARCHAR2(20),
+	    memName    VARCHAR2(50) NOT NULL,
+	    memTel    VARCHAR2(30),
+	    memEmail    VARCHAR2(100),
+	    memJoinDate    VARCHAR2(30) DEFAULT SYSDATE,
+	    memModifyDate    VARCHAR2(30) DEFAULT SYSDATE,
+	    memLevel    INTEGER DEFAULT 1,
+	    memPoint    INTEGER DEFAULT 0,
+	    authId    VARCHAR2(10) DEFAULT '1001' NOT NULL,
+	    memStateCode    VARCHAR2(20) DEFAULT '1100' NOT NULL,
+	    snsId    VARCHAR2(255),
+	    snsType    VARCHAR2(10)
+ -->
+ 
+<mapper namespace="mapper.f001">	
+ 	<resultMap type="F001VO" id="f001Result">
+ 		<result property="memNum" column="memNum"/>
+ 		<result property="memId" column="memId"/>
+ 		<result property="memPwd" column="memPwd"/>
+ 		<result property="memName" column="memName"/>
+ 		<result property="memTel" column="memTel"/>
+ 		<result property="memEmail" column="memEmail"/>
+ 		<result property="memJoinDate" column="memJoinDate"/>
+ 		<result property="memModifyDate" column="memModifyDate"/>
+ 		<result property="memLevel" column="memLevel"/>
+ 		<result property="memPoint" column="memPoint"/>
+ 		<result property="authId" column="authId"/>
+ 		<result property="memStateCode" column="memStateCode"/>
+ 		<result property="snsId" column="snsId"/>
+ 		<result property="snsType" column="snsType"/>
+ 	</resultMap>
+
+	<select id="searchList" resultMap="f001Result" parameterType="java.util.Map">
+		<![CDATA[
+			SELECT memNum, memId, memName, memEmail, memJoinDate, memLevel, memPoint, authId
+			FROM scott.member a
+		]]>
+		<where>
+			<if test=" authId != ''  and  authId != null">
+			<![CDATA[
+				authId = #{authId}
+			]]>
+			</if>
+			<if test=" memName != ''  and  memName != null">
+			<![CDATA[
+				memName = #{memName}
+			]]>
+			</if>
+		</where>
+		<![CDATA[
+			ORDER BY memNum desc	
+		]]>
+	</select>
+	
+	<update id="updateData" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE scott.member
+			SET memId=#{memId}
+				, memName=#{memName}
+				, memEmail=#{memEmail}
+				, memLevel=#{memLevel}
+				, memPoint=#{memPoint}
+			WHERE memNum = #{memNum}
+		]]>
+	</update>
+	
+	<update id="updateData2" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE scott.authmember
+			SET authId=#{authId}
+			WHERE memNum = #{memNum}
+		]]>
+	</update>
+	
+	<insert id="insertData" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO SCOTT.MEMBER (memNum, memid, memname, mememail, memJoinDate, memModifyDate)
+				values (SEQ_MEMBER.nextval, #{memId}, #{memName}, #{memEmail}, TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(SYSDATE,'YYYY-MM-DD'))
+ 		]]>
+	</insert>
+	
+	<insert id='insertData2' parameterType="java.util.Map">
+		<selectKey resultType="String" keyProperty="memNum" order="BEFORE">
+			<![CDATA[
+	       		SELECT memNum FROM scott.member        
+	       			WHERE memId = #{memId}
+       		]]>
+    	</selectKey>
+		<![CDATA[
+			INSERT INTO SCOTT.AUTHMEMBER(authId,memNum)
+				VALUES(#{authId},#{memNum})
+		]]>
+	</insert>
+	
+	<delete id="deleteData" parameterType="java.util.Map">
+		<![CDATA[
+			DELETE scott.member
+			WHERE memNum = #{memNum}
+		]]>
+	</delete>
+	
+	<delete id="deleteData2" parameterType="java.util.Map">
+		<![CDATA[
+			DELETE scott.authmember
+			WHERE memNum = #{memNum}
+		]]>
+	</delete>
+ 
+</mapper>
