@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,5 +62,29 @@ public class D001BuildingController {
 		return  mapList;
 		
 	}
+	
+	//빌딩 저장 jsp로 이동
+	@RequestMapping(value = "/Bldregist",method = {RequestMethod.GET, RequestMethod.POST})
+	public String insertBul() {
+			return "D_BuildingAdd";
+	}
+	
+	
+	//빌딩 저장 프로세스
+	@RequestMapping(value = "/BulAdd", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/text; charset=utf8")
+	@ResponseBody
+	public void insertBulInfo(@RequestParam Map<String, Object> vo){
+		String data = vo.toString();
+		System.out.println(data);
+		
+		d001BuildingService.insertBulInfo(vo);
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -65,10 +65,11 @@ public class D001BuildingServiceImpl implements D001BuildingService {
 		return bulInfo;
 	}
 
+	
 	@Override
-	public List<D001BuildingVO> insertBulidInfo(D001BuildingVO buildingvo) {
-		// TODO Auto-generated method stub
-		return null;
+	public void insertBulInfo(Map<String, Object> vo) {
+		d001BuildingDAO.insertBulInfo(vo);
+		
 	}
 
 	

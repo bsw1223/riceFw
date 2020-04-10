@@ -9,12 +9,28 @@
 	<script>
 	/*1,1000/2,1001/3,1002*/
 	var sideList = new Array();
-	var authId = ${member.authId};
+	var authId = "${member.authId}";
 	console.log(authId);
 	/* var authId = "1001"; */
-	var memnum = ${member.memNum};
+	var memnum = "${member.memNum}";
 	console.log(memnum);
 	 /* var memnum = "2"; */
+ 	var authId ="${member.authId}";
+	var authName ='';
+
+
+	if(authId==1000)
+		{
+			authName="관리자";
+		}else if(authId==1001)
+			{
+				authName="학생";
+			}else
+				{
+				 authName="강사";
+				}
+
+		$("p#profile").text(authName);
 	 
 	/* 	if(${member.authId}==1000)//관리자(1000),학생(1001),강사(1002) */
 	/* var authId= ${member.authId}; */
@@ -789,28 +805,28 @@ for(i in newMapList)
 	
 	
 
-  <aside class="main-sidebar">
+  <aside class="main-sidebar ">
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+    <section class="sidebar ">
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
           <img src="/${contextPath}resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <p id="profile" >Lv.${member.memLevel} ${member.memName} </p>
+          <a href="#"><i class=""></i> Online</a>
         </div>
       </div>
       <!-- search form -->
       <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
+       <!--  <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
               </span>
-        </div>
+        </div> -->
       </form>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
