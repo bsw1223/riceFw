@@ -22,43 +22,43 @@ import com.rice.M001.mailservice.M001MailService;
 @RequestMapping("/member/*")
 public class A001MemController { 
 	private static final Logger logger = LoggerFactory.getLogger(A001MemController.class);
+	
 	@Autowired
-
 	private A001MemService a001MemService;
 	@Autowired 
 	private M001MailService mailService;
 
 	
-	// GET ·Î±×ÀÎ, ·Î±×ÀÎ ÆäÀÌÁö ÀÌµ¿
+	// GET ë¡œê·¸ì¸, ë¡œê·¸ì¸ í˜ì´ì§€ ì´ë™
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLogin(Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("get login");
 		return "Alogin";
 	}
 	
-	// POST ·Î±×ÀÎ, ·Î±×ÀÎ check 
+	// POST ë¡œê·¸ì¸, ë¡œê·¸ì¸ check 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String postLogin(A001MemVO vo, Model model,HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String postLogin(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		logger.info("post login");
 		HttpSession session = request.getSession();
 		
 		A001MemVO login = null;
 		login = a001MemService.login(vo);
 		
-		if(login == null) {	// ·Î±×ÀÎ ½ÇÆĞ
+		if(login == null) {	// ë¡œê·¸ì¸ ì‹¤íŒ¨
 			logger.info("login fail");
-			session.setAttribute("member", null);
+			session.setAttribute("loginMem", null);
 			model.addAttribute("loginMsg", "false");
-			return "redirect:/member/login";		// ·Î±×ÀÎ ½ÇÆĞ ¸Ş½ÃÁö, ·Î±×ÀÎ ½ÇÆĞ ¸Ş½ÃÁö. º¸¿©ÁÖ±â
-		} else {		// ·Î±×ÀÎ ¼º°ø
+			return "redirect:/member/login";		// ë¡œê·¸ì¸ ì‹¤íŒ¨ ë©”ì‹œì§€, ë¡œê·¸ì¸ ì‹¤íŒ¨ ë©”ì‹œì§€. ë³´ì—¬ì£¼ê¸°
+		} else {		// ë¡œê·¸ì¸ ì„±ê³µ
 			logger.info("login ok");
-			session.setAttribute("member", login);
+			session.setAttribute("loginMem", login);
 		}
 		
 		return "redirect:/";
 	}
 	
-	// GET ·Î±×¾Æ¿ô, ·Î±×¾Æ¿ô ÈÄ ¸ŞÀÎÆäÀÌÁö ÀÌµ¿
+	// GET ë¡œê·¸ì•„ì›ƒ, ë¡œê·¸ì•„ì›ƒ í›„ ë©”ì¸í˜ì´ì§€ ì´ë™
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String getLogout(Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("get logout");
@@ -67,37 +67,38 @@ public class A001MemController {
 		return "redirect:/";
 	}
 	
-	// GET Account È¸¿ø°¡ÀÔ ¼±ÅÃ
+	// GET Account íšŒì›ê°€ì… ì„ íƒ
 	@RequestMapping(value = "/account", method = RequestMethod.GET)
 	public String account(Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("get account");
 		return "Aaccount";
 	}
 	
-	// È¸¿ø°¡ÀÔ GET, È¸¿ø°¡ÀÔ ÆäÀÌÁö ÀÌµ¿
+	// íšŒì›ê°€ì… GET, íšŒì›ê°€ì… í˜ì´ì§€ ì´ë™
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String getSignup(Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("get signup");
 		return "Asignup";
 	}
 	
-	// È¸¿ø°¡ÀÔ POST, È¸¿ø°¡ÀÔ ½Ãµµ
+	// íšŒì›ê°€ì… POST, íšŒì›ê°€ì… ì‹œë„
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String postSignup(A001MemVO vo,Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("post signup");
 		try {
 			a001MemService.signup(vo);
+			model.addAttribute("signupMsg", "true");	// íšŒì›ê°€ì… ì„±ê³µ ë©”ì‹œì§€, "íšŒì›ê°€ì… ì„±ê³µí–ˆìŠµë‹ˆë‹¤"
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			model.addAttribute("signupMsg", "false");	// È¸¿ø°¡ÀÔ ½ÇÆĞ ¸Ş½ÃÁö, "È¸¿ø°¡ÀÔ ½ÇÆĞÇß½À´Ï´Ù"
+			model.addAttribute("signupMsg", "false");	// íšŒì›ê°€ì… ì‹¤íŒ¨ ë©”ì‹œì§€, "íšŒì›ê°€ì… ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤"
 			return "redirect:/member/signup"; 
 		}
 		
 		return "redirect:/member/login";
 	}
 	
-	// POST memId Áßº¹Ã¼Å©, ajax
+	// POST memId ì¤‘ë³µì²´í¬, ajax
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
 	@ResponseBody
 	public String idCheck(@RequestBody String memId, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -108,13 +109,13 @@ public class A001MemController {
 		return idCheck;
 	}
 
-	// GET NAVER callback page ³Ñ±â±â
+	// GET NAVER callback page ë„˜ê¸°ê¸°
 	@RequestMapping(value = "/naverlogin", method = RequestMethod.GET)
 	public String getNaver(Model model, HttpServletRequest request, HttpServletResponse response) {
 		return "AnaverCallback";
 	}
 	
-	// POST NAVER ·Î±×ÀÎ
+	// POST NAVER ë¡œê·¸ì¸
 	@RequestMapping(value = "/naverlogin", method = RequestMethod.POST)
 	@ResponseBody
 	public String postNaver(@RequestBody A001MemVO vo,Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -124,42 +125,42 @@ public class A001MemController {
 		A001MemVO login = null;
 		
 		String snsId = vo.getSnsId();
-		if(a001MemService.snsIdCheck(snsId) == 0) {	// °¡ÀÔµÈÀû ¾ø´Â SNS ID ÀÏ °æ¿ì
+		if(a001MemService.snsIdCheck(snsId) == 0) {	// ê°€ì…ëœì  ì—†ëŠ” SNS ID ì¼ ê²½ìš°
 			try {
-				a001MemService.snsSignup(vo);	//	SNS È¸¿ø°¡ÀÔ 
-				login = a001MemService.snsLogin(vo);	// SNS ·Î±×ÀÎ 				
-				if(login == null) {	// ·Î±×ÀÎ ½ÇÆĞ
+				a001MemService.snsSignup(vo);	//	SNS íšŒì›ê°€ì… 
+				login = a001MemService.snsLogin(vo);	// SNS ë¡œê·¸ì¸ 				
+				if(login == null) {	// ë¡œê·¸ì¸ ì‹¤íŒ¨
 					logger.info("login fail");
-					session.setAttribute("member", null);
+					session.setAttribute("loginMem", null);
 					model.addAttribute("loginMsg", "false");
-					return "false";		// ·Î±×ÀÎ ½ÇÆĞ ¸Ş½ÃÁö, ·Î±×ÀÎ ½ÇÆĞ ¸Ş½ÃÁö. º¸¿©ÁÖ±â
-				} else {		// ·Î±×ÀÎ ¼º°ø
+					return "false";		// ë¡œê·¸ì¸ ì‹¤íŒ¨ ë©”ì‹œì§€, ë¡œê·¸ì¸ ì‹¤íŒ¨ ë©”ì‹œì§€. ë³´ì—¬ì£¼ê¸°
+				} else {		// ë¡œê·¸ì¸ ì„±ê³µ
 					logger.info("login ok");
-					session.setAttribute("member", login);
+					session.setAttribute("loginMem", login);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				model.addAttribute("signupMsg", "false");	// È¸¿ø°¡ÀÔ ½ÇÆĞ ¸Ş½ÃÁö, È¸¿ø°¡ÀÔ ½ÇÆĞÇß½À´Ï´Ù. º¸¿©ÁÖ±â
+				model.addAttribute("signupMsg", "false");	// íšŒì›ê°€ì… ì‹¤íŒ¨ ë©”ì‹œì§€, íšŒì›ê°€ì… ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ë³´ì—¬ì£¼ê¸°
 				return "false"; 
 			}
-		} else {	// ÀÌ¹Ì °¡ÀÔµÈ SNS ID ÀÏ °æ¿ì
+		} else {	// ì´ë¯¸ ê°€ì…ëœ SNS ID ì¼ ê²½ìš°
 			login = a001MemService.snsLogin(vo);
 			
-			if(login == null) {	// ·Î±×ÀÎ ½ÇÆĞ
+			if(login == null) {	// ë¡œê·¸ì¸ ì‹¤íŒ¨
 				logger.info("login fail");
-				session.setAttribute("member", null);
+				session.setAttribute("loginMem", null);
 				model.addAttribute("loginMsg", "false");
-				return "false";		// ·Î±×ÀÎ ½ÇÆĞ ¸Ş½ÃÁö, ·Î±×ÀÎ ½ÇÆĞ ¸Ş½ÃÁö. º¸¿©ÁÖ±â
-			} else {		// ·Î±×ÀÎ ¼º°ø
+				return "false";		// ë¡œê·¸ì¸ ì‹¤íŒ¨ ë©”ì‹œì§€, ë¡œê·¸ì¸ ì‹¤íŒ¨ ë©”ì‹œì§€. ë³´ì—¬ì£¼ê¸°
+			} else {		// ë¡œê·¸ì¸ ì„±ê³µ
 				logger.info("login ok");
-				session.setAttribute("member", login);
+				session.setAttribute("loginMem", login);
 			}
 		}
 		
 		return "true";
 	}
 	
-	// POST KAKAO ·Î±×ÀÎ
+	// POST KAKAO ë¡œê·¸ì¸
 	@RequestMapping(value = "/kakaologin", method = RequestMethod.POST)
 	@ResponseBody
 	public String postKakao(@RequestBody A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -168,35 +169,35 @@ public class A001MemController {
 		A001MemVO login = null;
 		
 		String snsId = vo.getSnsId();
-		if(a001MemService.snsIdCheck(snsId) == 0) {	// °¡ÀÔµÈÀû ¾ø´Â SNS ID ÀÏ °æ¿ì
+		if(a001MemService.snsIdCheck(snsId) == 0) {	// ê°€ì…ëœì  ì—†ëŠ” SNS ID ì¼ ê²½ìš°
 			try {
-				a001MemService.snsKakaoSignup(vo);	//	SNS È¸¿ø°¡ÀÔ 
-				login = a001MemService.snsLogin(vo);	// SNS ·Î±×ÀÎ 				
-				if(login == null) {	// ·Î±×ÀÎ ½ÇÆĞ
+				a001MemService.snsKakaoSignup(vo);	//	SNS íšŒì›ê°€ì… 
+				login = a001MemService.snsLogin(vo);	// SNS ë¡œê·¸ì¸ 				
+				if(login == null) {	// ë¡œê·¸ì¸ ì‹¤íŒ¨
 					logger.info("login fail");
-					session.setAttribute("member", null);
+					session.setAttribute("loginMem", null);
 					model.addAttribute("loginMsg", "false");
-					return "false";		// ·Î±×ÀÎ ½ÇÆĞ ¸Ş½ÃÁö, ·Î±×ÀÎ ½ÇÆĞ ¸Ş½ÃÁö. º¸¿©ÁÖ±â
-				} else {		// ·Î±×ÀÎ ¼º°ø
+					return "false";		// ë¡œê·¸ì¸ ì‹¤íŒ¨ ë©”ì‹œì§€, ë¡œê·¸ì¸ ì‹¤íŒ¨ ë©”ì‹œì§€. ë³´ì—¬ì£¼ê¸°
+				} else {		// ë¡œê·¸ì¸ ì„±ê³µ
 					logger.info("login ok");
-					session.setAttribute("member", login);
+					session.setAttribute("loginMem", login);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				model.addAttribute("signupMsg", "false");	// È¸¿ø°¡ÀÔ ½ÇÆĞ ¸Ş½ÃÁö, È¸¿ø°¡ÀÔ ½ÇÆĞÇß½À´Ï´Ù. º¸¿©ÁÖ±â
+				model.addAttribute("signupMsg", "false");	// íšŒì›ê°€ì… ì‹¤íŒ¨ ë©”ì‹œì§€, íšŒì›ê°€ì… ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ë³´ì—¬ì£¼ê¸°
 				return "false";
 			}
-		} else {	// ÀÌ¹Ì °¡ÀÔµÈ SNS ID ÀÏ °æ¿ì
+		} else {	// ì´ë¯¸ ê°€ì…ëœ SNS ID ì¼ ê²½ìš°
 			login = a001MemService.snsLogin(vo);
 			
-			if(login == null) {	// ·Î±×ÀÎ ½ÇÆĞ
+			if(login == null) {	// ë¡œê·¸ì¸ ì‹¤íŒ¨
 				logger.info("login fail");
-				session.setAttribute("member", null);
+				session.setAttribute("loginMem", null);
 				model.addAttribute("loginMsg", "false");
-				return "false";		// ·Î±×ÀÎ ½ÇÆĞ ¸Ş½ÃÁö, ·Î±×ÀÎ ½ÇÆĞ ¸Ş½ÃÁö. º¸¿©ÁÖ±â
-			} else {		// ·Î±×ÀÎ ¼º°ø
+				return "false";		// ë¡œê·¸ì¸ ì‹¤íŒ¨ ë©”ì‹œì§€, ë¡œê·¸ì¸ ì‹¤íŒ¨ ë©”ì‹œì§€. ë³´ì—¬ì£¼ê¸°
+			} else {		// ë¡œê·¸ì¸ ì„±ê³µ
 				logger.info("login ok");
-				session.setAttribute("member", login);
+				session.setAttribute("loginMem", login);
 			}
 		}
 		
@@ -204,12 +205,12 @@ public class A001MemController {
 	}
 	
 	
-	// GET modify/info, È¸¿øÁ¤º¸¼öÁ¤ ÆäÀÌÁö ÀÌµ¿
+	// GET modify/info, íšŒì›ì •ë³´ìˆ˜ì • í˜ì´ì§€ ì´ë™
 	@RequestMapping(value = "/modify/info", method = RequestMethod.GET)
 	public String getModifyInfo(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		logger.info("get /modify/info");
 		HttpSession session = request.getSession();
-		A001MemVO vo = (A001MemVO) session.getAttribute("member");
+		A001MemVO vo = (A001MemVO) session.getAttribute("loginMem");
 		if(vo == null) {
 			return "redirect:/";
 		}
@@ -222,7 +223,7 @@ public class A001MemController {
 		return "Amodify";
 	}
 	
-	// POST /modify/info È¸¿ø Á¤º¸ ¼öÁ¤
+	// POST /modify/info íšŒì› ì •ë³´ ìˆ˜ì •
 	@RequestMapping(value = "/modify/info", method = RequestMethod.POST)
 	public String postModifyInfo(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Integer result = 0;
@@ -238,7 +239,7 @@ public class A001MemController {
 		return "redirect:/member/modify/info";
 	}
 	
-	// POST /modify/pwd ºñ¹Ğ¹øÈ£ ¼öÁ¤
+	// POST /modify/pwd ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì •
 	@RequestMapping(value = "/modify/pwd", method = RequestMethod.POST)
 	public String postModifyPwd(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Integer result = 0;
@@ -253,7 +254,7 @@ public class A001MemController {
 		return "redirect:/member/modify/info";
 	}
 	
-	// POST /modify/auth °­»ç·Î ±ÇÇÑ º¯°æ
+	// POST /modify/auth ê°•ì‚¬ë¡œ ê¶Œí•œ ë³€ê²½
 	@RequestMapping(value = "/modify/auth", method = RequestMethod.POST)
 	public String postModifyAuth(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("post /modify/auth");
@@ -271,14 +272,14 @@ public class A001MemController {
 	}
 	
 	
-	// GET find/id, ¾ÆÀÌµğ Ã£±â
+	// GET find/id, ì•„ì´ë”” ì°¾ê¸°
 	@RequestMapping(value = "/find/id", method = RequestMethod.GET)
 	public String getFindId(Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("get FindId");
 		return "Afindid";
 	}
 	
-	// POST find/id, ¾ÆÀÌµğ Ã£±â
+	// POST find/id, ì•„ì´ë”” ì°¾ê¸°
 	@RequestMapping(value = "/find/id", method = RequestMethod.POST)
 	public String postFindId(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		logger.info("post /find/id");
@@ -287,33 +288,34 @@ public class A001MemController {
 		return "Aidresult";
 	}
 	
-	// GET find/pwd, ¾ÆÀÌµğ Ã£±â
+	// GET find/pwd, ì•„ì´ë”” ì°¾ê¸°
 	@RequestMapping(value = "/find/pwd", method = RequestMethod.GET)
 	public String getFindPwd(Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("get FindPwd");
 		return "Afindpwd";
 	}
 	
-	// POST find/pwd, ¾ÆÀÌµğ Ã£±â
+	// POST find/pwd, ì•„ì´ë”” ì°¾ê¸°
 	@RequestMapping(value = "/find/pwd", method = RequestMethod.POST)
 	public String postFindPwd(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("post FindPwd");
 		try {
 			String memNum = a001MemService.findPwd(vo);
 			if(memNum != null) {
-				vo.setMemNum(memNum);							// ºñ¹Ğ¹øÈ£ update¸¦ À§ÇÑ È¸¿ø¹øÈ£
+				vo.setMemNum(memNum);							// ë¹„ë°€ë²ˆí˜¸ updateë¥¼ ìœ„í•œ íšŒì›ë²ˆí˜¸
 				String newpwd = getRamdomPassword(10);
-				vo.setMemPwd(newpwd);			// randomÇÏ°Ô ¸¸µç »õ ºñ¹Ğ¹øÈ£
+				vo.setMemPwd(newpwd);			// randomí•˜ê²Œ ë§Œë“  ìƒˆ ë¹„ë°€ë²ˆí˜¸
 				Integer update_result = a001MemService.updatePwd(vo);
 				if(update_result != 0) {
-					mailService.sendMail(vo.getMemEmail(), "RiceLMS ÀÓ½Ã ºñ¹Ğ¹øÈ£ ¹ß±Ş", newpwd + " ÀÓ½Ã ºñ¹Ğ¹øÈ£ ÀÔ´Ï´Ù.");
+					mailService.sendMail(vo.getMemEmail(), "RiceLMS ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ ë°œê¸‰", newpwd + " ì„ì‹œ ë¹„ë°€ë²ˆí˜¸ ì…ë‹ˆë‹¤.");
+					model.addAttribute("findpwdMsg", "true");
 				}
 			}
-		} catch (Exception e) {	// ºñ¹Ğ¹øÈ£ Ã£±â ½ÇÆĞ ÇßÀ» °æ¿ì
+		} catch (Exception e) {	// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ì‹¤íŒ¨ í–ˆì„ ê²½ìš°
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "Alogin";
+		return "redirect:/member/login";
 	}
 	
 	public static String getRamdomPassword(int len) { 
@@ -324,7 +326,7 @@ public class A001MemController {
 		int idx = 0; 
 		StringBuffer sb = new StringBuffer();  
 		for (int i = 0; i < len; i++) {
-			idx = (int) (charSet.length * Math.random()); // 36 * »ı¼ºµÈ ³­¼ö¸¦ Int·Î ÃßÃâ (¼Ò¼ıÁ¡Á¦°Å) 
+			idx = (int) (charSet.length * Math.random()); // 36 * ìƒì„±ëœ ë‚œìˆ˜ë¥¼ Intë¡œ ì¶”ì¶œ (ì†Œìˆ«ì ì œê±°) 
 			sb.append(charSet[idx]); 
 		} 
 		logger.info(sb.toString());

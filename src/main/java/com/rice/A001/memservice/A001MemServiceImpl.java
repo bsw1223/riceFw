@@ -22,74 +22,71 @@ public class A001MemServiceImpl implements A001MemService {
 	public void signup(A001MemVO vo) throws Exception {
 		a001MemDAO.signup(vo);
 		a001MemDAO.signupauthmember(vo);
-	} // È¸¿ø°¡ÀÔ
+	} // íšŒì›ê°€ì…
 
 	@Override
 	public int idCheck(String memId) throws Exception {
 		return a001MemDAO.idCheck(memId);
-	} // memId Áßº¹Ã¼Å©
+	} // memId ì¤‘ë³µì²´í¬
 
 	@Override
 	public A001MemVO login(A001MemVO vo) throws Exception {
 		return a001MemDAO.login(vo);
-	} // ·Î±×ÀÎ
+	} // ë¡œê·¸ì¸
 
 	@Override
 	public int snsIdCheck(String snsId) throws Exception {
 		return a001MemDAO.snsIdCheck(snsId);
-	} // SNS memId Áßº¹Ã¼Å©
+	} // SNS memId ì¤‘ë³µì²´í¬
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void snsSignup(A001MemVO vo) throws Exception {
 		a001MemDAO.snsSignup(vo);
 		a001MemDAO.signupauthmember(vo);
-	} // SNS NAVER È¸¿ø°¡ÀÔ
+	} // SNS NAVER íšŒì›ê°€ì…
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void snsKakaoSignup(A001MemVO vo) throws Exception {
 		a001MemDAO.snsKakaoSignup(vo);
 		a001MemDAO.signupauthmember(vo);
-	} // SNS KAKAO È¸¿ø°¡ÀÔ
+	} // SNS KAKAO íšŒì›ê°€ì…
 
 	@Override
 	public A001MemVO snsLogin(A001MemVO vo) throws Exception {
 		return a001MemDAO.snsLogin(vo);
-	} // SNS ·Î±×ÀÎ
+	} // SNS ë¡œê·¸ì¸
 
 	@Override
 	public A001MemVO memInfo(String memNum) throws Exception {
 		return a001MemDAO.memInfo(memNum);
-	} // È¸¿øÁ¤º¸ °¡Á®¿À±â
+	} // íšŒì›ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 
 	@Override
 	public Integer updateInfo(A001MemVO vo) throws Exception {
 		return a001MemDAO.updateInfo(vo);
-	} // È¸¿øÁ¤º¸ ¼öÁ¤
+	} // íšŒì›ì •ë³´ ìˆ˜ì •
 
 	@Override
 	public Integer updatePwd(A001MemVO vo) throws Exception {
 		return a001MemDAO.updatePwd(vo);
-	} // ºñ¹Ğ¹øÈ£ ¼öÁ¤
+	} // ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì •
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void updateAuth(A001MemVO vo) throws Exception {
 		a001MemDAO.updateMemAuth(vo);
 		a001MemDAO.updateMatchAuth(vo);
-	} // °­»ç·Î ±ÇÇÑ º¯°æ
+	} // ê°•ì‚¬ë¡œ ê¶Œí•œ ë³€ê²½
 
 	@Override
 	public String findId(A001MemVO vo) throws Exception {
 		return a001MemDAO.findId(vo);
-	} // ¾ÆÀÌµğ Ã£±â
+	} // ì•„ì´ë”” ì°¾ê¸°
 
 	@Override
 	public String findPwd(A001MemVO vo) throws Exception {
-		return a001MemDAO.findNumforPwd(vo);	// È¸¿ø¹øÈ£ °Ë»ö
+		return a001MemDAO.findNumforPwd(vo);	// íšŒì›ë²ˆí˜¸ ê²€ìƒ‰
 	}
-
-	
-
 }

@@ -28,7 +28,7 @@
         <div class="box-header with-border">
           <h3 class="box-title"> <!-- Title -->
               <!-- session에 로그인 정보가 있을 경우 login TEST -->
-			    <c:if test="${not empty member}">
+			    <c:if test="${not empty loginMem}">
 			    	<p class="login-box-msg"> 환영합니다.</p>
 				</c:if>
           </h3>
