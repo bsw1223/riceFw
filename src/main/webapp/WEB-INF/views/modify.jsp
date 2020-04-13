@@ -91,8 +91,13 @@
 	<!-- /.content -->
 </div>
 </head>
-<body>
-</body>
+
+<form id='Form' action="/modify.do" method="post">
+	<input type='hidden' id='page' name='page' value='<c:out value="${cri.page}"/>'>
+	<input type='hidden' id='amount' name='amount' value='<c:out value="${cri.amount}"/>'>
+	<input type='hidden' id='keyword' name='keyword' value='<c:out value="${cri.keyword}"/>'>
+	<input type='hidden' id='type' name='type' value='<c:out value="${cri.type}"/>'>
+</form>
 
 <!-- CK Editor -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

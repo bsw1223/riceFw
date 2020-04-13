@@ -16,12 +16,39 @@
 	</properties>
 	
 	<dependencies>
+
+	<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+	<dependency>
+	    <groupId>commons-beanutils</groupId>
+	    <artifactId>commons-beanutils</artifactId>
+	    <version>1.9.3</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/net.minidev/json-smart -->
+	<dependency>
+	    <groupId>net.minidev</groupId>
+	    <artifactId>json-smart</artifactId>
+	    <version>2.3</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
+	<!-- https://mvnrepository.com/artifact/net.minidev/json-smart -->
+	<dependency>
+	    <groupId>net.minidev</groupId>
+	    <artifactId>json-smart</artifactId>
+	    <version>2.2.1</version>
+	</dependency>
+	<dependency> 
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId> 
+		<version>2.9.8</version> 
+	</dependency>
+
 		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.9.3</version>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/cglib/cglib-nodep -->
 		<dependency>
 			<groupId>cglib</groupId>
@@ -182,11 +209,11 @@
 			<version>2.9.8</version>
 		</dependency>
 		<!-- 댓글에서 사용 -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
-			<version>2.9.9</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.fasterxml.jackson.dataformat</groupId> -->
+<!-- 			<artifactId>jackson-dataformat-xml</artifactId> -->
+<!-- 			<version>2.9.9</version> -->
+<!-- 		</dependency> -->
 
 		<!--댓글에서 사용-->
 		<dependency>

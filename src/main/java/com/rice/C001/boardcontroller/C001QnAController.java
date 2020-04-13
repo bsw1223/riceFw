@@ -30,6 +30,7 @@ public class C001QnAController {
 	public String listAll(Model model,Criteria cri,HttpServletRequest request,HttpServletResponse response)throws Exception{
 		
 		List<C001QnAVO> list = c001QnAService.listAll(cri);
+		
 		model.addAttribute("boardList",list);
 		model.addAttribute("pageMaker",new PageDTO(cri,c001QnAService.getTotal()));
 		

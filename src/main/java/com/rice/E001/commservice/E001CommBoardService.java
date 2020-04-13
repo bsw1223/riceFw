@@ -16,5 +16,7 @@ public interface E001CommBoardService {
 	public boolean delete(String boNum);
 
 	public boolean update(E001CommBoardVO boardvo);
+	
+	public int updateViewCnt(String boNum);
 
 }

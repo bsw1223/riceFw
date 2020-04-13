@@ -1,6 +1,7 @@
 package com.rice.D001.buildingservice;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,45 @@ public class D001BuildingServiceImpl implements D001BuildingService {
 		// TODO Auto-generated method stub
 		return d001BuildingDAO.getTotal();
 	}
+	
+	
+	//-------------------------------------------------
+	
+
+
+	@Override
+	public List<Map<String, Object>> selectInfo(String bulId) {
+		List buildInfo=null;
+		buildInfo = d001BuildingDAO.getInfo(bulId);
+		return buildInfo;
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectBulnfo() {
+		List bulInfo=null;
+		bulInfo = d001BuildingDAO.getInfoBUL();
+		return bulInfo;
+	}
+
+	
+	@Override
+	public void insertBulInfo(Map<String, Object> vo) {
+		d001BuildingDAO.insertBulInfo(vo);
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

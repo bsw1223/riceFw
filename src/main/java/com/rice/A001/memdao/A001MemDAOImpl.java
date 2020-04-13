@@ -17,69 +17,69 @@ public class A001MemDAOImpl implements A001MemDAO {
 	@Override
 	public void signup(A001MemVO vo) throws Exception {
 		sqlsession.insert("mapper.member.signup", vo);
-	}	// È¸¿ø°¡ÀÔ MEMBER TABLE
+	}	// íšŒì›ê°€ì… MEMBER TABLE
 	@Override
 	public void signupauthmember(A001MemVO vo) throws Exception {
 		sqlsession.insert("mapper.member.signupauthmember", vo);
-	}	// È¸¿ø°¡ÀÔ AUTHMEMBER TABLE
+	}	// íšŒì›ê°€ì… AUTHMEMBER TABLE
 	
 	@Override
 	public int idCheck(String memId) throws Exception {
 		return sqlsession.selectOne("mapper.member.idCheck", memId);
-	}	// ¾ÆÀÌµğ Áßº¹Ã¼Å©
+	}	// ì•„ì´ë”” ì¤‘ë³µì²´í¬
 
 	@Override
 	public A001MemVO login(A001MemVO vo) throws Exception {
 		return sqlsession.selectOne("mapper.member.login", vo);
-	}	// ·Î±×ÀÎ
+	}	// ë¡œê·¸ì¸
 	
 	@Override
 	public int snsIdCheck(String snsId) throws Exception {
 		return sqlsession.selectOne("mapper.member.snsIdCheck", snsId);
-	}	// SNS ID Áßº¹Ã¼Å©
+	}	// SNS ID ì¤‘ë³µì²´í¬
 
 	@Override
 	public void snsSignup(A001MemVO vo) throws Exception {
 		sqlsession.insert("mapper.member.snsSignup", vo);
-	}	// SNS NAVER È¸¿ø°¡ÀÔ
+	}	// SNS NAVER íšŒì›ê°€ì…
 	
 	@Override
 	public void snsKakaoSignup(A001MemVO vo) throws Exception {
 		sqlsession.insert("mapper.member.snsKakaoSignup", vo);
-	}	// SNS KAKAO È¸¿ø°¡ÀÔ
+	}	// SNS KAKAO íšŒì›ê°€ì…
 	
 	@Override
 	public A001MemVO snsLogin(A001MemVO vo) throws Exception {
 		return sqlsession.selectOne("mapper.member.snsLogin", vo);
-	}	// SNS ·Î±×ÀÎ
+	}	// SNS ë¡œê·¸ì¸
 	
 	@Override
 	public A001MemVO memInfo(String memNum) throws Exception {
 		return sqlsession.selectOne("mapper.member.memInfo", memNum);
-	}	// È¸¿øÁ¤º¸ °¡Á®¿À±â
+	}	// íšŒì›ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 
 	@Override
 	public Integer updateInfo(A001MemVO vo) throws Exception {
 		return sqlsession.update("mapper.member.updateInfo", vo);
-	}	// È¸¿øÁ¤º¸ ¼öÁ¤ÇÏ±â
+	}	// íšŒì›ì •ë³´ ìˆ˜ì •í•˜ê¸°
 
 	@Override
 	public Integer updatePwd(A001MemVO vo) throws Exception {
 		return sqlsession.update("mapper.member.updatePwd", vo);
-	}	// ºñ¹Ğ¹øÈ£ ¼öÁ¤ÇÏ±â
+	}	// ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì •í•˜ê¸°
 
 	@Override
 	public Integer updateMemAuth(A001MemVO vo) throws Exception {
 		return sqlsession.update("mapper.member.updateMemAuth", vo);
-	}	// °­»ç·Î ±ÇÇÑ º¯°æÇÏ±â MEMBER TABLE
+	}	// ê°•ì‚¬ë¡œ ê¶Œí•œ ë³€ê²½í•˜ê¸° MEMBER TABLE
 	@Override
 	public Integer updateMatchAuth(A001MemVO vo) throws Exception {
 		return sqlsession.update("mapper.member.updateMatchAuth", vo);
-	}	// °­»ç·Î ±ÇÇÑ º¯°æÇÏ±â AUTHMEMBER TABLE
+	}	// ê°•ì‚¬ë¡œ ê¶Œí•œ ë³€ê²½í•˜ê¸° AUTHMEMBER TABLE
 	@Override
 	public String findId(A001MemVO vo) throws Exception {
 		return sqlsession.selectOne("mapper.member.findId", vo);
-	}	// ¾ÆÀÌµğ Ã£±â
+	}	// ì•„ì´ë”” ì°¾ê¸°
 	@Override
 	public String findNumforPwd(A001MemVO vo) throws Exception {
 		return sqlsession.selectOne("mapper.member.findNumforPwd", vo);

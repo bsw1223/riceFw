@@ -67,9 +67,9 @@
 			    select rownum rn, boNum,boCode,boTitle,boContent,boRegDate,boUpdateDate,boURL,memNum
 			    from CLASSBOARD
 			    where rownum <= (#{page}*#{amount})
-			    order by boNum desc
+			    order by boNum DESC
 			    )
-			where rn > ((#{page}-1)*#{amount})
+			where rn > (#{page}-1)*#{amount}
 		]]>
 	</select>
 	

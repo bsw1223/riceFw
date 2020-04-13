@@ -111,19 +111,20 @@
 	            <div class="box-footer">
 	              <ul class="pagination pagination-sm no-margin">
 	                	<c:if test="${pageMaker.prev}">
-							<li class="page-item">
+							<li class="paginate_button prev">
 								<a href="/mypage/board/list/page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
 							</li>
 						</c:if>
 	                	
-	                    <c:forEach var ="num" begin ="${pageMaker.startPage}" end="${pageMaker.endPage}">
-	                  		<li class="pageBtn ${pageMaker.cri.page == num?"active":""}">
-	                  			<a href="${num}">${num}</a></li>
-	                	</c:forEach>
+	                   <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
+							<li class="page-item ${num == pageMaker.cri.page?" active ":""}">
+								<a href="/mypage/board/qna/list?page=${num}">${num}</a>
+							</li>
+						</c:forEach>
 	                	
 	              		<c:if test="${pageMaker.next}">
-							<li class="page-item">
-								<a href="/mypage/board/list/page=${pageMaker.endPage+1 }&amount=${pageMaker.cri.amount}">next</a>
+							<li class="paginate_button next">
+								<a href="/mypage/board/list/page=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
 							</li>
 						</c:if>
 	              </ul>

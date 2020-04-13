@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <%@ include file = "header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
 
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <c:if test="${param.modifyMsg eq 'false'}">
 	<script>
 		alert("회원정보 수정에 실패했습니다")
@@ -48,10 +51,12 @@
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#info" data-toggle="tab">회원정보 수정</a></li>
-              <c:if test="${member.snsId eq null || member.snsId == ''}">
+              <c:if test="${loginMem.snsId eq null || member.snsId == ''}">
 				<li><a href="#pwd" data-toggle="tab">비밀번호 변경</a></li>
               </c:if>
-              <li><a href="#auth" data-toggle="tab">권한 변경</a></li>
+              <c:if test="${loginMem.authId ne '1000'}">
+              	<li><a href="#auth" data-toggle="tab">권한 변경</a></li>
+              </c:if>
             </ul>
             
             <!-- form  -->
@@ -85,7 +90,7 @@
                   </div>
                   <div class="col-sm-offset-2 col-sm-10 font-weight-bold text-danger" id="email_check"> </div>
                   <!-- 전화번호 -->
-                  <input type="hidden" name="memNum" value="${member.memNum}">    <!-- 회원 번호 -->       
+                  <input type="hidden" name="memNum" value="${loginMem.memNum}">    <!-- 회원 번호 -->       
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                       <button type="submit" class="btn btn-danger">회원정보 번경</button>
@@ -115,7 +120,7 @@
                   </div>
                   <div class="col-sm-offset-2 col-sm-10 font-weight-bold" id="pwd_check2"> </div>
                   <!-- 비밀번호 확인 -->
-                  <input type="hidden" name="memNum" value="${member.memNum}">    <!-- 회원 번호 --> 
+                  <input type="hidden" name="memNum" value="${loginMem.memNum}">    <!-- 회원 번호 --> 
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                       <button type="submit" class="btn btn-danger">비밀번호 변경</button>
@@ -127,7 +132,7 @@
               
               <div class="tab-pane" id="auth">
                 <form class="form-horizontal" action="/member/modify/auth" method="post" onsubmit="return modifyAuth()">
-                  <input type="hidden" name="memNum" value="${member.memNum}">    <!-- 회원 번호 --> 
+                  <input type="hidden" name="memNum" value="${loginMem.memNum}">    <!-- 회원 번호 --> 
                   <input type="hidden" name="authId" value="1002">    <!-- 변경 권한 강사 --> 
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
@@ -152,16 +157,6 @@
 
 <%@ include file = "footer.jsp" %>
 
-<!-- jQuery 3 -->
-<script src="${contextPath}/resources/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="${contextPath}/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="${contextPath}/resources/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="${contextPath}/resources/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="${contextPath}/resources/dist/js/demo.js"></script>
 <script>
 	function nameCheck() {
 		var memName = $("input[name='memName']").val();

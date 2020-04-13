@@ -60,11 +60,5 @@ public class C001BoardServiceImpl implements C001BoardService {
 
 	}
 
-	public List<C001BoardVO> getSelectOne(int bno) {
-		List<C001BoardVO> selectOne = null;
-		selectOne = c001BoardDAO.getSelectOne(bno);
-
-		return selectOne;
-	}
 
 }

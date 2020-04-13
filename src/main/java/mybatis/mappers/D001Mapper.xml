@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.Build">
+	<resultMap id="BuildResult" type="java.util.HashMap">
+	
+	
+		<result property="bulName" column="bulName" />
+        <result property="bulMgr" column="bulMgr" />
+        <result property="bulPhoneNum" column="bulPhoneNum" />
+        
+		<result property="bulAddress" column="bulAddress" />
+        <result property="bulClassNum" column="bulClassNum" />
+        <result property="bulFloor" column="bulFloor" />
+        
+		<result property="bulId" column="bulId" />
+        <result property="bulRemark" column="bulRemark" />
+          
+        
+	</resultMap> 
+	<resultMap id="ClassResult" type="java.util.HashMap">
+	
+		<result property="classCode" column="classCode" />
+        <result property="classNumber" column="classNumber" />
+        <result property="classFloorNum" column="classFloorNum" />
+        <result property="classCapacity" column="classCapacity" />
+  
+
+        <result property="codeGroup" column="codeGroup" />
+        <result property="codeId" column="codeId" />
+        <result property="codeName" column="codeName" />
+        <result property="codeOrder" column="codeOrder" />
+        <result property="codeGroupName" column="codeGroupName" />
+        <result property="classId" column="classId" />
+        
+        
+     </resultMap> 
+	
+
+
+	<select id="getBuildInfo" parameterType="String" resultMap="BuildResult">
+      <![CDATA[
+  
+        SELECT bulName, bulMgr, bulPhoneNum, bulAddress, bulClassNum, bulFloor, bulId, bulRemark 
+        FROM scott.BUILDING 
+        where bulId = #{bulId,jdbcType=VARCHAR}
+      ]]>
+	</select>
+
+	
+	<delete id="deleteClassroom">
+		delete from scott.CLASSROOM where classId = #{classId,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="getClassInfo" parameterType="String" resultMap="ClassResult">
+      <![CDATA[
+  
+  		 SELECT a.classCode, a.classNumber, a.classFloorNum, a.classCapacity, a.bulId, a.classId, a.classRemark, b.bulname
+	  	 FROM scott.CLASSROOM  a, building b      
+	  	 where a.bulid=b.bulid and classId = #{classId,jdbcType=VARCHAR}
+      ]]>
+	</select>
+	
+	
+	
+	
+	<select id="getClRInfo" parameterType="String" resultMap="ClassResult">
+      <![CDATA[
+		select codeName, codeOrder from code where codegroup='23' ORDER by codeorder
+		      ]]>
+	</select>
+	
+	
+	<select id="getBuildName" parameterType="String" resultMap="ClassResult">
+      <![CDATA[
+		select BULNAME, bulId from building
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	<insert id="insertClRInfo" parameterType="D001BuildingVO">
+			 <![CDATA[ 
+				insert into classroom
+				(classId, classCapacity,classCode,classNumber, classRemark,bulId) 
+				values
+				(
+				(clR_board.nextval), 
+				 #{classCapacity,jdbcType=VARCHAR},
+				 #{classCode,jdbcType=VARCHAR}, 
+				 #{classNumber,jdbcType=INTEGER},  
+				 #{classRemark,jdbcType=VARCHAR}, 
+				 #{bulId,jdbcType=VARCHAR}
+				 )
+			 ]]>
+	</insert>
+
+	
+	
+	<insert id="insertBulInfo" parameterType="D001BuildingVO">
+		<selectKey keyProperty="builName" order="BEFORE" resultType="String" >
+			select build_board.nextval from dual
+		</selectKey>
+		 <![CDATA[ 
+		insert into tbl_board(classId, bulId ,classCapacity ,classCode ,classNumber ,buildName ,classRemark ) 
+		values(#{classId},#{builName},#{classCapacity},#{classCode},#{classNumber},#{buildName},#{classRemark})
+	 ]]>
+	</insert>
+	
+
+	<insert id="insertBuildingInfo" parameterType="hashmap">
+			<selectKey keyProperty="bulId" order="BEFORE" resultType="String" >
+				select build_board.nextval from dual
+			</selectKey>
+			 <![CDATA[ 
+				INSERT INTO BUILDING(bulName,bulMgr,bulPhoneNum,bulAddress,bulClassNum,bulFloor,bulId,bulRemark)
+				VALUES(
+				#{bulName,jdbcType=VARCHAR},
+				#{bulMgr,jdbcType=VARCHAR},
+				#{bulPhoneNum,jdbcType=VARCHAR},
+				#{bulAddress,jdbcType=VARCHAR},
+				#{bulClassNum,jdbcType=INTEGER},
+				#{bulFloor,jdbcType=INTEGER},
+				#{bulId,jdbcType=VARCHAR},
+				#{bulRemark,jdbcType=VARCHAR}
+				)
+			 ]]>
+	</insert>
+	 
+	
+	
+	
+	
+	
+	
+<!-- 	
+	<insert id="insertBuildingInfo" parameterType="D001BuildingVO">
+			 <![CDATA[ 
+				INSERT INTO BUILDING(bulName,bulMgr,bulPhoneNum,bulAddress,bulClassNum,bulFloor,bulId,bulRemark)
+				VALUES(#{bulName},#{bulMgr},#{bulPhoneNum},#{bulAddress},#{bulClassNum},#{bulFloor},(build_board.nextval),#{bulRemark});
+			 ]]>
+	</insert>
+		 -->
+	
+	</mapper>
+	
+
+	
