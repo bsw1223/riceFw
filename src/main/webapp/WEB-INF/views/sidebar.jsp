@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script
-  src="https://code.jquery.com/jquery-2.2.4.js"
-  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-  crossorigin="anonymous"></script>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
 	<script>
@@ -199,6 +195,7 @@ for(var i in newMapListSub)
 			break;
 			}
 	}
+	
 var tempCount = 0;
 for(var i in newMapListSub)
 {
@@ -262,7 +259,7 @@ for(var i =0 ; i< tempCount1-1; i++)
 		}
 	}
 
-//-----------------------------트리종류 구별-------------------------------------------
+//-----------------------------트리종류 구별 1&2단 구별?-------------------------------------------
 	 
 for(var i in topMenuN)
 {
@@ -324,8 +321,9 @@ if(authId == "1002")
 			}
 		 } 
 }	 
-//--------------------------클래스추가---------------------------
+//--------------------------클래스추가 14&30 아닐때 top메뉴---------------------------
 //배열의 id를 이용하여 클래스를 넣는다.TOP
+
 var tempJ =0;
 for(i in topMenuT)
 	{
@@ -335,7 +333,7 @@ for(i in topMenuT)
 		if(tempM!='14')
 	  			{
 					var classN = "a"+tempM;
-					var secondC = "'.second:eq("+tempJ+")'";
+					var secondC = "'.second:eq("+tempJ+")'";//총2단인 메뉴의 top메뉴에 클래스 추가
 					$(eval(secondC)).addClass(classN); 
 					tempJ++;
 	  			}	
@@ -353,6 +351,18 @@ for(i in topMenuT)
 	  }
 }
 var remainTopMenu = $(topMenuN).not(topMenuT).get();//트리없는 TOP메뉴 리스트
+if(authId == "1001"||authId == "1000")
+	{
+	remainTopMenu.splice(remainTopMenu.indexOf("14"),1); // "14"를 찾아서 삭제한다.
+	}
+if(authId == "1002")
+	{
+	 remainTopMenu.splice(remainTopMenu.indexOf("30"),1); // "30"를 찾아서 삭제한다. */
+	}
+
+console.log("remainTopMenu : "+remainTopMenu);
+
+
 var tempT = 0;
 for(i in remainTopMenu)
 	{
@@ -363,7 +373,7 @@ for(i in remainTopMenu)
 		tempT++;
 	  				
 	}
-
+//------------ok-------------------
 //---------------------------top타이틀 추가-------------------------------------
 
 for(i in newMapList)
@@ -377,6 +387,8 @@ for(i in newMapList)
 			}
 	 
 	}
+	//---------------ok
+
 //----------------------2단 폼 넣기------------------
 //클래스 네임 검색 후 맞으면 폼추가
  for(i in newMapList)
@@ -402,9 +414,9 @@ for(i in newMapList)
 	 
  
 }
-
-	
+  
 //---------------------------sub타이틀 추가3단아닐때-------------------------------------
+
 var tempC= 0;
 var tempD= 1;
 var tempE= 2;
@@ -438,6 +450,7 @@ for(i in newMapList)
 					 }
 		 }
 }
+//-------------------------ok
 
 //3단일때
 
@@ -456,7 +469,6 @@ for(i in newMapListSub)
 			path="'li.a30 > ul > li.text:eq("+tempZ+") > a'";
 		}
 			var name = newMapListSub[i].openClassname;
-		
 					$(eval(path)).text(name); 
 					if(($(eval(path)).length)+1>0)
 						{
@@ -468,6 +480,8 @@ for(i in newMapListSub)
 						
 			
  }
+ //------------------------ok
+
 //----------마지막 하나 삭제------
  for(i in newMapList)
 {
@@ -491,54 +505,35 @@ for(i in newMapListSub)
 		}
  
 }	 
-
+ //--------------------ok
+ 
 //-------------------------------3단 ul.thirdthree > li에 각자의 class명 넣기-------------------------------------
-//과목 PARENTS 이용해서 class명 넣기
+//과목 PARENTS 이용해서 class명 넣기, "subject" 클래스 추가
 var tempD= 0;
 
+
 for(i in newMapList)
-{
-	 if(authId == "1001"||authId == "1000")
-		{
-			var classId = "a"+newMapList[i].parentMenuId;
-			if(classId=='a14')
-				{
-					var path="'li."+classId+" > ul > li.text:eq("+tempD+")'";
-					 var className = "subject"; 
-					if($('li').hasClass(classId))
-						{
-							$(eval(path)).addClass(className); 
-							if(($(eval(path)).length)+1>0)
-								{
-									tempD++;
-								 }else
-								 {
-									tempD=0;
-								  }
-					 	}
-				}
-		}
+	{
+		if(authId == "1001"||authId == "1000")
+			{
+				var path="'li.a14 > ul > li.text:eq("+tempD+")'";
+			}
 		if(authId == "1002")
-		{
-			var classId = "a"+newMapList[i].parentMenuId;
-			if(classId=='a30')
-				{
-					var path="'li."+classId+" > ul > li.text:eq("+tempD+")'";
-					 var className = "subject"; 
-					if($('li').hasClass(classId))
-						{
-							$(eval(path)).addClass(className); 
-							if(($(eval(path)).length)+1>0)
-								{
-									tempD++;
-								 }else
-								 {
+			{
+				var path="'li.a30 > ul > li.text:eq("+tempD+")'";
+			}	
+			    var className = "subject"; 
+				$(eval(path)).addClass(className); 
+						if(($(eval(path)).length)+1>0)
+							{
+								tempD++;
+			     		    }else
+							     {
 									tempD=0;
-								  }
-					 	}
-				}
-		}
-}
+							     }
+					
+	}
+	//----------------------ok
 
 //------------------각각 메뉴 넣기--------------------
 var tempD= 0;
@@ -589,6 +584,8 @@ for(i in newMapList)
 	 }
  
 }
+//------------------ok
+
 //-------------------------------3단 클래스 넣기-------------------------------------
 var tempF= 0;
 
@@ -644,120 +641,30 @@ for(i in newMapList)
 		
 	}
 }
+//----------------------------ok
 
 //-----------------------------3단 title붙이기-------------------------
 
-	var tempG= 0;
-
+	
 	for(i in newMapList)
-	{
-		for(j in newMapList)
-		{
-			 if(authId == "1001"||authId == "1000")
-				{
-					var classIdM = "a"+newMapList[j].menuId;
-					var title = newMapList[j].menuName;
-					var path="'li.a14 > ul > li.text:eq("+i+") > ul > li:eq("+tempG+") > a'";
-					if($('li').hasClass(classIdM))
-						{
-							var pathCount="'li.a14 > ul > li.text:eq("+i+") > ul > li'";
-							if($('li').hasClass("a14"))
-								{
-									$(eval(path)).text(title); 
-									if(($(eval(pathCount)).length)+2>0)
-										{
-												tempG++;
-										}
-									if($(eval(pathCount)).length-1==(tempG-1))//태그개수로 반복횟수 정함.
-										{
-												tempG=0;
-										}
-										
-								}
-							}
-				}
-			if(authId == "1002")
-			{
-				var classIdM = "a"+newMapList[j].menuId;
-				var title = newMapList[j].menuName;
-				var path="'li.a30 > ul > li.text:eq("+i+") > ul > li:eq("+tempG+") > a'";
-				if($('li').hasClass(classIdM))
-					{
-						var pathCount="'li.a30 > ul > li.text:eq("+i+") > ul > li'";
-						if($('li').hasClass("a30"))
-							{
-								$(eval(path)).text(title); 
-								if(($(eval(pathCount)).length)+2>0)
-									{
-											tempG++;
-									}
-								if($(eval(pathCount)).length-1==(tempG-1))//태그개수로 반복횟수 정함.
-									{
-											tempG=0;
-									}
+			{		
+					var classIdM = "a"+newMapList[i].menuId;
+					var title = newMapList[i].menuName;
+					var selectCl = '\'li[class^='+classIdM+'] > a \'';
+					$(eval(selectCl)).text(title);		
+			}
+	//--------------------ok	
 									
-							}
-						}
-				}
-		}
-		
-	}
 
 //-------------------------------3단 링크 걸기--------------------------------------
-
-	var tempH=0;
-
 	for(i in newMapList)
-	{
-		for(j in newMapList)
-		{
-			 if(authId == "1001"||authId == "1000")
-				{
-					var classIdM = "a"+newMapList[j].menuId;
-					var URL = newMapList[j].menuURL;
-					var path="'li.a14 > ul > li.text:eq("+i+") > ul > li:eq("+tempH+") > a'";
-					if($('li').hasClass(classIdM))
-						{
-							var pathCount="'li.a14 > ul > li.text:eq("+i+") > ul > li'";
-							if($('li').hasClass("a14"))
-								{
-									$(eval(path)).attr('href',URL); 
-									if(($(eval(pathCount)).length)+2>0)
-										{
-												tempH++;
-										}
-									if($(eval(pathCount)).length-1==(tempH-1))//태그개수로 반복횟수 정함.
-										{
-												tempH=0;
-										}
-								}
-							}
-					}
-			if(authId == "1002")
-			{
-				var classIdM = "a"+newMapList[j].menuId;
-				var URL = newMapList[j].menuURL;
-				var path="'li.a30 > ul > li.text:eq("+i+") > ul > li:eq("+tempH+") > a'";
-				if($('li').hasClass(classIdM))
-					{
-						var pathCount="'li.a30 > ul > li.text:eq("+i+") > ul > li'";
-						if($('li').hasClass("a30"))
-							{
-								$(eval(path)).attr('href',URL); 
-								if(($(eval(pathCount)).length)+2>0)
-									{
-											tempH++;
-									}
-								if($(eval(pathCount)).length-1==(tempH-1))//태그개수로 반복횟수 정함.
-									{
-											tempH=0;
-									}
-									
-							}
-						}
-				}
-		}
-	}
+			{		
+					var classIdM = "a"+newMapList[i].menuId;
+					var title = newMapList[i].menuURL;
+					var selectCl = '\'li[class^='+classIdM+'] > a \'';
+					$(eval(selectCl)).attr('href',title);		
+			}
+//---------------------------------ok
 //-------------------------------1단 URL 추가-------------------------------------
 
 for(i in newMapList)
@@ -765,41 +672,60 @@ for(i in newMapList)
 	var classIdM = "a"+newMapList[i].menuId;
 	var URL = newMapList[i].menuURL;
 	var path = "'li."+classIdM+" > a'";
-		if($('li').hasClass(classIdM))
-			{
-			$(eval(path)).attr('href',URL); 
-			}
+	$(eval(path)).attr('href',URL); 
+	
 	}
-//-------------------------------2단 클래스 추가-------------------------------------
-var tempW =0;
+	//----------ok
 
-for(i in newMapList)
-{
-	var classId = "a"+newMapList[i].parentMenuId;
-	if(classId!='a14'||classId!='a30')
-		{
-			var path="'li."+classId+" > ul > li.text:eq("+tempW+") > a'";
-			var URL = newMapList[i].menuURL;
-			if($('li').hasClass(classId))
+//-------------------------------2단 클래스 추가-------------------------------------
+var tempC =0;
+var parentsClP=null;
+for(var i =0; i<newMapList.length ; i++)
+	{
+		console.log("길이 : "+newMapList.length);	
+		if(i<newMapList.length-1){
+		var parentsClP = "a"+newMapList[i+1].parentMenuId;
+		}
+		var parentsCl = "a"+newMapList[i].parentMenuId;//부모아이디로 검색
+		
+		
+		var compared = newMapList[i].menuId;
+		
+		var classIdM = "a"+newMapList[i].menuId;
+		var selectClC= '\'li.'+parentsCl+' > ul > li\'';
+		var selectCl = '\'li.'+parentsCl+' > ul > li:eq('+tempC+')\'';
+		//console.log(selectCl);
+		    $(eval(selectCl)).addClass(classIdM);
+			
+		console.log("*selectCl : "+selectCl+"- *parentsClP : " +parentsClP);
+				if(parentsCl==parentsClP)
 				{
-					$(eval(path)).attr('href',URL); 
-					if(($(eval(path)).length)+1>0)
-						{
-							tempW++;
-						}
-									
-							
-					if($(eval(path)).length==(tempW-1))//태그개수로 반복횟수 정함.
-						{
-							tempW=0;
-						}
-				 }
-			}
-}
-					}
-		} );
+					tempC++;
+				 }else
+				 {
+					tempC=0;
+				  }
+			parentsClP=parentsCl;
+			
+	}
+//-------------------2단 url추가
+for(i in newMapList)
+	{
+		for(j in newMapList)
+			{
+				var classIdT = "a"+newMapList[i].menuId;
+				var classIdM = newMapList[i].menuURL;
+				var selectCl = '\'li.'+classIdT+':eq('+j+') > a\'';
+				//console.log("selectCl : "+selectCl);
+				$(eval(selectCl)).attr('href',classIdM);
+			}	
+		
+	}
+					} 
+	 	} ); 
 });
  	
+	
 </script>
 
 	
@@ -828,6 +754,7 @@ for(i in newMapList)
               </span>
         </div> -->
       </form>
+      
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu start" data-widget="tree">
@@ -839,4 +766,11 @@ for(i in newMapList)
       
     </section>
     <!-- /.sidebar -->
+    
   </aside>
+
+  
+  
+  
+ 
+  
