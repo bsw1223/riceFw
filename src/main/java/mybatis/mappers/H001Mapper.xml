@@ -44,6 +44,6 @@
 		 a, MEMBER b where a.memnum=b.memnum and b.memnum=#{memnum}
       ]]>
 	</select>
-	</mapper>
+</mapper>
 	
 	
