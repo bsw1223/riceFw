@@ -32,12 +32,20 @@ public class F001Controller {	// 회원관리
 	@Autowired
 	private F001VO f001VO;
 		
-	// 기본 화면
+	// 기본 화면 , 학생 조회
 	@RequestMapping(value = "/stMngadmin", method= {RequestMethod.GET, RequestMethod.POST})
 	public String searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		logger.info("/memMng/stMngadmin init");
 		request.setCharacterEncoding("UTF-8");
-		return "F_stBoard";
+		return "F_001Board";
+	}
+	
+	// 기본 화면 , 강사 조회
+	@RequestMapping(value = "/tchMngadmin", method= {RequestMethod.GET, RequestMethod.POST})
+	public String searchInit2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.info("/memMng/stMngadmin init");
+		request.setCharacterEncoding("UTF-8");
+		return "F_002Board";
 	}
 	
 	// 검색 조회
@@ -62,9 +70,61 @@ public class F001Controller {	// 회원관리
 		return resultMap;
 	}
 	
-	@RequestMapping(value = "/stMngadmin/save" , method = { RequestMethod.GET, RequestMethod.POST })
+	// 검색 조회
+	@RequestMapping(value = "/tchMngadmin/search", produces="application/json", method= {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map searchTeaList(@RequestParam(value="memId", required=false) String memName, 
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		logger.info("get/post  stMngadmin/search");
+		request.setCharacterEncoding("UTF-8");
+		Map<String, Object> searchMap = new HashMap<String, Object>();	// 검색조건
+		Map<String, Object> resultMap = new HashMap<String, Object>();	// 조회결과
+		
+		// 검색조건 설정
+		searchMap.put("authId", "1002");
+		searchMap.put("memName", memName);
+
+		// 데이터 조회
+		List<F001VO> data = f001Service.searchList(searchMap);
+		logger.info(data.toString());
+		resultMap.put("Data", data);
+		
+		return resultMap;
+	}
+	
+	@RequestMapping(value = "/stMngadmin/save", produces="application/json", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public Map saveStuData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		Map<String, String[]> dataMap = new HashMap<String, String[]>();	// 저장할 Data
+		Map<String, Object> resultMap = new HashMap<String, Object>();	// 처리결과
+		
+		// 저장 data 추출하기
+		Enumeration enu = request.getParameterNames();
+		while( enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String [] values = request.getParameterValues(name);
+			dataMap.put(name, values);
+		}
+		
+		Map<String, String> result = new HashMap<String, String>();
+		try {
+			f001Service.saveData(dataMap);
+			result.put("Code", "0");
+			result.put("Message", "저장되었습니다");
+		} catch (Exception e) {
+			result.put("Code", "-1");
+			result.put("Message", "저장에 실패하였습니다");
+			e.printStackTrace();
+		}
+		
+		resultMap.put("Result", result);
+		return resultMap;
+	}
+	
+	@RequestMapping(value = "/tchMngadmin/save" , method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public Map saveTeaData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		Map<String, String[]> dataMap = new HashMap<String, String[]>();	// 저장할 Data
 		Map<String, Object> resultMap = new HashMap<String, Object>();	// 처리결과
