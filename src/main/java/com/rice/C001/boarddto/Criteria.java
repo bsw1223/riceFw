@@ -2,14 +2,12 @@ package com.rice.C001.boarddto;
 
 public class Criteria {
 
-	@Override
-	public String toString() {
-		return "Criteria [page=" + page + ", amount=" + amount + ", type=" + type + ", keyword=" + keyword + "]";
-	}
+
 
 	private int page;
 	private int amount;
-	
+	private String boCode;
+	private String boURL;
 	private String type;
 	private String keyword;
 
@@ -20,6 +18,28 @@ public class Criteria {
 	public Criteria(int page, int amount) {
 		this.amount = amount;
 		this.page = page;
+	}
+	
+	public String getBoCode() {
+		return boCode;
+	}
+
+	public void setBoCode(String boCode) {
+		this.boCode = boCode;
+	}
+
+	public String getBoURL() {
+		return boURL;
+	}
+
+	public void setBoURL(String boURL) {
+		this.boURL = boURL;
+	}
+
+	@Override
+	public String toString() {
+		return "Criteria [page=" + page + ", amount=" + amount + ", boCode=" + boCode + ", boURL=" + boURL + ", type="
+				+ type + ", keyword=" + keyword + "]";
 	}
 
 	public int getPage() {

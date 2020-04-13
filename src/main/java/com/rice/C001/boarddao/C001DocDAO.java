@@ -10,8 +10,10 @@ public interface C001DocDAO {
 
 	List<C001ClassBoardVO> getListWithPaging(Criteria cri);
 
-	int getTotal();
+	int getTotal(Criteria cri);
 	
-	public C001ClassBoardVO read(String boNum);
+	public C001ClassBoardVO read(String boNum, String boURL, String boCode);
+	
+	public int updateViewCnt(String boNum, String boURL, String boCode);
 
 }

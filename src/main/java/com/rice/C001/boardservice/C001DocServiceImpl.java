@@ -22,15 +22,21 @@ public class C001DocServiceImpl implements C001DocService {
 	}
 
 	@Override
-	public int getTotal() {
+	public int getTotal(Criteria cri) {
 		// TODO Auto-generated method stub
-		return c001DocDAO.getTotal();
+		return c001DocDAO.getTotal(cri);
 	}
 
 	@Override
-	public C001ClassBoardVO read(String boNum) {
+	public C001ClassBoardVO read(String boNum, String boURL,String boCode) {
 		// TODO Auto-generated method stub
-		return c001DocDAO.read(boNum);
+		return c001DocDAO.read(boNum, boURL,boCode);
+	}
+	
+	@Override
+	public int updateViewCnt(String boNum, String boURL, String boCode) {
+		// TODO Auto-generated method stub
+		return c001DocDAO.updateViewCnt(boNum,boURL,boCode);
 	}
 
 }

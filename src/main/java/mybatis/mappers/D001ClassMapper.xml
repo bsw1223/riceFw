@@ -22,7 +22,7 @@
 	    select rownum rn, classCode, classNumber, classFloorNum, classCapacity, bulId, classId,classRemark
 	    from classroom
 	    where rownum <= (#{page}*#{amount})
-	    order by classId desc
+	    order by to_number(classId) desc
 	    )
 	where rn > ((#{page}-1)*#{amount})
 	]]>

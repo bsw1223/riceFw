@@ -16,15 +16,20 @@
 		<result property="memNum" column="memNum" />
 	</resultMap>
 
-
+	
 	<select id="getListWithPaging" resultType="C001ClassBoardVO">
 	<![CDATA[
 		select  boNum,boCode, boContent, boRegDate, boTitle,boUpdateDate,boViews,boLikes,boURL,memNum
 	from(
 	    select rownum rn, boNum,boCode, boContent, boRegDate, boTitle,boUpdateDate,boViews,boLikes,boURL,memNum
-	    from CLASSBOARD
+	    from (
+	    	
+			select	botitle,boNum,bocode,bocontent, boregdate, boupdatedate, boviews,bolikes,bourl,memnum
+			from classBoard
+			where boCode =#{boCode} and boURL=#{boURL}
+	    )
 	    where rownum <= (#{page}*#{amount})
-	    order by boNum desc
+	    order by to_number(boNum) desc
 	    )
 	where rn > ((#{page}-1)*#{amount})
 	]]>
@@ -32,16 +37,24 @@
 
 	<select id="getTotal" resultType="int">
 	<![CDATA[
-         select count(boNum) from CLASSBOARD
+         select count(boNum) from CLASSBOARD where boCode =#{boCode} and boURL=#{boURL}
       ]]>
 	</select>
 
 
 	<select id="read" resultType="C001ClassBoardVO">
 	<![CDATA[
-		select * from CLASSBOARD where
-		boNum=#{boNum}
+		select * from CLASSBOARD 
+		where boNum=#{boNum} and boCode =#{boCode} and boURL=#{boURL}
 		]]>
 	</select>
+	
+	<update id="updateViewCnt">
+	<![CDATA[
+		update CLASSBOARD
+		set boViews=boViews+1
+		where boNum=#{boNum} and boCode=#{boCode} and boURL=#{boURL}
+		]]>
+	</update>
 
 </mapper>

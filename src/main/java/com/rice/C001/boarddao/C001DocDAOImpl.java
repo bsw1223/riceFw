@@ -1,7 +1,9 @@
 
 package com.rice.C001.boarddao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +25,32 @@ public class C001DocDAOImpl implements C001DocDAO {
 	}
 
 	@Override
-	public int getTotal() {
+	public int getTotal(Criteria cri) {
 		// TODO Auto-generated method stub
 		int page;
-		page = sqlsession.selectOne("mapper.myboard.getTotal");
+		page = sqlsession.selectOne("mapper.myboard.getTotal", cri);
 		return page;
 	}
 
 	@Override
-	public C001ClassBoardVO read(String boNum) {
+	public C001ClassBoardVO read(String boNum, String boURL, String boCode) {
 		// TODO Auto-generated method stub
-		return sqlsession.selectOne("mapper.myboard.read", boNum);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boURL", boURL);
+		map.put("boNum", boNum);
+		map.put("boCode", boCode);
+		return sqlsession.selectOne("mapper.myboard.read", map);
+	}
+	
+	@Override
+	public int updateViewCnt(String boNum, String boURL, String boCode) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boURL", boURL);
+		map.put("boNum", boNum);
+		map.put("boCode", boCode);
+		
+		return sqlsession.update("mapper.myboard.updateViewCnt",map);
+		
 	}
 
 }

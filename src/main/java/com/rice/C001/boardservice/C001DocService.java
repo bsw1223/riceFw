@@ -9,8 +9,10 @@ public interface C001DocService {
 
 	List<C001ClassBoardVO> getList(Criteria cri);
 	
-	public int getTotal();
+	public int getTotal(Criteria cri);
 
-	public  C001ClassBoardVO read(String boNum);
+	public  C001ClassBoardVO read(String boNum,String boURL, String boCode);
+	
+	public int updateViewCnt(String boNum, String boURL, String boCode);
 
 }

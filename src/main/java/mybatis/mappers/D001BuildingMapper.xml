@@ -24,7 +24,7 @@
 	    select rownum rn, bulName,bulMgr, bulPhoneNum, bulAddress, bulClassNum,bulFloor,bulId,bulRemark
 	    from building
 	    where rownum <= (#{page}*#{amount})
-	    order by bulId desc
+	    order by to_number(bulId) desc
 	    )
 	where rn > ((#{page}-1)*#{amount})
 	]]>
