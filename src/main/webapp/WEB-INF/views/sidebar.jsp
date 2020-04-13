@@ -423,7 +423,6 @@ var tempE= 2;
 
 for(i in newMapList)
 {
-	
 	var classId = "a"+newMapList[i].parentMenuId;
 	if(classId!='a14'||classId!='a30')
 		{
@@ -455,9 +454,8 @@ for(i in newMapList)
 //3단일때
 
 
- var tempZ= 0;
- var path= null;
-
+var tempZ= 0;
+var path= null;
 for(i in newMapListSub)
 {
 	 if(authId == "1001"||authId == "1000")
@@ -477,8 +475,6 @@ for(i in newMapListSub)
 						{
 							tempZ=0;
 						}
-						
-			
  }
  //------------------------ok
 
@@ -503,15 +499,12 @@ for(i in newMapListSub)
 					$(eval(path)).empty();; 
 				}
 		}
- 
 }	 
  //--------------------ok
  
 //-------------------------------3단 ul.thirdthree > li에 각자의 class명 넣기-------------------------------------
 //과목 PARENTS 이용해서 class명 넣기, "subject" 클래스 추가
 var tempD= 0;
-
-
 for(i in newMapList)
 	{
 		if(authId == "1001"||authId == "1000")
@@ -531,7 +524,6 @@ for(i in newMapList)
 							     {
 									tempD=0;
 							     }
-					
 	}
 	//----------------------ok
 
@@ -558,7 +550,6 @@ for(i in newMapList)
 									tempD=0;
 								}
 						}
-					
 				 }
 	 }
 	if(authId == "1002")
@@ -682,22 +673,16 @@ var tempC =0;
 var parentsClP=null;
 for(var i =0; i<newMapList.length ; i++)
 	{
-		console.log("길이 : "+newMapList.length);	
 		if(i<newMapList.length-1){
 		var parentsClP = "a"+newMapList[i+1].parentMenuId;
 		}
 		var parentsCl = "a"+newMapList[i].parentMenuId;//부모아이디로 검색
-		
-		
 		var compared = newMapList[i].menuId;
-		
 		var classIdM = "a"+newMapList[i].menuId;
 		var selectClC= '\'li.'+parentsCl+' > ul > li\'';
 		var selectCl = '\'li.'+parentsCl+' > ul > li:eq('+tempC+')\'';
 		//console.log(selectCl);
 		    $(eval(selectCl)).addClass(classIdM);
-			
-		console.log("*selectCl : "+selectCl+"- *parentsClP : " +parentsClP);
 				if(parentsCl==parentsClP)
 				{
 					tempC++;

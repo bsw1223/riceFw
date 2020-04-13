@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.Sch">
+	<resultMap id="SchResult" type="java.util.HashMap">
+		<result property="_id" column="schId" />
+        <result property="title" column="schTitle" />
+        <result property="start" column="schStart" />
+        <result property="end" column="schEnd" />
+        <result property="description" column="schDescription" />
+        <result property="backgroundColor" column="schBackgroundColor" />
+        <result property="type" column="schType" />
+        <result property="memNum" column="memNum" />
+        <result property="textColor" column="schTextColor" />
+        <result property="allDay" column="schAllDay" />
+	</resultMap> 
+	
+
+
+	<select id="selectSchList" resultMap="SchResult">
+     
+      <![CDATA[
+		SELECT 
+		    schId,
+		    schTitle,
+		    schStart,
+		    schEnd,
+		    schDescription,
+		    schBackgroundColor,
+		    schType,
+		    memNum,
+		    schTextColor,
+		    schAllDay
+		FROM SCHEDULE
+      ]]>
+	</select>
+</mapper>
+	
+	

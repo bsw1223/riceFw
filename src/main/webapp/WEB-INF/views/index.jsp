@@ -16,6 +16,28 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <link rel="stylesheet" href="${contextPath}/resources/api/fullcalendar/css/main.css">
+<script>
+/* var tempVar = "";
+$(document).ready(function(){
+	$.ajax({
+		type : "post",
+		async: true,
+		datatype:"textd; charset=utf-8",
+		url: "/schlist",
+		data: {tempVar:tempVar},
+		success: function(response){
+			mapListSch = JSON.parse(response);
+			console.log(mapListSch);
+			//var newMapList = JSON.parse(mapListSch);//전체 리스트
+			
+			
+				}
+			});
+		});
+ */
+
+</script>
+
 
 <div class="content-wrapper" style="min-height: 901px;">
 	<!-- Content Header (Page header) -->
