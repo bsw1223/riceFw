@@ -24,8 +24,8 @@
 	<!-- 회원가입 -->
 	<insert id='signup'>
 		<![CDATA[
-			INSERT INTO SCOTT.MEMBER (memNum, memid, mempwd, memname, memtel, mememail, authId)
-				values (SEQ_MEMBER.nextval, #{memId}, #{memPwd}, #{memName}, #{memTel}, #{memEmail}, #{authId})
+			INSERT INTO SCOTT.MEMBER (memNum, memid, mempwd, memname, memtel, mememail, authId, memJoinDate, memModifyDate)
+				values (SEQ_MEMBER.nextval, #{memId}, #{memPwd}, #{memName}, #{memTel}, #{memEmail}, #{authId}, TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(SYSDATE,'YYYY-MM-DD'))
 		]]>
 	</insert>
 	
@@ -54,7 +54,7 @@
 	<select id="login" resultType="com.rice.A001.memvo.A001MemVO" parameterType="com.rice.A001.memvo.A001MemVO">
       <![CDATA[
         	select
-        		memNum, memEmail, authId, memLevel, memName
+        		memNum, memEmail, authId, memName, memLevel
         	from
         		scott.member
         	where memId = #{memId}
@@ -77,7 +77,7 @@
 	<update id="updateInfo" parameterType="com.rice.A001.memvo.A001MemVO">
 		<![CDATA[
 			UPDATE SCOTT.MEMBER
-				SET memName=#{memName}, memTel=#{memTel}, memEmail=#{memEmail}, memModifyDate=SYSDATE
+				SET memName=#{memName}, memTel=#{memTel}, memEmail=#{memEmail}, memModifyDate=TO_CHAR(SYSDATE,'YYYY-MM-DD')
 			WHERE
 				memNum=#{memNum}
 		]]>
@@ -87,7 +87,7 @@
 	<update id="updatePwd" parameterType="com.rice.A001.memvo.A001MemVO">
 		<![CDATA[
 			UPDATE SCOTT.MEMBER
-				SET memPwd=#{memPwd}, memModifyDate=SYSDATE
+				SET memPwd=#{memPwd}, memModifyDate=TO_CHAR(SYSDATE,'YYYY-MM-DD')
 			WHERE
 				memNum=#{memNum}
 		]]>
@@ -97,7 +97,7 @@
 	<update id="updateMemAuth" parameterType="com.rice.A001.memvo.A001MemVO">
 		<![CDATA[
 			UPDATE SCOTT.MEMBER
-				SET authId=#{authId}, memModifyDate=SYSDATE
+				SET authId=#{authId}, memModifyDate=TO_CHAR(SYSDATE,'YYYY-MM-DD')
 			WHERE
 				memNum=#{memNum}
 		]]>

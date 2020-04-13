@@ -25,6 +25,10 @@ public interface D001BuildingDAO {
 	
 	
 	public List<Map<String, Object>> getInfoBUL();
+	
+	
+	public void insertBulInfo(Map<String, Object> vo);
+	
 
 	
 }

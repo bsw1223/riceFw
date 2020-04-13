@@ -69,6 +69,14 @@ public class D001BuildingDAOImpl implements D001BuildingDAO {
 		return list;
 	}
 
+	@Override
+	public void insertBulInfo(Map<String, Object> vo) {
+		String data = vo.toString();
+		System.out.println("data DAO : "+data);
+		sqlsession.insert("mapper.Build.insertBuildingInfo",vo);
+				
+	}
+
 
 
 	

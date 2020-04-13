@@ -3,34 +3,34 @@ package com.rice.A001.memdao;
 import com.rice.A001.memvo.A001MemVO;
 
 public interface A001MemDAO {	
-	// È¸¿ø°¡ÀÔ
+	// íšŒì›ê°€ì…
 	public void signup(A001MemVO vo) throws Exception;
-	// È¸¿ø±ÇÇÑºÎ¿©
+	// íšŒì›ê¶Œí•œë¶€ì—¬
 	public void signupauthmember(A001MemVO vo) throws Exception;
-	// ¾ÆÀÌµğ Áßº¹Ã¼Å©
+	// ì•„ì´ë”” ì¤‘ë³µì²´í¬
 	public int idCheck(String memId) throws Exception;
-	// ·Î±×ÀÎ
+	// ë¡œê·¸ì¸
 	public A001MemVO login(A001MemVO vo) throws Exception;
-	// SNS ID Áßº¹Ã¼Å©
+	// SNS ID ì¤‘ë³µì²´í¬
 	public int snsIdCheck(String snsId) throws Exception;
-	// SNS NAVER È¸¿ø°¡ÀÔ
+	// SNS NAVER íšŒì›ê°€ì…
 	public void snsSignup(A001MemVO vo) throws Exception;
-	// SNS KAKAO È¸¿ø°¡ÀÔ
+	// SNS KAKAO íšŒì›ê°€ì…
 	public void snsKakaoSignup(A001MemVO vo) throws Exception;
-	// SNS ·Î±×ÀÎ
+	// SNS ë¡œê·¸ì¸
 	public A001MemVO snsLogin(A001MemVO vo) throws Exception;
-	// È¸¿øÁ¤º¸ °¡Á®¿À±â
+	// íšŒì›ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 	public A001MemVO memInfo(String memNum) throws Exception;
-	// È¸¿øÁ¤º¸ ¼öÁ¤ÇÏ±â
+	// íšŒì›ì •ë³´ ìˆ˜ì •í•˜ê¸°
 	public Integer updateInfo(A001MemVO vo) throws Exception;
-	// ºñ¹Ğ¹øÈ£ ¼öÁ¤ÇÏ±â
+	// ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì •í•˜ê¸°
 	public Integer updatePwd(A001MemVO vo) throws Exception;
-	// È¸¿ø ±ÇÇÑ º¯°æÇÏ±â member table
+	// íšŒì› ê¶Œí•œ ë³€ê²½í•˜ê¸° member table
 	public Integer updateMemAuth(A001MemVO vo) throws Exception;
-	// È¸¿ø ±ÇÇÑ º¯°æÇÏ±â Auth member table
+	// íšŒì› ê¶Œí•œ ë³€ê²½í•˜ê¸° Auth member table
 	public Integer updateMatchAuth(A001MemVO vo) throws Exception;
-	// ¾ÆÀÌµğ Ã£±â
+	// ì•„ì´ë”” ì°¾ê¸°
 	public String findId(A001MemVO vo) throws Exception;
-	// ºñ¹Ğ¹øÈ£ Àç¼³Á¤À» À§ÇÑ È¸¿ø °Ë»ö
+	// ë¹„ë°€ë²ˆí˜¸ ì¬ì„¤ì •ì„ ìœ„í•œ íšŒì› ê²€ìƒ‰
 	public String findNumforPwd(A001MemVO vo) throws Exception;
 }

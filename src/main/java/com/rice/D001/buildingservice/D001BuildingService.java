@@ -23,7 +23,7 @@ public interface D001BuildingService {
 	
 	public List<Map<String, Object>> selectBulnfo();
 
-	public List<D001BuildingVO> insertBulidInfo(D001BuildingVO buildingvo);
+	public void insertBulInfo(Map<String, Object> vo);
 
 	
 	

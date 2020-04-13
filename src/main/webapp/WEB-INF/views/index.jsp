@@ -28,7 +28,7 @@
         <div class="box-header with-border">
           <h3 class="box-title"> <!-- Title -->
               <!-- session에 로그인 정보가 있을 경우 login TEST -->
-			    <c:if test="${not empty member}">
+			    <c:if test="${not empty loginMem}">
 			    	<p class="login-box-msg"> 환영합니다.</p>
 				</c:if>
           </h3>
@@ -57,13 +57,7 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.18
-    </div>
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
-    reserved.
-  </footer>
+  
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

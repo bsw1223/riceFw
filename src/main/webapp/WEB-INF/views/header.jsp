@@ -7,54 +7,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<!DOCTYPE html>
-<html>
+
 <head>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script>
 
-/* var memNum = ${member.memNum}; */
-var preLogInTag = "<li class=\"\">"
-			     +"<a href=\"../../member/login\" data-toggle=\"\">"
-				 +"	<button type=\"button\" class=\"btn btn-block btn-warning btn-xs\">L o g I n -  H e r e</button>"
-				 +"	</a>"
-				 +"</li> "
-			
-			
-var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
-			       +"<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">"
-				   +"<button type=\"button\" class=\"btn btn-block btn-info btn-xs\">마 이 페 이 지 </button>"
-		           +"	</a>"
-		           +"<ul class=\"dropdown-menu\">"
-				   +"	<li class=\"user-header\">"
-				   /* +"	 <img src=\"${contextPath}/resources/dist/img/user2-160x160.jpg\" class=\"img-circle\" alt=\"User Image\">" */
-				   +"<p>"
-				   +" Alexander Pierce - Web Developer"
-				   +" <small>Member since Nov. 2012</small>"
-				   +" </p>"
-				   +"</li>"
-				   +"</li>"
-				   +"<li class=\"user-footer\">"
-				   +" <div class=\"pull-left\">"
-				   +"  <a href=\"../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
-				   +" </div>"
-				   +" <div class=\"pull-right\">"
-				   +"   <a href=\"../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
-				   +" </div></li></ul></li>"
-				   
- console.log("${member.memNum} : "+eval(${member.memNum}));
-	$(document).ready(function(){	
-	if(eval(${member.memNum})==undefined)
-		{
-			$('li#insertTag').after(preLogInTag);
-		}else{
-				$('li#insertTag').after(afterLogInTag);
-			  }
-								});
-	 
-
-
-</script>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -96,13 +51,78 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+$(document).ready(function(){
+var memName ="${loginMem.memName}";
+var memLevel =" ${loginMem.memLevel}";
+var authId ="${loginMem.authId}";
+var authName ='';
+console.log(memName);
+console.log(memLevel);
+console.log(authId);
+console.log(authName);
+
+
+if(authId==1000)
+	{
+		authName="관리자";
+	}else if(authId==1001)
+		{
+			authName="학생";
+		}else
+			{
+			 authName="강사";
+			}
+
+/* var memNum = ${member.memNum}; */
+var preLogInTag = "<li class=\"\">"
+			     +"<a href=\"../../member/login\" data-toggle=\"\">"
+				 +"	<button type=\"button\" class=\"btn btn-block btn-warning btn-xs\">L o g I n -  H e r e</button>"
+				 +"	</a>"
+				 +"</li> ";
+			
+			
+var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
+			       +"<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">"
+				   +"<button type=\"button\" class=\"btn btn-block btn-info btn-xs\">마 이 페 이 지 </button>"
+		           +"	</a>"
+		           +"<ul class=\"dropdown-menu\">"
+				   +"	<li class=\"user-header\">"
+				   /* +"	 <img src=\"${contextPath}/resources/dist/img/user2-160x160.jpg\" class=\"img-circle\" alt=\"User Image\">" */
+				   +"<p>"
+				   + "Lv."+memLevel+" "+memName+" "+"-"+" "+authName
+				  /*  +" <small>Member since Nov. 2012</small>" */
+				   +" </p>"
+				   +"</li>"
+				   +"</li>"
+				   +"<li class=\"user-footer\">"
+				   +" <div class=\"pull-left\">"
+				   +"  <a href=\"../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
+				   +" </div>"
+				   +" <div class=\"pull-right\">"
+				   +"   <a href=\"../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
+				   +" </div></li></ul></li>";
+				   
+
+	if(eval("${loginMem.memNum}")==undefined)
+		{
+			$('li#insertTag').after(preLogInTag);
+		}else{
+				$('li#insertTag').after(afterLogInTag);
+			  }
+								});
+	 
+
+
+</script>
 	<div class="wrapper">
 
 		<header class="main-header">
 			<!-- Logo -->
 			<a href="../../" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>RiceLms</b></span>
+				<span class="logo-lg"><b>RiceLMS</b></span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
@@ -308,54 +328,3 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 	
 		<%@ include file="sidebar.jsp"%>
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		 <%-- <li class="dropdown user user-menu">
-				            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				              <img src="${contextPath}/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-				              <span class="hidden-xs">LOGIN HERE</span>
-				            </a>
-				            <ul class="dropdown-menu">
-				              <!-- User image -->
-				              <li class="user-header">
-				                <img src="${contextPath}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-				
-				                <p>
-				                  Alexander Pierce - Web Developer
-				                  <small>Member since Nov. 2012</small>
-				                </p>
-				              </li>
-				              <!-- Menu Body -->
-				              <li class="user-body">
-				                <div class="row">
-				                  <div class="col-xs-4 text-center">
-				                    <a href="#">Followers</a>
-				                  </div>
-				                  <div class="col-xs-4 text-center">
-				                    <a href="#">Sales</a>
-				                  </div>
-				                  <div class="col-xs-4 text-center">
-				                    <a href="#">Friends</a>
-				                  </div>
-				                </div>
-				                <!-- /.row -->
-				              </li>
-				              <!-- Menu Footer-->
-				              <li class="user-footer">
-				                <div class="pull-left">
-				                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-				                </div>
-				                <div class="pull-right">
-				                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-				                </div>
-				              </li>
-				            </ul>
-				          </li> --%>

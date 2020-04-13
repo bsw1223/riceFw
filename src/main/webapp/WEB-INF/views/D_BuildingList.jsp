@@ -111,7 +111,7 @@
 							</form>
 						</div>
 						<div class="offset-md-8">
-							<form action="/register.do">
+							<form action="../../classMng/MngBld/Bldregist">
 								<button type="submit" class="btn pull-right">건물등록</button>
 							</form>
 						</div>

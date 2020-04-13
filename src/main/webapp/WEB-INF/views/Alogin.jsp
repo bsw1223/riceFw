@@ -44,6 +44,16 @@
 		alert("잘못된 아이디 패스워드 입니다")
 	</script>
 </c:if>
+<c:if test="${param.signupMsg eq 'true'}">
+	<script>
+		alert("회원가입 성공했습니다")
+	</script>
+</c:if>
+<c:if test="${param.findpwdMsg eq 'true'}">
+	<script>
+		alert("임시비밀번호를 발급했습니다")
+	</script>
+</c:if>
 <div class="login-box">
   <div class="login-logo">
     <a href="/"><b>Rice</b>LMS</a>
