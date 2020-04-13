@@ -151,7 +151,8 @@
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
 		var page = 1;
-		location.href = "/classMng/MngBld/classr?page=" + page + "&amount=" + sel;
+		location.href = "/classMng/MngBld/classr?page=" + page + "&amount="
+				+ sel;
 
 	}
 </script>

@@ -4,14 +4,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+	
+</script>
 
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>건물관리</h1>
+		<h1>
+			<c:out value="boURL" />
+		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li><a href="#">Tables</a></li>
@@ -46,31 +50,22 @@
 							<table class="table table-hover" id="example2"
 								class="table table-bordered table-hover">
 								<thead>
-									<tr><th>No.</th>
-										<th>건물이름</th>
-										<th>건물관리자</th>
-										<th>건물번호</th>
-										<th>건물주소</th>
-										<th>강의실층</th>
-										<th>강의실번호</th>
-										<th>비고</th>
+									<tr>
+										<th>No.</th>
+										<th>공지사항</th>
+										<th>boViews</th>
 									</tr>
-								</thead>								
-								
+								</thead>
+
 								<tbody>
-									<c:forEach var="listB" items="${listB}">
+									<c:forEach var="listB" items='${listB}'>
 										<tr>
-											<td><c:out value="${vs.rn}"/>
-											<td><a
-												href='../../classMng/MngBld/Blddesc?bulId=<c:out value="${listB.bulId}"/>'>
-													<c:out value="${listB.bulName}" />
+											<td><c:out value='${vs.rn}' /> </td>
+											<td><a href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
+													<c:out value='${listB.boContent}' />
 											</a></td>
-											<td><c:out value="${listB.bulMgr}" /></td>
-											<td><c:out value="${listB.bulPhoneNum}" /></td>
-											<td><c:out value="${listB.bulAddress}" /></td>
-											<td><c:out value="${listB.bulFloor}" /></td>
-											<td><c:out value="${listB.bulClassNum}" /></td>
-											<td><c:out value="${listB.bulRemark}" /></td>
+											<td><c:out value='${listB.boViews}' /> 
+											</td>
 									</c:forEach>
 								</tbody>
 							</table>
@@ -79,21 +74,22 @@
 						<div>
 							<ul class="pagination">
 
-								<c:if test="${pageMaker.prev}">
+								<c:if test='${pageMaker.prev}'>
 									<li class="page-item"><a class="page-link"
-										href="/classMng/MngBld/Bld?page=${pageMaker.startPage-1 }&amount=${ pageMaker.cri.amount}">Previous</a></li>
+										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum}&amount=${pageMaker.cri.amount}page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">Previous</a></li>
 								</c:if>
 
 								<c:forEach begin="${pageMaker.startPage }"
-									end="${pageMaker.endPage }" var="pnum">
+									end="${pageMaker.endPage}" var="pnum">
 									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-										<a class="page-link"
-										href="/classMng/MngBld/Bld?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
-									</li>
-								</c:forEach>
+								<a class="page-link"
+												href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
+												</li>
+								
+											</c:forEach>
 								<c:if test="${pageMaker.next}">
 									<li class="page-item"><a class="page-link"
-										href="/classMng/MngBld/Bld?page=${pageMaker.endPage+1 }&amount=${ pageMaker.cri.amount}">Next</a></li>
+										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
 								</c:if>
 							</ul>
 						</div>
@@ -108,11 +104,6 @@
 										</button>
 									</span>
 								</div>
-							</form>
-						</div>
-						<div class="offset-md-8">
-							<form action="../../classMng/MngBld/Bldregist">
-								<button type="submit" class="btn pull-right">건물등록</button>
 							</form>
 						</div>
 						<!-- /.box-body -->
@@ -131,7 +122,7 @@
 
 
 
-<form id="actionForm" action="/classMng/MngBld/Bld" method='get'>
+<form id="actionForm" action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method='get'>
 	<input type="hidden" name="page" value='${pageMaker.cri.page}'>
 	<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
 </form>
@@ -153,7 +144,9 @@
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
 		var page = 1;
-		location.href = "/classMng/MngBld/Bld?page=" + page + "&amount=" + sel;
+		console.log(boURL);
+
+		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=" + page + "&amount=" + sel;
 
 	}
 </script>

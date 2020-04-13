@@ -24,7 +24,7 @@
 	    select rownum rn, bulName,bulMgr, bulPhoneNum, bulAddress, bulClassNum,bulFloor,bulId,bulRemark
 	    from building
 	    where rownum <= (#{page}*#{amount})
-	    order by bulId desc
+	    order by to_number(bulId) desc
 	    )
 	where rn > ((#{page}-1)*#{amount})
 	]]>
@@ -45,25 +45,17 @@
 
 
 	<select id="read" resultType="D001BuildingVO">
+	  <![CDATA[
 		select * from building where
 		bulId=#{bulId}
+		 ]]>
 	</select>
 
 	<delete id="delete">
+	  <![CDATA[
 		delete from building where bulId=#{bulId}
+		]]>
 	</delete>
-
-	<update id="update">
-		update building
-		set bulName=#{bulName},
-		bulMgr=#{bulMgr},
-		bulPhoneNum=#{bulPhoneNum},
-		bulAddress=#{bulAddress},
-		bulClassNum=#{bulClassNum},
-		bulFloor=#{bulFloor},
-		bulRemark=#{bulRemark}
-		where bulId=#{bulId}
-	</update>
 
 
 </mapper>

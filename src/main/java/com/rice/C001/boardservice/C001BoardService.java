@@ -21,5 +21,4 @@ public interface C001BoardService {
 
 	public List<C001BoardVO> getList(Criteria cri);
 
-
 }

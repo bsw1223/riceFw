@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.qna">
+	<resultMap id="qnaResult" type="C001QnAVO">
+		<result property="boNum" column="boNum" />
+        <result property="boCode" column="boCode" />
+        <result property="boTitle" column="boTitle"/>
+        <result property="boContent" column="boContent"/>
+        <result property="boRegDate" column="boRegDate"/>
+        <result property="boUpdateDate" column="boUpdateDate"/>
+        <result property="boURL" column="boURL"/>
+        <result property="memNum" column="memNum"/>
+	</resultMap> 
+	
+	<insert id="insert">
+		insert into CLASSBOARD(boNum,boTitle,boRegDate,boContent,memNum,boCode)
+		values(seq_classboard.nextval,#{boTitle, jdbcType=VARCHAR},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{boContent, jdbcType=VARCHAR},1,23)
+	</insert>
+	
+	<!-- insert QnA  -->
+	<insert id ="insertSelectKey" parameterType="C001QnAVO">
+		<selectKey keyProperty="boNum" resultType="String"> 
+			select seq_classboard.nextval from dual
+		</selectKey>
+	
+		insert into CLASSBOARD(boNum,boTitle,boRegDate,boContent,memNum,boCode)
+		values(#{boNum, jdbcType=VARCHAR},#{boTitle, jdbcType=VARCHAR},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{boContent, jdbcType=VARCHAR},1,23)
+	</insert>
+	
+	
+	<!-- show QnAlist -->
+	<select id="list" resultMap="qnaResult">
+		<![CDATA[
+			select * from CLASSBOARD
+			order by boNum DESC
+		]]>
+	</select>
+
+	<!-- QlIST DETAIL-->
+	<select id="BoardDetail" resultMap="qnaResult" parameterType="String">
+		select * from CLASSBOARD where boNum=#{boNum}
+	</select>
+	
+	<!-- delete QnA -->
+	<delete id="delete">
+		delete from CLASSBOARD where boNum=#{boNum, jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- modify QnA -->
+	<update id ="modify">
+		update CLASSBOARD 
+		set boTitle=#{boTitle, jdbcType=VARCHAR},
+			boContent=#{boContent, jdbcType=VARCHAR},
+			boUpdateDate=TO_CHAR(SYSDATE,'YYYY-MM-DD')
+		where boNum=#{boNum, jdbcType=VARCHAR}
+	</update>
+	
+
+	<!-- pagination -->
+	<select id="getListWithPaging" resultMap="qnaResult">
+		<![CDATA[
+			select  boNum,boCode,boTitle,boContent,boRegDate,boUpdateDate,boURL,memNum
+			from(
+			    select rownum rn, boNum,boCode,boTitle,boContent,boRegDate,boUpdateDate,boURL,memNum
+			    from CLASSBOARD
+			    where rownum <= (#{page}*#{amount})
+			    order by boNum DESC
+			    )
+			where rn > (#{page}-1)*#{amount}
+		]]>
+	</select>
+	
+	<!-- total list amount count -->
+	<select id="getTotal" resultType="int">
+		<![CDATA[
+	         select count(*) from CLASSBOARD  where boNum>0
+	      ]]>
+	</select>
+
+</mapper>	
