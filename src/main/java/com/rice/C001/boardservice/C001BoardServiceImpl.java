@@ -60,5 +60,4 @@ public class C001BoardServiceImpl implements C001BoardService {
 
 	}
 
-
 }

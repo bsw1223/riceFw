@@ -41,8 +41,7 @@ public class D001BuildingController {
 
 	
 //---------------------------------------------------------------------------	
-	
-	//건물 상세보기
+
 	@RequestMapping(value = "/Blddesc",method = {RequestMethod.GET, RequestMethod.POST})
 	public String dBuildingDetail(@RequestParam("bulId") String bulId, Model model, HttpServletRequest request,RedirectAttributes rttr) {
 //		rttr.addFlashAttribute("building", bulId);

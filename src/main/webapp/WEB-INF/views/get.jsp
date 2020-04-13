@@ -102,7 +102,8 @@
 									<h3 class="box-title">댓글작성</h3>
 								</div>
 								<form>
-									 <input type="hidden" id='bno' name='bno' value='<c:out value ="${board.bno}"/>'>
+									<input type="hidden" id='bno' name='bno'
+										value='<c:out value ="${board.bno}"/>'>
 									<div class="box-body">
 										<div class="form-group">
 											<label for="reply">댓글내용</label> <input class="form-control"
@@ -113,7 +114,8 @@
 												class="form-control" id="replyer" name="replyer"
 												placeholder="replyer">
 										</div>
-										<input type="button" id="insertButton" value="전송" onclick="replysubmit()">
+										<input type="button" id="insertButton" value="전송"
+											onclick="replysubmit()">
 								</form>
 
 							</div>
@@ -157,71 +159,92 @@
 	<!-- /.content -->
 </div>
 <form id='openForm' action="/modify.do" method="get">
-	<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
-	<input type='hidden' id='page' name='page' value='<c:out value="${cri.page}"/>'>
-	<input type='hidden' id='amount' name='amount' value='<c:out value="${cri.amount}"/>'>
-	<input type='hidden' id='keyword' name='keyword' value='<c:out value="${cri.keyword}"/>'>
-	<input type='hidden' id='type' name='type' value='<c:out value="${cri.type}"/>'>
+	<input type='hidden' id='bno' name='bno'
+		value='<c:out value="${board.bno}"/>'> <input type='hidden'
+		id='page' name='page' value='<c:out value="${cri.page}"/>'> <input
+		type='hidden' id='amount' name='amount'
+		value='<c:out value="${cri.amount}"/>'> <input type='hidden'
+		id='keyword' name='keyword' value='<c:out value="${cri.keyword}"/>'>
+	<input type='hidden' id='type' name='type'
+		value='<c:out value="${cri.type}"/>'>
 </form>
 
 <script type="text/javascript"
 	src="/resources/bower_components/bootstrap/reply.js"></script>
 <script type="text/javascript">
-	$(document).ready(
+	$(document)
+			.ready(
 					function() {
 						console.log("==============");
 						console.log("JS TEST!!");
 
 						var bnoValue = '<c:out value="${board.bno}"/>';
-						var replyUL =$(".chat");
-						
-						showList(1,10);
-						
-						function showList(page, amount){
-							replyService.getList({bno:bnoValue, page: page||1, amount: amount||10}, function(list){
-								var str="";
-								if(list==null||list.length==0){
-									replyUL.html("");
-									
-									return "";
-								}
-								for(var i=0, len=list.length||0; i <len ; i++){
-									str+="<li class='left clearfix' data-rno='"+list[i].rno+"'name='rno' id='rno'>";
-									str+="<div><div class='header'><strong class='primary-font' id='replyer'>"+list[i].replyer+"</strong>";
-									str+="<small class='pull-right text-muted' id='replyDate'>"+list[i].replyDate+"</small></div>";
-									str+="<p id='reply'>"+list[i].reply+"</p>";
-									str+="<div class='col-md-3'><td><input type='button' style='width:40pt;height:20pt;display:inline-block;' class='btn btn-block btn-primary' value='수정' id='modify' onclick='replymodify()'></td>";
-				                	str+="<td><input type='button' style='width:40pt;height:20pt;display:inline-block;' class='btn btn-block btn-default' value='삭제' id='remove' onclick='replyremove()'></td></div></div></li>"
-								};
-								replyUL.html(str);
-							})
+						var replyUL = $(".chat");
+
+						showList(1, 10);
+
+						function showList(page, amount) {
+							replyService
+									.getList(
+											{
+												bno : bnoValue,
+												page : page || 1,
+												amount : amount || 10
+											},
+											function(list) {
+												var str = "";
+												if (list == null
+														|| list.length == 0) {
+													replyUL.html("");
+
+													return "";
+												}
+												for (var i = 0, len = list.length || 0; i < len; i++) {
+													str += "<li class='left clearfix' data-rno='"+list[i].rno+"'name='rno' id='rno'>";
+													str += "<div><div class='header'><strong class='primary-font' id='replyer'>"
+															+ list[i].replyer
+															+ "</strong>";
+													str += "<small class='pull-right text-muted' id='replyDate'>"
+															+ list[i].replyDate
+															+ "</small></div>";
+													str += "<p id='reply'>"
+															+ list[i].reply
+															+ "</p>";
+													str += "<div class='col-md-3'><td><input type='button' style='width:40pt;height:20pt;display:inline-block;' class='btn btn-block btn-primary' value='수정' id='modify' onclick='replymodify()'></td>";
+													str += "<td><input type='button' style='width:40pt;height:20pt;display:inline-block;' class='btn btn-block btn-default' value='삭제' id='remove' onclick='replyremove()'></td></div></div></li>"
+												}
+												;
+												replyUL.html(str);
+											})
 						}
-						
-					}); 	
-function replysubmit(){
-	replyService.add(
-			
-			{reply:$('input#reply').val(),replyer:$('input#replyer').val(),bno:$('input#bno').val()},
-			function(result){
+
+					});
+	function replysubmit() {
+		replyService.add(
+
+		{
+			reply : $('input#reply').val(),
+			replyer : $('input#replyer').val(),
+			bno : $('input#bno').val()
+		}, function(result) {
 			location.reload();
-	});
-	
-};
+		});
 
-function replyremove(){
-	var rno = $('li#rno').data("rno");
-	replyService.remove(rno,function(result){
-		location.reload();
-	});
-}
+	};
 
-function replymodify(){
-	var str="";
-	var rno = $('li#rno').data("rno");
- 	replyService.get(rno, function(result){
- 	})
-}
+	function replyremove() {
+		var rno = $('li#rno').data("rno");
+		replyService.remove(rno, function(result) {
+			location.reload();
+		});
+	}
 
+	function replymodify() {
+		var str = "";
+		var rno = $('li#rno').data("rno");
+		replyService.get(rno, function(result) {
+		})
+	}
 </script>
 <%@ include file="footer.jsp"%>
 </body>
