@@ -36,8 +36,10 @@
 
 
 	<select id="read" resultType="D001ClassVO">
+	<![CDATA[
 		select * from classroom where
 		classId=#{classId}
+		]]>
 	</select>
 
 

@@ -38,8 +38,10 @@
 
 
 	<select id="read" resultType="C001ClassBoardVO">
+	<![CDATA[
 		select * from CLASSBOARD where
 		boNum=#{boNum}
+		]]>
 	</select>
 
 </mapper>

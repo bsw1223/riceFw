@@ -20,7 +20,6 @@ import com.rice.C001.boardservice.C001DocService;
 import com.rice.C001.boardvo.C001ClassBoardVO;
 
 @Controller
-
 @RequestMapping("/mypage/board/*")
 public class C001DocContoller {
 

@@ -38,22 +38,29 @@
 
 
 	<select id="read" resultType="E001CommBoardVO">
+	<![CDATA[
 		select * from commboard where
 		boNum=#{boNum}
+		]]>
 	</select>
 
 	<insert id="insert" parameterType="E001CommBoardVO">
+	<![CDATA[
 		insert into commboard (boNum,
 		boContent, boTitle, boURL, memNum)
 		values(seq_board.nextval,
 		#{boContent}, #{boTitle}, #{boURL}, #{memNum})
+		]]>
 	</insert>
 
 	<delete id="delete">
+	<![CDATA[
 		delete from commboard where boNum=#{boNum}
+		]]>
 	</delete>
 
 	<update id="update">
+	<![CDATA[
 		update commboard
 		set boContent=#{boContent},
 		boTitle=#{boTitle},
@@ -61,12 +68,15 @@
 		memNum=#{memNum}
 		boUpdateDate=sysdate
 		where boNum=#{boNum}
+		]]>
 	</update>
 
 	<update id="updateViewCnt">
+	<![CDATA[
 		update commboard
 		set boViews=boViews+1
 		where boNum=#{boNum} 
+		]]>
 	</update>
 
 </mapper>

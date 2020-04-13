@@ -45,25 +45,17 @@
 
 
 	<select id="read" resultType="D001BuildingVO">
+	  <![CDATA[
 		select * from building where
 		bulId=#{bulId}
+		 ]]>
 	</select>
 
 	<delete id="delete">
+	  <![CDATA[
 		delete from building where bulId=#{bulId}
+		]]>
 	</delete>
-
-	<update id="update">
-		update building
-		set bulName=#{bulName},
-		bulMgr=#{bulMgr},
-		bulPhoneNum=#{bulPhoneNum},
-		bulAddress=#{bulAddress},
-		bulClassNum=#{bulClassNum},
-		bulFloor=#{bulFloor},
-		bulRemark=#{bulRemark}
-		where bulId=#{bulId}
-	</update>
 
 
 </mapper>

@@ -59,10 +59,12 @@
 	</select>
 
 	<insert id="insert" parameterType="C001BoardVO">
+		<![CDATA[
 		insert into tbl_board (bno,
 		title, content, writer)
 		values(seq_board.nextval, #{title}, #{content},
 		#{writer})
+		 ]]>
 	</insert>
 
 	<select id="getTotal" resultType="int">
@@ -72,12 +74,13 @@
 	</select>
 
 	<select id="getTotalCount" resultType="int">
-		select count(*) from tbl_board
-		where
+		<![CDATA[select count(*) from tbl_board
+		where ]]>
 
 		<include refid="criteria"></include>
-
+		<![CDATA[
 		bno> 0
+		 ]]>
 	</select>
 
 	<insert id="insertSelectKey" parameterType="C001BoardVO">
@@ -93,21 +96,27 @@
 	</insert>
 
 	<select id="read" resultType="C001BoardVO">
+	<![CDATA[
 		select * from tbl_board where
 		bno=#{bno}
+		]]>
 	</select>
 
 	<delete id="delete">
+	<![CDATA[
 		delete from tbl_board where bno=#{bno}
+		]]>
 	</delete>
 
 	<update id="update">
+		<![CDATA[
 		update tbl_board
 		set title=#{title},
 		content=#{content},
 		writer=#{writer},
 		updateDate=sysdate
 		where bno=#{bno}
+			]]>
 	</update>
 
 	<select id="getSelectOne" parameterType="int"
