@@ -48,53 +48,73 @@
 
 <script src='${contextPath}/resources/static/fullcalendar/core/main.js'></script>
 <script src='${contextPath}/resources/static/fullcalendar/timeline/main.js'></script>
+<script src='${contextPath}/resources/static/fullcalendar/interaction/main.js'></script>
 <script src='${contextPath}/resources/static/fullcalendar/resource-common/main.js'></script>
 <script src='${contextPath}/resources/static/fullcalendar/resource-timeline/main.js'></script>
 
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
+	var classList = null;
+	var bookingList = null;
+	$(document).ready(function(){
+		$.ajax({
+			type : "post",
+			async: false,
+			url: "/booking/getClassList",
+			success: function(mapList) {
+						if(mapList != null) {
+							classList = mapList;
+						}
+					},
+		});
+		
+		$.ajax({
+			type : "post",
+			async: false,
+			url: "/booking/getBookingList",
+			success: function(mapList) {
+						if(mapList != null) {
+							bookingList = mapList;
+						}
+					},
+		});
+		
+		rendCal(classList, bookingList);
+	});
+	
+	function rendCal(classList, bookingList) {
 		var calendarEl = document.getElementById('timeline_cal');
 
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			plugins : [ 'resourceTimeline' ],
+			timeZone: 'local',
+			plugins : [ 'interaction', 'resourceTimeline' ],
 			header: {
 			      left: 'today prev,next',
 			      center: 'title',
-			      right: 'resourceTimelineDay,resourceTimelineWeek'
+			      right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth'
 			    },
 			defaultView: 'resourceTimelineDay',
+			resourceColumns: [
+			      {
+			        labelText: '강의실',
+			        field: 'title'
+			      },
+			      {
+			        labelText: '수용인원',
+			        field: 'occupancy'
+			      }
+			    ],
 			resourceGroupField: 'building',
-			resources: [
-				  { id: 'a', building: '460 Bryant', title: 'Auditorium A' },
-			      { id: 'b', building: '460 Bryant', title: 'Auditorium B' },
-			      { id: 'c', building: '460 Bryant', title: 'Auditorium C' },
-			      { id: 'd', building: '460 Bryant', title: 'Auditorium D' },
-			      { id: 'e', building: '460 Bryant', title: 'Auditorium E' },
-			      { id: 'f', building: '460 Bryant', title: 'Auditorium F' },
-			      { id: 'g', building: '564 Pacific', title: 'Auditorium G' },
-			      { id: 'h', building: '564 Pacific', title: 'Auditorium H' },
-			      { id: 'i', building: '564 Pacific', title: 'Auditorium I' },
-			      { id: 'j', building: '564 Pacific', title: 'Auditorium J' },
-			      { id: 'k', building: '564 Pacific', title: 'Auditorium K' },
-			      { id: 'l', building: '564 Pacific', title: 'Auditorium L' },
-			      { id: 'm', building: '564 Pacific', title: 'Auditorium M' },
-			      { id: 'n', building: '564 Pacific', title: 'Auditorium N' },
-			      { id: 'o', building: '101 Main St', title: 'Auditorium O' },
-			      { id: 'p', building: '101 Main St', title: 'Auditorium P' },
-			      { id: 'q', building: '101 Main St', title: 'Auditorium Q' },
-			      { id: 'r', building: '101 Main St', title: 'Auditorium R' },
-			      { id: 's', building: '101 Main St', title: 'Auditorium S' },
-			      { id: 't', building: '101 Main St', title: 'Auditorium T' },
-			      { id: 'u', building: '101 Main St', title: 'Auditorium U' },
-			      { id: 'v', building: '101 Main St', title: 'Auditorium V' },
-			      { id: 'w', building: '101 Main St', title: 'Auditorium W' },
-			      { id: 'x', building: '101 Main St', title: 'Auditorium X' },
-			      { id: 'y', building: '101 Main St', title: 'Auditorium Y' },
-			      { id: 'z', building: '101 Main St', title: 'Auditorium Z' }
-			  ]
+			resources: classList,
+			events: bookingList
+// 			dateClick: function(info) {
+// 			      alert('clicked ' + info.dateStr + ' on resource ' + info.resource.id);
+// 			    },
+// 		    select: function(info) {
+// 		      alert('selected ' + info.startStr + ' to ' + info.endStr + ' on resource ' + info.resource.id);
+// 		    }
 		});
-
 		calendar.render();
-	});
+	}
+
 </script>
 </html>

@@ -37,7 +37,7 @@ public class H001SchController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(H001SchController.class);
 
-	
+
 	
 	@RequestMapping(value = "data.json", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 	@ResponseBody
