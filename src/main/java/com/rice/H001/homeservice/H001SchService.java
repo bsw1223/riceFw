@@ -7,6 +7,6 @@ import com.rice.H001.homevo.H001HomeVO;
 
 public interface H001SchService {
 
-	public List<Map<String, Object>> selectSchList();
+	public List<Map<String, Object>> selectSchList(String memNum);
 	
 }

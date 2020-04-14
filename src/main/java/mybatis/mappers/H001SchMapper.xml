@@ -15,16 +15,14 @@
         <result property="memNum" column="memNum" />
         <result property="textColor" column="schTextColor" />
         <result property="allDay" column="schAllDay" />
-        <result property="username" column="memId" />
 	</resultMap> 
 	
 
 
-	<select id="selectSchList" resultMap="SchResult">
+	<select id="selectSchList" parameterType="String" resultMap="SchResult">
      
       <![CDATA[
 		SELECT 
-			memId,
 		    schId,
 		    schTitle,
 		    schStart,
@@ -36,6 +34,7 @@
 		    schTextColor,
 		    schAllDay
 		FROM SCHEDULE
+		where memnum =#{memNum, jdbcType=VARCHAR}
       ]]>
 	</select>
 </mapper>
