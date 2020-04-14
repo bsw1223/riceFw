@@ -56,7 +56,7 @@ public class H001SchController {
 //			}
 //			System.out.println("newrow : " + row);
 //		}
-//		String response = mapper.writeValueAsString(map);
+		String response = mapper.writeValueAsString(map);
 		System.out.println("map : "+ map);
 		
 		System.out.println();

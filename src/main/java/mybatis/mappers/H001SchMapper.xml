@@ -15,6 +15,7 @@
         <result property="memNum" column="memNum" />
         <result property="textColor" column="schTextColor" />
         <result property="allDay" column="schAllDay" />
+        <result property="username" column="memId" />
 	</resultMap> 
 	
 
@@ -23,6 +24,7 @@
      
       <![CDATA[
 		SELECT 
+			memId,
 		    schId,
 		    schTitle,
 		    schStart,

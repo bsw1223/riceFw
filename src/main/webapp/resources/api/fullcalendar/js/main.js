@@ -4,25 +4,37 @@ var activeInactiveWeekends = true;
 function getDisplayEventDate(event) {
 
   var displayEventDate;
-
+  console.log("event title: " + event.title);
+  console.log("event allDay: " + event.allDay);
+  console.log("event start: " + event.start);
+  console.log("event end: " + event.end);
+  console.log("event username: " + event.username);
   if (event.allDay == false) {
     var startTimeEventInfo = moment(event.start).format('HH:mm');
     var endTimeEventInfo = moment(event.end).format('HH:mm');
     displayEventDate = startTimeEventInfo + " - " + endTimeEventInfo;
+    
+    console.log("displayEventDate : " + displayEventDate);
+    console.log("aaa");
   } else {
     displayEventDate = "하루종일";
+    console.log("bbb");
   }
 
+  console.log("ccc");
   return displayEventDate;
 }
 
 function filtering(event) {
+	console.log("ddd");
   var show_username = true;
   var show_type = true;
 
   var username = $('input:checkbox.filter:checked').map(function () {
     return $(this).val();
   }).get();
+  
+  console.log("username : "+username);
   var types = $('#type_filter').val();
 
   show_username = username.indexOf(event.username) >= 0;
@@ -34,11 +46,13 @@ function filtering(event) {
       show_type = types.indexOf(event.type) >= 0;
     }
   }
-
+console.log("show_username : "+show_username);
+console.log("show_type : "+show_type);
   return show_username && show_type;
 }
 
 function calDateWhenResize(event) {
+	console.log("eee");
 
   var newDates = {
     startDate: '',
@@ -53,10 +67,12 @@ function calDateWhenResize(event) {
     newDates.endDate = moment(event.end._d).format('YYYY-MM-DD HH:mm');
   }
 
+  console.log("newDates : "+ newDates);
   return newDates;
 }
 
 function calDateWhenDragnDrop(event) {
+	console.log("fff");
   // 드랍시 수정된 날짜반영
   var newDates = {
     startDate: '',
@@ -65,28 +81,32 @@ function calDateWhenDragnDrop(event) {
 
   // 날짜 & 시간이 모두 같은 경우
   if(!event.end) {
+	  console.log('333333333');
     event.end = event.start;
   }
 
   // 하루짜리 all day
   if (event.allDay && event.end === event.start) {
-    console.log('1111')
+    console.log('1111');
     newDates.startDate = moment(event.start._d).format('YYYY-MM-DD');
     newDates.endDate = newDates.startDate;
   }
 
   // 2일이상 all day
   else if (event.allDay && event.end !== null) {
+	  console.log('222222222');
     newDates.startDate = moment(event.start._d).format('YYYY-MM-DD');
     newDates.endDate = moment(event.end._d).subtract(1, 'days').format('YYYY-MM-DD');
   }
 
   // all day가 아님
   else if (!event.allDay) {
+	  console.log('444444444444');
     newDates.startDate = moment(event.start._d).format('YYYY-MM-DD HH:mm');
     newDates.endDate = moment(event.end._d).format('YYYY-MM-DD HH:mm');
   }
 
+  console.log(newDates);
   return newDates;
 }
 
@@ -119,7 +139,7 @@ var calendar = $('#calendar').fullCalendar({
       html: true,
       container: 'body'
     });
-
+    console.log("filtering(event) : "+ filtering(event))
     return filtering(event);
 
   },
@@ -172,31 +192,34 @@ var calendar = $('#calendar').fullCalendar({
       },
       success: function (response) {
         var fixedDate = response.map(function (array) {
+        	console.log("111111array.allDay :"+array.allDay);
+        	console.log("111111array.start :"+array.start);
           if (array.allDay && array.start !== array.end) {
             // 이틀 이상 AllDay 일정인 경우 달력에 표기시 하루를 더해야 정상출력
             array.end = moment(array.end).add(1, 'days');
           }
           return array;
         })
+        console.log("typeof  fixedDate : " +typeof  fixedDate);
         callback(fixedDate);
-        console.log(fixedDate);
+        
       }
     });
   },
-
+  
   eventAfterAllRender: function (view) {
+	  console.log("2222222view : " +view.name);
     if (view.name == "month") {
       $(".fc-content").css('height', 'auto');
     }
-  },
+  }/*,
 
   // 일정 리사이즈
   eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
     $('.popover.fade.top').remove();
 
-    /**
-	 * 리사이즈시 수정된 날짜반영 하루를 빼야 정상적으로 반영됨.
-	 */
+   //	 * 리사이즈시 수정된 날짜반영 하루를 빼야 정상적으로 반영됨.
+	
     var newDates = calDateWhenResize(event);
 
     // 리사이즈한 일정 업데이트
@@ -339,5 +362,5 @@ var calendar = $('#calendar').fullCalendar({
   dayPopoverFormat: 'MM/DD dddd',
   longPressDelay: 0,
   eventLongPressDelay: 0,
-  selectLongPressDelay: 0
+  selectLongPressDelay: 0*/
 });
