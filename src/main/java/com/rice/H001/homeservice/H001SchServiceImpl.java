@@ -14,9 +14,9 @@ public class H001SchServiceImpl implements H001SchService{
 		
 
 	@Override
-	public List<Map<String, Object>> selectSchList() {
+	public List<Map<String, Object>> selectSchList(String memNum) {
 		List subJectInfo=null;
-		subJectInfo = h001SchDAO.selectSchList();
+		subJectInfo = h001SchDAO.selectSchList(memNum);
 		return subJectInfo;
 	}
 

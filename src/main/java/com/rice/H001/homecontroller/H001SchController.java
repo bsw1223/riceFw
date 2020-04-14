@@ -43,7 +43,10 @@ public class H001SchController {
 	@ResponseBody
 	public List schlist(Model model, HttpServletRequest request) throws JsonProcessingException  {
 		ObjectMapper mapper = new ObjectMapper();
-		List<Map<String, Object>>map = h001SchService.selectSchList();
+		String memNum= (String)request.getParameter("memNum");
+		System.out.println("memNum : "+ memNum);
+		
+		List<Map<String, Object>>map = h001SchService.selectSchList(memNum);
 //		for(Map<String, Object> row : map) {
 //			System.out.println(row);
 //			String allDay =  row.get("allDay") +"";
@@ -56,7 +59,7 @@ public class H001SchController {
 //			}
 //			System.out.println("newrow : " + row);
 //		}
-//		String response = mapper.writeValueAsString(map);
+		String response = mapper.writeValueAsString(map);
 		System.out.println("map : "+ map);
 		
 		System.out.println();

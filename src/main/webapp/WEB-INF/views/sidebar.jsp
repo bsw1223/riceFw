@@ -9,7 +9,7 @@
 	console.log(authId);
 	/* var authId = "1001"; */
 	var memnum = "${loginMem.memNum}";
-	console.log(memnum);
+	console.log("memnum : "+memnum);
 	 /* var memnum = "2"; */
  	var authId ="${loginMem.authId}";
 	var authName ='';

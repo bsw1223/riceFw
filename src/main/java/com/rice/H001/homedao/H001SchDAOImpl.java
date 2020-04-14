@@ -16,9 +16,9 @@ public class H001SchDAOImpl implements H001SchDAO {
 	
 	
 	@Override
-	public List<Map<String, Object>> selectSchList() {
+	public List<Map<String, Object>> selectSchList(String memNum) {
 		
-		 List<Map<String, Object>> menuList= sqlsession.selectList("mapper.Sch.selectSchList");
+		 List<Map<String, Object>> menuList= sqlsession.selectList("mapper.Sch.selectSchList",memNum);
 		 
 //		 System.out.println("DAO _menuList : " + menuList);
 		

@@ -19,7 +19,7 @@
 	
 
 
-	<select id="selectSchList" resultMap="SchResult">
+	<select id="selectSchList" parameterType="String" resultMap="SchResult">
      
       <![CDATA[
 		SELECT 
@@ -34,6 +34,7 @@
 		    schTextColor,
 		    schAllDay
 		FROM SCHEDULE
+		where memnum =#{memNum, jdbcType=VARCHAR}
       ]]>
 	</select>
 </mapper>

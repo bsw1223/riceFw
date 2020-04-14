@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <script
   src="https://code.jquery.com/jquery-2.2.4.js"
   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
@@ -8,7 +10,6 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 
-<head>
 
 
 <meta charset="utf-8">
@@ -41,17 +42,18 @@
 	href="${contextPath}/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// 
+[if lt IE 9]>-->
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
   <!-- Google Font -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
+
 <body class="hold-transition skin-blue sidebar-mini">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <script>
 $(document).ready(function(){
 var memName ="${loginMem.memName}";
