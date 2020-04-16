@@ -91,10 +91,82 @@
 					<h4 class="modal-title">Modal title</h4>
 				</div>
 				<div class="modal-body">
-					<p>One fine body&hellip;</p>
+
+
+					
+						
+						<!-- /.box-header -->
+						<!-- form start -->
+						<form class="form-horizontal">
+							<div class="box-body">
+							
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">이벤트 아이디</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventId" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword3" class="col-sm-2 control-label ">하루종일</label>
+
+									<div class="col-sm-10">
+										<input type="password" class="form-control eventAllday"
+											id="inputPassword3" placeholder="Password">
+									</div>
+								</div>
+							  	<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">제 목</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventTitle" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">시작 시간</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventStart" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">설 명</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventDescription" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">배경색</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventBackgroundColor" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">종료 시간</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventEnd" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								
+							<!-- /.box-footer -->
+						</form>
+				
+
+
+
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-default bg-red color-palette" data-dismiss="modal">Delete</button>
 					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>
 			</div>
@@ -108,6 +180,7 @@
 <!-- /.content-wrapper -->
 <%@ include file="footer.jsp"%>
 
+
 <link href='${contextPath}/resources/static/fullcalendar/core/main.css'	rel='stylesheet' />
 <link href='${contextPath}/resources/static/fullcalendar/daygrid/main.css' rel='stylesheet' />
 <link href='${contextPath}/resources/static/fullcalendar/timegrid/main.min.css' rel='stylesheet' />
@@ -118,133 +191,196 @@
 <script src='${contextPath}/resources/static/fullcalendar/core/locales/ko.js'></script>
 </head>
 <script>
-
+	var mapList = null;
 	var memNum = "${loginMem.memNum}";
-	console.log("index _ menNum : "+ memNum)
-	document.addEventListener('DOMContentLoaded', function() {
-			
-			$.ajax({
-				type : "get",
-				async: true,
-				datatype:"textd; charset=utf-8",
-				url: "data.json",
-				data: {memNum:memNum},
-				success: function(map){
-						
-					for(i in map)
-							{
-								console.log("map : title-"+ map[i].title+", id -"+ map[i]._id);
-							}
-				    var Calendar = FullCalendar.Calendar;
-				    var Draggable = FullCalendarInteraction.Draggable;
-				    
-				    var containerEl = document.getElementById('external-events');
-				    var calendarEl = document.getElementById('calendar');
-				    var checkbox = document.getElementById('drop-remove');
-				 
-				    // initialize the external events
-				    // -----------------------------------------------------------------
-				 
-				    new Draggable(containerEl, {
-				      itemSelector: '.fc-event',
-				      eventData: function(eventEl) {
-				        return {
-				          title: eventEl.innerText
-				        };
-				      }
-				    });
-				   
-
-				var calendar = new FullCalendar.Calendar(calendarEl, {
-					plugins : [ 'interaction', 'dayGrid', 'timeGrid' ],
-					selectable : true,
-					header : {
-						left : 'prev,next today',
-						center : 'title',
-						right : 'dayGridMonth,timeGridWeek,timeGridDay'
+	
+	var eventMemNum = null;
+	var eventId = null;
+	var eventAllday = null;
+	var eventTitle = null;
+	var eventStart = null;
+	var eventEnd = null;
+	var eventDescription = null;
+	var eventBackgroundColor = null;
+	
+	console.log("index _ menNum : "+ memNum);
+	
+	$(document).ready(
+			function() {
+				$.ajax({
+					type : "get",
+					async : true,
+					datatype : "textd; charset=utf-8",
+					url : "data.json",
+					data : {
+						memNum : memNum
 					},
-
-					editable : true,
-					droppable : true, // this allows things to be dropped onto the calendar
-					drop : function(info) {
-						// is the "remove after drop" checkbox checked?
-						if (checkbox.checked) {
-							// if so, remove the element from the "Draggable Events" list
-							info.draggedEl.parentNode.removeChild(info.draggedEl);
+					success : function(map) {
+						mapList = map;
+						for (i in map) {
+							console.log("map : title-" + map[i].title
+									+ ", id -" + map[i]._id);
 						}
-					}, dateClick: function(info) {
-						$('#modalPop').modal();
-						//alert('clicked ' + info.dateStr);
-				    }, events : map/* [ 
-				    {
-						"title" : "Meeting",
-						"start" : "2020-04-14T10:30:00+09:00",
-						"end" : "2020-04-14T12:30:00+09:00"
-					},{
-						"allDay": "0",
-						"groupId" : "999", 
-						"title" : "Repeating Event",
-						"start" : "2020-04-09T16:00:00+09:00"
-					}] */,
-				    
-								
-					
-					locale : 'ko'
+						readyView(mapList);
+					}
 				});
-
-				calendar.render();
-										
-						}
-					});
-				});
-		
+				
+				
+			});
 	
-	 $("#btnAddTest").click(function(){
-	      //var arr = getCalendarEvent();
-	      var arr = getCalendarDataInDB();
-	      //console.log('arr[0].size : ' +  Object.keys( arr[0] ).length );
-	      $.each(arr, function(index, item){
-	          calendar.addEvent( item );
-	          console.log('click evt loop_in_cal' + index + ' : ' + item);
-	          $.each(item, function(iii, ttt){
-	                console.log('click evt inner loop_in_cal => ' + iii + ' : ' + ttt);
-	          });
-	      });
-	      
-	      //calendar.addEvent( {'title':'evt4', 'start':'2019-09-04', 'end':'2019-09-06'});
-	      calendar.render();
-	  });  
-	
+function readyView(mapList){	
 
-	 
-	function getCalendarEvent(){
-	    //var arr = [ {'title':'evt4', 'start':'2019-09-04', 'end':'2019-09-06'} ];
-	    var arr = { 'title':'evt4', 'start':'2019-09-04', 'end':'2019-09-06' };
-	    return arr;
-	}
-	 
-	function getCalendarDataInDB(){
-	    var arr = [{title: 'evt1', start:'ssssss'}, {title: 'evt2', start:'123123123'}];
+		console.log("maplist : " +mapList);
+	    var Calendar = FullCalendar.Calendar;
+	    var Draggable = FullCalendarInteraction.Draggable;
 	    
-	    //배열 초기화
-	    var viewData = {};
-	    //data[키] = 밸류
-	    viewData["id"] = $("#currId").text().trim();
-	    viewData["title"] = $("#title").val();
-	    viewData["content"] = $("#content").val();
-	      
-	    return arr;
+	    var containerEl = document.getElementById('external-events');
+	    var calendarEl = document.getElementById('calendar');
+	    var checkbox = document.getElementById('drop-remove');
+	 
+	    // initialize the external events
+	    // -----------------------------------------------------------------
+	 
+
+	new Draggable(containerEl, {
+			itemSelector : '.fc-event',
+			eventData : function(eventEl) {
+				return {
+					title : eventEl.innerText
+				}
+			}
+		});
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			plugins : [ 'interaction', 'interaction', 'dayGrid', 'timeGrid' ],
+			selectable : true,
+			header : {
+				left : 'prev,next today',
+				center : 'title',
+				right : 'dayGridMonth,timeGridWeek,timeGridDay'
+			},
+
+			editable : true,
+			droppable : true, // this allows things to be dropped onto the calendar
+			drop : function(info) {
+				// is the "remove after drop" checkbox checked?
+				if (checkbox.checked) {
+					// if so, remove the element from the "Draggable Events" list
+					info.draggedEl.parentNode.removeChild(info.draggedEl);
+				}
+			},
+			dateClick : function(info) {
+				alert('Clicked on: ' + info.title);
+
+			},
+			eventClick : function(info) {
+				var eventId = info.event.id;
+				var eventAllday = info.event.allDay;
+				var eventTitle = info.event.title;
+				var eventStart = info.event.start;
+				var eventEnd = info.event.end;
+				var eventDescription = info.event.description;
+				var eventBackgroundColor = info.event.backgroundColor;
+				var eventVal = 
+					  "<p>이벤트 아이디 : "+ eventId +"</p>"
+					+ "<p>하루종일 : "+ eventAllday +"</p>"
+					+ "<p>제 목 : "+ eventTitle +"</p>"
+					+ "<p>시작 시간 : "+ eventStart +"</p>"
+					+ "<p>종료 시간 : "+ eventEnd +"</p>"
+					+ "<p>설 명 : "+ eventDescription +"</p>"
+					+ "<p>배경색 : "+ eventBackgroundColor +"</p>"
+					
+				var eventValT =     
+		        
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+				
+				$('div.modal-body:eq(-1) > p').remove();
+				$('div.modal-body').append(eventValT);
+				$('#modalPop').modal();
+				
+				
+				//var eventMemNum = memNum;
+				//alert('Clicked on title: ' + info.event.title);
+				//alert('Clicked on start: ' + info.event.start);
+				//alert('Clicked on id: ' + info.event.id);
+				//alert('Clicked on end: ' + info.event.end);
+				//alert('Clicked on description: ' + info.event.description);
+				//alert('Clicked on backgroundColor: ' + info.event.backgroundColor);
+				//alert('Clicked on: allDay' + info.event.allDay);
+				//alert('Clicked on: memNum' + info.event.memNum);
+				
+				
+				
+				
+				
+			},
+			events : mapList,
+
+			locale : 'ko'
+		});
+
+		calendar.render();
+
+	};
+
+	$("#btnAddTest").click(
+			function() {
+				//var arr = getCalendarEvent();
+				var arr = getCalendarDataInDB();
+				//console.log('arr[0].size : ' +  Object.keys( arr[0] ).length );
+				$.each(arr,
+						function(index, item) {
+							calendar.addEvent(item);
+							console.log('click evt loop_in_cal' + index + ' : '
+									+ item);
+							$.each(item, function(iii, ttt) {
+								console.log('click evt inner loop_in_cal => '
+										+ iii + ' : ' + ttt);
+							});
+						});
+
+				//calendar.addEvent( {'title':'evt4', 'start':'2019-09-04', 'end':'2019-09-06'});
+				calendar.render();
+			});
+
+	function getCalendarEvent() {
+		//var arr = [ {'title':'evt4', 'start':'2019-09-04', 'end':'2019-09-06'} ];
+		var arr = {
+			'title' : 'evt4',
+			'start' : '2019-09-04',
+			'end' : '2019-09-06'
+		};
+		return arr;
 	}
-	
-	
-	$(document).on("click",".fc-event-container",function(){
-			console.log("눌림");
-	      	$('#modalPop').modal();
-	    });
-	
-	
 
+	function getCalendarDataInDB() {
+		var arr = [ {
+			title : 'evt1',
+			start : 'ssssss'
+		}, {
+			title : 'evt2',
+			start : '123123123'
+		} ];
 
+		//배열 초기화
+		var viewData = {};
+		//data[키] = 밸류
+		viewData["id"] = $("#currId").text().trim();
+		viewData["title"] = $("#title").val();
+		viewData["content"] = $("#content").val();
+
+		return arr;
+	}
 </script>
 
 </html>

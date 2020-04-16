@@ -5,7 +5,7 @@
 
 <mapper namespace="mapper.Sch">
 	<resultMap id="SchResult" type="java.util.HashMap">
-		<result property="_id" column="schId" />
+		<result property="id" column="schId" />
         <result property="title" column="schTitle" />
         <result property="start" column="schStart" />
         <result property="end" column="schEnd" />
