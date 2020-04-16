@@ -18,7 +18,11 @@
         <result property="end" column="bookEndTime" />
         <result property="title" column="title" />
      </resultMap> 
-     
+     	
+     <resultMap id="BookingInfo" type="java.util.HashMap">
+     	<result property="id" column="bookNum"/>
+     	
+     </resultMap>    
      
      
      <select id="getClassList" resultMap="ClassResult">
@@ -44,6 +48,45 @@
 			    '(' || M.memName || ') ' || B.bookTitle as title
 			FROM BOOKING B, MEMBER M
 			WHERE B.MEMNUM=M.MEMNUM
+				and B.bookCode = '1300'
 		]]>
-     </select>     
+     </select>   
+     
+     <!-- 스터디실 예약자 번호  get -->
+     <select id="getBookingMem" resultType="String" parameterType="String">
+	     <![CDATA[
+	     	SELECT 
+			    B.memNum
+			FROM BOOKING B
+		]]>
+		<where>
+			<if test=" bookNum != ''  and  bookNum != null">
+			<![CDATA[
+				bookNum = #{bookNum}
+			]]>
+			</if>
+		</where>
+     </select>  
+     
+     <!-- 스터디실 예약 정보  get -->
+     <select id="getBookingInfo" resultMap="BookingResult" parameterType="String">
+	     <![CDATA[
+	     	SELECT 
+			    B.bookNum ,
+			    B.classId ,
+			    B.bookStartTime,
+			    B.bookEndTime,
+			    B.bookTitle as title
+			FROM BOOKING B, MEMBER M
+			WHERE B.MEMNUM=M.MEMNUM
+				and B.bookCode = '1300'
+		]]>
+		<where>
+			<if test=" bookNum != ''  and  bookNum != null">
+			<![CDATA[
+				bookNum = #{bookNum}
+			]]>
+			</if>
+		</where>
+     </select>  
 </mapper>
