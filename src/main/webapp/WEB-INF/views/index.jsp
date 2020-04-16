@@ -91,9 +91,6 @@
 					<h4 class="modal-title">Modal title</h4>
 				</div>
 				<div class="modal-body">
-
-
-					
 						
 						<!-- /.box-header -->
 						<!-- form start -->
@@ -133,6 +130,14 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">종료 시간</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventEnd" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">설 명</label>
 
 									<div class="col-sm-10">
@@ -148,20 +153,10 @@
 											placeholder="Email">
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">종료 시간</label>
-
-									<div class="col-sm-10">
-										<input type="email" class="form-control eventEnd" id="inputEmail3"
-											placeholder="Email">
-									</div>
-								</div>
+								
 								
 							<!-- /.box-footer -->
 						</form>
-				
-
-
 
 				</div>
 				<div class="modal-footer">
@@ -280,29 +275,14 @@ function readyView(mapList){
 				var eventEnd = info.event.end;
 				var eventDescription = info.event.description;
 				var eventBackgroundColor = info.event.backgroundColor;
-				var eventVal = 
-					  "<p>이벤트 아이디 : "+ eventId +"</p>"
-					+ "<p>하루종일 : "+ eventAllday +"</p>"
-					+ "<p>제 목 : "+ eventTitle +"</p>"
-					+ "<p>시작 시간 : "+ eventStart +"</p>"
-					+ "<p>종료 시간 : "+ eventEnd +"</p>"
-					+ "<p>설 명 : "+ eventDescription +"</p>"
-					+ "<p>배경색 : "+ eventBackgroundColor +"</p>"
-					
-				var eventValT =     
-		        
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
-								
+				var eventVal =    "<p>이벤트 아이디 : "+ eventId +"</p>"
+								+ "<p>하루종일 : "+ eventAllday +"</p>"
+								+ "<p>제 목 : "+ eventTitle +"</p>"
+								+ "<p>시작 시간 : "+ eventStart +"</p>"
+								+ "<p>종료 시간 : "+ eventEnd +"</p>"
+								+ "<p>설 명 : "+ eventDescription +"</p>"
+								+ "<p>배경색 : "+ eventBackgroundColor +"</p>"
+			
 				
 				$('div.modal-body:eq(-1) > p').remove();
 				$('div.modal-body').append(eventValT);
@@ -318,10 +298,6 @@ function readyView(mapList){
 				//alert('Clicked on backgroundColor: ' + info.event.backgroundColor);
 				//alert('Clicked on: allDay' + info.event.allDay);
 				//alert('Clicked on: memNum' + info.event.memNum);
-				
-				
-				
-				
 				
 			},
 			events : mapList,
