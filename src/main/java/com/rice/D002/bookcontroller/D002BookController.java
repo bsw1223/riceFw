@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,5 +50,14 @@ public class D002BookController {
 		List<Map<String, Object>> resultMap = d002BookService.getBookingList();
 		
 		return resultMap;
+	}
+	
+	@RequestMapping(value = "/getBookingInfo", method =  {RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=utf8")
+	@ResponseBody
+	public Map getBookingInfo(@RequestParam("bookNum") String bookNum, HttpServletRequest request, HttpServletResponse response) throws DataAccessException {
+		ObjectMapper mapper = new ObjectMapper();
+		List<Map<String, Object>> resultMap = d002BookService.getBookingList();
+		
+		return null;
 	}
 }
