@@ -1,14 +1,20 @@
 package com.rice.C001.boardvo;
 
 public class C001ClassBoardVO {
-	String boNum, boCode, boContent, boRegdate, boTitle, boUpdateDate, boURL, memNum;
+	String boNum, boCode, boContent, boRegdate, boTitle, boUpdateDate, boURL, memNum, memName;
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
 	int boViews, boLikes;
-	
+
 	@Override
 	public String toString() {
 		return "C001ClassBoardVO [boNum=" + boNum + ", boCode=" + boCode + ", boContent=" + boContent + ", boRegdate="
 				+ boRegdate + ", boTitle=" + boTitle + ", boUpdateDate=" + boUpdateDate + ", boURL=" + boURL
-				+ ", memNum=" + memNum + ", boViews=" + boViews + ", boLikes=" + boLikes + "]";
+				+ ", memNum=" + memNum + ", memName=" + memName + ", boViews=" + boViews + ", boLikes=" + boLikes + "]";
 	}
 	public String getBoUpdateDate() {
 		return boUpdateDate;

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.rice.C001.boarddto.Criteria;
+import com.rice.C001.boardvo.C001BoardVO;
 import com.rice.C001.boardvo.C001ClassBoardVO;
 
 @Repository
@@ -51,6 +52,27 @@ public class C001DocDAOImpl implements C001DocDAO {
 		
 		return sqlsession.update("mapper.myboard.updateViewCnt",map);
 		
+	}
+	
+	@Override
+	public void insertSelectKey(C001ClassBoardVO vo) {
+
+		sqlsession.insert("mapper.myboard.insertSelectKey", vo);
+	}
+	
+	@Override
+	public int delete(String boNum, String boURL, String boCode) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boURL", boURL);
+		map.put("boNum", boNum);
+		map.put("boCode", boCode);
+		return sqlsession.delete("mapper.myboard.delete", map);
+
+	}
+
+	@Override
+	public int update(C001ClassBoardVO vo) {
+		return sqlsession.update("mapper.myboard.update", vo);
 	}
 
 }

@@ -4,6 +4,7 @@ package com.rice.C001.boarddao;
 import java.util.List;
 
 import com.rice.C001.boarddto.Criteria;
+import com.rice.C001.boardvo.C001BoardVO;
 import com.rice.C001.boardvo.C001ClassBoardVO;
 
 public interface C001DocDAO {
@@ -15,5 +16,11 @@ public interface C001DocDAO {
 	public C001ClassBoardVO read(String boNum, String boURL, String boCode);
 	
 	public int updateViewCnt(String boNum, String boURL, String boCode);
+	
+	public void insertSelectKey(C001ClassBoardVO vo);
+	
+	public int delete(String boNum, String boURL, String boCode);
+
+	public int update(C001ClassBoardVO vo);
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.rice.C001.boarddao.C001DocDAO;
 import com.rice.C001.boarddto.Criteria;
+import com.rice.C001.boardvo.C001BoardVO;
 import com.rice.C001.boardvo.C001ClassBoardVO;
 
 @Service
@@ -37,6 +38,23 @@ public class C001DocServiceImpl implements C001DocService {
 	public int updateViewCnt(String boNum, String boURL, String boCode) {
 		// TODO Auto-generated method stub
 		return c001DocDAO.updateViewCnt(boNum,boURL,boCode);
+	}
+	@Override
+	public void register(C001ClassBoardVO vo) {
+		c001DocDAO.insertSelectKey(vo);
+
+	}
+
+	@Override
+	public boolean delete(String boNum, String boURL, String boCode) {
+
+		return c001DocDAO.delete(boNum, boURL, boCode) == 1;
+	}
+
+	@Override
+	public boolean update(C001ClassBoardVO vo) {
+		// TODO Auto-generated method stub
+		return c001DocDAO.update(vo) == 1;
 	}
 
 }
