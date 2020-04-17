@@ -16,17 +16,17 @@
 		<result property="memNum" column="memNum" />
 	</resultMap>
 
-	
+
 	<select id="getListWithPaging" resultType="C001ClassBoardVO">
 	<![CDATA[
-		select  boNum,boCode, boContent, boRegDate, boTitle,boUpdateDate,boViews,boLikes,boURL,memNum
+		select  boNum,boCode, boContent, boRegDate, boTitle,boUpdateDate,boViews,boLikes,boURL,memNum,memName
 	from(
-	    select rownum rn, boNum,boCode, boContent, boRegDate, boTitle,boUpdateDate,boViews,boLikes,boURL,memNum
+	    select rownum rn, boNum,boCode, boContent, boRegDate, boTitle,boUpdateDate,boViews,boLikes,boURL,memNum,memName
 	    from (
 	    	
-			select	botitle,boNum,bocode,bocontent, boregdate, boupdatedate, boviews,bolikes,bourl,memnum
-			from classBoard
-			where boCode =#{boCode} and boURL=#{boURL}
+			select	b.botitle,b.boNum,b.bocode,b.bocontent, b.boregdate, b.boupdatedate, b.boviews,b.bolikes,b.bourl,b.memnum, a.memName
+			from classBoard b, member a
+			where b.memNum= a.memNum and boCode =#{boCode} and boURL=#{boURL}
 	    )
 	    where rownum <= (#{page}*#{amount})
 	    order by to_number(boNum) desc
@@ -44,11 +44,11 @@
 
 	<select id="read" resultType="C001ClassBoardVO">
 	<![CDATA[
-		select * from CLASSBOARD 
-		where boNum=#{boNum} and boCode =#{boCode} and boURL=#{boURL}
+		select * from CLASSBOARD b, member a
+		where b.memNum=a.memNum and boNum=#{boNum} and boCode =#{boCode} and boURL=#{boURL}
 		]]>
 	</select>
-	
+
 	<update id="updateViewCnt">
 	<![CDATA[
 		update CLASSBOARD
@@ -56,5 +56,35 @@
 		where boNum=#{boNum} and boCode=#{boCode} and boURL=#{boURL}
 		]]>
 	</update>
+
+	<insert id="insertSelectKey" parameterType="C001ClassBoardVO">
+		<selectKey keyProperty="boNum" order="BEFORE" resultType="String">
+
+			select seq_board.nextval from dual
+
+		</selectKey>
+		 <![CDATA[ 
+		insert into classboard(boNum,boTitle,boContent,boCode,boRegdate,boUpdatedate,boURL,memNum,boViews,boLikes) 
+		values(#{boNum},#{boTitle},#{boContent},#{boCode},TO_CHAR(SYSDATE,'YYYY-MM-DD'),TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{boURL},#{memNum},to_number(#{boViews}),to_number(#{boLikes}))
+	 ]]>
+	</insert>
+	
+		<delete id="delete">
+	<![CDATA[
+		delete from classboard where boNum=#{boNum} and boCode=#{boCode} and boURL=#{boURL}
+		]]>
+	</delete>
+
+	<update id="update">
+		<![CDATA[
+		update classboard
+		set boTitle=#{boTitle},
+		boContent=#{boContent},
+		memNum=#{memNum},
+		boUpdateDate=TO_CHAR(SYSDATE,'YYYY-MM-DD')
+		where boNum=#{boNum} and boCode=#{boCode} and boURL=#{boURL}
+			]]>
+	</update>
+
 
 </mapper>

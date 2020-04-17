@@ -29,7 +29,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">건물리스트</h3>
+						<h3 class="box-title">Q & A 게시판</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -52,8 +52,11 @@
 								<thead>
 									<tr>
 										<th>No.</th>
-										<th>공지사항</th>
-										<th>boViews</th>
+										<th>제목</th>
+										<th>작성자</th>
+										<th>작성날짜</th>
+										<th>조회수</th>
+										<th>답변상태</th>
 									</tr>
 								</thead>
 
@@ -62,10 +65,12 @@
 										<tr>
 											<td><c:out value='${vs.rn}' /> </td>
 											<td><a href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
-													<c:out value='${listB.boContent}' />
+													<c:out value='${listB.boTitle}' />
 											</a></td>
-											<td><c:out value='${listB.boViews}' /> 
-											</td>
+											<td><c:out value='${listB.memNum}' /></td>
+											<td><c:out value='${listB.boRegdate}' /></td>
+											<td><c:out value='${listB.boViews}' /></td>
+											<td>답변상태</td>
 									</c:forEach>
 								</tbody>
 							</table>

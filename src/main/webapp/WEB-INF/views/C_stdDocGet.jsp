@@ -13,8 +13,8 @@
 		<h1>공지사항</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">건물</a></li>
-			<li class="active">건물관리</li>
+			<li><a href="#">자료</a></li>
+			<li class="active">자료게시판</li>
 		</ol>
 	</section>
 
@@ -31,34 +31,34 @@
 					<!-- /.box-header -->
 					<!-- bulName -->
 					<div class="form-group">
-						<label>boTitle</label> <input class="form-control" name="boTitle"
-							value='<c:out value ="${docBoard.boTitle}"/>' readonly="readonly" />
+						<label>제목</label> <input class="form-control" name="boTitle"
+							value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
 					</div>
 
 					<!-- bulMgr -->
 					<div class="form-group">
-						<label>boContent</label> <input type="text" class="form-control"
-							name="boContent" value='<c:out value ="${docBoard.boContent}"/>'
+						<label>내용</label> <input type="text" class="form-control"
+							name="boContent" value='<c:out value ="${list.boContent}"/>'
 							readonly="readonly" />
 					</div>
 
 					<!-- bulPhoneNum -->
 					<div class="form-group">
-						<label>boUpdateDate</label> <input type="text"
+						<label>업데이트날짜</label> <input type="text"
 							class="form-control" name="bulPhoneNum"
-							value='<c:out value ="${docBoard.boUpdateDate}"/>'
+							value='<c:out value ="${list.boUpdateDate}"/>'
 							readonly="readonly" />
 					</div>
 					<div class="box-body">
 
 						<button type="button" class="btn btn-default btn-xs">
-							<i class="fa fa-eye"></i>${docBoard.boViews}
+							<i class="fa fa-eye"></i>${list.boViews}
 						</button>
 						<span class="pull-right text-muted">127 likes - 200 views</span>
 					</div>
 
 					<button data-oper="list" class="btn btn-default"
-						onclick="location.href='/mypage/board/${docBoard.boCode}/${docBoard.boURL}'">뒤로가기</button>
+						onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
 
 					<!-- /.box-footer -->
 				</div>
