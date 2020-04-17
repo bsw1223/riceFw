@@ -39,14 +39,10 @@ public class H001HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model, HttpServletRequest request) {
-
-		
+	public String home(Model model, HttpServletRequest request) {		
 		return "index";
 	}
 
-	
-	
 	@RequestMapping(value = "/main.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String main(Model model, HttpServletRequest request) throws JsonProcessingException {
