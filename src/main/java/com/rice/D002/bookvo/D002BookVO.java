@@ -38,6 +38,7 @@ public class D002BookVO {
 	String classId;
 	String classNumber;
 
+	String bookNum;
 	String bookTitle;
 	String bookStartTime;
 	String bookEndTime;
@@ -104,5 +105,11 @@ public class D002BookVO {
 	}
 	public void setMemNum(String memNum) {
 		this.memNum = memNum;
+	}
+	public String getBookNum() {
+		return bookNum;
+	}
+	public void setBookNum(String bookNum) {
+		this.bookNum = bookNum;
 	}
 }

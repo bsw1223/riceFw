@@ -15,4 +15,9 @@ public interface C001DocService {
 	
 	public int updateViewCnt(String boNum, String boURL, String boCode);
 
+	public void register(C001ClassBoardVO boardvo);
+	
+	public boolean delete(String boNum, String boURL, String boCode);
+
+	public boolean update(C001ClassBoardVO boardvo);
 }

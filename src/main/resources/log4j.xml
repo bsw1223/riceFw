@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.rice.A001">
+	<logger name="com.rice">
 		<level value="info" />
 	</logger>
 	
