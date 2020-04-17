@@ -79,7 +79,7 @@ if(authId==1000)
 
 /* var memNum = ${member.memNum}; */
 var preLogInTag = "<li class=\"\">"
-			     +"<a href=\"../../member/login\" data-toggle=\"\">"
+			     +"<a href=\"../../../member/login\" data-toggle=\"\">"
 				 +"	<button type=\"button\" class=\"btn btn-block btn-warning btn-xs\">L o g I n -  H e r e</button>"
 				 +"	</a>"
 				 +"</li> ";
@@ -100,10 +100,10 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 				   +"</li>"
 				   +"<li class=\"user-footer\">"
 				   +" <div class=\"pull-left\">"
-				   +"  <a href=\"../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
+				   +"  <a href=\"../../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
 				   +" </div>"
 				   +" <div class=\"pull-right\">"
-				   +"   <a href=\"../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
+				   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
 				   +" </div></li></ul></li>";
 				   
 
@@ -122,7 +122,7 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 
 		<header class="main-header">
 			<!-- Logo -->
-			<a href="../../" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<a href="../../../" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
 				<span class="logo-lg"><b>RiceLMS</b></span>
 			</a>

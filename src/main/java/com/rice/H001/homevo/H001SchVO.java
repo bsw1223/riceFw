@@ -15,6 +15,12 @@ public class H001SchVO {
 	
 	
 	
+	@Override
+	public String toString() {
+		return "H001SchVO [schId=" + schId + ", schTitle=" + schTitle + ", schStart=" + schStart + ", schEnd=" + schEnd
+				+ ", schDescription=" + schDescription + ", schBackgroundColor=" + schBackgroundColor + ", schType="
+				+ schType + ", memNum=" + memNum + ", schTextColor=" + schTextColor + ", schAllDay=" + schAllDay + "]";
+	}
 	public int getSchId() {
 		return schId;
 	}

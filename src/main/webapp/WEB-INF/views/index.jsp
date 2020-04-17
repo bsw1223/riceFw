@@ -42,6 +42,7 @@
 					<!-- /.box-body -->
 				</div>
 				<!-- /.box -->
+			<!-- 	드래그 메뉴
 				<div id="external-events">
 					<p>
 						<strong>Draggable Events</strong>
@@ -55,9 +56,7 @@
 						<input type="checkbox" id="drop-remove"> <label
 							for="drop-remove">remove after drop</label>
 					</p>
-				</div>
-				
-
+				</div> -->
 			</div>
 			<!-- /.col -->
 
@@ -78,7 +77,7 @@
 		<!-- /.row -->
 
 	</section>
-	<!-- /.content -->
+	<!-- 수정모달창 -->
 
 	<div class="modal fade" id="modalPop">
 		<div class="modal-dialog">
@@ -88,81 +87,67 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">Modal title</h4>
+					<h4 class="modal-title">일정 확인</h4>
 				</div>
 				<div class="modal-body">
-						
-						<!-- /.box-header -->
-						<!-- form start -->
+
 						<form class="form-horizontal">
 							<div class="box-body">
 							
 								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">이벤트 아이디</label>
+									<label for="inputEmail3" class="col-sm-2 control-label">일정번호</label>
 
 									<div class="col-sm-10">
-										<input type="email" class="form-control eventId" id="inputEmail3"
-											placeholder="Email">
+										<input type="text" class="form-control eventId" id="eventId"
+											placeholder="">
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="inputPassword3" class="col-sm-2 control-label ">하루종일</label>
-
-									<div class="col-sm-10">
-										<input type="password" class="form-control eventAllday"
-											id="inputPassword3" placeholder="Password">
-									</div>
-								</div>
+								
 							  	<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">제 목</label>
 
 									<div class="col-sm-10">
-										<input type="email" class="form-control eventTitle" id="inputEmail3"
-											placeholder="Email">
+										<input type="text" class="form-control eventTitle" id="eventTitle" placeholder="">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">시작 시간</label>
 
 									<div class="col-sm-10">
-										<input type="email" class="form-control eventStart" id="inputEmail3"
-											placeholder="Email">
+										<input type="text" class="form-control eventStart" id="eventStart" placeholder="">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">종료 시간</label>
 
 									<div class="col-sm-10">
-										<input type="email" class="form-control eventEnd" id="inputEmail3"
-											placeholder="Email">
+										<input type="text" class="form-control eventEnd" id="eventEnd"	placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword3" class="col-sm-2 control-label ">하루종일</label>
+
+									<div class="col-sm-10">
+										
+										<input type="checkbox" id="eventAllday" class="eventAllday" >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputEmail3" class="col-sm-2 control-label">설 명</label>
 
 									<div class="col-sm-10">
-										<input type="email" class="form-control eventDescription" id="inputEmail3"
-											placeholder="Email">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">배경색</label>
-
-									<div class="col-sm-10">
-										<input type="email" class="form-control eventBackgroundColor" id="inputEmail3"
-											placeholder="Email">
+										<input type="text" class="form-control eventDescription" id="eventDescription" placeholder="">
 									</div>
 								</div>
 								
 								
 							<!-- /.box-footer -->
 						</form>
-
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-default bg-red color-palette" data-dismiss="modal">Delete</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" class="btn btn-primary" id="saveScd">Save changes</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -170,6 +155,94 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
+
+
+
+<!-- 입력 모달창 -->
+
+	<div class="modal fade" id="insertModalPop">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">일정 확인</h4>
+				</div>
+				<div class="modal-body">
+						
+						<form class="form-horizontal">
+							<div class="box-body">
+							
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">일정번호</label>
+
+									<div class="col-sm-10">
+										<input type="text" class="form-control eventId" id="iEventId"
+											placeholder="">
+									</div>
+								</div>
+								
+							  	<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">제 목</label>
+
+									<div class="col-sm-10">
+										<input type="text" class="form-control eventTitle" id="iEventTitle" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">시작 시간</label>
+
+									<div class="col-sm-10">
+										<input type="text" class="form-control eventStart" id="iEventStart" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">종료 시간</label>
+
+									<div class="col-sm-10">
+										<input type="text" class="form-control eventEnd" id="iEventEnd"	placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword3" class="col-sm-2 control-label ">하루종일</label>
+
+									<div class="col-sm-10">
+										
+										<input type="checkbox" id="iEventAllday" class="eventAllday" >
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">설 명</label>
+
+									<div class="col-sm-10">
+										<input type="text" class="form-control eventDescription" id="iEventDescription" placeholder="">
+									</div>
+								</div>
+								
+								
+							<!-- /.box-footer -->
+						</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-default bg-red color-palette" data-dismiss="modal">Delete</button>
+					<button type="button" class="btn btn-primary" id="iSaveScd">Save changes</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+
+
+
+
+
+
 
 </div>
 <!-- /.content-wrapper -->
@@ -188,10 +261,9 @@
 <script>
 	var mapList = null;
 	var memNum = "${loginMem.memNum}";
-	
 	var eventMemNum = null;
 	var eventId = null;
-	var eventAllday = null;
+	//var eventAllday = null;
 	var eventTitle = null;
 	var eventStart = null;
 	var eventEnd = null;
@@ -219,8 +291,6 @@
 						readyView(mapList);
 					}
 				});
-				
-				
 			});
 	
 function readyView(mapList){	
@@ -237,14 +307,14 @@ function readyView(mapList){
 	    // -----------------------------------------------------------------
 	 
 
-	new Draggable(containerEl, {
+	/* new Draggable(containerEl, {
 			itemSelector : '.fc-event',
 			eventData : function(eventEl) {
 				return {
 					title : eventEl.innerText
 				}
 			}
-		});
+		}); *///드래그 메뉴기능
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			plugins : [ 'interaction', 'interaction', 'dayGrid', 'timeGrid' ],
 			selectable : true,
@@ -255,7 +325,8 @@ function readyView(mapList){
 			},
 
 			editable : true,
-			droppable : true, // this allows things to be dropped onto the calendar
+			//droppable : false, // this allows things to be dropped onto the calendar
+			eventResizableFromStart : false , 
 			drop : function(info) {
 				// is the "remove after drop" checkbox checked?
 				if (checkbox.checked) {
@@ -263,41 +334,39 @@ function readyView(mapList){
 					info.draggedEl.parentNode.removeChild(info.draggedEl);
 				}
 			},
+			//날짜 클릭시 적용
 			dateClick : function(info) {
-				alert('Clicked on: ' + info.title);
-
+				//alert('Clicked on: ' + info.title);
+			$('input.eventId').prop('disabled',true );
+			$('#insertModalPop').modal();
+				
 			},
+			//이벤트 클릭시 적용
 			eventClick : function(info) {
 				var eventId = info.event.id;
-				var eventAllday = info.event.allDay;
+				var eventAllday = null;
 				var eventTitle = info.event.title;
 				var eventStart = info.event.start;
 				var eventEnd = info.event.end;
 				var eventDescription = info.event.description;
+				console.log(" eventDescription :  "+ eventDescription);
 				var eventBackgroundColor = info.event.backgroundColor;
-				var eventVal =    "<p>이벤트 아이디 : "+ eventId +"</p>"
-								+ "<p>하루종일 : "+ eventAllday +"</p>"
-								+ "<p>제 목 : "+ eventTitle +"</p>"
-								+ "<p>시작 시간 : "+ eventStart +"</p>"
-								+ "<p>종료 시간 : "+ eventEnd +"</p>"
-								+ "<p>설 명 : "+ eventDescription +"</p>"
-								+ "<p>배경색 : "+ eventBackgroundColor +"</p>"
-			
-				
-				$('div.modal-body:eq(-1) > p').remove();
-				$('div.modal-body').append(eventValT);
-				$('#modalPop').modal();
-				
-				
-				//var eventMemNum = memNum;
-				//alert('Clicked on title: ' + info.event.title);
-				//alert('Clicked on start: ' + info.event.start);
-				//alert('Clicked on id: ' + info.event.id);
-				//alert('Clicked on end: ' + info.event.end);
-				//alert('Clicked on description: ' + info.event.description);
-				//alert('Clicked on backgroundColor: ' + info.event.backgroundColor);
-				//alert('Clicked on: allDay' + info.event.allDay);
-				//alert('Clicked on: memNum' + info.event.memNum);
+				//check박스 설정
+				if(info.event.allDay===1){
+					eventAllday = "checked";
+					$('input#eventAllday').remove('checked');
+					$('input#eventAllday').attr('checked','checked');
+				}
+				if(info.event.allDay===0) {$('input#eventAllday').remove('checked');}
+				$('input.eventId').attr('value',eventId );
+				$('input.eventId').prop('disabled',true );
+				$('input.eventTitle').attr('value',eventTitle );
+				$('input.eventStart').attr('value',eventStart );
+				$('input.eventEnd').attr('value',eventEnd );
+				$('input.eventDescription').attr('value',eventDescription );
+				console.log("eventDescription : "+eventDescription)
+				//$('input.eventBackgroundColor').0oattr('value',eventBackgroundColor );
+				$('div#modalPop').modal();
 				
 			},
 			events : mapList,
@@ -308,12 +377,45 @@ function readyView(mapList){
 		calendar.render();
 
 	};
+	
+	//스케쥴 저장saveScd
+ 	$(document).ready(function(){
+
+    $("#saveScd").on("click",function(){ 
+    	$.ajax({
+			type : "post",
+			async : true,
+			datatype : "textd; charset=utf-8",
+			url : "schModify",
+			data : {schId :$("#eventId").val(),
+				   schTitle :$("#eventTitle").val(),
+				   schStart :$("#eventStart").val(),
+				   schEnd :$("#eventEnd").val(),
+				   schDescription :$("#eventDescription").val(),
+				   memNum: memNum,
+				   
+			},
+			success : function() {
+					console.log("Modify_sucess")
+				/* mapList = map;
+				for (i in map) {
+					console.log("map : title-" + map[i].title
+							+ ", id -" + map[i]._id);
+				}
+				readyView(mapList); */
+			}
+		});
+    	
+    	
+    }); 
+ 	});
+
+
+	
 
 	$("#btnAddTest").click(
 			function() {
-				//var arr = getCalendarEvent();
 				var arr = getCalendarDataInDB();
-				//console.log('arr[0].size : ' +  Object.keys( arr[0] ).length );
 				$.each(arr,
 						function(index, item) {
 							calendar.addEvent(item);
@@ -325,12 +427,10 @@ function readyView(mapList){
 							});
 						});
 
-				//calendar.addEvent( {'title':'evt4', 'start':'2019-09-04', 'end':'2019-09-06'});
 				calendar.render();
 			});
 
 	function getCalendarEvent() {
-		//var arr = [ {'title':'evt4', 'start':'2019-09-04', 'end':'2019-09-06'} ];
 		var arr = {
 			'title' : 'evt4',
 			'start' : '2019-09-04',

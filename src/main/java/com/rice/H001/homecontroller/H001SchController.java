@@ -30,15 +30,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @RequestMapping("/*")
 public class H001SchController {
+	//스케쥴 받기
 	@Autowired
 	private H001SchService h001SchService;
 	private H001SchVO h001SchVO;
 	
-	
 	private static final Logger logger = LoggerFactory.getLogger(H001SchController.class);
-
-
-	
 	@RequestMapping(value = "data.json", method = RequestMethod.GET, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public List schlist(Model model, HttpServletRequest request) throws JsonProcessingException  {
@@ -47,22 +44,23 @@ public class H001SchController {
 		System.out.println("memNum : "+ memNum);
 		
 		List<Map<String, Object>>map = h001SchService.selectSchList(memNum);
-//		for(Map<String, Object> row : map) {
-//			System.out.println(row);
-//			String allDay =  row.get("allDay") +"";
-//			System.out.println("allDay : ~~~~~~~~~" + allDay);
-//			
-//			if(allDay.equals('0')) {
-//				row.replace("allDay", false);
-//			} else {
-//				row.replace("allDay", true);
-//			}
-//			System.out.println("newrow : " + row);
-//		}
 		String response = mapper.writeValueAsString(map);
 		System.out.println("map : "+ map);
 		
-		System.out.println();
 		return  map;
 	}
+	
+	//스케쥴 수정
+	@RequestMapping(value = "schModify", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public void schlist(H001SchVO h001SchVO, HttpServletRequest request) throws JsonProcessingException  {
+	
+		h001SchService.ModifySchInfo(h001SchVO);
+		System.out.println("h001SchVO.toString() : " + h001SchVO.toString());
+	}
+	
+	
+	
+	
+	
 }

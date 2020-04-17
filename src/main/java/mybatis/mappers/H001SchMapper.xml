@@ -10,17 +10,26 @@
         <result property="start" column="schStart" />
         <result property="end" column="schEnd" />
         <result property="description" column="schDescription" />
-        <result property="backgroundColor" column="schBackgroundColor" />
         <result property="type" column="schType" />
         <result property="memNum" column="memNum" />
         <result property="textColor" column="schTextColor" />
         <result property="allDay" column="schAllDay" />
 	</resultMap> 
-	
+	<resultMap id="SchResultVo" type="H001SchVO">
+		<result property="id" column="schId" />
+        <result property="title" column="schTitle" />
+        <result property="start" column="schStart" />
+        <result property="end" column="schEnd" />
+        <result property="description" column="schDescription" />
+        <result property="type" column="schType" />
+        <result property="memNum" column="memNum" />
+        <result property="textColor" column="schTextColor" />
+        <result property="allDay" column="schAllDay" />
+	</resultMap> 
 
 
 	<select id="selectSchList" parameterType="String" resultMap="SchResult">
-     
+     <!-- 스케쥴 조회 -->
       <![CDATA[
 		SELECT 
 		    schId,
@@ -28,7 +37,6 @@
 		    schStart,
 		    schEnd,
 		    schDescription,
-		    schBackgroundColor,
 		    schType,
 		    memNum,
 		    schTextColor,
@@ -37,6 +45,21 @@
 		where memnum =#{memNum, jdbcType=VARCHAR}
       ]]>
 	</select>
+	
+	<update id="modifySchInfo" parameterType="H001SchVO">
+			 <![CDATA[ 
+				UPDATE scott.SCHEDULE
+				SET SCHTITLE=#{schTitle, jdbcType=VARCHAR}, 
+				SCHSTART=#{schStart, jdbcType=VARCHAR},
+				SCHEND=#{schEnd, jdbcType=VARCHAR},
+				SCHDESCRIPTION=#{schDescription, jdbcType=VARCHAR}, 
+				SCHALLDAY=#{schAllDay, jdbcType=VARCHAR}  
+				WHERE MEMNUM=#{memNum, jdbcType=VARCHAR} and SCHID=#{schId, jdbcType=VARCHAR}
+								
+			 ]]>
+	</update>
+	
+	
 </mapper>
 	
 	
