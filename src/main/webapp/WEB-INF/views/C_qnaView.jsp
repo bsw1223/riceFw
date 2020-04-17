@@ -39,23 +39,23 @@
               <div class ="form-group">
             	<form name="readForm" role="form" method="post">
               	<label>No.</label>
-              	<input class ="form-control" id='boNum'name ='boNum' value ="${read.boNum}" readonly="readonly"/>
+              	<input class ="form-control" id='boNum'name ='boNum' value ="${read.A.boNum}" readonly="readonly"/>
               	</form>
               </div>
               <!-- boTitle -->
               <div class="form-group">
                   <label>제목</label>
-                  <input class="form-control" id="boTitle" name ="boTitle" value ="${read.boTitle}"readonly ="readonly"/>
+                  <input class="form-control" id="boTitle" name ="boTitle" value ="${read.A.boTitle}"readonly ="readonly"/>
               </div>
            		<!-- boContent -->
                 <div class="form-group">
                   <label>내용</label>
-                  <textarea class="form-control" style="resize: none;"rows="3" id='boContent' name ='boContent' readonly="readonly"><c:out value ="${read.boContent}"/></textarea>
+                  <textarea class="form-control" style="resize: none;"rows="3" id='boContent' name ='boContent' readonly="readonly"><c:out value ="${read.A.boContent}"/></textarea>
                 </div>
 				<!--memNum-->
 				<div class ="form-group">
              	 	<label>작성자</label>
-              		<input class ="form-control"id="memNum" name ="memNum" value ="${read.memNum}" readonly="readonly"/>
+              		<input class ="form-control"id="memNum" name ="memNum" value ="${read.A.memNum}" readonly="readonly"/>
               	</div>
 	       	    <!-- /.box-body --> 
 	       	    <div> 
@@ -74,7 +74,15 @@
     </div>
    <!-- ./row -->
   <!-- /.content -->
-
+  
+ 
+ <form id="operForm" action="/qna/modify" method='get'>
+ 	<input type='hidden' id='boNum' name="boNum" value='<c:out value="${list.boNum}"/>'>
+	<input type='hidden' name='page' value='<c:out value="${cri.page}"/>'>
+	<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
+	<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
+	<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
+</form>   
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -98,7 +106,20 @@
 		})
 		//list
 		$(".listBtn").on("click",function(){
-			location.href="/mypage/board/qna/list";
+			formObj.attr("action","/mypage/board/qna/list").attr("method","get");
+			
+			var pageTag=$("input[name='page']").clone();
+			var amountTag=$("input[name='amount']").clone();
+			var keywordTag=$("input[name='keyword']").clone();
+			var typeTag=$("input[name='type']").clone();
+						
+			formObj.empty();
+			formObj.append(pageTag);
+			formObj.append(amountTag);
+			formObj.append(keywordTag);
+			formObj.append(typeTag);
+			
+			formObj.submit();
 		})
 	});
 </script>

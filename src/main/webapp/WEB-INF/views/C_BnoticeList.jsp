@@ -32,13 +32,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Q&A 게시판
+        공지게시판
         <small>과목명</small>
       </h1>
       <ol class="breadcrumb" >
         <li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>
         <li><a href="#">과목명</a></li>
-        <li class="active">Q&A 게시판 </li>
+        <li class="active">공지게시판</li>
       </ol>
     </section>
 
@@ -53,7 +53,7 @@
 			<div class="box-body">
 			<!-- search -->
 			 <div class="box-tools pull-right">
-				<form id='searchForm' action="/mypage/board/qna/list" method ="get">
+				<form id='searchForm' action="/mypage/board/notice/list" method ="get">
 					<div class='select'>
 	                  <select name='type' style="width:100px;height:30px;">
 	                    <option value=""
@@ -61,9 +61,9 @@
 	                    <option value="T"
 	                    	<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
 	                    <option value="C"
-	                    	<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
+	                    	<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>과목명</option>
 	                    <option value="W"
-	                    	<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자<option>
+	                    	<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>강사명<option>
 	                    <option value="TWC"
 	                    	<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>전체</option>
 	                  </select>
@@ -83,28 +83,26 @@
               <table class="table table-bordered">
                 <tr>
                   <th style="width: 20px">No.</th>
+                  <th>No.</th>
                   <th>제목</th>
                   <th>작성자</th>
                   <th>작성일자</th>
-                  <th>답변여부</th>
                 </tr>
-                <c:forEach var="list" items="${boardList}">
+                <c:forEach var="list" items="${noticeList}">
 	                <tr>
 	                  <td><c:out value="${list.boNum}"/></td>
 	                  <td>
-	                  	<a class='move' href="/mypage/board/qna/view?boNum=<c:out value="${list.boNum}"/>">
+	                  	<a class='move' href="/mypage/board/notice/view?boNum=<c:out value="${list.boNum}"/>">
 	                  	<c:out value="${list.boTitle}"/></a>
 	                  </td>
 	                  <td><c:out value="${list.memNum}"/></td>
 	                  <td><c:out value="${list.boRegDate}"/></td>
-	                  <!-- 답변여부 확인하는 td로 수정해야함 -->
-	                  <td><c:out value="${list.boUpdateDate}"/></td>
 	                </tr>
                 </c:forEach>
               </table>
               <!-- /table -->
            		<div class="pull-right" style="padding:10px;">
-					<form action="/mypage/board/qna/writeView" method="get">
+					<form action="/mypage/board/notice/writeView" method="get">
 				      	<button id='regBtn' type="button" class="btn btn-block btn-primary">등록</button>
 				     </form> 
 				</div> 
@@ -113,19 +111,19 @@
 	              <ul class="pagination pagination-sm no-margin">
 	                	<c:if test="${pageMaker.prev}">
 							<li class="paginate_button prev">
-								<a href="/mypage/board/qna/list?page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
+								<a href="/mypage/board/notice/list?page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
 							</li>
 						</c:if>
 	                	
 	                   <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
 							<li class="page-item ${pageMaker.cri.page==num?" active ":""}">
-								<a href="/mypage/board/qna/list?page=${num}">${num}</a>
+								<a href="/mypage/board/notice/list?page=${num}">${num}</a>
 							</li>
 						</c:forEach>
 	                	
 	              		<c:if test="${pageMaker.next}">
 							<li class="paginate_button next">
-								<a href="/mypage/board/qna/list?page=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
+								<a href="/mypage/board/notice/list?page=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
 							</li>
 						</c:if>
 	              </ul>
@@ -168,14 +166,14 @@
 		$(".move").on("click",function(){
 			e.preventDefault();
 			actionForm.append("<input type='hidden' name='boNum' value='"+$(this).attr("href")+"'>");
-			actionForm.attr("action","/mypage/board/qna/view");
+			actionForm.attr("action","/mypage/board/notice/view");
 			actionForm.submit();
 		})
 		
 		$(".pageBtn a").on("click",function(e){
 			e.preventDefault();
 			actionForm.find("input[name='page']").val($(this).attr("href"));
-			actionForm.attr("action","/mypage/board/qna/list")
+			actionForm.attr("action","/mypage/board/notice/list")
 			actionForm.submit();
 		})
 		 

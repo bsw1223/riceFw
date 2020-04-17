@@ -16,13 +16,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Q&A 게시판
+       	 공지사항
         <small>과목명</small>
       </h1>
       <ol class="breadcrumb" >
         <li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>
         <li><a href="#">과목명</a></li>
-        <li class="active">Q&A 게시판 </li>
+        <li class="active">공지사항</li>
       </ol>
     </section>
     
@@ -34,13 +34,13 @@
           <!-- general form elements -->
           <div class="box box-info">
             <div class="box-header">
-              <h3 class="box-title">글쓰기
+              <h3 class="box-title">공지사항 작성
               </h3>
             </div>
             <!-- /.box-header -->
              <div class="box-body">
               <!-- boTitle -->
-              <form id="writeForm"role="form" name="writeForm"action ="/mypage/board/qna/write" method='post' enctype="multipart/form-data">
+              <form id="writeForm"role="form" name="writeForm"action ="/mypage/board/notice/write" method='post'>
              	<div class="form-group">
                   <label>제목</label>
                   <input type="text" class="form-control" id='boTitle' name ='boTitle'>
@@ -54,11 +54,6 @@
 				<div class ="form-group">
               		<label>작성자</label><input class ="form-control"name ='memNum'>
               	</div>
-              	<!--file-->
-				<div class ="form-group">
-              		<label>파일첨부</label><input class ="form-control"name ='file' type ='file'>
-              	</div>
-              	
 	       	    <!-- /.box-body -->  
 	            <div class="box-footer">
                 	<button id="regBtn" data-oper="submit" class="btn btn-primary" >등록</button>
@@ -77,7 +72,7 @@
     <!-- /.content -->
   </div>
   
- 
+
  
 <form id="actionForm" action="/board.do" method='get'>
 	<input type="hidden" name="page" value='${pageMaker.cri.page}' >
@@ -95,22 +90,19 @@
 				alert("제목을 입력하세요");
 				return false;
 			}
+		
+			self.location="/notice/list";
 			formObj.submit();
 		 });
-		
-		 $("#listBtn").on("click",function(e){
-			 history.back();
+		 $("#listBtn").on("click",function(){
+		 	self.location="/notice/list";
 		 });
 	});
-	
-	CKEDITOR.plugins.addExternal( 'abbr', '/myplugins/abbr/', 'plugin.js' );
-
 	
 	CKEDITOR.replace( 'editor',{
      	enterMode : CKEDITOR.ENTER_BR,
      	filebrowserBrowseUrl: '/browser/browse.php',
         filebrowserUploadUrl: '/uploader/upload.php'
-        
  	});
 	
 </script>

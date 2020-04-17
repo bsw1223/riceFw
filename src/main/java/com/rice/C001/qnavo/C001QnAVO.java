@@ -1,5 +1,9 @@
 package com.rice.C001.qnavo;
 
+import java.util.List;
+
+import org.apache.ibatis.type.Alias;
+@Alias("C001QnAVO")
 public class C001QnAVO{
 	
 	private String boNum;
@@ -10,7 +14,9 @@ public class C001QnAVO{
 	private String boUpdateDate;
 	private String boURL;
 	private String memNum;
+	private List<classattachedFileVO> attachedFileList;
 	
+
 	public String getBoNum() {
 		return boNum;
 	}
@@ -59,6 +65,10 @@ public class C001QnAVO{
 	public void setMemNum(String memNum) {
 		this.memNum = memNum;
 	}
-
-	
+	public List<classattachedFileVO> getAttachedFileList() {
+		return attachedFileList;
+	}
+	public void setAttachedFileList(List<classattachedFileVO> attachedFileList) {
+		this.attachedFileList = attachedFileList;
+	}
 }

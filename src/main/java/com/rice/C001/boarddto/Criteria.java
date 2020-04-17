@@ -9,6 +9,7 @@ public class Criteria {
 
 	private int page;
 	private int amount;
+	private String[] typeArr;
 
 	private String type;
 	private String keyword;
@@ -20,6 +21,10 @@ public class Criteria {
 	public Criteria(int page, int amount) {
 		this.amount = amount;
 		this.page = page;
+	}
+
+	public void setTypeArr(String[] typeArr) {
+		this.typeArr = typeArr;
 	}
 
 	public int getPage() {
@@ -53,8 +58,8 @@ public class Criteria {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-
+	
 	public String[] getTypeArr() {
-		return type==null? new String[] {}:type.split("");
+		return type == null? new String[]{}: type.split("");
 	}
 }

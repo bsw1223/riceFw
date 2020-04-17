@@ -13,35 +13,74 @@
         <result property="boUpdateDate" column="boUpdateDate"/>
         <result property="boURL" column="boURL"/>
         <result property="memNum" column="memNum"/>
-	</resultMap> 
+        <collection property="attachedFileList" ofType="classattachedFileVO" resultMap="attachedFileMap"/>
+	</resultMap>
 	
-	<insert id="insert">
-		insert into CLASSBOARD(boNum,boTitle,boRegDate,boContent,memNum,boCode)
-		values(seq_classboard.nextval,#{boTitle, jdbcType=VARCHAR},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{boContent, jdbcType=VARCHAR},1,23)
-	</insert>
+	<resultMap type="classattachedFileVO" id="classattachedFileVO">
+		<result property="boNum" column="boNum"/>
+		<result property="commFileNum" column="commFileNum"/>
+		<result property="fileName" column="fileName"/>
+		<result property="filePath" column="filePath"/>
+		<result property="saveFileName" column="saveFileName"/>
+		<result property="fileSize" column="fileSize"/>
+		<result property="fileCode" column="fileCode"/>
+		<result property="createDate" column="createDate"/>
+		<result property="memId" column="memId"/>
+	</resultMap>
+	
+
+
+	<!-- <insert id="insert" parameterType="C001QnAVO">
+		<![CDATA[
+			INSERT INTO SCOTT.CLASSBOARD (boNum, boTitle, boRegDate, boContent, memNum, boCode)
+				values (SEQ_CLASSBOARD.nextval, #{boTitle}, TO_CHAR(SYSDATE,'YYYY-MM-DD'), #{boContent}, 1, 23)
+		]]>
+	</insert> -->
 	
 	<!-- insert QnA  -->
-	<insert id ="insertSelectKey" parameterType="C001QnAVO">
-		<selectKey keyProperty="boNum" resultType="String"> 
-			select seq_classboard.nextval from dual
+	<insert id ="insert" parameterType="C001QnAVO" useGeneratedKeys="true" keyProperty="boNum">
+		<selectKey keyProperty="boNum" resultType="String" order="BEFORE"> 
+			select SEQ_CLASSBOARD.nextval from dual
 		</selectKey>
+		<![CDATA[
+			insert into CLASSBOARD(boNum,boTitle,boRegDate,boContent,memNum,boCode)
+			values(#{boNum, jdbcType=VARCHAR},#{boTitle, jdbcType=VARCHAR},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{boContent, jdbcType=VARCHAR},1,23)
+		]]>
+	</insert>
 	
-		insert into CLASSBOARD(boNum,boTitle,boRegDate,boContent,memNum,boCode)
-		values(#{boNum, jdbcType=VARCHAR},#{boTitle, jdbcType=VARCHAR},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{boContent, jdbcType=VARCHAR},1,23)
+	<!-- insertFile -->
+	<insert id ="insertFile" parameterType="hashMap">
+		<![CDATA[
+			insert into CLASSATTACHEDFILE(
+				FILENAME,BONUM,FILEPATH,SAVEFILENAME,FILESIZE,FILECODE,CREATEDATE,MEMID,CLASSFILENUM
+			)
+			values(
+				SEQ_CLASSATTACHEDFILE.NEXTVAL,#{boNum, jdbcType=VARCHAR},#{FILEPATH, jdbcType=VARCHAR},#{SAVEFILENAME, jdbcType=VARCHAR},
+				#{FILESIZE, jdbcType=VARCHAR},#{FILECODE, jdbcType=VARCHAR},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{MEMID, jdbcType=VARCHAR},
+				#{CLASSFILENUM, jdbcType=VARCHAR}
+			)
+		]]>
 	</insert>
 	
 	
 	<!-- show QnAlist -->
-	<select id="list" resultMap="qnaResult">
+	<select id="list" resultType="C001QnAVO" >
 		<![CDATA[
-			select * from CLASSBOARD
-			order by boNum DESC
+			select *
+			from classboard 
+			where boNum =#{boNum}
 		]]>
 	</select>
 
 	<!-- QlIST DETAIL-->
-	<select id="BoardDetail" resultMap="qnaResult" parameterType="String">
-		select * from CLASSBOARD where boNum=#{boNum}
+	<select id="BoardDetail" resultMap="classattachedFileVO">
+		SELECT  A.BONUM,A.BOCODE,A.BOCONTENT,A.BOREGDATE,A.BOTITLE,A.BOVIEWS,A.BOURL,A.MEMNUM,A.BOTOPFIXED,B.FILECODE,b.filename,B.FILEPATH,b.memid
+		FROM CLASSBOARD A,CLASSATTACHEDFILE B
+		WHERE A.BONUM = B.BONUM
+		AND A.BONUM=(SELECT BONUM
+               		 FROM CLASSATTACHEDFILE
+					WHERE BONUM=#{BONUM, jdbcType=VARCHAR}
+         			)
 	</select>
 	
 	<!-- delete QnA -->
@@ -58,26 +97,52 @@
 		where boNum=#{boNum, jdbcType=VARCHAR}
 	</update>
 	
+	<!-- search -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach item ='type' collection="typeArr">
+				<trim prefix="OR">
+				<choose>
+					<when test="type=='T'.toString()">
+					boTitle like '%'||#{keyword}||'%'
+					</when>
+					<when test="type=='W'.toString()">
+					memNum like '%'||#{keyword}||'%'
+					</when>
+					<when test="type=='C'.toString()">
+					boContent like '%'||#{keyword}||'%'
+					</when>
+				</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
 
 	<!-- pagination -->
-	<select id="getListWithPaging" resultMap="qnaResult">
+	<select id="getListWithPaging" resultType="C001QnAVO">
 		<![CDATA[
 			select  boNum,boCode,boTitle,boContent,boRegDate,boUpdateDate,boURL,memNum
 			from(
 			    select rownum rn, boNum,boCode,boTitle,boContent,boRegDate,boUpdateDate,boURL,memNum
 			    from CLASSBOARD
-			    where rownum <= (#{page}*#{amount})
-			    order by boNum DESC
-			    )
-			where rn > (#{page}-1)*#{amount}
-		]]>
+			    where
+			]]>    
+	<include refid="criteria"></include>
+	<![CDATA[	
+		rownum <= #{page} *#{amount}
+		)
+		where rn> (#{page}-1) *#{amount}
+	]]>
 	</select>
+	
+	<!-- /pagination -->
 	
 	<!-- total list amount count -->
 	<select id="getTotal" resultType="int">
-		<![CDATA[
-	         select count(*) from CLASSBOARD  where boNum>0
-	      ]]>
+		select count(*)
+		from CLASSBOARD 
+		where boNum>0
 	</select>
+	<!--  -->
 
 </mapper>	

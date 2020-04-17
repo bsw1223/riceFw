@@ -1,6 +1,7 @@
 package com.rice.C001.boarddao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +48,11 @@ public class C001QnADAOImpl implements C001QnADAO {
 		return sqlsession.selectOne("mapper.qna.BoardDetail",boNum);
 	}
 
-	@Override
-	public void insertSelectKey(C001QnAVO vo) {
-
-		sqlsession.insert("mapper.qna.insertSelectKey",vo);
-	}
+	/*
+	 * @Override public void insertSelectKey(C001QnAVO vo) {
+	 * 
+	 * sqlsession.insert("mapper.qna.insertSelectKey",vo); }
+	 */
 
 	@Override
 	public List<C001QnAVO> getListWithPaging(Criteria cri) {
@@ -61,8 +62,14 @@ public class C001QnADAOImpl implements C001QnADAO {
 
 	@Override
 	public int getTotal() {
-		int page;
-		page=sqlsession.selectOne("mapper.qna.getTotal");
-		return page;
+		
+		return sqlsession.selectOne("mapper.qna.getTotal");
+				
+	}
+
+	@Override
+	public void insertFile(Map<String, Object> map) {
+
+		sqlsession.insert("mapper.qna.insertFile",map);
 	}
 }

@@ -13,13 +13,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Q&A 게시판
+    	    공지사항
         <small>과목명</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>
         <li><a href="#">과목명</a></li>
-        <li class="active">Q&A 게시판 </li>
+        <li class="active">공지사항 </li>
       </ol>
     </section>
 
@@ -36,7 +36,7 @@
             </div>
             <!-- /.box-header -->
 			<div class="box-body">
-			<form name="updateForm" role="form" method="post" action="/mypage/board/qna/modify">
+			<form name="updateForm" role="form" method="post" action="/mypage/board/notice/modify">
               <!-- boNum -->
               <div class ="form-group">
               	<label>No.</label>
@@ -76,7 +76,7 @@
     <!-- /.content -->
   </div>
  
-<form role="" action="/qna/modify" method='get'>
+<form role="" action="/notice/modify" method='get'>
  	<input type='hidden' id='boNum' name="boNum" value='<c:out value="${list.boNum}"/>'>
 	<input type='hidden' name='page' value='<c:out value="${cri.page}"/>'>
 	<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
@@ -89,13 +89,13 @@
 	$(document).ready(function(){
 		$("#modify").on("click",function(){
 	
-			formObj.attr("action","/mypage/board/qna/modify");
+			formObj.attr("action","/mypage/board/notice/modify");
 			formObj.attr("method","post");
 			formObj.submit();
 		})	
 		$("#cancel").on("click",function(){
 			event.preventDefault();
-			location.href="/mypage/board/qna/list"
+			location.href="/mypage/board/notice/list"
 		})
 	})
 	
