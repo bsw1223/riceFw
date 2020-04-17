@@ -131,21 +131,6 @@
 			 ]]>
 	</insert>
 	 
-	
-	
-	
-	
-	
-	
-<!-- 	
-	<insert id="insertBuildingInfo" parameterType="D001BuildingVO">
-			 <![CDATA[ 
-				INSERT INTO BUILDING(bulName,bulMgr,bulPhoneNum,bulAddress,bulClassNum,bulFloor,bulId,bulRemark)
-				VALUES(#{bulName},#{bulMgr},#{bulPhoneNum},#{bulAddress},#{bulClassNum},#{bulFloor},(build_board.nextval),#{bulRemark});
-			 ]]>
-	</insert>
-		 -->
-	
 	</mapper>
 	
 

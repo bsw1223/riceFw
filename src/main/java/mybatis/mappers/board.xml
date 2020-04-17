@@ -7,81 +7,90 @@
 <mapper namespace="mapper.board">
 	<resultMap id="boardResult" type="C001BoardVO">
 		<result property="bno" column="bno" />
-        <result property="title" column="title" />
-        <result property="content" column="content" />
-        <result property="writer" column="writer"/>
-     </resultMap> 
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="writer" column="writer" />
+	</resultMap>
 
 
-		<select id="getListWithPaging" resultType="C001BoardVO">
+	<select id="getListWithPaging" resultType="C001BoardVO">
 	<![CDATA[
 		select  bno,title, content, writer, regdate
 	from(
 	    select rownum rn, bno,title, content, writer, regdate
 	    from tbl_board
-	    where]]> 
-	    <include refid="criteria"></include>
-	    <![CDATA[rownum <= (#{page}*#{amount})
+	    where
+	    ]]>
+		<include refid="criteria"></include>
+	    <![CDATA[
+	    rownum <= (#{page}*#{amount})
 	    and bno > 0
 	    order by bno desc
 	    )
 	where rn > ((#{page}-1)*#{amount})
 	]]>
 	</select>
-	
-	<sql id = "criteria">
-		  <trim prefix="(" suffix=") AND" prefixOverrides="OR">
-	    	<foreach item='type' collection="typeArr">
-	    		<trim prefix="OR">
-	    			<choose>
-	    				<when test="type =='T'.toString()">
-	    					title like '%'||#{keyword}||'%'
-	    				</when>
-	    				<when test="type =='C'.toString()">
-	    					content like '%'||#{keyword}||'%'
-	    				</when>
-	    				<when test="type =='W'.toString()">
-	    					writer like '%'||#{keyword}||'%'
-	    				</when>
-	    			</choose>
-	    		</trim>
-	    	</foreach>
-	    </trim>
-	</sql>
-	
-	
 
-	<select id="listBoard" resultType="C001BoardVO" parameterType="String">
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type =='T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type =='C'.toString()">
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type =='W'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+
+
+	<select id="listBoard" resultType="C001BoardVO"
+		parameterType="String">
       <![CDATA[
          select * from tbl_board
       ]]>
 	</select>
-	
+
 	<insert id="insert" parameterType="C001BoardVO">
-		insert into tbl_board (bno, title, content, writer)
-		values(seq_board.nextval, #{title}, #{content}, #{writer})
+		<![CDATA[
+		insert into tbl_board (bno,
+		title, content, writer)
+		values(seq_board.nextval, #{title}, #{content},
+		#{writer})
+		 ]]>
 	</insert>
-	
+
 	<select id="getTotal" resultType="int">
 	<![CDATA[
          select count(bno) from tbl_board
       ]]>
 	</select>
-	
+
 	<select id="getTotalCount" resultType="int">
-	select count(*) from tbl_board
-	where
-	
-	 <include refid="criteria"></include>
-	 
-	 bno> 0
+		<![CDATA[select count(*) from tbl_board
+		where ]]>
+
+		<include refid="criteria"></include>
+		<![CDATA[
+		bno> 0
+		 ]]>
 	</select>
-	
+
 	<insert id="insertSelectKey" parameterType="C001BoardVO">
-		<selectKey keyProperty="bno" order="BEFORE" resultType="long" >
-		
+		<selectKey keyProperty="bno" order="BEFORE"
+			resultType="long">
+
 			select seq_board.nextval from dual
-			
+
 		</selectKey>
 		 <![CDATA[ 
 		insert into tbl_board(bno,title,content,writer) values(#{bno},#{title},#{content},#{writer})
@@ -89,23 +98,31 @@
 	</insert>
 
 	<select id="read" resultType="C001BoardVO">
-		select * from  tbl_board where bno=#{bno}
+	<![CDATA[
+		select * from tbl_board where
+		bno=#{bno}
+		]]>
 	</select>
-	
+
 	<delete id="delete">
+	<![CDATA[
 		delete from tbl_board where bno=#{bno}
+		]]>
 	</delete>
-	
+
 	<update id="update">
+		<![CDATA[
 		update tbl_board
 		set title=#{title},
 		content=#{content},
 		writer=#{writer},
 		updateDate=sysdate
 		where bno=#{bno}
+			]]>
 	</update>
 
-	<select id="getSelectOne" parameterType="int" resultType="C001BoardVO">
+	<select id="getSelectOne" parameterType="int"
+		resultType="C001BoardVO">
 	<![CDATA[
          select * from tbl_board where bno=#{number}
       ]]>

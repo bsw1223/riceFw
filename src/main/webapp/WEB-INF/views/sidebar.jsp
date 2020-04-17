@@ -9,7 +9,7 @@
 	console.log(authId);
 	/* var authId = "1001"; */
 	var memnum = "${loginMem.memNum}";
-	console.log(memnum);
+	console.log("memnum : "+memnum);
 	 /* var memnum = "2"; */
  	var authId ="${loginMem.authId}";
 	var authName ='';
@@ -423,7 +423,6 @@ var tempE= 2;
 
 for(i in newMapList)
 {
-	
 	var classId = "a"+newMapList[i].parentMenuId;
 	if(classId!='a14'||classId!='a30')
 		{
@@ -452,24 +451,30 @@ for(i in newMapList)
 }
 //-------------------------ok
 
-//3단일때
+//3단일때, 2단 제목 추가?
 
 
- var tempZ= 0;
- var path= null;
-
+var tempZ= 0;
+var path= null;
+var paPath = null;
 for(i in newMapListSub)
 {
 	 if(authId == "1001"||authId == "1000")
 		{
 			path="'li.a14 > ul > li.text:eq("+tempZ+") > a'";
+			paPath="'li.a14 > ul > li.text:eq("+tempZ+")'";
 		}
 	 if(authId == "1002")
 		{
 			path="'li.a30 > ul > li.text:eq("+tempZ+") > a'";
+			paPath="'li.a30 > ul > li.text:eq("+tempZ+")'";
 		}
 			var name = newMapListSub[i].openClassname;
+			var subId = newMapListSub[i].openClassId;
+			console.log("과목명 !!!!!!!!!!! : "+  name);
+			console.log("과목명 !!!!!!!!!!! : "+  subId);
 					$(eval(path)).text(name); 
+					$(eval(paPath)).attr('id',subId); //개설과목id를 과목li태그의id로 추가
 					if(($(eval(path)).length)+1>0)
 						{
 							tempZ++;
@@ -477,8 +482,6 @@ for(i in newMapListSub)
 						{
 							tempZ=0;
 						}
-						
-			
  }
  //------------------------ok
 
@@ -503,15 +506,12 @@ for(i in newMapListSub)
 					$(eval(path)).empty();; 
 				}
 		}
- 
 }	 
  //--------------------ok
  
 //-------------------------------3단 ul.thirdthree > li에 각자의 class명 넣기-------------------------------------
 //과목 PARENTS 이용해서 class명 넣기, "subject" 클래스 추가
 var tempD= 0;
-
-
 for(i in newMapList)
 	{
 		if(authId == "1001"||authId == "1000")
@@ -531,7 +531,6 @@ for(i in newMapList)
 							     {
 									tempD=0;
 							     }
-					
 	}
 	//----------------------ok
 
@@ -558,7 +557,6 @@ for(i in newMapList)
 									tempD=0;
 								}
 						}
-					
 				 }
 	 }
 	if(authId == "1002")
@@ -637,8 +635,7 @@ for(i in newMapList)
 							}
 						}
 		}
-		
-		
+			
 	}
 }
 //----------------------------ok
@@ -682,22 +679,16 @@ var tempC =0;
 var parentsClP=null;
 for(var i =0; i<newMapList.length ; i++)
 	{
-		console.log("길이 : "+newMapList.length);	
 		if(i<newMapList.length-1){
 		var parentsClP = "a"+newMapList[i+1].parentMenuId;
 		}
 		var parentsCl = "a"+newMapList[i].parentMenuId;//부모아이디로 검색
-		
-		
 		var compared = newMapList[i].menuId;
-		
 		var classIdM = "a"+newMapList[i].menuId;
 		var selectClC= '\'li.'+parentsCl+' > ul > li\'';
 		var selectCl = '\'li.'+parentsCl+' > ul > li:eq('+tempC+')\'';
 		//console.log(selectCl);
 		    $(eval(selectCl)).addClass(classIdM);
-			
-		console.log("*selectCl : "+selectCl+"- *parentsClP : " +parentsClP);
 				if(parentsCl==parentsClP)
 				{
 					tempC++;
@@ -721,10 +712,69 @@ for(i in newMapList)
 			}	
 		
 	}
-					} 
+					
+//-----------------3단 추가 url  URL에 과목코드 추가
+if(authId == "1001"||authId == "1000")
+			{		
+		var firstPath ='\'li.a14 > ul:eq(0) > li.subject\'';
+		var secondPath = '\'li.a14 > ul:eq(0) > li.subject > ul:eq(0) > li\'';
+		console.log("firstPath.length : " + $(eval(firstPath)).length);
+		console.log("secondPath.length : " + $(eval(secondPath)).length);
+		
+		for(var i = 0; i< $(eval(firstPath)).length ;i++){
+			var firstPathR ='\'li.a14 > ul > li.subject:eq('+i+')\'';
+			var firstPathId = $(eval(firstPathR)).attr('id');
+			console.log("firstPathUrl : "+firstPathId);
+			for(var j = 0 ; j< $(eval(secondPath)).length;j++){
+				//console.log("j : "+j);
+				var thirdPath='\'li.a14 > ul > li:eq('+i+') > ul > li:eq('+j+') > a\'';
+				var thirdPathURL= $(eval(thirdPath)).attr('href');
+				
+				console.log("thirdPathURL : "+ thirdPathURL);
+				var finalPathURL = thirdPathURL+"/"+firstPathId;
+				console.log("finalPathURL : "+finalPathURL);
+				
+				var finalPathURLS= $(eval(thirdPath)).attr('href',finalPathURL);
+			}
+			
+			
+		}
+		
+}
+if(authId == "1002")
+{
+	var firstPath ='\'li.a30 > ul:eq(0) > li.subject\'';
+	var secondPath = '\'li.a30 > ul:eq(0) > li.subject > ul:eq(0) > li\'';
+	console.log("firstPath.length : " + $(eval(firstPath)).length);
+	console.log("secondPath.length : " + $(eval(secondPath)).length);
+	
+	for(var i = 0; i< $(eval(firstPath)).length ;i++){
+		var firstPathR ='\'li.a30 > ul > li.subject:eq('+i+')\'';
+		var firstPathId = $(eval(firstPathR)).attr('id');
+		console.log("firstPathUrl : "+firstPathId);
+		for(var j = 0 ; j< $(eval(secondPath)).length;j++){
+			//console.log("j : "+j);
+			var thirdPath='\'li.a30 > ul > li:eq('+i+') > ul > li:eq('+j+') > a\'';
+			var thirdPathURL= $(eval(thirdPath)).attr('href');
+			
+			console.log("thirdPathURL : "+ thirdPathURL);
+			var finalPathURL = thirdPathURL+"/"+firstPathId;
+			console.log("finalPathURL : "+finalPathURL);
+			
+			var finalPathURLS= $(eval(thirdPath)).attr('href',finalPathURL);
+		}
+	}
+	
+	
+}
+//-------------------3단url 추가 끝
+		} 
 	 	} ); 
 });
  	
+	
+	
+	
 	
 </script>
 

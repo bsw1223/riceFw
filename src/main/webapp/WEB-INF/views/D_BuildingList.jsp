@@ -46,7 +46,7 @@
 							<table class="table table-hover" id="example2"
 								class="table table-bordered table-hover">
 								<thead>
-									<tr>
+									<tr><th>No.</th>
 										<th>건물이름</th>
 										<th>건물관리자</th>
 										<th>건물번호</th>
@@ -55,10 +55,12 @@
 										<th>강의실번호</th>
 										<th>비고</th>
 									</tr>
-								</thead>
+								</thead>								
+								
 								<tbody>
 									<c:forEach var="listB" items="${listB}">
 										<tr>
+											<td><c:out value="${vs.rn}"/>
 											<td><a
 												href='../../classMng/MngBld/Blddesc?bulId=<c:out value="${listB.bulId}"/>'>
 													<c:out value="${listB.bulName}" />

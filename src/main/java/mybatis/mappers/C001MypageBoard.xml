@@ -1,0 +1,90 @@
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.myboard">
+	<resultMap id="myboardResult" type="C001ClassBoardVO">
+		<result property="boNum" column="boNum" />
+		<result property="boCode" column="boCode" />
+		<result property="boContent" column="boContent" />
+		<result property="boRegDate" column="boRegDate" />
+		<result property="boTitle" column="boTitle" />
+		<result property="boUpdateDate" column="boUpdateDate" />
+		<result property="boViews" column="boViews" />
+		<result property="boLikes" column="boLikes" />
+		<result property="boURL" column="boURL" />
+		<result property="memNum" column="memNum" />
+	</resultMap>
+
+
+	<select id="getListWithPaging" resultType="C001ClassBoardVO">
+	<![CDATA[
+		select  boNum,boCode, boContent, boRegDate, boTitle,boUpdateDate,boViews,boLikes,boURL,memNum,memName
+	from(
+	    select rownum rn, boNum,boCode, boContent, boRegDate, boTitle,boUpdateDate,boViews,boLikes,boURL,memNum,memName
+	    from (
+	    	
+			select	b.botitle,b.boNum,b.bocode,b.bocontent, b.boregdate, b.boupdatedate, b.boviews,b.bolikes,b.bourl,b.memnum, a.memName
+			from classBoard b, member a
+			where b.memNum= a.memNum and boCode =#{boCode} and boURL=#{boURL}
+	    )
+	    where rownum <= (#{page}*#{amount})
+	    order by to_number(boNum) desc
+	    )
+	where rn > ((#{page}-1)*#{amount})
+	]]>
+	</select>
+
+	<select id="getTotal" resultType="int">
+	<![CDATA[
+         select count(boNum) from CLASSBOARD where boCode =#{boCode} and boURL=#{boURL}
+      ]]>
+	</select>
+
+
+	<select id="read" resultType="C001ClassBoardVO">
+	<![CDATA[
+		select * from CLASSBOARD b, member a
+		where b.memNum=a.memNum and boNum=#{boNum} and boCode =#{boCode} and boURL=#{boURL}
+		]]>
+	</select>
+
+	<update id="updateViewCnt">
+	<![CDATA[
+		update CLASSBOARD
+		set boViews=boViews+1
+		where boNum=#{boNum} and boCode=#{boCode} and boURL=#{boURL}
+		]]>
+	</update>
+
+	<insert id="insertSelectKey" parameterType="C001ClassBoardVO">
+		<selectKey keyProperty="boNum" order="BEFORE" resultType="String">
+
+			select seq_board.nextval from dual
+
+		</selectKey>
+		 <![CDATA[ 
+		insert into classboard(boNum,boTitle,boContent,boCode,boRegdate,boUpdatedate,boURL,memNum,boViews,boLikes) 
+		values(#{boNum},#{boTitle},#{boContent},#{boCode},TO_CHAR(SYSDATE,'YYYY-MM-DD'),TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{boURL},#{memNum},to_number(#{boViews}),to_number(#{boLikes}))
+	 ]]>
+	</insert>
+	
+		<delete id="delete">
+	<![CDATA[
+		delete from classboard where boNum=#{boNum} and boCode=#{boCode} and boURL=#{boURL}
+		]]>
+	</delete>
+
+	<update id="update">
+		<![CDATA[
+		update classboard
+		set boTitle=#{boTitle},
+		boContent=#{boContent},
+		memNum=#{memNum},
+		boUpdateDate=TO_CHAR(SYSDATE,'YYYY-MM-DD')
+		where boNum=#{boNum} and boCode=#{boCode} and boURL=#{boURL}
+			]]>
+	</update>
+
+
+</mapper>

@@ -22,6 +22,7 @@
         <result property="memTel" column="memTel" />
         <result property="memJoinDate" column="memJoinDate" />
         <result property="openClassname" column="openClassname" />
+        <result property="openClassId" column="openClassId" />
         
 	</resultMap> 
 	
@@ -35,7 +36,7 @@
 
 	<select id="getSubList" parameterType="String" resultMap="HomeResult">
       <![CDATA[
-		 select a.openclassname  from
+		 select a.openclassname , a.openClassId from
 		 ( 
 		 select memnum,openclassid, openclassName from ENROLMENT 
 		 union

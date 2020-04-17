@@ -1,209 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
-<%@ include file = "header.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%@ include file="header.jsp"%>
 
 
-<!-- <link rel="shortcut icon" href="image/favicon.ico"> -->
-
-<link rel="stylesheet" href="${contextPath}/resources/api/fullcalendar/vendor/css/fullcalendar.min.css">
-<link rel="stylesheet" href="${contextPath}/resources/api/fullcalendar/vendor/css/bootstrap.min.css">
-<link rel="stylesheet" href="${contextPath}/resources/api/fullcalendar/vendor/css/select2.min.css">
-<link rel="stylesheet" href="${contextPath}/resources/api/fullcalendar/vendor/css/bootstrap-datetimepicker.min.css">
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,500,600">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-<link rel="stylesheet" href="${contextPath}/resources/api/fullcalendar/css/main.css">
 
 <div class="content-wrapper" style="min-height: 901px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>Home</h1>
 		<ol class="breadcrumb">
-			<li class="active"><i class="fa fa-dashboard"></i>  Home</li>
+			<li class="active"><i class="fa fa-dashboard"></i> Home</li>
 		</ol>
 	</section>
 
 	<!-- Main content -->
 	<section class="content">
 
+
 		<div class="row">
 			<div class="col-md-3">
-
 				<!-- Profile Image -->
 				<div class="box box-primary">
 					<div class="box-body box-profile">
-						<img class="profile-user-img img-responsive img-circle" src="${contextPath}/resources/dist/img/user4-128x128.jpg" alt="User profile picture">
+						<img class="profile-user-img img-responsive img-circle"
+							src="${contextPath}/resources/dist/img/user4-128x128.jpg"
+							alt="User profile picture">
 						<h3 class="profile-username text-center">Nina Mcintire</h3>
 						<p class="text-muted text-center">Software Engineer</p>
 						<ul class="list-group list-group-unbordered">
-							<li class="list-group-item">
-								<b>Followers</b> 
-								<a class="pull-right">1,322</a>
-							</li>
-							<li class="list-group-item">
-								<b>Following</b> 
-							<a class="pull-right">543</a>
-							</li>
-							<li class="list-group-item">
-								<b>Friends</b> 
-							<a class="pull-right">13,287</a></li>
+							<li class="list-group-item"><b>Followers</b> <a
+								class="pull-right">1,322</a></li>
+							<li class="list-group-item"><b>Following</b> <a
+								class="pull-right">543</a></li>
+							<li class="list-group-item"><b>Friends</b> <a
+								class="pull-right">13,287</a></li>
 						</ul>
 						<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
 					</div>
 					<!-- /.box-body -->
 				</div>
 				<!-- /.box -->
+				<div id="external-events">
+					<p>
+						<strong>Draggable Events</strong>
+					</p>
+					<div class="fc-event">My Event 1</div>
+					<div class="fc-event">My Event 2</div>
+					<div class="fc-event">My Event 3</div>
+					<div class="fc-event">My Event 4</div>
+					<div class="fc-event">My Event 5</div>
+					<p>
+						<input type="checkbox" id="drop-remove"> <label
+							for="drop-remove">remove after drop</label>
+					</p>
+				</div>
+				
+
 			</div>
 			<!-- /.col -->
 
 			<div class="col-md-9">
+			
 				<!-- Full Calendar -->
 				<div class="box box-primary">
 					<div class="box-body">
-						<div class="container">
-							<!-- 일자 클릭시 메뉴오픈 -->
-							<div id="contextMenu" class="dropdown clearfix">
-								<ul class="dropdown-menu dropNewEvent" role="menu" aria-labelledby="dropdownMenu" 
-									style="display: block; position: static; margin-bottom: 5px;">
-									<li><a tabindex="-1" href="#">카테고리1</a></li>
-									<li><a tabindex="-1" href="#">카테고리2</a></li>
-									<li><a tabindex="-1" href="#">카테고리3</a></li>
-									<li><a tabindex="-1" href="#">카테고리4</a></li>
-									<li class="divider"></li>
-									<li><a tabindex="-1" href="#" data-role="close">Close</a></li>
-								</ul>
-							</div>
-							<div id="wrapper">
-								<div id="loading"></div>
-								<div id="calendar"></div>
-							</div>
-							<!-- 일정 추가 MODAL -->
-							<div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-											<h4 class="modal-title"></h4>
-										</div>
-										<div class="modal-body"> 
-											<div class="row">
-												<div class="col-xs-12">
-													<label class="col-xs-4" for="edit-allDay">하루종일</label> 
-													<input class='allDayNewEvent' id="edit-allDay" type="checkbox">
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-xs-12">
-													<label class="col-xs-4" for="edit-title">일정명</label> 
-													<input class="inputModal" type="text" name="edit-title" id="edit-title" required="required" />
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-xs-12">
-													<label class="col-xs-4" for="edit-start">시작</label> 
-													<input class="inputModal" type="text" name="edit-start" id="edit-start" />
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-xs-12">
-													<label class="col-xs-4" for="edit-end">끝</label> <input
-														class="inputModal" type="text" name="edit-end"
-														id="edit-end" />
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-xs-12">
-													<label class="col-xs-4" for="edit-type">구분</label> 
-													<select class="inputModal" type="text" name="edit-type" id="edit-type">
-														<option value="카테고리1">카테고리1</option>
-														<option value="카테고리2">카테고리2</option>
-														<option value="카테고리3">카테고리3</option>
-														<option value="카테고리4">카테고리4</option>
-													</select>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-xs-12">
-													<label class="col-xs-4" for="edit-color">색상</label> 
-													<select class="inputModal" name="color" id="edit-color">
-														<option value="#D25565" style="color: #D25565;">빨간색</option>
-														<option value="#9775fa" style="color: #9775fa;">보라색</option>
-														<option value="#ffa94d" style="color: #ffa94d;">주황색</option>
-														<option value="#74c0fc" style="color: #74c0fc;">파란색</option>
-														<option value="#f06595" style="color: #f06595;">핑크색</option>
-														<option value="#63e6be" style="color: #63e6be;">연두색</option>
-														<option value="#a9e34b" style="color: #a9e34b;">초록색</option>
-														<option value="#4d638c" style="color: #4d638c;">남색</option>
-														<option value="#495057" style="color: #495057;">검정색</option>
-													</select>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-xs-12">
-													<label class="col-xs-4" for="edit-desc">설명</label>
-													<textarea rows="4" cols="50" class="inputModal" name="edit-desc" id="edit-desc"></textarea>
-												</div>
-											</div>
-										</div>
-										<div class="modal-footer modalBtnContainer-addEvent">
-											<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-											<button type="button" class="btn btn-primary" id="save-event">저장</button>
-										</div>
-										<div class="modal-footer modalBtnContainer-modifyEvent">
-											<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-											<button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
-											<button type="button" class="btn btn-primary" id="updateEvent">저장</button>
-										</div>
-									</div>
-									<!-- /.modal-content -->
-								</div>
-								<!-- /.modal-dialog -->
-							</div>
-							<!-- /.modal -->
-
-<!-- 							<div class="panel panel-default"> -->
-<!-- 								<div class="panel-heading"> -->
-<!-- 									<h3 class="panel-title">필터</h3> -->
-<!-- 								</div> -->
-
-<!-- 								<div class="panel-body"> -->
-<!-- 									<div class="col-lg-6"> -->
-<!-- 										<label for="calendar_view">구분별</label> -->
-<!-- 										<div class="input-group"> -->
-<!-- 											<select class="filter" id="type_filter" multiple="multiple"> -->
-<!-- 												<option value="카테고리1">카테고리1</option> -->
-<!-- 												<option value="카테고리2">카테고리2</option> -->
-<!-- 												<option value="카테고리3">카테고리3</option> -->
-<!-- 												<option value="카테고리4">카테고리4</option> -->
-<!-- 											</select> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 									/.col	 -->
-<!-- 									<div class="col-lg-6"> -->
-<!-- 										<label for="calendar_view">등록자별</label> -->
-<!-- 										<div class="input-group"> -->
-<!-- 											<label class="checkbox-inline"><input class='filter' type="checkbox" value="정연" checked>정연</label>  -->
-<!-- 											<label class="checkbox-inline"><input class='filter' type="checkbox" value="다현" checked>다현</label>  -->
-<!-- 											<label class="checkbox-inline"><input class='filter' type="checkbox" value="사나" checked>사나</label>  -->
-<!-- 											<label class="checkbox-inline"><input class='filter' type="checkbox" value="나연" checked>나연</label>  -->
-<!-- 											<label class="checkbox-inline"><input class='filter' type="checkbox" value="지효" checked>지효</label> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 									/.col -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							/.filter panel -->
-						</div>
-						<!-- /.container -->
-
-
-
+						<div id='calendar'></div>
+						<!-- /#calendar -->
 					</div>
 					<!-- /.box-body -->
 				</div>
@@ -215,22 +79,285 @@
 
 	</section>
 	<!-- /.content -->
+
+	<div class="modal fade" id="modalPop">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Modal title</h4>
+				</div>
+				<div class="modal-body">
+						
+						<!-- /.box-header -->
+						<!-- form start -->
+						<form class="form-horizontal">
+							<div class="box-body">
+							
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">이벤트 아이디</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventId" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword3" class="col-sm-2 control-label ">하루종일</label>
+
+									<div class="col-sm-10">
+										<input type="password" class="form-control eventAllday"
+											id="inputPassword3" placeholder="Password">
+									</div>
+								</div>
+							  	<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">제 목</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventTitle" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">시작 시간</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventStart" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">종료 시간</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventEnd" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">설 명</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventDescription" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputEmail3" class="col-sm-2 control-label">배경색</label>
+
+									<div class="col-sm-10">
+										<input type="email" class="form-control eventBackgroundColor" id="inputEmail3"
+											placeholder="Email">
+									</div>
+								</div>
+								
+								
+							<!-- /.box-footer -->
+						</form>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-default bg-red color-palette" data-dismiss="modal">Delete</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
 </div>
 <!-- /.content-wrapper -->
-
-<script src="${contextPath}/resources/api/fullcalendar/vendor/js/jquery.min.js"></script>
-<script src="${contextPath}/resources/api/fullcalendar/vendor/js/bootstrap.min.js"></script>
-<script src="${contextPath}/resources/api/fullcalendar/vendor/js/moment.min.js"></script>
-<script src="${contextPath}/resources/api/fullcalendar/vendor/js/fullcalendar.min.js"></script>
-<script src="${contextPath}/resources/api/fullcalendar/vendor/js/ko.js"></script>
-<script src="${contextPath}/resources/api/fullcalendar/vendor/js/select2.min.js"></script>
-<script src="${contextPath}/resources/api/fullcalendar/vendor/js/bootstrap-datetimepicker.min.js"></script>
-<script src="${contextPath}/resources/api/fullcalendar/js/main.js"></script>
-<script src="${contextPath}/resources/api/fullcalendar/js/addEvent.js"></script>
-<script src="${contextPath}/resources/api/fullcalendar/js/editEvent.js"></script>
-<script src="${contextPath}/resources/api/fullcalendar/js/etcSetting.js"></script>
+<%@ include file="footer.jsp"%>
 
 
-<%@ include file = "footer.jsp" %>
+<link href='${contextPath}/resources/static/fullcalendar/core/main.css'	rel='stylesheet' />
+<link href='${contextPath}/resources/static/fullcalendar/daygrid/main.css' rel='stylesheet' />
+<link href='${contextPath}/resources/static/fullcalendar/timegrid/main.min.css' rel='stylesheet' />
+<script src='${contextPath}/resources/static/fullcalendar/core/main.js'></script>
+<script	src='${contextPath}/resources/static/fullcalendar/interaction/main.js'></script>
+<script	src='${contextPath}/resources/static/fullcalendar/daygrid/main.js'></script>
+<script	src="${contextPath}/resources/static/fullcalendar/timegrid/main.min.js"></script>
+<script src='${contextPath}/resources/static/fullcalendar/core/locales/ko.js'></script>
+</head>
+<script>
+	var mapList = null;
+	var memNum = "${loginMem.memNum}";
+	
+	var eventMemNum = null;
+	var eventId = null;
+	var eventAllday = null;
+	var eventTitle = null;
+	var eventStart = null;
+	var eventEnd = null;
+	var eventDescription = null;
+	var eventBackgroundColor = null;
+	
+	console.log("index _ menNum : "+ memNum);
+	
+	$(document).ready(
+			function() {
+				$.ajax({
+					type : "get",
+					async : true,
+					datatype : "textd; charset=utf-8",
+					url : "data.json",
+					data : {
+						memNum : memNum
+					},
+					success : function(map) {
+						mapList = map;
+						for (i in map) {
+							console.log("map : title-" + map[i].title
+									+ ", id -" + map[i]._id);
+						}
+						readyView(mapList);
+					}
+				});
+				
+				
+			});
+	
+function readyView(mapList){	
+
+		console.log("maplist : " +mapList);
+	    var Calendar = FullCalendar.Calendar;
+	    var Draggable = FullCalendarInteraction.Draggable;
+	    
+	    var containerEl = document.getElementById('external-events');
+	    var calendarEl = document.getElementById('calendar');
+	    var checkbox = document.getElementById('drop-remove');
+	 
+	    // initialize the external events
+	    // -----------------------------------------------------------------
+	 
+
+	new Draggable(containerEl, {
+			itemSelector : '.fc-event',
+			eventData : function(eventEl) {
+				return {
+					title : eventEl.innerText
+				}
+			}
+		});
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			plugins : [ 'interaction', 'interaction', 'dayGrid', 'timeGrid' ],
+			selectable : true,
+			header : {
+				left : 'prev,next today',
+				center : 'title',
+				right : 'dayGridMonth,timeGridWeek,timeGridDay'
+			},
+
+			editable : true,
+			droppable : true, // this allows things to be dropped onto the calendar
+			drop : function(info) {
+				// is the "remove after drop" checkbox checked?
+				if (checkbox.checked) {
+					// if so, remove the element from the "Draggable Events" list
+					info.draggedEl.parentNode.removeChild(info.draggedEl);
+				}
+			},
+			dateClick : function(info) {
+				alert('Clicked on: ' + info.title);
+
+			},
+			eventClick : function(info) {
+				var eventId = info.event.id;
+				var eventAllday = info.event.allDay;
+				var eventTitle = info.event.title;
+				var eventStart = info.event.start;
+				var eventEnd = info.event.end;
+				var eventDescription = info.event.description;
+				var eventBackgroundColor = info.event.backgroundColor;
+				var eventVal =    "<p>이벤트 아이디 : "+ eventId +"</p>"
+								+ "<p>하루종일 : "+ eventAllday +"</p>"
+								+ "<p>제 목 : "+ eventTitle +"</p>"
+								+ "<p>시작 시간 : "+ eventStart +"</p>"
+								+ "<p>종료 시간 : "+ eventEnd +"</p>"
+								+ "<p>설 명 : "+ eventDescription +"</p>"
+								+ "<p>배경색 : "+ eventBackgroundColor +"</p>"
+			
+				
+				$('div.modal-body:eq(-1) > p').remove();
+				$('div.modal-body').append(eventValT);
+				$('#modalPop').modal();
+				
+				
+				//var eventMemNum = memNum;
+				//alert('Clicked on title: ' + info.event.title);
+				//alert('Clicked on start: ' + info.event.start);
+				//alert('Clicked on id: ' + info.event.id);
+				//alert('Clicked on end: ' + info.event.end);
+				//alert('Clicked on description: ' + info.event.description);
+				//alert('Clicked on backgroundColor: ' + info.event.backgroundColor);
+				//alert('Clicked on: allDay' + info.event.allDay);
+				//alert('Clicked on: memNum' + info.event.memNum);
+				
+			},
+			events : mapList,
+
+			locale : 'ko'
+		});
+
+		calendar.render();
+
+	};
+
+	$("#btnAddTest").click(
+			function() {
+				//var arr = getCalendarEvent();
+				var arr = getCalendarDataInDB();
+				//console.log('arr[0].size : ' +  Object.keys( arr[0] ).length );
+				$.each(arr,
+						function(index, item) {
+							calendar.addEvent(item);
+							console.log('click evt loop_in_cal' + index + ' : '
+									+ item);
+							$.each(item, function(iii, ttt) {
+								console.log('click evt inner loop_in_cal => '
+										+ iii + ' : ' + ttt);
+							});
+						});
+
+				//calendar.addEvent( {'title':'evt4', 'start':'2019-09-04', 'end':'2019-09-06'});
+				calendar.render();
+			});
+
+	function getCalendarEvent() {
+		//var arr = [ {'title':'evt4', 'start':'2019-09-04', 'end':'2019-09-06'} ];
+		var arr = {
+			'title' : 'evt4',
+			'start' : '2019-09-04',
+			'end' : '2019-09-06'
+		};
+		return arr;
+	}
+
+	function getCalendarDataInDB() {
+		var arr = [ {
+			title : 'evt1',
+			start : 'ssssss'
+		}, {
+			title : 'evt2',
+			start : '123123123'
+		} ];
+
+		//배열 초기화
+		var viewData = {};
+		//data[키] = 밸류
+		viewData["id"] = $("#currId").text().trim();
+		viewData["title"] = $("#title").val();
+		viewData["content"] = $("#content").val();
+
+		return arr;
+	}
+</script>
 
 </html>
+
