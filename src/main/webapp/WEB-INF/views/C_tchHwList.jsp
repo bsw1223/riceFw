@@ -14,12 +14,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			<c:out value="boURL" />
+			<c:out value='${sjctName}' />
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li><a href="#"><c:out value='${sjctName}' /></a></li>
+			<li class="active">과제</li>
 		</ol>
 	</section>
 
@@ -29,7 +29,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Q & A 게시판</h3>
+						<h3 class="box-title">과제게시판</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -52,23 +52,23 @@
 								<thead>
 									<tr>
 										<th>No.</th>
-										<th>팀원이름</th>
-										<th>전화번호</th>
-										<th>스터디장소</th>
+										<th>제목</th>
+										<th>작성자</th>
+										<th>조회수</th>
+										<th>첨부파일</th>
 									</tr>
 								</thead>
 
 								<tbody>
 									<c:forEach var="listB" items='${listB}'>
 										<tr>
-											<td><c:out value='${vs.rn}' /> </td>
-											<td><a href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
+											<td><c:out value='${listB.boNum}' /></td>
+											<td><a
+												href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
 													<c:out value='${listB.boTitle}' />
 											</a></td>
-											<td><c:out value='${listB.memNum}' /></td>
-											<td><c:out value='${listB.boRegdate}' /></td>
+											<td><c:out value='${listB.memName}' />
 											<td><c:out value='${listB.boViews}' /></td>
-											<td>답변상태</td>
 									</c:forEach>
 								</tbody>
 							</table>
@@ -85,11 +85,11 @@
 								<c:forEach begin="${pageMaker.startPage }"
 									end="${pageMaker.endPage}" var="pnum">
 									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-								<a class="page-link"
-												href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
-												</li>
-								
-											</c:forEach>
+										<a class="page-link"
+										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
+									</li>
+
+								</c:forEach>
 								<c:if test="${pageMaker.next}">
 									<li class="page-item"><a class="page-link"
 										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
@@ -97,16 +97,8 @@
 							</ul>
 						</div>
 						<div class="offset-md-8">
-							<form action="#" method="get" class="sidebar-form">
-								<div class="input-group">
-									<input type="text" name="q" class="form-control"
-										placeholder="Search..."> <span class="input-group-btn">
-										<button type="submit" name="search" id="search-btn"
-											class="btn btn-flat">
-											<i class="fa fa-search"></i>
-										</button>
-									</span>
-								</div>
+							<form action="/mypage/board/regForm/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}">
+								<button type="submit" class="btn pull-right">자료등록</button>
 							</form>
 						</div>
 						<!-- /.box-body -->
@@ -147,9 +139,8 @@
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
 		var page = 1;
-		console.log(boURL);
 
-		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=" + page + "&amount=" + sel;
+		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page="+ page + "&amount=" + sel;
 
 	}
 </script>

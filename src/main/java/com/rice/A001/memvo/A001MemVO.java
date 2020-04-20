@@ -33,6 +33,14 @@ public class A001MemVO {
 	private String snsId;
 	private String snsType;
 	
+	@Override
+	public String toString() {
+		return "A001MemVO [memNum=" + memNum + ", memId=" + memId + ", memPwd=" + memPwd + ", memName=" + memName
+				+ ", memTel=" + memTel + ", memEmail=" + memEmail + ", memJoinDate=" + memJoinDate + ", memModifyDate="
+				+ memModifyDate + ", memLevel=" + memLevel + ", memPoint=" + memPoint + ", authId=" + authId
+				+ ", memStateCode=" + memStateCode + ", snsId=" + snsId + ", snsType=" + snsType + "]";
+	}
+	
 	public String getMemNum() {
 		return memNum;
 	}

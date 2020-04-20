@@ -14,12 +14,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			<c:out value="boURL" />
+			<c:out value='${sjctName}' />
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li><a href="#"><c:out value='${sjctName}' /></a></li>
+			<li class="active">자료</li>
 		</ol>
 	</section>
 
@@ -29,7 +29,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">건물리스트</h3>
+						<h3 class="box-title">자료게시판</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -62,7 +62,7 @@
 								<tbody>
 									<c:forEach var="listB" items='${listB}'>
 										<tr>
-											<td><c:out value='${vs.rn}' /></td>
+											<td><c:out value='${listB.boNum}' /></td>
 											<td><a
 												href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
 													<c:out value='${listB.boTitle}' />
@@ -139,7 +139,6 @@
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
 		var page = 1;
-		console.log(boURL);
 
 		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page="+ page + "&amount=" + sel;
 

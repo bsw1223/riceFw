@@ -14,12 +14,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			<c:out value="boURL" />
+			<c:out value='${sjctName}' />
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li><a href="#"><c:out value='${sjctName}' /></a></li>
+			<li class="active">과제</li>
 		</ol>
 	</section>
 
@@ -52,7 +52,7 @@
 								<thead>
 									<tr>
 										<th>No.</th>
-										<th>과제</th>
+										<th>제목</th>
 										<th>작성자</th>
 										<th>작성날짜</th>
 										<th>조회수</th>
@@ -62,11 +62,11 @@
 								<tbody>
 									<c:forEach var="listB" items='${listB}'>
 										<tr>
-											<td><c:out value='${vs.rn}' /> </td>
+											<td><c:out value='${listB.boNum}' /> </td>
 											<td><a href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
-													<c:out value='${listB.boContent}' />
+													<c:out value='${listB.boTitle}' />
 											</a></td>
-											<td><c:out value='${listB.memName}' /></td>
+											<td><c:out value='${listB.memNum}' /></td>
 											<td><c:out value='${listB.boRegdate}' /></td>
 											<td><c:out value='${listB.boViews}' /></td>
 									</c:forEach>
@@ -95,19 +95,6 @@
 										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
 								</c:if>
 							</ul>
-						</div>
-						<div class="offset-md-8">
-							<form action="#" method="get" class="sidebar-form">
-								<div class="input-group">
-									<input type="text" name="q" class="form-control"
-										placeholder="Search..."> <span class="input-group-btn">
-										<button type="submit" name="search" id="search-btn"
-											class="btn btn-flat">
-											<i class="fa fa-search"></i>
-										</button>
-									</span>
-								</div>
-							</form>
 						</div>
 						<!-- /.box-body -->
 					</div>

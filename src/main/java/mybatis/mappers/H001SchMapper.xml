@@ -10,7 +10,6 @@
         <result property="start" column="schStart" />
         <result property="end" column="schEnd" />
         <result property="description" column="schDescription" />
-        <result property="backgroundColor" column="schBackgroundColor" />
         <result property="type" column="schType" />
         <result property="memNum" column="memNum" />
         <result property="textColor" column="schTextColor" />
@@ -28,7 +27,6 @@
 		    schStart,
 		    schEnd,
 		    schDescription,
-		    schBackgroundColor,
 		    schType,
 		    memNum,
 		    schTextColor,
