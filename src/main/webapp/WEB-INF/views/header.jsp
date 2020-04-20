@@ -9,9 +9,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-
-
-
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>RiceLMS</title>
@@ -60,11 +57,6 @@ var memName ="${loginMem.memName}";
 var memLevel =" ${loginMem.memLevel}";
 var authId ="${loginMem.authId}";
 var authName ='';
-console.log(memName);
-console.log(memLevel);
-console.log(authId);
-console.log(authName);
-
 
 if(authId==1000)
 	{
@@ -122,7 +114,7 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 
 		<header class="main-header">
 			<!-- Logo -->
-			<a href="../../../" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
 				<span class="logo-lg"><b>RiceLMS</b></span>
 			</a>

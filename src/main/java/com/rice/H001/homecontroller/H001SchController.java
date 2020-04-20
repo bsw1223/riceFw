@@ -36,31 +36,82 @@ public class H001SchController {
 	private H001SchVO h001SchVO;
 	
 	private static final Logger logger = LoggerFactory.getLogger(H001SchController.class);
-	@RequestMapping(value = "data.json", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	@RequestMapping(value = "calMain", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public List schlist(Model model, HttpServletRequest request) throws JsonProcessingException  {
 		ObjectMapper mapper = new ObjectMapper();
 		String memNum= (String)request.getParameter("memNum");
-		System.out.println("memNum : "+ memNum);
-		
 		List<Map<String, Object>>map = h001SchService.selectSchList(memNum);
 		String response = mapper.writeValueAsString(map);
-		System.out.println("map : "+ map);
-		
 		return  map;
 	}
 	
 	//스케쥴 수정
 	@RequestMapping(value = "schModify", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	@ResponseBody
-	public void schlist(H001SchVO h001SchVO, HttpServletRequest request) throws JsonProcessingException  {
-	
+	public String schlist(H001SchVO h001SchVO, HttpServletRequest request) throws JsonProcessingException  {
 		h001SchService.ModifySchInfo(h001SchVO);
-		System.out.println("h001SchVO.toString() : " + h001SchVO.toString());
+		var data = "1";
+		return data;
+	}
+	
+		
+	//기존스케쥴 클릭 시 desc받아오기
+	@RequestMapping(value = "selectDesc", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public Map<String, Object> selectDesc(H001SchVO h001SchVO, HttpServletRequest request) throws JsonProcessingException  {
+		Map<String, Object> map = h001SchService.selectDesc(h001SchVO);
+		
+		return  map;
+	}
+	
+	
+	
+	//달력클릭 시 seq받아오기
+	@RequestMapping(value = "selectSchSeqNo", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public Map<String, Object> selectSchSeqNo(H001SchVO h001SchVO, HttpServletRequest request) throws JsonProcessingException  {
+		Map<String, Object> map = h001SchService.selectSchSeqNo();
+		return  map;
 	}
 	
 	
 	
 	
+	//달력클릭후 저장
+		@RequestMapping(value = "schInsert", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+		@ResponseBody
+		public String schInsert(H001SchVO h001SchVO, HttpServletRequest request){
+			h001SchService.insertSchInfo(h001SchVO);
+			var data = "1";
+			return data;
+		}
+	
+	
+	
+	
+		//스케쥴 삭제
+		@RequestMapping(value = "deleteSchInfo", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+		@ResponseBody
+		public String deleteSchInfo(H001SchVO h001SchVO, HttpServletRequest request){
+			h001SchService.deleteSchInfo(h001SchVO);
+			return "1";
+		}
+	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

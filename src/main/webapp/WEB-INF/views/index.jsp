@@ -4,8 +4,6 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%@ include file="header.jsp"%>
 
-
-
 <div class="content-wrapper" style="min-height: 901px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -17,8 +15,6 @@
 
 	<!-- Main content -->
 	<section class="content">
-
-
 		<div class="row">
 			<div class="col-md-3">
 				<!-- Profile Image -->
@@ -41,22 +37,6 @@
 					</div>
 					<!-- /.box-body -->
 				</div>
-				<!-- /.box -->
-			<!-- 	드래그 메뉴
-				<div id="external-events">
-					<p>
-						<strong>Draggable Events</strong>
-					</p>
-					<div class="fc-event">My Event 1</div>
-					<div class="fc-event">My Event 2</div>
-					<div class="fc-event">My Event 3</div>
-					<div class="fc-event">My Event 4</div>
-					<div class="fc-event">My Event 5</div>
-					<p>
-						<input type="checkbox" id="drop-remove"> <label
-							for="drop-remove">remove after drop</label>
-					</p>
-				</div> -->
 			</div>
 			<!-- /.col -->
 
@@ -75,9 +55,11 @@
 			<!-- /.col -->
 		</div>
 		<!-- /.row -->
-
+<div>
+</div>
 	</section>
-	<!-- 수정모달창 -->
+<%@ include file="footer.jsp"%>
+	<!-- 수정모달창(이벤트 클릭) -->
 
 	<div class="modal fade" id="modalPop">
 		<div class="modal-dialog">
@@ -139,14 +121,12 @@
 										<input type="text" class="form-control eventDescription" id="eventDescription" placeholder="">
 									</div>
 								</div>
-								
-								
 							<!-- /.box-footer -->
 						</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-default bg-red color-palette" data-dismiss="modal">Delete</button>
+					<button type="button" class="btn btn-default bg-red color-palette" data-dismiss="modal" id = "eventDelete">Delete</button>
 					<button type="button" class="btn btn-primary" id="saveScd">Save changes</button>
 				</div>
 			</div>
@@ -154,11 +134,11 @@
 		</div>
 		<!-- /.modal-dialog -->
 	</div>
-	<!-- /.modal -->
+<!-- /.modal -->
+</div>
 
 
-
-<!-- 입력 모달창 -->
+<!-- 입력 모달창(날짜 클릭) -->
 
 	<div class="modal fade" id="insertModalPop">
 		<div class="modal-dialog">
@@ -171,7 +151,6 @@
 					<h4 class="modal-title">일정 확인</h4>
 				</div>
 				<div class="modal-body">
-						
 						<form class="form-horizontal">
 							<div class="box-body">
 							
@@ -179,8 +158,7 @@
 									<label for="inputEmail3" class="col-sm-2 control-label">일정번호</label>
 
 									<div class="col-sm-10">
-										<input type="text" class="form-control eventId" id="iEventId"
-											placeholder="">
+										<input type="text" class="form-control eventId" id="iEventId" placeholder="">
 									</div>
 								</div>
 								
@@ -195,7 +173,7 @@
 									<label for="inputEmail3" class="col-sm-2 control-label">시작 시간</label>
 
 									<div class="col-sm-10">
-										<input type="text" class="form-control eventStart" id="iEventStart" placeholder="">
+										<input type="text" class="form-control eventStart" id="iEventStart" value=" " placeholder="">
 									</div>
 								</div>
 								<div class="form-group">
@@ -210,7 +188,7 @@
 
 									<div class="col-sm-10">
 										
-										<input type="checkbox" id="iEventAllday" class="eventAllday" >
+										<input type="checkbox" id="iEventAllday" class="iEventAllday" >
 									</div>
 								</div>
 								<div class="form-group">
@@ -220,15 +198,12 @@
 										<input type="text" class="form-control eventDescription" id="iEventDescription" placeholder="">
 									</div>
 								</div>
-								
-								
 							<!-- /.box-footer -->
 						</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-default bg-red color-palette" data-dismiss="modal">Delete</button>
-					<button type="button" class="btn btn-primary" id="iSaveScd">Save changes</button>
+					<button type="button" class="btn btn-primary" id="iSave">Save</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -236,19 +211,8 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-
-
-
-
-
-
-
-
 </div>
 <!-- /.content-wrapper -->
-<%@ include file="footer.jsp"%>
-
-
 <link href='${contextPath}/resources/static/fullcalendar/core/main.css'	rel='stylesheet' />
 <link href='${contextPath}/resources/static/fullcalendar/daygrid/main.css' rel='stylesheet' />
 <link href='${contextPath}/resources/static/fullcalendar/timegrid/main.min.css' rel='stylesheet' />
@@ -257,206 +221,349 @@
 <script	src='${contextPath}/resources/static/fullcalendar/daygrid/main.js'></script>
 <script	src="${contextPath}/resources/static/fullcalendar/timegrid/main.min.js"></script>
 <script src='${contextPath}/resources/static/fullcalendar/core/locales/ko.js'></script>
+
+
+<!-- bootstrap datetimepicker -->
+<link rel="stylesheet" href="${contextPath}/resources/api/css/bootstrap-datetimepicker.min.css" />
+<script src="${contextPath}/resources/api/js/moment.min.js"></script>
+<script src="${contextPath}/resources/api/js/ko.js"></script>
+<script src='${contextPath}/resources/api/js/bootstrap-datetimepicker.min.js'></script>
 </head>
 <script>
-	var mapList = null;
 	var memNum = "${loginMem.memNum}";
-	var eventMemNum = null;
-	var eventId = null;
-	//var eventAllday = null;
-	var eventTitle = null;
-	var eventStart = null;
-	var eventEnd = null;
-	var eventDescription = null;
-	var eventBackgroundColor = null;
 	
-	console.log("index _ menNum : "+ memNum);
-	
-	$(document).ready(
-			function() {
-				$.ajax({
-					type : "get",
-					async : true,
-					datatype : "textd; charset=utf-8",
-					url : "data.json",
-					data : {
-						memNum : memNum
-					},
-					success : function(map) {
-						mapList = map;
-						for (i in map) {
-							console.log("map : title-" + map[i].title
-									+ ", id -" + map[i]._id);
-						}
-						readyView(mapList);
-					}
-				});
-			});
-	
-function readyView(mapList){	
+	var eventStart = $("input#eventStart");
+	var eventEnd = $("input#eventEnd");
+	var eventAllday = $("input#eventAllday");
+		
+	var iEventStart= $("input#iEventStart");
+	var iEventEnd= $("input#iEventEnd");
 
-		console.log("maplist : " +mapList);
-	    var Calendar = FullCalendar.Calendar;
-	    var Draggable = FullCalendarInteraction.Draggable;
-	    
-	    var containerEl = document.getElementById('external-events');
-	    var calendarEl = document.getElementById('calendar');
-	    var checkbox = document.getElementById('drop-remove');
-	 
-	    // initialize the external events
-	    // -----------------------------------------------------------------
-	 
-
-	/* new Draggable(containerEl, {
-			itemSelector : '.fc-event',
-			eventData : function(eventEl) {
-				return {
-					title : eventEl.innerText
-				}
+	
+	
+	$(document).ready(function() {
+		$.ajax({
+			type : "post",
+			async : true,
+			datatype : "textd; charset=utf-8",
+			url : "calMain",
+			data : {
+				memNum : memNum
+			},
+			success : function(map) {
+					  readyView(map);
 			}
-		}); *///드래그 메뉴기능
+		});
+	});
+
+	function readyView(map) {
+		
+		var Calendar = FullCalendar.Calendar;
+		var containerEl = document.getElementById('external-events');
+		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-			plugins : [ 'interaction', 'interaction', 'dayGrid', 'timeGrid' ],
+			
+			plugins : [ 'interaction', 'dayGrid', 'timeGrid' ],
 			selectable : true,
 			header : {
 				left : 'prev,next today',
 				center : 'title',
 				right : 'dayGridMonth,timeGridWeek,timeGridDay'
 			},
-
-			editable : true,
-			//droppable : false, // this allows things to be dropped onto the calendar
-			eventResizableFromStart : false , 
-			drop : function(info) {
-				// is the "remove after drop" checkbox checked?
-				if (checkbox.checked) {
-					// if so, remove the element from the "Draggable Events" list
-					info.draggedEl.parentNode.removeChild(info.draggedEl);
-				}
-			},
+			events : map,
+			eventResizableFromStart : false,
 			//날짜 클릭시 적용
 			dateClick : function(info) {
-				//alert('Clicked on: ' + info.title);
-			$('input.eventId').prop('disabled',true );
-			$('#insertModalPop').modal();
-				
+				dateClick(info)
 			},
 			//이벤트 클릭시 적용
 			eventClick : function(info) {
-				var eventId = info.event.id;
-				var eventAllday = null;
-				var eventTitle = info.event.title;
-				var eventStart = info.event.start;
-				var eventEnd = info.event.end;
-				var eventDescription = info.event.description;
-				console.log(" eventDescription :  "+ eventDescription);
-				var eventBackgroundColor = info.event.backgroundColor;
-				//check박스 설정
-				if(info.event.allDay===1){
-					eventAllday = "checked";
-					$('input#eventAllday').remove('checked');
-					$('input#eventAllday').attr('checked','checked');
-				}
-				if(info.event.allDay===0) {$('input#eventAllday').remove('checked');}
-				$('input.eventId').attr('value',eventId );
-				$('input.eventId').prop('disabled',true );
-				$('input.eventTitle').attr('value',eventTitle );
-				$('input.eventStart').attr('value',eventStart );
-				$('input.eventEnd').attr('value',eventEnd );
-				$('input.eventDescription').attr('value',eventDescription );
-				console.log("eventDescription : "+eventDescription)
-				//$('input.eventBackgroundColor').0oattr('value',eventBackgroundColor );
-				$('div#modalPop').modal();
-				
+				eventClick(info)
 			},
-			events : mapList,
-
 			locale : 'ko'
 		});
-
+		
+		dateFunction();
+		dateFunctionE();
 		calendar.render();
+	};
 
+	//날짜 클릭 시 일정번호 받아옴
+	function dateClick(info){
+	$.ajax({
+		type : "get",
+		async : true,
+		datatype : "textd; charset=utf-8",
+		url : "selectSchSeqNo",
+		data : {},
+		success : function(map) {
+			var dateTodayS = moment(info.dateStr).format('YYYY-MM-DD HH:mm');
+			var dateTodayE = moment(info.dateStr).format('YYYY-MM-DD 01:00');
+			
+			$("input#iEventStart").val(dateTodayS);
+			$("input#iEventEnd").val(dateTodayE);
+			$("input#iEventId").prop('disabled', true);//편집 불가로 변경
+			$("input#iEventTitle").val('');
+			$("input#iEventDescription").val('');
+			//id추가
+			var id = map.id;
+			$('input#iEventId').attr('value', id);
+			$('#insertModalPop').modal();
+		}
+	});
 	};
 	
-	//스케쥴 저장saveScd
- 	$(document).ready(function(){
+//이벤트 클릭
+	function eventClick(info) {
+		var eventTitle = info.event.title;
+		var eventId = info.event.id;
+		var eventAllday = null;
+		if (info.event.allDay == 1) {
+			$('input#eventAllday').prop("checked", true);
+		} else {
+			$('input#eventAllday').prop("checked", false);
+		}
+		var eventStartE = moment(info.event.start).format('YYYY-MM-DD HH:mm');
+		var eventEndE = moment(info.event.end).format('YYYY-MM-DD HH:mm');
+		$("input#eventStart").val(eventStartE);
+		$("input#eventEnd").val(eventEndE);
+		$('input#eventTitle').val(eventTitle);
+		$('input#eventId').val(eventId);
+		$("input#eventId").prop('disabled', true)
 
-    $("#saveScd").on("click",function(){ 
-    	$.ajax({
-			type : "post",
+		//기존 이벤트 클릭 시 desc받아옴 ->정보 전체로 변경
+		$.ajax({
+			type : "get",
 			async : true,
 			datatype : "textd; charset=utf-8",
-			url : "schModify",
-			data : {schId :$("#eventId").val(),
-				   schTitle :$("#eventTitle").val(),
-				   schStart :$("#eventStart").val(),
-				   schEnd :$("#eventEnd").val(),
-				   schDescription :$("#eventDescription").val(),
-				   memNum: memNum,
-				   
-			},
-			success : function() {
-					console.log("Modify_sucess")
-				/* mapList = map;
-				for (i in map) {
-					console.log("map : title-" + map[i].title
-							+ ", id -" + map[i]._id);
+			url : "selectDesc",
+			data : {
+						memNum : memNum,
+						schId : eventId
+					},
+			success : function(map) {
+				if (map.allDay == 1) {
+					eventAllday = "checked";
+					$('input#eventAllday').prop('checked',false);
+					$('input#eventAllday').prop('checked', true);
+				} else {
+					$('input#eventAllday').prop('checked',false);
 				}
-				readyView(mapList); */
+				var schDescription = map.schDescription;
+				$('input.eventDescription').val(schDescription);
 			}
 		});
-    	
-    	
-    }); 
- 	});
+		dateFunctionE(info);
+		//check박스 설정
+		$('div#modalPop').modal();
+	};
 
+	//스케쥴 수정saveScd
+	$(document).ready(function() {
+		$("#saveScd").on("click", function() {
+			   if ($("input#eventStart").val() > $("input#eventEnd").val()) {
+		            alert('끝나는 날짜가 앞설 수 없습니다.');
+		            return false;
+		        }
+		       if ($('input#eventTitle').val() === '') {
+		            alert('일정명은 필수입니다.')
+		           return false;
+		        }
+				var con_result = confirm("정말 수정하시겠습니까?")
+				if (!con_result) {
+					return false;
+				}
+				//allDay일 때
+				if ($("input#eventAllday").is(':checked')==true) {
+					$("#eventStart").val(moment($("#eventStart").val()).format('YYYY-MM-DD'));
+		        //render시 날짜표기수정
+		        $("#eventEnd").val(moment($("#eventEnd").val()).add(1, 'days').format('YYYY-MM-DD'));
+		        }else{
+					$("#eventStart").val(moment($("#eventStart").val()).format('YYYY-MM-DD HH:mm'));
+			        //render시 날짜표기수정
+			        $("#eventEnd").val(moment($("#eventEnd").val()).format('YYYY-MM-DD HH:mm'));
+			        }
+				
+				
+			$.ajax({
+				type : "post",
+				async : true,
+				datatype : "textd; charset=utf-8",
+				url : "schModify",
+				data : {
+					schId : $("#eventId").val(),
+					schTitle : $("#eventTitle").val(),
+					schStart : $("#eventStart").val(),
+					schEnd : $("#eventEnd").val(),
+					schAllDay : $("input#eventAllday").is(':checked'),
+					schDescription : $("#eventDescription").val(),
+					memNum : memNum,
+				},
+				success : function(data) {
+					if (data == '1') {
+						alert("수정 되었습니다");
+						window.location.href = '/';
+					} else {
+						alert("수정에 실패했습니다");
+					}
+				},
+			});
+		});
+	});
+	
+	//insert 스케쥴
+	$(document).ready(function() {
+		$("#iSave").on("click", function() {
+			 if ($("input#iEventStart").val() > $("input#iEventEnd").val()) {
+		            alert('끝나는 날짜가 앞설 수 없습니다.');
+		            return false;
+		        }
+		     if ($('input#iEventTitle').val() === '') {
+		          alert('일정명은 필수입니다.')
+		          return false;
+		        }
+		   //allDay일 때
+				if ($("input#iEventAllday").is(':checked')==true) {
+					$("#iEventStart").val(moment($("#iEventStart").val()).format('YYYY-MM-DD'));
+		        //render시 날짜표기수정
+		        $("#iEventEnd").val(moment($("#iEventEnd").val()).add(1, 'days').format('YYYY-MM-DD'));
+		        }else{
+					$("#iEventStart").val(moment($("#iEventStart").val()).format('YYYY-MM-DD HH:mm'));
+			        //render시 날짜표기수정
+			        $("#iEventEnd").val(moment($("#iEventEnd").val()).format('YYYY-MM-DD HH:mm'));
+			        }
+		   
+				
+			$.ajax({
+				type : "post",
+				async : true,
+				datatype : "textd; charset=utf-8",
+				url : "schInsert",
+				data : {
+					schId : $("#iEventId").val(),
+					schTitle : $("#iEventTitle").val(),
+					schStart : $("#iEventStart").val(),
+					schEnd : $("#iEventEnd").val(),
+					schAllDay : $("input#iEventAllday").is(':checked'),
+					schDescription : $("#iEventDescription").val(),
+					memNum : memNum,
+				},
+				success : function(data) {
+					if (data == '1') {
+						alert("스케쥴이 등록되었습니다");
+						window.location.href = '/';
+					} else {
+						alert("등록에 실패했습니다");
+					}
+				},
+			});
+		});
+	});
+	
+	//삭제
+	$(document).ready(function() {
+		$("#eventDelete").on("click", function() {
+			var con_result = confirm("정말 삭제하시겠습니까?")
+			if (!con_result) {
+				return false;
+			}
+			$.ajax({
+				type : "post",
+				async : true,
+				datatype : "textd; charset=utf-8",
+				url : "deleteSchInfo",
+				data : {
+					schId : $("#eventId").val(),
+					memNum : memNum,
+				},
+				success : function(data) {
+					if (data == '1') {
+						alert("삭제 되었습니다.");
+						window.location.href = '/';
+					} else {
+						alert("삭제에 실패했습니다");
+					}
+				},
+			});
+		});
+	});
 
+	//날짜 클릭
+	function dateClick(info) {
+		//날짜 클릭 시 일정번호 받아옴
+		$.ajax({
+			type : "get",
+			async : true,
+			datatype : "textd; charset=utf-8",
+			url : "selectSchSeqNo",
+			data : {},
+			success : function(map) {
+				var dateTodayS = moment(info.dateStr)
+						.format('YYYY-MM-DD HH:mm');
+				var dateTodayE = moment(info.dateStr)
+						.format('YYYY-MM-DD 01:00');
+				$("input#iEventStart").val(dateTodayS);
+				$("input#iEventEnd").val(dateTodayE);
+				$("input#iEventId").prop('disabled', true);//편집 불가로 변경
+				$("input#iEventTitle").val('');
+				$("input#iEventDescription").val('');
+				//id추가
+				var id = map.id;
+				$('input#iEventId').attr('value', id);
+				$('#insertModalPop').modal();
+			}
+		});
+	};
+
+	//시간 설정
+	function dateFunctionE() {
+		$("input.eventStart").datetimepicker(
+				{
+					format : 'YYYY-MM-DD HH:mm',
+					stepping : 5,
+				});
+		$("input.eventEnd").datetimepicker(
+				{
+					format : 'YYYY-MM-DD HH:mm',
+					stepping : 5,
+				});
+	};
+
+	function dateFunction() {
+		$("input#iEventStart").datetimepicker(
+				{
+					format : 'YYYY-MM-DD HH:mm',
+					stepping : 5,
+				});
+		$("input#iEventEnd").datetimepicker(
+				{
+					format : 'YYYY-MM-DD HH:mm',
+					stepping : 5,
+				});
+	};
+	
+	
+	//모달 닫힐 때 실행(체크 박스 초기화)
+
+	$('div#modalPop').on('hide.bs.modal', function(e){
+		modalClose();
+		e.stopImmediatePropagation();
+	});
+	$('#insertModalPop').on('hide.bs.modal', function(e){
+		modalClose();
+		e.stopImmediatePropagation();
+	});
+	
+	//체크박스 초기화
+	function modalClose()
+		{
+			$('input#eventAllday').prop("checked", false);
+			$('input#iEventAllday').prop("checked", false);
+		}
 	
 
-	$("#btnAddTest").click(
-			function() {
-				var arr = getCalendarDataInDB();
-				$.each(arr,
-						function(index, item) {
-							calendar.addEvent(item);
-							console.log('click evt loop_in_cal' + index + ' : '
-									+ item);
-							$.each(item, function(iii, ttt) {
-								console.log('click evt inner loop_in_cal => '
-										+ iii + ' : ' + ttt);
-							});
-						});
-
-				calendar.render();
-			});
-
-	function getCalendarEvent() {
-		var arr = {
-			'title' : 'evt4',
-			'start' : '2019-09-04',
-			'end' : '2019-09-06'
-		};
-		return arr;
-	}
-
-	function getCalendarDataInDB() {
-		var arr = [ {
-			title : 'evt1',
-			start : 'ssssss'
-		}, {
-			title : 'evt2',
-			start : '123123123'
-		} ];
-
-		//배열 초기화
-		var viewData = {};
-		//data[키] = 밸류
-		viewData["id"] = $("#currId").text().trim();
-		viewData["title"] = $("#title").val();
-		viewData["content"] = $("#content").val();
-
-		return arr;
-	}
+	
+	
 </script>
 
 </html>
