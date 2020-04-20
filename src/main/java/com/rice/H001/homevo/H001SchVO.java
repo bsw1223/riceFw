@@ -2,6 +2,8 @@ package com.rice.H001.homevo;
 
 public class H001SchVO {
 	
+	
+	private int id;
 	private int schId;
 	private String schTitle;
 	private String schStart;
@@ -14,7 +16,19 @@ public class H001SchVO {
 	private boolean schAllDay;
 	
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
+	@Override
+	public String toString() {
+		return "H001SchVO [schId=" + schId + ", schTitle=" + schTitle + ", schStart=" + schStart + ", schEnd=" + schEnd
+				+ ", schDescription=" + schDescription + ", schBackgroundColor=" + schBackgroundColor + ", schType="
+				+ schType + ", memNum=" + memNum + ", schTextColor=" + schTextColor + ", schAllDay=" + schAllDay + "]";
+	}
 	public int getSchId() {
 		return schId;
 	}

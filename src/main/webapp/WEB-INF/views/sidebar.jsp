@@ -6,10 +6,8 @@
 	/*1,1000/2,1001/3,1002*/
 	var sideList = new Array();
 	var authId = "${loginMem.authId}";
-	console.log(authId);
 	/* var authId = "1001"; */
 	var memnum = "${loginMem.memNum}";
-	console.log("memnum : "+memnum);
 	 /* var memnum = "2"; */
  	var authId ="${loginMem.authId}";
 	var authName ='';
@@ -360,9 +358,6 @@ if(authId == "1002")
 	 remainTopMenu.splice(remainTopMenu.indexOf("30"),1); // "30"를 찾아서 삭제한다. */
 	}
 
-console.log("remainTopMenu : "+remainTopMenu);
-
-
 var tempT = 0;
 for(i in remainTopMenu)
 	{
@@ -471,8 +466,6 @@ for(i in newMapListSub)
 		}
 			var name = newMapListSub[i].openClassname;
 			var subId = newMapListSub[i].openClassId;
-			console.log("과목명 !!!!!!!!!!! : "+  name);
-			console.log("과목명 !!!!!!!!!!! : "+  subId);
 					$(eval(path)).text(name); 
 					$(eval(paPath)).attr('id',subId); //개설과목id를 과목li태그의id로 추가
 					if(($(eval(path)).length)+1>0)
@@ -687,7 +680,6 @@ for(var i =0; i<newMapList.length ; i++)
 		var classIdM = "a"+newMapList[i].menuId;
 		var selectClC= '\'li.'+parentsCl+' > ul > li\'';
 		var selectCl = '\'li.'+parentsCl+' > ul > li:eq('+tempC+')\'';
-		//console.log(selectCl);
 		    $(eval(selectCl)).addClass(classIdM);
 				if(parentsCl==parentsClP)
 				{
@@ -707,7 +699,6 @@ for(i in newMapList)
 				var classIdT = "a"+newMapList[i].menuId;
 				var classIdM = newMapList[i].menuURL;
 				var selectCl = '\'li.'+classIdT+':eq('+j+') > a\'';
-				//console.log("selectCl : "+selectCl);
 				$(eval(selectCl)).attr('href',classIdM);
 			}	
 		
@@ -718,22 +709,13 @@ if(authId == "1001"||authId == "1000")
 			{		
 		var firstPath ='\'li.a14 > ul:eq(0) > li.subject\'';
 		var secondPath = '\'li.a14 > ul:eq(0) > li.subject > ul:eq(0) > li\'';
-		console.log("firstPath.length : " + $(eval(firstPath)).length);
-		console.log("secondPath.length : " + $(eval(secondPath)).length);
-		
 		for(var i = 0; i< $(eval(firstPath)).length ;i++){
 			var firstPathR ='\'li.a14 > ul > li.subject:eq('+i+')\'';
 			var firstPathId = $(eval(firstPathR)).attr('id');
-			console.log("firstPathUrl : "+firstPathId);
 			for(var j = 0 ; j< $(eval(secondPath)).length;j++){
-				//console.log("j : "+j);
 				var thirdPath='\'li.a14 > ul > li:eq('+i+') > ul > li:eq('+j+') > a\'';
 				var thirdPathURL= $(eval(thirdPath)).attr('href');
-				
-				console.log("thirdPathURL : "+ thirdPathURL);
 				var finalPathURL = thirdPathURL+"/"+firstPathId;
-				console.log("finalPathURL : "+finalPathURL);
-				
 				var finalPathURLS= $(eval(thirdPath)).attr('href',finalPathURL);
 			}
 			
@@ -745,37 +727,21 @@ if(authId == "1002")
 {
 	var firstPath ='\'li.a30 > ul:eq(0) > li.subject\'';
 	var secondPath = '\'li.a30 > ul:eq(0) > li.subject > ul:eq(0) > li\'';
-	console.log("firstPath.length : " + $(eval(firstPath)).length);
-	console.log("secondPath.length : " + $(eval(secondPath)).length);
-	
 	for(var i = 0; i< $(eval(firstPath)).length ;i++){
 		var firstPathR ='\'li.a30 > ul > li.subject:eq('+i+')\'';
 		var firstPathId = $(eval(firstPathR)).attr('id');
-		console.log("firstPathUrl : "+firstPathId);
 		for(var j = 0 ; j< $(eval(secondPath)).length;j++){
-			//console.log("j : "+j);
 			var thirdPath='\'li.a30 > ul > li:eq('+i+') > ul > li:eq('+j+') > a\'';
 			var thirdPathURL= $(eval(thirdPath)).attr('href');
-			
-			console.log("thirdPathURL : "+ thirdPathURL);
 			var finalPathURL = thirdPathURL+"/"+firstPathId;
-			console.log("finalPathURL : "+finalPathURL);
-			
 			var finalPathURLS= $(eval(thirdPath)).attr('href',finalPathURL);
 		}
 	}
-	
-	
 }
 //-------------------3단url 추가 끝
 		} 
 	 	} ); 
 });
- 	
-	
-	
-	
-	
 </script>
 
 	
@@ -804,19 +770,13 @@ if(authId == "1002")
               </span>
         </div> -->
       </form>
-      
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu start" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-       
-        
       </ul>
-      
-      
     </section>
     <!-- /.sidebar -->
-    
   </aside>
 
   

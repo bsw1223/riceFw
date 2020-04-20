@@ -9,17 +9,31 @@
         <result property="title" column="schTitle" />
         <result property="start" column="schStart" />
         <result property="end" column="schEnd" />
+<<<<<<< HEAD
         <result property="description" column="schDescription" />
+=======
+        <result property="schDescription" column="schDescription" />
+>>>>>>> refs/remotes/origin/master
         <result property="type" column="schType" />
         <result property="memNum" column="memNum" />
         <result property="textColor" column="schTextColor" />
         <result property="allDay" column="schAllDay" />
 	</resultMap> 
-	
+	<resultMap id="SchResultVo" type="H001SchVO">
+		<result property="id" column="schId" />
+        <result property="title" column="schTitle" />
+        <result property="start" column="schStart" />
+        <result property="end" column="schEnd" />
+        <result property="schDescription" column="schDescription" />
+        <result property="type" column="schType" />
+        <result property="memNum" column="memNum" />
+        <result property="textColor" column="schTextColor" />
+        <result property="allDay" column="schAllDay" />
+	</resultMap> 
 
 
 	<select id="selectSchList" parameterType="String" resultMap="SchResult">
-     
+     <!-- 스케쥴 조회 -->
       <![CDATA[
 		SELECT 
 		    schId,
@@ -35,6 +49,80 @@
 		where memnum =#{memNum, jdbcType=VARCHAR}
       ]]>
 	</select>
+	
+	<update id="modifySchInfo" parameterType="H001SchVO">
+			 <![CDATA[ 
+				UPDATE scott.SCHEDULE
+				SET SCHTITLE=#{schTitle, jdbcType=VARCHAR}, 
+				SCHSTART=#{schStart, jdbcType=VARCHAR},
+				SCHEND=#{schEnd, jdbcType=VARCHAR},
+				SCHDESCRIPTION=#{schDescription, jdbcType=VARCHAR}, 
+				SCHALLDAY=#{schAllDay, jdbcType=VARCHAR}  
+				WHERE MEMNUM=#{memNum, jdbcType=VARCHAR} and SCHID=#{schId, jdbcType=VARCHAR}
+								
+			 ]]>
+	</update>
+	
+	
+	<select id="selectDesc" resultMap="SchResult">
+     <!-- 스케쥴 조회 -->
+      <![CDATA[
+		select 
+		* 
+		from scott.schedule 
+		where 
+		memnum=#{memNum, jdbcType=VARCHAR}
+		and
+		schid=#{schId, jdbcType=VARCHAR}
+      ]]>
+	</select>
+	
+	
+	
+	
+	
+	<!-- 스케쥴 추가를 위한 시퀀스 생성 -->
+	<select id="schSeq" resultMap="SchResult">
+     <!-- 스케쥴 조회 -->
+      <![CDATA[
+		select SEQ_SCH.nextval schId from dual
+      ]]>
+	</select>
+	
+	
+	<!--  날짜 클릭 후 스케쥴 내용 저장 -->
+	
+	<insert id="insertSchInfo" parameterType="H001SchVO">
+			 <![CDATA[ 
+				insert into scott.SCHEDULE
+				(SCHTITLE, SCHSTART, SCHEND, SCHDESCRIPTION, SCHALLDAY, MEMNUM, SCHID) 
+				VALUES(
+				#{schTitle, jdbcType=VARCHAR},
+				 #{schStart, jdbcType=VARCHAR},
+				 #{schEnd, jdbcType=VARCHAR},
+				 #{schDescription, jdbcType=VARCHAR},
+				 #{schAllDay, jdbcType=VARCHAR},
+				 #{memNum, jdbcType=VARCHAR},
+				 #{schId, jdbcType=VARCHAR}
+				 )
+								
+			 ]]>
+	</insert>
+	
+	<delete id="deleteSchInfo">
+			 <![CDATA[ 
+				   
+       			 delete  
+       			 from  
+       			 scott.schedule 
+       			 where 
+       			 memNum=#{memNum, jdbcType=VARCHAR} 
+       			 and schid= #{schId, jdbcType=VARCHAR}
+       			 
+			 ]]>
+	</delete>
+	
+	
 </mapper>
 	
 	
