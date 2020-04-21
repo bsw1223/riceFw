@@ -9,11 +9,7 @@
         <result property="title" column="schTitle" />
         <result property="start" column="schStart" />
         <result property="end" column="schEnd" />
-<<<<<<< HEAD
-        <result property="description" column="schDescription" />
-=======
         <result property="schDescription" column="schDescription" />
->>>>>>> refs/remotes/origin/master
         <result property="type" column="schType" />
         <result property="memNum" column="memNum" />
         <result property="textColor" column="schTextColor" />
