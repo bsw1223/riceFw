@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rice.A001.memvo.A001MemVO;
 import com.rice.C001.boarddao.C001DocDAO;
 import com.rice.C001.boarddto.Criteria;
 import com.rice.C001.boardvo.C001BoardVO;
@@ -55,6 +56,18 @@ public class C001DocServiceImpl implements C001DocService {
 	public boolean update(C001ClassBoardVO vo) {
 		// TODO Auto-generated method stub
 		return c001DocDAO.update(vo) == 1;
+	}
+	
+	@Override
+	public List<A001MemVO> getStdList(Criteria cri) {
+		// TODO Auto-generated method stub
+		return c001DocDAO.getStdListWithPaging(cri);
+	}
+
+	@Override
+	public String getsbjc(String boURL) {
+		// TODO Auto-generated method stub
+		return c001DocDAO.subjectName(boURL);
 	}
 
 }

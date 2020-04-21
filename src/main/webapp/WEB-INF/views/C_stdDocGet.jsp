@@ -10,11 +10,13 @@
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>공지사항</h1>
+		<h1>
+			<c:out value='${sjctName}' />
+		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">자료</a></li>
-			<li class="active">자료게시판</li>
+			<li><a href="#"><c:out value='${sjctName}' /></a></li>
+			<li class="active">자료</li>
 		</ol>
 	</section>
 
@@ -25,7 +27,7 @@
 			<div class="col-md-12">
 				<div class="box box-info">
 					<div class="box-header">
-						<h3 class="box-title">과목명</h3>
+						<h3 class="box-title">자료게시판</h3>
 
 					</div>
 					<!-- /.box-header -->
@@ -41,11 +43,18 @@
 							name="boContent" value='<c:out value ="${list.boContent}"/>'
 							readonly="readonly" />
 					</div>
+					
+					<!-- bulMgr -->
+					<div class="form-group">
+						<label>내용</label> <input type="text" class="form-control"
+							name="memName" value='<c:out value ="${list.memName}"/>'
+							readonly="readonly" />
+					</div>
 
 					<!-- bulPhoneNum -->
 					<div class="form-group">
 						<label>업데이트날짜</label> <input type="text"
-							class="form-control" name="bulPhoneNum"
+							class="form-control" name="boUpdateDate"
 							value='<c:out value ="${list.boUpdateDate}"/>'
 							readonly="readonly" />
 					</div>
@@ -54,7 +63,6 @@
 						<button type="button" class="btn btn-default btn-xs">
 							<i class="fa fa-eye"></i>${list.boViews}
 						</button>
-						<span class="pull-right text-muted">127 likes - 200 views</span>
 					</div>
 
 					<button data-oper="list" class="btn btn-default"

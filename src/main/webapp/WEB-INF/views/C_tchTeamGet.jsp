@@ -2,160 +2,83 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous">
-	
-</script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
-
+<html>
+<head>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			<c:out value="boURL" />
+			<c:out value='${sjctName}' />
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li><a href="#"><c:out value='${sjctName}' /></a></li>
+			<li class="active">스터디</li>
 		</ol>
 	</section>
 
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-xs-12">
-				<div class="box">
+			<div class="col-md-12">
+				<div class="box box-info">
 					<div class="box-header">
-						<h3 class="box-title">Q & A 게시판</h3>
+						<h3 class="box-title">스터디 게시판</h3>
+
 					</div>
 					<!-- /.box-header -->
-					<div class="box-body">
-						<div style="float: right;">
-							<select id="getListWithPaging" name="sel" onchange="selChange()">
-								<option value="5"
-									<c:if test="${pageMaker.cri.amount == 5}">selected</c:if>>5개씩보기</option>
-								<option value="10"
-									<c:if test="${pageMaker.cri.amount == 10}">selected</c:if>>10개씩보기</option>
-								<option value="15"
-									<c:if test="${pageMaker.cri.amount == 15}">selected</c:if>>15개씩보기</option>
-								<option value="20"
-									<c:if test="${pageMaker.cri.amount == 20}">selected</c:if>>20개씩보기</option>
-							</select>
-						</div>
-						<!-- 옵션선택 끝 -->
-						<div class="box-body table-responsive no-padding">
-							<table class="table table-hover" id="example2"
-								class="table table-bordered table-hover">
-								<thead>
-									<tr>
-										<th>No.</th>
-										<th>팀원이름</th>
-										<th>전화번호</th>
-										<th>스터디장소</th>
-									</tr>
-								</thead>
 
-								<tbody>
-									<c:forEach var="listB" items='${listB}'>
-										<tr>
-											<td><c:out value='${vs.rn}' /> </td>
-											<td><a href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
-													<c:out value='${listB.boTitle}' />
-											</a></td>
-											<td><c:out value='${listB.memNum}' /></td>
-											<td><c:out value='${listB.boRegdate}' /></td>
-											<td><c:out value='${listB.boViews}' /></td>
-											<td>답변상태</td>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-
-						<div>
-							<ul class="pagination">
-
-								<c:if test='${pageMaker.prev}'>
-									<li class="page-item"><a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum}&amount=${pageMaker.cri.amount}page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">Previous</a></li>
-								</c:if>
-
-								<c:forEach begin="${pageMaker.startPage }"
-									end="${pageMaker.endPage}" var="pnum">
-									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-								<a class="page-link"
-												href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
-												</li>
-								
-											</c:forEach>
-								<c:if test="${pageMaker.next}">
-									<li class="page-item"><a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
-								</c:if>
-							</ul>
-						</div>
-						<div class="offset-md-8">
-							<form action="#" method="get" class="sidebar-form">
-								<div class="input-group">
-									<input type="text" name="q" class="form-control"
-										placeholder="Search..."> <span class="input-group-btn">
-										<button type="submit" name="search" id="search-btn"
-											class="btn btn-flat">
-											<i class="fa fa-search"></i>
-										</button>
-									</span>
-								</div>
-							</form>
-						</div>
-						<!-- /.box-body -->
+					<!--title -->
+					<div class="form-group">
+						<label>제목</label> <input class="form-control" name="boTitle"
+							value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
 					</div>
-					<!-- /.box -->
-				</div>
-				<!-- /.box-body -->
-			</div>
-			<!-- /.box -->
-		</div>
-		<!-- /.col -->
 
+					<!-- content -->
+					<div class="form-group">
+						<label>내용</label> <input type="text" class="form-control"
+							name="boContent" value='<c:out value ="${list.boContent}"/>'
+							readonly="readonly" />
+					</div>
+
+					<!-- content -->
+					<div class="form-group">
+						<label>작성자</label> <input type="text" class="form-control"
+							name="memName" value='<c:out value ="${list.memName}"/>'
+							readonly="readonly" />
+					</div>
+
+					<!-- file -->
+					<%-- 	<div class="form-group">
+						<label>첨부파일</label> <input type="text" class="form-control" 
+						name="classFloorNum" value='<c:out value ="${list.fileName}"/>'
+							readonly="readonly" />
+					</div> --%>
+
+					<div class="box-body">
+						<button type="button" class="btn btn-default btn-xs">
+							<i class="fa fa-eye"></i> ${list.boViews}
+						</button>
+					</div>
+
+					<button data-oper="list" class="btn btn-default"
+						onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
+
+					<!-- /.box-footer -->
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
 	</section>
 	<!-- /.content -->
 </div>
-
-
-
-<form id="actionForm" action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method='get'>
-	<input type="hidden" name="page" value='${pageMaker.cri.page}'>
-	<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
 </form>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-
-		var actionForm = $("actionForm");
-
-		$(".page-item").on("click", function(e) {
-			e.preventDafault();
-
-			console.log('click');
-			actionForm.find("input[name='page']").val($(this).attr("href"));
-			actionForm.submit();
-		});
-	});
-
-	function selChange() {
-		var sel = document.getElementById('getListWithPaging').value;
-		var page = 1;
-		console.log(boURL);
-
-		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=" + page + "&amount=" + sel;
-
-	}
-</script>
-
-
+<!--댓글필요  -->
 <%@ include file="footer.jsp"%>
-
 </body>
 </html>

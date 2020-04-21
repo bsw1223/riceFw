@@ -12,12 +12,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			게시물 수정 <small>과목명</small>
+			<c:out value='${sjctName}' />
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>
-			<li><a href="#">과목명</a></li>
-			<li class="active">공지사항</li>
+			<li><a href="#"><c:out value='${sjctName}' /></a></li>
+			<li class="active"><c:out value='${pageTitle}' /></li>
 		</ol>
 	</section>
 
@@ -28,7 +28,7 @@
 				<div class="box box-info">
 					<div class="box-header">
 						<h3 class="box-title">
-							글보기 <small>과목명</small>
+							<c:out value='${pageTitle}' />
 						</h3>
 
 					</div>

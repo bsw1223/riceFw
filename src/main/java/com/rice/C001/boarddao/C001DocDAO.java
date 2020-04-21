@@ -3,6 +3,7 @@ package com.rice.C001.boarddao;
 
 import java.util.List;
 
+import com.rice.A001.memvo.A001MemVO;
 import com.rice.C001.boarddto.Criteria;
 import com.rice.C001.boardvo.C001BoardVO;
 import com.rice.C001.boardvo.C001ClassBoardVO;
@@ -22,5 +23,9 @@ public interface C001DocDAO {
 	public int delete(String boNum, String boURL, String boCode);
 
 	public int update(C001ClassBoardVO vo);
+	
+	List<A001MemVO> getStdListWithPaging(Criteria cri);
+	
+	public String subjectName(String boURL);
 
 }

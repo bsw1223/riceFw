@@ -15,13 +15,13 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>자료게시판
+      <h1><c:out value='${pageTitle}' />
         <small>과목명</small>
       </h1>
       <ol class="breadcrumb" >
         <li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>
         <li><a href="#">과목명</a></li>
-        <li class="active">자료게시판</li>
+        <li class="active"><c:out value='${pageTitle}' /></li>
       </ol>
     </section>
     
@@ -49,7 +49,13 @@
                   <label>내용</label>
                   <textarea class="form-control" id="editor" rows="3" name ='boContent'></textarea>
                 </div>
-                	<input type="hidden" class="form-control" name ='memNum' value="114">
+
+                <div class="form-group">
+                  <label>작성자</label>
+                  <input type="text" class="form-control" value="${memName}" readonly="readonly">
+                </div>
+                
+                	<input type="hidden" class="form-control" name ='memNum' value="${memNum}">
                 	<input type="hidden" class="form-control" name ='boViews' value="0">
                 	<input type="hidden" class="form-control" name ='boLikes' value="0">
                 <div class="form-group">

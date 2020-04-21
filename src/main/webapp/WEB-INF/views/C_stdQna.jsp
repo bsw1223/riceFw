@@ -20,53 +20,48 @@
 		</ol>
 	</section>
 
+
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box box-info">
 					<div class="box-header">
-						<h3 class="box-title">Q&A 게시판</h3>
+						<h3 class="box-title">Q & A 게시판</h3>
 
 					</div>
 					<!-- /.box-header -->
-
-					<!--title -->
+					<!-- bulName -->
 					<div class="form-group">
 						<label>제목</label> <input class="form-control" name="boTitle"
 							value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
 					</div>
 
-					<!-- content -->
+					<!-- bulMgr -->
 					<div class="form-group">
 						<label>내용</label> <input type="text" class="form-control"
 							name="boContent" value='<c:out value ="${list.boContent}"/>'
 							readonly="readonly" />
 					</div>
-
-					<!-- content -->
+					
+					<!-- bulMgr -->
 					<div class="form-group">
-						<label>작성자</label> <input type="text" class="form-control"
+						<label>내용</label> <input type="text" class="form-control"
 							name="memName" value='<c:out value ="${list.memName}"/>'
 							readonly="readonly" />
 					</div>
 
-					<!-- file -->
-					<%-- 	<div class="form-group">
-						<label>첨부파일</label> <input type="text" class="form-control" 
-						name="classFloorNum" value='<c:out value ="${list.fileName}"/>'
+					<!-- bulPhoneNum -->
+					<div class="form-group">
+						<label>업데이트날짜</label> <input type="text" class="form-control" name="boUpdateDate"
+							value='<c:out value ="${list.boUpdateDate}"/>'
 							readonly="readonly" />
-					</div> --%>
-
+					</div>
 					<div class="box-body">
 						<button type="button" class="btn btn-default btn-xs">
-							<i class="fa fa-eye"></i> ${list.boViews}
-						</button>
-						<button type="button" class="btn btn-default btn-xs">
-							<i class="fa fa-thumbs-o-up"></i>${list.boLikes}
+							<i class="fa fa-eye"></i>${list.boViews}
 						</button>
 					</div>
-
 					<button data-oper="list" class="btn btn-default"
 						onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
 
@@ -80,8 +75,10 @@
 	</section>
 	<!-- /.content -->
 </div>
-</form>
-<!--댓글필요  -->
+</head>
+
+
+
 <%@ include file="footer.jsp"%>
 </body>
 </html>
