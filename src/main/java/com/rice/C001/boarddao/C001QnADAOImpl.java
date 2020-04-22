@@ -72,4 +72,21 @@ public class C001QnADAOImpl implements C001QnADAO {
 
 		sqlsession.insert("mapper.qna.insertFile",map);
 	}
+
+	@Override
+	public List<Map<String, Object>> selectFileList(String boNum) throws Exception {
+		return sqlsession.selectList("mapper.qna.selectFileList",boNum);
+	}
+
+	@Override
+	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
+		
+		return sqlsession.selectOne("mapper.qna.selectFileInfo",map);
+	}
+
+	@Override
+	public void updateFile(Map<String, Object> map) throws Exception {
+
+		sqlsession.update("mapper.qna.updateFile",map);
+	}
 }

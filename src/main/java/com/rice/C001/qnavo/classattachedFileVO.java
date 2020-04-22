@@ -6,7 +6,6 @@ import org.apache.ibatis.type.Alias;
 public class classattachedFileVO {
 	
 	private String boNum;
-	private int commFileNum;
 	private String fileName;
 	private String filePath;
 	private String saveFileName;
@@ -14,18 +13,16 @@ public class classattachedFileVO {
 	private String	fileCode;
 	private String createDate;
 	private String memId;
+	private int CLASSFILENUM;
+	
+	
+	
 	
 	public String getBoNum() {
 		return boNum;
 	}
 	public void setBoNum(String boNum) {
 		this.boNum = boNum;
-	}
-	public int getCommFileNum() {
-		return commFileNum;
-	}
-	public void setCommFileNum(int commFileNum) {
-		this.commFileNum = commFileNum;
 	}
 	public String getFileName() {
 		return fileName;
@@ -69,7 +66,11 @@ public class classattachedFileVO {
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
+	public int getCLASSFILENUM() {
+		return CLASSFILENUM;
+	}
+	public void setCLASSFILENUM(int cLASSFILENUM) {
+		CLASSFILENUM = cLASSFILENUM;
+	}
 	
-
-
 }

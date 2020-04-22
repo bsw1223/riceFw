@@ -6,6 +6,10 @@
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
+  
+  
+
+  
 
 
   <!-- Content Wrapper. Contains page content -->
@@ -39,28 +43,35 @@
               <div class ="form-group">
             	<form name="readForm" role="form" method="post">
               	<label>No.</label>
-              	<input class ="form-control" id='boNum'name ='boNum' value ="${read.A.boNum}" readonly="readonly"/>
+              	<input class ="form-control" id='boNum'name ='boNum' value ="${read.boNum}" readonly="readonly"/>
               	</form>
               </div>
               <!-- boTitle -->
               <div class="form-group">
                   <label>제목</label>
-                  <input class="form-control" id="boTitle" name ="boTitle" value ="${read.A.boTitle}"readonly ="readonly"/>
+                  <input class="form-control" id="boTitle" name ="boTitle" value ="${read.boTitle}"readonly ="readonly"/>
               </div>
            		<!-- boContent -->
                 <div class="form-group">
                   <label>내용</label>
-                  <textarea class="form-control" style="resize: none;"rows="3" id='boContent' name ='boContent' readonly="readonly"><c:out value ="${read.A.boContent}"/></textarea>
+                  <textarea class="form-control" style="resize: none;"rows="3" id='boContent' name ='boContent' readonly="readonly"><c:out value ="${read.boContent}"/></textarea>
                 </div>
 				<!--memNum-->
 				<div class ="form-group">
              	 	<label>작성자</label>
-              		<input class ="form-control"id="memNum" name ="memNum" value ="${read.A.memNum}" readonly="readonly"/>
+              		<input class ="form-control"id="memNum" name ="memNum" value ="${read.memNum}" readonly="readonly"/>
+              	</div>
+              	
+              	<div>파일목록</div>
+              	<div class ="form-group" style="border :1px solid #bdbdbd;">
+					<c:forEach var ="file" items="${file}">
+						<a href="#" onclick="fn_fileDown('${file.classfileNum}'); return false;">${file.FILENAME}</a>(${file.FILESIZE}kb)<br>
+					</c:forEach>
               	</div>
 	       	    <!-- /.box-body --> 
 	       	    <div> 
                 	<button data-oper="modify" class="btn btn-primary updateBtn">수정</button>
-                   	<button data-oper="delete" class="btn btn-primary deleteBtn">삭제</button>
+                   	<button data-oper="delete" class="btn btn-warning deleteBtn">삭제</button>
                     <button data-oper="list" class="btn btn-default listBtn">뒤로가기</button>
                 </div>  	
                <!-- /.box-footer -->
@@ -76,12 +87,12 @@
   <!-- /.content -->
   
  
- <form id="operForm" action="/qna/modify" method='get'>
+ <form id="readForm" role="form" method="post">
  	<input type='hidden' id='boNum' name="boNum" value='<c:out value="${list.boNum}"/>'>
 	<input type='hidden' name='page' value='<c:out value="${cri.page}"/>'>
 	<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
 	<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
-	<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
+	<input type='hidden' id="classfileNum" name='classfileNum' value="">
 </form>   
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
@@ -103,12 +114,14 @@
 				formObj.attr("method","post");
 				formObj.submit();
 			}
-		})
+		})//이게 왜 안돼
 		//list
 		$(".listBtn").on("click",function(){
-			formObj.attr("action","/mypage/board/qna/list").attr("method","get");
+			/* formObj.attr("action","/mypage/board/qna/list").attr("method","get"); */
 			
-			var pageTag=$("input[name='page']").clone();
+			/* history.replaceState({}, null, location.pathname); */
+			history.go(-1);
+			/* var pageTag=$("input[name='page']").clone();
 			var amountTag=$("input[name='amount']").clone();
 			var keywordTag=$("input[name='keyword']").clone();
 			var typeTag=$("input[name='type']").clone();
@@ -119,9 +132,16 @@
 			formObj.append(keywordTag);
 			formObj.append(typeTag);
 			
-			formObj.submit();
+			formObj.submit(); */
 		})
 	});
+	
+	function fn_fileDown(fileno){
+		var formObj=$("form[name='readForm']");
+		$("#classfileNum").attr("value",fileno);
+		formObj.attr("action","/mypage/board/fileDown");
+		formObj.submit();
+	}
 </script>
 <%@ include file = "footer.jsp" %>
 </body>

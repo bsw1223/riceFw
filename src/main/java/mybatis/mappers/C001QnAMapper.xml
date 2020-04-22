@@ -18,7 +18,7 @@
 	
 	<resultMap type="classattachedFileVO" id="classattachedFileVO">
 		<result property="boNum" column="boNum"/>
-		<result property="commFileNum" column="commFileNum"/>
+		<result property="CLASSFILENUM" column="CLASSFILENUM"/>
 		<result property="fileName" column="fileName"/>
 		<result property="filePath" column="filePath"/>
 		<result property="saveFileName" column="saveFileName"/>
@@ -27,7 +27,6 @@
 		<result property="createDate" column="createDate"/>
 		<result property="memId" column="memId"/>
 	</resultMap>
-	
 
 
 	<!-- <insert id="insert" parameterType="C001QnAVO">
@@ -52,14 +51,15 @@
 	<insert id ="insertFile" parameterType="hashMap">
 		<![CDATA[
 			insert into CLASSATTACHEDFILE(
-				FILENAME,BONUM,FILEPATH,SAVEFILENAME,FILESIZE,FILECODE,CREATEDATE,MEMID,CLASSFILENUM
+				CLASSFILENUM,FILENAME,BONUM,FILEPATH,SAVEFILENAME,FILESIZE,FILECODE,CREATEDATE,MEMID
 			)
 			values(
-				SEQ_CLASSATTACHEDFILE.NEXTVAL,#{boNum, jdbcType=VARCHAR},#{FILEPATH, jdbcType=VARCHAR},#{SAVEFILENAME, jdbcType=VARCHAR},
-				#{FILESIZE, jdbcType=VARCHAR},#{FILECODE, jdbcType=VARCHAR},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{MEMID, jdbcType=VARCHAR},
-				#{CLASSFILENUM, jdbcType=VARCHAR}
+				SEQ_CLASSATTACHEDFILE.NEXTVAL,#{FILENAME, jdbcType=VARCHAR},#{boNum, jdbcType=VARCHAR},#{FILEPATH, jdbcType=VARCHAR},
+				#{SAVEFILENAME, jdbcType=VARCHAR},#{FILESIZE, jdbcType=VARCHAR},1,TO_CHAR(SYSDATE,'YYYY-MM-DD'),
+				#{MEMID, jdbcType=VARCHAR}
 			)
 		]]>
+		
 	</insert>
 	
 	
@@ -73,21 +73,27 @@
 	</select>
 
 	<!-- QlIST DETAIL-->
-	<select id="BoardDetail" resultMap="classattachedFileVO">
-		SELECT  A.BONUM,A.BOCODE,A.BOCONTENT,A.BOREGDATE,A.BOTITLE,A.BOVIEWS,A.BOURL,A.MEMNUM,A.BOTOPFIXED,B.FILECODE,b.filename,B.FILEPATH,b.memid
-		FROM CLASSBOARD A,CLASSATTACHEDFILE B
-		WHERE A.BONUM = B.BONUM
-		AND A.BONUM=(SELECT BONUM
-               		 FROM CLASSATTACHEDFILE
-					WHERE BONUM=#{BONUM, jdbcType=VARCHAR}
-         			)
+	<select id="BoardDetail" resultType="C001QnAVO">
+		SELECT  *
+		FROM CLASSBOARD 
+		WHERE boNum =#{boNum}
+		
 	</select>
 	
+	<!-- CLASSATTACHEDFILE detail -->
+	<select id="selectFileList" parameterType="string" resultType="hashMap">
+		select CLASSFILENUM,FILENAME,ROUND(FILESIZE/1024,1)AS FILESIZE,FILECODE
+		from CLASSATTACHEDFILE
+		where boNum =#{boNum}
+				and FILECODE ='1'
+		order by CLASSFILENUM ASC		
+	</select>
+	
+		
 	<!-- delete QnA -->
 	<delete id="delete">
-		delete from CLASSBOARD where boNum=#{boNum, jdbcType=VARCHAR}
+		delete from CLASSBOARD where boNum=#{boNum, jdbcType=VARCHAR} 
 	</delete>
-	
 	<!-- modify QnA -->
 	<update id ="modify">
 		update CLASSBOARD 
@@ -144,5 +150,21 @@
 		where boNum>0
 	</select>
 	<!--  -->
+	
+	<!-- CLASSATTACHEDFILE DOWNLOAD -->
+	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+		select	FILENAME,SAVEFILENAME,CLASSFILENUM
+		from 	CLASSATTACHEDFILE
+		where boNum =#{boNum, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- CLASSATTACHEDFILE UPDATE -->
+	<update id="updateFile" parameterType="hashMap">
+		    UPDATE ( SELECT A.filecode
+              FROM classattachedfile A, classboard B
+              WHERE A.bonum = B.bonum AND
+                    b.bonum=#{bonum}) 
+                    SET  filecode= '1'
+	</update>
 
 </mapper>	

@@ -27,6 +27,10 @@ public interface C001QnADAO {
 	public List<C001QnAVO> getListWithPaging(Criteria cri);
 
 	public void insertFile(Map<String, Object> map);
-
 	
+	public List<Map<String, Object>> selectFileList(String boNum)throws Exception;
+
+	public Map<String, Object> selectFileInfo(Map<String, Object>map)throws Exception;
+
+	public void updateFile(Map<String,Object>map)throws Exception;
 }
