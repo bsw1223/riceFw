@@ -8,15 +8,16 @@
 		<result property="commId" column="commId" />
 		<result property="commName" column="commName" />
 		<result property="commDesc" column="commDesc" />
-		<result property="CommLevel" column="CommLevel" />
+		<result property="commLevel" column="commLevel" />
 		<result property="memId" column="memId" />
+		<result property="commURL" column="commURL" />
 	</resultMap>
 
 	<select id="getListWithPaging" resultType="E001CommVO">
 		<![CDATA[
-			select  commId, commName, commDesc, CommLevel, memId
+			select  commId, commName, commDesc, commLevel, memId, commURL
 		from(
-		    select rownum rn, commId, commName, commDesc, CommLevel, memId
+		    select rownum rn, commId, commName, commDesc, commLevel, memId, commURL
 		    from community
 		    order by commId desc
 		    )
@@ -35,5 +36,17 @@
 		select * from community where
 		commId=#{commId}
 	</select>
+	
+	
+	
+	<insert id="insertSelectKey" parameterType="E001CommVO">
+		<selectKey keyProperty="commId" order="BEFORE" resultType="String">
+			select seq_community.nextval from dual
+		</selectKey>
+		 <![CDATA[ 
+		insert into community(commId, commName, commDesc, commLevel, memId, commURL) 
+		values(#{commId},#{commName},#{commDesc},#{commLevel},#{memId},#{commURL})
+	 ]]>
+	</insert>
 
 </mapper>

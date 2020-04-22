@@ -9,9 +9,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-
-
-
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>RiceLMS</title>
@@ -51,7 +48,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-green-light sidebar-mini">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <script>
@@ -60,11 +57,6 @@ var memName ="${loginMem.memName}";
 var memLevel =" ${loginMem.memLevel}";
 var authId ="${loginMem.authId}";
 var authName ='';
-console.log(memName);
-console.log(memLevel);
-console.log(authId);
-console.log(authName);
-
 
 if(authId==1000)
 	{
@@ -79,7 +71,7 @@ if(authId==1000)
 
 /* var memNum = ${member.memNum}; */
 var preLogInTag = "<li class=\"\">"
-			     +"<a href=\"../../member/login\" data-toggle=\"\">"
+			     +"<a href=\"../../../member/login\" data-toggle=\"\">"
 				 +"	<button type=\"button\" class=\"btn btn-block btn-warning btn-xs\">L o g I n -  H e r e</button>"
 				 +"	</a>"
 				 +"</li> ";
@@ -100,10 +92,10 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 				   +"</li>"
 				   +"<li class=\"user-footer\">"
 				   +" <div class=\"pull-left\">"
-				   +"  <a href=\"../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
+				   +"  <a href=\"../../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
 				   +" </div>"
 				   +" <div class=\"pull-right\">"
-				   +"   <a href=\"../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
+				   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
 				   +" </div></li></ul></li>";
 				   
 
@@ -122,7 +114,7 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 
 		<header class="main-header">
 			<!-- Logo -->
-			<a href="../../" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini"><b>A</b>LT</span> <!-- logo for regular state and mobile devices -->
 				<span class="logo-lg"><b>RiceLMS</b></span>
 			</a>
@@ -320,9 +312,6 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 						<!-- User Account: style can be found in dropdown.less -->
 						<!-- 로그인메뉴 삽입부 -->
 				
-						<!-- Control Sidebar Toggle Button -->
-						<li><a href="#" data-toggle="control-sidebar"><i
-								class="fa fa-gears"></i></a></li>
 					</ul>
 				</div>
 			</nav>

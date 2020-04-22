@@ -37,7 +37,7 @@ public class C001BoardController {
 	}
 
 	@RequestMapping(value = "/register.do", method = RequestMethod.GET)
-	public String register(C001BoardVO boardvo, RedirectAttributes rttr) {
+	public String register(C001BoardVO boardvo) {
 
 		return "register";
 	}

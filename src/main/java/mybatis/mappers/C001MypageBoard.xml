@@ -16,23 +16,66 @@
 		<result property="memNum" column="memNum" />
 	</resultMap>
 
+	<resultMap id="memResult" type="A001MemVO">
+		<result property="memNum" column="memNum" />
+		<result property="memId" column="memId" />
+		<result property="memPwd" column="memPwd" />
+		<result property="memName" column="memName" />
+		<result property="memTel" column="memTel" />
+		<result property="memEmail" column="memEmail" />
+		<result property="memJoinDate" column="memJoinDate" />
+		<result property="memModifyDate" column="memModifyDate" />
+		<result property="memLevel" column="memLevel" />
+		<result property="memPoint" column="memPoint" />
+		<result property="authId" column="authId" />
+		<result property="memStateCode" column="memStateCode" />
+		<result property="snsId" column="snsId" />
+		<result property="snsType" column="snsType" />
+	</resultMap>
+
 
 	<select id="getListWithPaging" resultType="C001ClassBoardVO">
 	<![CDATA[
-		select  boNum,boCode, boContent, boRegDate, boTitle,boUpdateDate,boViews,boLikes,boURL,memNum,memName
+		select  boNum,boCode, boContent, boRegDate, boTitle,boUpdateDate,boViews,boLikes,boURL,memNum,memId
 	from(
-	    select rownum rn, boNum,boCode, boContent, boRegDate, boTitle,boUpdateDate,boViews,boLikes,boURL,memNum,memName
+	    select rownum rn, boNum,boCode, boContent, boRegDate, boTitle,boUpdateDate,boViews,boLikes,boURL,memNum,memId
 	    from (
 	    	
-			select	b.botitle,b.boNum,b.bocode,b.bocontent, b.boregdate, b.boupdatedate, b.boviews,b.bolikes,b.bourl,b.memnum, a.memName
+			select	b.botitle,b.boNum,b.bocode,b.bocontent, b.boregdate, b.boupdatedate, b.boviews,b.bolikes,b.bourl,b.memnum, a.memId
 			from classBoard b, member a
 			where b.memNum= a.memNum and boCode =#{boCode} and boURL=#{boURL}
+			order by to_number(boNum) desc
 	    )
 	    where rownum <= (#{page}*#{amount})
-	    order by to_number(boNum) desc
 	    )
 	where rn > ((#{page}-1)*#{amount})
 	]]>
+	</select>
+
+	<select id="getStdListWithPaging" resultType="A001MemVO">
+	<![CDATA[
+		select  rownum rn, memName, memTel, memEmail, memLevel, memNum, memId
+	from(
+	    select rownum rn, memName, memTel, memEmail, memLevel, memNum, memId
+	    from (
+	    	
+			select a.memName, a.memTel, a.memEmail, a.memLevel, a.memNum, a.memId
+			from enrolment c, member a
+			where c.memNum = a.memNum and c.openclassid=#{boURL}
+			order by memName
+	    )
+	    where rownum <= (#{page}*#{amount})
+	    )
+	where rn > ((#{page}-1)*#{amount})
+	]]>
+	</select>
+	
+	<select id = "subjectName" resultType="String">
+	<![CDATA[
+        select	c.openclassName
+		from member a, OPENCLASS c
+		where a.memNum=c.memNum and openclassid=#{boURL}
+      ]]>
 	</select>
 
 	<select id="getTotal" resultType="int">
@@ -58,7 +101,8 @@
 	</update>
 
 	<insert id="insertSelectKey" parameterType="C001ClassBoardVO">
-		<selectKey keyProperty="boNum" order="BEFORE" resultType="String">
+		<selectKey keyProperty="boNum" order="BEFORE"
+			resultType="String">
 
 			select seq_board.nextval from dual
 
@@ -68,8 +112,8 @@
 		values(#{boNum},#{boTitle},#{boContent},#{boCode},TO_CHAR(SYSDATE,'YYYY-MM-DD'),TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{boURL},#{memNum},to_number(#{boViews}),to_number(#{boLikes}))
 	 ]]>
 	</insert>
-	
-		<delete id="delete">
+
+	<delete id="delete">
 	<![CDATA[
 		delete from classboard where boNum=#{boNum} and boCode=#{boCode} and boURL=#{boURL}
 		]]>

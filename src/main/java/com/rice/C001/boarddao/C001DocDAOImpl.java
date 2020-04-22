@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.rice.A001.memvo.A001MemVO;
 import com.rice.C001.boarddto.Criteria;
 import com.rice.C001.boardvo.C001BoardVO;
 import com.rice.C001.boardvo.C001ClassBoardVO;
@@ -73,6 +74,18 @@ public class C001DocDAOImpl implements C001DocDAO {
 	@Override
 	public int update(C001ClassBoardVO vo) {
 		return sqlsession.update("mapper.myboard.update", vo);
+	}
+	
+	@Override
+	public List<A001MemVO> getStdListWithPaging(Criteria cri) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList("mapper.myboard.getStdListWithPaging", cri);
+	}
+
+	@Override
+	public String subjectName(String boURL) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("mapper.myboard.subjectName", boURL);
 	}
 
 }

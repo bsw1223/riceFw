@@ -11,12 +11,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			Text Editors <small>Advanced form element</small>
+			<c:out value='${sjctName}' /> 
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Forms</a></li>
-			<li class="active">Editors</li>
+			<li><a href="#"><c:out value='${sjctName}' /> </a></li>
+			<li class="active">자료</li>
 		</ol>
 	</section>
 
@@ -26,18 +26,15 @@
 			<div class="col-md-12">
 				<div class="box box-info">
 					<div class="box-header">
-						<h3 class="box-title">
-							자료게시판
-						</h3>
+						<h3 class="box-title">자료게시판</h3>
 
 					</div>
 					<!-- /.box-header -->
-					
+
 					<!--title -->
 					<div class="form-group">
-						<label>제목</label> <input class="form-control"
-							name="boTitle" value='<c:out value ="${list.boTitle}"/>'
-							readonly="readonly" />
+						<label>제목</label> <input class="form-control" name="boTitle"
+							value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
 					</div>
 
 					<!-- content -->
@@ -47,17 +44,30 @@
 							readonly="readonly" />
 					</div>
 
+					<!-- content -->
+					<div class="form-group">
+						<label>작성자</label> <input type="text" class="form-control"
+							name="memId" value='<c:out value ="${list.memId}"/>'
+							readonly="readonly" />
+					</div>
+
 					<!-- file -->
-				<%-- 	<div class="form-group">
+					<%-- 	<div class="form-group">
 						<label>첨부파일</label> <input type="text" class="form-control" 
 						name="classFloorNum" value='<c:out value ="${list.fileName}"/>'
 							readonly="readonly" />
 					</div> --%>
 
+					<div class="box-body">
+						<button type="button" class="btn btn-default btn-xs">
+							<i class="fa fa-eye"></i> ${list.boViews}
+						</button>
+					</div>
+
 					<button data-oper="submit" class="btn btn-primary"
 						onclick="location.href='/mypage/board/mdfyForm/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">수정</button>
 					<button data-oper="submit" class="btn btn-primary"
-						onclick="location.href='/mypage/board/dlt/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">삭제</button>			
+						onclick="location.href='/mypage/board/dlt/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">삭제</button>
 					<button data-oper="list" class="btn btn-default"
 						onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
 

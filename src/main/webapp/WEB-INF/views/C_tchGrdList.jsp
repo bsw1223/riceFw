@@ -14,12 +14,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			<c:out value="boURL" />
+			<c:out value='${sjctName}' />
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li><a href="#"><c:out value='${sjctName}' /></a></li>
+			<li class="active">성적</li>
 		</ol>
 	</section>
 
@@ -29,7 +29,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Q & A 게시판</h3>
+						<h3 class="box-title">성적게시판</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
@@ -51,10 +51,10 @@
 								class="table table-bordered table-hover">
 								<thead>
 									<tr>
-										<th>No.</th>
-										<th>팀원이름</th>
-										<th>전화번호</th>
-										<th>스터디장소</th>
+										<th>학생이름</th>
+										<th>과제</th>
+										<th>점수</th>
+										<th>배점</th>
 									</tr>
 								</thead>
 
@@ -67,8 +67,6 @@
 											</a></td>
 											<td><c:out value='${listB.memNum}' /></td>
 											<td><c:out value='${listB.boRegdate}' /></td>
-											<td><c:out value='${listB.boViews}' /></td>
-											<td>답변상태</td>
 									</c:forEach>
 								</tbody>
 							</table>
@@ -95,19 +93,6 @@
 										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
 								</c:if>
 							</ul>
-						</div>
-						<div class="offset-md-8">
-							<form action="#" method="get" class="sidebar-form">
-								<div class="input-group">
-									<input type="text" name="q" class="form-control"
-										placeholder="Search..."> <span class="input-group-btn">
-										<button type="submit" name="search" id="search-btn"
-											class="btn btn-flat">
-											<i class="fa fa-search"></i>
-										</button>
-									</span>
-								</div>
-							</form>
 						</div>
 						<!-- /.box-body -->
 					</div>
