@@ -49,7 +49,7 @@ public class F001Controller {	// 회원관리
 	}
 	
 	// 검색 조회
-	@RequestMapping(value = "/stMngadmin/search", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/stMngadmin/search", method= {RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=utf8")
 	@ResponseBody
 	public Map searchStuList(@RequestParam(value="memId", required=false) String memName, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -71,7 +71,7 @@ public class F001Controller {	// 회원관리
 	}
 	
 	// 검색 조회
-	@RequestMapping(value = "/tchMngadmin/search", produces="application/json", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/tchMngadmin/search", method= {RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=utf8")
 	@ResponseBody
 	public Map searchTeaList(@RequestParam(value="memId", required=false) String memName, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -92,7 +92,7 @@ public class F001Controller {	// 회원관리
 		return resultMap;
 	}
 	
-	@RequestMapping(value = "/stMngadmin/save", produces="application/json", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/stMngadmin/save", method = { RequestMethod.GET, RequestMethod.POST }, produces="application/json; charset=utf8")
 	@ResponseBody
 	public Map saveStuData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
@@ -122,7 +122,7 @@ public class F001Controller {	// 회원관리
 		return resultMap;
 	}
 	
-	@RequestMapping(value = "/tchMngadmin/save" , method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/tchMngadmin/save" , method = { RequestMethod.GET, RequestMethod.POST }, produces="application/json; charset=utf8")
 	@ResponseBody
 	public Map saveTeaData(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");

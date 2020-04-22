@@ -48,7 +48,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-green-light sidebar-mini">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <script>
@@ -312,9 +312,6 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 						<!-- User Account: style can be found in dropdown.less -->
 						<!-- 로그인메뉴 삽입부 -->
 				
-						<!-- Control Sidebar Toggle Button -->
-						<li><a href="#" data-toggle="control-sidebar"><i
-								class="fa fa-gears"></i></a></li>
 					</ul>
 				</div>
 			</nav>
