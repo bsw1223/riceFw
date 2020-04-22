@@ -11,15 +11,14 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			<c:out value='${sjctName}' />
+			Text Editors <small>Advanced form element</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#"><c:out value='${sjctName}' /></a></li>
-			<li class="active">스터디</li>
+			<li><a href="#">Forms</a></li>
+			<li class="active">Editors</li>
 		</ol>
 	</section>
-
 
 	<!-- Main content -->
 	<section class="content">
@@ -27,46 +26,37 @@
 			<div class="col-md-12">
 				<div class="box box-info">
 					<div class="box-header">
-						<h3 class="box-title">스터디 게시판</h3>
+						<h3 class="box-title">커뮤니티명</h3>
 
 					</div>
 					<!-- /.box-header -->
 					<!-- bulName -->
 					<div class="form-group">
 						<label>제목</label> <input class="form-control" name="boTitle"
-							value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
+							value='<c:out value ="${comm.boTitle}"/>' readonly="readonly" />
 					</div>
 
 					<!-- bulMgr -->
 					<div class="form-group">
-						<label>내용</label> <input type="text" class="form-control"
-							name="boContent" value='<c:out value ="${list.boContent}"/>'
-							readonly="readonly" />
-					</div>
-					
-					<!-- bulMgr -->
-					<div class="form-group">
-						<label>작성자</label> <input type="text" class="form-control"
-							name="memId" value='<c:out value ="${list.memId}"/>'
+						<label>내용</label> <input type="text" class="boContent"
+							name=boContent value='<c:out value ="${comm.boContent}"/>'
 							readonly="readonly" />
 					</div>
 
-					<!-- bulPhoneNum -->
-					<div class="form-group">
-						<label>업데이트날짜</label> <input type="text"
-							class="form-control" name="boUpdateDate"
-							value='<c:out value ="${list.boUpdateDate}"/>'
-							readonly="readonly" />
-					</div>
-					<div class="box-body">
+					<button type="button" class="btn btn-default btn-xs">
+						<i class="fa fa-eye"></i>
+						<c:out value="${comm.boViews}" />
+					</button>
+					<button type="button" class="btn btn-default btn-xs">
+						<i class="fa fa-thumbs-o-up"></i>
+						<c:out value="${comm.boLikes}" />
+					</button>
 
-						<button type="button" class="btn btn-default btn-xs">
-							<i class="fa fa-eye"></i>${list.boViews}
-						</button>
-					</div>
+					<button data-oper="submit" class="btn btn-primary"
+						onclick="location.href='/viewupdate?boNum=<c:out value="${comm.boNum}"/>'">수정</button>
 
 					<button data-oper="list" class="btn btn-default"
-						onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
+						onclick="location.href='/comm/writingslist'">뒤로가기</button>
 
 					<!-- /.box-footer -->
 				</div>
@@ -78,9 +68,7 @@
 	</section>
 	<!-- /.content -->
 </div>
-</head>
-
-
+</form>
 
 <%@ include file="footer.jsp"%>
 </body>

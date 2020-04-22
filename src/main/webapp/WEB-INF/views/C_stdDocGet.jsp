@@ -47,7 +47,7 @@
 					<!-- bulMgr -->
 					<div class="form-group">
 						<label>내용</label> <input type="text" class="form-control"
-							name="memName" value='<c:out value ="${list.memName}"/>'
+							name="memId" value='<c:out value ="${list.memId}"/>'
 							readonly="readonly" />
 					</div>
 

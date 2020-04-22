@@ -16,12 +16,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-      	<c:out value='${pageTitle}' />
+      	커뮤니티 만들기
       </h1>
       <ol class="breadcrumb" >
         <li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>
-        <li><a href="#">c:out value='${pageTitle}' /></a></li>
-        <li class="active">자료</li>
+        <li><a href="#">커뮤니티 메인</a></li>
+        <li class="active">커뮤니티 생성</li>
       </ol>
     </section>
     
@@ -33,35 +33,39 @@
           <!-- general form elements -->
           <div class="box box-info">
             <div class="box-header">
-              <h3 class="box-title">글쓰기
+              <h3 class="box-title">커뮤니티 만들기
               </h3>
             </div>
             <!-- /.box-header -->
              <div class="box-body">
               <!-- boTitle -->
-              <form role="form" name="writeForm" action ="/mypage/board/reg/${boCode}/${boURL}" method='get'>
+              <form role="form" name="writeForm" action ="/comm/commRegister" method='get'>
              	<div class="form-group">
-                  <label>제목</label>
-                  <input type="text" class="form-control" name ='boTitle'>
+                  <label>커뮤니티 이름</label>
+                  <input type="text" class="form-control" name ='commName' id='commName'>
+                </div>
+                
+                <div class="form-group">
+                  <label>커뮤니티 URL</label>
+                   <input type="text" class="form-control" name ='commURL' id='commURL'>
                 </div>
            		  <!-- boContent -->
                 <div class="form-group">
-                  <label>내용</label>
-                  <textarea class="form-control" id="editor" rows="3" name ='boContent'></textarea>
+                  <label>커뮤니티 설명</label>
+                  <textarea class="form-control" id="commDesc" rows="3" name ='commDesc'></textarea>
                 </div>
 
                 <div class="form-group">
                   <label>작성자</label>
-                  <input type="text" class="form-control" value="${memId}" readonly="readonly">
+                  <input type="text" class="form-control" value="${memId}" name ='memId'  id='memId' readonly="readonly">
                 </div>
                 
-                	<input type="hidden" class="form-control" name ='memNum' value="${memNum}">
-                	<input type="hidden" class="form-control" name ='boViews' value="0">
-                	<input type="hidden" class="form-control" name ='boLikes' value="0">
+                
                 <div class="form-group">
-                  <label>첨부파일</label>
-                  <button>파일첨부</button>
+                  <label>커뮤니티 레벨</label>
+                  <input type="text" class="form-control" value="${memLevel}"   id ='commLevel' name ='commLevel' readonly="readonly">
                 </div>
+                
 	       	    <!-- /.box-body -->  
 	            <div class="box-footer">
                 	<button id="regBtn"data-oper="submit" class="btn btn-primary" >등록</button>
@@ -80,23 +84,17 @@
     <!-- /.content -->
   </div>
  
- 
-<form id="actionForm" action="/mypage/board/${boCode}/${boURL}" method='get'>
-	<input type="hidden" name="boCode" value='${boCode}' >
-	<input type="hidden" name="boURL" value='${boURL}' >
-</form>  
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var formObj =$("form[name='writeForm']");
 		
 		$("#regBtn").on("click",function(){
-			console.log(${boCode});
-			self.location="/mypage/board/${boCode}/${boURL}";
+			self.location="/comm/makecomm";
 			formObj.submit();
 		 });
 		 $("#listBtn").on("click",function(){
-		 	self.location="/mypage/board/${boCode}/${boURL}";
+		 	self.location="/comm/makecomm";
 		 });
 	});
 	

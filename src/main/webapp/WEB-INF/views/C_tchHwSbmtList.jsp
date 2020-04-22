@@ -61,11 +61,11 @@
 								<tbody>
 									<c:forEach var="listB" items='${listB}'>
 										<tr>
-											<td><c:out value='${vs.rn}' /> </td>
+											<td><c:out value='${listB.boNum}' /> </td>
 											<td><a href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
 													<c:out value='${listB.boTitle}' />
 											</a></td>
-											<td><c:out value='${listB.memNum}' /></td>
+											<td><c:out value='${listB.memId}' /></td>
 											<td>답변상태</td>
 									</c:forEach>
 								</tbody>
