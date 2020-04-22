@@ -1,23 +1,7 @@
 package com.rice.A001.memvo;
 
 public class A001MemVO {
-	/*
-	    memNum    VARCHAR2(20) DEFAULT '1000' NOT NULL,
-	    memId    VARCHAR2(30) NOT NULL,
-	    memPwd    VARCHAR2(20),
-	    memName    VARCHAR2(50) NOT NULL,
-	    memTel    VARCHAR2(30),
-	    memEmail    VARCHAR2(100),
-	    memJoinDate    VARCHAR2(30) DEFAULT SYSDATE,
-	    memModifyDate    VARCHAR2(30) DEFAULT SYSDATE,
-	    memLevel    INTEGER DEFAULT 1,
-	    memPoint    INTEGER DEFAULT 0,
-	    authId    VARCHAR2(10) DEFAULT '1001' NOT NULL,
-	    memStateCode    VARCHAR2(20) DEFAULT '1100' NOT NULL,
-	    snsId    VARCHAR2(255),
-	    snsType    VARCHAR2(10)
-	 */
-	
+
 	private String memNum;
 	private String memId;
 	private String memPwd;
