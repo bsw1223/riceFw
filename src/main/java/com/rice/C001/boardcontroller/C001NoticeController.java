@@ -74,7 +74,7 @@ public class C001NoticeController {
 	@RequestMapping(value="/notice/modify",method=RequestMethod.POST)
 	public String modify(C001QnAVO vo,RedirectAttributes rttr,@ModelAttribute("cri")Criteria cri)throws Exception{
 		
-		c001QnAService.modify(vo);
+				
 		
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("amount",cri.getAmount());
