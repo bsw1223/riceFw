@@ -60,7 +60,6 @@ public class D002BookController {
 	@ResponseBody
 	public List getMybookList(@RequestBody Map param,  HttpServletRequest request, HttpServletResponse response) throws DataAccessException {
 		logger.info("get /getBookingList");
-		logger.info(param.toString());
 		List<Map<String, Object>> resultMap = d002BookService.getMybookList(param);
 		
 		return resultMap;

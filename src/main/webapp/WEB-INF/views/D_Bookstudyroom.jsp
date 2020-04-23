@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
 <%@ include file = "header.jsp" %>
@@ -18,7 +17,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="box box-primary">
+				<div class="box box-success">
 					<div class="box-body">
 						<div id='timeline_cal'></div>
 					</div>
@@ -26,9 +25,15 @@
 				</div>
 				<!-- /.box -->
 
-				<div class="box box-primary">
+				<div class="box box-success">
 					<div class="box-header">
 						<h3 class="box-title">내 예약 현황</h3>
+						
+						<div class="box-tools pull-right">
+		                	<button type="button" class="btn btn-box-tool" data-widget="collapse">
+		                		<i class="fa fa-minus"></i>
+		                	</button>
+		              	</div>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body table-responsive no-padding">
@@ -511,6 +516,7 @@
 		    maxTime: "20:00:00",	
 		    aspectRatio: 2,
 		    slotWidth: "5%",
+		    height: 600,
 		    resourceAreaWidth: "20%",
 			plugins : [ 'interaction', 'resourceTimeline' ],
 			header: {
