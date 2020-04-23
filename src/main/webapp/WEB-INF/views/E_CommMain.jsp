@@ -67,8 +67,8 @@
 						<!-- top -->
 						<div id="top">
 			 				<div class="pull-left" style="padding:10px;">
-								<form action="/mypage/board/qna/writeView" method="get">
-							      	<button id='regBtn' type="button" class="btn btn-block btn-primary">게시판 만들기</button>
+								<form action="/comm/makecomm" method="get">
+							      	<input id='regBtn' type="submit" class="btn btn-block btn-primary" value="게시판 만들기">
 							     </form> 
 							</div> 
 		<%-- 				<table id="example2" class="table table-bordered table-hover">

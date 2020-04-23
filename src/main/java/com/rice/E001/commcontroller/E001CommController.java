@@ -13,9 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rice.A001.memvo.A001MemVO;
@@ -34,10 +37,20 @@ public class E001CommController {
 	public E001CommBoardService e001CommBoardService;
 	@Autowired
 	public E001CommService e001CommService;
+	
 
-	@RequestMapping(value = "/writingslist", method = RequestMethod.GET)
-	public String list(Model model, Criteria cri, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String commMain(Model model, Criteria cri, HttpServletRequest request, HttpServletResponse response) {
 
+		return "E_CommMain";
+
+	}
+	
+
+	@RequestMapping(value = "/{commURL}", method = RequestMethod.GET)
+	public String list(Model model, Criteria cri, HttpServletRequest request, HttpServletResponse response,
+			@PathVariable("commURL") String commURL) {
+		
 		List<E001CommBoardVO> commboardlist = e001CommBoardService.getList(cri);
 		model.addAttribute("commboardlist", commboardlist);
 		model.addAttribute("pageMaker", new PageDTO(cri, e001CommBoardService.getTotal()));
@@ -79,15 +92,34 @@ public class E001CommController {
 		A001MemVO vo = (A001MemVO) session.getAttribute("loginMem");
 		model.addAttribute("memId", vo.getMemId());
 		model.addAttribute("memLevel", vo.getMemLevel());
-
 		return "E_CommCrt";
 	}
-	@RequestMapping(value = "/commRegister", method = RequestMethod.GET)
+	
+	//url 중복확인
+	@RequestMapping(value = "/urlCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public String urlCheck(@RequestBody String commURL, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String urlCheck = "1";
+		urlCheck = Integer.toString(e001CommService.urlCheck(commURL));
+
+		return urlCheck;
+	}
+	
+	@RequestMapping(value = "/nameCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public String nameCheck(@RequestBody String commName, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String nameCheck = "1";
+		nameCheck = Integer.toString(e001CommService.nameCheck(commName));
+
+		return nameCheck;
+	}
+	
+	@RequestMapping(value = "/commRegister", method = RequestMethod.POST)
 	public String commRegister(HttpServletRequest request, Model model, E001CommVO e001commvo) {
 		
 		e001CommService.commReg(e001commvo);
 		
-		return "redirect:/comm/makecomm";
+		return "E_CommMain";
 	}
 
 }

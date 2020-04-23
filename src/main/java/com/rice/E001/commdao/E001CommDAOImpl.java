@@ -21,6 +21,15 @@ public class E001CommDAOImpl implements E001CommDAO {
 		sqlsession.insert("mapper.comm.insertSelectKey", vo);
 	}
 
+	@Override
+	public int urlCheck(String commURL) throws Exception {
+		return sqlsession.selectOne("mapper.comm.urlCheck", commURL);
+	}	
+	
+	@Override
+	public int nameCheck(String commName) throws Exception {
+		return sqlsession.selectOne("mapper.comm.nameCheck", commName);
+	}	
 
 
 }
