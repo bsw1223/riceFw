@@ -19,7 +19,7 @@
 		<typeAlias alias="F001VO" type="com.rice.F001.F001vo.F001VO"/>
 		<typeAlias alias="C001ClassBoardVO" type="com.rice.C001.boardvo.C001ClassBoardVO" />
 		<typeAlias alias="C001QnAVO" type="com.rice.C001.qnavo.C001QnAVO"/>
-		
+		<typeAlias alias="C002ChatroomVO" type="com.rice.C002.chatvo.C002ChatroomVO"/>
 	</typeAliases>
 
 </configuration>
