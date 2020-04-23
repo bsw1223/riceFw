@@ -50,8 +50,8 @@
 							</div>
 							<!--memNum-->
 							<div class="form-group">
-								<label>작성자</label> <input class="form-control" id="memNum"
-									name="memName" value="${list.memName}" readonly="readonly" />
+								<label>작성자</label> <input class="form-control" id="memId"
+									name="memId" value="${list.memId}" readonly="readonly" />
 							</div>
 							<input type="hidden" class="form-control" name ='memNum' value="${list.memNum}">
                 			<input type="hidden" class="form-control" name ='boViews' value="${list.boViews}">

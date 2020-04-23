@@ -7,6 +7,25 @@
 	crossorigin="anonymous"></script>
 
 
+<style>
+.box-body{
+	background-color: white;
+}
+.box-tools{
+	margin:auto;
+	display:flex;
+}
+.select{
+	float:left;
+	
+}
+.input-group{
+	float:left;
+	width: 170px;
+}
+
+</style>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -31,7 +50,7 @@
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-						<div style="float: right;">
+						<%-- <div style="float: right;">
 							<select id="getListWithPaging" name="sel" onchange="selChange()">
 								<option value="5"
 									<c:if test="${pageMaker.cri.amount == 5}">selected</c:if>>5개씩보기</option>
@@ -42,11 +61,17 @@
 								<option value="20"
 									<c:if test="${pageMaker.cri.amount == 20}">selected</c:if>>20개씩보기</option>
 							</select>
-						</div>
+						</div> --%>
+						
 						<!-- 옵션선택 끝 -->
-
-
-						<table id="example2" class="table table-bordered table-hover">
+						<!-- top -->
+						<div id="top">
+			 				<div class="pull-left" style="padding:10px;">
+								<form action="/mypage/board/qna/writeView" method="get">
+							      	<button id='regBtn' type="button" class="btn btn-block btn-primary">게시판 만들기</button>
+							     </form> 
+							</div> 
+		<%-- 				<table id="example2" class="table table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>글번호</th>
@@ -75,44 +100,59 @@
 									</tr>
 								</c:forEach>
 							</tbody>
-						</table>
+						</table> --%>
+						<div class="box-tools pull-right">
+							<form id='searchForm' action="/mypage/board/qna/list" method ="get">
+								<div class='select'>
+				                  <select name='type' style="width:100px;height:30px;">
+				                    <option value=""
+				                    	<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+				                    <option value="T"
+				                    	<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
+				                    <option value="C"
+				                    	<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
+				                    <option value="W"
+				                    	<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자<option>
+				                    <option value="TWC"
+				                    	<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>전체</option>
+				                  </select>
+				                  </div>
+				                  <!-- /select option -->
+				                <div class="input-group input-group-sm hidden-xs" >
+				                    <input type="text" name='keyword'
+				                    	value='<c:out value="${pageMaker.cri.keyword}"/>'class="form-control pull-right">
+				                    <div class="input-group-btn">
+				                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+				                  </div>
+							</div>
+							</form>
+			            </div>
+			           </div>
+			           <!-- /top -->
 						<div>
-							<ul class="pagination">
-								<c:if test="${pageMaker.prev}">
-									<li class="page-item"><a class="page-link"
-										href="/board.do?page=${pageMaker.startPage-1 }&amount=${ pageMaker.cri.amount}">Previous</a></li>
-								</c:if>
-								<c:forEach begin="${pageMaker.startPage }"
-									end="${pageMaker.endPage }" var="pnum">
-									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-										<a class="page-link"
-										href="/board.do?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
-									</li>
-								</c:forEach>
-								<c:if test="${pageMaker.next}">
-									<li class="page-item"><a class="page-link"
-										href="/board.do?page=${pageMaker.endPage+1 }&amount=${ pageMaker.cri.amount}">Next</a></li>
-								</c:if>
-							</ul>
+						<!-- Main row -->
+					      <div class="row">
+					        <!-- Left col -->
+					        <section class="col-lg-7 connectedSortable">
+					          <!-- Custom tabs (Charts with tabs)-->
+					          <div class="nav-tabs-custom">
+					            <!-- Tabs within a box -->
+					            <ul class="nav nav-tabs pull-right">
+					              <li class="active"><a href="#popular" data-toggle="tab">최신글/인기글</a></li>
+					              <li><a href="#wholecomm" data-toggle="tab"></a>전체커뮤니티</li>
+					            </ul>
+					            <div class="tab-content no-padding">
+					              <!-- Morris chart - Sales -->
+					              <div class="chart tab-pane active" id="popular" style="position: relative; height: 300px;"></div>
+					              <div class="chart tab-pane" id="wholecomm" style="position: relative; height: 300px;"></div>
+					            </div>
+					          </div>
+					          <!-- /.nav-tabs-custom -->
+							</section>
+							</div>
+							</div>
 						</div>
-						<div class="offset-md-8">
-							<form action="#" method="get" class="sidebar-form">
-								<div class="input-group">
-									<input type="text" name="q" class="form-control"
-										placeholder="Search..."> <span class="input-group-btn">
-										<button type="submit" name="search" id="search-btn"
-											class="btn btn-flat">
-											<i class="fa fa-search"></i>
-										</button>
-									</span>
-								</div>
-							</form>
-						</div>
-						<div class="offset-md-8">
-							<form action="/register.do">
-								<button type="submit" class="btn pull-right">글쓰기</button>
-							</form>
-						</div>
+						<!-- /main -->		
 						<!-- /.box-body -->
 					</div>
 					<!-- /.box -->

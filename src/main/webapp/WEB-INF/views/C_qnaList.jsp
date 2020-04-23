@@ -97,6 +97,7 @@
 	                  </td>
 	                  <td><c:out value="${list.memNum}"/></td>
 	                  <td><c:out value="${list.boRegDate}"/></td>
+	                  <!-- 답변여부 확인하는 td로 수정해야함 -->
 	                  <td><c:out value="${list.boUpdateDate}"/></td>
 	                </tr>
                 </c:forEach>
@@ -112,19 +113,19 @@
 	              <ul class="pagination pagination-sm no-margin">
 	                	<c:if test="${pageMaker.prev}">
 							<li class="paginate_button prev">
-								<a href="/mypage/board/list/page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
+								<a href="/mypage/board/qna/list?page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
 							</li>
 						</c:if>
 	                	
 	                   <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
-							<li class="page-item ${num == pageMaker.cri.page?" active ":""}">
+							<li class="page-item ${pageMaker.cri.page==num?" active ":""}">
 								<a href="/mypage/board/qna/list?page=${num}">${num}</a>
 							</li>
 						</c:forEach>
 	                	
 	              		<c:if test="${pageMaker.next}">
 							<li class="paginate_button next">
-								<a href="/mypage/board/list/page=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
+								<a href="/mypage/board/qna/list?page=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
 							</li>
 						</c:if>
 	              </ul>
@@ -140,10 +141,7 @@
 <!-- /content wrapper -->
 </div>
  
- <form id="actionForm" action="/qna/list" method='get'>
-	<input type='hidden' name="page" value='${pageMaker.cri.page}' >
-	<input type='hidden' name="amount" value='${pageMaker.cri.amount}'>
-</form>   
+
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.classcomment">
+	<resultMap id="CommentResult" type="C001CommentVO">
+		<result property="boNum" column="boNum" />
+		<result property="comtNum" column="comtNum" />
+		<result property="parentNum" column="parentNum" />
+		<result property="userId" column="userId" />
+		<result property="comtRegdate" column="comtRegdate" />
+		<result property="comtContent" column="comtContent" />
+		<result property="comtUpdateDate" column="comtUpdateDate" />
+	</resultMap>
+	
+	<insert id="insert">
+	<![CDATA[
+		insert into ClassComment(comtNum, boNum, comtContent, userId, comtRegdate, comtUpdateDate)
+		values (seq_reply.nextval,#{boNum},#{comtContent},#{userId}, TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(SYSDATE,'YYYY-MM-DD'))
+		]]>
+	</insert>
+
+	<select id="read" resultType="C001CommentVO">
+	<![CDATA[
+		select * from ClassComment 
+		where boNum=#{boNum}
+		]]>
+	</select>
+
+	<delete id="delete">
+	<![CDATA[
+		delete from ClassComment where comtNum=#{comtNum}
+			]]>
+	</delete>
+
+	<update id="update">
+	<![CDATA[
+		update ClassComment set comtContent=#{comtContent}, comtUpdateDate=TO_CHAR(SYSDATE,'YYYY-MM-DD') 
+		where comtNum =#{comtNum}
+			]]>
+	</update>
+
+	<select id="getListWithPaging" resultType="C001CommentVO">
+	<![CDATA[
+		select comtNum, boNum, comtContent, userId,comtRegdate, comtUpdateDate
+		from ClassComment
+		where boNum=#{boNum}
+		order by comtNum desc
+			]]>
+	</select>
+
+</mapper>

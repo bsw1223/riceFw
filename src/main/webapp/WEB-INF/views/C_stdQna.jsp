@@ -43,17 +43,18 @@
 							name="boContent" value='<c:out value ="${list.boContent}"/>'
 							readonly="readonly" />
 					</div>
-					
+
 					<!-- bulMgr -->
 					<div class="form-group">
 						<label>내용</label> <input type="text" class="form-control"
-							name="memName" value='<c:out value ="${list.memName}"/>'
+							name="memId" value='<c:out value ="${list.memId}"/>'
 							readonly="readonly" />
 					</div>
 
 					<!-- bulPhoneNum -->
 					<div class="form-group">
-						<label>업데이트날짜</label> <input type="text" class="form-control" name="boUpdateDate"
+						<label>업데이트날짜</label> <input type="text" class="form-control"
+							name="boUpdateDate"
 							value='<c:out value ="${list.boUpdateDate}"/>'
 							readonly="readonly" />
 					</div>
@@ -67,6 +68,22 @@
 
 					<!-- /.box-footer -->
 				</div>
+				<div class='row'>
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<i class="fa fa-comments fa-fw"></i>Reply
+								</div>
+
+								<div class="panel-body">
+									<ul class='chat'>
+
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</div>
 				<!-- /.box -->
 			</div>
 			<!-- /.col -->
@@ -76,6 +93,79 @@
 	<!-- /.content -->
 </div>
 </head>
+<script type="text/javascript"
+	src="/resources/bower_components/bootstrap/comment.js"></script>
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						console.log("==============");
+						console.log("JS TEST!!");
+
+						var memIdValue = '<c:out value="${list.memId}"/>';
+						var boNumValue = '<c:out value="${list.boNum}"/>';
+						var replyUL = $(".chat");
+
+						showList(1, 10);
+
+						function showList(page, amount) {
+							replyService.getList(
+											{
+												boNum : boNumValue,
+												memId : memIdValue,
+												page : page || 1,
+												amount : amount || 10
+											},
+											function(list) {
+												var str = "";
+												if (list == null
+														|| list.length == 0) {
+													replyUL
+															.html("작성된 댓글이 없습니다.");
+
+													return "";
+												}
+												for (var i = 0, len = list.length || 0; i < len; i++) {
+													str += "<li class='left clearfix' data-comtNum='"+list[i].comtNum+"'name='comtNum' id='comtNum'>";
+													str += "<div><div class='header'><strong class='primary-font' id='userId'>"
+															+ list[i].userId
+															+ "</strong>";
+													str += "<small class='pull-right text-muted' id='comtRegdate'>"
+															+ list[i].comtRegdate
+															+ "</small></div>";
+													str += "<p id='comtContent' name='comtContent'>"
+															+ list[i].comtContent
+															+ "</p>";
+													if (list[i].userId == memIdValue) {
+														str += "<input type = 'hidden' name='comtNum' id='comtNum' value='"+list[i].comtNum+"'>";												
+														str += '<a href="javascript:void(0)" onclick="fn_editReply(' + list[i].comtNum + ', \'' + list[i].userId + '\', \'' + list[i].comtContent + '\' )" style="padding-right:5px">수정</a>';
+														str += '<a href="javascript:void(0)" onclick="replyremove()" >삭제</a></div></div>';
+													}
+													str += "</li>";
+												}
+												;
+												replyUL.html(str);
+											})
+						}
+
+					});
+
+	function replysubmit() {
+		replyService.add({
+			comtContent : $('input#comtContent').val(),
+			userId : $('input#userId').val(),
+			boNum : $('input#boNum').val()
+		}, function(result) {
+			if (comtContent == '') {
+				return false;
+			} else {
+				location.reload();
+			}
+		});
+
+	};
+
+</script>
 
 
 

@@ -40,27 +40,35 @@
             <!-- /.box-header -->
              <div class="box-body">
               <!-- boTitle -->
-              <form role="form" name="writeForm"action ="/mypage/board/qna/write" method='post'>
+              <form id="writeForm" role="form" name="writeForm"enctype="multipart/form-data">
              	<div class="form-group">
                   <label>제목</label>
-                  <input type="text" class="form-control" name ='boTitle'>
+                  <input type="text" class="form-control" id='boTitle' name ='boTitle'>
                 </div>
            		  <!-- boContent -->
                 <div class="form-group">
                   <label>내용</label>
-                  <textarea class="form-control" id="editor" rows="3" name ='boContent'></textarea>
+                  <textarea class="form-control" id="editor" rows="3" id='boContent' name ='boContent'></textarea>
                 </div>
 				<!--memNum-->
 				<div class ="form-group">
               		<label>작성자</label><input class ="form-control"name ='memNum'>
               	</div>
+              	<!--file-->
+				<div class ="form-group">
+              		<label>파일첨부</label>
+              		<input multiple class ="form-control"name ='file' type ='file'>
+              	</div>
+              	<!-- file add -->
+              	<div id="fileIndex"></div>
 	       	    <!-- /.box-body -->  
 	            <div class="box-footer">
-                	<button id="regBtn"data-oper="submit" class="btn btn-primary" >등록</button>
-                    <button id="listBtn"data-oper="list" class="btn btn-default">뒤로가기</button>
+                	<button id="regBtn" data-oper="submit" class="btn btn-primary" >등록</button>
+                    <button id="listBtn" class="btn btn-default">뒤로가기</button>
                 </div>
                <!-- /.box-footer -->
               </form> 	
+             <!--  <button id="fileAddBtn" class="btn btn-warning">파일 추가</button> -->
           </div>
           <!-- /.box -->
         </div>
@@ -71,30 +79,55 @@
     </section>
     <!-- /.content -->
   </div>
+  
  
  
-<form id="actionForm" action="/board.do" method='get'>
-	<input type="hidden" name="page" value='${pageMaker.cri.page}' >
-	<input type="hidden" name="amount" value='${pageMaker.cri.amount}' >
-</form>  
+
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		var formObj =$("form[name='writeForm']");
-		
-		$("#regBtn").on("click",function(){
-			self.location="/qna/list";
+	$(document).ready(function() {
+		var formObj = $("form[name='writeForm']");
+
+		$("#regBtn").on("click", function() {
+			if (!document.writeForm.boTitle.value) {
+				alert("제목을 입력하세요");
+				return false;
+			}
+			formObj.attr("action", "/mypage/board/qna/write");
+			formObj.attr("method", "post");
 			formObj.submit();
-		 });
-		 $("#listBtn").on("click",function(){
-		 	self.location="/qna/list";
-		 });
+
+		});
+
+		$("#listBtn").on("click", function(e) {
+			formObj.attr("action", "/mypage/board/qna/list");
+			formObj.attr("method", "get");
+		});
+
+		/* fn_addFile(); */
 	});
-	
-	CKEDITOR.replace( 'editor',{
-     	enterMode : CKEDITOR.ENTER_BR,
- 	});
-	
+
+/* 	function fn_addFile() {
+		var fileIndex = 1;
+		console.log("aaaa");
+		$("#fileAddBtn").on("click", function() {
+			$("#fileIndex").append("<div><input class ='form-control' style='float:left;' name='file_"
+									+(fileIndex++)+"' type ='file'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"
+									+"삭제"+"</button></div>");
+		});
+		
+		$("#fileDelBtn").on("click",function(){
+			$(this).parent().remove();
+		});
+	} */
+	CKEDITOR.plugins.addExternal('abbr', '/myplugins/abbr/', 'plugin.js');
+
+	CKEDITOR.replace('editor', {
+		enterMode : CKEDITOR.ENTER_BR,
+		filebrowserBrowseUrl : '/browser/browse.php',
+		filebrowserUploadUrl : '/uploader/upload.php'
+
+	});
 </script>
 <%@ include file = "footer.jsp" %>
 

@@ -15,13 +15,13 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1><c:out value='${pageTitle}' />
-        <small>과목명</small>
+      <h1>
+      	<c:out value='${pageTitle}' />
       </h1>
       <ol class="breadcrumb" >
         <li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>
-        <li><a href="#">과목명</a></li>
-        <li class="active"><c:out value='${pageTitle}' /></li>
+        <li><a href="#">c:out value='${pageTitle}' /></a></li>
+        <li class="active">자료</li>
       </ol>
     </section>
     
@@ -52,7 +52,7 @@
 
                 <div class="form-group">
                   <label>작성자</label>
-                  <input type="text" class="form-control" value="${memName}" readonly="readonly">
+                  <input type="text" class="form-control" value="${memId}" readonly="readonly">
                 </div>
                 
                 	<input type="hidden" class="form-control" name ='memNum' value="${memNum}">

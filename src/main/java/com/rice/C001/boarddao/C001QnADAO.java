@@ -1,6 +1,7 @@
 package com.rice.C001.boarddao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rice.C001.boarddto.Criteria;
 import com.rice.C001.qnavo.C001QnAVO;
@@ -21,9 +22,15 @@ public interface C001QnADAO {
 
 	public void insert(C001QnAVO vo);
 	
-	public void insertSelectKey(C001QnAVO vo);
+	/* public void insertSelectKey(C001QnAVO vo); */
 	
 	public List<C001QnAVO> getListWithPaging(Criteria cri);
 
+	public void insertFile(Map<String, Object> map);
 	
+	public List<Map<String, Object>> selectFileList(String boNum)throws Exception;
+
+	public Map<String, Object> selectFileInfo(Map<String, Object>map)throws Exception;
+
+	public void updateFile(Map<String,Object>map)throws Exception;
 }

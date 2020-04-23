@@ -9,6 +9,7 @@
         <result property="title" column="schTitle" />
         <result property="start" column="schStart" />
         <result property="end" column="schEnd" />
+        <result property="description" column="schDescription" />
         <result property="schDescription" column="schDescription" />
         <result property="type" column="schType" />
         <result property="memNum" column="memNum" />

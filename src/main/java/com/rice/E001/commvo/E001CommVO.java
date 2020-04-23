@@ -1,8 +1,9 @@
 package com.rice.E001.commvo;
 
 public class E001CommVO {
-	String commId, commName, commDesc, memId;
-	Integer commLevel;
+	String commId, commName, commDesc, memId, commURL;
+
+	int commLevel;
 
 	public void setCommLevel(Integer commLevel) {
 		this.commLevel = commLevel;
@@ -47,5 +48,13 @@ public class E001CommVO {
 	public void setCommLevel(int commLevel) {
 		this.commLevel = commLevel;
 	}
+	public String getCommURL() {
+		return commURL;
+	}
+
+	public void setCommURL(String commURL) {
+		this.commURL = commURL;
+	}
+
 
 }

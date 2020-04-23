@@ -95,6 +95,7 @@ public class C001DocContoller {
 		c001DocService.updateViewCnt(boNum, boURL, boCode);
 		model.addAttribute("sjctName", c001DocService.getsbjc(boURL));
 		model.addAttribute("list", c001DocService.read(boNum, boURL, boCode));
+		model.addAttribute("memId", vo.getMemId());
 		if (vo == null) {
 			return "redirect:/";
 		} else if (vo.getAuthId().equals("1001")) { // ÇÐ»ý
