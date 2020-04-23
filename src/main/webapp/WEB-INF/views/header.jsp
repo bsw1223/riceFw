@@ -48,7 +48,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-<body class="hold-transition skin-green-light sidebar-mini">
+<body class="hold-transition skin-blue-light sidebar-mini">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <script>
