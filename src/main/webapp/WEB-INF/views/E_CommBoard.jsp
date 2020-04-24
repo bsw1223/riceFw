@@ -179,6 +179,8 @@
 				      <!--       </div> -->
 				          </section>
 			           	<!-- /top -->
+			           	
+			           	<section class="connectedSortable">
 					          <div class="nav-tabs-custom">
 					            <!-- Tabs within a box -->
 					            <ul class="nav nav-tabs pull-left">
@@ -187,13 +189,13 @@
 					            </ul>
 					            <div class="tab-content padding">
 					              <!-- Morris chart - Sales -->
-					              <div class="chart tab-pane active" id="popular" style="position: relative; height: 300px;">
+					              <div class="chart tab-pane active" id="popular" style="position: relative; height: 200px;">
 					              		<table id="example2" class="table table-bordered table-hover">
 											<thead>
 												<tr>
 													<th style="width: 60px;">글번호</th>
 													<th >제목</th>
-													<th style="width: 120px;">커뮤티니 명</th>
+													<th style="width: 120px;">커뮤니티 명</th>
 													<th style="width: 100px;">작성일자</th>
 													<th style="width: 60px;">조회수</th>
 													<th style="width: 80px;">좋아요수</th>
@@ -242,12 +244,13 @@
 					             	 </div>
 					           	 </div>
 					          </div>
-							</div>
+					         </section>
+						</div>
 						<!-- /main -->
 			  		</div>
 				  <!-- /content -->
 			 </div>
-			 </div>
+			</div>
 		</section>
 	  </div>
 	 

@@ -63,28 +63,26 @@
               	</div>
               	
               	<!-- file -->
-              	
+              	<div class ="form-group" style="margin:15px;" >
 	              	<c:forEach var="file" items="${file}" varStatus="var">
 		              	<div>
 	    	          		<input type='hidden' id="classfileNum" name="classfileNum_${var.index}" value="${file.CLASSFILENUM}"/>
 		              		<input type='hidden' id="fileName" name="fileName" value="classfileNum_${var.index}">
 		              		<a href ="#" id="fileName" onclick="return false;">${file.FILENAME}</a>(${file.FILESIZE}kb)
-		              		<button id="fileDel" onclick="fn_del('${file.CLASSFILENUM}','classfileNum_${var.index}');" type="button">삭제</button>
+		              		<button id="fileDel" onclick="fn_del('${file.CLASSFILENUM}','${var.index}');" type="button" class="pull-right">삭제</button>
 		              	</div>
 	              	</c:forEach>
-	              	
-				<div id="fileIndex"></div>
-              	
-              	
+	             </div>
+	             <div>
+	           		<input type ='file'class ='form-control'name='file_"+(fileIndex++)+"'>
+	           	 </div>
 	       	    <!-- /.box-body -->  
 	            <div class="box-footer">
                 	<button data-oper="register" class="btn btn-primary">저장</button>
-                	<button data-oper="fileAddBtn"class ="btn btn-primary">파일 추가</button>
-             		<button data-oper="cancel" class="btn btn-primary">취소</button>
+             		<button data-oper="cancel" class="btn">취소</button>
                 </div>
                <!-- /.box-footer -->	
           	</form>
-          	
           </div>
           <!-- /.box -->
         </div>
@@ -109,32 +107,41 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var formObj = $("form[name='updateForm']");
+		
+		$(document).on("click","#fileDel", function(){
+			$(this).parent().remove();
+		})
+		
+		fn_addFile();
+		
 		$(document).on("click","#register",function(){
 	
 			formObj.attr("action","/mypage/board/qna/modify");
 			formObj.attr("method","post");
 			formObj.submit();
+			
+			console.log("file:"+file);
 		})	
 		$("#cancel").on("click",function(){
 			event.preventDefault();
 			location.href="/mypage/board/qna/list"
 		})
-		fn_addFile();
 	});
+
+
+	/*function fn_addFile(){
+			var fileIndex = 1;
+			//$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"<button type='button' style='float:right;' id='fileAddBtn'>"+"추가"+"</button></div>");
+			$(".fileAdd_btn").on("click", function(){
+				$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"+"삭제"+"</button></div>");
+			});
+			$(document).on("click","#fileDelBtn", function(){
+				$(this).parent().remove();
+				
+			});
+		}*/
 	
-	function fn_addFile() {
-		var fileIndex = 1;
-		console.log("aaaa");
-		$("#fileAddBtn").on("click", function() {
-			$("#fileIndex").append("<div><input class ='form-control' style='float:left;' name='file_"
-									+(fileIndex++)+"' type ='file'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"
-									+"삭제"+"</button></div>");
-		});
-		
-		$(document).on("click","#fileDel",function(){
-			$(this).parent().remove();
-		});
-	}
 	var fileNoArray = new Array();
 	var fileNameArray = new Array();
 
@@ -142,6 +149,8 @@
 		
 		fileNoArray.push(value);
 		fileNameArray.push(name);
+		console.log("fileNoArray:"+fileNoArray);
+		console.log("fileNameArray:"+fileNameArray);
 		
 		$("#fileNoDel").attr("value",fileNoArray);
 		$("#fileNameDel").attr("value",fileNameArray);
