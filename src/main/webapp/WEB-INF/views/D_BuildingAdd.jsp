@@ -54,12 +54,10 @@ $(document).on("click","#buildingAdd",function(){
                 <div class="form-group">
                   <label>건물명</label>
                   <input type="text" class="form-control classNumber" placeholder="" id="bulName">
-                  </select>
                 </div>
                 <div class="form-group">
                   <label>건물주소</label>
                   <input type="text" class="form-control classNumber" placeholder="" id="bulAddress">
-                  </select>
                 </div>
                 <div class="form-group">
                   <label>관리자</label>
@@ -67,7 +65,6 @@ $(document).on("click","#buildingAdd",function(){
                 </div>
                   <label>관리자 전화번호</label>
                   <input type="text" class="form-control classNumber" placeholder="" id="bulPhoneNum">
-                  </select>
                 <div class="form-group">
                   <label>강의실수</label>
                   <input type="text" class="form-control people classCapacity " placeholder="숫자만 입력해 주세요" id="bulClassNum">

@@ -77,10 +77,10 @@
 							<div class="box-body">
 							
 								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">일정번호</label>
+									<!-- <label for="inputEmail3" class="col-sm-2 control-label">일정번호</label> -->
 
 									<div class="col-sm-10">
-										<input type="text" class="form-control eventId" id="eventId"
+										<input type="hidden" class="form-control eventId" id="eventId"
 											placeholder="">
 									</div>
 								</div>
@@ -155,10 +155,10 @@
 							<div class="box-body">
 							
 								<div class="form-group">
-									<label for="inputEmail3" class="col-sm-2 control-label">일정번호</label>
+									<!-- <label for="inputEmail3" class="col-sm-2 control-label">일정번호</label> -->
 
 									<div class="col-sm-10">
-										<input type="text" class="form-control eventId" id="iEventId" placeholder="">
+										<input type="hidden" class="form-control eventId" id="iEventId" placeholder="">
 									</div>
 								</div>
 								

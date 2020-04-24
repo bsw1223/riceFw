@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="mapper.f001Lecture">	
+ 	<resultMap type="F001LectureVO" id="f001Lecture">
+ 		<result property="subId" column="subId"/>
+ 		<result property="codeName" column="codeName"/>
+ 		<result property="codeOrder" column="codeOrder"/>
+ 		<result property="subCode" column="subCode"/>
+ 		<result property="subDesc" column="subDesc"/>
+ 		<result property="subRegDate" column="subRegDate"/>
+ 		<result property="subAblDate" column="subAblDate"/>
+ 	</resultMap>
+
+
+
+<!-- select subCode -->
+	<select id="selectSubCode" resultType="java.util.Map">
+      <![CDATA[
+		select codeName, codeId from code where codegroup='14' ORDER by codeorder
+		      ]]>
+	</select>
+
+
+<!--select subject sequence -->
+	<select id="selectSubSeq" resultType="java.util.Map">
+      <![CDATA[
+		select seq_subject.nextval subId from dual
+      ]]>
+	</select>
+
+
+<!-- insert lecture -->
+<insert id="lectureAdd" parameterType="F001LectureVO">
+      <![CDATA[
+		INSERT INTO SUBJECT(subId,subName,subDesc,subRegDate,subAblDate,subCode)
+   		 VALUES(#{subId,jdbcType=VARCHAR},#{subName,jdbcType=VARCHAR},#{subDesc,jdbcType=VARCHAR},#{subRegDate,jdbcType=VARCHAR},#{subAblDate,jdbcType=VARCHAR},#{subCode,jdbcType=VARCHAR})
+      ]]>
+</insert>
+
+
+
+<!-- select SubInfo -->
+	<select id="selectSubInfo" resultType="java.util.Map">
+      <![CDATA[
+		SELECT 
+		    subId,
+		    subName,
+		    subDesc,
+		    subRegDate,
+		    subAblDate,
+		    subCode
+		FROM SUBJECT
+		      ]]>
+	</select>
+
+
+
+
+<!-- select LecturePlanInfo -->
+	<select id="selectLecturePlanInfo" resultType="java.util.Map">
+      <![CDATA[
+		SELECT 
+		       memNum
+		FROM LECTUREPLAN
+	    where planCode = #{subCode,jdbcType=VARCHAR}
+		      ]]>
+	</select>
+
+<!-- 이름가져오기 -->
+	<select id="selectMemName" resultType="String">
+      <![CDATA[
+		select 
+			memname 
+		from 
+			member 
+		where 
+			memnum=#{memNum,jdbcType=VARCHAR}
+		      ]]>
+	</select>
+<!-- 이름다시 가져오기 -->
+	<select id="reGetTeaName" resultType="String">
+      <![CDATA[
+		select 
+			memname 
+		from 
+			member 
+		where 
+			memnum=#{memNum,jdbcType=VARCHAR}
+		      ]]>
+	</select>
+	
+	
+<!-- 강의정보 가져오기 -->
+	<select id="lecturePlanInfoND" resultType="java.util.Map">
+      <![CDATA[
+		SELECT 
+		    planLectureContent,
+		    planId,
+		    planName,
+		    planCode,
+		    memNum
+		FROM LECTUREPLAN
+	    where planCode = #{subCode,jdbcType=VARCHAR}
+	    and memNum = #{memNum,jdbcType=VARCHAR}
+		      ]]>
+	</select>
+	
+	
+
+<!-- 강의정보 가져오기 전체 -->
+	<select id="selectLecPlanId" resultType="java.util.Map">
+      <![CDATA[
+		SELECT 
+		   planStartDate,
+		   planLectureContent,
+		   planId,
+	       planEndDate,
+	       planStartTime,
+	       planEndTime,
+	       planName,
+	       planDescFile,
+	       planCapacity,
+	       planCode,
+	       planDescFile,
+	       memNum
+		FROM LECTUREPLAN
+	    where planId = #{planId,jdbcType=VARCHAR}
+		      ]]>
+	</select>
+
+
+
+<!-- 오픈클래스 등록 -->
+	<insert id="insertOpenLec" >
+      <![CDATA[
+		INSERT INTO OPENCLASS
+		(
+			openStartDate,
+			classDesc,
+			classId,
+			openclassId,
+			classCapacity,
+			memNum,
+			classPrice,
+			openclassName,
+			subId,
+			openEndDate,
+			openStartTime,
+			openEndTime
+			)
+    VALUES(
+		    #{openStartDate,jdbcType=VARCHAR},
+		    #{classDesc,jdbcType=VARCHAR},
+		    #{classId,jdbcType=VARCHAR},
+		    (seq_lecOpen.nextval),
+		    #{classCapacity},
+		    #{memNum,jdbcType=VARCHAR},
+		    #{classPrice,jdbcType=VARCHAR},
+		    #{openclassName,jdbcType=VARCHAR},
+		    #{subId,jdbcType=VARCHAR},
+		    #{openEndDate,jdbcType=VARCHAR},
+		    #{openStartTime,jdbcType=VARCHAR},
+		    #{openEndTime,jdbcType=VARCHAR}
+		    )
+		      ]]>
+	</insert>
+
+
+
+
+
+
+	
+ 
+</mapper>
