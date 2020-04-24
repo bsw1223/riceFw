@@ -6,6 +6,7 @@ public class Criteria {
 
 	private int page;
 	private int amount;
+	private String[] typeArr;
 	private String boCode;
 	private String boURL;
 	private String type;
@@ -42,6 +43,10 @@ public class Criteria {
 				+ type + ", keyword=" + keyword + "]";
 	}
 
+	public void setTypeArr(String[] typeArr) {
+		this.typeArr = typeArr;
+	}
+
 	public int getPage() {
 		return page;
 	}
@@ -73,8 +78,8 @@ public class Criteria {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-
+	
 	public String[] getTypeArr() {
-		return type==null? new String[] {}:type.split("");
+		return type == null? new String[]{}: type.split("");
 	}
 }

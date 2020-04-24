@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 /* F001 회원관리 */
 @Component("F001VO")
 public class F001VO {
-	private static final Logger logger = LoggerFactory.getLogger(F001VO.class);
 	/*
 		memNum    VARCHAR2(20) DEFAULT '1000' NOT NULL,
 	    memId    VARCHAR2(30) NOT NULL,
@@ -38,11 +37,7 @@ public class F001VO {
 	String memStateCode;
 	String snsId;
 	String snsType;
-	
-	public F001VO() {
-		logger.info("F001VO");
-	}
-	
+
 	public String getMemNum() {
 		return memNum;
 	}

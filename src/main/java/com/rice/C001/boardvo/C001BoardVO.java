@@ -1,6 +1,5 @@
 package com.rice.C001.boardvo;
 
-import java.util.Date;
 
 public class C001BoardVO {
 	private Long bno;

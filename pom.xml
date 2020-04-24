@@ -41,6 +41,19 @@
 		<artifactId>jackson-databind</artifactId> 
 		<version>2.9.8</version> 
 	</dependency>
+	
+		<!-- MultipartHttpServletRequset -->
+		 <dependency>
+			 <groupId>commons-io</groupId>
+			 <artifactId>commons-io</artifactId>
+			 <version>2.0.1</version>
+		 </dependency>
+		 
+		 <dependency>
+			 <groupId>commons-fileupload</groupId>
+			 <artifactId>commons-fileupload</artifactId>
+			 <version>1.2.2</version>
+		 </dependency>
 
 		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
 		<dependency>
@@ -214,7 +227,6 @@
 <!-- 			<artifactId>jackson-dataformat-xml</artifactId> -->
 <!-- 			<version>2.9.9</version> -->
 <!-- 		</dependency> -->
-
 		<!--댓글에서 사용-->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -222,7 +234,13 @@
 			<version>2.8.2</version>
 		</dependency>
 
-
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+		<!-- 채팅 websocket  -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>4.0.4.RELEASE</version>
+		</dependency>
 
 		<!-- Local -->
 		<dependency>
@@ -240,7 +258,6 @@
 			<artifactId>poi</artifactId>
 			<version>3.13-all</version>
 		</dependency>
-
 		<dependency>     
 		  <groupId>log</groupId>
 		  <artifactId>log4sql</artifactId>

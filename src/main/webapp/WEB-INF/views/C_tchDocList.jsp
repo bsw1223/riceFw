@@ -67,7 +67,7 @@
 												href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
 													<c:out value='${listB.boTitle}' />
 											</a></td>
-											<td><c:out value='${listB.memName}' />
+											<td><c:out value='${listB.memId}' />
 											<td><c:out value='${listB.boViews}' /></td>
 									</c:forEach>
 								</tbody>

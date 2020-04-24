@@ -18,8 +18,8 @@
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#">Tables</a></li>
-			<li class="active">Data tables</li>
+			<li><a href="#"><c:out value='${sjctName}' /></a></li>
+			<li class="active">공지사항</li>
 		</ol>
 	</section>
 
@@ -52,7 +52,7 @@
 								<thead>
 									<tr>
 										<th>No.</th>
-										<th>공지사항</th>
+										<th>제목</th>
 										<th>작성자</th>
 										<th>작성날짜</th>
 										<th>조회수</th>
@@ -67,7 +67,7 @@
 												href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
 													<c:out value='${listB.boTitle}' />
 											</a></td>
-											<td><c:out value='${listB.memName}' />
+											<td><c:out value='${listB.memId}' />
 											<td><c:out value='${listB.boRegdate}' /></td>
 											<td><c:out value='${listB.boViews}' /></td>
 									</c:forEach>
