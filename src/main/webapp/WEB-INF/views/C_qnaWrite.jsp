@@ -56,8 +56,11 @@
               	</div>
               	<!--file-->
 				<div class ="form-group">
-              		<label>파일첨부</label>
+              		<label id="fileUpload" >파일첨부</label>
               		<input multiple class ="form-control"name ='file' type ='file'>
+              		 <c:forEach var="file" items="${files}">
+						<div>${files.ORG_FILE_NAME}</div>(${files.FILE_SIZE}kb)<br>
+					</c:forEach> 
               	</div>
               	<!-- file add -->
               	<div id="fileIndex"></div>
@@ -104,22 +107,26 @@
 			formObj.attr("method", "get");
 		});
 
-		/* fn_addFile(); */
-	});
-
-/* 	function fn_addFile() {
-		var fileIndex = 1;
-		console.log("aaaa");
-		$("#fileAddBtn").on("click", function() {
-			$("#fileIndex").append("<div><input class ='form-control' style='float:left;' name='file_"
-									+(fileIndex++)+"' type ='file'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"
-									+"삭제"+"</button></div>");
-		});
 		
-		$("#fileDelBtn").on("click",function(){
-			$(this).parent().remove();
-		});
+	});
+	
+/* 	function checkFileName(fileName){
+		$(document).on("click","#fileUpload",function(e){
+			var formData = new FormData();
+			var inputFile = $("input[name='uploadFile']");
+			var files = inputFile[0].files;
+	
+			console.log(files);
+			for(var i=0;i<files.length;i++){
+				formData.append("uploadFile",files[i]);
+				
+				}
+			}
+		}) 
 	} */
+
+ 	
+	
 	CKEDITOR.plugins.addExternal('abbr', '/myplugins/abbr/', 'plugin.js');
 
 	CKEDITOR.replace('editor', {

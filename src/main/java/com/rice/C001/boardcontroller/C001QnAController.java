@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -87,17 +86,16 @@ public class C001QnAController {
 	
 	//modify
 	@RequestMapping(value="/qna/modify",method=RequestMethod.POST)
-	public String modify(C001QnAVO vo,RedirectAttributes rttr,classattachedFileVO filevo,
+	public String modify(C001QnAVO vo,RedirectAttributes rttr,
 						@ModelAttribute("cri")Criteria cri,
 						@RequestParam(value="fileNoDel[]",required=false)String[] files,
 						@RequestParam(value="fileNameDel[]",required=false)String[] fileNames,
 						MultipartHttpServletRequest mpRequest)throws Exception{
 		
-		//String files = request.getParameter("fileNoDel");
-		//String fileNames= request.getParameter("fileNameDel");
 		System.out.println("files:"+files);
 		System.out.println("filNames:"+fileNames);
 		c001QnAService.modify(vo,files, fileNames, mpRequest);
+		/* c001QnAService.insert(vo,mpRequest); */
 		
 		rttr.addAttribute("page",cri.getPage());
 		rttr.addAttribute("amount",cri.getAmount());

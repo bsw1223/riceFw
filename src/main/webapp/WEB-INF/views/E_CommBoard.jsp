@@ -101,9 +101,127 @@
 				</div>
 				<!-- /.box-body -->
 			</div>
+<<<<<<< HEAD
 			<!-- /.box -->
 		</div>
 		<!-- /.col -->
+=======
+		<!-- tab& search -->
+		<div class="col-md-9">
+	  <!-- Custom tabs (Charts with tabs)-->
+          <!-- general form elements -->
+          <div class="box">
+   			 <!-- box body -->
+				<div class="box-body">
+					<!-- top -->
+						<section>
+						<!-- 	<div class="row"> -->
+							<div class="box-tools pull-right" style="padding:20px;">
+								<form id='searchForm' action="/comm/searchcomm" method ="get">
+									<div class='select'>
+					                  <select name='type' style="width:100px;height:30px;">
+					                    <option value=""
+					                    	<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+					                    <option value="T"
+					                    	<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
+					                    <option value="C"
+					                    	<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
+					                    <option value="W"
+					                    	<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자<option>
+					                    <option value="TWC"
+					                    	<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>전체</option>
+					                  </select>
+					                  </div>
+					                  <!-- /select option -->
+					                <div class="input-group input-group-sm hidden-xs" >
+					                    <input type="text" name='keyword'
+					                    	value='<c:out value="${pageMaker.cri.keyword}"/>'class="form-control pull-right">
+					                    <div class="input-group-btn">
+					                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+					                  </div>
+									</div>
+								</form>
+				            </div>
+				      <!--       </div> -->
+				          </section>
+			           	<!-- /top -->
+			           	
+			           	<section class="connectedSortable">
+					          <div class="nav-tabs-custom">
+					            <!-- Tabs within a box -->
+					            <ul class="nav nav-tabs pull-left">
+					              <li class="active"><a href="#popular" data-toggle="tab">최신글/인기글</a></li>
+					              <li><a href="#wholecomm" data-toggle="tab" style="width: 100px;"></a>전체커뮤니티</li>
+					            </ul>
+					            <div class="tab-content padding">
+					              <!-- Morris chart - Sales -->
+					              <div class="chart tab-pane active" id="popular" style="position: relative; height: 200px;">
+					              		<table id="example2" class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<th style="width: 60px;">글번호</th>
+													<th >제목</th>
+													<th style="width: 120px;">커뮤니티 명</th>
+													<th style="width: 100px;">작성일자</th>
+													<th style="width: 60px;">조회수</th>
+													<th style="width: 80px;">좋아요수</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="commboardlist" items="${commboardlist}">
+													<tr>
+														<td><c:out value="${commboardlist.boNum}" /></td>
+														<td><a
+															href='/comm/viewwritings?boNum=<c:out value="${commboardlist.boNum}"/>'>
+																<c:out value="${commboardlist.boTitle}" />
+														</a></td>
+														<td><c:out value="${commboardlist.memNum}" /></td>
+														<td><c:out value="${commboardlist.boRegDate}" /></td>
+														<td><c:out value="${commboardlist.boViews}" /></td>
+														<td><c:out value="${commboardlist.boLikes}" /></td>
+														
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table> 
+					              </div>
+					              <div class="chart tab-pane" id="wholecomm" style="position: relative; height: 300px;">
+					              		<table id="example2" class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<th style="width: 110px;">커뮤니티 번호</th>
+													<th style="width: 200px;">커뮤니티 명</th>
+													<th>커뮤니티 설명</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="commboardlist" items="${commboardlist}">
+													<tr>
+														<td><c:out value="${commboardlist.boNum}" /></td>
+														<td><a
+															href='/comm/viewwritings?boNum=<c:out value="${commboardlist.boNum}"/>'>
+																<c:out value="${commboardlist.boTitle}" />
+														</a></td>
+														<td><c:out value="${commboardlist.memNum}" /></td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table> 
+					             	 </div>
+					           	 </div>
+					          </div>
+					         </section>
+						</div>
+						<!-- /main -->
+			  		</div>
+				  <!-- /content -->
+			 </div>
+			</div>
+		</section>
+	  </div>
+	 
+		
+>>>>>>> refs/remotes/origin/master
 
 	</section>
 	<!-- /.content -->
