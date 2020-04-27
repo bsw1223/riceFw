@@ -26,7 +26,7 @@ public class F001LectureDAOImpl implements F001LectureDAO{
 	//select subId 
 	@Override
 	public Map<String, Object> selectSubId(F001LectureVO f001LectureVO) {
-		logger.info("ok");
+		//logger.info("ok");
 		Map<String, Object> subId = sqlsession.selectOne("mapper.f001Lecture.selectSubSeq", f001LectureVO);
 		return subId;
 	}
@@ -35,7 +35,7 @@ public class F001LectureDAOImpl implements F001LectureDAO{
 
 	@Override
 	public List<Map<String, Object>> selectSubCode(F001LectureVO f001LectureVO) {
-		logger.info("ok");
+		//logger.info("ok");
 		List<Map<String, Object>> subCode = sqlsession.selectList("mapper.f001Lecture.selectSubCode", f001LectureVO);
 		
 		return subCode;
@@ -104,4 +104,25 @@ public class F001LectureDAOImpl implements F001LectureDAO{
 		
 	}
 
+
+
+	@Override
+	public List<Map<String, Object>> classIdLec() {
+		List<Map<String, Object>> classIdLec= sqlsession.selectList("mapper.f001Lecture.classIdLec");
+		return classIdLec;
+	}
+
+	@Override
+	public List<Map<String, Object>> bulCodeLec(F001LectureVO f001LectureVO) {
+		List<Map<String, Object>> bulCodeLec= sqlsession.selectList("mapper.f001Lecture.bulCodeLec",f001LectureVO);
+		return bulCodeLec;
+	}
+
+
+
+	@Override
+	public List<Map<String, Object>> selectTeaName(F001LectureVO f001LectureVO) {
+		List<Map<String, Object>> selectTeaName= sqlsession.selectList("mapper.f001Lecture.selectTeaName",f001LectureVO);
+		return selectTeaName;
+	}
 }

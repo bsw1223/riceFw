@@ -26,7 +26,7 @@ public class F001LectureServiceImpl implements F001LectureService {
 
 	@Override
 	public Map<String, Object> selectSubId(F001LectureVO f001LectureVO) {
-		logger.info("ok");
+		//logger.info("ok");
 		Map<String, Object> subId = f001LectureDAO.selectSubId(f001LectureVO);
 		return subId;
 	}
@@ -34,7 +34,7 @@ public class F001LectureServiceImpl implements F001LectureService {
 
 	@Override
 	public List<Map<String, Object>> selectSubCode(F001LectureVO f001LectureVO) {
-		logger.info("ok");
+		//logger.info("ok");
 		List<Map<String, Object>> subCode = f001LectureDAO.selectSubCode(f001LectureVO);
 		return subCode;
 	}
@@ -95,5 +95,28 @@ public class F001LectureServiceImpl implements F001LectureService {
 		
 	}
 
+
+	@Override
+	public List<Map<String, Object>> classIdLec() {
+		List<Map<String, Object>> classIdLec = f001LectureDAO.classIdLec();
+		return classIdLec;
+	}
+
+
+	@Override
+	public List<Map<String, Object>> bulCodeLec(F001LectureVO f001LectureVO) {
+		List<Map<String, Object>> bulCodeLec = f001LectureDAO.bulCodeLec(f001LectureVO);
+		return bulCodeLec;
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectTeaName(F001LectureVO f001LectureVO) {
+		List<Map<String, Object>> selectTeaName = f001LectureDAO.selectTeaName(f001LectureVO);
+		return selectTeaName;
+	}
+
+
+	
 	
 }

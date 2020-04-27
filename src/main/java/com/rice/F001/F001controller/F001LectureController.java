@@ -145,4 +145,31 @@ public class F001LectureController {	// 회원관리
 //		System.out.println("controller_ insertOpenLec : "+ f001LectureVO.toString());
 	}
 	
+	
+	//강의실자료 가져오기
+	@RequestMapping(value = "classIdLec", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> classIdLec(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<Map<String, Object>> classIdLec=f001LectureService.classIdLec();
+		//System.out.println("controller_ classIdLec : "+ classIdLec.toString());
+		return classIdLec;
+	}
+
+	//강의실자료 가져오기2
+	@RequestMapping(value = "bulCodeLec", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> bulCodeLec(F001LectureVO f001LectureVO,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<Map<String, Object>> bulCodeLec=f001LectureService.bulCodeLec(f001LectureVO);
+		//System.out.println("controller_ bulCodeLec : "+ bulCodeLec.toString());
+		return bulCodeLec;
+	}
+	
+	//강사 검색
+	@RequestMapping(value = "selectTeaName", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> selectTeaName(F001LectureVO f001LectureVO,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<Map<String, Object>> selectTeaName=f001LectureService.selectTeaName(f001LectureVO);
+		//System.out.println("controller_ bulCodeLec : "+ selectTeaName.toString());
+		return selectTeaName;
+	}
 }

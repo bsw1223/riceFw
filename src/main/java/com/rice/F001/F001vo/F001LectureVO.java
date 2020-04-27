@@ -17,6 +17,7 @@ public class F001LectureVO {
 	String subAblDate = null;
 	String subName = null;
 	String memNum = null;
+	String memName = null;
 	String openStartDate = null;
 	String classId= null;
 	String classDesc= null;
@@ -27,13 +28,25 @@ public class F001LectureVO {
     String openEndDate= null;
     String openStartTime= null;
     String openEndTime= null;
-	
+    String bulId = null;
 	
 	
 	
 	
     
-    public String getClassId() {
+    public String getMemName() {
+    	return memName;
+    }
+    public void setMemName(String memName) {
+    	this.memName = memName;
+    }
+    public String getBulId() {
+		return bulId;
+	}
+	public void setBulId(String bulId) {
+		this.bulId = bulId;
+	}
+	public String getClassId() {
 		return classId;
 	}
 	public void setClassId(String classId) {

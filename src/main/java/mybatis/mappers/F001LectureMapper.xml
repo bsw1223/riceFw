@@ -55,6 +55,7 @@
 		    subAblDate,
 		    subCode
 		FROM SUBJECT
+		order by subname
 		      ]]>
 	</select>
 
@@ -171,6 +172,57 @@
 	</insert>
 
 
+<select id="classIdLec" resultType="java.util.Map">
+      <![CDATA[
+		SELECT 
+			a.bulid,
+		    b.bulName,
+		    a.classnumber,
+		    a.classCapacity
+		FROM CLASSROOM a , building b
+		where classcode = '강의실'
+		and a.bulid=b.bulid
+		order by b.bulName
+		      ]]>
+	</select>
+
+<select id="bulCodeLec" resultType="java.util.Map">
+      <![CDATA[
+		SELECT 
+			a.bulid,
+		    b.bulName,
+		    a.classnumber,
+		    a.classCapacity
+		FROM CLASSROOM a , building b
+		where classcode = '강의실'
+		and a.bulid=#{bulId}
+		and a.bulid=b.bulid
+		order by b.bulName
+		      ]]>
+	</select>
+<!-- 강사이름으로 검색 -->
+<select id="selectTeaName" resultType="java.util.Map">
+      <![CDATA[
+	select
+		 a.memnum,a.memname 
+    from
+		(
+	select 
+	memnum, memname from member where authid='1002' and memname like '%'||#{memName,jdbcType=VARCHAR}||'%'
+		)
+		a,
+		(
+	select 
+		* 
+	from 
+		LECTUREPLAN
+	where 
+		plancode=#{subCode,jdbcType=VARCHAR}
+		) b 
+	where 
+	a.memnum=b.memnum
+		      ]]>
+	</select>
 
 
 
