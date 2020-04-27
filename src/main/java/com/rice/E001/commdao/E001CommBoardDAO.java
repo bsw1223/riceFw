@@ -11,7 +11,7 @@ public interface E001CommBoardDAO {
 
 	public E001CommBoardVO read(String boNum);
 
-	public List<E001CommBoardVO> getListWithPaging(Criteria cri);
+	public List<E001CommBoardVO> getListWithPaging(Criteria cri, String commURL);
 
 	public int delete(String boNum);
 

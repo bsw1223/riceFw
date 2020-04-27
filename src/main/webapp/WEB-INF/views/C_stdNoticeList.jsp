@@ -7,6 +7,18 @@
 	crossorigin="anonymous">
 	
 </script>
+<style>
+.box-body{
+	text-align:center;
+}
+
+tr{
+	text-aling: center;
+}
+
+
+
+</style>
 
 
 <!-- Content Wrapper. Contains page content -->
@@ -30,9 +42,6 @@
 				<div class="box">
 					<div class="box-header">
 						<h3 class="box-title">공지사항게시판</h3>
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
 						<div style="float: right;">
 							<select id="getListWithPaging" name="sel" onchange="selChange()">
 								<option value="5"
@@ -46,10 +55,12 @@
 							</select>
 						</div>
 						<!-- 옵션선택 끝 -->
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
 						<div class="box-body table-responsive no-padding">
-							<table class="table table-hover" id="example2"
-								class="table table-bordered table-hover">
-								<thead>
+							<table class="table table-hover" id="example2" class="table table-bordered table-hover">
+								<thead class="thead-dark">
 									<tr>
 										<th>No.</th>
 										<th>제목</th>
@@ -74,30 +85,29 @@
 								</tbody>
 							</table>
 						</div>
-
-						<div>
-							<ul class="pagination">
-
-								<c:if test='${pageMaker.prev}'>
-									<li class="page-item"><a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum}&amount=${pageMaker.cri.amount}page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">Previous</a></li>
-								</c:if>
-
-								<c:forEach begin="${pageMaker.startPage }"
-									end="${pageMaker.endPage}" var="pnum">
-									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-										<a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
-									</li>
-
-								</c:forEach>
-								<c:if test="${pageMaker.next}">
-									<li class="page-item"><a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
-								</c:if>
-							</ul>
-						</div>
 						<!-- /.box-body -->
+					</div>
+					<div>
+						<ul class="pagination">
+
+							<c:if test='${pageMaker.prev}'>
+								<li class="page-item"><a class="page-link"
+									href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum}&amount=${pageMaker.cri.amount}page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">Previous</a></li>
+							</c:if>
+
+							<c:forEach begin="${pageMaker.startPage }"
+								end="${pageMaker.endPage}" var="pnum">
+								<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
+									<a class="page-link"
+									href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
+								</li>
+
+							</c:forEach>
+							<c:if test="${pageMaker.next}">
+								<li class="page-item"><a class="page-link"
+									href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
+							</c:if>
+						</ul>
 					</div>
 					<!-- /.box -->
 				</div>

@@ -51,7 +51,7 @@ public class E001CommController {
 	public String list(Model model, Criteria cri, HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("commURL") String commURL) {
 		
-		List<E001CommBoardVO> commboardlist = e001CommBoardService.getList(cri);
+		List<E001CommBoardVO> commboardlist = e001CommBoardService.getList(cri, commURL);
 		model.addAttribute("commboardlist", commboardlist);
 		model.addAttribute("pageMaker", new PageDTO(cri, e001CommBoardService.getTotal()));
 		return "E_CommBoard";

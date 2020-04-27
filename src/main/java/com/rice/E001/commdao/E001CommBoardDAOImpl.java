@@ -1,6 +1,8 @@
 package com.rice.E001.commdao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +34,13 @@ public class E001CommBoardDAOImpl implements E001CommBoardDAO {
 	}
 
 	@Override
-	public List<E001CommBoardVO> getListWithPaging(Criteria cri) {
+	public List<E001CommBoardVO> getListWithPaging(Criteria cri, String commURL) {
 
-		return sqlsession.selectList("mapper.commboard.getListWithPaging", cri);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cri", cri);
+		map.put("commURL", commURL);
+
+		return sqlsession.selectList("mapper.commboard.getListWithPaging", map);
 	}
 
 	@Override
