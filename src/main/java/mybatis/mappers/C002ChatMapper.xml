@@ -23,10 +23,17 @@
     	<result property="memName" column="memName"/>
     </resultMap>
     
+     <resultMap id="chatMsg" type="java.util.HashMap">
+     	<result property="send_memNum" column="memNum"/>
+    	<result property="send_name" column="memId"/>
+    	<result property="send_time" column="msgDatetime"/>
+    	<result property="send_msg" column="msgText"/>
+    </resultMap>
+    
     <!-- 채팅방 목록 가져오기 -->
     <select id="getChatroomList" resultType="C002ChatroomVO" parameterType="java.util.HashMap">
     	<![CDATA[
-		    SELECT B.CHATROOMNAME, B.CHATROOMID
+		    SELECT A.CHATROOMNICKNAME CHATROOMNAME, B.CHATROOMID
 			FROM MEMBERCHAT A, CHATROOM B
 			WHERE A.CHATROOMID=B.CHATROOMID
 			    AND A.MEMNUM = #{memNum, jdbcType=VARCHAR}
@@ -185,13 +192,13 @@
 	<!-- 생성한 채팅방 멤버 추가하기 -->
 	<insert id="insertMemberChat" parameterType="java.util.HashMap">
 		<foreach collection="memList" item="item" open="INSERT ALL" close=" SELECT * FROM DUAL" separator=" "> 
-			INTO MEMBERCHAT VALUES (#{item}, #{chatroomId}) 
+			INTO MEMBERCHAT (memNum,chatroomId,chatroomNickname) VALUES (#{item}, #{chatroomId}, #{chatroomName}) 
 		</foreach>
 	</insert>
 	
 	
 	<!-- 방장 번호 알아오기 -->
-	<select id="getmakeMember" parameterType="java.util.HashMap">
+	<select id="getmakeMember" resultType="String" parameterType="java.util.HashMap">
 		<![CDATA[
 			SELECT memNum
 			FROM CHATROOM
@@ -199,7 +206,7 @@
 		<where>
 			<if test=" chatroomId != ''  and  chatroomId != null">
 			<![CDATA[
-				CHATROOMID = #{chatroomId}
+				CHATROOMID=#{chatroomId}
 			]]>
 			</if>
 		</where>
@@ -208,7 +215,7 @@
 	<!-- 방이름, 방번호, 참여멤버 이름 가져오기 -->
 	<select id="getChatroomInfo" resultMap="chatroomInfo" parameterType="java.util.HashMap">
 		<![CDATA[
-			SELECT A.CHATROOMID, A.CHATROOMNAME, C.MEMNUM, C.MEMNAME
+			SELECT A.CHATROOMID, B.chatroomNickname CHATROOMNAME,C.MEMNUM, C.MEMNAME
 			FROM CHATROOM A, MEMBERCHAT B, MEMBER C
 		]]>
 		<where>
@@ -218,10 +225,78 @@
 			]]>
 			<if test=" chatroomId != ''  and  chatroomId != null">
 				<![CDATA[
-					AND A.CHATROOMID  = #{chatroomId}
+					AND A.CHATROOMID=#{chatroomId}
 				]]>
 			</if>
 		</where>
 	</select>
 	
+	<!--접속 할 나의 모든 채팅방 리스트 가져오기  -->
+	<select id="getmychatIdList" resultType="String" parameterType="String">
+		<![CDATA[
+			SELECT CHATROOMID
+			FROM MEMBERCHAT
+		]]>
+		<where>
+			<if test=" value != ''  and  value != null">
+				<![CDATA[
+					memNum=#{value}
+				]]>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 채팅 메시지 저장하기 -->
+	<insert id="insertMsg" parameterType="java.util.HashMap">
+		<![CDATA[
+			INSERT INTO MESSAGE(msgNum,chatroomId,memNum,msgDatetime,msgText)
+			    VALUES( 
+			    		SEQ_MESSAGE.NEXTVAL,
+			    		#{send_target,jdbcType=VARCHAR},
+			    		#{send_memNum,jdbcType=VARCHAR}, 
+			    		#{send_time,jdbcType=VARCHAR},
+			    		#{send_msg,jdbcType=VARCHAR}
+			    	)
+		]]>
+	</insert>
+	
+	<!-- 접속 채팅방 이전 메시지 get // 최근 100 개만 -->
+	<select id="getpastMsg" resultMap="chatMsg" parameterType="java.util.HashMap">
+		<![CDATA[
+		SELECT memNum ,memId, msgDatetime, msgText 
+		FROM (
+			SELECT ROW_NUMBER() OVER (ORDER BY TO_NUMBER(A.MSGNUM) DESC) AS rn, A.memNum ,B.memId, A.msgDatetime, A.msgText
+			FROM MESSAGE A, MEMBER B
+			WHERE A.MEMNUM=B.MEMNUM
+		]]>
+			<if test=" chatroomId != ''  and  chatroomId != null">
+				<![CDATA[
+					AND A.CHATROOMID = #{chatroomId}
+				]]>
+			</if>
+		<![CDATA[
+			ORDER BY rn desc
+		)
+		WHERE rn < 100
+		]]>
+	</select>
+	
+	<!-- 채팅방 이름 수정 -->
+	<update id="updateChatroomName" parameterType="java.util.HashMap">
+		<![CDATA[
+			UPDATE MEMBERCHAT 
+			SET CHATROOMNICKNAME = #{chatroomNickname}
+			WHERE CHATROOMID = #{chatroomId}
+			    AND MEMNUM = #{memNum}
+		]]>
+	</update>
+	
+	<!-- 채팅방 나가기 -->
+	<delete id="deleteMemberChat" parameterType="java.util.HashMap">
+		<![CDATA[
+			DELETE FROM MEMBERCHAT 
+			WHERE CHATROOMID = #{chatroomId}
+			    AND MEMNUM = #{memNum}
+		]]>
+	</delete>
 </mapper>	

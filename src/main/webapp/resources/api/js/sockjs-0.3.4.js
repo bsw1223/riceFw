@@ -25,7 +25,7 @@ THE SOFTWARE.
 var JSON;JSON||(JSON={}),function(){function str(a,b){var c,d,e,f,g=gap,h,i=b[a];i&&typeof i=="object"&&typeof i.toJSON=="function"&&(i=i.toJSON(a)),typeof rep=="function"&&(i=rep.call(b,a,i));switch(typeof i){case"string":return quote(i);case"number":return isFinite(i)?String(i):"null";case"boolean":case"null":return String(i);case"object":if(!i)return"null";gap+=indent,h=[];if(Object.prototype.toString.apply(i)==="[object Array]"){f=i.length;for(c=0;c<f;c+=1)h[c]=str(c,i)||"null";e=h.length===0?"[]":gap?"[\n"+gap+h.join(",\n"+gap)+"\n"+g+"]":"["+h.join(",")+"]",gap=g;return e}if(rep&&typeof rep=="object"){f=rep.length;for(c=0;c<f;c+=1)typeof rep[c]=="string"&&(d=rep[c],e=str(d,i),e&&h.push(quote(d)+(gap?": ":":")+e))}else for(d in i)Object.prototype.hasOwnProperty.call(i,d)&&(e=str(d,i),e&&h.push(quote(d)+(gap?": ":":")+e));e=h.length===0?"{}":gap?"{\n"+gap+h.join(",\n"+gap)+"\n"+g+"}":"{"+h.join(",")+"}",gap=g;return e}}function quote(a){escapable.lastIndex=0;return escapable.test(a)?'"'+a.replace(escapable,function(a){var b=meta[a];return typeof b=="string"?b:"\\u"+("0000"+a.charCodeAt(0).toString(16)).slice(-4)})+'"':'"'+a+'"'}function f(a){return a<10?"0"+a:a}"use strict",typeof Date.prototype.toJSON!="function"&&(Date.prototype.toJSON=function(a){return isFinite(this.valueOf())?this.getUTCFullYear()+"-"+f(this.getUTCMonth()+1)+"-"+f(this.getUTCDate())+"T"+f(this.getUTCHours())+":"+f(this.getUTCMinutes())+":"+f(this.getUTCSeconds())+"Z":null},String.prototype.toJSON=Number.prototype.toJSON=Boolean.prototype.toJSON=function(a){return this.valueOf()});var cx=/[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,escapable=/[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,gap,indent,meta={"\b":"\\b","\t":"\\t","\n":"\\n","\f":"\\f","\r":"\\r",'"':'\\"',"\\":"\\\\"},rep;typeof JSON.stringify!="function"&&(JSON.stringify=function(a,b,c){var d;gap="",indent="";if(typeof c=="number")for(d=0;d<c;d+=1)indent+=" ";else typeof c=="string"&&(indent=c);rep=b;if(!b||typeof b=="function"||typeof b=="object"&&typeof b.length=="number")return str("",{"":a});throw new Error("JSON.stringify")}),typeof JSON.parse!="function"&&(JSON.parse=function(text,reviver){function walk(a,b){var c,d,e=a[b];if(e&&typeof e=="object")for(c in e)Object.prototype.hasOwnProperty.call(e,c)&&(d=walk(e,c),d!==undefined?e[c]=d:delete e[c]);return reviver.call(a,b,e)}var j;text=String(text),cx.lastIndex=0,cx.test(text)&&(text=text.replace(cx,function(a){return"\\u"+("0000"+a.charCodeAt(0).toString(16)).slice(-4)}));if(/^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,"@").replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,"]").replace(/(?:^|:|,)(?:\s*\[)+/g,""))){j=eval("("+text+")");return typeof reviver=="function"?walk({"":j},""):j}throw new SyntaxError("JSON.parse")})}()
 
 
-//     [*] Including lib/index.js
+// [*] Including lib/index.js
 // Public object
 SockJS = (function(){
               var _document = document;
@@ -33,17 +33,16 @@ SockJS = (function(){
               var utils = {};
 
 
-//         [*] Including lib/reventtarget.js
+// [*] Including lib/reventtarget.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
-/* Simplified implementation of DOM2 EventTarget.
- *   http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-EventTarget
+/*
+ * Simplified implementation of DOM2 EventTarget.
+ * http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-EventTarget
  */
 var REventTarget = function() {};
 REventTarget.prototype.addEventListener = function (eventType, listener) {
@@ -89,16 +88,14 @@ REventTarget.prototype.dispatchEvent = function (event) {
         }
     }
 };
-//         [*] End of lib/reventtarget.js
+// [*] End of lib/reventtarget.js
 
 
-//         [*] Including lib/simpleevent.js
+// [*] Including lib/simpleevent.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var SimpleEvent = function(type, obj) {
@@ -121,16 +118,14 @@ SimpleEvent.prototype.toString = function() {
     }
     return 'SimpleEvent(' + r.join(', ') + ')';
 };
-//         [*] End of lib/simpleevent.js
+// [*] End of lib/simpleevent.js
 
 
-//         [*] Including lib/eventemitter.js
+// [*] Including lib/eventemitter.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var EventEmitter = function(events) {
@@ -182,16 +177,14 @@ EventEmitter.prototype.nuke = function() {
     }
     that._listeners = {};
 };
-//         [*] End of lib/eventemitter.js
+// [*] End of lib/eventemitter.js
 
 
-//         [*] Including lib/utils.js
+// [*] Including lib/utils.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var random_string_chars = 'abcdefghijklmnopqrstuvwxyz0123456789_';
@@ -306,7 +299,7 @@ utils.amendUrl = function(url) {
         throw new Error('Only basic urls are supported in SockJS');
     }
 
-    //  '//abc' --> 'http://abc'
+    // '//abc' --> 'http://abc'
     if (url.indexOf('//') === 0) {
         url = dl.protocol + url;
     }
@@ -354,7 +347,7 @@ utils.delay = function(t, fun) {
 
 
 // Chars worth escaping, as defined by Douglas Crockford:
-//   https://github.com/douglascrockford/JSON-js/blob/47a9882cddeb1e8529e07af9736218075372b8ac/json2.js#L196
+// https://github.com/douglascrockford/JSON-js/blob/47a9882cddeb1e8529e07af9736218075372b8ac/json2.js#L196
 var json_escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
     json_lookup = {
 "\u0000":"\\u0000","\u0001":"\\u0001","\u0002":"\\u0002","\u0003":"\\u0003",
@@ -424,7 +417,7 @@ var unroll_lookup = function(escapable) {
 
 // Quote string, also taking care of unicode characters that browsers
 // often break. Especially, take care of unicode surrogates:
-//    http://en.wikipedia.org/wiki/Mapping_of_Unicode_characters#Surrogates
+// http://en.wikipedia.org/wiki/Mapping_of_Unicode_characters#Surrogates
 utils.quote = function(string) {
     var quoted = JSONQuote(string);
 
@@ -511,16 +504,14 @@ utils.detectProtocols = function(probed, protocols_whitelist, info) {
     }
     return protocols;
 }
-//         [*] End of lib/utils.js
+// [*] End of lib/utils.js
 
 
-//         [*] Including lib/dom.js
+// [*] Including lib/dom.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 // May be used by htmlfile jsonp and transports.
@@ -719,16 +710,14 @@ utils.createHtmlfile = function (iframe_url, error_callback) {
         loaded: unattach
     };
 };
-//         [*] End of lib/dom.js
+// [*] End of lib/dom.js
 
 
-//         [*] Including lib/dom2.js
+// [*] Including lib/dom2.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var AbstractXHRObject = function(){};
@@ -848,8 +837,8 @@ XHRLocalObject.prototype = new AbstractXHRObject();
 
 
 // References:
-//   http://ajaxian.com/archives/100-line-ajax-wrapper
-//   http://msdn.microsoft.com/en-us/library/cc288060(v=VS.85).aspx
+// http://ajaxian.com/archives/100-line-ajax-wrapper
+// http://msdn.microsoft.com/en-us/library/cc288060(v=VS.85).aspx
 var XDRObject = utils.XDRObject = function(method, url, payload) {
     var that = this;
     utils.delay(function(){that._start(method, url, payload);});
@@ -921,16 +910,14 @@ utils.isXHRCorsCapable = function() {
     }
     return 4;
 };
-//         [*] End of lib/dom2.js
+// [*] End of lib/dom2.js
 
 
-//         [*] Including lib/sockjs.js
+// [*] Including lib/sockjs.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var SockJS = function(url, dep_protocols_whitelist, options) {
@@ -1186,16 +1173,14 @@ SockJS.prototype._applyInfo = function(info, rtt, protocols_whitelist) {
     var probed = utils.probeProtocols();
     that._protocols = utils.detectProtocols(probed, protocols_whitelist, info);
 };
-//         [*] End of lib/sockjs.js
+// [*] End of lib/sockjs.js
 
 
-//         [*] Including lib/trans-websocket.js
+// [*] Including lib/trans-websocket.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var WebSocketTransport = SockJS.websocket = function(ri, trans_url) {
@@ -1250,16 +1235,14 @@ WebSocketTransport.enabled = function() {
 // separate SSL connection, in which case 2 round trips are an
 // absolute minumum.
 WebSocketTransport.roundTrips = 2;
-//         [*] End of lib/trans-websocket.js
+// [*] End of lib/trans-websocket.js
 
 
-//         [*] Including lib/trans-sender.js
+// [*] Including lib/trans-sender.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var BufferedSender = function() {};
@@ -1394,22 +1377,20 @@ var createAjaxSender = function(AjaxObject) {
         };
     };
 };
-//         [*] End of lib/trans-sender.js
+// [*] End of lib/trans-sender.js
 
 
-//         [*] Including lib/trans-jsonp-receiver.js
+// [*] Including lib/trans-jsonp-receiver.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 // Parts derived from Socket.io:
-//    https://github.com/LearnBoost/socket.io/blob/0.6.17/lib/socket.io/transports/jsonp-polling.js
+// https://github.com/LearnBoost/socket.io/blob/0.6.17/lib/socket.io/transports/jsonp-polling.js
 // and jQuery-JSONP:
-//    https://code.google.com/p/jquery-jsonp/source/browse/trunk/core/jquery.jsonp.js
+// https://code.google.com/p/jquery-jsonp/source/browse/trunk/core/jquery.jsonp.js
 var jsonPGenericReceiver = function(url, callback) {
     var tref;
     var script = _document.createElement('script');
@@ -1477,9 +1458,9 @@ var jsonPGenericReceiver = function(url, callback) {
     // script object. Later, onreadystatechange, manually execute this
     // code. FF and Chrome doesn't work with 'event' and 'htmlFor'
     // set. For reference see:
-    //   http://jaubourg.net/2010/07/loading-script-as-onclick-handler-of.html
+    // http://jaubourg.net/2010/07/loading-script-as-onclick-handler-of.html
     // Also, read on that about script ordering:
-    //   http://wiki.whatwg.org/wiki/Dynamic_Script_Execution_Order
+    // http://wiki.whatwg.org/wiki/Dynamic_Script_Execution_Order
     if (typeof script.async === 'undefined' && _document.attachEvent) {
         // According to mozilla docs, in recent browsers script.async defaults
         // to 'true', so we may use it to detect a good browser:
@@ -1514,16 +1495,14 @@ var jsonPGenericReceiver = function(url, callback) {
     }
     return close_script;
 };
-//         [*] End of lib/trans-jsonp-receiver.js
+// [*] End of lib/trans-jsonp-receiver.js
 
 
-//         [*] Including lib/trans-jsonp-polling.js
+// [*] Including lib/trans-jsonp-polling.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 // The simplest and most robust transport, using the well-know cross
@@ -1531,8 +1510,8 @@ var jsonPGenericReceiver = function(url, callback) {
 // mssage could use up to one http request. But at least it works almost
 // everywhere.
 // Known limitations:
-//   o you will get a spinning cursor
-//   o for Konqueror a dumb timer is needed to detect errors
+// o you will get a spinning cursor
+// o for Konqueror a dumb timer is needed to detect errors
 
 
 var JsonPTransport = SockJS['jsonp-polling'] = function(ri, trans_url) {
@@ -1623,16 +1602,14 @@ var jsonPReceiverWrapper = function(url, constructReceiver, user_callback) {
     };
     return stop;
 };
-//         [*] End of lib/trans-jsonp-polling.js
+// [*] End of lib/trans-jsonp-polling.js
 
 
-//         [*] Including lib/trans-xhr.js
+// [*] Including lib/trans-xhr.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var AjaxBasedTransport = function() {};
@@ -1678,8 +1655,8 @@ XhrStreamingTransport.need_body = true;
 
 
 // According to:
-//   http://stackoverflow.com/questions/1641507/detect-browser-support-for-cross-domain-xmlhttprequests
-//   http://hacks.mozilla.org/2009/07/cross-site-xmlhttprequest-with-cors/
+// http://stackoverflow.com/questions/1641507/detect-browser-support-for-cross-domain-xmlhttprequests
+// http://hacks.mozilla.org/2009/07/cross-site-xmlhttprequest-with-cors/
 
 
 // xdr-streaming
@@ -1716,16 +1693,14 @@ XdrPollingTransport.prototype = new AjaxBasedTransport();
 
 XdrPollingTransport.enabled = XdrStreamingTransport.enabled;
 XdrPollingTransport.roundTrips = 2; // preflight, ajax
-//         [*] End of lib/trans-xhr.js
+// [*] End of lib/trans-xhr.js
 
 
-//         [*] Including lib/trans-iframe.js
+// [*] Including lib/trans-iframe.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 // Few cool transports do work only for same-origin. In order to make
@@ -1733,8 +1708,8 @@ XdrPollingTransport.roundTrips = 2; // preflight, ajax
 // remote domain. New browsers, have capabilities to communicate with
 // cross domain iframe, using postMessage(). In IE it was implemented
 // from IE 8+, but of course, IE got some details wrong:
-//    http://msdn.microsoft.com/en-us/library/cc197015(v=VS.85).aspx
-//    http://stevesouders.com/misc/test-postmessage.php
+// http://msdn.microsoft.com/en-us/library/cc197015(v=VS.85).aspx
+// http://stevesouders.com/misc/test-postmessage.php
 
 var IframeTransport = function() {};
 
@@ -1807,22 +1782,21 @@ IframeTransport.prototype.doSend = function (message) {
 };
 
 IframeTransport.enabled = function() {
-    // postMessage misbehaves in konqueror 4.6.5 - the messages are delivered with
+    // postMessage misbehaves in konqueror 4.6.5 - the messages are delivered
+	// with
     // huge delay, or not at all.
     var konqueror = navigator && navigator.userAgent && navigator.userAgent.indexOf('Konqueror') !== -1;
     return ((typeof _window.postMessage === 'function' ||
             typeof _window.postMessage === 'object') && (!konqueror));
 };
-//         [*] End of lib/trans-iframe.js
+// [*] End of lib/trans-iframe.js
 
 
-//         [*] Including lib/trans-iframe-within.js
+// [*] Including lib/trans-iframe-within.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var curr_window_id;
@@ -1904,23 +1878,22 @@ SockJS.bootstrap_iframe = function() {
 
     // alert('test ticker');
     // facade = new FacadeJS();
-    // facade._transport = new FacadeJS['w-iframe-xhr-polling'](facade, 'http://host.com:9999/ticker/12/basd');
+    // facade._transport = new FacadeJS['w-iframe-xhr-polling'](facade,
+	// 'http://host.com:9999/ticker/12/basd');
 
     utils.attachMessage(onMessage);
 
     // Start
     postMessage('s');
 };
-//         [*] End of lib/trans-iframe-within.js
+// [*] End of lib/trans-iframe-within.js
 
 
-//         [*] Including lib/info.js
+// [*] Including lib/info.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var InfoReceiver = function(base_url, AjaxObject) {
@@ -2029,16 +2002,14 @@ var WInfoReceiverIframe = FacadeJS['w-iframe-info-receiver'] = function(ri, _tra
     }
 };
 WInfoReceiverIframe.prototype.doCleanup = function() {};
-//         [*] End of lib/info.js
+// [*] End of lib/info.js
 
 
-//         [*] Including lib/trans-iframe-eventsource.js
+// [*] Including lib/trans-iframe-eventsource.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var EventSourceIframeTransport = SockJS['iframe-eventsource'] = function () {
@@ -2062,16 +2033,14 @@ var EventSourceTransport = FacadeJS['w-iframe-eventsource'] = function(ri, trans
     this.run(ri, trans_url, '/eventsource', EventSourceReceiver, utils.XHRLocalObject);
 }
 EventSourceTransport.prototype = new AjaxBasedTransport();
-//         [*] End of lib/trans-iframe-eventsource.js
+// [*] End of lib/trans-iframe-eventsource.js
 
 
-//         [*] Including lib/trans-iframe-xhr-polling.js
+// [*] Including lib/trans-iframe-xhr-polling.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var XhrPollingIframeTransport = SockJS['iframe-xhr-polling'] = function () {
@@ -2096,16 +2065,14 @@ var XhrPollingITransport = FacadeJS['w-iframe-xhr-polling'] = function(ri, trans
 };
 
 XhrPollingITransport.prototype = new AjaxBasedTransport();
-//         [*] End of lib/trans-iframe-xhr-polling.js
+// [*] End of lib/trans-iframe-xhr-polling.js
 
 
-//         [*] Including lib/trans-iframe-htmlfile.js
+// [*] Including lib/trans-iframe-htmlfile.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 // This transport generally works in any browser, but will cause a
@@ -2135,16 +2102,14 @@ var HtmlFileTransport = FacadeJS['w-iframe-htmlfile'] = function(ri, trans_url) 
     this.run(ri, trans_url, '/htmlfile', HtmlfileReceiver, utils.XHRLocalObject);
 };
 HtmlFileTransport.prototype = new AjaxBasedTransport();
-//         [*] End of lib/trans-iframe-htmlfile.js
+// [*] End of lib/trans-iframe-htmlfile.js
 
 
-//         [*] Including lib/trans-polling.js
+// [*] Including lib/trans-polling.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var Polling = function(ri, Receiver, recv_url, AjaxObject) {
@@ -2183,16 +2148,14 @@ Polling.prototype.abort = function() {
         that.poll.abort();
     }
 };
-//         [*] End of lib/trans-polling.js
+// [*] End of lib/trans-polling.js
 
 
-//         [*] Including lib/trans-receiver-eventsource.js
+// [*] Including lib/trans-receiver-eventsource.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var EventSourceReceiver = function(url) {
@@ -2213,7 +2176,7 @@ var EventSourceReceiver = function(url) {
         es = null;
         // Safari and chrome < 15 crash if we close window before
         // waiting for ES cleanup. See:
-        //   https://code.google.com/p/chromium/issues/detail?id=89155
+        // https://code.google.com/p/chromium/issues/detail?id=89155
         utils.delay(200, function() {
                         that.dispatchEvent(new SimpleEvent('close', {reason: reason}));
                     });
@@ -2228,16 +2191,14 @@ EventSourceReceiver.prototype.abort = function() {
         that.es_close({}, true);
     }
 };
-//         [*] End of lib/trans-receiver-eventsource.js
+// [*] End of lib/trans-receiver-eventsource.js
 
 
-//         [*] Including lib/trans-receiver-htmlfile.js
+// [*] Including lib/trans-receiver-htmlfile.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var _is_ie_htmlfile_capable;
@@ -2297,16 +2258,14 @@ HtmlfileReceiver.prototype.abort = function() {
         that.iframe_close({}, 'user');
     }
 };
-//         [*] End of lib/trans-receiver-htmlfile.js
+// [*] End of lib/trans-receiver-htmlfile.js
 
 
-//         [*] Including lib/trans-receiver-xhr.js
+// [*] Including lib/trans-receiver-xhr.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 var XhrReceiver = function(url, AjaxObject) {
@@ -2343,16 +2302,14 @@ XhrReceiver.prototype.abort = function() {
         that.xo = null;
     }
 };
-//         [*] End of lib/trans-receiver-xhr.js
+// [*] End of lib/trans-receiver-xhr.js
 
 
-//         [*] Including lib/test-hooks.js
+// [*] Including lib/test-hooks.js
 /*
- * ***** BEGIN LICENSE BLOCK *****
- * Copyright (c) 2011-2012 VMware, Inc.
- *
- * For the license see COPYING.
- * ***** END LICENSE BLOCK *****
+ * ***** BEGIN LICENSE BLOCK ***** Copyright (c) 2011-2012 VMware, Inc.
+ * 
+ * For the license see COPYING. ***** END LICENSE BLOCK *****
  */
 
 // For testing
@@ -2363,7 +2320,7 @@ SockJS.getUtils = function(){
 SockJS.getIframeTransport = function(){
     return IframeTransport;
 };
-//         [*] End of lib/test-hooks.js
+// [*] End of lib/test-hooks.js
 
                   return SockJS;
           })();
@@ -2373,7 +2330,7 @@ if ('_sockjs_onload' in window) setTimeout(_sockjs_onload, 1);
 if (typeof define === 'function' && define.amd) {
     define('sockjs', [], function(){return SockJS;});
 }
-//     [*] End of lib/index.js
+// [*] End of lib/index.js
 
 // [*] End of lib/all.js
 
