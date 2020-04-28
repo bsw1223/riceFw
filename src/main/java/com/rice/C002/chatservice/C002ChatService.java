@@ -27,4 +27,22 @@ public interface C002ChatService {
 	public String getchatroomId();
 	// 채팅방 만들기
 	public void insertChatroom(Map info);
+	
+	// 방장 번호 알아오기
+	public String getmakeMember(Map info);
+	// 방이름, 방번호, 참여멤버 이름 가져오기
+	public List<Map<String, Object>> getChatroomInfo(Map info);
+	
+	// 접속 할 나의 모든 채팅방 리스트 가져오기
+	public List<String> getmychatIdList(String info);
+	
+	// 채팅메시지 저장하기
+	public void insertMsg(Map info);
+	// 접속 채팅방 이전 메시지 get
+	public List<Map<String, Object>> getpastMsg(Map info);
+	
+	// 채팅방 이름 수정
+	public void updateChatroomName(Map info);
+	// 채팅방 나가기
+	public void deleteMemberChat(Map info);
 }
