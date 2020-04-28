@@ -80,34 +80,36 @@ public class C001DocContoller {
 			return "redirect:/";
 		} else if (vo.getAuthId().equals("1001")) { // 학생
 			if (boCode.equals("2000")) {
+				//공지사항 게시판
 				result_view = "C_stdNoticeList";
 			} else if (boCode.equals("2001")) {
-				result_view = "C_stdDocList";
-			} else if (boCode.equals("2002")) {
-				result_view = "C_stdHwList";
-			} else if (boCode.equals("2003")) {
+				//Q&A 게시판
 				result_view = "C_stdQnaList";
-			}else if(boCode.equals("2006")) {
-				result_view ="C_stdTeamList";
+			} else if (boCode.equals("2002")) {
+				//스터디 게시판
+				result_view = "C_stdTeamList";
+			} else if (boCode.equals("2003")) {
+				//성적게시판
+				result_view = "C_stdGrdList";
 			}
 		} else if (vo.getAuthId().equals("1002")) { // 강사
-			if (boCode.equals("2000")) { // 공지사항
+			if (boCode.equals("2000")) { 
+				// 공지사항 게시판
 				result_view = "C_tchNoticeList";
-			} else if (boCode.equals("2001")) { // 자료게시판
-				result_view = "C_tchDocList";
-			} else if (boCode.equals("2002")) { // 과제게시판
-				result_view = "C_tchHwList";
-			} else if (boCode.equals("2003")) { // qna게시판
+			} else if (boCode.equals("2001")) { 
+				//Q&A 게시판
 				result_view = "C_tchQnaList";
-			} else if(boCode.equals("2004")) {	//
+			} else if (boCode.equals("2002")) {
+				// 스터디 게시판
+				result_view = "C_tchTeamList";
+			} else if (boCode.equals("2003")) {
+				//성적게시판
+				result_view = "C_tchGrdList";
+			} else if(boCode.equals("2004")) {	
+				//학생목록
 				List<A001MemVO> stdlist = c001DocService.getStdList(cri);
-				System.out.println(stdlist);
 				model.addAttribute("list", stdlist);
 				result_view ="C_tchStdList";
-			} else if(boCode.equals("2005")) {
-				result_view ="C_tchGrdList";
-			} else if(boCode.equals("2006")) {
-				result_view ="C_tchTeamList";
 			}
 		}
 
@@ -128,35 +130,38 @@ public class C001DocContoller {
 			return "redirect:/";
 		} else if (vo.getAuthId().equals("1001")) { // 학생
 			if (boCode.equals("2000")) {
+				//공지사항 내용
 				result_view = "C_stdNoticeGet";
 			} else if (boCode.equals("2001")) {
-				result_view = "C_stdDocGet";
-			} else if (boCode.equals("2002")) {
-				result_view = "C_stdHwGet";
-			} else if (boCode.equals("2003")) {
+				//Q&A 내용
 				if(vo.getMemNum().equals(c001DocService.read(boNum, boURL, boCode).getMemNum())) {
+					//내가 등록한 게시물일 경우 이동페이지(수정, 삭제 버튼이 있는 페이지)
 					result_view = "C_stdQnaGet";
 				}
 				else {
+					//내가 등록한 게시물일 경우 이동페이지(수정, 삭제 버튼이 없는 페이지)
 					result_view="C_stdQna";
 				}
-			} else if(boCode.equals("2006")) {
+			} else if (boCode.equals("2002")) {
+				//스터디 내용
 				result_view = "C_stdTeamGet";
-			}
+			} 
+			//성적은 리스트에 바로 성적을 보여줄거 
 		} else if (vo.getAuthId().equals("1002")) { // 강사
-			if (boCode.equals("2000")) { // 공지사항
+			if (boCode.equals("2000")) { 
+				//공지사항 내용
 				result_view = "C_tchNoticeGet";
-			} else if (boCode.equals("2001")) { // 자료게시판
-				result_view = "C_tchDocGet";
-			} else if (boCode.equals("2002")) { // 과제게시판
-				result_view = "C_tchHwGet";
-			} else if (boCode.equals("2003")) { // qna게시판
+			} else if (boCode.equals("2001")) { 
+				//Q&A 내용
 				result_view = "C_tchQnaGet";
-			} else if(boCode.equals("2005")) {
-				result_view ="C_tchGrdGet";
-			} else if(boCode.equals("2006")) {
-				result_view ="C_tchTeamGet";
+			} else if (boCode.equals("2002")) { 
+				//스터디 내용
+				result_view = "C_tchTeamGet";
+			} else if (boCode.equals("2003")) { 
+				// 성적입력
+				result_view = "C_tchQnaGet";
 			}
+			//힉셍목록은 리스트만
 		}
 
 		return result_view;
@@ -177,16 +182,10 @@ public class C001DocContoller {
 		if (boCode.equals("2000")) { // 공지사항
 			pageTitle = "공지사항 게시판";
 		} else if (boCode.equals("2001")) { // 자료게시판
-			pageTitle = "자료 게시판";
+			pageTitle = "Q&A 게시판";
 		} else if (boCode.equals("2002")) { // 과제게시판
-			pageTitle = "과제 게시판";
-		} else if(boCode.equals("2005")) {
-			pageTitle ="성적 게시판";
-		} else if(boCode.equals("2006")) {
-			pageTitle ="스터디 게시판";
-		} else if(boCode.equals("2003")) {
-			pageTitle ="Q&A 게시판";
-		}
+			pageTitle = "스터디 게시판";
+		} 
 		model.addAttribute("pageTitle", pageTitle);
 		return "C_tchDocReg";
 	}
@@ -210,23 +209,15 @@ public class C001DocContoller {
 	public String update( Model model, @PathVariable("boURL") String boURL,@RequestParam("boNum") String boNum,
 			@PathVariable("boCode") String boCode, HttpServletRequest request,C001ClassBoardVO boardvo) {
 		model.addAttribute("sjctName", c001DocService.getsbjc(boURL));
-		System.out.println("mdfyForm  "+boardvo.getBoNum());
-		System.out.println("mdfyForm  "+boNum);
 		model.addAttribute("list", c001DocService.read(boNum, boURL, boCode));
 		String pageTitle = null;
 		if (boCode.equals("2000")) { // 공지사항
 			pageTitle = "공지사항 게시판";
 		} else if (boCode.equals("2001")) { // 자료게시판
-			pageTitle = "자료 게시판";
+			pageTitle = "Q&A 게시판";
 		} else if (boCode.equals("2002")) { // 과제게시판
-			pageTitle = "과제 게시판";
-		} else if(boCode.equals("2005")) {
-			pageTitle ="성적 게시판";
-		} else if(boCode.equals("2006")) {
-			pageTitle ="스터디 게시판";
-		} else if(boCode.equals("2003")) {
-			pageTitle ="Q&A 게시판";
-		}
+			pageTitle = "스터디 게시판";
+		} 
 		model.addAttribute("pageTitle", pageTitle);
 
 		return "C_tchDocMdfy";
@@ -235,8 +226,6 @@ public class C001DocContoller {
 	@RequestMapping(value = "/mdfy/{boCode}/{boURL}", method = RequestMethod.GET)
 	public String updateBoard(C001ClassBoardVO boardvo, @PathVariable("boURL") String boURL, Model model,@RequestParam("boNum") String boNum,
 			@PathVariable("boCode") String boCode) {
-		System.out.println("mdfy 첫번째 줄 : "+boardvo.getBoNum());
-		System.out.println("mdfy 두번째 줄 : "+boNum);
 		model.addAttribute("sjctName", c001DocService.getsbjc(boURL));
 		c001DocService.update(boardvo);
 
@@ -290,9 +279,7 @@ public class C001DocContoller {
 				attachVO.setFilePath(uploadFolderPath);
 				
 				if(checkImageType(saveFile)) {
-					
-					attachVO.setFileCode("Image");
-					
+
 					//파일코드가 이미지일경우 썸네일 생성
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_"+uploadFileName));
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);

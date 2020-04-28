@@ -268,15 +268,12 @@ $(document).ready(function() {
 	    
 	    console.log(operation);
 	    
-	    if(operation === 'remove'){
-	      formObj.attr("action", "/board/remove");
-	      
-	    }else if(operation === 'list'){
+	     if(operation === 'list'){
 	      //move to list
 	      formObj.attr("action", "/mypage/board/${list.boCode}/${list.boURL}");
 		  formObj.attr("method", "get");
 	      
-	      var pageNumTag = $("input[name='page']").clone();
+	      var pageTag = $("input[name='page']").clone();
 	      var amountTag = $("input[name='amount']").clone();
 	      var keywordTag = $("input[name='keyword']").clone();
 	      var typeTag = $("input[name='type']").clone();      
@@ -305,7 +302,7 @@ $(document).ready(function() {
 				str += "<input type='hidden' name='filelist["+i+"].filePath' value='"+jobj.data("path")+"'>";
 				str += "<input type='hidden' name='filelist["+i+"].fileCode' value='"+jobj.data("type")+"'>";
 				str += "<input type='hidden' name='filelist["+i+"].fileSize' value='"+jobj.data("size")+"'>";
-				str += "<input type='hidden' name='filelist["+i+"].saveFileName' value='"+jobj.data("saveFileName")+"'>";
+				str += "<input type='hidden' name='filelist["+i+"].saveFileName' value='"+jobj.data("savefilename")+"'>";
 				str += "<input type='hidden' name='filelist["+i+"].boNum' value='"+jobj.data("boNum")+"'>";
 				str += "<input type='hidden' name='filelist["+i+"].memId' value='${list.memId}'>";
 	          

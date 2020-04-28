@@ -31,13 +31,14 @@
 	<insert id="insert" parameterType="String">
 	<![CDATA[
 	insert into CLASSATTACHEDFILE (boNum, fileSize, classFileNum, fileCode, fileName, saveFileName, filePath, createDate, memId)
-	values (#{boNum}, #{fileSize},#{classFileNum},#{fileCode},#{fileName},#{saveFileName},#{filePath},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{memId})
+	values (#{boNum}, #{fileSize},#{classFileNum},'1',#{fileName},#{saveFileName},#{filePath},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{memId})
 	]]>
 	</insert>
 	
 	<delete id="delete">
 	<![CDATA[
-		delete from CLASSATTACHEDFILE where boNum=#{boNum}
+		UPDATE CLASSATTACHEDFILE SET fileCode = '0' WHERE boNum=#{boNum}
+
 		]]>
 	</delete>
 

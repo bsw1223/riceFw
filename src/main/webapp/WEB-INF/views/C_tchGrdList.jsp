@@ -29,7 +29,7 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">성적게시판</h3>
+						<h3 class="box-title">성적 게시판</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
