@@ -80,6 +80,19 @@
 </div>
 </head>
 
+<script>
+$(document).ready(function(){
+	console.log("hi");
+	(function(){
+		var boNum = '<c:out value="${list.boNum}"/>';
+		console.log(boNum);
+		$.getJSON("/mypage/board/getAttachList",{boNum:boNum}, function(arr){
+			console.log(arr);
+		});
+	})();	
+})
+
+</script>
 
 
 <%@ include file="footer.jsp"%>

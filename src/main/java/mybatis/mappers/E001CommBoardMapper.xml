@@ -13,22 +13,34 @@
 		<result property="boLikes" column="boLikes" />
 		<result property="boURL" column="boURL" />
 		<result property="memNum" column="memNum" />
-
+		<result property="memId" column="memId" />
+		<result property="commName" column="commName" />
 	</resultMap>
 
 
 	<select id="getListWithPaging" resultType="E001CommBoardVO">
 		<![CDATA[
-			select  boNum, boContent, boRegDate, boTitle, boUpdateDate, boViews, boLikes, boURL, memNum
+			select  boNum, boContent, boRegDate, boTitle, boUpdateDate, boViews, boLikes, boURL, memNum, memId 
 		from(
-		    select rownum rn, boNum, boContent, boRegDate, boTitle, boUpdateDate, boViews, boLikes, boURL, memNum
-		    from commboard
-		    where rownum <= (#{page}*#{amount})
+		   select rownum rn, boNum, boContent, boRegDate, boTitle, boUpdateDate, boViews, boLikes, boURL, memNum, memId
+		    from  (
+            		select c.boNum, c.boContent, c.boRegDate, c.boTitle, c.boUpdateDate, c.boViews, c.boLikes, c.boURL, c.memNum, a.memId
+            		from commboard c, member a
+            		where c.memNum = a.memNum
+            )
+		    where rownum <= (#{page}*#{amount}) and boURL = #{commURL}
 		    order by boNum desc
 		    )
 		where rn > ((#{page}-1)*#{amount})
 		]]>
 	</select>
+
+	<select id="getCommName" resultType="String">
+		select commName
+		from community
+		where boURL =#{commURL};
+	</select>
+
 
 	<select id="getTotal" resultType="int">
 	<![CDATA[
@@ -46,10 +58,8 @@
 
 	<insert id="insert" parameterType="E001CommBoardVO">
 	<![CDATA[
-		insert into commboard (boNum,
-		boContent, boTitle, boURL, memNum)
-		values(seq_board.nextval,
-		#{boContent}, #{boTitle}, #{boURL}, #{memNum})
+		insert into commboard (boNum,boContent, boTitle, boURL, memNum, boUpdateDate, boRegDate, boLikes, boViews)
+		values(seq_board.nextval, #{boContent}, #{boTitle}, #{boURL}, #{memNum}, TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(SYSDATE,'YYYY-MM-DD'),0,0)
 		]]>
 	</insert>
 

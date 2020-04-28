@@ -24,6 +24,19 @@
 		where rn > ((#{page}-1)*#{amount})
 		]]>
 	</select>
+	
+	<select id="urlCheck" parameterType="String" resultType="Integer">
+		<![CDATA[
+			SELECT COUNT(*) FROM community
+				WHERE commURL = #{commURL}
+		]]>
+	</select>
+	<select id="nameCheck" parameterType="String" resultType="Integer">
+		<![CDATA[
+			SELECT COUNT(*) FROM community
+				WHERE commName = #{commName}
+		]]>
+	</select>
 
 	<select id="getTotal" resultType="int">
 	<![CDATA[

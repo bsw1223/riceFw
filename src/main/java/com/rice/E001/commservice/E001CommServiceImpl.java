@@ -16,6 +16,15 @@ public class E001CommServiceImpl implements E001CommService {
 	@Override
 	public void commReg(E001CommVO vo) {
 		e001CommDAO.insertSelectKey(vo);
-
 	}
+	
+	@Override
+	public int urlCheck(String commURL) throws Exception {
+		return e001CommDAO.urlCheck(commURL);
+	} 
+	
+	@Override
+	public int nameCheck(String commName) throws Exception {
+		return e001CommDAO.nameCheck(commName);
+	} 
 }

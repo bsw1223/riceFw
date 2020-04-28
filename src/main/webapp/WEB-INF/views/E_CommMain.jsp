@@ -4,108 +4,142 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous">
+	crossorigin="anonymous"></script>
+
+
+<style>
+.box-body{
+	background-color: white;
+}
+.box-tools{
+	margin:auto;
+	display:flex;
+}
+.select{
+	float:left;
 	
-</script>
+}
+.input-group{
+	float:left;
+	width: 170px;
+}
 
+</style>
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-		<h1>
-			<c:out value='${commboardlist.boName}' />
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#"><c:out value='${sjctName}' /></a></li>
-			<li class="active">자료</li>
-		</ol>
-	</section>
-
-	<!-- Main content -->
-	<section class="content">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="box">
-					<div class="box-header">
-						<h3 class="box-title">자료게시판</h3>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        	커뮤니티
+      </h1>
+      <ol class="breadcrumb" >
+        <li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>
+        <li class="active">커뮤니티 </li>
+      </ol>
+    </section>
+    
+    
+	  <!-- Main content -->
+    <section class="content">
+      <div class="row">
+		<div class="col-md-3"  >
+			    <!-- Main content -->
+          <!-- general form elements -->
+          <div class="box">
+   			 <!-- box body -->
+			<div class="box-body" >
+					<!-- top -->
+					<section>
+						<div class="row">
+			 				<div style="padding:20px;">
+								<form action="/comm/makecomm" method="get">
+							      	<button id='regBtn' type="button" class="btn btn-block btn-primary">게시판 만들기</button>
+							     </form> 
+							</div> 
+							</div>
+				          </section>
+			           	<!-- /top -->
+				
+					<!-- Main row -->
+					        <div>
+					          <div class="box">
+					            <div class="box-header with-border">
+					              <h3 class="box-title">반별 커뮤니티</h3>
+					          
+					              <div class="box-tools pull-right">
+					                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					                </button>
+					              </div>
+					              <!-- /.box-tools -->
+					            </div>
+					            <!-- /.box-header -->
+					            <div class="box-body">
+					             <div class="col-md-12">
+					
+					                  <div class="progress-group">
+					                    <a href="/comm/qweqwe">커뮤니티1</a>   
+					                  </div>
+					                  <!-- /.progress-group -->
+					                  <div class="progress-group">
+					                    <a href="#">커뮤니티2</a>
+					                  </div>
+					                  <!-- /.progress-group -->
+					                  <div class="progress-group">
+					                   <a href="#">커뮤니티3</a>
+					                  </div>
+					                  <!-- /.progress-group -->
+					                  <div class="progress-group">
+					                    <a href="#">커뮤니티4</a>
+					                  </div>
+					                  <!-- /.progress-group -->
+					                </div>
+					                <!-- /.col -->
+					              </div>
+					              <!-- /ROW -->
+					            </div>
+					            <!-- ./box-body -->
+					          <div class="box">
+					            <div class="box-header with-border">
+					              <h3 class="box-title">가입한 커뮤니티 목록</h3>
+					          
+					              <div class="box-tools pull-right">
+					                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					                </button>
+					              </div>
+					              <!-- /.box-tools -->
+					            </div>
+					            <!-- /.box-header -->
+					            <div class="box-body">
+					             <div class="col-md-12">
+					                  <div class="progress-group">
+					                    <a href="#">커뮤니티1</a>
+					                  </div>
+					                  <!-- /.progress-group -->
+					                  <div class="progress-group">
+					                    <a href="#">커뮤니티2</a>
+					                  </div>
+					                  <!-- /.progress-group -->
+					                  <div class="progress-group">
+					                   <a href="#">커뮤니티3</a>
+					                  </div>
+					                  <!-- /.progress-group -->
+					                  <div class="progress-group">
+					                    <a href="#">커뮤니티4</a>
+					                  </div>
+					                  <!-- /.progress-group -->
+					                </div>
+					                <!-- /.col -->
+					              </div>
+					              <!-- /ROW -->
+					            </div>
+					            
+				         
+				            <!-- /.box-body -->
+						</div>
 					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<div style="float: right;">
-							<select id="getListWithPaging" name="sel" onchange="selChange()">
-								<option value="5"
-									<c:if test="${pageMaker.cri.amount == 5}">selected</c:if>>5개씩보기</option>
-								<option value="10"
-									<c:if test="${pageMaker.cri.amount == 10}">selected</c:if>>10개씩보기</option>
-								<option value="15"
-									<c:if test="${pageMaker.cri.amount == 15}">selected</c:if>>15개씩보기</option>
-								<option value="20"
-									<c:if test="${pageMaker.cri.amount == 20}">selected</c:if>>20개씩보기</option>
-							</select>
-						</div>
-						<!-- 옵션선택 끝 -->
-						<div class="box-body table-responsive no-padding">
-							<table class="table table-hover" id="example2" class="table table-bordered table-hover">
-								<thead>
-									<tr>
-										<th>No.</th>
-										<th>제목</th>
-										<th>작성자</th>
-										<th>조회수</th>
-										<th>첨부파일</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<c:forEach var="listB" items='${listB}'>
-										<tr>
-											<td><c:out value='${listB.boNum}' /> </td>
-											<td><a href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
-													<c:out value='${listB.boContent}' />
-											</a></td>
-											<td><c:out value='${listB.memId}' /> 
-											<td><c:out value='${listB.boViews}' /> 
-											</td>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-
-						<div>
-							<ul class="pagination">
-
-								<c:if test='${pageMaker.prev}'>
-									<li class="page-item"><a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum}&amount=${pageMaker.cri.amount}page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">Previous</a></li>
-								</c:if>
-
-								<c:forEach begin="${pageMaker.startPage }"
-									end="${pageMaker.endPage}" var="pnum">
-									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-								<a class="page-link"
-												href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
-												</li>
-								
-											</c:forEach>
-								<c:if test="${pageMaker.next}">
-									<li class="page-item"><a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
-								</c:if>
-							</ul>
-						</div>
-						<!-- /.box-body -->
-					</div>
-					<!-- /.box -->
 				</div>
-				<!-- /.box-body -->
 			</div>
-<<<<<<< HEAD
-			<!-- /.box -->
-		</div>
-		<!-- /.col -->
-=======
 		<!-- tab& search -->
 		<div class="col-md-9">
 	  <!-- Custom tabs (Charts with tabs)-->
@@ -145,8 +179,6 @@
 				      <!--       </div> -->
 				          </section>
 			           	<!-- /top -->
-			           	
-			           	<section class="connectedSortable">
 					          <div class="nav-tabs-custom">
 					            <!-- Tabs within a box -->
 					            <ul class="nav nav-tabs pull-left">
@@ -155,13 +187,13 @@
 					            </ul>
 					            <div class="tab-content padding">
 					              <!-- Morris chart - Sales -->
-					              <div class="chart tab-pane active" id="popular" style="position: relative; height: 200px;">
+					              <div class="chart tab-pane active" id="popular" style="position: relative; height: 300px;">
 					              		<table id="example2" class="table table-bordered table-hover">
 											<thead>
 												<tr>
 													<th style="width: 60px;">글번호</th>
 													<th >제목</th>
-													<th style="width: 120px;">커뮤니티 명</th>
+													<th style="width: 120px;">커뮤티니 명</th>
 													<th style="width: 100px;">작성일자</th>
 													<th style="width: 60px;">조회수</th>
 													<th style="width: 80px;">좋아요수</th>
@@ -210,26 +242,20 @@
 					             	 </div>
 					           	 </div>
 					          </div>
-					         </section>
-						</div>
+							</div>
 						<!-- /main -->
 			  		</div>
 				  <!-- /content -->
 			 </div>
-			</div>
+			 </div>
 		</section>
 	  </div>
 	 
 		
->>>>>>> refs/remotes/origin/master
 
-	</section>
-	<!-- /.content -->
-</div>
+	
 
-
-
-<form id="actionForm" action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method='get'>
+<form id="actionForm" action="/board.do" method='get'>
 	<input type="hidden" name="page" value='${pageMaker.cri.page}'>
 	<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
 </form>
@@ -251,9 +277,7 @@
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
 		var page = 1;
-		console.log(boURL);
-
-		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=" + page + "&amount=" + sel;
+		location.href = "board.do?page=" + page + "&amount=" + sel;
 
 	}
 </script>

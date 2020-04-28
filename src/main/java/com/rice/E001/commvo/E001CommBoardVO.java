@@ -1,8 +1,25 @@
 package com.rice.E001.commvo;
 
 public class E001CommBoardVO {
-	String boNum, boRegDate, boTitle, boUpdateDate, boURL, memNum, boContent;
+	String boNum, boRegDate, boTitle, boUpdateDate, boURL, memNum, boContent, memId, commName;
+
+	public String getCommName() {
+		return commName;
+	}
+
+	public void setCommName(String commName) {
+		this.commName = commName;
+	}
+
 	int boViews, boLikes;
+	
+	public String getMemId() {
+		return memId;
+	}
+
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
 
 	public String getBoNum() {
 		return boNum;

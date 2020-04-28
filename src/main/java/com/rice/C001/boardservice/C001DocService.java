@@ -5,6 +5,7 @@ import java.util.List;
 import com.rice.A001.memvo.A001MemVO;
 import com.rice.C001.boarddto.Criteria;
 import com.rice.C001.boardvo.C001ClassBoardVO;
+import com.rice.C001.boardvo.C001FileUploadVO;
 
 public interface C001DocService {
 
@@ -25,5 +26,7 @@ public interface C001DocService {
 	List<A001MemVO> getStdList(Criteria cri);
 	
 	public String getsbjc(String boURL);
+	
+	public List<C001FileUploadVO> getAttachList(String boNum);
 	
 }

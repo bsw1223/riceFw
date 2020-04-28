@@ -13,6 +13,7 @@
 		<typeAlias alias="H001SchVO" type="com.rice.H001.homevo.H001SchVO"/>
 		<typeAlias alias="C001ReplyVO" type="com.rice.C001.replyvo.C001ReplyVO"/>
 		<typeAlias alias="C001CommentVO" type="com.rice.C001.boardvo.C001CommentVO"/>
+		<typeAlias alias="C001FileUploadVO" type="com.rice.C001.boardvo.C001FileUploadVO"/>
 		<typeAlias alias="D001BuildingVO" type="com.rice.D001.buildingvo.D001BuildingVO"/>
 		<typeAlias alias="D001ClassVO" type="com.rice.D001.buildingvo.D001ClassVO"/>
 		<typeAlias alias="D002BookVO" type="com.rice.D002.bookvo.D002BookVO"/>
@@ -20,6 +21,7 @@
 		<typeAlias alias="E001CommBoardVO" type="com.rice.E001.commvo.E001CommBoardVO"/>
 		<typeAlias alias="E001PostReportVO" type="com.rice.E001.commvo.E001PostReportVO"/>
 		<typeAlias alias="F001VO" type="com.rice.F001.F001vo.F001VO"/>
+		<typeAlias alias="F001LectureVO" type="com.rice.F001.F001vo.F001LectureVO"/>
 		<typeAlias alias="C001ClassBoardVO" type="com.rice.C001.boardvo.C001ClassBoardVO" />
 		<typeAlias alias="C001QnAVO" type="com.rice.C001.qnavo.C001QnAVO"/>
 		<typeAlias alias="C002ChatroomVO" type="com.rice.C002.chatvo.C002ChatroomVO"/>

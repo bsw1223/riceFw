@@ -52,11 +52,11 @@
 					</div>
 
 					<!-- file -->
-					<%-- 	<div class="form-group">
+					<div class="form-group">
 						<label>첨부파일</label> <input type="text" class="form-control" 
 						name="classFloorNum" value='<c:out value ="${list.fileName}"/>'
 							readonly="readonly" />
-					</div> --%>
+					</div>
 
 					<div class="box-body">
 						<button type="button" class="btn btn-default btn-xs">
