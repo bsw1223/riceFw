@@ -33,6 +33,7 @@
       select * from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
       ]]>
 	</select>
+	
 
 	<select id="getSubList" parameterType="String" resultMap="HomeResult">
       <![CDATA[
