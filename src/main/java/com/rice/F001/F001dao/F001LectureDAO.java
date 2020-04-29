@@ -38,5 +38,7 @@ public interface F001LectureDAO {
 
 	public List<Map<String, Object>> selectTeaName(F001LectureVO f001LectureVO);
 
+	public List<Map<String, Object>> enrolmentInfo();
+
 
 }

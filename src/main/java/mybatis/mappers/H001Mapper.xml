@@ -26,13 +26,14 @@
         
 	</resultMap> 
 	
-
-
+<!--       select * from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid} -->
 	<select id="getMenuList" parameterType="String" resultMap="HomeResult">
       <![CDATA[
-      select * from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
+  		 select * from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
+ 		 order by to_number(a.parentmenuid),to_number(a.menuorder),to_number(a.menuid)
       ]]>
 	</select>
+	
 
 	<select id="getSubList" parameterType="String" resultMap="HomeResult">
       <![CDATA[

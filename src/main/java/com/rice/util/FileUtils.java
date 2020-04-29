@@ -12,9 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.rice.C001.boardservice.C001QnAService;
 import com.rice.C001.qnavo.C001QnAVO;
-import com.rice.C001.qnavo.classattachedFileVO;
 
 @Component("fileUtils")
 public class FileUtils {
@@ -49,7 +47,7 @@ public class FileUtils {
 				file = new File(filepath+storedFileName);
 				multipartFile.transferTo(file);
 				listMap= new HashMap<String, Object>();
-				listMap.put("boNum", boNum);
+				listMap.put("BONUM", boNum);
 				listMap.put("FILENAME", originalFileName);
 				listMap.put("SAVEFILENAME",storedFileName);
 				listMap.put("FILESIZE", multipartFile.getSize());
@@ -72,6 +70,7 @@ public class FileUtils {
 		Map<String, Object> listMap = null;
 		
 		String boNum =vo.getBoNum();
+		// 삭제 안할 파일
 		while(iterator.hasNext()) {
 			multipartFile = mpRequest.getFile(iterator.next());
 			if(multipartFile.isEmpty() == false) {
@@ -81,13 +80,14 @@ public class FileUtils {
 				multipartFile.transferTo(new File(filepath+storedFileName));
 				listMap = new HashMap<String, Object>();
 				listMap.put("IS_NEW","1");
-				listMap.put("boNum",boNum);
+				listMap.put("BONUM",boNum);
 				listMap.put("FILENAME", originalFileName);
 				listMap.put("SAVEFILENAME",storedFileName);
 				listMap.put("FILESIZE", multipartFile.getSize());
 				list.add(listMap);
 			}
 		}
+		//삭제할 파일
 		if(files!= null && fileNames!= null) {
 			for(int i =0;i<fileNames.length;i++) {
 				listMap = new HashMap<String, Object>();

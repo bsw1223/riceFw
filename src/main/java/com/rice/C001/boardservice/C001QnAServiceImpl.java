@@ -8,13 +8,11 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.rice.C001.boarddao.C001QnADAO;
 import com.rice.C001.boarddto.Criteria;
 import com.rice.C001.qnavo.C001QnAVO;
-import com.rice.C001.qnavo.classattachedFileVO;
 import com.rice.util.FileUtils;
 
 @Service

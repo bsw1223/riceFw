@@ -51,12 +51,6 @@
 							readonly="readonly" />
 					</div>
 					<input type="hidden" value='<c:out value ="${list.boNum}"/>'>
-					<!-- file -->
-					<%-- <div class="form-group">
-						<label>첨부파일</label> <input type="text" class="form-control" 
-						name="classFloorNum" value='<c:out value ="${list.fileName}"/>'
-							readonly="readonly" />
-					</div> --%>
 					
 					<div class="row">
 						<div class="col-lg-12">
@@ -96,7 +90,6 @@
 	</section>
 	<!-- /.content -->
 </div>
-</form>
 
 <script>
 $(document).ready(function(){
@@ -115,7 +108,6 @@ $(document).ready(function(){
 				str += "</div>"
 				str + "</li>";
 			});
-			console.log(str);
 			$(".uploadResult ul").html(str);
 		});
 	})();	
@@ -131,7 +123,7 @@ $(document).ready(function(){
 		str += "<input type='hidden' name='filePath' value='"+liObj.data("path")+"'>";
 		str += "<input type='hidden' name='classFileNum' value='"+liObj.data("classfilenum")+"'>";
 		str += "<input type='hidden' name='bonum' value='"+liObj.data("bonum")+"'>";
-		$(".uploadResult li").html(str).submit(); 
+		$(".uploadResult li").append(str).submit(); 
 		
 		var path = encodeURIComponent(liObj.data("path")+"\\"+liObj.data("classfilenum")+"_"+liObj.data("filename"));
 		

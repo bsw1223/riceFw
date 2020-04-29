@@ -7,6 +7,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,7 +163,7 @@ public class F001LectureController {	// 회원관리
 	@ResponseBody
 	public List<Map<String, Object>> bulCodeLec(F001LectureVO f001LectureVO,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<Map<String, Object>> bulCodeLec=f001LectureService.bulCodeLec(f001LectureVO);
-		//System.out.println("controller_ bulCodeLec : "+ bulCodeLec.toString());
+		System.out.println("controller_ bulCodeLec : "+ bulCodeLec.toString());
 		return bulCodeLec;
 	}
 	
@@ -172,4 +175,23 @@ public class F001LectureController {	// 회원관리
 		//System.out.println("controller_ bulCodeLec : "+ selectTeaName.toString());
 		return selectTeaName;
 	}
+	//--------------------------------------------------------------------결제 ----------------------------------------------------------------
+	@RequestMapping(value = "enrolment", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	public String enrolment(){
+		//System.out.println("controller_ bulCodeLec : "+ selectTeaName.toString());
+		return "F_Enrolment";
+	}
+	
+	//수강신청 정보 불러오기
+	@RequestMapping(value = "enrolmentInfo", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> enrolmentInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<Map<String, Object>> enrolmentInfo=f001LectureService.enrolmentInfo();
+		System.out.println("controller_ bulCodeLec : "+ enrolmentInfo.toString());
+		return enrolmentInfo;
+	}
+	
+
+	
+	
 }

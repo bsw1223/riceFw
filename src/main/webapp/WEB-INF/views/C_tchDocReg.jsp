@@ -15,12 +15,12 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			<c:out value='${pageTitle}' />
+			<c:out value='${sjctName}' />
 		</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>
-			<li><a href="#">c:out value='${pageTitle}' /></a></li>
-			<li class="active">자료</li>
+			<li class="active"><i class="fa fa-dashboard"></i> 마이페이지</li>
+			<li class="active"><c:out value='${sjctName}'/></li>
+			<li class="active"><c:out value='${pageTitle}'/></li>
 		</ol>
 	</section>
 
@@ -32,11 +32,10 @@
 				<!-- general form elements -->
 				<div class="box box-info">
 					<div class="box-header">
-						<h3 class="box-title">글쓰기</h3>
+						<h3 class="box-title"><c:out value='${pageTitle}' /></h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-						<!-- boTitle action ="/mypage/board/reg/${boCode}/${boURL}" -->
 						<form role="form" name="writeForm" action="/mypage/board/reg/${boCode}/${boURL}" method='get'>
 							<div class="form-group">
 								<label>제목</label> <input type="text" class="form-control"
@@ -54,10 +53,9 @@
 									value="${memId}" readonly="readonly">
 							</div>
 
-							<input type="hidden" class="form-control" name='memNum'
-								value="${memNum}"> <input type="hidden"
-								class="form-control" name='boViews' value="0"> <input
-								type="hidden" class="form-control" name='boLikes' value="0">
+							<input type="hidden" class="form-control" name='memNum' value="${memNum}"> 
+							<input type="hidden" class="form-control" name='boViews' value="0"> 
+							<input type="hidden" class="form-control" name='boLikes' value="0">
 
 							<div class="row">
 								<div class="col-lg-12">
@@ -79,8 +77,7 @@
 							</div>
 							<!-- /.box-body -->
 							<div class="box-footer">
-								<button type="submit" id="regBtn" class="btn btn-primary"
-									name="regBtn">등록</button>
+								<button type="submit" id="regBtn" class="btn btn-primary" name="regBtn">등록</button>
 								<button id="listBtn" data-oper="list" class="btn btn-default">뒤로가기</button>
 							</div>
 							<!-- /.box-footer -->
@@ -152,15 +149,11 @@
 											var inputFile = $("input[name='uploadFile']");
 											var files = inputFile[0].files;
 											var filesArr= Array.prototype.slice.call(files);
-											console.log("files"+files);
-											console.log("filesArr: "+filesArr);
 											
 											filesArr.forEach(function(f){
 												gallery_files.push(f);
 												
-											});
-											console.log("ga     "+gallery_files);
-											
+											});											
 
 											for (var i = 0; i < gallery_files.length; i++) {
 
@@ -170,10 +163,8 @@
 
 												formData.append("uploadFile",gallery_files[i]);
 											}
-											console.log("formData"+formData);
 											
 											if(filesArr==""){
-												console.log("없어");
 											}else{
 												
 												$.ajax({
@@ -194,8 +185,6 @@
 										});
 						
 						//파일 리스트
-						
-						//var uploadResult = $(".uploadResult ul");
 						function showUploadedFile(gallery_files) {
 							
 							if (!gallery_files || gallery_files.length == 0) {
@@ -205,7 +194,7 @@
 							var uploadUL = $(".uploadResult ul");
 
 							var str = "";
-							console.log("ga      밑에  "+gallery_files);
+
 							$(gallery_files).each(
 											function(i, obj) {
 												
@@ -214,11 +203,10 @@
 												str += "<li";
 												str += " data-path='"+obj.filePath+"' data-classfilenum='"+obj.classFileNum+"'data-filename='"+obj.fileName+"' data-type='"+obj.fileCode+"' data-size='"+obj.fileSize+"' data-savefilename='"+obj.saveFileName+"'><div>";
 												str += "<span>" + obj.fileName+ "</span>";
-												str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+												str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' data-filename='"+obj.fileName+"'class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
 												str += "</div>"
 												str + "</li>";
-											});
-							console.log(str);
+											});;
 							uploadUL.html(str);
 						}
 						
@@ -227,11 +215,19 @@
 						$(".uploadResult").on("click", "button", function(e) {
 
 							console.log("delete");
-
+							console.log($(this));
 							var targetFile = $(this).data("file");
 							var type = $(this).data("type");
-
 							var targetLi = $(this).closest("li");
+							var filename = $(this).data("filename");
+						
+							for(var i = 0; i < gallery_files.length; i++){
+
+								if(gallery_files[i].name.toString() == filename){
+									gallery_files.splice(i, 1);	// 삭제
+									break;
+								}
+							}
 
 							$.ajax({
 								url : '/mypage/board/deleteFile',

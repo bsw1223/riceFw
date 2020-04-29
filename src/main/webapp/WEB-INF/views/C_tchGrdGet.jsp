@@ -14,8 +14,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <a href="/qna/list">Q&A 게시판</a>
-        <small>과목명</small>
+         <c:out value='${sjctName}' />
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>

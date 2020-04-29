@@ -2,9 +2,11 @@ package com.rice.C001.boardcontroller;
 
 import java.io.File;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Multipart;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,7 +24,6 @@ import com.rice.C001.boarddto.Criteria;
 import com.rice.C001.boarddto.PageDTO;
 import com.rice.C001.boardservice.C001QnAService;
 import com.rice.C001.qnavo.C001QnAVO;
-import com.rice.C001.qnavo.classattachedFileVO;
 
 
 @Controller
@@ -53,6 +53,8 @@ public class C001QnAController {
 		List<Map<String, Object>> fileList = c001QnAService.selectFilelList(vo.getBoNum());
 		model.addAttribute("file",fileList);
 		
+		System.out.println("fileList:"+fileList);
+		
 		return "C_qnaView";
 	}
 	
@@ -73,13 +75,14 @@ public class C001QnAController {
 	
 	//modifyView
 	@RequestMapping(value="/qna/modifyView",method=RequestMethod.POST)
-	public String modifyView(C001QnAVO vo,Model model,@ModelAttribute("boNum")String boNum)throws Exception{
+	public String modifyView(C001QnAVO vo,Model model,
+			@RequestParam(value="fileNoDel[]",required=false)String[] files,
+			@RequestParam(value="fileNameDel[]",required=false)String[] fileNames,@ModelAttribute("boNum")String boNum)throws Exception{
 		
 		model.addAttribute("update",c001QnAService.read(vo.getBoNum()));
 		
 		List<Map<String, Object>> fileList = c001QnAService.selectFilelList(vo.getBoNum());
 		model.addAttribute("file",fileList);
-		System.out.println("filelist:"+fileList);
 		
 		return "C_qnaModify";
 	}
@@ -91,9 +94,9 @@ public class C001QnAController {
 						@RequestParam(value="fileNoDel[]",required=false)String[] files,
 						@RequestParam(value="fileNameDel[]",required=false)String[] fileNames,
 						MultipartHttpServletRequest mpRequest)throws Exception{
-		
-		System.out.println("files:"+files);
-		System.out.println("filNames:"+fileNames);
+
+		System.out.println("files:"+Arrays.toString(files));
+		System.out.println("filNames:"+Arrays.toString(fileNames));
 		c001QnAService.modify(vo,files, fileNames, mpRequest);
 		/* c001QnAService.insert(vo,mpRequest); */
 		
@@ -123,9 +126,8 @@ public class C001QnAController {
 	@RequestMapping(value="/fileDown")
 	public void fileDown(@RequestParam Map<String, Object>map, HttpServletResponse response)throws Exception {
 		Map<String, Object> resultMap = c001QnAService.selectFileInfo(map);
-		System.out.println( (String)resultMap.get("SAVEFILENAME"));
-		String storedFileName = (String)resultMap.get("SAVEFILENAME");
-		String originalFileName = (String)resultMap.get("FILENAME");
+		String storedFileName = (String)resultMap.get("saveFileName");
+		String originalFileName = (String)resultMap.get("fileName");
 		
 		byte fileByte[] = org.apache.commons.io.FileUtils.readFileToByteArray(new File("C:\\download\\test\\"+storedFileName));
 		response.setContentType("application/octet-stream");
@@ -135,5 +137,4 @@ public class C001QnAController {
 		response.getOutputStream().flush();
 		response.getOutputStream().close();
 	}
-	
 }

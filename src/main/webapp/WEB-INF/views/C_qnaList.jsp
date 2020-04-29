@@ -32,7 +32,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Q&A 게시판
+        <a href="/qna/list">Q&A 게시판</a>
         <small>과목명</small>
       </h1>
       <ol class="breadcrumb" >
@@ -92,8 +92,7 @@
 	                <tr>
 	                  <td><c:out value="${list.boNum}"/></td>
 	                  <td>
-	                  	<a class='move' href="/mypage/board/qna/view?boNum=<c:out value="${list.boNum}"/>">
-	                  	<c:out value="${list.boTitle}"/></a>
+	                  	<a class='move' href="/mypage/board/qna/view?boNum=<c:out value='${list.boNum}'/>"><c:out value="${list.boTitle}"/></a>
 	                  </td>
 	                  <td><c:out value="${list.memNum}"/></td>
 	                  <td><c:out value="${list.boRegDate}"/></td>
@@ -142,7 +141,12 @@
 </div>
  
 
-
+ <form id="actionForm" action="/qna/list" method="post">
+	<input type='hidden' name='page' value='${cri.page}'>
+	<input type='hidden' name='amount' value='${cri.amount}'>
+	<%-- <input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
+	<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'> --%>
+</form>   
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
