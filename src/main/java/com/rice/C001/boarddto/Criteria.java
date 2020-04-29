@@ -1,5 +1,7 @@
 package com.rice.C001.boarddto;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class Criteria {
 
 
@@ -81,5 +83,14 @@ public class Criteria {
 	
 	public String[] getTypeArr() {
 		return type == null? new String[]{}: type.split("");
+	}
+	
+	public String getListLink() {
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("").queryParam("page", page)
+				.queryParam("amount", amount)
+				.queryParam("type", type)
+				.queryParam("keyword", keyword);
+		
+		return builder.toUriString();
 	}
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.upload">
+	<resultMap id="myboardResult" type="C001ClassBoardVO">
+		<result property="boNum" column="boNum" />
+		<result property="boCode" column="boCode" />
+		<result property="boContent" column="boContent" />
+		<result property="boRegDate" column="boRegDate" />
+		<result property="boTitle" column="boTitle" />
+		<result property="boUpdateDate" column="boUpdateDate" />
+		<result property="boViews" column="boViews" />
+		<result property="boLikes" column="boLikes" />
+		<result property="boURL" column="boURL" />
+		<result property="memNum" column="memNum" />
+	</resultMap>
+	<resultMap id="fileResult" type="C001FileUploadVO">
+		<result property="boNum" column="boNum" />
+		<result property="fileSize" column="fileSize" />
+		<result property="fileCode" column="fileCode" />
+		<result property="classFileNum" column="classFileNum" />
+		<result property="fileName" column="fileName" />
+		<result property="saveFileName" column="saveFileName" />
+		<result property="filePath" column="filePath" />
+		<result property="createDate" column="createDate" />
+		<result property="memId" column="memId" />
+	</resultMap>
+
+
+	<insert id="insert" parameterType="String">
+	<![CDATA[
+	insert into CLASSATTACHEDFILE (boNum, fileSize, classFileNum, fileCode, fileName, saveFileName, filePath, createDate, memId)
+	values (#{boNum}, #{fileSize},#{classFileNum},'1',#{fileName},#{saveFileName},#{filePath},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{memId})
+	]]>
+	</insert>
+	
+	<delete id="delete">
+	<![CDATA[
+		UPDATE CLASSATTACHEDFILE SET fileCode = '0' WHERE boNum=#{boNum}
+
+		]]>
+	</delete>
+
+	<select id="findByboNum" resultType="C001FileUploadVO">
+	<![CDATA[
+		select * from CLASSATTACHEDFILE where boNum=#{boNum}
+		]]>
+	</select>
+
+
+</mapper>

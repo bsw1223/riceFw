@@ -9,15 +9,12 @@
   
   
 
-  
-
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Q&A 게시판
+        <a href="/qna/list">Q&A 게시판</a>
         <small>과목명</small>
       </h1>
       <ol class="breadcrumb">
@@ -65,7 +62,7 @@
               	<div>파일목록</div>
               	<div class ="form-group" style="border :1px solid #bdbdbd;">
 					<c:forEach var ="file" items="${file}">
-						<a href="#" onclick="fn_fileDown('${file.classfileNum}'); return false;">${file.FILENAME}</a>(${file.FILESIZE}kb)<br>
+						<a href="#" onclick="fn_fileDown('${file.CLASSFILENUM}'); return false;">${file.FILENAME}</a>(${file.FILESIZE}kb)<br>
 					</c:forEach>
               	</div>
 	       	    <!-- /.box-body --> 
@@ -91,6 +88,7 @@
  	<input type='hidden' id='boNum' name="boNum" value='<c:out value="${list.boNum}"/>'>
 	<input type='hidden' name='page' value='<c:out value="${cri.page}"/>'>
 	<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
+	<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
 	<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
 	<input type='hidden' id="classfileNum" name='classfileNum' value="">
 </form>   
@@ -114,13 +112,17 @@
 				formObj.attr("method","post");
 				formObj.submit();
 			}
-		})//이게 왜 안돼
+		})
 		//list
 		$(".listBtn").on("click",function(){
 			/* formObj.attr("action","/mypage/board/qna/list").attr("method","get"); */
 			
 			/* history.replaceState({}, null, location.pathname); */
 			history.go(-1);
+			
+			location.href="/qna/list?page=${cri.page}"
+						+"&amount=${cri.amount}"
+						+"&type=${cri.type}&keyword=${cri.keyword}";
 			/* var pageTag=$("input[name='page']").clone();
 			var amountTag=$("input[name='amount']").clone();
 			var keywordTag=$("input[name='keyword']").clone();
@@ -138,6 +140,7 @@
 	
 	function fn_fileDown(fileno){
 		var formObj=$("form[name='readForm']");
+		
 		$("#classfileNum").attr("value",fileno);
 		formObj.attr("action","/mypage/board/fileDown");
 		formObj.submit();

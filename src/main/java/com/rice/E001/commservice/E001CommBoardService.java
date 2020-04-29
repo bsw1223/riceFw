@@ -11,7 +11,7 @@ public interface E001CommBoardService {
 
 	public E001CommBoardVO read(String boNum);
 
-	public List<E001CommBoardVO> getList(Criteria cri);
+	public List<E001CommBoardVO> getList(Criteria cri, String commURL);
 
 	public boolean delete(String boNum);
 

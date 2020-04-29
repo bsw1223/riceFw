@@ -18,7 +18,7 @@
 	
 	<resultMap type="classattachedFileVO" id="classattachedFileVO">
 		<result property="boNum" column="boNum"/>
-		<result property="CLASSFILENUM" column="CLASSFILENUM"/>
+		<result property="classfileNum" column="classfileNum"/>
 		<result property="fileName" column="fileName"/>
 		<result property="filePath" column="filePath"/>
 		<result property="saveFileName" column="saveFileName"/>
@@ -54,7 +54,7 @@
 				CLASSFILENUM,FILENAME,BONUM,FILEPATH,SAVEFILENAME,FILESIZE,FILECODE,CREATEDATE,MEMID
 			)
 			values(
-				SEQ_CLASSATTACHEDFILE.NEXTVAL,#{FILENAME, jdbcType=VARCHAR},#{boNum, jdbcType=VARCHAR},#{FILEPATH, jdbcType=VARCHAR},
+				SEQ_CLASSATTACHEDFILE.NEXTVAL,#{FILENAME, jdbcType=VARCHAR},#{BONUM, jdbcType=VARCHAR},#{FILEPATH, jdbcType=VARCHAR},
 				#{SAVEFILENAME, jdbcType=VARCHAR},#{FILESIZE, jdbcType=VARCHAR},1,TO_CHAR(SYSDATE,'YYYY-MM-DD'),
 				#{MEMID, jdbcType=VARCHAR}
 			)
@@ -76,7 +76,7 @@
 	<select id="BoardDetail" resultType="C001QnAVO">
 		SELECT  *
 		FROM CLASSBOARD 
-		WHERE boNum =#{boNum}
+		WHERE BONUM =#{BONUM}
 		
 	</select>
 	
@@ -84,7 +84,7 @@
 	<select id="selectFileList" parameterType="string" resultType="hashMap">
 		select CLASSFILENUM,FILENAME,ROUND(FILESIZE/1024,1)AS FILESIZE,FILECODE
 		from CLASSATTACHEDFILE
-		where boNum =#{boNum}
+		where BONUM =#{BONUM}
 				and FILECODE ='1'
 		order by CLASSFILENUM ASC		
 	</select>
@@ -92,7 +92,7 @@
 		
 	<!-- delete QnA -->
 	<delete id="delete">
-		delete from CLASSBOARD where boNum=#{boNum, jdbcType=VARCHAR} 
+		delete from CLASSBOARD where BONUM=#{BONUM, jdbcType=VARCHAR} 
 	</delete>
 	<!-- modify QnA -->
 	<update id ="modify">
@@ -134,11 +134,12 @@
 			    where
 			]]>    
 	<include refid="criteria"></include>
-	<![CDATA[	
-		rownum <= #{page} *#{amount}
-		)
-		where rn> (#{page}-1) *#{amount}
-	]]>
+
+		<![CDATA[	
+			rownum <= #{page} *#{amount}
+			)
+			where rn> (#{page}-1) *#{amount}
+		]]>
 	</select>
 	
 	<!-- /pagination -->
@@ -147,24 +148,27 @@
 	<select id="getTotal" resultType="int">
 		select count(*)
 		from CLASSBOARD 
-		where boNum>0
+		where 
+		boNum>0
+
 	</select>
 	<!--  -->
 	
 	<!-- CLASSATTACHEDFILE DOWNLOAD -->
 	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
-		select	FILENAME,SAVEFILENAME,CLASSFILENUM
+		select	FILENAME,SAVEFILENAME
 		from 	CLASSATTACHEDFILE
-		where boNum =#{boNum, jdbcType=VARCHAR}
+		where  CLASSFILENUM=#{CLASSFILENUM, jdbcType=VARCHAR}
 	</select>
 	
 	<!-- CLASSATTACHEDFILE UPDATE -->
 	<update id="updateFile" parameterType="hashMap">
-		    UPDATE ( SELECT A.filecode
-              FROM classattachedfile A, classboard B
-              WHERE A.bonum = B.bonum AND
-                    b.bonum=#{bonum}) 
-                    SET  filecode= '1'
+		    UPDATE 
+		    ( SELECT A.FILECODE
+              FROM CLASSATTACHEDFILE A, CLASSBOARD B
+              WHERE A.BONUM = B.BONUM AND
+                    b.BONUM=#{BONUM, jdbcType=VARCHAR}) 
+            SET  FILECODE= '1'
 	</update>
 
 </mapper>	

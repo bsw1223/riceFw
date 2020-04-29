@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+a {
+	color : #000000;
+}
+.treeview-menu>li>div {
+	padding: 8px 5px 5px 15px;
+	display: block;
+	font-size:14px;
+}
+.treeview-menu>li>div>.fa {
+	width:20px;
+}
+#friendList {
+	list-style:none;
+	padding: 5px;
+}
+#friendList>li {
+	padding: 8px 5px 8px 5px;
+}
+#friendList>li>a>.fa{
+	width: 20px;
+}

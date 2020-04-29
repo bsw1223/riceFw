@@ -29,8 +29,8 @@ public class E001CommBoardServiceImpl implements E001CommBoardService {
 	}
 
 	@Override
-	public List<E001CommBoardVO> getList(Criteria cri) {
-		return e001CommBoardDAO.getListWithPaging(cri);
+	public List<E001CommBoardVO> getList(Criteria cri, String commURL) {
+		return e001CommBoardDAO.getListWithPaging(cri, commURL);
 	}
 
 	@Override

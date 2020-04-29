@@ -16,16 +16,17 @@ public class C001QnAVO{
 	private String boURL;
 	private String memNum;
 	private List<Map<String, Object>> attachedFileList;
-	private int CLASSFILENUM;
+	private int classfileNum;
 
-	public int getCLASSFILENUM() {
-		return CLASSFILENUM;
-	}
-	public void setCLASSFILENUM(int cLASSFILENUM) {
-		CLASSFILENUM = cLASSFILENUM;
-	}
+
 	public String getBoNum() {
 		return boNum;
+	}
+	public int getClassfileNum() {
+		return classfileNum;
+	}
+	public void setClassfileNum(int classfileNum) {
+		this.classfileNum = classfileNum;
 	}
 	public void setBoNum(String boNum) {
 		this.boNum = boNum;

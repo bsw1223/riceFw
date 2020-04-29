@@ -67,7 +67,7 @@
 											</a></td>
 											<td><c:out value='${listB.memId}' /> 
 											<td><c:out value='${listB.boViews}' /> 
-											</td>
+											<td>첨부파일 
 									</c:forEach>
 								</tbody>
 							</table>

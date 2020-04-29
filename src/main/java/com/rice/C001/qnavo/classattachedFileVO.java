@@ -13,9 +13,7 @@ public class classattachedFileVO {
 	private String	fileCode;
 	private String createDate;
 	private String memId;
-	private int CLASSFILENUM;
-	
-	
+	private int classfileNum;
 	
 	
 	public String getBoNum() {
@@ -66,11 +64,11 @@ public class classattachedFileVO {
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-	public int getCLASSFILENUM() {
-		return CLASSFILENUM;
+	public int getClassfileNum() {
+		return classfileNum;
 	}
-	public void setCLASSFILENUM(int cLASSFILENUM) {
-		CLASSFILENUM = cLASSFILENUM;
+	public void setClassfileNum(int classfileNum) {
+		this.classfileNum = classfileNum;
 	}
 	
 }
