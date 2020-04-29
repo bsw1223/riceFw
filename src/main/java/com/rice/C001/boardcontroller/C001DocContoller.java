@@ -32,10 +32,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,7 +46,6 @@ import com.rice.A001.memvo.A001MemVO;
 import com.rice.C001.boarddto.Criteria;
 import com.rice.C001.boarddto.PageDTO;
 import com.rice.C001.boardservice.C001DocService;
-import com.rice.C001.boardvo.C001BoardVO;
 import com.rice.C001.boardvo.C001ClassBoardVO;
 import com.rice.C001.boardvo.C001FileUploadVO;
 
@@ -61,7 +58,8 @@ public class C001DocContoller {
 
 	@Autowired
 	private C001DocService c001DocService;
-
+	
+		//list
 	@RequestMapping(value = "/{boCode}/{boURL}", method = RequestMethod.GET)
 	public String list(Model model, Criteria cri, HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("boURL") String boURL, @PathVariable("boCode") String boCode) {
@@ -78,35 +76,30 @@ public class C001DocContoller {
 		
 		if (vo == null) {
 			return "redirect:/";
-		} else if (vo.getAuthId().equals("1001")) { // ÇĞ»ı
+		} else if (vo.getAuthId().equals("1001")) { // ï¿½Ğ»ï¿½
 			if (boCode.equals("2000")) {
-				//°øÁö»çÇ× °Ô½ÃÆÇ
 				result_view = "C_stdNoticeList";
 			} else if (boCode.equals("2001")) {
-				//Q&A °Ô½ÃÆÇ
 				result_view = "C_stdQnaList";
 			} else if (boCode.equals("2002")) {
-				//½ºÅÍµğ °Ô½ÃÆÇ
 				result_view = "C_stdTeamList";
 			} else if (boCode.equals("2003")) {
-				//¼ºÀû°Ô½ÃÆÇ
+				result_view = "C_stdGrdList";
+			}else if(boCode.equals("2004")) {
+				result_view ="C_stdTeamList";
+			} else if (boCode.equals("2003")) {
 				result_view = "C_stdGrdList";
 			}
-		} else if (vo.getAuthId().equals("1002")) { // °­»ç
+		} else if (vo.getAuthId().equals("1002")) { // ï¿½ï¿½ï¿½ï¿½
 			if (boCode.equals("2000")) { 
-				// °øÁö»çÇ× °Ô½ÃÆÇ
 				result_view = "C_tchNoticeList";
 			} else if (boCode.equals("2001")) { 
-				//Q&A °Ô½ÃÆÇ
 				result_view = "C_tchQnaList";
-			} else if (boCode.equals("2002")) {
-				// ½ºÅÍµğ °Ô½ÃÆÇ
+			} else if (boCode.equals("2002")) { // ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½
 				result_view = "C_tchTeamList";
-			} else if (boCode.equals("2003")) {
-				//¼ºÀû°Ô½ÃÆÇ
+			} else if (boCode.equals("2003")) { // qnaï¿½Ô½ï¿½ï¿½ï¿½
 				result_view = "C_tchGrdList";
-			} else if(boCode.equals("2004")) {	
-				//ÇĞ»ı¸ñ·Ï
+			} else if(boCode.equals("2004")) {	//
 				List<A001MemVO> stdlist = c001DocService.getStdList(cri);
 				model.addAttribute("list", stdlist);
 				result_view ="C_tchStdList";
@@ -115,7 +108,8 @@ public class C001DocContoller {
 
 		return result_view;
 	}
-
+	
+	//detail
 	@RequestMapping(value = "/get/{boCode}/{boURL}", method = RequestMethod.GET)
 	public String get(@RequestParam("boNum") String boNum, Model model, Criteria cri, HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("boURL") String boURL, @PathVariable("boCode") String boCode) {
@@ -126,47 +120,46 @@ public class C001DocContoller {
 		model.addAttribute("sjctName", c001DocService.getsbjc(boURL));
 		model.addAttribute("list", c001DocService.read(boNum, boURL, boCode));
 		model.addAttribute("memId", vo.getMemId());
+		
 		if (vo == null) {
 			return "redirect:/";
-		} else if (vo.getAuthId().equals("1001")) { // ÇĞ»ı
+		} else if (vo.getAuthId().equals("1001")) { // ï¿½Ğ»ï¿½
 			if (boCode.equals("2000")) {
-				//°øÁö»çÇ× ³»¿ë
 				result_view = "C_stdNoticeGet";
 			} else if (boCode.equals("2001")) {
-				//Q&A ³»¿ë
 				if(vo.getMemNum().equals(c001DocService.read(boNum, boURL, boCode).getMemNum())) {
-					//³»°¡ µî·ÏÇÑ °Ô½Ã¹°ÀÏ °æ¿ì ÀÌµ¿ÆäÀÌÁö(¼öÁ¤, »èÁ¦ ¹öÆ°ÀÌ ÀÖ´Â ÆäÀÌÁö)
 					result_view = "C_stdQnaGet";
 				}
 				else {
-					//³»°¡ µî·ÏÇÑ °Ô½Ã¹°ÀÏ °æ¿ì ÀÌµ¿ÆäÀÌÁö(¼öÁ¤, »èÁ¦ ¹öÆ°ÀÌ ¾ø´Â ÆäÀÌÁö)
 					result_view="C_stdQna";
 				}
 			} else if (boCode.equals("2002")) {
-				//½ºÅÍµğ ³»¿ë
 				result_view = "C_stdTeamGet";
-			} 
-			//¼ºÀûÀº ¸®½ºÆ®¿¡ ¹Ù·Î ¼ºÀûÀ» º¸¿©ÁÙ°Å 
-		} else if (vo.getAuthId().equals("1002")) { // °­»ç
+			} else if (boCode.equals("2003")) {
+				result_view = "C_stdGrdGet";
+			} else if(boCode.equals("2006")) {
+				result_view = "C_stdTeamGet";
+			}
+		} else if (vo.getAuthId().equals("1002")) { // ï¿½ï¿½ï¿½ï¿½
 			if (boCode.equals("2000")) { 
-				//°øÁö»çÇ× ³»¿ë
 				result_view = "C_tchNoticeGet";
 			} else if (boCode.equals("2001")) { 
-				//Q&A ³»¿ë
 				result_view = "C_tchQnaGet";
-			} else if (boCode.equals("2002")) { 
-				//½ºÅÍµğ ³»¿ë
+			} else if (boCode.equals("2002")) { // ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½
 				result_view = "C_tchTeamGet";
-			} else if (boCode.equals("2003")) { 
-				// ¼ºÀûÀÔ·Â
-				result_view = "C_tchQnaGet";
+			} else if (boCode.equals("2003")) { // qnaï¿½Ô½ï¿½ï¿½ï¿½
+				result_view = "C_tchGrdGet";
+			} else if(boCode.equals("2004")) {
+				result_view ="C_tchGrdGet";
+			} else if(boCode.equals("2006")) {
+				result_view ="C_tchTeamGet";
 			}
-			//Èø¼Ä¸ñ·ÏÀº ¸®½ºÆ®¸¸
 		}
 
 		return result_view;
 	}
-
+	
+	//ë“±ë¡ì°½
 	@RequestMapping(value = "/regForm/{boCode}/{boURL}", method = RequestMethod.GET)
 	public String regForm(C001ClassBoardVO boardvo, Model model, @PathVariable("boURL") String boURL,HttpServletRequest request,
 			@PathVariable("boCode") String boCode) {
@@ -179,13 +172,20 @@ public class C001DocContoller {
 		model.addAttribute("boCode", boCode);
 		model.addAttribute("sjctName", c001DocService.getsbjc(boURL));
 		String pageTitle = null;
-		if (boCode.equals("2000")) { // °øÁö»çÇ×
-			pageTitle = "°øÁö»çÇ× °Ô½ÃÆÇ";
-		} else if (boCode.equals("2001")) { // ÀÚ·á°Ô½ÃÆÇ
-			pageTitle = "Q&A °Ô½ÃÆÇ";
-		} else if (boCode.equals("2002")) { // °úÁ¦°Ô½ÃÆÇ
-			pageTitle = "½ºÅÍµğ °Ô½ÃÆÇ";
-		} 
+
+		if (boCode.equals("2000")) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			pageTitle = "ê³µì§€ì‚¬í•­";
+		} else if (boCode.equals("2001")) { // ï¿½Ú·ï¿½Ô½ï¿½ï¿½ï¿½
+			pageTitle = "Q&Aê²Œì‹œíŒ";
+		} else if (boCode.equals("2002")) { // ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½
+			pageTitle = "ìŠ¤í„°ë””";
+		} else if(boCode.equals("2003")) {
+			pageTitle ="ì„±ì  ì¡°íšŒ";
+		} else if(boCode.equals("2004")) {
+			pageTitle ="í•™ìƒëª©ë¡";
+		} else if(boCode.equals("2005")) {
+			pageTitle ="Q&A ï¿½Ô½ï¿½ï¿½ï¿½";
+		}
 		model.addAttribute("pageTitle", pageTitle);
 		return "C_tchDocReg";
 	}
@@ -197,7 +197,7 @@ public class C001DocContoller {
 		cri.setBoCode(boCode);
 
 		if(boardvo.getFilelist() != null) {
-			boardvo.getFilelist().forEach(attach->System.out.println("Ãâ·Â "+attach.getFileName()));
+			boardvo.getFilelist().forEach(attach->System.out.println("ï¿½ï¿½ï¿½ "+attach.getFileName()));
 		}
 		c001DocService.register(boardvo);
 		String nextPage = "redirect:/mypage/board/" + boCode + "/" + boURL;
@@ -205,19 +205,27 @@ public class C001DocContoller {
 		return nextPage;
 	}
 
+	//ìˆ˜ì •ì°½
 	@RequestMapping(value = "/mdfyForm/{boCode}/{boURL}", method = RequestMethod.GET)
 	public String update( Model model, @PathVariable("boURL") String boURL,@RequestParam("boNum") String boNum,
 			@PathVariable("boCode") String boCode, HttpServletRequest request,C001ClassBoardVO boardvo) {
 		model.addAttribute("sjctName", c001DocService.getsbjc(boURL));
 		model.addAttribute("list", c001DocService.read(boNum, boURL, boCode));
 		String pageTitle = null;
-		if (boCode.equals("2000")) { // °øÁö»çÇ×
-			pageTitle = "°øÁö»çÇ× °Ô½ÃÆÇ";
-		} else if (boCode.equals("2001")) { // ÀÚ·á°Ô½ÃÆÇ
-			pageTitle = "Q&A °Ô½ÃÆÇ";
-		} else if (boCode.equals("2002")) { // °úÁ¦°Ô½ÃÆÇ
-			pageTitle = "½ºÅÍµğ °Ô½ÃÆÇ";
-		} 
+
+		if (boCode.equals("2000")) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			pageTitle = "ê³µì§€ì‚¬í•­";
+		} else if (boCode.equals("2001")) { // ï¿½Ú·ï¿½Ô½ï¿½ï¿½ï¿½
+			pageTitle = "Q&A ê²Œì‹œíŒ";
+		} else if (boCode.equals("2002")) { // ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½
+			pageTitle = "ìŠ¤í„°ë”” ê²Œì‹œíŒ";
+		} else if(boCode.equals("2003")) {
+			pageTitle ="ì„±ì  ê²Œì‹œíŒ";
+		} else if(boCode.equals("2004")) {
+			pageTitle ="í•™ìƒëª©ë¡";
+		} else if(boCode.equals("2005")) {
+			pageTitle ="Q&A ï¿½Ô½ï¿½ï¿½ï¿½";
+		}
 		model.addAttribute("pageTitle", pageTitle);
 
 		return "C_tchDocMdfy";
@@ -226,6 +234,8 @@ public class C001DocContoller {
 	@RequestMapping(value = "/mdfy/{boCode}/{boURL}", method = RequestMethod.GET)
 	public String updateBoard(C001ClassBoardVO boardvo, @PathVariable("boURL") String boURL, Model model,@RequestParam("boNum") String boNum,
 			@PathVariable("boCode") String boCode) {
+		System.out.println("mdfy Ã¹ï¿½ï¿½Â° ï¿½ï¿½ : "+boardvo.getBoNum());
+		System.out.println("mdfy ï¿½Î¹ï¿½Â° ï¿½ï¿½ : "+boNum);
 		model.addAttribute("sjctName", c001DocService.getsbjc(boURL));
 		c001DocService.update(boardvo);
 
@@ -253,12 +263,12 @@ public class C001DocContoller {
 		
 		String uploadFolder ="C:\\upload";
 		String uploadFolderPath= getFolder();
-		//³¯Â¥º° Æú´õ ¸¸µé±â
+		//ï¿½ï¿½Â¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
 		if(uploadPath.exists() == false) {
 			uploadPath.mkdirs();
 		}
-		//Æú´õ¿¡ ÆÄÀÏÀúÀå
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		for(MultipartFile multipartFile : uploadFile) {
 
 			C001FileUploadVO attachVO = new C001FileUploadVO();
@@ -279,8 +289,8 @@ public class C001DocContoller {
 				attachVO.setFilePath(uploadFolderPath);
 				
 				if(checkImageType(saveFile)) {
-
-					//ÆÄÀÏÄÚµå°¡ ÀÌ¹ÌÁöÀÏ°æ¿ì ½æ³×ÀÏ »ı¼º
+					
+					attachVO.setFileCode("Image");
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_"+uploadFileName));
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 					thumbnail.close();
@@ -335,7 +345,7 @@ public class C001DocContoller {
 	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, C001FileUploadVO vo){
 		
 		
-		//µğºñ¿¡¼­ °æ·Î °¡Á®¿À±â ÇØ¾ßµÊ
+		//ï¿½ï¿½ñ¿¡¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ßµï¿½
 		Resource resource = new FileSystemResource("C:\\upload\\"+vo.getFileName());
 		
 		if(resource.exists() ==false) {
@@ -345,7 +355,7 @@ public class C001DocContoller {
 		
 		String resuourceOriginalName = resourceName.substring(resourceName.indexOf("_")+1);
 		HttpHeaders headers = new HttpHeaders();
-		//µğºñ¿¡¼­ ÆÄÀÏÀÌ¸§À» °¡Á®¿Í¾ßÇÔ
+		//ï¿½ï¿½ñ¿¡¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ï¿½ï¿½ï¿½
 		try {
 			String downloadName = null;
 			if(userAgent.contains("Trident")) {

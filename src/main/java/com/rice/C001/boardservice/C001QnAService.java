@@ -3,6 +3,8 @@ package com.rice.C001.boardservice;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.rice.C001.boarddto.Criteria;
@@ -30,5 +32,4 @@ public interface C001QnAService {
 	public List<Map<String, Object>> selectFilelList(String boNum)throws Exception;
 
 	public Map<String, Object> selectFileInfo(Map<String, Object>map)throws Exception;
-	
 }
