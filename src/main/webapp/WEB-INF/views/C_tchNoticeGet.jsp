@@ -109,7 +109,6 @@ $(document).ready(function(){
 				str += "</div>"
 				str + "</li>";
 			});
-			console.log(str);
 			$(".uploadResult ul").html(str);
 		});
 	})();	
@@ -125,7 +124,7 @@ $(document).ready(function(){
 		str += "<input type='hidden' name='filePath' value='"+liObj.data("path")+"'>";
 		str += "<input type='hidden' name='classFileNum' value='"+liObj.data("classfilenum")+"'>";
 		str += "<input type='hidden' name='bonum' value='"+liObj.data("bonum")+"'>";
-		$(".uploadResult li").html(str).submit(); 
+		$(".uploadResult li").append(str).submit(); 
 		
 		var path = encodeURIComponent(liObj.data("path")+"\\"+liObj.data("classfilenum")+"_"+liObj.data("filename"));
 		
