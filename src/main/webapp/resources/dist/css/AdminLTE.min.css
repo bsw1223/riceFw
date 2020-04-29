@@ -3140,7 +3140,13 @@ table.text-center, table.text-center td, table.text-center th {
 }
 
 .direct-chat-msg {
-	margin-bottom: 10px
+	margin-bottom: 10px;
+	width: 60%;
+	float: left;
+}
+
+.direct-chat-messages>.right {
+	float: right;
 }
 
 .direct-chat-msg:before, .direct-chat-msg:after {

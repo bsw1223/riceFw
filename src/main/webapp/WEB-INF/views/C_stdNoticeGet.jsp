@@ -51,12 +51,6 @@
 							readonly="readonly" />
 					</div>
 					<input type="hidden" value='<c:out value ="${list.boNum}"/>'>
-					<!-- file -->
-					<%-- <div class="form-group">
-						<label>첨부파일</label> <input type="text" class="form-control" 
-						name="classFloorNum" value='<c:out value ="${list.fileName}"/>'
-							readonly="readonly" />
-					</div> --%>
 					
 					<div class="row">
 						<div class="col-lg-12">
@@ -96,7 +90,6 @@
 	</section>
 	<!-- /.content -->
 </div>
-</form>
 
 <script>
 $(document).ready(function(){

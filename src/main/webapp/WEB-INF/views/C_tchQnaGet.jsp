@@ -26,7 +26,7 @@
 			<div class="col-md-12">
 				<div class="box box-info">
 					<div class="box-header">
-						<h3 class="box-title">Q&A 게시판</h3>
+						<h3 class="box-title">Q & A 게시판</h3>
 
 					</div>
 					<!-- /.box-header -->
@@ -52,11 +52,21 @@
 					</div>
 
 					<!-- file -->
-					<%-- 	<div class="form-group">
-						<label>첨부파일</label> <input type="text" class="form-control" 
-						name="classFloorNum" value='<c:out value ="${list.fileName}"/>'
-							readonly="readonly" />
-					</div> --%>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">Files</div>
+								
+								<div class="panel-body">
+									<div class="uploadResult">
+										<ul>
+										
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
 					<div class="box-body">
 						<button type="button" class="btn btn-default btn-xs">
@@ -123,12 +133,11 @@
 	</section>
 	<!-- /.content -->
 </div>
-</form>
+
 <script type="text/javascript"
 	src="/resources/bower_components/bootstrap/comment.js"></script>
 <script type="text/javascript">
-	$(document)
-			.ready(
+	$(document).ready(
 					function() {
 						console.log("==============");
 						console.log("JS TEST!!");
@@ -238,6 +247,50 @@
 
 
 	}
+</script>
+
+
+<script>
+$(document).ready(function(){
+
+	(function(){
+		var boNum = '<c:out value="${list.boNum}"/>';
+		$.getJSON("/mypage/board/getAttachList",{boNum:boNum}, function(arr){
+			console.log(arr);
+			var str ="";
+			
+			$(arr).each(function(i,attach){
+				str += "<li";
+				str += " data-path='"+attach.filePath+"' data-classfilenum='"+attach.classFileNum+"'data-filename='"+attach.fileName+"' data-type='"+attach.fileCode;
+				str +="' data-size='"+attach.fileSize+"' data-savefilename='"+attach.saveFileName+"' data-boNum=${list.boNum}><div>";
+				str += "<span>" + attach.fileName+ "</span>";
+				str += "</div>"
+				str + "</li>";
+			});
+			console.log(str);
+			$(".uploadResult ul").html(str);
+		});
+	})();	
+	
+	$(".uploadResult").on("click","li",function(e){
+		
+		console.log("view image");
+		
+		var liObj=$(this);
+		
+		 var str ="";
+		str += "<input type='hidden' name='fileName' value='"+liObj.data("filename")+"'>";
+		str += "<input type='hidden' name='filePath' value='"+liObj.data("path")+"'>";
+		str += "<input type='hidden' name='classFileNum' value='"+liObj.data("classfilenum")+"'>";
+		str += "<input type='hidden' name='bonum' value='"+liObj.data("bonum")+"'>";
+		$(".uploadResult li").html(str).submit(); 
+		
+		var path = encodeURIComponent(liObj.data("path")+"\\"+liObj.data("classfilenum")+"_"+liObj.data("filename"));
+		
+		self.location="/mypage/board/download?fileName="+path;
+		
+	});
+});
 </script>
 
 <%@ include file="footer.jsp"%>

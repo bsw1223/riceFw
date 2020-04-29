@@ -70,6 +70,42 @@ public class C002ChatDAOImpl implements C002ChatDAO {
 	public void insertMemberChat(Map info) {
 		sqlsession.insert("mapper.chat.insertMemberChat", info);		
 	}
-
+	// 방장 번호 알아오기
+	@Override
+	public String getmakeMember(Map info) {
+		return sqlsession.selectOne("mapper.chat.getmakeMember", info);
+	}
+	// 방이름, 방번호, 참여멤버 이름 가져오기
+	@Override
+	public List<Map<String, Object>> getChatroomInfo(Map info) {
+		return sqlsession.selectList("mapper.chat.getChatroomInfo", info);
+	}
+	
+	// 접속 할 나의 모든 채팅방 리스트 가져오기
+	@Override
+	public List<String> getmychatIdList(String info) {
+		return sqlsession.selectList("mapper.chat.getmychatIdList", info);
+	}
+	// 채팅메시지 저장하기
+	@Override
+	public void insertMsg(Map info) {
+		sqlsession.insert("mapper.chat.insertMsg", info);
+	}
+	// 접속 채팅방 이전 메시지 get
+	@Override
+	public List<Map<String, Object>> getpastMsg(Map info) {
+		return sqlsession.selectList("mapper.chat.getpastMsg", info);
+	}
+	// 채팅방 이름 수정
+	@Override
+	public void updateChatroomName(Map info) {
+		sqlsession.update("mapper.chat.updateChatroomName", info);
+	}
+	// 채팅방 나가기
+	@Override
+	public void deleteMemberChat(Map info) {
+		sqlsession.delete("mapper.chat.deleteMemberChat", info);
+	}
+	
 	
 }

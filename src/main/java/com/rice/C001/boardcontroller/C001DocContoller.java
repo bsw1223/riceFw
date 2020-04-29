@@ -87,11 +87,13 @@ public class C001DocContoller {
 				result_view = "C_stdGrdList";
 			}else if(boCode.equals("2004")) {
 				result_view ="C_stdTeamList";
+			} else if (boCode.equals("2003")) {
+				result_view = "C_stdGrdList";
 			}
 		} else if (vo.getAuthId().equals("1002")) { // ����
-			if (boCode.equals("2000")) { // ��������
+			if (boCode.equals("2000")) { 
 				result_view = "C_tchNoticeList";
-			} else if (boCode.equals("2001")) { // �ڷ�Խ���
+			} else if (boCode.equals("2001")) { 
 				result_view = "C_tchQnaList";
 			} else if (boCode.equals("2002")) { // �����Խ���
 				result_view = "C_tchTeamList";
@@ -99,13 +101,8 @@ public class C001DocContoller {
 				result_view = "C_tchGrdList";
 			} else if(boCode.equals("2004")) {	//
 				List<A001MemVO> stdlist = c001DocService.getStdList(cri);
-				System.out.println(stdlist);
 				model.addAttribute("list", stdlist);
 				result_view ="C_tchStdList";
-			} else if(boCode.equals("2005")) {
-				result_view ="C_tchGrdList";
-			} else if(boCode.equals("2006")) {
-				result_view ="C_tchTeamList";
 			}
 		}
 
@@ -144,9 +141,9 @@ public class C001DocContoller {
 				result_view = "C_stdTeamGet";
 			}
 		} else if (vo.getAuthId().equals("1002")) { // ����
-			if (boCode.equals("2000")) { // ��������
+			if (boCode.equals("2000")) { 
 				result_view = "C_tchNoticeGet";
-			} else if (boCode.equals("2001")) { // �ڷ�Խ���
+			} else if (boCode.equals("2001")) { 
 				result_view = "C_tchQnaGet";
 			} else if (boCode.equals("2002")) { // �����Խ���
 				result_view = "C_tchTeamGet";
@@ -175,6 +172,7 @@ public class C001DocContoller {
 		model.addAttribute("boCode", boCode);
 		model.addAttribute("sjctName", c001DocService.getsbjc(boURL));
 		String pageTitle = null;
+
 		if (boCode.equals("2000")) { // ��������
 			pageTitle = "공지사항";
 		} else if (boCode.equals("2001")) { // �ڷ�Խ���
@@ -212,10 +210,9 @@ public class C001DocContoller {
 	public String update( Model model, @PathVariable("boURL") String boURL,@RequestParam("boNum") String boNum,
 			@PathVariable("boCode") String boCode, HttpServletRequest request,C001ClassBoardVO boardvo) {
 		model.addAttribute("sjctName", c001DocService.getsbjc(boURL));
-		System.out.println("mdfyForm  "+boardvo.getBoNum());
-		System.out.println("mdfyForm  "+boNum);
 		model.addAttribute("list", c001DocService.read(boNum, boURL, boCode));
 		String pageTitle = null;
+
 		if (boCode.equals("2000")) { // ��������
 			pageTitle = "공지사항";
 		} else if (boCode.equals("2001")) { // �ڷ�Խ���
@@ -294,8 +291,6 @@ public class C001DocContoller {
 				if(checkImageType(saveFile)) {
 					
 					attachVO.setFileCode("Image");
-					
-					//�����ڵ尡 �̹����ϰ�� ����� ����
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_"+uploadFileName));
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 					thumbnail.close();

@@ -64,6 +64,21 @@
 							<i class="fa fa-eye"></i>${list.boViews}
 						</button>
 					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">Files</div>
+								
+								<div class="panel-body">
+									<div class="uploadResult">
+										<ul>
+										
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 					<!-- 로그인한 사람과 글쓴 사람이 일치할 경우에만 수정삭제버튼 뜨도록 변경해야함 -->
 					<button data-oper="submit" class="btn btn-primary"
 						onclick="location.href='/mypage/board/mdfyForm/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">수정</button>
@@ -125,8 +140,7 @@
 											},
 											function(list) {
 												var str = "";
-												if (list == null
-														|| list.length == 0) {
+												if (list == null|| list.length == 0) {
 													replyUL
 															.html("작성된 댓글이 없습니다.");
 
@@ -174,7 +188,48 @@
 
 </script>
 
+<script>
+$(document).ready(function(){
 
+	(function(){
+		var boNum = '<c:out value="${list.boNum}"/>';
+		$.getJSON("/mypage/board/getAttachList",{boNum:boNum}, function(arr){
+			console.log(arr);
+			var str ="";
+			
+			$(arr).each(function(i,attach){
+				str += "<li";
+				str += " data-path='"+attach.filePath+"' data-classfilenum='"+attach.classFileNum+"'data-filename='"+attach.fileName+"' data-type='"+attach.fileCode;
+				str +="' data-size='"+attach.fileSize+"' data-savefilename='"+attach.saveFileName+"' data-boNum=${list.boNum}><div>";
+				str += "<span>" + attach.fileName+ "</span>";
+				str += "</div>"
+				str + "</li>";
+			});
+			console.log(str);
+			$(".uploadResult ul").html(str);
+		});
+	})();	
+	
+	$(".uploadResult").on("click","li",function(e){
+		
+		console.log("view image");
+		
+		var liObj=$(this);
+		
+		 var str ="";
+		str += "<input type='hidden' name='fileName' value='"+liObj.data("filename")+"'>";
+		str += "<input type='hidden' name='filePath' value='"+liObj.data("path")+"'>";
+		str += "<input type='hidden' name='classFileNum' value='"+liObj.data("classfilenum")+"'>";
+		str += "<input type='hidden' name='bonum' value='"+liObj.data("bonum")+"'>";
+		$(".uploadResult li").append(str).submit(); 
+		
+		var path = encodeURIComponent(liObj.data("path")+"\\"+liObj.data("classfilenum")+"_"+liObj.data("filename"));
+		
+		self.location="/mypage/board/download?fileName="+path;
+		
+	});
+});
+</script>
 
 <%@ include file="footer.jsp"%>
 </body>

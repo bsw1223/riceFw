@@ -241,10 +241,9 @@
 			<artifactId>thumbnailator</artifactId>
 			<version>0.4.8</version>
 		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+		
 		<!-- 채팅 websocket -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
