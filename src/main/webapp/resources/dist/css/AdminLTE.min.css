@@ -3131,7 +3131,7 @@ table.text-center, table.text-center td, table.text-center th {
 	-o-transform: translate(0, 0);
 	transform: translate(0, 0);
 	padding: 10px;
-	height: 600px;
+	height: 500px;
 	overflow: auto
 }
 
