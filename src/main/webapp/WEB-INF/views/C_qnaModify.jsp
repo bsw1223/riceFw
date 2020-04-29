@@ -16,7 +16,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Q&A 게시판
+        <a href="/qna/list">Q&A 게시판</a>
         <small>과목명</small>
       </h1>
       <ol class="breadcrumb">
@@ -39,7 +39,14 @@
             </div>
             <!-- /.box-header -->
 			<div class="box-body">
-			<form name="updateForm" role="form" method="post" action="/mypage/board/qna/modify"  enctype= "multipart/form-data">
+			<form name="updateForm"role="form" action="/mypage/board/qna/modify" method='post'  enctype="multipart/form-data">
+				 	<input type='hidden' id='boNum' name="boNum" value='<c:out value="${list.boNum}"/>'>
+					<input type='hidden' name='page' value='<c:out value="${cri.page}"/>'>
+					<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'> 
+					<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
+					<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
+					<!-- <input type='text' id="fileNoDel" name="fileNoDel[]" value="">
+					<input type='text' id="fileNameDel" name="fileNameDel[]" value=""> -->
               <!-- boNum -->
               <div class ="form-group">
               	<label>No.</label>
@@ -63,19 +70,20 @@
               	</div>
               	
               	<!-- file -->
-              	<div class ="form-group" style="margin:15px;" >
+              	<div class ="form-group" style="border :1px solid #bdbdbd;padding:5px;">
 	              	<c:forEach var="file" items="${file}" varStatus="var">
 		              	<div>
 	    	          		<input type='hidden' id="classfileNum" name="classfileNum_${var.index}" value="${file.CLASSFILENUM}"/>
 		              		<input type='hidden' id="fileName" name="fileName" value="classfileNum_${var.index}">
 		              		<a href ="#" id="fileName" onclick="return false;">${file.FILENAME}</a>(${file.FILESIZE}kb)
-		              		<button id="fileDel" onclick="fn_del('${file.CLASSFILENUM}','${var.index}');" type="button" class="pull-right">삭제</button>
+		              		<button id="fileDel" onclick="fn_del('${file.CLASSFILENUM}','classfileNum_${var.index}');" type="button">삭제</button>
 		              	</div>
 	              	</c:forEach>
-	             </div>
-	             <div>
-	           		<input type ='file'class ='form-control'name='file_"+(fileIndex++)+"'>
-	           	 </div>
+	            </div>
+	            <div >
+	              	<input type ='file'  style='float:left ;margin-bottom:10px;'class ='form-control' name='file_"+(fileIndex++)+"'>
+	           </div>
+	           
 	       	    <!-- /.box-body -->  
 	            <div class="box-footer">
                 	<button data-oper="register" class="btn btn-primary">저장</button>
@@ -94,53 +102,46 @@
     <!-- /.content -->
   </div>
  
-<form role="form" action="/qna/modify" method='post'  enctype="multipart/form-data">
- 	<input type='hidden' id='boNum' name="boNum" value='<c:out value="${list.boNum}"/>'>
-	<input type='hidden' name='page' value='<c:out value="${cri.page}"/>'>
-	<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
-	<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
-	<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
-	<input type='text' id="fileNoDel" name="fileNoDel[]" value="">
-	<input type='text' id="fileNameDel" name="fileNameDel[]" value="">
-</form>   
- 
+
+
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var formObj = $("form[name='updateForm']");
 		
-		$(document).on("click","#fileDel", function(){
-			$(this).parent().remove();
-		})
-		
-		fn_addFile();
-		
 		$(document).on("click","#register",function(){
-	
+			e.preventDefault();
 			formObj.attr("action","/mypage/board/qna/modify");
 			formObj.attr("method","post");
 			formObj.submit();
 			
-			console.log("file:"+file);
 		})	
 		$("#cancel").on("click",function(){
 			event.preventDefault();
 			location.href="/mypage/board/qna/list"
 		})
+		
+		$(document).on("click","#fileDel", function(e){
+			e.preventDefault();
+			$(this).parent().remove();
+		})
+		
 	});
 
-
-	/*function fn_addFile(){
-			var fileIndex = 1;
-			//$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"<button type='button' style='float:right;' id='fileAddBtn'>"+"추가"+"</button></div>");
+	/* function fn_addFile(){
+		
+			var str="<div><input type='file name='file_"+(fileIndex++)+"'>"+
+					"<button type='button' style='float:right;' id='fileDelBtn'>"+"삭제"+"</button></div>"
+			
 			$(".fileAdd_btn").on("click", function(){
-				$("#fileIndex").append("<div><input type='file' style='float:left;' name='file_"+(fileIndex++)+"'>"+"</button>"+"<button type='button' style='float:right;' id='fileDelBtn'>"+"삭제"+"</button></div>");
-			});
+				$("#fileIndex").append(str);
+				
 			$(document).on("click","#fileDelBtn", function(){
 				$(this).parent().remove();
 				
 			});
-		}*/
+		}
+	} */
 	
 	var fileNoArray = new Array();
 	var fileNameArray = new Array();

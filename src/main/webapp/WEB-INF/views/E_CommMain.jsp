@@ -133,8 +133,6 @@
 					              </div>
 					              <!-- /ROW -->
 					            </div>
-					            
-				         
 				            <!-- /.box-body -->
 						</div>
 					</div>
@@ -183,7 +181,7 @@
 					            <!-- Tabs within a box -->
 					            <ul class="nav nav-tabs pull-left">
 					              <li class="active"><a href="#popular" data-toggle="tab">최신글/인기글</a></li>
-					              <li><a href="#wholecomm" data-toggle="tab" style="width: 100px;"></a>전체커뮤니티</li>
+					              <li><a href="#wholecomm" data-toggle="tab" style="width: 120px;">전체커뮤니티</a></li>
 					            </ul>
 					            <div class="tab-content padding">
 					              <!-- Morris chart - Sales -->

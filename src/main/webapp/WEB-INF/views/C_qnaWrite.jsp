@@ -16,7 +16,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Q&A 게시판
+        <a href="/qna/list">Q&A 게시판</a>
         <small>과목명</small>
       </h1>
       <ol class="breadcrumb" >
@@ -57,10 +57,7 @@
               	<!--file-->
 				<div class ="form-group">
               		<label id="fileUpload" >파일첨부</label>
-              		<input multiple class ="form-control"name ='file' type ='file'>
-              		 <c:forEach var="file" items="${files}">
-						<div>${files.ORG_FILE_NAME}</div>(${files.FILE_SIZE}kb)<br>
-					</c:forEach> 
+              		<input multiple="multiple" class ="form-control"name ='file' type ='file'>
               	</div>
               	<!-- file add -->
               	<div id="fileIndex"></div>
