@@ -26,11 +26,12 @@
 
 </style>
   
-
+<body>
+<%@ include file="F_Fixedsidebar.jsp"%>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header"style="width:83%">
       <h1>
         <c:out value='${sjctName}' />
        
@@ -46,7 +47,7 @@
     <section class="content">
       <div class="row">
         <!-- left column -->
-        <div class="col-md-12">
+        <div class="col-md-10">
           <!-- general form elements -->
           <div class="box box-primary">
    			 <!-- box body -->
@@ -139,7 +140,7 @@
 </section>
 <!-- /content wrapper -->
 </div>
- 
+</body>
 
  <form id="actionForm" action="/qna/list" method="post">
 	<input type='hidden' name='page' value='${cri.page}'>

@@ -8,11 +8,13 @@
 	
 </script>
 
+<body>
 
+<%@ include file="F_Fixedsidebar.jsp"%>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
-	<section class="content-header">
+	 <section class="content-header"style="width:83%">
 		<h1>
 			<c:out value='${sjctName}' />
 		</h1>
@@ -26,7 +28,7 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-xs-10">
 				<div class="box">
 					<div class="box-header">
 						<h3 class="box-title">Q & A 게시판</h3>
@@ -114,7 +116,7 @@
 	</section>
 	<!-- /.content -->
 </div>
-
+</body>
 
 
 <form id="actionForm" action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method='get'>
@@ -139,7 +141,6 @@
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
 		var page = 1;
-		console.log(boURL);
 
 		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=" + page + "&amount=" + sel;
 

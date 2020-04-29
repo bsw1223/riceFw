@@ -20,11 +20,13 @@ tr{
 
 </style>
 
+<body>
 
+<%@ include file="F_Fixedsidebar.jsp"%>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
-	<section class="content-header">
+	<section class="content-header"style="width:83%">
 		<h1>
 			<c:out value='${sjctName}' />
 		</h1>
@@ -38,7 +40,7 @@ tr{
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-xs-10">
 				<div class="box">
 					<div class="box-header">
 						<h3 class="box-title">공지사항게시판</h3>
@@ -120,7 +122,7 @@ tr{
 	</section>
 	<!-- /.content -->
 </div>
-
+</body>
 
 
 <form id="actionForm"
