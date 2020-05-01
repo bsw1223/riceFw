@@ -7,6 +7,32 @@
 	crossorigin="anonymous">
 	
 </script>
+<style>
+
+.box-body{
+	background-color: white;
+}
+#search{
+	margin:auto;
+	display:flex;
+}
+.select{
+	float:left;
+	margin-left:10px;
+	
+}
+.input-group{
+	float:left;
+	width: 170px;
+}
+.buttons{
+	float:left;
+	display:flex;
+	
+}
+
+</style>
+
 
 <body>
 
@@ -21,7 +47,7 @@
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li><a href="#"><c:out value='${sjctName}' /></a></li>
-			<li class="active">Q&A</li>
+			<li class="active">QnA 게시판</li>
 		</ol>
 	</section>
 
@@ -29,13 +55,10 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-xs-10">
-				<div class="box">
+				<div class="box box-primary">
 					<div class="box-header">
-						<h3 class="box-title">Q & A 게시판</h3>
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<div style="float: right;">
+						<h2 class="box-title">QnA 게시판</h2>
+						<div style="float: right;" class="amount">
 							<select id="getListWithPaging" name="sel" onchange="selChange()">
 								<option value="5"
 									<c:if test="${pageMaker.cri.amount == 5}">selected</c:if>>5개씩보기</option>
@@ -47,75 +70,60 @@
 									<c:if test="${pageMaker.cri.amount == 20}">selected</c:if>>20개씩보기</option>
 							</select>
 						</div>
-						<!-- 옵션선택 끝 -->
-						<div class="box-body table-responsive no-padding">
-							<table class="table table-hover" id="example2"
-								class="table table-bordered table-hover">
-								<thead>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성날짜</th>
+									<th>조회수</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="listB" items='${listB}'>
 									<tr>
-										<th>No.</th>
-										<th>제목</th>
-										<th>작성자</th>
-										<th>작성날짜</th>
-										<th>조회수</th>
+										<td><c:out value='${listB.boNum}' /> </td>
+										<td><a href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
+												<c:out value='${listB.boTitle}' /></a>
+										</td>
+										<td><c:out value='${listB.memId}' /></td>
+										<td><c:out value='${listB.boRegdate}' /></td>
+										<td><c:out value='${listB.boViews}' /></td>
 									</tr>
-								</thead>
-
-								<tbody>
-									<c:forEach var="listB" items='${listB}'>
-										<tr>
-											<td><c:out value='${listB.boNum}' /> </td>
-											<td><a href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
-													<c:out value='${listB.boTitle}' />
-											</a></td>
-											<td><c:out value='${listB.memId}' /></td>
-											<td><c:out value='${listB.boRegdate}' /></td>
-											<td><c:out value='${listB.boViews}' /></td>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-
-						<div>
-							<ul class="pagination">
-
+								</c:forEach>
+							</tbody>
+						</table>
+						<div class="box-footer">
+							<ul class="pagination pagination-sm no-margin">
 								<c:if test='${pageMaker.prev}'>
-									<li class="page-item"><a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum}&amount=${pageMaker.cri.amount}page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">Previous</a></li>
+									<li class="paginate_button prev"><a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum}&amount=${pageMaker.cri.amount}page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">Previous</a></li>
 								</c:if>
-
 								<c:forEach begin="${pageMaker.startPage }"
-									end="${pageMaker.endPage}" var="pnum">
+											end="${pageMaker.endPage}" var="pnum">
 									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-								<a class="page-link"
-												href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
-												</li>
-								
-											</c:forEach>
+										<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a></li>
+								</c:forEach>
 								<c:if test="${pageMaker.next}">
-									<li class="page-item"><a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
+									<li class="paginate_button next"><a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
 								</c:if>
 							</ul>
+							<!-- /pagination -->
+							<div class="offset-md-8">
+								<form action="/mypage/board/regForm/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}">
+									<button type="submit" class="btn pull-right">질문등록</button>
+								</form>
+							</div>
 						</div>
-						<div class="offset-md-8">
-							<form action="/mypage/board/regForm/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}">
-								<button type="submit" class="btn pull-right">질문등록</button>
-							</form>
-						</div>
-						<!-- /.box-body -->
 					</div>
-					<!-- /.box -->
 				</div>
-				<!-- /.box-body -->
+			  </div>
 			</div>
-			<!-- /.box -->
-		</div>
-		<!-- /.col -->
-
-	</section>
-	<!-- /.content -->
-</div>
+		</section>
+	</div>
 </body>
 
 

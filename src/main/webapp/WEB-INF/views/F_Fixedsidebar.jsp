@@ -6,7 +6,7 @@
   z-index: 1;
   top: 150px;
   right: 20px;
-  background: #000000;
+  background: #FFFFF;
   overflow-x: hidden;
   padding: 8px 0;
 }

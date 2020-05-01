@@ -8,11 +8,31 @@
 	
 </script>
 
+<style>
+.box-body{
+	background-color: white;
+}
+.box-tools{
+	margin:auto;
+	display:flex;
+}
+.select{
+	float:left;
+	
+}
+.input-group{
+	float:left;
+	width: 170px;
+}
+.amount{
+float: right;
+}
+
+</style>
+
 <body>
 <%@ include file="F_Fixedsidebar.jsp"%>
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
+  <div class="content-wrapper">
 	<section class="content-header"style="width:83%">
 		<h1>
 			<c:out value='${sjctName}' />
@@ -20,7 +40,7 @@
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li><a href="#"><c:out value='${sjctName}' /></a></li>
-			<li class="active">스터디</li>
+			<li class="active">스터디 </li>
 		</ol>
 	</section>
 
@@ -31,35 +51,30 @@
 				<div class="box">
 					<div class="box-header">
 						<h3 class="box-title">스터디 게시판</h3>
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<div style="float: right;">
-							<select id="getListWithPaging" name="sel" onchange="selChange()">
+							<div class="amount">
+								<select id="getListWithPaging" name="sel" onchange="selChange()">
 								<option value="5"
-									<c:if test="${pageMaker.cri.amount == 5}">selected</c:if>>5개씩보기</option>
+										<c:if test="${pageMaker.cri.amount == 5}">selected</c:if>>5개씩보기</option>
 								<option value="10"
 									<c:if test="${pageMaker.cri.amount == 10}">selected</c:if>>10개씩보기</option>
 								<option value="15"
 									<c:if test="${pageMaker.cri.amount == 15}">selected</c:if>>15개씩보기</option>
 								<option value="20"
 									<c:if test="${pageMaker.cri.amount == 20}">selected</c:if>>20개씩보기</option>
-							</select>
-						</div>
-						<!-- 옵션선택 끝 -->
-						<div class="box-body table-responsive no-padding">
-							<table class="table table-hover" id="example2"
-								class="table table-bordered table-hover">
-								<thead>
-									<tr>
-										<th>No.</th>
-										<th>제목</th>
-										<th>작성자</th>
-										<th>작성날짜</th>
-										<th>조회수</th>
-									</tr>
-								</thead>
-
+								</select>
+							</div>
+					</div>
+					<div class="box-body">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성날짜</th>
+									<th>조회수</th>
+								</tr>
+							</thead>
 								<tbody>
 									<c:forEach var="listB" items='${listB}'>
 										<tr>
@@ -71,14 +86,12 @@
 											<td><c:out value='${listB.memId}' /></td>
 											<td><c:out value='${listB.boRegdate}' /></td>
 											<td><c:out value='${listB.boViews}' /></td>
+										</tr>	
 									</c:forEach>
 								</tbody>
 							</table>
-						</div>
-
-						<div>
+						<div class = "box-footer">
 							<ul class="pagination">
-
 								<c:if test='${pageMaker.prev}'>
 									<li class="page-item"><a class="page-link"
 										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum}&amount=${pageMaker.cri.amount}page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">Previous</a></li>
@@ -103,18 +116,11 @@
 								<button type="submit" class="btn pull-right">게시물등록</button>
 							</form>
 						</div>
-						<!-- /.box-body -->
 					</div>
-					<!-- /.box -->
 				</div>
-				<!-- /.box-body -->
 			</div>
-			<!-- /.box -->
 		</div>
-		<!-- /.col -->
-
 	</section>
-	<!-- /.content -->
 </div>
 
 </body>
@@ -143,7 +149,6 @@
 		var page = 1;
 
 		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page="+ page + "&amount=" + sel;
-
 	}
 </script>
 

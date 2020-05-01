@@ -28,7 +28,6 @@
 				<div class="box box-info">
 					<div class="box-header">
 						<h3 class="box-title">Q & A 게시판</h3>
-
 					</div>
 					<!-- /.box-header -->
 					<!-- bulName -->

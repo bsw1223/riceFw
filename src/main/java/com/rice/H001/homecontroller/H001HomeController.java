@@ -46,32 +46,34 @@ public class H001HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) throws IOException {	
 		//토익 접수 크롤링
-		String URL = "https://exam.ybmnet.co.kr/toeic/";
-		Document doc = Jsoup.connect(URL).get();
-		Elements elem = doc.select("table#reg_table");
-		
-		String elemString = elem.toString();
-		String elemStringRep = elemString.replace("\"images/index/", "\"../../../../resources/");
-		model.addAttribute("elemStringRep",elemStringRep);
-		//System.out.println(elemStringRep);
-		
-		String speakingURL = "https://exam.ybmnet.co.kr/toeicswt/";
-		Document speakingDoc = Jsoup.connect(speakingURL).get();
-		Elements speakingElem = speakingDoc.select("#tabSchedule1sub > table > tbody");
-		
-		String speakingElemString = speakingElem.toString();
-		//String speakingElemStringRep = speakingElemString.replace("\"images/index/", "\"../../../../resources/");
-		String speakingElemStringRep = speakingElemString.replace("<span class=\"dday\">D-3</span>","");
-		String speakingElemStringRepR = speakingElemStringRep.replace("2020년","20년");
-		String elemStringRepR = speakingElemStringRepR.replace(" <col width=\"40%\">"," <col width=\"30%\">");
-		String elemStringRepRY = elemStringRepR.replace("년",".");
-		String elemStringRepRM = elemStringRepRY.replace("월",".");
-		String elemStringRepRD = elemStringRepRM.replace("일","");
-		String elemStringRepRG = elemStringRepRD.replace("()","(일)");
-		
-		model.addAttribute("elemStringRepRG",elemStringRepRG);
-		//System.out.println("elemStringRepRG : "+elemStringRepRG);
-		
+		/*
+		 * String URL = "https://exam.ybmnet.co.kr/toeic/"; Document doc =
+		 * Jsoup.connect(URL).get(); Elements elem = doc.select("table#reg_table");
+		 * 
+		 * String elemString = elem.toString(); String elemStringRep =
+		 * elemString.replace("\"images/index/", "\"../../../../resources/");
+		 * model.addAttribute("elemStringRep",elemStringRep);
+		 * //System.out.println(elemStringRep);
+		 * 
+		 * String speakingURL = "https://exam.ybmnet.co.kr/toeicswt/"; Document
+		 * speakingDoc = Jsoup.connect(speakingURL).get(); Elements speakingElem =
+		 * speakingDoc.select("#tabSchedule1sub > table > tbody");
+		 * 
+		 * String speakingElemString = speakingElem.toString(); //String
+		 * speakingElemStringRep = speakingElemString.replace("\"images/index/",
+		 * "\"../../../../resources/"); String speakingElemStringRep =
+		 * speakingElemString.replace("<span class=\"dday\">D-3</span>",""); String
+		 * speakingElemStringRepR = speakingElemStringRep.replace("2020년","20년"); String
+		 * elemStringRepR =
+		 * speakingElemStringRepR.replace(" <col width=\"40%\">"," <col width=\"30%\">"
+		 * ); String elemStringRepRY = elemStringRepR.replace("년","."); String
+		 * elemStringRepRM = elemStringRepRY.replace("월","."); String elemStringRepRD =
+		 * elemStringRepRM.replace("일",""); String elemStringRepRG =
+		 * elemStringRepRD.replace("()","(일)");
+		 * 
+		 * model.addAttribute("elemStringRepRG",elemStringRepRG);
+		 * //System.out.println("elemStringRepRG : "+elemStringRepRG);
+		 */
 		
 		return "index";
 	}

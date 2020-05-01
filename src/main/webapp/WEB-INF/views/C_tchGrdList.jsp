@@ -27,8 +27,8 @@
 }
 .buttons{
 	float:left;
-	margin:auto;
 	display:flex;
+	
 }
 
 </style>
@@ -36,9 +36,7 @@
 <body>
 
 <%@ include file="F_Fixedsidebar.jsp"%>
-   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
      <section class="content-header"style="width:83%">
       <h1>
         <c:out value='${sjctName}' />
@@ -46,35 +44,32 @@
       <ol class="breadcrumb" >
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 		<li><a href="#"><c:out value='${sjctName}' /></a></li>
-		<li class="active">성적</li>
+		<li class="active">성적 입력</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">
-        <!-- left column -->
-        <div class="col-md-10">
-          <!-- general form elements -->
-          <div class="box box-primary">
-   			 <!-- box body -->
-			<div class="box-body">
-			<!-- search -->
-			 <div class="box-tools pull-left">
-			 <label>과목명 :</label>
+      <div class="col-md-10">
+        <div class="box">
+		 <div class="box-body">
+		   <div class="box-header">
+				<h2 class="box-title">성적 입력 </h2>
+			 <div class="box-tools pull-right">
+			 <label>과제명 :</label>
 				<form id='searchForm' action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method ="get">
 					<div class='select'>
 	                  <select name='type' style="width:150px;height:20px;">
 	                    <option value=""
-	                    	<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+	                    	<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>-----</option>
 	                    <option value="T"
-	                    	<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
+	                    	<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>과제1</option>
 	                    <option value="C"
-	                    	<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
+	                    	<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>과제2</option>
 	                    <option value="W"
-	                    	<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자<option>
+	                    	<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>과제3<option>
 	                    <option value="TWC"
-	                    	<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>전체</option>
+	                    	<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>과제4</option>
 	                  </select>
 	                  </div>
 	                  <!-- /select option -->
@@ -87,16 +82,16 @@
 				</div> --%>
 				</form>
             </div>
+            </div>
 			<!-- /search-->
 			<!-- table -->
               <table class="table table-bordered">
                 <tr>
                   <th style="width: 20px">No.</th>
                   <th>학생이름</th>
-                  <th>제출여부</th>
-                  <th>첨부파일</th>
+                  <th style="width: 100px">제출여부</th>
+                  <th style="width: 100px">첨부파일</th>
                   <th style="width: 100px">점수</th>
-                 
                 </tr>
                 <c:forEach var="list" items="${studentList}">
 	                <tr>
@@ -112,127 +107,42 @@
                 </c:forEach>
               </table>
               <!-- /table -->
-           		<div class="pull-right">
-					<form action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method="get">
+           		<div class="box-footer pull-right">
+					 <form action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method="get"> 
 						<div class="buttons">
-							<button class="btn btn-block btn-primary">입력</button>
-					      	<button class="btn btn-block btn-primary">등록</button>
+						<!-- 입력버튼을 누르면 점수를 입력할수 있는 칸 나옴 -->
+							<button class="btn btn-warning">입력</button>
+							<!-- 등록버튼을 누르면 입력한 정수를 저장하고 더이상 입력할수 없게 readonly로 변함 -->
+					      	<button class="btn btn-primary">등록</button>
 					     </div>
-				     </form> 
+				    </form>  
 				</div> 
 	            <!-- pagination -->
-	            <div class="box-footer">
-	              <ul class="pagination pagination-sm no-margin">
-	                	<c:if test="${pageMaker.prev}">
-							<li class="paginate_button prev">
-								<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
-							</li>
-						</c:if>
-	                	
-	                   <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
-							<li class="page-item ${pageMaker.cri.page==num?" active ":""}">
-								<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${num}">${num}</a>
-							</li>
-						</c:forEach>
-	                	
-	              		<c:if test="${pageMaker.next}">
-							<li class="paginate_button next">
-								<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
-							</li>
-						</c:if>
-	              </ul>
-	        	</div>
-        		 <!-- /pagination -->  
+	             <ul class="pagination pagination-sm no-margin">
+	               <c:if test="${pageMaker.prev}">
+					<li class="paginate_button prev">
+						<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
+					</li>
+					</c:if>
+                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
+						<li class="page-item ${pageMaker.cri.page==num?" active ":""}">
+							<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${num}">${num}</a>
+						</li>
+					</c:forEach>
+	           		<c:if test="${pageMaker.next}">
+						<li class="paginate_button next">
+							<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
+						</li>
+					</c:if>
+	             </ul>
      		</div>
-    	 <!-- /.main content -->
-  		</div>  
+  		 </div>  
 		</div>
-	</div>
-	<!-- /section -->
-</section>
-<!-- /content wrapper -->
-</div>
+	</section>
+  </div>
 </body>
  
  
- <!-- MODAL -->
- <div class="modal fade" id="modalPop">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title">점수 입력창</h4>
-				</div>
-				<div class="modal-body">
-
-						<form class="form-horizontal">
-							<div class="box-body">
-							
-								<div class="form-group  col-sm-12">
-				                <label for="" class="col-sm-6" id="selectSub">과목선택</label>
-				                  <select class="form-control" id="subId2">
-				                    
-				                  </select>
-				                </div>
-				                <div class="form-group  col-sm-12">
-				                 <label for="" class="col-sm-12" id="searchTeacher">강사검색</label>
-										<input type="text" class="form-control" id="eventTitle" placeholder="이름을 입력해 주세요">
-								</div>
-								<button type="button" class="btn btn-primary col-sm-12" id="selectTeaName">검색</button>
-								</div>
-							</form>	
-			<div class="box-header with-border">
-            <div class="box-header">
-              	
-              <h3 class="box-title">강사 목록</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <table class="table table-condensed" id="lecInfoTable">
-                <tr>
-                  <th style="width: 5px">No</th>
-                  <th style="width: 5px">선택</th>
-                  <th style="width: 40px">강사번호</th>
-                  <th style="width: 40px">강사이름</th>
-                </tr>
- 
-              </table>
-            </div>
-            <!-- /.box-body -->
-      	  </div>
-
-		<div class="box-header with-border">
-			<div class="box-header">
-			<h3 class="box-title">강의 계획 목록</h3>
-				</div>
-				<!-- /.box-header -->
-				<div class="box-body no-padding">
-					<table class="table table-condensed" id="lecInfoTeacher">
-						<tr>
-							<th style="width: 5px">No</th>
-							<th style="width: 5px">선택</th>
-							<th style="width: 40px">강의 계획명</th>
-							<th style="width: 40px">강의 내용</th>
-						</tr>
-	
-					</table>
-				</div>
-				<!-- /.box-body -->
-		</div>
-			</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary" id="saveSub">선택</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-<!-- /.modal -->
 
 
 <form id="actionForm" action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method='get'>
