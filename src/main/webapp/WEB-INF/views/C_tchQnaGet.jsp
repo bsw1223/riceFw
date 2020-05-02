@@ -2,137 +2,111 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous">
+</script>
 
-<html>
-<head>
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-		<h1>
-			<c:out value='${sjctName}' />
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#"><c:out value='${sjctName}' /></a></li>
-			<li class="active">Q&A</li>
-		</ol>
-	</section>
 
-	<!-- Main content -->
-	<section class="content">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="box box-info">
-					<div class="box-header">
-						<h3 class="box-title">Q & A 게시판</h3>
+<body>
+	<%@ include file="F_Fixedsidebar.jsp"%>
+	<div class="content-wrapper">
+		<section class="content-header"style="width:83%">
+			<h1>
+				<c:out value='${sjctName}' />
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+				<li><a href="#"><c:out value='${sjctName}' /></a></li>
+				<li class="active">QnA 게시판</li>
+			</ol>
+		</section>
 
-					</div>
-					<!-- /.box-header -->
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-md-10">
+					<div class="box box-primary">
+						<div class="box-body">
+							<h2 class="box-title">QnA 게시판</h2>
 
-					<!--title -->
-					<div class="form-group">
-						<label>제목</label> <input class="form-control" name="boTitle"
-							value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
-					</div>
-
-					<!-- content -->
-					<div class="form-group">
-						<label>내용</label> <input type="text" class="form-control"
-							name="boContent" value='<c:out value ="${list.boContent}"/>'
-							readonly="readonly" />
-					</div>
-
-					<!-- content -->
-					<div class="form-group">
-						<label>작성자</label> <input type="text" class="form-control"
-							name="memId" value='<c:out value ="${list.memId}"/>'
-							readonly="readonly" />
-					</div>
-
-					<!-- file -->
-					<div class="row">
-						<div class="col-lg-12">
+							<!--title -->
+							<div class="form-group">
+								<label>제목</label> <input class="form-control" name="boTitle" value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
+							</div>
+							<!-- content -->
+							<div class="form-group">
+								<label>내용</label> <input type="text" class="form-control" name="boContent" value='<c:out value ="${list.boContent}"/>'
+														readonly="readonly" />
+							</div>
+							<!-- content -->
+							<div class="form-group">
+								<label>작성자</label> <input type="text" class="form-control"	name="memId" value='<c:out value ="${list.memId}"/>'
+														readonly="readonly" />
+							</div>
+							<!-- file -->
 							<div class="panel panel-default">
 								<div class="panel-heading">Files</div>
-								
-								<div class="panel-body">
-									<div class="uploadResult">
-										<ul>
-										
-										</ul>
+									<div class="panel-body">
+										<div class="uploadResult">
+											<ul>
+											</ul>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-
-					<div class="box-body">
-						<button type="button" class="btn btn-default btn-xs">
-							<i class="fa fa-eye"></i> ${list.boViews}
-						</button>
-						<button type="button" class="btn btn-default btn-xs">
-							<i class="fa fa-thumbs-o-up"></i>${list.boLikes}
-						</button>
-					</div>
-
-					<button data-oper="list" class="btn btn-default"
-						onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
-
-					<!-- /.box-footer -->
-
-				<div class="col-lg-12">
-					<!-- PANEL -->
-					<div class="box box-priamry">
-						<div class="box-header with-border">
-							<i class="fa fa-fw fa-comments"></i>
-							<h3 class="box-title">댓글작성</h3>
-						</div>
-						<form>
-							<input type="hidden" id='boNum' name='boNum'
-								value='<c:out value ="${list.boNum}"/>'>
-							<div class="box-body">
-								<div class="form-group">
-									<label for="comtContent">댓글내용</label> <input class="form-control" id="comtContent" 
-									name="comtContent" placeholder="comment...">
-								</div>
-								<div class="form-group">
-									<label for="userId">댓글 작성자</label> <input class="form-control"
-										id="userId" name="userId" value='<c:out value ="${memId}"/>'
-										readonly="readonly">
-								</div>
-								<input type="button" id="insertButton" value="전송"
-									onclick="replysubmit()" />
+							<!-- box footer -->
+							<div class="box-footer">
+								<button type="button" class="btn btn-default btn-xs">
+									<i class="fa fa-eye"></i> ${list.boViews}</button>
+								<button type="button" class="btn btn-default btn-xs">
+									<i class="fa fa-thumbs-o-up"></i>${list.boLikes}</button>
+								<button data-oper="list" class="btn btn-default" 
+										onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
 							</div>
-						</form>
-
+						</div>
 					</div>
 				</div>
-				<div class='row'>
-					<div class="col-lg-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<i class="fa fa-comments fa-fw"></i>Reply
-							</div>
-
-							<div class="panel-body">
-								<ul class='chat'>
-
-								</ul>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<!-- /.box -->
 			</div>
-			<!-- /.col -->
+		</section>
+	</div>
+	<!-- comment -->
+	<div class="col-md-12">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<i class="fa fa-fw fa-comments"></i>
+					<h3 class="box-title">댓글작성</h3>
+			</div>
+			<form>
+				<input type="hidden" id='boNum' name='boNum' value='<c:out value ="${list.boNum}"/>'>
+					<div class="box-body">
+						<div class="form-group">	
+							<label for="comtContent">댓글내용</label> 
+							<input class="form-control" id="comtContent"name="comtContent" placeholder="comment...">
+						</div>
+						<div class="form-group">
+							<label for="userId">댓글 작성자</label>
+							 <input class="form-control" id="userId" name="userId" value='<c:out value ="${memId}"/>'
+									readonly="readonly">
+						</div>
+							<input type="button" id="insertButton" value="전송" onclick="replysubmit()" />
+					</div>
+			</form>
 		</div>
-		<!-- /.row -->
-	</section>
-	<!-- /.content -->
-</div>
+	</div>
+	<div class='row'>
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<i class="fa fa-comments fa-fw"></i>Reply
+				</div>
+				<div class="panel-body">
+					<ul class='chat'>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 
 <script type="text/javascript"
 	src="/resources/bower_components/bootstrap/comment.js"></script>

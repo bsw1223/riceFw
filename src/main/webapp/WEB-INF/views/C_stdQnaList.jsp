@@ -30,6 +30,13 @@
 	display:flex;
 	
 }
+.th1{
+ width:10px;
+}
+
+.th2{
+ width:100px;
+}
 
 </style>
 
@@ -76,11 +83,11 @@
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-									<th>No.</th>
+									<th class="th1">No.</th>
 									<th>제목</th>
-									<th>작성자</th>
-									<th>작성날짜</th>
-									<th>조회수</th>
+									<th class="th2">작성자</th>
+									<th class="th2">작성날짜</th>
+									<th class="th2">조회수</th>
 								</tr>
 							</thead>
 							<tbody>

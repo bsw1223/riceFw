@@ -34,9 +34,7 @@
 
 <body>
 	<%@ include file="F_Fixedsidebar.jsp"%>
-	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
-		<!-- Content Header (Page header) -->
 		<section class="content-header"style="width:83%">
 			<h1>
 				<c:out value='${sjctName}' />
@@ -51,7 +49,7 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-xs-10">
+				<div class="col-md-10">
 					<div class="box box-primary">
 						<div class="box-header">
 							<h2 class="box-title">공지사항게시판</h2>

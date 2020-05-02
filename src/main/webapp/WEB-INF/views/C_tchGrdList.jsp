@@ -25,11 +25,6 @@
 	float:left;
 	width: 170px;
 }
-.buttons{
-	float:left;
-	display:flex;
-	
-}
 
 </style>
 

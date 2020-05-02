@@ -110,8 +110,6 @@ float: right;
 										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
 								</c:if>
 							</ul>
-						</div>
-						<div class="offset-md-8">
 							<form action="/mypage/board/regForm/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}">
 								<button type="submit" class="btn pull-right">게시물등록</button>
 							</form>
