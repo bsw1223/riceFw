@@ -167,7 +167,6 @@ delete_event_btn.click(function () {	// 예약 삭제 버튼 click
 			memNum: memNum
 		}
 	
-	console.log(JSON.stringify(eventData))
 	// 예약 삭제 처리
 	$.ajax({
 		type : "post",

@@ -192,7 +192,8 @@
 			a.bulid,
 		    b.bulName,
 		    a.classnumber,
-		    a.classCapacity
+		    a.classCapacity,
+		    a.classId
 		FROM CLASSROOM a , building b
 		where classcode = '강의실'
 		and a.bulid=#{bulId}
@@ -223,6 +224,39 @@
 	a.memnum=b.memnum
 		      ]]>
 	</select>
+
+<!-- 수강신청 관련 조회 -->
+<select id="enrolmentInfo" resultType="java.util.Map">
+      <![CDATA[
+		SELECT 
+		   a.openStartDate,
+		   a.classDesc,
+		   a.classId,
+		   a.openclassId,
+		   a.classCapacity,
+		   a.classDescFile,
+		   a.memNum,
+		   a.classPrice,
+		   a.openclassName,
+		   a.subId,
+		   a.openEndDate,
+		   a.openStartTime,
+		   a.openEndTime,
+		   a.classMon,
+		   a.classTue,
+		   a.classWed,
+		   a.classThur,
+		   a.classFri,
+		   a.classSat,
+		   a.classSun,
+		   b.memname
+		FROM OPENCLASS a, member b
+		where a.memnum=b.memnum
+
+	      ]]>
+	</select>
+
+
 
 
 

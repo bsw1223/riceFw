@@ -23,17 +23,18 @@
 	float:left;
 	width: 170px;
 }
+.amount{
+float: right;
+}
 
 </style>
   
-
-  <!-- Content Wrapper. Contains page content -->
+<body>
+<%@ include file="F_Fixedsidebar.jsp"%>
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header"style="width:83%">
       <h1>
         <c:out value='${sjctName}' />
-       
       </h1>
       <ol class="breadcrumb" >
         <li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>
@@ -45,101 +46,111 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <!-- left column -->
-        <div class="col-md-12">
-          <!-- general form elements -->
-          <div class="box box-primary">
-   			 <!-- box body -->
-			<div class="box-body">
-			<!-- search -->
-			 <div class="box-tools pull-right">
-				<form id='searchForm' action="/mypage/board/qna/list" method ="get">
-					<div class='select'>
-	                  <select name='type' style="width:100px;height:30px;">
-	                    <option value=""
-	                    	<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
-	                    <option value="T"
-	                    	<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
-	                    <option value="C"
-	                    	<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
-	                    <option value="W"
-	                    	<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자<option>
-	                    <option value="TWC"
-	                    	<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>전체</option>
-	                  </select>
-	                  </div>
-	                  <!-- /select option -->
-	                <div class="input-group input-group-sm hidden-xs" >
-	                    <input type="text" name='keyword'
-	                    	value='<c:out value="${pageMaker.cri.keyword}"/>'class="form-control pull-right">
-	                    <div class="input-group-btn">
-	                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
-	                  </div>
+        <div class="col-md-10">
+          <div class="box">
+   			 <div class="box-header">
+				<h2 class="box-title">QnA 게시판</h2>
+				<div class="amount">
+					<select id="getListWithPaging" name="sel" onchange="selChange()">
+						<option value="5"
+							<c:if test="${pageMaker.cri.amount == 5}">selected</c:if>>5개씩보기</option>
+						<option value="10"
+							<c:if test="${pageMaker.cri.amount == 10}">selected</c:if>>10개씩보기</option>
+						<option value="15"
+							<c:if test="${pageMaker.cri.amount == 15}">selected</c:if>>15개씩보기</option>
+						<option value="20"
+							<c:if test="${pageMaker.cri.amount == 20}">selected</c:if>>20개씩보기</option>
+					</select>
 				</div>
-				</form>
-            </div>
-			<!-- /search-->
-			<!-- table -->
+			</div>
+			<div class="box-body">
               <table class="table table-bordered">
-                <tr>
-                  <th style="width: 20px">No.</th>
-                  <th>제목</th>
-                  <th>작성자</th>
-                  <th>조회수</th>
-                  <th>답변여부</th>
-                </tr>
-                <c:forEach var="list" items="${boardList}">
-	                <tr>
-	                  <td><c:out value="${list.boNum}"/></td>
-	                  <td>
-	                  	<a class='move' href="/mypage/board/${pageMaker.cri.boCode}/get?boNum=<c:out value='${list.boNum}'/>"><c:out value="${list.boTitle}"/></a>
-	                  </td>
-	                  <td><c:out value="${list.memNum}"/></td>
-	                  <td><c:out value="${list.boView}"/></td>
-	                  <!--답변상태로 수정해야함-->
-	                  <td><c:out value="${list.boUpdateDate}"/></td>
-	                </tr>
-                </c:forEach>
+               	<thead>
+	               <tr>
+	                  <th style="width: 20px">No.</th>
+	                  <th>제목</th>
+	                  <th style="width: 120px">작성자</th>
+	                  <th style="width: 100px">조회수</th>
+	                  <th style="width: 100px">답변여부</th>
+	               </tr>
+                </thead>
+                <tbody>
+	                <c:forEach var="list" items="${boardList}">
+		                <tr>
+		                  <td><c:out value="${list.boNum}"/></td>
+		                  <td>
+		                  	<a class='move' href="/mypage/board/${pageMaker.cri.boCode}/get?boNum=<c:out value='${list.boNum}'/>"><c:out value="${list.boTitle}"/></a>
+		                  </td>
+		                  <td><c:out value="${list.memNum}"/></td>
+		                  <td><c:out value="${list.boView}"/></td>
+		                  <!--답변상태로 수정해야함-->
+		                  <td><c:out value="${list.boUpdateDate}"/></td>
+		                </tr>
+	                </c:forEach>
+                </tbody>
               </table>
-              <!-- /table -->
-           		<div class="pull-right" style="padding:10px;">
+           		<!-- button -->
+           		<!-- <div class="pull-right" style="padding:10px;">
 					<form action="/mypage/board/qna/writeView" method="get">
 				      	<button id='regBtn' type="button" class="btn btn-block btn-primary">등록</button>
 				     </form> 
-				</div> 
+				</div>  -->
 	            <!-- pagination -->
 	            <div class="box-footer">
 	              <ul class="pagination pagination-sm no-margin">
-	                	<c:if test="${pageMaker.prev}">
+	                <c:if test="${pageMaker.prev}">
 							<li class="paginate_button prev">
 								<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
 							</li>
 						</c:if>
-	                	
-	                   <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
+	                <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
 							<li class="page-item ${pageMaker.cri.page==num?" active ":""}">
 								<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${num}">${num}</a>
 							</li>
-						</c:forEach>
-	                	
-	              		<c:if test="${pageMaker.next}">
+					</c:forEach>
+	                <c:if test="${pageMaker.next}">
 							<li class="paginate_button next">
 								<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
 							</li>
-						</c:if>
+					</c:if>
 	              </ul>
 	        	</div>
-        		 <!-- /pagination -->  
+        		 <!-- /pagination --> 
+        		 <!-- search -->
+<%-- 				 <div class="box-tools pull-right">
+					<form id='searchForm' action="/mypage/board/qna/list" method ="get">
+						<div class='select'>
+		                  <select name='type' style="width:100px;height:30px;">
+		                    <option value=""
+		                    	<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+		                    <option value="T"
+		                    	<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
+		                    <option value="C"
+		                    	<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
+		                    <option value="W"
+		                    	<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자<option>
+		                    <option value="TWC"
+		                    	<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>전체</option>
+		                  </select>
+		                  </div>
+		                  <!-- /select option -->
+		                <div class="input-group input-group-sm hidden-xs" >
+		                    <input type="text" name='keyword'
+		                    	value='<c:out value="${pageMaker.cri.keyword}"/>'class="form-control pull-right">
+		                    <div class="input-group-btn">
+		                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+		                   </div>
+						</div>
+					</form>
+	            </div> --%>
+			<!-- /search--> 
      		</div>
-    	 <!-- /.main content -->
   		</div>  
 		</div>
+	  </div>
+	</section>
 	</div>
-	<!-- /section -->
-</section>
-<!-- /content wrapper -->
-</div>
- 
+</body>
 
  <form id="actionForm" action="/qna/list" method="post">
 	<input type='hidden' name='page' value='${cri.page}'>

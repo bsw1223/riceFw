@@ -162,6 +162,7 @@
                 <div class="">
                   <label>강의실</label>
                   <input type="text" class="form-control " placeholder="" id="classIdLec">
+                  <input type="hidden" class="form-control " placeholder="" id="hiddenClassIdLec">
                 </div>
                 <div class="">
                   <label>과정금액</label>
@@ -539,19 +540,18 @@ var selClLecCapa = null;
 var selBulNameB = null;
 var selBulNameC = null;
 var selBulNameT = null;
+var selBulNameV = null;
 var teaMemName = null;
 var memNameSecond =null;
 var memNumSecond = null;
 var teaSubCode = null;
 var compareLecTea = new Array();
 var getSelSubName = null;
+var getclassIdLec = null;
 //개설 교과과정 등록
 //insertSub
 
-	$(document).on(
-			"click",
-			"#insertSub",
-			function() {
+	$(document).on("click","#insertSub",function() {
 				if ($('#subName').val() == '' || $('#teaLec').val() == ''
 						|| $('#titleLec').val() == '' || $('#startDateLec').val() == ''
 						|| $('#endEndDateLec').val() == ''
@@ -562,10 +562,10 @@ var getSelSubName = null;
 					alert("빈칸을 모두 채워 주세요");
 					
 				}else{
-				classId = $('#classIdLec').val();
+				classId = $('input#hiddenClassIdLec').val();
 				classPliceLec = $('#costLec').val();
 				//classDescFile://첨부파일 차후 적용
-
+				
 				/* console.log("insertOpenLec : "+
 						"classId : "+classId+" "+
 						"planStartDateLec : "+planStartDateLec+"  "+
@@ -902,6 +902,8 @@ $(document).on('click','#classIdLec',function(){
 					
 				for(i in bulCodeLec){
 					numK++;
+					getclassIdLec = bulCodeLec[i].CLASSID;
+					//console.log("getclassIdLec : " +getclassIdLec);
 					classBulIdSelLec = bulCodeLec[i].BULID;
 					classNumLecSelLec = bulCodeLec[i].CLASSNUMBER;//클래스 넘버
 					bulNameLecLec = bulCodeLec[i].BULNAME;//빌딩이름
@@ -913,6 +915,7 @@ $(document).on('click','#classIdLec',function(){
 										+ "<td  value=\""+numK+"\"><input id =\"classNumLecTagV\" type=\"radio\" name=\"selectClassLec\" class=\"flat-red\" value=\""+numK+"\"></td>"
 										+ "<td id =\"bulNameLecLec\">" + bulNameLecLec + "</td>" + "<td id =\"classNumLecSelLec\">"
 										+ classNumLecSelLec + "호</td>"
+										+ "<input type=\"hidden\" value=\""+getclassIdLec+"\" id=\"classIdSelLec\"/>" 
 										+ "<td id =\"classCapacityLec\">" + classCapacityLec + "명</td>" + 
 										+"</tr>";
 						$('#classNumLec').append(classNumLecTag);
@@ -931,16 +934,18 @@ $(document).on('click','#classIdLec',function(){
 	//console.log('selBulName : '+selBulName);
 	selBulNameB= $(eval('\'td#a'+selBulName+'\'')).nextAll('td#bulNameLecLec').text();
 	selBulNameC= $(eval('\'td#a'+selBulName+'\'')).nextAll('td#classNumLecSelLec').text();
+	selBulNameV= $(eval('\'td#a'+selBulName+'\'')).nextAll('input#classIdSelLec').val();
 	selBulNameT= $(eval('\'td#a'+selBulName+'\'')).nextAll('td#classCapacityLec').text();
 	//console.log("selBulNameB : "+selBulNameB);
 	//console.log("selBulNameC : "+selBulNameC);
 	//console.log("selBulNameT : "+selBulNameT);
+	console.log("selBulNameV : "+selBulNameV);//이걸 저장
 	var bulText = "건물  : "+selBulNameB+" / 강의실  :  " +selBulNameC+" / 수용인원  :  " +selBulNameT;
 	
 	//수용인원 비교시   selBulNameT에서 명 빼서 사용
 	selBulNameTSub = selBulNameT.substr(0, selBulNameT.length -1)*1;//강의실 수용인원
 	//console.log("selBulNameTSub : " +selBulNameTSub);
-	
+	$('input#hiddenClassIdLec').val(selBulNameV);
 	$('input#classIdLec').val(bulText);
 	$('#classModalPop').modal("hide");
 	var compareCap = $('input#lecCapacity').val()*1;
@@ -1062,6 +1067,8 @@ $(document).on('click','#classIdLec',function(){
 		$('tr#addTeacherTr').remove();
 		$('tr#addSubTr').remove();
 		compare = [];
+		$('input#eventTitle').val('');
+		compareLecTea=[];
 	}
 		
 	
@@ -1077,7 +1084,8 @@ $(document).on('click','#classIdLec',function(){
 		$('option#lecNameBul').remove();
 		$('tr#addClassLec').remove();
 		compareLec = [];
-		$('input#eventTitle').val();
+		$('input#eventTitle').val('');
+		compareLecTea=[];
 	}
 		
 		

@@ -117,6 +117,13 @@ public class F001LectureServiceImpl implements F001LectureService {
 	}
 
 
+	@Override
+	public List<Map<String, Object>> enrolmentInfo() {
+		List<Map<String, Object>> enrolmentInfo = f001LectureDAO.enrolmentInfo();
+		return enrolmentInfo;
+	}
+
+
 	
 	
 }

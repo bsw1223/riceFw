@@ -125,4 +125,12 @@ public class F001LectureDAOImpl implements F001LectureDAO{
 		List<Map<String, Object>> selectTeaName= sqlsession.selectList("mapper.f001Lecture.selectTeaName",f001LectureVO);
 		return selectTeaName;
 	}
+
+
+
+	@Override
+	public List<Map<String, Object>> enrolmentInfo() {
+		List<Map<String, Object>> enrolmentInfo= sqlsession.selectList("mapper.f001Lecture.enrolmentInfo");
+		return enrolmentInfo;
+	}
 }

@@ -4,19 +4,189 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.attend">
-	<resultMap id="attendResult" type="B001AttendVO">
-		<result property="attendDate" column="attendDate" />
-        <result property="attendInfo" column="attendInfo" />
-        <result property="attendingTime" column="attendingTime" />
-          <!-- <result property="joinDate" column="joinDate" /> -->
+	<resultMap id="ipAddress" type="java.util.HashMap">
+		<result property="ipStart1" column="ipStart1" />
+        <result property="ipEnd1" column="ipEnd1" />
+        <result property="ipStart2" column="ipStart2" />
+        <result property="ipEnd2" column="ipEnd2" />
 	</resultMap> 
 	
-
-
-	<select id="listAttend" resultType="B001AttendVO">
-      <![CDATA[
-         select * from tbl_attend
-      ]]>
-	</select>
-	</mapper>
+	<resultMap id="classList" type="java.util.HashMap">
+		<result property="openclassId" column="openclassId" />
+        <result property="openclassName" column="openclassName" />
+	</resultMap> 
 	
+	<resultMap id="insertVal" type="java.util.HashMap">
+		<result property="enrId" column="enrId" />
+        <result property="atdCode" column="atdCode" />
+	</resultMap> 
+	
+	<resultMap id="enrId" type="java.util.HashMap">
+		<result property="enrId" column="enrId" />
+	</resultMap> 
+	
+	
+	<!-- 접근 가능한 IP 대역 가져오기 -->
+	<select id="getIpAddress" resultMap="ipAddress">
+		<![CDATA[
+			SELECT etc1 ipStart1, etc2 ipEnd1, etc3 ipStart2, etc4 ipEnd2
+			FROM CODE
+			WHERE codeGroup = '24'
+			    AND codeId = '00'
+		]]>
+	</select>
+	
+	<!-- 수업목록 가져오기 -->
+	<select id="getClassList" resultMap="classList" parameterType="java.util.HashMap">
+      <![CDATA[
+	        SELECT openclassId, openclassName
+			FROM ENROLMENT
+      ]]>
+      <where>
+			<if test=" memNum != ''  and  memNum != null">
+			<![CDATA[
+				memNum = #{memNum,jdbcType=VARCHAR}
+			]]>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 입력한 수업번호/이메일/비밀번호가 맞는지 check //// 맞으면 1, 아니면 0 -->
+	<select id="checkEmailPwd" resultType="int" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM ENROLMENT A, MEMBER B
+			WHERE A.MEMNUM=B.MEMNUM
+			    AND B.MEMEMAIL = #{memEmail}
+			    AND B.MEMPWD = #{memPwd}
+			    AND A.OPENCLASSID = #{openclassId}
+			    AND A.MEMNUM = #{memNum}
+		]]>
+	</select>
+	
+	<!-- 입력한 시간이 수업 시간이 맞는지 check -->
+	<select id="checkClassTime" resultType="int" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM OPENCLASS A, ENROLMENT B
+			WHERE A.OPENCLASSID = B.OPENCLASSID
+			    AND TO_DATE(A.OPENSTARTDATE) < TO_DATE(#{currentDate})
+			    AND TO_DATE(A.OPENENDDATE) > TO_DATE(#{currentDate})
+			    AND (TO_DATE(A.OPENSTARTTIME, 'HH24:MI')-TO_DATE(#{currentTime}, 'HH24:MI:SS'))  * 24 * 60 <= 10
+			    AND (TO_DATE(A.OPENENDTIME, 'HH24:MI')-TO_DATE(#{currentTime}, 'HH24:MI:SS'))  * 24 * 60 > 0
+			    AND A.OPENCLASSID = #{openclassId}
+		]]>
+		<if test="currentDay == 0">
+			<![CDATA[
+				AND A.CLASSSUN = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 1">
+			<![CDATA[
+				AND A.CLASSMON = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 2">
+			<![CDATA[
+				AND A.CLASSTUE = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 3">
+			<![CDATA[
+				AND A.CLASSWED = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 4">
+			<![CDATA[
+				AND A.CLASSTHUR = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 5">
+			<![CDATA[
+				AND A.CLASSFRI = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 6">
+			<![CDATA[
+				AND A.CLASSSAT = 'y'
+			]]>
+		</if>
+	</select>
+	
+	<select id="getinsertVal" resultMap="insertVal" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT B.ENRID,
+			    CASE 
+			        WHEN ABS(((TO_DATE(A.OPENSTARTTIME, 'HH24:MI')
+			                    -TO_DATE(#{currentTime}, 'HH24:MI:SS'))* 24 * 60)) <= 10 THEN '1800'
+			        WHEN ((TO_DATE(A.OPENSTARTTIME, 'HH24:MI')
+			                    -TO_DATE(#{currentTime}, 'HH24:MI:SS'))* 24 * 60) < -10
+			            AND ((TO_DATE(A.OPENENDTIME, 'HH24:MI')
+			                    -TO_DATE(#{currentTime}, 'HH24:MI:SS')) * 24 * 60) > 0 THEN '1801'
+			        ELSE '1803'
+			        END AS atdCode
+			FROM OPENCLASS A, ENROLMENT B
+			WHERE A.OPENCLASSID=B.OPENCLASSID
+			    AND B.MEMNUM = #{memNum}
+			    AND B.OPENCLASSID = #{openclassId}
+		]]>
+	</select>
+	
+	<!-- insert 출석 -->
+	<insert id="insertAttendance" parameterType="java.util.HashMap">
+		<![CDATA[
+			INSERT INTO ATTENDANCE(enrId,atdDate,atdTime,atdCode)
+	    		VALUES(#{enrId},#{currentDate},#{currentTime},#{atdCode})
+		]]>
+	</insert>
+	
+	<!-- 결석 처리를 위한 모든 수강신청ID 가져오기 -->
+	<select id="getEnrId" resultMap="enrId" parameterType="java.util.HashMap" >
+		<![CDATA[
+			SELECT A.ENRID
+			FROM ENROLMENT A, OPENCLASS B
+			WHERE A.OPENCLASSID=B.OPENCLASSID
+		]]>
+		<if test="currentDay == 1">
+			<![CDATA[
+				AND B.CLASSSUN = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 2">
+			<![CDATA[
+				AND B.CLASSMON = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 3">
+			<![CDATA[
+				AND B.CLASSTUE = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 4">
+			<![CDATA[
+				AND B.CLASSWED = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 5">
+			<![CDATA[
+				AND B.CLASSTHUR = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 6">
+			<![CDATA[
+				AND B.CLASSFRI = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 7">
+			<![CDATA[
+				AND A.CLASSSAT = 'y'
+			]]>
+		</if>
+	</select>
+	
+	<insert id="insertAbsent" parameterType="java.util.HashMap">
+		<foreach collection="enrId" item="item" open="INSERT ALL" close=" SELECT * FROM DUAL" separator=" "> 
+			INTO ATTENDANCE(enrId,atdDate,atdCode) VALUES (#{item.enrId}, #{currentDate}, '1803')
+		</foreach>
+	</insert>
+</mapper>	

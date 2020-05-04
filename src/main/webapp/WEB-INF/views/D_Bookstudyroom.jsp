@@ -17,7 +17,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="box box-success">
+				<div class="box box-default">
 					<div class="box-body">
 						<div id='timeline_cal'></div>
 					</div>
@@ -25,7 +25,7 @@
 				</div>
 				<!-- /.box -->
 
-				<div class="box box-success">
+				<div class="box box-default">
 					<div class="box-header">
 						<h3 class="box-title">내 예약 현황</h3>
 						
@@ -212,4 +212,5 @@
 	});
 
 </script>
+</body>
 </html>

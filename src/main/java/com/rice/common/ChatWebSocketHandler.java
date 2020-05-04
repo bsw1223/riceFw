@@ -31,8 +31,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	private C002ChatService c002ChatService;
 	
 	private Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
-//	private List<WebSocketSession> users = new ArrayList<WebSocketSession>();
-//	private Map<String, Object> userMap = new HashMap<String, Object>();
 	private Map<String, Map<String, WebSocketSession>> chatroomMap = new HashMap<String, Map<String, WebSocketSession>>();
 	
 	//클라이언트가 연결 되었을 때 실행

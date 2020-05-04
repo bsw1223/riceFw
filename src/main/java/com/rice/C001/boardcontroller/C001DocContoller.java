@@ -148,6 +148,7 @@ public class C001DocContoller {
 			} 
 			//성적은 리스트에 바로 성적을 보여줄거 
 		} else if (vo.getAuthId().equals("1002")) { // 占쏙옙占쏙옙
+
 			if (boCode.equals("2000")) { 
 				//공지사항 내용
 				result_view = "C_tchNoticeGet";

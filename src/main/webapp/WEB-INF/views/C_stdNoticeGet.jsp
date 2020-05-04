@@ -2,56 +2,78 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 
 <html>
-<head>
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-		<h1>
-			<c:out value='${sjctName}' />
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#"><c:out value='${sjctName}' /></a></li>
-			<li class="active">공지사항</li>
-		</ol>
-	</section>
+
+<style>
+.box-body{
+	background-color: white;
+}
+#search{
+	margin:auto;
+	display:flex;
+}
+.select{
+	float:left;
+	margin-left:10px;
+	
+}
+.input-group{
+	float:left;
+	width: 170px;
+}
+.buttons{
+	float:left;
+	display:flex;
+	
+}
+
+</style>
+<body>
+	<%@ include file="F_Fixedsidebar.jsp"%>
+	<div class="content-wrapper">
+		<section class="content-header"style="width:83%">
+			<h1>
+				<c:out value='${sjctName}' />
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+				<li><a href="#"><c:out value='${sjctName}' /></a></li>
+				<li class="active">공지사항</li>
+			</ol>
+		</section>
 
 	<!-- Main content -->
-	<section class="content">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="box box-info">
-					<div class="box-header">
-						<h3 class="box-title">공지사항게시판</h3>
-
-					</div>
+		<section class="content">
+			<div class="row">
+				<div class="col-xs-10">
+					<div class="box box-primary">
+						<div class="box-header">
+							<h2 class="box-title">공지사항게시판</h2>
+						</div>
 					<!-- /.box-header -->
+					<div class="box-body">
 				<form role="form">
 					<!--title -->
 					<div class="form-group">
-						<label>제목</label> <input class="form-control" name="boTitle"
-							value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
+						<label>제목</label>
+						<input class="form-control" name="boTitle" value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
 					</div>
-
 					<!-- content -->
 					<div class="form-group">
-						<label>내용</label> <input type="text" class="form-control"
-							name="boContent" value='<c:out value ="${list.boContent}"/>'
+						<label>내용</label> <input type="text" class="form-control" name="boContent" value='<c:out value ="${list.boContent}"/>'
 							readonly="readonly" />
 					</div>
-
 					<!-- content -->
 					<div class="form-group">
-						<label>작성자</label> <input type="text" class="form-control"
-							name="memId" value='<c:out value ="${list.memId}"/>'
+						<label>작성자</label> <input type="text" class="form-control"name="memId" value='<c:out value ="${list.memId}"/>'
 							readonly="readonly" />
 					</div>
 					<input type="hidden" value='<c:out value ="${list.boNum}"/>'>
-					
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="panel panel-default">
@@ -68,29 +90,35 @@
 						</div>
 					</div>
 
-					<div class="box-body">
+					<div class="box-footer">
 						<button type="button" class="btn btn-default btn-xs">
 							<i class="fa fa-eye"></i> ${list.boViews}
 						</button>
 						<button type="button" class="btn btn-default btn-xs">
 							<i class="fa fa-thumbs-o-up"></i>${list.boLikes}
 						</button>
+<<<<<<< HEAD
 					</div>
 				</form>
+=======
+					
+
+>>>>>>> refs/remotes/origin/master
 					<button data-oper="list" class="btn btn-default"
 						onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
+<<<<<<< HEAD
 					
 					<!-- /.box-footer -->
+=======
+					</div>
+					</form>
+>>>>>>> refs/remotes/origin/master
 				</div>
-				<!-- /.box -->
 			</div>
-			<!-- /.col -->
 		</div>
-		<!-- /.row -->
 	</section>
-	<!-- /.content -->
 </div>
-
+</body>
 <script>
 $(document).ready(function(){
 
