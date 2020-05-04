@@ -13,9 +13,9 @@
     <bean id="interceptorLoginCheck" class="com.rice.interceptor.AuthInterceptor"></bean>
 
     <mvc:interceptors>
-    
         <mvc:interceptor>
-            <mvc:mapping path="/*"/>
+        	<mvc:mapping path="/*"/>
+        	<mvc:mapping path="/*/*"/>
             <mvc:exclude-mapping path="/member/login"/>
             <mvc:exclude-mapping path="/member/loginPost"/>
             <mvc:exclude-mapping path="/member/logout"/>
@@ -28,6 +28,5 @@
             <mvc:exclude-mapping path="/member/find/pwd"/>
 			<ref bean="interceptorLoginCheck"/>
         </mvc:interceptor>
-        
     </mvc:interceptors>
 </beans>

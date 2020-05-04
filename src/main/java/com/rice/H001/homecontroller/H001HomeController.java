@@ -46,6 +46,7 @@ public class H001HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, HttpServletRequest request) throws IOException {	
 		//토익 접수 크롤링
+		/*
 		String URL = "https://exam.ybmnet.co.kr/toeic/";
 		Document doc = Jsoup.connect(URL).get();
 		Elements elem = doc.select("table#reg_table");
@@ -72,7 +73,7 @@ public class H001HomeController {
 		model.addAttribute("elemStringRepRG",elemStringRepRG);
 		//System.out.println("elemStringRepRG : "+elemStringRepRG);
 		
-		
+		*/
 		return "index";
 	}
 

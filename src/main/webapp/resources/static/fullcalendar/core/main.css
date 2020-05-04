@@ -298,12 +298,12 @@ temporary rendered events).
   font-size: 0.85em;
   line-height: 1.4;
   border-radius: 3px;
-  border: 1px solid #56b6ce;
+  border: 1px solid #00a65a;
 }
 
 .fc-event,
 .fc-event-dot {
-  background-color: #56b6ce;
+  background-color: #00a65a;
   /* default BACKGROUND color */
 }
 
