@@ -1,5 +1,9 @@
 package com.rice.E001.commvo;
 
+import java.util.List;
+
+import com.rice.C001.boardvo.C001FileUploadVO;
+
 public class E001CommBoardVO {
 	String boNum, boRegDate, boTitle, boUpdateDate, boURL, memNum, boContent, memId, commName;
 
@@ -91,6 +95,15 @@ public class E001CommBoardVO {
 
 	public void setBoLikes(int boLikes) {
 		this.boLikes = boLikes;
+	}
+	
+	List<E001FileUploadVO> filelist;
+	
+	public List<E001FileUploadVO> getFilelist() {
+		return filelist;
+	}
+	public void setFilelist(List<E001FileUploadVO> filelist) {
+		this.filelist = filelist;
 	}
 
 }

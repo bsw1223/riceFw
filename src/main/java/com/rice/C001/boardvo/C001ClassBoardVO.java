@@ -5,6 +5,7 @@ import java.util.List;
 public class C001ClassBoardVO {
 	String boNum, boCode, boContent, boRegdate, boTitle, boUpdateDate, boURL, memNum, memId;
 	int boViews, boLikes;
+	
 	List<C001FileUploadVO> filelist;
 	
 	public List<C001FileUploadVO> getFilelist() {

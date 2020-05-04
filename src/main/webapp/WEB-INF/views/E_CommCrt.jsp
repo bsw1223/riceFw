@@ -64,13 +64,6 @@
 									name='memId' id='memId' readonly="readonly">
 							</div>
 
-							<!-- 커뮤니티 가입레벨  -->
-							<div class="form-group">
-								<label>커뮤니티 레벨       </label> <small>커뮤니티 가입허용 레벨</small> 
-								<input type="text" class="form-control" value="${memLevel}"
-									id='commLevel' name='commLevel' readonly="readonly">
-							</div>
-
 							<!-- /.box-body -->
 							<div class="box-footer">
 								<button id="regBtn" data-oper="submit" class="btn btn-primary">등록</button>
@@ -91,26 +84,6 @@
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
- 	/* $(document).ready(function(){
-		var formObj =$("form[name='writeForm']");
-		
-		$("#regBtn").on("click",function(){
-			var comtNum = $('input#comtNum').attr("value");
-			if(){
-				
-			}else if(){
-				
-			}
-			else{
-				self.location="/comm/makecomm";
-				formObj.submit();
-				alert("커뮤니티가 생성되었습니다.")
-			}
-		 });
-		 $("#listBtn").on("click",function(){
-		 	self.location="/comm/makecomm";
-		 });
-	});  */
 	
 	var comm_result = false;
 	var commName_result = false;

@@ -76,30 +76,35 @@ public class C001DocContoller {
 		
 		if (vo == null) {
 			return "redirect:/";
-		} else if (vo.getAuthId().equals("1001")) { // �л�
+		} else if (vo.getAuthId().equals("1001")) { //학생
 			if (boCode.equals("2000")) {
+				//공지사항 게시판
 				result_view = "C_stdNoticeList";
 			} else if (boCode.equals("2001")) {
+				//Q&A 게시판
 				result_view = "C_stdQnaList";
 			} else if (boCode.equals("2002")) {
+				//스터디 게시판
 				result_view = "C_stdTeamList";
 			} else if (boCode.equals("2003")) {
-				result_view = "C_stdGrdList";
-			}else if(boCode.equals("2004")) {
-				result_view ="C_stdTeamList";
-			} else if (boCode.equals("2003")) {
+				//성적게시판
 				result_view = "C_stdGrdList";
 			}
-		} else if (vo.getAuthId().equals("1002")) { // ����
+		} else if (vo.getAuthId().equals("1002")) { //강사
 			if (boCode.equals("2000")) { 
+				// 공지사항 게시판
 				result_view = "C_tchNoticeList";
 			} else if (boCode.equals("2001")) { 
+				//Q&A 게시판
 				result_view = "C_tchQnaList";
-			} else if (boCode.equals("2002")) { // �����Խ���
+			} else if (boCode.equals("2002")) {
+				// 스터디 게시판
 				result_view = "C_tchTeamList";
-			} else if (boCode.equals("2003")) { // qna�Խ���
+			} else if (boCode.equals("2003")) {
+				//성적게시판
 				result_view = "C_tchGrdList";
-			} else if(boCode.equals("2004")) {	//
+			} else if(boCode.equals("2004")) {	
+				//학생목록
 				List<A001MemVO> stdlist = c001DocService.getStdList(cri);
 				model.addAttribute("list", stdlist);
 				result_view ="C_tchStdList";
@@ -123,43 +128,47 @@ public class C001DocContoller {
 		
 		if (vo == null) {
 			return "redirect:/";
-		} else if (vo.getAuthId().equals("1001")) { // �л�
+		} else if (vo.getAuthId().equals("1001")) { // 占싻삼옙
 			if (boCode.equals("2000")) {
+				//공지사항 내용
 				result_view = "C_stdNoticeGet";
 			} else if (boCode.equals("2001")) {
+				//Q&A 내용
 				if(vo.getMemNum().equals(c001DocService.read(boNum, boURL, boCode).getMemNum())) {
+					//내가 등록한 게시물일 경우 이동페이지(수정, 삭제 버튼이 있는 페이지)
 					result_view = "C_stdQnaGet";
 				}
 				else {
+					//내가 등록한 게시물일 경우 이동페이지(수정, 삭제 버튼이 없는 페이지)
 					result_view="C_stdQna";
 				}
 			} else if (boCode.equals("2002")) {
+				//스터디 내용
 				result_view = "C_stdTeamGet";
-			} else if (boCode.equals("2003")) {
-				result_view = "C_stdGrdGet";
-			} else if(boCode.equals("2006")) {
-				result_view = "C_stdTeamGet";
-			}
-		} else if (vo.getAuthId().equals("1002")) { // ����
+			} 
+			//성적은 리스트에 바로 성적을 보여줄거 
+		} else if (vo.getAuthId().equals("1002")) { // 占쏙옙占쏙옙
 			if (boCode.equals("2000")) { 
+				//공지사항 내용
 				result_view = "C_tchNoticeGet";
 			} else if (boCode.equals("2001")) { 
+				//Q&A 내용
 				result_view = "C_tchQnaGet";
-			} else if (boCode.equals("2002")) { // �����Խ���
+			} else if (boCode.equals("2002")) { 
+				//스터디 내용
 				result_view = "C_tchTeamGet";
-			} else if (boCode.equals("2003")) { // qna�Խ���
-				result_view = "C_tchGrdGet";
-			} else if(boCode.equals("2004")) {
-				result_view ="C_tchGrdGet";
-			} else if(boCode.equals("2006")) {
-				result_view ="C_tchTeamGet";
+			} else if (boCode.equals("2003")) { 
+				// 성적입력
+				result_view = "C_tchQnaGet";
 			}
+			//힉셍목록은 리스트만
+		
 		}
 
 		return result_view;
 	}
 	
-	//등록창
+	//�벑濡앹갹
 	@RequestMapping(value = "/regForm/{boCode}/{boURL}", method = RequestMethod.GET)
 	public String regForm(C001ClassBoardVO boardvo, Model model, @PathVariable("boURL") String boURL,HttpServletRequest request,
 			@PathVariable("boCode") String boCode) {
@@ -173,19 +182,13 @@ public class C001DocContoller {
 		model.addAttribute("sjctName", c001DocService.getsbjc(boURL));
 		String pageTitle = null;
 
-		if (boCode.equals("2000")) { // ��������
-			pageTitle = "공지사항";
-		} else if (boCode.equals("2001")) { // �ڷ�Խ���
-			pageTitle = "Q&A게시판";
-		} else if (boCode.equals("2002")) { // �����Խ���
-			pageTitle = "스터디";
-		} else if(boCode.equals("2003")) {
-			pageTitle ="성적 조회";
-		} else if(boCode.equals("2004")) {
-			pageTitle ="학생목록";
-		} else if(boCode.equals("2005")) {
-			pageTitle ="Q&A �Խ���";
-		}
+		if (boCode.equals("2000")) { // 공지사항
+			pageTitle = "공지사항 게시판";
+		} else if (boCode.equals("2001")) { // 자료게시판
+			pageTitle = "Q&A 게시판";
+		} else if (boCode.equals("2002")) { // 과제게시판
+			pageTitle = "스터디 게시판";
+		} 
 		model.addAttribute("pageTitle", pageTitle);
 		return "C_tchDocReg";
 	}
@@ -197,7 +200,7 @@ public class C001DocContoller {
 		cri.setBoCode(boCode);
 
 		if(boardvo.getFilelist() != null) {
-			boardvo.getFilelist().forEach(attach->System.out.println("��� "+attach.getFileName()));
+			boardvo.getFilelist().forEach(attach->System.out.println("출력 "+attach.getFileName()));
 		}
 		c001DocService.register(boardvo);
 		String nextPage = "redirect:/mypage/board/" + boCode + "/" + boURL;
@@ -205,27 +208,21 @@ public class C001DocContoller {
 		return nextPage;
 	}
 
-	//수정창
+	//�닔�젙李�
 	@RequestMapping(value = "/mdfyForm/{boCode}/{boURL}", method = RequestMethod.GET)
-	public String update( Model model, @PathVariable("boURL") String boURL,@RequestParam("boNum") String boNum,
+	public String update( Model model, @PathVariable("boURL") String boURL, @RequestParam("boNum") String boNum,
 			@PathVariable("boCode") String boCode, HttpServletRequest request,C001ClassBoardVO boardvo) {
 		model.addAttribute("sjctName", c001DocService.getsbjc(boURL));
 		model.addAttribute("list", c001DocService.read(boNum, boURL, boCode));
 		String pageTitle = null;
 
-		if (boCode.equals("2000")) { // ��������
-			pageTitle = "공지사항";
-		} else if (boCode.equals("2001")) { // �ڷ�Խ���
+		if (boCode.equals("2000")) { // 공지사항
+			pageTitle = "공지사항 게시판";
+		} else if (boCode.equals("2001")) { // 자료게시판
 			pageTitle = "Q&A 게시판";
-		} else if (boCode.equals("2002")) { // �����Խ���
+		} else if (boCode.equals("2002")) { // 과제게시판
 			pageTitle = "스터디 게시판";
-		} else if(boCode.equals("2003")) {
-			pageTitle ="성적 게시판";
-		} else if(boCode.equals("2004")) {
-			pageTitle ="학생목록";
-		} else if(boCode.equals("2005")) {
-			pageTitle ="Q&A �Խ���";
-		}
+		} 
 		model.addAttribute("pageTitle", pageTitle);
 
 		return "C_tchDocMdfy";
@@ -234,8 +231,6 @@ public class C001DocContoller {
 	@RequestMapping(value = "/mdfy/{boCode}/{boURL}", method = RequestMethod.GET)
 	public String updateBoard(C001ClassBoardVO boardvo, @PathVariable("boURL") String boURL, Model model,@RequestParam("boNum") String boNum,
 			@PathVariable("boCode") String boCode) {
-		System.out.println("mdfy ù��° �� : "+boardvo.getBoNum());
-		System.out.println("mdfy �ι�° �� : "+boNum);
 		model.addAttribute("sjctName", c001DocService.getsbjc(boURL));
 		c001DocService.update(boardvo);
 
@@ -263,12 +258,12 @@ public class C001DocContoller {
 		
 		String uploadFolder ="C:\\upload";
 		String uploadFolderPath= getFolder();
-		//��¥�� ���� �����
+		//날짜별 폴더 만들기
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
 		if(uploadPath.exists() == false) {
 			uploadPath.mkdirs();
 		}
-		//������ ��������
+		//폴더에 파일저장
 		for(MultipartFile multipartFile : uploadFile) {
 
 			C001FileUploadVO attachVO = new C001FileUploadVO();
@@ -345,7 +340,7 @@ public class C001DocContoller {
 	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, C001FileUploadVO vo){
 		
 		
-		//��񿡼� ��� �������� �ؾߵ�
+		//占쏙옙澍【占� 占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙 占쌔야듸옙
 		Resource resource = new FileSystemResource("C:\\upload\\"+vo.getFileName());
 		
 		if(resource.exists() ==false) {
@@ -355,7 +350,7 @@ public class C001DocContoller {
 		
 		String resuourceOriginalName = resourceName.substring(resourceName.indexOf("_")+1);
 		HttpHeaders headers = new HttpHeaders();
-		//��񿡼� �����̸��� �����;���
+		//占쏙옙澍【占� 占쏙옙占쏙옙占싱몌옙占쏙옙 占쏙옙占쏙옙占싶억옙占쏙옙
 		try {
 			String downloadName = null;
 			if(userAgent.contains("Trident")) {

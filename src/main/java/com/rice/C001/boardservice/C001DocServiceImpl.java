@@ -48,7 +48,6 @@ public class C001DocServiceImpl implements C001DocService {
 	}
 	@Override
 	public void register(C001ClassBoardVO vo) {
-		System.out.println("service....");
 		c001DocDAO.insertSelectKey(vo);
 		
 		if(vo.getFilelist() ==null || vo.getFilelist().size() <= 0) {

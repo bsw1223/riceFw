@@ -1,5 +1,7 @@
 package com.rice.C001.boarddto;
 
+import java.util.Arrays;
+
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class Criteria {
@@ -10,6 +12,8 @@ public class Criteria {
 	private int amount;
 	private String[] typeArr;
 	private String boCode;
+	private String commURL;
+
 	private String boURL;
 	private String type;
 	private String keyword;
@@ -41,8 +45,9 @@ public class Criteria {
 
 	@Override
 	public String toString() {
-		return "Criteria [page=" + page + ", amount=" + amount + ", boCode=" + boCode + ", boURL=" + boURL + ", type="
-				+ type + ", keyword=" + keyword + "]";
+		return "Criteria [page=" + page + ", amount=" + amount + ", typeArr=" + Arrays.toString(typeArr) + ", boCode="
+				+ boCode + ", commURL=" + commURL + ", boURL=" + boURL + ", type=" + type + ", keyword=" + keyword
+				+ "]";
 	}
 
 	public void setTypeArr(String[] typeArr) {
@@ -86,11 +91,20 @@ public class Criteria {
 	}
 	
 	public String getListLink() {
-		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("").queryParam("page", page)
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+				.queryParam("page", page)
 				.queryParam("amount", amount)
 				.queryParam("type", type)
 				.queryParam("keyword", keyword);
 		
 		return builder.toUriString();
+	}
+	
+	public String getCommURL() {
+		return commURL;
+	}
+
+	public void setCommURL(String commURL) {
+		this.commURL = commURL;
 	}
 }
