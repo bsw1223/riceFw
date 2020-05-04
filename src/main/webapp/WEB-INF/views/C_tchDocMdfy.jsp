@@ -5,95 +5,78 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
+	
+ <!-- ckeditor cdn -->
+ <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-		<h1>
-			<c:out value='${sjctName}' />
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>
-			<li><a href="#"><c:out value='${sjctName}' /></a></li>
-			<li class="active"><c:out value='${pageTitle}' /></li>
-		</ol>
-	</section>
+<body>
+	<%@ include file="F_Fixedsidebar.jsp"%>
+	<div class="content-wrapper">
+		<section class="content-header"style="width:83%">
+			<h1>
+				<c:out value='${sjctName}' />
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+				<li><a href="#"><c:out value='${sjctName}' /></a></li>
+				<li class="active">QnA 게시판</li>
+			</ol>
+		</section>
 
-	<!-- Main content -->
-	<section class="content">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="box box-info">
-					<div class="box-header">
-						<h3 class="box-title">
-							<c:out value='${pageTitle}' />
-						</h3>
-
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-					<!-- action="/mypage/board/mdfy/${list.boCode}/${list.boURL}" -->
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-md-10">
+					<div class="box box-primary">
+						<div class="box-body">
+						<h2 class="box-title"><c:out value='${pageTitle}' /></h2>
+					
+						<!-- action="/mypage/board/mdfy/${list.boCode}/${list.boURL}" -->
 						<form name="updateForm" role="form" method="get">
-
 							<!-- boTitle -->
 							<div class="form-group">
-								<label>제목</label> <input class="form-control" id="boTitle"
-									name="boTitle" value="${list.boTitle}" />
+								<label>제목</label> <input class="form-control" id="boTitle" name="boTitle" value="${list.boTitle}" />
 							</div>
 							<!-- boContent -->
 							<div class="form-group">
 								<label>내용</label>
-								<textarea class="form-control" rows="3" id='boContent'
-									name='boContent'><c:out value="${list.boContent}" /></textarea>
+								<textarea class="form-control" rows="3" id='boContent' name='boContent'><c:out value="${list.boContent}" /></textarea>
 							</div>
 							<!--memNum-->
 							<div class="form-group">
-								<label>작성자</label> <input class="form-control" id="memId"
-									name="memId" value="${list.memId}" readonly="readonly" />
+								<label>작성자</label> <input class="form-control" id="memId" name="memId" value="${list.memId}" readonly="readonly" />
 							</div>
-							<input type="hidden" class="form-control" name ='memNum' value="${list.memNum}">
-                			<input type="hidden" class="form-control" name ='boViews' value="${list.boViews}">
-                			<input type="hidden" class="form-control" name ='boLikes' value="${list.boLikes}">
-                			<input type="hidden" class="form-control" name ='boRegdate' value="${list.boRegdate}">
-                			<input type="hidden" class="form-control" name ='boNum' value="${list.boNum}">
-							<!-- /.box-body -->
-					<div class="row">
-						<div class="col-lg-12">
+								<input type="hidden" class="form-control" name ='memNum' value="${list.memNum}">
+	                			<input type="hidden" class="form-control" name ='boViews' value="${list.boViews}">
+	                			<input type="hidden" class="form-control" name ='boLikes' value="${list.boLikes}">
+	                			<input type="hidden" class="form-control" name ='boRegdate' value="${list.boRegdate}">
+	                			<input type="hidden" class="form-control" name ='boNum' value="${list.boNum}">
+							<!-- files -->
 							<div class="panel panel-default">
 								<div class="panel-heading">Files</div>
-								
-								<div class="panel-body">
-									<div class="form-group uploadDiv">
-										<input type="file" name="uploadFile" multiple="multiple">
+									<div class="panel-body">
+										<div class="form-group uploadDiv">
+											<input type="file" name="uploadFile" multiple="multiple">
+										</div>
+										<div class="uploadResult">
+											<ul>
+											</ul>
+										</div>
 									</div>
-									<div class="uploadResult">
-										<ul>
-										
-										</ul>
-									</div>
-								</div>
 							</div>
+						</form>
+						<div class="box-footer">
+							<button data-oper="modify" class="btn btn-primary">저장</button>
+							<button data-oper="cancel" class="btn btn-primary">취소</button>
 						</div>
 					</div>
-											</form>
-							<div class="box-footer">
-								<button data-oper="modify" class="btn btn-primary">저장</button>
-								<button data-oper="cancel" class="btn btn-primary">취소</button>
-							</div>
-							<!-- /.box-footer -->
-<!-- 						</form> -->
-					</div>
-					<!-- /.box -->
 				</div>
-				<!-- /.col-->
+				</div>
 			</div>
-		</div>
-		<!-- ./row -->
-	</section>
-	<!-- /.content -->
-</div>
+		</section>
+	</div>
+</body>
 
 
 
@@ -118,7 +101,8 @@
 					str += "<li";
 					str += " data-path='"+attach.filePath+"' data-classfilenum='"+attach.classFileNum+"'data-filename='"+attach.fileName+"' data-type='"+attach.fileCode+"' data-size='"+attach.fileSize+"' data-savefilename='"+attach.saveFileName+"'data-boNum='"+attach.boNum+"'><div>";
 					str += "<span>" + attach.fileName+ "</span>";
-					str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+					str += "&nbsp&nbsp"
+					str += "<button  type='button' data-file=\'"+fileCallPath+"\' data-type='file' style= font-size:10px;border:0px;><i class='fa fa-fw fa-close'></i></button><br>";
 					str += "</div>"
 					str + "</li>";	
 				});
@@ -216,7 +200,7 @@
 								str += "<li";
 								str += " data-path='"+obj.filePath+"' data-classfilenum='"+obj.classFileNum+"'data-filename='"+obj.fileName+"' data-type='"+obj.fileCode+"' data-size='"+obj.fileSize+"' data-savefilename='"+obj.saveFileName+"'><div>";
 								str += "<span>" + obj.fileName+ "</span>";
-								str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+								str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-circle'><i class='fa fa-fw fa-close'></i></button><br>";
 								str += "</div>";
 								str + "</li>";
 							});
@@ -316,6 +300,10 @@ $(document).ready(function() {
 	  });
 
 });
+
+CKEDITOR.replace( 'boContent',{
+ 	enterMode : CKEDITOR.ENTER_BR
+	});
 
 </script>
 <%@ include file="footer.jsp"%>

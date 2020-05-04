@@ -25,12 +25,13 @@
 }
 
 </style>
-
+<body>
+<%@ include file="F_Fixedsidebar.jsp"%>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
+    <section class="content-header"style="width:83%">
+      <h1 >
         	커뮤니티
       </h1>
       <ol class="breadcrumb" >
@@ -43,15 +44,15 @@
 	  <!-- Main content -->
     <section class="content">
       <div class="row">
-		<div class="col-md-3"  >
-			    <!-- Main content -->
+		<div class="col-md-3">
+		<!-- Main content -->
           <!-- general form elements -->
           <div class="box">
    			 <!-- box body -->
-			<div class="box-body" >
+			<div class="box-body">
 					<!-- top -->
 					<section>
-						<div class="row">
+						<div class="row" style="height:100px;">
 			 				<div style="padding:20px;">
 								<form action="/comm/makecomm" method="get">
 							      	<button id='regBtn' type="button" class="btn btn-block btn-primary">게시판 만들기</button>
@@ -139,7 +140,7 @@
 				</div>
 			</div>
 		<!-- tab& search -->
-		<div class="col-md-9">
+		<div class="col-md-7">
 	  <!-- Custom tabs (Charts with tabs)-->
           <!-- general form elements -->
           <div class="box">
@@ -248,7 +249,7 @@
 			 </div>
 		</section>
 	  </div>
-	 
+	</body> 
 		
 
 	

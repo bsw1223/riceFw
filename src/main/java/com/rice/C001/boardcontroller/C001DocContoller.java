@@ -87,8 +87,6 @@ public class C001DocContoller {
 				result_view = "C_stdGrdList";
 			}else if(boCode.equals("2004")) {
 				result_view ="C_stdTeamList";
-			} else if (boCode.equals("2003")) {
-				result_view = "C_stdGrdList";
 			}
 		} else if (vo.getAuthId().equals("1002")) { // ����
 			if (boCode.equals("2000")) { 
@@ -137,8 +135,8 @@ public class C001DocContoller {
 				result_view = "C_stdTeamGet";
 			} else if (boCode.equals("2003")) {
 				result_view = "C_stdGrdGet";
-			} else if(boCode.equals("2006")) {
-				result_view = "C_stdTeamGet";
+			} else if(boCode.equals("2004")) {
+				result_view = "";
 			}
 		} else if (vo.getAuthId().equals("1002")) { // ����
 			if (boCode.equals("2000")) { 
@@ -150,9 +148,9 @@ public class C001DocContoller {
 			} else if (boCode.equals("2003")) { // qna�Խ���
 				result_view = "C_tchGrdGet";
 			} else if(boCode.equals("2004")) {
-				result_view ="C_tchGrdGet";
-			} else if(boCode.equals("2006")) {
-				result_view ="C_tchTeamGet";
+				result_view ="";
+			} else if(boCode.equals("2005")) {
+				result_view ="";
 			}
 		}
 
