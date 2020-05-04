@@ -26,7 +26,6 @@
 	width: 170px;
 }
 </style>
-<<<<<<< HEAD
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -96,41 +95,6 @@
 									<!-- /.col -->
 								</div>
 								<!-- /ROW -->
-=======
-<body>
-<%@ include file="F_Fixedsidebar.jsp"%>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header"style="width:83%">
-      <h1 >
-        	커뮤니티
-      </h1>
-      <ol class="breadcrumb" >
-        <li><a href="#"><i class="fa fa-dashboard"></i> 마이페이지</a></li>
-        <li class="active">커뮤니티 </li>
-      </ol>
-    </section>
-    
-    
-	  <!-- Main content -->
-    <section class="content">
-      <div class="row">
-		<div class="col-md-3">
-		<!-- Main content -->
-          <!-- general form elements -->
-          <div class="box">
-   			 <!-- box body -->
-			<div class="box-body">
-					<!-- top -->
-					<section>
-						<div class="row" style="height:100px;">
-			 				<div style="padding:20px;">
-								<form action="/comm/makecomm" method="get">
-							      	<button id='regBtn' type="button" class="btn btn-block btn-primary">게시판 만들기</button>
-							     </form> 
-							</div> 
->>>>>>> refs/remotes/origin/master
 							</div>
 							<!-- ./box-body -->
 							<div class="box">
@@ -174,7 +138,6 @@
 					</div>
 				</div>
 			</div>
-<<<<<<< HEAD
 			<!-- tab& search -->
 			<div class="col-md-9">
 				<!-- Custom tabs (Charts with tabs)-->
@@ -183,16 +146,6 @@
 					<!-- box body -->
 					<div class="box-body">
 						<!-- top -->
-=======
-		<!-- tab& search -->
-		<div class="col-md-7">
-	  <!-- Custom tabs (Charts with tabs)-->
-          <!-- general form elements -->
-          <div class="box">
-   			 <!-- box body -->
-				<div class="box-body">
-					<!-- top -->
->>>>>>> refs/remotes/origin/master
 						<section>
 							<!-- 	<div class="row"> -->
 							<div class="box-tools pull-right" style="padding: 20px;">
@@ -224,7 +177,6 @@
 									</div> 
 								</form>
 							</div>
-<<<<<<< HEAD
 							<!--       </div> -->
 						</section>
 						<!-- /top -->
@@ -262,17 +214,6 @@
 													<td><c:out value="${commboardlist.boRegDate}" /></td>
 													<td><c:out value="${commboardlist.boViews}" /></td>
 													<td><c:out value="${commboardlist.boLikes}" /></td>
-=======
-						<!-- /main -->
-			  		</div>
-				  <!-- /content -->
-			 </div>
-			 </div>
-		</section>
-	  </div>
-	</body> 
-		
->>>>>>> refs/remotes/origin/master
 
 												</tr>
 											</c:forEach>

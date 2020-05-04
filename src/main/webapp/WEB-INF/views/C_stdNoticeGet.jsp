@@ -97,22 +97,11 @@
 						<button type="button" class="btn btn-default btn-xs">
 							<i class="fa fa-thumbs-o-up"></i>${list.boLikes}
 						</button>
-<<<<<<< HEAD
 					</div>
 				</form>
-=======
-					
-
->>>>>>> refs/remotes/origin/master
 					<button data-oper="list" class="btn btn-default"
 						onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
-<<<<<<< HEAD
-					
-					<!-- /.box-footer -->
-=======
-					</div>
-					</form>
->>>>>>> refs/remotes/origin/master
+			<!-- /.box-footer -->
 				</div>
 			</div>
 		</div>
