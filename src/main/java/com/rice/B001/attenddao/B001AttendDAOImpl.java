@@ -56,6 +56,15 @@ public class B001AttendDAOImpl implements B001AttendDAO {
 	public void insertAbsent(Map info) {
 		sqlsession.insert("mapper.attend.insertAbsent", info);	
 	}
-	
+	// 출석 데이터 가져오기
+	@Override
+	public Map<String, Object> getAttendData(Map info) {
+		return sqlsession.selectOne("mapper.attend.getAttendData", info);
+	}
+	// 한 과목 출석 list 가져오기
+	@Override
+	public List<Map<String, Object>> getAttendList(Map info) {
+		return sqlsession.selectList("mapper.attend.getAttendList", info);
+	}
 	
 }

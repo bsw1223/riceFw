@@ -5,12 +5,6 @@
 
 <%@ include file="header.jsp"%>
 
-<style>
-#clock{
-	text-align: center;
-	color: orangered;
-}
-</style>
 <div class="content-wrapper" style="min-height: 901px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -83,6 +77,7 @@
 <!-- /.content-wrapper -->
 
 <%@ include file="footer.jsp"%>
+<link href='${contextPath}/resources/css/rice_attendcss.css' rel='stylesheet' />
 <!-- Select2 -->
 <link rel="stylesheet" href="${contextPath}/resources/bower_components/select2/dist/css/select2.min.css">
 <script src="${contextPath}/resources/bower_components/select2/dist/js/select2.full.min.js"></script>

@@ -21,4 +21,9 @@ public interface B001AttendDAO {
 	public List<Map<String, Object>> getEnrId(Map info);
 	// 결석 insert 처리
 	public void insertAbsent(Map info);
+	
+	// 출석 데이터 가져오기
+	public Map<String, Object> getAttendData(Map info);
+	// 한 과목 출석 list 가져오기
+	public List<Map<String, Object>> getAttendList(Map info);
 }

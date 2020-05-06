@@ -1,5 +1,6 @@
 package com.rice.B001.attendcontroller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,5 +126,33 @@ public class B001AttendController {
 		logger.info("get /attend/status");
 		
 		return "B_002status";
+	}
+	
+	// 출석 데이터 가져오기
+	@RequestMapping(value = "/getAttendData", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=utf8")
+	@ResponseBody
+	public ResponseEntity<?> getAttendData(@RequestBody Map<String, Object> info, HttpServletRequest request, HttpServletResponse response) throws DataAccessException {
+		logger.info("get/post /getAttendData");
+		List<Map<String, Object>> resultList = new ArrayList<Map<String,Object>>();
+		List<Map<String, Object>> classList = b001AttendService.getClassList(info);
+		
+		for(int i = 0 ; i < classList.size() ; i++) {
+			String openclassId = (String) classList.get(i).get("openclassId");
+			info.put("openclassId", openclassId);
+			Map<String, Object> tmp = b001AttendService.getAttendData(info);
+			resultList.add(tmp);
+		}
+		
+		return new ResponseEntity(resultList, HttpStatus.OK);
+	}
+	
+	// 한 과목 출석 list 가져오기
+	@RequestMapping(value = "/getAttendList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=utf8")
+	@ResponseBody
+	public ResponseEntity<?> getAttendList(@RequestBody Map<String, Object> info, HttpServletRequest request, HttpServletResponse response) throws DataAccessException {
+		logger.info("get/post /getAttendList");
+		List<Map<String, Object>> resultList= b001AttendService.getAttendList(info);
+		
+		return new ResponseEntity(resultList, HttpStatus.OK);
 	}
 }
