@@ -97,7 +97,7 @@
 						</div>
 						<div class="offset-md-8">
 							<form action="/comm/regForm/${pageMaker.cri.commURL}">
-								<button type="submit" class="btn pull-right">커뮤니티 가입하기</button>
+								<button type="submit" class="btn pull-right">게시글 등록</button>
 							</form>
 						</div>
 						<!-- /.box-body -->

@@ -2,10 +2,30 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<html>
+<head>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header"> 
+		<h1>
+			<c:out value='${sjctName}' />
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="#"><c:out value='${sjctName}' /></a></li>
+			<li class="active">Q&A</li>
+		</ol>
+	</section>
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous">
 </script>
+
 
 
 <body>

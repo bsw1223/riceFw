@@ -97,12 +97,11 @@
 						<button type="button" class="btn btn-default btn-xs">
 							<i class="fa fa-thumbs-o-up"></i>${list.boLikes}
 						</button>
-					
-
+					</div>
+				</form>
 					<button data-oper="list" class="btn btn-default"
 						onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
-					</div>
-					</form>
+			<!-- /.box-footer -->
 				</div>
 			</div>
 		</div>

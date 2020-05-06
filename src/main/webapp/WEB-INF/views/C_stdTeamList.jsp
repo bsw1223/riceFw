@@ -143,8 +143,6 @@
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
 		var page = 1;
-		console.log(boURL);
-
 		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=" + page + "&amount=" + sel;
 
 	}
