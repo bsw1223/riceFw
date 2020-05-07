@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+#ipt_ratio {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+
+#ipt_ratio>.input-group-addon{
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    border-left: 0;
+    border-radius: 0;
+    border-color: #d2d6de;
+    background-color: #fff;
+}

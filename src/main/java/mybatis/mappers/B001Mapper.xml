@@ -49,6 +49,7 @@
 			SELECT A.ENRID
 			FROM ENROLMENT A, OPENCLASS B
 			WHERE A.OPENCLASSID=B.OPENCLASSID
+				AND A.classApplyCode = '1600'
 		]]>
 		<if test="currentDay == 1">
 			<![CDATA[
@@ -110,6 +111,7 @@
 	        SELECT A.openclassId, B.openclassName
 			FROM ENROLMENT A, OPENCLASS B
 			WHERE A.OPENCLASSID=B.OPENCLASSID
+				AND A.classApplyCode = '1600'
       ]]>
 		<if test=" memNum != ''  and  memNum != null">
 			<![CDATA[
@@ -124,6 +126,7 @@
 			SELECT COUNT(*)
 			FROM ENROLMENT A, MEMBER B
 			WHERE A.MEMNUM=B.MEMNUM
+				AND A.classApplyCode = '1600'
 			    AND B.MEMEMAIL = #{memEmail}
 			    AND B.MEMPWD = #{memPwd}
 			    AND A.OPENCLASSID = #{openclassId}
@@ -222,6 +225,7 @@
 		            AND B.MEMNUM = #{memNum}
 		            AND A.ATDCODE ='1800'
 		            AND C.OPENCLASSID = #{openclassId}
+		            AND B.classApplyCode = '1600'
 		        ) AS ATTCOUNT,
 		        (
 		            SELECT COUNT(*) FROM ATTENDANCE A, ENROLMENT B, OPENCLASS C
@@ -229,6 +233,7 @@
 		            AND B.MEMNUM = #{memNum}
 		            AND A.ATDCODE ='1801'
 		            AND C.OPENCLASSID = #{openclassId}
+		            AND B.classApplyCode = '1600'
 		        ) AS LATECOUNT,
 		        (
 		            SELECT COUNT(*) FROM ATTENDANCE A, ENROLMENT B, OPENCLASS C
@@ -236,6 +241,7 @@
 		            AND B.MEMNUM = #{memNum}
 		            AND A.ATDCODE ='1803'
 		            AND C.OPENCLASSID = #{openclassId}
+		            AND B.classApplyCode = '1600'
 		        ) AS ABSENTCOUNT,
 		        (   
 		            SELECT OPENCLASSNAME
@@ -267,6 +273,7 @@
 			    AND B.OPENCLASSID = C.OPENCLASSID
 			    AND B.MEMNUM = #{memNum}
 			    AND B.OPENCLASSID= #{openclassId}
+			    AND B.classApplyCode = '1600'
 			ORDER BY TO_DATE(A.ATDDATE)
 		]]>
 	</select>

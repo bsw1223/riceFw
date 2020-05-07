@@ -31,7 +31,7 @@ function getAttendList(id){
 						tbl_myAttendList.append(str);
 						for(i = 0 ; i < attendList.length; i++) {
 							var str = "<tr>"
-								+ "<td>" + moment(attendList[i].atdDate).format('MM/DD(dddd)') + " "
+								+ "<td>" + moment(attendList[i].atdDate).format('MM/DD(dd)') + " "
 								+ attendList[i].openStartTime +"~"+ attendList[i].openEndTime +"</td>"
 								+ "<td>" + attendList[i].atdState + "  " ;
 							if(attendList[i].atdTime != null) {

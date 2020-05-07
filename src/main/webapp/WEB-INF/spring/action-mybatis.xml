@@ -55,7 +55,8 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-	<tx:annotation-driven transaction-manager="txManager"/>
+<!-- 	<tx:annotation-driven transaction-manager="txManager"/> -->
+	<tx:annotation-driven/>
 	<!-- scan -->
 	<context:component-scan base-package="com.rice.util"></context:component-scan>
 	

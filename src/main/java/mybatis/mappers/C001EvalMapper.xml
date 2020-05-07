@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.eval">
+	<resultMap type="java.util.HashMap" id="evalList">
+		<result property="evalId" column="evalId"/>
+		<result property="evalTitle" column="evalTitle"/>
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="evalScore">
+		<result property="evalId" column="EVALID"/>
+		<result property="evalScore" column="EVALSCORE"/>
+		<result property="enrId" column="ENRID"/>
+		<result property="memName" column="MEMNAME"/>
+		<result property="memNum" column="MEMNUM"/>
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="stuScoreList">
+		<result property="evalId" column="EVALID"/>
+		<result property="evalTitle" column="EVALTITLE"/>
+		<result property="evalDate" column="EVALDATE"/>
+		<result property="evalScore" column="EVALSCORE"/>
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="chartScore">
+		<result property="evalId" column="EVALID"/>
+		<result property="label" column="label"/>
+		<result property="y" column="y"/>
+	</resultMap>
+	
+	<!-- 평가 생성을 위한 get sequence val -->
+	<select id="getEvalId" resultType="String">
+		<![CDATA[
+			SELECT SEQ_EVALMETHOD.NEXTVAL
+			from dual
+		]]>
+	</select>
+	
+	<!-- 수업의 학생 리스트 가져오기 -->
+	<select id="getMemList" resultType="String" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT ENRID
+			FROM ENROLMENT
+			WHERE OPENCLASSID=#{openclassId}
+		]]>
+	</select>
+	
+	<!-- 새로운 평가 생성 -->
+	<insert id="insertEval" parameterType="java.util.HashMap">
+		<![CDATA[
+			INSERT INTO EVALMETHOD(evalId,evalTitle,evalCode,evalDate,evalRatio,evalDesc,openclassId)
+  			  VALUES(#{evalId},#{evalTitle},#{evalCode},#{evalDate},#{evalRatio},#{evalDesc},#{openclassId})
+		]]>
+	</insert>
+	
+	<!-- 새로 등록된 평가에 학생 연결하기  -->
+	<insert id="insertEvalScore" parameterType="java.util.HashMap">
+		<foreach collection="memList" item="item" open="INSERT ALL" close=" SELECT * FROM DUAL" separator=" "> 
+			INTO EVALSCORE(enrId,evalId) VALUES (#{item},#{evalId})
+		</foreach>
+	</insert>
+	
+	<!-- 평가 목록 불러오기 -->
+	<select id="getEvalList" resultMap="evalList" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT A.EVALID, A.EVALTITLE
+			FROM EVALMETHOD A
+			WHERE A.OPENCLASSID = #{openclassId}
+			ORDER BY TO_NUMBER(A.EVALID)
+		]]>
+	</select>
+	
+	<!-- 평가 입력 학생 점수 불러오기 -->
+	<select id="getEvalScore" resultMap="evalScore" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT B.EVALID, B.EVALSCORE, B.ENRID, D.MEMNAME, D.MEMNUM
+			FROM EVALMETHOD A, EVALSCORE B, ENROLMENT C, MEMBER D
+			WHERE A.EVALID = B.EVALID
+			    AND B.ENRID = C.ENRID
+			    AND C.MEMNUM= D.MEMNUM
+			    AND C.OPENCLASSID = #{openclassId}
+			    AND B.EVALID= #{evalId}
+		]]>
+	</select>
+	
+	<!-- 평가 점수 update -->
+	<update id="updateScore" parameterType="java.util.HashMap">
+		<![CDATA[
+			UPDATE EVALSCORE 
+			SET evalScore= #{evalScore}
+			WHERE enrId= #{enrId}
+			    AND evalId= #{evalId}
+		]]>
+	</update>
+	
+	
+	<!-- /////////////////////////학생/////////////////////////////// -->
+	<!-- 성적 리스트 가져오기 -->
+	<select id="getStuScoreList" resultMap="stuScoreList" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT B.EVALID, A.EVALTITLE, A.EVALDATE, B.EVALSCORE
+			FROM EVALMETHOD A, EVALSCORE B, ENROLMENT C
+			WHERE A.EVALID=B.EVALID
+			    AND B.ENRID=C.ENRID
+			    AND C.MEMNUM=#{memNum}
+			    AND C.OPENCLASSID=#{openclassId}
+			ORDER BY TO_DATE(A.EVALDATE)
+		]]>
+	</select>
+	
+	<!-- 평균 성적 get -->
+	<select id="getAvgScore" resultMap="chartScore" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT B.EVALID, A.EVALTITLE label, AVG(B.EVALSCORE) y
+			FROM EVALMETHOD A, EVALSCORE B, ENROLMENT C
+			WHERE A.EVALID=B.EVALID
+			    AND B.ENRID=C.ENRID
+			    AND C.OPENCLASSID=#{openclassId}
+			GROUP BY B.EVALID, A.EVALTITLE
+			ORDER BY B.EVALID
+		]]>
+	</select>
+	
+	<!-- 내 성적 chart get -->
+	<select id="getChartScore" resultMap="chartScore" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT B.EVALID, A.EVALTITLE label, B.EVALSCORE y
+			FROM EVALMETHOD A, EVALSCORE B, ENROLMENT C
+			WHERE A.EVALID=B.EVALID
+			    AND B.ENRID=C.ENRID
+			    AND C.MEMNUM=#{memNum}
+			    AND C.OPENCLASSID=#{openclassId}
+			ORDER BY B.EVALID
+		]]>
+	</select>
+</mapper>
+	

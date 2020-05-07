@@ -22,7 +22,6 @@
 				<div class="box box-default">
 					<div class="form-horizontal">
 						<div class="box-body" id="attendChart">
-							
 						</div>
 						<!-- /.box-body -->
 					</div>
