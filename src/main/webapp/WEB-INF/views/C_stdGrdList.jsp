@@ -7,7 +7,7 @@ pageEncoding="UTF-8"%>
 	crossorigin="anonymous">
 	
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
   
 <style>
 .box-body{
@@ -55,18 +55,6 @@ float: right;
 	          <div class="box box-primary">
 	         	 <div class="box-header">
 					<h2 class="box-title">성적 조회</h2>
-						<%-- <div class="amount">
-							<select id="getListWithPaging" name="sel" onchange="selChange()">
-								<option value="5"
-									<c:if test="${pageMaker.cri.amount == 5}">selected</c:if>>5개씩보기</option>
-								<option value="10"
-									<c:if test="${pageMaker.cri.amount == 10}">selected</c:if>>10개씩보기</option>
-								<option value="15"
-									<c:if test="${pageMaker.cri.amount == 15}">selected</c:if>>15개씩보기</option>
-								<option value="20"
-								<c:if test="${pageMaker.cri.amount == 20}">selected</c:if>>20개씩보기</option>
-							</select>
-						</div> --%>
 					<!-- 옵션선택 끝 -->
 				</div>			
 	   			 <!-- box body -->
@@ -86,62 +74,6 @@ float: right;
 		                </tr>
 	                </c:forEach>
 	              </table>
-	              <!-- /table -->
-	  <!--          		<div class="pull-right" style="padding:10px;">
-						<form action="/mypage/board/qna/writeView" method="get">
-					      	<button id='regBtn' type="button" class="btn btn-block btn-primary">등록</button>
-					     </form> 
-					</div>  -->
-		            <!-- pagination -->
- 	  <%--            <div class="box-footer">
-		              <ul class="pagination pagination-sm no-margin">
-		                	<c:if test='${pageMaker.prev}'>
-									<li class="page-item"><a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum}&amount=${pageMaker.cri.amount}page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">Previous</a></li>
-							</c:if>
-							<c:forEach begin="${pageMaker.startPage }"
-									end="${pageMaker.endPage}" var="pnum">
-									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-									<a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
-									</li>
-							</c:forEach>
-							<c:if test="${pageMaker.next}">
-									<li class="page-item"><a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
-							</c:if>
-		              </ul>
-		        	</div> --%> 
-	        		 <!-- /pagination -->
-	        		 
-	        		 <!-- search -->
-					<%--  <div class="box-tools center-block">
-						<form id='searchForm' action="/mypage/board/qna/list" method ="get">
-							<div class='select'>
-			                  <select name='type' style="width:100px;height:30px;">
-			                    <option value=""
-			                    	<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
-			                    <option value="T"
-			                    	<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
-			                    <option value="C"
-			                    	<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
-			                    <option value="W"
-			                    	<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자<option>
-			                    <option value="TWC"
-			                    	<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>전체</option>
-			                  </select>
-			                </div>
-			                  <!-- /select option -->
-			                <div class="input-group input-group-sm hidden-xs" >
-			                    <input type="text" name='keyword'
-			                    	value='<c:out value="${pageMaker.cri.keyword}"/>'class="form-control pull-right">
-			                    <div class="input-group-btn">
-			                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
-			                  </div>
-							</div>
-						</form>
-		            </div> --%>
-				  <!-- /search-->  
 	     		</div>
 	    	` <!-- /.main content -->
 	  		</div>  
@@ -150,9 +82,9 @@ float: right;
 			 <div class="col-md-5">
 	          <!-- general form elements -->
 	          <div class="box box-primary">
-	         	 <div class="box-header">
-					<h2 class="box-title">차트 넣는곳</h2>
-				 </div>			
+	         	 <div class="box-body" id="barChart">
+							
+				</div>
 	   			 <!-- box body -->
 				<div class="box-body">
 				<!-- put your chart here -->
@@ -196,7 +128,93 @@ float: right;
 
 	}
 </script>
+<script src="${contextPath}/resources/api/js/canvasjs.min.js"></script>
+<script>
+		var chart = $("#barChart");
+		
+		$(document).ready(function() {
+			chart.append('<div id="chartContainer" style="height: 300px; width: 400px;"></div>');
+			
+			charRender();
+		});
+		
+		function charRender(data) {
+			var chart = new CanvasJS.Chart("chartContainer", {
+				animationEnabled: true,
+				title:{
+					text: "점수 그래프"
+				},	
+				axisY: {
+					title: "Billions of Barrels",
+					titleFontColor: "#4F81BC",
+					lineColor: "#4F81BC",
+					labelFontColor: "#4F81BC",
+					tickColor: "#4F81BC"
+				},
+				axisY2: {
+					title: "Millions of Barrels/day",
+					titleFontColor: "#C0504E",
+					lineColor: "#C0504E",
+					labelFontColor: "#C0504E",
+					tickColor: "#C0504E"
+				},	
+				toolTip: {
+					shared: true
+				},
+				legend: {
+					cursor:"pointer",
+					itemclick: toggleDataSeries
+				},
+				data: [{
+					type: "column",
+					name: "내 점수",
+					legendText: "Proven Oil Reserves",
+					showInLegend: true, 
+					dataPoints:[
+						{ label: "Saudi", y: 266.21 },
+						{ label: "Venezuela", y: 302.25 },
+						{ label: "Iran", y: 157.20 },
+						{ label: "Iraq", y: 148.77 },
+						{ label: "Kuwait", y: 101.50 },
+						{ label: "UAE", y: 97.8 }
+					]
+				},
+				{
+					type: "column",	
+					name: "평균",
+					legendText: "Oil Production",
+					axisYType: "secondary",
+					showInLegend: true,
+					dataPoints:[
+						{ label: "Saudi", y: 10.46 },
+						{ label: "Venezuela", y: 2.27 },
+						{ label: "Iran", y: 3.99 },
+						{ label: "Iraq", y: 4.45 },
+						{ label: "Kuwait", y: 2.92 },
+						{ label: "UAE", y: 3.1 }
+					]
+				}]
+			});
+			chart.render();
 
+		}
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else {
+		e.dataSeries.visible = true;
+	}
+	chart.render();
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
 
 <%@ include file="footer.jsp"%>
 
