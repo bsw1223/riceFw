@@ -1,176 +1,190 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous">
-	
-</script>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"/>
+<%@ include file = "header.jsp" %>
 
 <style>
-.box-body{
+.box-body {
 	background-color: white;
 }
-.box-tools{
-	margin:auto;
-	display:flex;
+
+.box-tools {
+	margin: auto;
+	display: flex;
 }
-.select{
-	float:left;
-	margin-left:10px;
-	
+
+.select {
+	float: left;
+	margin-left: 10px;
 }
-.input-group{
-	float:left;
+
+.input-group {
+	float: left;
 	width: 170px;
 }
-
 </style>
 
-<body>
-
-<%@ include file="F_Fixedsidebar.jsp"%>
-  <div class="content-wrapper">
-     <section class="content-header"style="width:83%">
-      <h1>
-        <c:out value='${sjctName}' />
-      </h1>
-      <ol class="breadcrumb" >
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="#"><c:out value='${sjctName}' /></a></li>
-		<li class="active">성적 입력</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="col-md-10">
-        <div class="box">
-		 <div class="box-body">
-		   <div class="box-header">
-				<h2 class="box-title">성적 입력 </h2>
-			 <div class="box-tools pull-right">
-			 <label>과제명 :</label>
-				<form id='searchForm' action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method ="get">
-					<div class='select'>
-	                  <select name='type' style="width:150px;height:20px;">
-	                    <option value=""
-	                    	<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>-----</option>
-	                    <option value="T"
-	                    	<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>과제1</option>
-	                    <option value="C"
-	                    	<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>과제2</option>
-	                    <option value="W"
-	                    	<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>과제3<option>
-	                    <option value="TWC"
-	                    	<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>과제4</option>
-	                  </select>
-	                  </div>
-	                  <!-- /select option -->
-	                <%-- <div class="input-group input-group-sm hidden-xs" >
-	                    <input type="text" name='keyword'
-	                    	value='<c:out value="${pageMaker.cri.keyword}"/>'class="form-control pull-right">
-	                    <div class="input-group-btn">
-	                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
-	                  </div>
-				</div> --%>
-				</form>
-            </div>
-            </div>
-			<!-- /search-->
-			<!-- table -->
-              <table class="table table-bordered">
-                <tr>
-                  <th style="width: 20px">No.</th>
-                  <th>학생이름</th>
-                  <th style="width: 100px">제출여부</th>
-                  <th style="width: 100px">첨부파일</th>
-                  <th style="width: 100px">점수</th>
-                </tr>
-                <c:forEach var="list" items="${studentList}">
-	                <tr>
-	                  <td><c:out value="${list.memNum}"/></td>
-	                  <td>
-	                  	<a class='move' href="/mypage/board/${pageMaker.cri.boCode}/view?boNum=<c:out value='${list.boNum}'/>"><c:out value="${list.memName}"/></a>
-	                  </td>
-	                  <td><c:out value="${list.memNum}"/></td>
-	                  <td><div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-download"></i> fa-download</div>
-	                  <c:out value="${list.boRegDate}"/></td>
-	                  <td><c:out value="${list.boRegDate}"/></td>
-	                </tr>
-                </c:forEach>
-              </table>
-              <!-- /table -->
-           		<div class="box-footer pull-right">
-					 <form action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method="get"> 
-						<div class="buttons">
-						<!-- 입력버튼을 누르면 점수를 입력할수 있는 칸 나옴 -->
-							<button class="btn btn-warning">입력</button>
-							<!-- 등록버튼을 누르면 입력한 정수를 저장하고 더이상 입력할수 없게 readonly로 변함 -->
-					      	<button class="btn btn-primary">등록</button>
-					     </div>
-				    </form>  
-				</div> 
-	            <!-- pagination -->
-	             <ul class="pagination pagination-sm no-margin">
-	               <c:if test="${pageMaker.prev}">
-					<li class="paginate_button prev">
-						<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
-					</li>
-					</c:if>
-                    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
-						<li class="page-item ${pageMaker.cri.page==num?" active ":""}">
-							<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${num}">${num}</a>
-						</li>
-					</c:forEach>
-	           		<c:if test="${pageMaker.next}">
-						<li class="paginate_button next">
-							<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
-						</li>
-					</c:if>
-	             </ul>
-     		</div>
-  		 </div>  
-		</div>
+<div class="content-wrapper">
+	<section class="content-header">
+		<h1>
+			<c:out value='${sjctName}' />
+		</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="#"><c:out value='${sjctName}' /></a></li>
+			<li class="active">성적 입력</li>
+		</ol>
 	</section>
-  </div>
-</body>
- 
- 
 
-
-<form id="actionForm" action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method='get'>
-	<input type="hidden" name="page" value='${pageMaker.cri.page}'>
-	<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
-</form>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-
-		var actionForm = $("actionForm");
-
-		$(".page-item").on("click", function(e) {
-			e.preventDafault();
-
-			console.log('click');
-			actionForm.find("input[name='page']").val($(this).attr("href"));
-			actionForm.submit();
-		});
-	});
-
-	function selChange() {
-		var sel = document.getElementById('getListWithPaging').value;
-		var page = 1;
-		console.log(boURL);
-
-		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=" + page + "&amount=" + sel;
-
-	}
-</script>
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-md-10">
+				<div class="box">
+					<div class="box-header">
+						<h2 class="box-title">성적 입력</h2>
+						<div class="pull-right">
+							<label class="control-label" for="evalList" style="margin-right: 10px;">평가명 :</label>
+							<div class="pull-right">
+								<select name='evalList' class="form-control">
+									<option value="">-----</option>
+								</select>
+							</div>
+							<!-- /.select -->
+						</div>
+					</div>
+					<!-- /. box-header -->
+					<div class="box-body">
+						<table class="table table-bordered">
+							<tr>
+								<th style="width: 20px">No.</th>
+								<th style="width: 50%">학생이름</th>
+								<th>점수</th>
+							</tr>
+							<tbody id="scoreList">
+							</tbody>
+						</table>
+					</div>
+					<!-- /.box-body -->
+					<div class="box-footer">
+						<div class="buttons">
+							<button class="btn btn-primary" id="add-eval">평가 생성</button>
+							<button class="btn btn-primary pull-right" id="save-score" style="display: none;">점수 저장</button>
+						</div>
+					</div>
+					<!-- /.box-footer -->
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</section>
+	<!-- /.content -->
+	
+	<!-- 평가 추가 MODAL -->
+	<div class="modal fade" id="evalModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">평가 생성</h4>
+					<!-- 스터디실 예약  -->
+				</div>
+				<!-- /.modal-header -->
+				<form class="form-horizontal">
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="evalTitle">평가명</label>
+							<div class="col-sm-10">
+								<input class="form-control" type="text" name="evalTitle"/> 
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="evalCode">평가방법</label>
+							<div class="col-sm-10">
+								<select class="form-control" name='evalCode'>
+									<option value="">----------</option>
+									<option value="1500">시험</option>
+									<option value="1501">과제</option>
+									<option value="1502">출석</option>
+									<option value="1503">기타</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="evalDate">평가일</label>
+							<div class="col-sm-10">
+								<input class="form-control" type="text" name="evalDate" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="evalRatio">평가비율</label>
+							<div class="col-sm-10 " id="ipt_ratio" >
+								<input class="form-control" type="text" name="evalRatio" placeholder="숫자만 입력해주세요"/>
+								<span class="input-group-addon">%</span>	
+							</div>	
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-2 control-label" for="evalDesc">설명</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" rows="4" cols="50" name="evalDesc" id="evalDesc"></textarea>
+							</div>
+						</div>
+					</div>
+					<!-- /.modal-body -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-primary" id="save-eval">평가 생성</button>
+					</div>
+				</form>
+				<!-- /.modal-footer -->
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+</div>
+<!-- /.content-wrapper -->
 
 
 <%@ include file="footer.jsp"%>
+<link href='${contextPath}/resources/css/rice_evalcss.css' rel='stylesheet' />
+<!-- bootstrap datepicker -->
+<link rel="stylesheet" href="${contextPath}/resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+<!-- bootstrap datepicker -->
+<script src="${contextPath}/resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="${contextPath}/resources/api/js/moment.min.js"></script>
+<script src="${contextPath}/resources/api/js/ko.js"></script>
+<!-- InputMask -->
+<script src="${contextPath}/resources/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="${contextPath}/resources/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="${contextPath}/resources/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
+<script src="${contextPath}/resources/js/rice_tchevaljs.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		setboCode('${pageMaker.cri.boCode}');
+		setboURL('${pageMaker.cri.boURL}');
+		
+		ipt_evalDate.datepicker({
+			autoclose: true,
+			locale: 'ko',
+		    format: 'yyyy-mm-dd'
+		});
+		
+		getEvalList();
+		
+		ipt_evalList.change(function() {
+			getEvalScore(ipt_evalList.val());
+		})
+	});
+
+</script>
 </body>
 </html>

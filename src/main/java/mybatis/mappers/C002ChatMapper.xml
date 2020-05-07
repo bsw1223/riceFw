@@ -47,14 +47,13 @@
 		<![CDATA[
 			SELECT openClassId
 			FROM ENROLMENT
+			WHERE classApplyCode = '1600'
 		]]>
-		<where>
-			<if test=" memNum != ''  and  memNum != null">
-			<![CDATA[
-				memNum = #{memNum,jdbcType=VARCHAR}
-			]]>
-			</if>
-		</where>
+		<if test=" memNum != ''  and  memNum != null">
+		<![CDATA[
+			memNum = #{memNum,jdbcType=VARCHAR}
+		]]>
+		</if>
 	</select>
 	
 	<!-- 친구 목록 불러오기 // 같은 수업을 듣는 학생 -->
@@ -66,6 +65,7 @@
 		<where>
 			<![CDATA[
 				E.MEMNUM = M.MEMNUM
+				AND E.classApplyCode = '1600'
 			]]>
 			<if test=" memNum != ''  and  memNum != null">
 			<![CDATA[
@@ -135,6 +135,7 @@
 		<where>
 			<![CDATA[
 				E.MEMNUM = M.MEMNUM
+				AND E.classApplyCode = '1600'
 			]]>
 			<choose>
 	            <when test="classList.size != 0">

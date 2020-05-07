@@ -68,13 +68,12 @@
 						<h3 class="box-title">친구 목록</h3>
 					</div>
 					<!-- /.box-header -->
-
 					<div class="box-body">
 						<ul class="tree" data-widget="tree" id='friendList'>
 					        
 					    </ul>
 					</div>
-					
+					<!-- /.box-body -->
 					<div class="box-footer">
 			          <button class="btn btn-block btn-warning" id="btn_makeChat">채팅방 만들기</button>
 			        </div>

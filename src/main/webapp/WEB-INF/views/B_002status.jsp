@@ -4,7 +4,6 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <%@ include file="header.jsp"%>
-
 <div class="content-wrapper" style="min-height: 901px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -23,7 +22,6 @@
 				<div class="box box-default">
 					<div class="form-horizontal">
 						<div class="box-body" id="attendChart">
-							
 						</div>
 						<!-- /.box-body -->
 					</div>
@@ -37,17 +35,13 @@
 			<div class="col-md-6">
 				<div class="box box-default">
 					<div class="box-header">
-						<h3 class="box-title" id="attendTitle">수업이름</h3>
+						<h3 class="box-title" id="attendTitle"></h3>
 					</div>
 					<!-- /.box-header -->
 					
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
 							<tbody id="myAttendList">
-								<tr>
-									<th>일자 및 시간</th>
-									<th>출결 정보</th>
-								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -65,49 +59,21 @@
 
 <%@ include file="footer.jsp"%>
 
-<!-- moment / date type -->
+<link href='${contextPath}/resources/css/rice_attendcss.css' rel='stylesheet' />
+<!-- moment -->
+<script src="${contextPath}/resources/api/js/moment.min.js"></script>
+<script src="${contextPath}/resources/api/js/ko.js"></script>
+<!-- canvasjs / chart-->
 <script src="${contextPath}/resources/api/js/canvasjs.min.js"></script>
+<script src="${contextPath}/resources/js/rice_attendstatusjs.js"></script>
 <script type="text/javascript">
-	var div_attendChart = $("#attendChart");
-	
 	$(document).ready(function() {
-		div_attendChart.append('<div id="chartContainer" style="height: 150px; width: 50%;"></div>');
-		
-		charRender();
+		setmemNum('${loginMem.memNum}');
+
+		getAttendInfo();
 	});
 	
-	function charRender(data) {
-		var chart = new CanvasJS.Chart("chartContainer", {
-			animationEnabled : true,
-			title : {
-				text : "수업이름",
-				horizontalAlign : "center"
-			},
-			data : [ {
-				type : "doughnut",
-				startAngle : 60,
-				//innerRadius : 30,
-				indexLabelFontSize : 10,
-				indexLabel : "{y}",
-				toolTipContent : "<b>{label}:</b> {y} (#percent%)",
-				dataPoints : [ {
-					y : 67,
-					label : "출석",
-					exploded : true
-				}, {
-					y : 3,
-					label : "지각"
-				}, {
-					y : 3,
-					label : "결석"
-				}, {
-					y : 10,
-					label : "남은수업"
-				}, ]
-			} ]
-		});
-		chart.render();
-	}
+	
 </script>
 </body>
 </html>

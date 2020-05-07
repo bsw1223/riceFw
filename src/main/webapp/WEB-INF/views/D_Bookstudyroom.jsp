@@ -105,8 +105,8 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-xs-4" for="bookPurpose">설명</label>
-							<div class="col-sm-12">
+							<label class="col-sm-2 control-label" for="bookPurpose">설명</label>
+							<div class="col-sm-10">
 								<textarea class="form-control" rows="4" cols="50"
 									name="bookPurpose" id="bookPurpose"></textarea>
 							</div>

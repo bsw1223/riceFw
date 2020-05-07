@@ -25,6 +25,75 @@
 		<result property="enrId" column="enrId" />
 	</resultMap> 
 	
+	<resultMap id="attendData" type="java.util.HashMap">
+		<result property="remainCount" column="REMAINCOUNT" />
+        <result property="attCount" column="ATTCOUNT" />
+        <result property="lateCount" column="LATECOUNT" />
+        <result property="absentCount" column="ABSENTCOUNT" />
+        <result property="openclassId" column="openclassId" />
+        <result property="openclassName" column="openclassName" />
+	</resultMap>
+	
+	<resultMap id="attendList" type="java.util.HashMap" >
+		<result property="atdDate" column="ATDDATE"/>
+		<result property="openStartTime" column="OPENSTARTTIME"/>
+		<result property="openEndTime" column="OPENENDTIME"/>
+		<result property="atdState" column="ATDSTATE"/>
+		<result property="atdTime" column="ATDTIME"/>
+		<result property="openclassName" column="openclassName"/>
+	</resultMap>
+	
+	<!-- 결석 처리를 위한 모든 수강신청ID 가져오기 -->
+	<select id="getEnrId" resultMap="enrId" parameterType="java.util.HashMap" >
+		<![CDATA[
+			SELECT A.ENRID
+			FROM ENROLMENT A, OPENCLASS B
+			WHERE A.OPENCLASSID=B.OPENCLASSID
+				AND A.classApplyCode = '1600'
+		]]>
+		<if test="currentDay == 1">
+			<![CDATA[
+				AND B.CLASSSUN = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 2">
+			<![CDATA[
+				AND B.CLASSMON = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 3">
+			<![CDATA[
+				AND B.CLASSTUE = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 4">
+			<![CDATA[
+				AND B.CLASSWED = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 5">
+			<![CDATA[
+				AND B.CLASSTHUR = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 6">
+			<![CDATA[
+				AND B.CLASSFRI = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 7">
+			<![CDATA[
+				AND A.CLASSSAT = 'y'
+			]]>
+		</if>
+	</select>
+	
+	<!-- 결석 data insert query -->
+	<insert id="insertAbsent" parameterType="java.util.HashMap">
+		<foreach collection="enrId" item="item" open="INSERT ALL" close=" SELECT * FROM DUAL" separator=" "> 
+			INTO ATTENDANCE(enrId,atdDate,atdCode) VALUES (#{item.enrId}, #{currentDate}, '1803')
+		</foreach>
+	</insert>
 	
 	<!-- 접근 가능한 IP 대역 가져오기 -->
 	<select id="getIpAddress" resultMap="ipAddress">
@@ -39,16 +108,16 @@
 	<!-- 수업목록 가져오기 -->
 	<select id="getClassList" resultMap="classList" parameterType="java.util.HashMap">
       <![CDATA[
-	        SELECT openclassId, openclassName
-			FROM ENROLMENT
+	        SELECT A.openclassId, B.openclassName
+			FROM ENROLMENT A, OPENCLASS B
+			WHERE A.OPENCLASSID=B.OPENCLASSID
+				AND A.classApplyCode = '1600'
       ]]>
-      <where>
-			<if test=" memNum != ''  and  memNum != null">
+		<if test=" memNum != ''  and  memNum != null">
 			<![CDATA[
-				memNum = #{memNum,jdbcType=VARCHAR}
+				AND A.memNum = #{memNum,jdbcType=VARCHAR}
 			]]>
-			</if>
-		</where>
+		</if>
 	</select>
 	
 	<!-- 입력한 수업번호/이메일/비밀번호가 맞는지 check //// 맞으면 1, 아니면 0 -->
@@ -57,6 +126,7 @@
 			SELECT COUNT(*)
 			FROM ENROLMENT A, MEMBER B
 			WHERE A.MEMNUM=B.MEMNUM
+				AND A.classApplyCode = '1600'
 			    AND B.MEMEMAIL = #{memEmail}
 			    AND B.MEMPWD = #{memPwd}
 			    AND A.OPENCLASSID = #{openclassId}
@@ -113,6 +183,7 @@
 		</if>
 	</select>
 	
+	<!--  출석 입력 데이터를 만들기 위한 get value query -->
 	<select id="getinsertVal" resultMap="insertVal" parameterType="java.util.HashMap">
 		<![CDATA[
 			SELECT B.ENRID,
@@ -140,53 +211,71 @@
 		]]>
 	</insert>
 	
-	<!-- 결석 처리를 위한 모든 수강신청ID 가져오기 -->
-	<select id="getEnrId" resultMap="enrId" parameterType="java.util.HashMap" >
+	<!-- 출석 데이터 가져오기 -->
+	<select id="getAttendData" resultMap="attendData" parameterType="java.util.HashMap">
 		<![CDATA[
-			SELECT A.ENRID
-			FROM ENROLMENT A, OPENCLASS B
-			WHERE A.OPENCLASSID=B.OPENCLASSID
+		SELECT (FULLCOUNT-ATTCOUNT-LATECOUNT-ABSENTCOUNT) REMAINCOUNT, ATTCOUNT, LATECOUNT, ABSENTCOUNT, OPENCLASSNAME, OPENCLASSID
+		FROM 
+		    (SELECT 
+		        ( SELECT OPENCLASSDAYS FROM OPENCLASS 
+		            WHERE OPENCLASSID=#{openclassId}
+		        ) AS FULLCOUNT,
+		        ( SELECT COUNT(*) FROM ATTENDANCE A, ENROLMENT B, OPENCLASS C
+		            WHERE A.ENRID=B.ENRID AND B.OPENCLASSID=C.OPENCLASSID
+		            AND B.MEMNUM = #{memNum}
+		            AND A.ATDCODE ='1800'
+		            AND C.OPENCLASSID = #{openclassId}
+		            AND B.classApplyCode = '1600'
+		        ) AS ATTCOUNT,
+		        (
+		            SELECT COUNT(*) FROM ATTENDANCE A, ENROLMENT B, OPENCLASS C
+		            WHERE A.ENRID=B.ENRID AND B.OPENCLASSID=C.OPENCLASSID
+		            AND B.MEMNUM = #{memNum}
+		            AND A.ATDCODE ='1801'
+		            AND C.OPENCLASSID = #{openclassId}
+		            AND B.classApplyCode = '1600'
+		        ) AS LATECOUNT,
+		        (
+		            SELECT COUNT(*) FROM ATTENDANCE A, ENROLMENT B, OPENCLASS C
+		            WHERE A.ENRID=B.ENRID AND B.OPENCLASSID=C.OPENCLASSID
+		            AND B.MEMNUM = #{memNum}
+		            AND A.ATDCODE ='1803'
+		            AND C.OPENCLASSID = #{openclassId}
+		            AND B.classApplyCode = '1600'
+		        ) AS ABSENTCOUNT,
+		        (   
+		            SELECT OPENCLASSNAME
+		            FROM OPENCLASS
+		            WHERE OPENCLASSID= #{openclassId}
+		        ) AS OPENCLASSNAME,
+		        (   
+		            SELECT OPENCLASSID
+		            FROM OPENCLASS
+		            WHERE OPENCLASSID= #{openclassId}
+		        ) AS OPENCLASSID
+		    FROM DUAL
+		    ) T
 		]]>
-		<if test="currentDay == 1">
-			<![CDATA[
-				AND B.CLASSSUN = 'y'
-			]]>
-		</if>
-		<if test="currentDay == 2">
-			<![CDATA[
-				AND B.CLASSMON = 'y'
-			]]>
-		</if>
-		<if test="currentDay == 3">
-			<![CDATA[
-				AND B.CLASSTUE = 'y'
-			]]>
-		</if>
-		<if test="currentDay == 4">
-			<![CDATA[
-				AND B.CLASSWED = 'y'
-			]]>
-		</if>
-		<if test="currentDay == 5">
-			<![CDATA[
-				AND B.CLASSTHUR = 'y'
-			]]>
-		</if>
-		<if test="currentDay == 6">
-			<![CDATA[
-				AND B.CLASSFRI = 'y'
-			]]>
-		</if>
-		<if test="currentDay == 7">
-			<![CDATA[
-				AND A.CLASSSAT = 'y'
-			]]>
-		</if>
 	</select>
 	
-	<insert id="insertAbsent" parameterType="java.util.HashMap">
-		<foreach collection="enrId" item="item" open="INSERT ALL" close=" SELECT * FROM DUAL" separator=" "> 
-			INTO ATTENDANCE(enrId,atdDate,atdCode) VALUES (#{item.enrId}, #{currentDate}, '1803')
-		</foreach>
-	</insert>
+	<!-- 한 과목 출석 list 가져오기 -->
+	<select id="getAttendList" resultMap="attendList" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT A.ATDDATE, C.OPENSTARTTIME, C.OPENENDTIME, 
+			    CASE TO_CHAR(A.ATDCODE) 
+			        WHEN '1800' THEN '<span class="label label-success">출석</span>' 
+			        WHEN '1801' THEN '<span class="label label-warning">지각</span>'
+			        WHEN '1803' THEN '<span class="label label-danger">결석</span>'
+			    ELSE '' END ATDSTATE,
+			    A.ATDTIME, C.OPENCLASSNAME
+			FROM ATTENDANCE A, ENROLMENT B, OPENCLASS C
+			WHERE A.ENRID=B.ENRID
+			    AND B.OPENCLASSID = C.OPENCLASSID
+			    AND B.MEMNUM = #{memNum}
+			    AND B.OPENCLASSID= #{openclassId}
+			    AND B.classApplyCode = '1600'
+			ORDER BY TO_DATE(A.ATDDATE)
+		]]>
+	</select>
+	
 </mapper>	

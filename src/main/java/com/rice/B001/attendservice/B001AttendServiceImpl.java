@@ -60,5 +60,15 @@ public class B001AttendServiceImpl implements B001AttendService {
 	public void insertAbsent(Map info) {
 		b001AttendDAO.insertAbsent(info);		
 	}
+	// 출석 데이터 가져오기
+	@Override
+	public Map<String, Object> getAttendData(Map info) {
+		return b001AttendDAO.getAttendData(info);
+	}
+	// 한 과목 출석 list 가져오기
+	@Override
+	public List<Map<String, Object>> getAttendList(Map info) {
+		return b001AttendDAO.getAttendList(info);
+	}
 	
 }
