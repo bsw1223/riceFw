@@ -2,6 +2,8 @@ package com.rice.H001.homecontroller;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -42,35 +46,123 @@ public class H001HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 * @throws IOException 
+	 * @throws ParseException 
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model, HttpServletRequest request) throws IOException {	
+	public String home(Model model, H001HomeVO h001HomeVO, HttpServletRequest request) throws IOException, ParseException {	
 		//토익 접수 크롤링
-		String URL = "https://exam.ybmnet.co.kr/toeic/";
-		Document doc = Jsoup.connect(URL).get();
-		Elements elem = doc.select("table#reg_table");
+		//인터넷접수, 추가접수, 시험일자, 성적발표일
 		
-		String elemString = elem.toString();
-		String elemStringRep = elemString.replace("\"images/index/", "\"../../../../resources/");
-		model.addAttribute("elemStringRep",elemStringRep);
-		//System.out.println(elemStringRep);
+		//오늘날짜와 db EXSCHEDULE테이블의 exDate과 비교 후 오늘이 더 크면 진행
+		SimpleDateFormat today = new SimpleDateFormat ("yy.MM.dd");
+		Date time = new Date();
+		//오늘날짜 받아옴
+		String todayDate = today.format(time);
+		Date toDayAll= today.parse(todayDate);
 		
-		String speakingURL = "https://exam.ybmnet.co.kr/toeicswt/";
-		Document speakingDoc = Jsoup.connect(speakingURL).get();
-		Elements speakingElem = speakingDoc.select("#tabSchedule1sub > table > tbody");
+		//System.out.println("오늘 : " +toDayAll);
+		//System.out.println("오늘2 : " +todayDate);
 		
-		String speakingElemString = speakingElem.toString();
-		//String speakingElemStringRep = speakingElemString.replace("\"images/index/", "\"../../../../resources/");
-		String speakingElemStringRep = speakingElemString.replace("<span class=\"dday\">D-3</span>","");
-		String speakingElemStringRepR = speakingElemStringRep.replace("2020년","20년");
-		String elemStringRepR = speakingElemStringRepR.replace(" <col width=\"40%\">"," <col width=\"30%\">");
-		String elemStringRepRY = elemStringRepR.replace("년",".");
-		String elemStringRepRM = elemStringRepRY.replace("월",".");
-		String elemStringRepRD = elemStringRepRM.replace("일","");
-		String elemStringRepRG = elemStringRepRD.replace("()","(일)");
 		
-		model.addAttribute("elemStringRepRG",elemStringRepRG);
-		//System.out.println("elemStringRepRG : "+elemStringRepRG);
+
+
+
+		
+		//db날짜 받아와서 비교 및 빼기, 빼기는 dday에 사용
+		String toeicDate = h001HomeService.selectToeicDate();
+		SimpleDateFormat toeicDateAll = new SimpleDateFormat("yy.MM.dd");
+		Date compareDate= toeicDateAll.parse(todayDate);
+		
+		//System.out.println("toeicDate : "+toeicDate);
+		
+		int compare = toDayAll.compareTo(compareDate);
+		//System.out.println(" compare  : "+compare);
+		
+		
+		//날짜 차이
+		    final String DATE_PATTERN = "yy.MM.dd";
+	        final int MILLI_SECONDS_PER_DAY = 24 * 60 * 60 * 1000;
+	        String inputStartDate =  todayDate;
+	        String inputEndDate =toeicDate;
+	        SimpleDateFormat sdf = new SimpleDateFormat(DATE_PATTERN);
+	        Date startDate = sdf.parse(inputStartDate);
+	        Date endDate = sdf.parse(inputEndDate);
+	        long difference = (endDate.getTime() - startDate.getTime()) / MILLI_SECONDS_PER_DAY;
+	      //  System.out.println(difference);
+		
+	
+	       
+
+
+		
+		
+		
+		if(difference < 0 )
+		{		
+		System.out.println("ybm 접속해서 받아옴");
+		String URL = "https://exam.ybmnet.co.kr/toeic/"; 
+		Document doc =Jsoup.connect(URL).get(); 
+		Elements elemExDate = doc.select("#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td:nth-child(1) > a");
+		String exDatet = elemExDate.toString();
+		String exDate = exDatet.replace("<a href=\"/YBMSisacom.asp?SiteURL=https://appexam.ybmnet.co.kr&amp;pageURL=/toeic/receipt/receipt.asp?toeic_times=404\">", "")
+				.replace("<span style=\"color:#dc2f3c\">(일)</span> 09:20</a>", "")
+				.replace("<span style=\"color:#5384d0\">(토)</span> 14:20</a>", "");//시험일
+		h001HomeVO.setExDate(exDate);//시험일
+		//System.out.println("시험일 : " +exDate);
+		
+		Elements elemrecepShedule = doc.select("#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td:nth-child(3)");
+		String recepShedulet = elemrecepShedule.toString();
+		String recepShedule = recepShedulet.replace("<td class=\"str\">", "").replace("(월) 오전 8시</td>", "");//접수마감
+		//System.out.println("접수마감 : "+recepShedule);
+		h001HomeVO.setRecepShedule(recepShedule);
+		
+		Elements elemDateRls = doc.select("#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td:nth-child(2)");
+		String dateRlst = elemDateRls.toString();
+		String dateRls = dateRlst.replace("<td class=\"str\">", "").replace("(목) 오전 6시</td>", "");//성적발표일
+		//System.out.println("성적발표일 : "+dateRls);
+		h001HomeVO.setDateRls(dateRls);
+		
+		h001HomeService.updateToeicShedule(h001HomeVO);
+		
+		model.addAttribute("compare",difference);
+		model.addAttribute("dateRls",dateRls);
+		model.addAttribute("exDate",exDate);
+		model.addAttribute("recepShedule",recepShedule);
+		
+		
+		
+		//System.out.println(" exDate  : "+exDate);
+		//System.out.println(" recepShedule  : "+recepShedule);
+		//System.out.println(" dateRls  : "+dateRls);
+		
+		}else {
+			
+			List<Map<String, Object>>selectDdayList = h001HomeService.selectDdayList();	
+			//System.out.println("토익 정보리스트 : "+selectDdayList);
+			
+			String dateRls = (String) selectDdayList.get(0).get("dateRls");
+			String exDate = selectDdayList.get(0).get("exDate").toString();
+			String recepShedule = selectDdayList.get(0).get("recepShedule").toString();
+			
+			model.addAttribute("compare",difference);
+			model.addAttribute("dateRls",dateRls);
+			model.addAttribute("exDate",exDate);
+			model.addAttribute("recepShedule",recepShedule);
+			
+		//	System.out.println(" exDate  : "+exDate);
+		//	System.out.println(" recepShedule  : "+recepShedule);
+		//	System.out.println(" dateRls  : "+dateRls);
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		return "index";
@@ -79,12 +171,10 @@ public class H001HomeController {
 	@RequestMapping(value = "/main.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String main(Model model, HttpServletRequest request) throws JsonProcessingException {
-		
 		ObjectMapper mapper = new ObjectMapper();
 		String authId= request.getParameter("authId");
 		List<Map<String, Object>>map = h001HomeService.getMenuList((String)authId);//1000은 테스트용  authId로 변경해야함
 		String mapList = mapper.writeValueAsString(map);
-
 		
 		return  mapList;
 	}
@@ -92,9 +182,7 @@ public class H001HomeController {
 	@RequestMapping(value = "/sublist", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String sublist(Model model, HttpServletRequest request) throws JsonProcessingException {
-		
 		ObjectMapper mapper = new ObjectMapper();
-		
 		String memnum= request.getParameter("memnum");
 		List<Map<String, Object>>map = h001HomeService.selectSubjectList((String)memnum);//1000은 테스트용  authId로 변경해야함
 		String mapListSub = mapper.writeValueAsString(map);
@@ -102,9 +190,33 @@ public class H001HomeController {
 		return  mapListSub;
 	}
 	
+	@RequestMapping(value = "selectSysdate", method = RequestMethod.GET, produces = "application/json ; charset=utf8")
+	@ResponseBody
+	public Map<String, Object> selectSysdate(HttpServletRequest request) {
+		Map<String, Object> selectSysdate = h001HomeService.selectSysdate();//1000은 테스트용  authId로 변경해야함
+		System.out.println("selectSysdate_controller : "+selectSysdate);
+		
+		return  selectSysdate;
+	}
 	
 	
 	
 	
+	@RequestMapping(value = "dateClassChoice", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> dateClassChoice(H001HomeVO h001HomeVO, HttpServletRequest request) {
+		List<Map<String, Object>> dateClassChoice = h001HomeService.dateClassChoice(h001HomeVO);
+		
+		return  dateClassChoice;
+	}
 	
+	//오늘 날짜 받아오기
+	@RequestMapping(value = "selectDateToday", method = RequestMethod.GET, produces = "application/json ; charset=utf8")
+	@ResponseBody
+	public Map<String, Object> selectDateToday(HttpServletRequest request) {
+		Map<String, Object> selectDateToday = h001HomeService.selectDateToday();
+		System.out.println("selectDateToday : "+selectDateToday);
+		
+		return  selectDateToday;
+	}
 }

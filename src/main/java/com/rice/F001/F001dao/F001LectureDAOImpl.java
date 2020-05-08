@@ -133,4 +133,117 @@ public class F001LectureDAOImpl implements F001LectureDAO{
 		List<Map<String, Object>> enrolmentInfo= sqlsession.selectList("mapper.f001Lecture.enrolmentInfo");
 		return enrolmentInfo;
 	}
+
+
+
+	@Override
+	public Map<String, Object> partnerOrderId() {
+		Map<String, Object> partnerOrderId= sqlsession.selectOne("mapper.f001Lecture.partnerOrderId");
+		return partnerOrderId;
+	}
+
+
+
+	@Override
+	public void insertEnrolLec(Map<String, Object> insertEnrolLecS) {
+		System.out.println("Dao : "+insertEnrolLecS);
+	sqlsession.insert("mapper.f001Lecture.insertEnrolLec", insertEnrolLecS);
+		
+	}
+
+
+
+	@Override
+	public List<Map<String, Object>> searchClassIdName() {
+		List<Map<String, Object>> searchClassIdName= sqlsession.selectList("mapper.f001Lecture.searchClassIdName");
+		return searchClassIdName;
+	}
+
+
+
+	@Override
+	public void holdDel(F001LectureVO f001LectureVO) {
+		sqlsession.delete("mapper.f001Lecture.holdDel",f001LectureVO);
+		return;
+	}
+
+
+
+	@Override
+	public List<Map<String, Object>> delRegL(F001LectureVO f001LectureVO) {
+		List<Map<String, Object>> delRegL= sqlsession.selectList("mapper.f001Lecture.delRegL",f001LectureVO);
+		return delRegL;
+	}
+
+
+
+	@Override
+	public List<Map<String, Object>> searchClassTea() {
+		List<Map<String, Object>> searchClassTea= sqlsession.selectList("mapper.f001Lecture.searchClassTea");
+		return searchClassTea;
+	}
+
+
+
+	@Override
+	public List<Map<String, Object>> getSubIdJspC(F001LectureVO f001LectureVO) {
+		List<Map<String, Object>> getSubIdJspC= sqlsession.selectList("mapper.f001Lecture.getSubIdJspC",f001LectureVO);
+		return getSubIdJspC;
+	}
+
+
+
+	@Override
+	public void insertCart(Map<String, Object> insertEnrolLecS) {
+		sqlsession.insert("mapper.f001Lecture.insertCart",insertEnrolLecS);
+		return;
+	}
+
+
+
+	@Override
+	public void paidlist(String enrId) {
+		sqlsession.update("mapper.f001Lecture.paidlist",enrId);
+		
+	}
+
+
+
+	@Override
+	public void savePaidlist(Map<String, Object> insertEnrolLecS) {
+		sqlsession.insert("mapper.f001Lecture.savePaidlist",insertEnrolLecS);
+		
+	}
+
+
+
+	@Override
+	public String searchSub(String tempId) {
+		String searchSub = sqlsession.selectOne("mapper.f001Lecture.searchSub",tempId);
+		return searchSub;
+	}
+
+
+
+	@Override
+	public void insertOrderList(Map<String, Object> map) {
+		sqlsession.insert("mapper.f001Lecture.insertOrderList",map);
+		
+	}
+
+
+
+	@Override
+	public List<Map<String, Object>> selectPaidListR(String memNum) {
+		List<Map<String, Object>> selectPaidListR= sqlsession.selectList("mapper.f001Lecture.selectPaidListR",memNum);
+		return selectPaidListR;
+	}
+
+
+
+	@Override
+	public List<Map<String, Object>> cartInfo(String memNum) {
+		List<Map<String, Object>> cartInfo= sqlsession.selectList("mapper.f001Lecture.cartInfo",memNum);
+		return cartInfo;
+	}
 }

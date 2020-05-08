@@ -16,12 +16,31 @@ public class H001HomeVO {
 	private String memEmail;
 	private String memJoinDate;
 	private String openClassname;
+	private String sysDate;
 	
-	public String getOpenClassname() {
-		return openClassname;
+	//dday
+	private String  exDate;
+	private String  dateRls;
+	private String  recepShedule;
+	private String  addrecepSheduleText;
+	private String  subCode;
+	
+	
+	
+	
+	
+	
+	
+	public String getSubCode() {
+		return subCode;
 	}
-	public void setOpenClassname(String openClassname) {
-		this.openClassname = openClassname;
+	public void setSubCode(String subCode) {
+		this.subCode = subCode;
+	}
+	@Override
+	public String toString() {
+		return "H001HomeVO [exDate=" + exDate + ", dateRls=" + dateRls + ", recepShedule=" + recepShedule
+				+ ", addrecepSheduleText=" + addrecepSheduleText + "]";
 	}
 	public String getMenuId() {
 		return menuId;
@@ -107,13 +126,44 @@ public class H001HomeVO {
 	public void setMemJoinDate(String memJoinDate) {
 		this.memJoinDate = memJoinDate;
 	}
-	public String getMemStateCode() {
-		return memStateCode;
+	public String getOpenClassname() {
+		return openClassname;
 	}
-	public void setMemStateCode(String memStateCode) {
-		this.memStateCode = memStateCode;
+	public void setOpenClassname(String openClassname) {
+		this.openClassname = openClassname;
 	}
-	private String memStateCode;
+	public String getSysDate() {
+		return sysDate;
+	}
+	public void setSysDate(String sysDate) {
+		this.sysDate = sysDate;
+	}
+	public String getExDate() {
+		return exDate;
+	}
+	public void setExDate(String exDate) {
+		this.exDate = exDate;
+	}
+	public String getDateRls() {
+		return dateRls;
+	}
+	public void setDateRls(String dateRls) {
+		this.dateRls = dateRls;
+	}
+	public String getRecepShedule() {
+		return recepShedule;
+	}
+	public void setRecepShedule(String recepShedule) {
+		this.recepShedule = recepShedule;
+	}
+	public String getAddrecepSheduleText() {
+		return addrecepSheduleText;
+	}
+	public void setAddrecepSheduleText(String addrecepSheduleText) {
+		this.addrecepSheduleText = addrecepSheduleText;
+	}
+	
+	
 	
 	
 }

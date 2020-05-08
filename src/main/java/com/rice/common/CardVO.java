@@ -1,5 +1,8 @@
 package com.rice.common;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CardVO {
 	 private String purchase_corp, purchase_corp_code;
 	    private String issuer_corp, issuer_corp_code;
