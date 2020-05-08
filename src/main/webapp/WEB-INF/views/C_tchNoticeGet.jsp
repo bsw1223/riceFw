@@ -8,7 +8,7 @@
 	
 </script>
 <body>
-	<%@ include file="F_Fixedsidebar.jsp"%>
+
 	<div class="content-wrapper">
 		<section class="content-header"style="width:83%">
 			<h1>
@@ -24,24 +24,37 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-md-10">
+			<div class="col-md-2"></div>
+				<div class="col-md-8">
 					<div class="box box-primary">
 						<div class="box-body">
 							<h2 class="box-title">공지사항게시판</h2>
 							<!--title -->
 							<div class="form-group">
-								<label>제목</label> <input class="form-control" name="boTitle" value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
+								<label>제목</label> <h4><c:out value ="${list.boTitle}"/></h4>
+							</div>
+							
+							<div class="form-group">
+								<!-- 작성자 -->
+								<span style="margin-right:20px;">
+									<label>작성자 </label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.memId}"/></span>
+								</span>
+								<!-- 작성일 -->
+								<span style="margin:20px;">
+									<label>작성일</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boRegdate}"/></span>
+								</span>
+								<span style="margin:20px;">
+									<label>조회수</label> <span>&nbsp;&nbsp;&nbsp;${list.boViews}</span>
+								</span>
 							</div>
 							<!-- content -->
 							<div class="form-group">
-								<label>내용</label> <input type="text" class="form-control" name="boContent" value='<c:out value ="${list.boContent}"/>'
-														readonly="readonly" />
+								<label>내용</label>
+								 <textarea  class="form-control" name="boContent" rows='15' style="resize: none;"
+														readonly="readonly" ><c:out value ="${list.boContent}"/></textarea>
 							</div>
 							<!-- content -->
-							<div class="form-group">
-								<label>작성자</label> <input type="text" class="form-control" name="memId" value='<c:out value ="${list.memId}"/>'
-														readonly="readonly" />
-							</div>
+							
 							<!-- file -->
 							<div class="panel panel-default">
 								<div class="panel-heading">Files</div>
@@ -60,11 +73,6 @@
 									onclick="location.href='/mypage/board/dlt/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">삭제</button>
 								<button data-oper="list" class="btn btn-default"
 									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
-								<div class="pull-right">	
-									<button type="button" class="btn btn-default btn-xs">
-											<i class="fa fa-eye"></i> ${list.boViews}
-									</button>
-								</div>	
 							</div>
 						</div>	
 					</div>

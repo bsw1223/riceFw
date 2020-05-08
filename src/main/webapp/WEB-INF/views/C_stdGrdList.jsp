@@ -46,16 +46,13 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<!-- left column -->
-			<div class="col-md-5">
-				<!-- general form elements -->
+		<div class="col-md-2"></div>
+			<div class="col-md-3">
 				<div class="box box-default">
 					<div class="box-header">
 						<h2 class="box-title">성적 조회</h2>
 					</div>
-					<!-- box-header -->
 					<div class="box-body">
-						<!-- table -->
 						<table class="table table-bordered">
 							<tr>
 								<th>평가명</th>

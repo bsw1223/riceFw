@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.rice.A001.memvo.A001MemVO;
 import com.rice.C001.boarddto.Criteria;
-import com.rice.C001.boardvo.C001BoardVO;
 import com.rice.C001.boardvo.C001ClassBoardVO;
 
 @Repository

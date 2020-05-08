@@ -30,7 +30,7 @@ float: right;
 </style>
 
 <body>
-<%@ include file="F_Fixedsidebar.jsp"%>
+
  <div class="content-wrapper">
 	<section class="content-header"style="width:83%">
 		<h1>
@@ -46,7 +46,8 @@ float: right;
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-md-10">
+		<div class="col-md-2"></div>
+			<div class="col-md-8">
 				<div class="box">
 					<div class="box-header">
 						<h2 class="box-title">공지사항 게시판</h2>

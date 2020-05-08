@@ -30,7 +30,7 @@ float: right;
 </style>
 
 <body>
-<%@ include file="F_Fixedsidebar.jsp"%>
+
   <div class="content-wrapper">
     <section class="content-header"style="width:83%">
       <h1>
@@ -46,7 +46,8 @@ float: right;
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-10">
+      <div class="col-md-2"></div>
+        <div class="col-md-8">
           <div class="box">
           	<div class="box-header">
 				<h2 class="box-title">학생목록</h2>
@@ -70,20 +71,20 @@ float: right;
                 <tr>
                   <th style="width: 20px">No.</th>
                   <th>이름</th>
-                  <th style="width: 150px">등록일자</th>
-                  <th style="width: 150px">점수</th>
-                  <th style="width: 150px">총점</th>
+                  <th style="width: 150px">전화번호</th>
+                  <th style="width: 150px">이메일</th>
+                  <th style="width: 150px">일련번호</th>
                 </tr>
-                <c:forEach var="list" items="${boardList}">
+                <c:forEach var="list" items="${list}">
 	                <tr>
-	                  <td><c:out value="${list.boNum}"/></td>
+	                  <td><c:out value="${list.memId}"/></td>
 	                  <td>
-	                  	<a class='move' href="/mypage/board/qna/view?boNum=<c:out value='${list.boNum}'/>"><c:out value="${list.boTitle}"/></a>
+	                  	<c:out value="${list.memName}"/>
 	                  </td>
-	                  <td><c:out value="${list.memNum}"/></td>
-	                  <td><c:out value="${list.boView}"/></td>
+	                  <td><c:out value="${list.memTel}"/></td>
+	                  <td><c:out value="${list.memEmail}"/></td>
 	                  <!--답변상태로 수정해야함-->
-	                  <td><c:out value="${list.boUpdateDate}"/></td>
+	                  <td><c:out value="${list.memNum}"/></td>
 	                </tr>
                 </c:forEach>
               </table>
