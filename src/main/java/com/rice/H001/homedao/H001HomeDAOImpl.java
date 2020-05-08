@@ -15,6 +15,7 @@ public class H001HomeDAOImpl implements H001HomeDAO {
 
 	@Autowired
 	private SqlSession sqlsession;
+	private H001HomeVO h001HomeVO;
 	
 	
 	@Override
@@ -31,5 +32,44 @@ public class H001HomeDAOImpl implements H001HomeDAO {
 		list= sqlsession.selectList("mapper.Home.getSubList",memnum);
 		
 		return list;
+	}
+
+	@Override
+	public Map<String, Object> selectSysdate() {
+		Map<String, Object> selectSysdate= sqlsession.selectOne("mapper.Home.selectSysdate");
+		System.out.println("selectSysdate_dao : "+selectSysdate);
+		return selectSysdate;
+	}
+
+	@Override
+	public List<Map<String, Object>> dateClassChoice() {
+		List<Map<String, Object>> dateClassChoice= sqlsession.selectList("mapper.Home.dateClassChoice");
+		return dateClassChoice;
+	}
+
+	@Override
+	public Map<String, Object> selectDateToday() {
+		Map<String, Object> selectDateToday= sqlsession.selectOne("mapper.Home.selectDateToday");
+		return selectDateToday;
+	}
+
+	@Override
+	public void updateToeicShedule(H001HomeVO h001HomeVO) {
+		//System.out.println("dao : "+h001HomeVO.toString());
+		sqlsession.update("mapper.Home.updateToeicShedule",h001HomeVO);
+		
+	}
+
+	@Override
+	public String selectToeicDate() {
+		
+		String selectToeicDate= sqlsession.selectOne("mapper.Home.selectToeicDate");
+		return selectToeicDate;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectDdayList() {
+		List<Map<String, Object>> selectDdayList= sqlsession.selectList("mapper.Home.selectDdayList");
+		return selectDdayList;
 	}
 }

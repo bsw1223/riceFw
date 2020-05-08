@@ -1,5 +1,7 @@
 package com.rice.F001.F001vo;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -29,12 +31,81 @@ public class F001LectureVO {
     String openStartTime= null;
     String openEndTime= null;
     String bulId = null;
-	
+	ArrayList<String> classIdKakao =null;
+	String item_name = null;
+	ArrayList<String> classPriceS =null;
+	ArrayList<String> openclassNameS =null;
+	String cId= null;
+	String cName= null;
+	String cPrice= null;
+	String cartOrderId= null;
 	
 	
 	
     
-    public String getMemName() {
+  
+	public String getcId() {
+		return cId;
+	}
+	public void setcId(String cId) {
+		this.cId = cId;
+	}
+	public String getcName() {
+		return cName;
+	}
+	public void setcName(String cName) {
+		this.cName = cName;
+	}
+	public String getcPrice() {
+		return cPrice;
+	}
+	public void setcPrice(String cPrice) {
+		this.cPrice = cPrice;
+	}
+	public String getCartOrderId() {
+		return cartOrderId;
+	}
+	public void setCartOrderId(String cartOrderId) {
+		this.cartOrderId = cartOrderId;
+	}
+	@Override
+	public String toString() {
+		return "F001LectureVO [subId=" + subId + ", codeName=" + codeName + ", codeOrder=" + codeOrder + ", subCode="
+				+ subCode + ", subDesc=" + subDesc + ", subRegDate=" + subRegDate + ", subAblDate=" + subAblDate
+				+ ", subName=" + subName + ", memNum=" + memNum + ", memName=" + memName + ", openStartDate="
+				+ openStartDate + ", classId=" + classId + ", classDesc=" + classDesc + ", classCapacity="
+				+ classCapacity + ", classPrice=" + classPrice + ", openclassName=" + openclassName + ", planId="
+				+ planId + ", openEndDate=" + openEndDate + ", openStartTime=" + openStartTime + ", openEndTime="
+				+ openEndTime + ", bulId=" + bulId + ", classIdKakao=" + classIdKakao + ", item_name=" + item_name
+				+ ", classPriceS=" + classPriceS + ", openclassNameS=" + openclassNameS + "]";
+	}
+	public ArrayList<String> getOpenclassNameS() {
+		return openclassNameS;
+	}
+	public void setOpenclassNameS(ArrayList<String> openclassNameS) {
+		this.openclassNameS = openclassNameS;
+	}
+	
+	public ArrayList<String> getClassPriceS() {
+		return classPriceS;
+	}
+	public void setClassPriceS(ArrayList<String> classPriceS) {
+		this.classPriceS = classPriceS;
+	}
+	
+	public String getItem_name() {
+		return item_name;
+	}
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
+	public ArrayList<String> getClassIdKakao() {
+		return classIdKakao;
+	}
+	public void setClassIdKakao(ArrayList<String> classIdKakao) {
+		this.classIdKakao = classIdKakao;
+	}
+	public String getMemName() {
     	return memName;
     }
     public void setMemName(String memName) {
@@ -115,16 +186,6 @@ public class F001LectureVO {
 	}
 	public void setMemNum(String memNum) {
 		this.memNum = memNum;
-	}
-	@Override
-	public String toString() {
-		return "F001LectureVO [subId=" + subId + ", codeName=" + codeName + ", codeOrder=" + codeOrder + ", subCode="
-				+ subCode + ", subDesc=" + subDesc + ", subRegDate=" + subRegDate + ", subAblDate=" + subAblDate
-				+ ", subName=" + subName + ", getSubName()=" + getSubName() + ", getSubCode()=" + getSubCode()
-				+ ", getSubDesc()=" + getSubDesc() + ", getSubRegDate()=" + getSubRegDate() + ", getSubAblDate()="
-				+ getSubAblDate() + ", getSubId()=" + getSubId() + ", getCodeName()=" + getCodeName()
-				+ ", getCodeOrder()=" + getCodeOrder() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
 	}
 	public String getSubName() {
 		return subName;

@@ -91,9 +91,10 @@
 	
 	<insert id="insertSchInfo" parameterType="H001SchVO">
 			 <![CDATA[ 
-				insert into scott.SCHEDULE
-				(SCHTITLE, SCHSTART, SCHEND, SCHDESCRIPTION, SCHALLDAY, MEMNUM, SCHID) 
-				VALUES(
+				update scott.exscedule set(
+				subCode,exDate,recepShedule,addrecepShedule,dateRls
+				)
+				where (
 				#{schTitle, jdbcType=VARCHAR},
 				 #{schStart, jdbcType=VARCHAR},
 				 #{schEnd, jdbcType=VARCHAR},
@@ -105,6 +106,9 @@
 								
 			 ]]>
 	</insert>
+	
+
+	
 	
 	<delete id="deleteSchInfo">
 			 <![CDATA[ 
