@@ -8,11 +8,36 @@
 	
 </script>
 
+<style>
+.box-body{
+	background-color: white;
+}
+.box-tools{
+	margin:auto;
+	display:flex;
+}
+.select{
+	float:left;
+	margin-left:10px;
+	
+}
+.input-group{
+	float:left;
+	width: 170px;
+}
+.buttons{
+	float:left;
+	display:flex;
+	
+}
 
-<!-- Content Wrapper. Contains page content -->
+</style>
+
+<body>
+
+<%@ include file="F_Fixedsidebar.jsp"%>
 <div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
+	<section class="content-header"style="width:83%">
 		<h1>
 			<c:out value='${sjctName}' />
 		</h1>
@@ -26,14 +51,12 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-xs-12">
-				<div class="box">
+			<div class="col-md-10">
+		   		<div class="box box-primary">
+				  <div class="box-body">
 					<div class="box-header">
 						<h3 class="box-title">스터디 게시판</h3>
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<div style="float: right;">
+					 	<div class='select'style="float: right;">
 							<select id="getListWithPaging" name="sel" onchange="selChange()">
 								<option value="5"
 									<c:if test="${pageMaker.cri.amount == 5}">selected</c:if>>5개씩보기</option>
@@ -44,11 +67,9 @@
 								<option value="20"
 									<c:if test="${pageMaker.cri.amount == 20}">selected</c:if>>20개씩보기</option>
 							</select>
-						</div>
-						<!-- 옵션선택 끝 -->
-						<div class="box-body table-responsive no-padding">
-							<table class="table table-hover" id="example2"
-								class="table table-bordered table-hover">
+						 </div>
+						 </div>
+							 <table class="table table-bordered">
 								<thead>
 									<tr>
 										<th>No.</th>
@@ -72,45 +93,33 @@
 									</c:forEach>
 								</tbody>
 							</table>
-						</div>
-
 						<div>
 							<ul class="pagination">
-
 								<c:if test='${pageMaker.prev}'>
 									<li class="page-item"><a class="page-link"
 										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum}&amount=${pageMaker.cri.amount}page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">Previous</a></li>
 								</c:if>
-
 								<c:forEach begin="${pageMaker.startPage }"
-									end="${pageMaker.endPage}" var="pnum">
+											end="${pageMaker.endPage}" var="pnum">
 									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-								<a class="page-link"
-												href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
-												</li>
-								
-											</c:forEach>
-								<c:if test="${pageMaker.next}">
-									<li class="page-item"><a class="page-link"
-										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
-								</c:if>
-							</ul>
-						</div>
-						<!-- /.box-body -->
+									<a class="page-link"
+										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a>
+											</li>
+										</c:forEach>
+							<c:if test="${pageMaker.next}">
+								<li class="page-item"><a class="page-link"
+									href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
+							</c:if>
+						</ul>
 					</div>
-					<!-- /.box -->
 				</div>
-				<!-- /.box-body -->
 			</div>
-			<!-- /.box -->
 		</div>
-		<!-- /.col -->
-
+		</div>
 	</section>
-	<!-- /.content -->
 </div>
 
-
+</body>
 
 <form id="actionForm" action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method='get'>
 	<input type="hidden" name="page" value='${pageMaker.cri.page}'>
@@ -134,8 +143,6 @@
 	function selChange() {
 		var sel = document.getElementById('getListWithPaging').value;
 		var page = 1;
-		console.log(boURL);
-
 		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=" + page + "&amount=" + sel;
 
 	}

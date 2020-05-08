@@ -51,24 +51,25 @@ public class H001HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model, H001HomeVO h001HomeVO, HttpServletRequest request) throws IOException, ParseException {	
 		//토익 접수 크롤링
+
 		//인터넷접수, 추가접수, 시험일자, 성적발표일
+
 		
-		//오늘날짜와 db EXSCHEDULE테이블의 exDate과 비교 후 오늘이 더 크면 진행
 		SimpleDateFormat today = new SimpleDateFormat ("yy.MM.dd");
 		Date time = new Date();
-		//오늘날짜 받아옴
+		//�삤�뒛�궇吏� 諛쏆븘�샂
 		String todayDate = today.format(time);
 		Date toDayAll= today.parse(todayDate);
 		
-		//System.out.println("오늘 : " +toDayAll);
-		//System.out.println("오늘2 : " +todayDate);
+		//System.out.println("�삤�뒛 : " +toDayAll);
+		//System.out.println("�삤�뒛2 : " +todayDate);
 		
 		
 
 
 
 		
-		//db날짜 받아와서 비교 및 빼기, 빼기는 dday에 사용
+		//db�궇吏� 諛쏆븘���꽌 鍮꾧탳 諛� 鍮쇨린, 鍮쇨린�뒗 dday�뿉 �궗�슜
 		String toeicDate = h001HomeService.selectToeicDate();
 		SimpleDateFormat toeicDateAll = new SimpleDateFormat("yy.MM.dd");
 		Date compareDate= toeicDateAll.parse(todayDate);
@@ -79,7 +80,7 @@ public class H001HomeController {
 		//System.out.println(" compare  : "+compare);
 		
 		
-		//날짜 차이
+		//�궇吏� 李⑥씠
 		    final String DATE_PATTERN = "yy.MM.dd";
 	        final int MILLI_SECONDS_PER_DAY = 24 * 60 * 60 * 1000;
 	        String inputStartDate =  todayDate;
@@ -99,27 +100,27 @@ public class H001HomeController {
 		
 		if(difference < 0 )
 		{		
-		System.out.println("ybm 접속해서 받아옴");
+		System.out.println("ybm �젒�냽�빐�꽌 諛쏆븘�샂");
 		String URL = "https://exam.ybmnet.co.kr/toeic/"; 
 		Document doc =Jsoup.connect(URL).get(); 
 		Elements elemExDate = doc.select("#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td:nth-child(1) > a");
 		String exDatet = elemExDate.toString();
 		String exDate = exDatet.replace("<a href=\"/YBMSisacom.asp?SiteURL=https://appexam.ybmnet.co.kr&amp;pageURL=/toeic/receipt/receipt.asp?toeic_times=404\">", "")
-				.replace("<span style=\"color:#dc2f3c\">(일)</span> 09:20</a>", "")
-				.replace("<span style=\"color:#5384d0\">(토)</span> 14:20</a>", "");//시험일
-		h001HomeVO.setExDate(exDate);//시험일
-		//System.out.println("시험일 : " +exDate);
+				.replace("<span style=\"color:#dc2f3c\">(�씪)</span> 09:20</a>", "")
+				.replace("<span style=\"color:#5384d0\">(�넗)</span> 14:20</a>", "");//�떆�뿕�씪
+		h001HomeVO.setExDate(exDate);//�떆�뿕�씪
+		//System.out.println("�떆�뿕�씪 : " +exDate);
 		
 		Elements elemrecepShedule = doc.select("#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td:nth-child(3)");
 		String recepShedulet = elemrecepShedule.toString();
-		String recepShedule = recepShedulet.replace("<td class=\"str\">", "").replace("(월) 오전 8시</td>", "");//접수마감
-		//System.out.println("접수마감 : "+recepShedule);
+		String recepShedule = recepShedulet.replace("<td class=\"str\">", "").replace("(�썡) �삤�쟾 8�떆</td>", "");//�젒�닔留덇컧
+		//System.out.println("�젒�닔留덇컧 : "+recepShedule);
 		h001HomeVO.setRecepShedule(recepShedule);
 		
 		Elements elemDateRls = doc.select("#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td:nth-child(2)");
 		String dateRlst = elemDateRls.toString();
-		String dateRls = dateRlst.replace("<td class=\"str\">", "").replace("(목) 오전 6시</td>", "");//성적발표일
-		//System.out.println("성적발표일 : "+dateRls);
+		String dateRls = dateRlst.replace("<td class=\"str\">", "").replace("(紐�) �삤�쟾 6�떆</td>", "");//�꽦�쟻諛쒗몴�씪
+		//System.out.println("�꽦�쟻諛쒗몴�씪 : "+dateRls);
 		h001HomeVO.setDateRls(dateRls);
 		
 		h001HomeService.updateToeicShedule(h001HomeVO);
@@ -138,7 +139,7 @@ public class H001HomeController {
 		}else {
 			
 			List<Map<String, Object>>selectDdayList = h001HomeService.selectDdayList();	
-			//System.out.println("토익 정보리스트 : "+selectDdayList);
+			//System.out.println("�넗�씡 �젙蹂대━�뒪�듃 : "+selectDdayList);
 			
 			String dateRls = (String) selectDdayList.get(0).get("dateRls");
 			String exDate = selectDdayList.get(0).get("exDate").toString();
@@ -154,7 +155,6 @@ public class H001HomeController {
 		//	System.out.println(" dateRls  : "+dateRls);
 			
 		}
-		
 		
 		
 		

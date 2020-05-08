@@ -56,29 +56,32 @@
 						<label>커뮤니티 검색결과창 </label>
 						<!-- 	<div class="row"> -->
 							<div class="box-tools" style="padding:20px;">
-								<form id='searchForm' action="/comm/searchcomm" method ="get">
+								<form id='searchForm' action="/comm/searchcomm" method="get">
 									<div class='select'>
-					                  <select name='type' style="width:150px;height:30px;">
-					                    <option value=""
-					                    	<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
-					                    <option value="T"
-					                    	<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
-					                    <option value="C"
-					                    	<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
-					                    <option value="W"
-					                    	<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자<option>
-					                    <option value="TWC"
-					                    	<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>전체</option>
-					                  </select>
-					                  </div>
-					                  <!-- /select option -->
-					                <div class="input-group input-group-sm hidden-xs" >
-					                    <input type="text" name='keyword'
-					                    	value='<c:out value="${pageMaker.cri.keyword}"/>'class="form-control pull-right">
-					                    <div class="input-group-btn">
-					                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
-					                  </div>
+										<select name='type' style="width: 100px; height: 30px;">
+											<option value="TWCN"
+												<c:out value="${pageMaker.cri.type eq 'TWCN'?'selected':''}"/>>전체</option>
+											<option value="T"
+												<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
+											<option value="C"
+												<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
+											<option value="W"
+												<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자</option>
+											<option value="N"
+												<c:out value="${pageMaker.cri.type eq 'N'?'selected':''}"/>>커뮤니티명</option>
+										</select>
 									</div>
+									<!-- /select option -->
+									<div class="input-group input-group-sm hidden-xs">
+										<input type="text" name='keyword' class="form-control pull-right">
+										<input type='hidden' name='page' value='${pageMaker.cri.page}'>
+										<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+										<div class="input-group-btn">
+											<button type="submit" class="btn btn-primary btn-flat">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div> 
 								</form>
 				            </div>
 				      <!--       </div> -->
@@ -98,10 +101,10 @@
 													<tr>
 														<td><c:out value="${commboardlist.boNum}" /></td>
 														<td><a
-															href='/comm/viewwritings?boNum=<c:out value="${commboardlist.boNum}"/>'>
+															href='/comm/viewwritings/${commboardlist.boURL}?boNum=<c:out value="${commboardlist.boNum}"/>'>
 																<c:out value="${commboardlist.boTitle}" />
 														</a></td>
-														<td><c:out value="${commboardlist.memNum}" /></td>
+														<td><c:out value="${commboardlist.commName}" /></td>
 														<td><c:out value="${commboardlist.boRegDate}" /></td>
 														<td><c:out value="${commboardlist.boViews}" /></td>
 														<td><c:out value="${commboardlist.boLikes}" /></td>

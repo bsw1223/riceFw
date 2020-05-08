@@ -37,9 +37,9 @@ public class A001MemController {
 	}
 	
 	// POST 濡쒓렇�씤, 濡쒓렇�씤 check 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public String postLogin(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		logger.info("post login");
+		logger.info("post loginPost");
 		HttpSession session = request.getSession();
 		
 		A001MemVO login = null;

@@ -51,7 +51,7 @@ function eventClick(info) {
 						ipt_bookTitle.val(data.bookTitle);
 						ipt_bookStartTime.val(bookStartTimeVal);
 						ipt_bookEndTime.val(bookEndTimeVal);
-						ipt_bookPurpose.html(data.bookPurpose);
+						ipt_bookPurpose.val(data.bookPurpose);
 						
 						bookInfoModal.modal("hide");
 						addBtnContainer.hide();
@@ -87,7 +87,7 @@ function selectDate(info) {
 		success: function(data) {
 					ipt_bookNum.val('');
 					ipt_bookTitle.val('');
-					ipt_bookPurpose.html('');
+					ipt_bookPurpose.val('');
 					ipt_classId.val(data.classId);
 					ipt_className.val(data.className);
 					ipt_bookStartTime.val(startStr);
@@ -167,7 +167,6 @@ delete_event_btn.click(function () {	// 예약 삭제 버튼 click
 			memNum: memNum
 		}
 	
-	console.log(JSON.stringify(eventData))
 	// 예약 삭제 처리
 	$.ajax({
 		type : "post",

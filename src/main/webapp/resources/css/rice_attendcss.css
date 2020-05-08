@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+
+#clock{
+	text-align: center;
+	color: orangered;
+}
+
+#attendChart>div {
+	height: 150px; 
+	width: 45%; 
+	float:left;
+	margin: 15px 0px 15px 5px;
+}
+
+#myAttendList>tr>th {
+	text-align: center;
+	width: 50%;
+}
+
+#myAttendList>tr {
+	text-align: center;
+}

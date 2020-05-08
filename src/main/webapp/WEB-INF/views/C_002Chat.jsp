@@ -7,7 +7,7 @@
 <div class="content-wrapper" style="min-height: 901px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1> Chatting </h1>
+		<h1> 채팅 </h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li class="active"> 채팅</li>
@@ -68,13 +68,12 @@
 						<h3 class="box-title">친구 목록</h3>
 					</div>
 					<!-- /.box-header -->
-
 					<div class="box-body">
 						<ul class="tree" data-widget="tree" id='friendList'>
 					        
 					    </ul>
 					</div>
-					
+					<!-- /.box-body -->
 					<div class="box-footer">
 			          <button class="btn btn-block btn-warning" id="btn_makeChat">채팅방 만들기</button>
 			        </div>
@@ -173,4 +172,5 @@
 	});
 	
 </script>
+</body>
 </html>

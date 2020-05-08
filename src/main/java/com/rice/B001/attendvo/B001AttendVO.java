@@ -25,8 +25,4 @@ public class B001AttendVO {
 	public void setAttendingTime(String attendingTime) {
 		this.attendingTime = attendingTime;
 	}
-	
-	
-	
-
 }

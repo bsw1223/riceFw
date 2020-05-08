@@ -17,7 +17,29 @@
 		<result property="commName" column="commName" />
 	</resultMap>
 
-
+	<sql id="criteria">
+		 <trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		    	<foreach item='type' collection="typeArr">
+		    		<trim prefix="OR">
+		    			<choose>
+		    				<when test="type=='T'.toString()">
+		    					boTitle like '%'||#{keyword}||'%'
+		    				</when>
+		    				<when test="type=='C'.toString()">
+		    					boContent like '%'||#{keyword}||'%'
+		    				</when>
+		    				<when test="type=='W'.toString()">
+		    					memId like '%'||#{keyword}||'%'
+		    				</when>
+		    				<when test="type=='N'.toString()">
+		    					commName like '%'||#{keyword}||'%'
+		    				</when>
+		    			</choose>
+		    		</trim>
+		    	</foreach>
+		    </trim>
+	</sql>
+	
 	<select id="getListWithPaging" resultType="E001CommBoardVO">
 		<![CDATA[
 			select  boNum, boContent, boRegDate, boTitle, boUpdateDate, boViews, boLikes, boURL, memNum, memId 
@@ -28,39 +50,87 @@
             		from commboard c, member a
             		where c.memNum = a.memNum
             )
-		    where rownum <= (#{page}*#{amount}) and boURL = #{commURL}
-		    order by boNum desc
+		    where]]>
+		    
+		    <include refid="criteria"></include>
+		    
+		    <![CDATA[ 
+		    rownum <= (#{page}*#{amount}) and boURL = #{commURL}
+		    order by to_number(boNum) desc
 		    )
-		where rn > ((#{page}-1)*#{amount})
+		    where rn > ((#{page}-1)*#{amount})
 		]]>
 	</select>
+	
+	<select id="searchComm" resultType="E001CommBoardVO">
+		<![CDATA[
+			select  boNum, boContent, boRegDate, boTitle, boUpdateDate, boViews, boLikes, boURL, memNum, memId, commName
+		from(
+		   select rownum rn, boNum, boContent, boRegDate, boTitle, boUpdateDate, boViews, boLikes, boURL, memNum, memId, commName
+		    from  (
+            		select c.boNum, c.boContent, c.boRegDate, c.boTitle, c.boUpdateDate, c.boViews, c.boLikes, c.boURL, c.memNum, a.memId, b.commName
+            		from commboard c, member a, community b
+            		where c.memNum = a.memNum and c.bourl=b.commurl 
+            		order by to_number(boNum) desc
+            		
+            )
+		    where]]>
+		    
+		    <include refid="criteria"></include>
+		    
+		    <![CDATA[ 
+		    rownum <= (#{page}*#{amount})
+		    )
+		    where rn > ((#{page}-1)*#{amount})
+		]]>
+	</select>
+	
 
 	<select id="getCommName" resultType="String">
+	<![CDATA[
 		select commName
 		from community
-		where boURL =#{commURL};
+		where commURL =#{commURL}
+		  ]]>
 	</select>
 
 
 	<select id="getTotal" resultType="int">
 	<![CDATA[
-         select count(boNum) from commboard
-      ]]>
+         select count(boNum) from commboard c, member a, community b
+         where c.memNum = a.memNum and b.commurl=c.bourl and]]>
+         <!--  <include refid="criteria"></include> -->
+          <![CDATA[
+          to_number(boNum) > 0
+           ]]>
 	</select>
-
-
+	
 	<select id="read" resultType="E001CommBoardVO">
 	<![CDATA[
-		select * from commboard where
-		boNum=#{boNum}
+		   select * 
+		   from commboard b, member a
+  		   where a.memNum=b.memNum and boNum=#{boNum}
 		]]>
 	</select>
 
-	<insert id="insert" parameterType="E001CommBoardVO">
+<!-- 	<insert id="insert" parameterType="E001CommBoardVO">
 	<![CDATA[
 		insert into commboard (boNum,boContent, boTitle, boURL, memNum, boUpdateDate, boRegDate, boLikes, boViews)
 		values(seq_board.nextval, #{boContent}, #{boTitle}, #{boURL}, #{memNum}, TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(SYSDATE,'YYYY-MM-DD'),0,0)
 		]]>
+	</insert> -->
+	
+	<insert id="insertSelectKey" parameterType="E001CommBoardVO">
+		<selectKey keyProperty="boNum" order="BEFORE"
+			resultType="String">
+
+			select SEQ_COMM.nextval from dual
+
+		</selectKey>
+		 <![CDATA[ 
+		insert into commboard(boNum,boContent, boTitle, boURL, memNum, boUpdateDate, boRegDate, boLikes, boViews) 
+		values(#{boNum},#{boContent},#{boTitle},#{boURL},#{memNum},TO_CHAR(SYSDATE,'YYYY-MM-DD'),TO_CHAR(SYSDATE,'YYYY-MM-DD'),to_number(#{boViews}),to_number(#{boLikes}))
+	 ]]>
 	</insert>
 
 	<delete id="delete">
@@ -76,10 +146,43 @@
 		boTitle=#{boTitle},
 		boURL=#{boURL},
 		memNum=#{memNum}
-		boUpdateDate=sysdate
+		boUpdateDate=TO_CHAR(SYSDATE,'YYYY-MM-DD')
 		where boNum=#{boNum}
 		]]>
 	</update>
+	
+	<update id="updateLikeCnt">
+	<![CDATA[
+		update commboard
+		set boLikes=boLikes+1
+		where boNum=#{boNum} 
+		 ]]>
+	</update>
+	
+	<update id="updatedelLikeCnt">
+	<![CDATA[
+		update commboard
+		set boLikes=boLikes-1
+		where boNum=#{boNum} 
+		 ]]>
+	</update>
+	
+	<insert id="like">
+	<![CDATA[
+		insert into response(boNum, responseCode, responseDate, memNum)
+		values(#{boNum},'2200',TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{memNum})
+	]]>
+	</insert>
+	
+	<delete id="delLike">
+		delete from response where boNum=#{boNum} and memNum=#{memNum} and responseCode='2200'
+	</delete>
+	
+	<!-- <delete id="delLike">
+	<![CDATA[
+		 delete from response where boNum=#{boNum} and memnum=#{memnum} and responseCode='2200'
+	]]>
+	</delete> -->
 
 	<update id="updateViewCnt">
 	<![CDATA[
@@ -88,5 +191,20 @@
 		where boNum=#{boNum} 
 		]]>
 	</update>
-
+	
+		
+	<select id="likeCheck" parameterType="String" resultType="Integer">
+		<![CDATA[
+			SELECT COUNT(*) FROM response
+			WHERE memNum = #{memNum} and boNum=#{boNum}
+		]]> 
+	</select>
+	
+	<select id="checkMem" parameterType="String" resultType="Integer">
+		<![CDATA[
+			select count(*)
+			from (select * from commjoin a, community b where a.commId=b.commId)
+			where commURL=#{commURL} and memNum=#{memNum}
+		]]> 
+	</select>
 </mapper>
