@@ -30,7 +30,7 @@ float: right;
 </style>
   
 <body>
-<%@ include file="F_Fixedsidebar.jsp"%>
+
   <div class="content-wrapper">
     <section class="content-header"style="width:83%">
       <h1>
@@ -46,7 +46,8 @@ float: right;
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-10">
+      <div class="col-md-2"></div>
+        <div class="col-md-8">
           <div class="box">
    			 <div class="box-header">
 				<h2 class="box-title">QnA 게시판</h2>
@@ -75,16 +76,17 @@ float: right;
 	               </tr>
                 </thead>
                 <tbody>
-	                <c:forEach var="list" items="${boardList}">
+	                <c:forEach var="listB" items="${listB}">
 		                <tr>
-		                  <td><c:out value="${list.boNum}"/></td>
+		                  <td><c:out value="${listB.boNum}"/></td>
 		                  <td>
-		                  	<a class='move' href="/mypage/board/${pageMaker.cri.boCode}/get?boNum=<c:out value='${list.boNum}'/>"><c:out value="${list.boTitle}"/></a>
+		                  	<a href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
+		                  	<c:out value="${listB.boTitle}"/></a>
 		                  </td>
-		                  <td><c:out value="${list.memNum}"/></td>
-		                  <td><c:out value="${list.boView}"/></td>
+		                  <td><c:out value="${listB.memNum}"/></td>
+		                  <td><c:out value="${listB.boViews}"/></td>
 		                  <!--답변상태로 수정해야함-->
-		                  <td><c:out value="${list.boUpdateDate}"/></td>
+		                  <td><c:out value="${listB.boUpdateDate}"/></td>
 		                </tr>
 	                </c:forEach>
                 </tbody>

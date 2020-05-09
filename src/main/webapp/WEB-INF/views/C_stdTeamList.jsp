@@ -35,7 +35,7 @@
 
 <body>
 
-<%@ include file="F_Fixedsidebar.jsp"%>
+
 <div class="content-wrapper">
 	<section class="content-header"style="width:83%">
 		<h1>
@@ -51,7 +51,8 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-md-10">
+		<div class="col-md-2"></div>
+			<div class="col-md-8">
 		   		<div class="box box-primary">
 				  <div class="box-body">
 					<div class="box-header">

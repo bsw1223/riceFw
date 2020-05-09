@@ -11,7 +11,7 @@
 
 
 <body>
-	<%@ include file="F_Fixedsidebar.jsp"%>
+
 	<div class="content-wrapper">
 		<section class="content-header"style="width:83%">
 			<h1>
@@ -27,7 +27,8 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-md-10">
+			<div class="col-md-2"></div>
+				<div class="col-md-8">
 					<div class="box box-primary">
 						<div class="box-body">
 						<h2 class="box-title"><c:out value='${pageTitle}' /></h2>
@@ -68,7 +69,8 @@
 						</form>
 						<div class="box-footer">
 							<button data-oper="modify" class="btn btn-primary">저장</button>
-							<button data-oper="cancel" class="btn btn-primary">취소</button>
+							<button data-oper="cancel" class="btn btn-primary"
+									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'return false;">취소</button>
 						</div>
 					</div>
 				</div>
@@ -301,9 +303,12 @@ $(document).ready(function() {
 
 });
 
-CKEDITOR.replace( 'boContent',{
- 	enterMode : CKEDITOR.ENTER_BR
+	CKEDITOR.replace( 'boContent',{
+ 		enterMode : CKEDITOR.ENTER_BR,
+ 		uploadUrl: "/image/drag", 
+    	filebrowserUploadUrl: "/image" 
 	});
+
 
 </script>
 <%@ include file="footer.jsp"%>

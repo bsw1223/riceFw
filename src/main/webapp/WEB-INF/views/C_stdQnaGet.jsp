@@ -2,15 +2,23 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous">
+</script>
+
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <html>
 <head>
-<!-- Content Wrapper. Contains page content -->
+
+
+
+
+<body>
 <div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header"> 
+	<section class="content-header" style="width:83%"> 
 		<h1>
 			<c:out value='${sjctName}' />
 		</h1>
@@ -21,28 +29,7 @@
 		</ol>
 	</section>
 
-<script src="https://code.jquery.com/jquery-3.4.1.js"
-	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous">
-</script>
-
-
-
-<body>
-	<%@ include file="F_Fixedsidebar.jsp"%>
 	<div class="content-wrapper">
-		<section class="content-header"style="width:83%">
-			<h1>
-				<c:out value='${sjctName}' />
-			</h1>
-			<ol class="breadcrumb">
-				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-				<li><a href="#"><c:out value='${sjctName}' /></a></li>
-				<li class="active">QnA 게시판</li>
-			</ol>
-		</section>
-
-
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
@@ -51,29 +38,31 @@
 						<div class="box-body">
 							<h2 class="box-title">QnA 게시판</h2>
 							
-							<!-- bulName -->
+							<!--title -->
 							<div class="form-group">
-								<label>제목</label> <input class="form-control" name="boTitle"
-									value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
+								<!-- <label>제목</label>  --><h4><c:out value ="${list.boTitle}"/></h4>
 							</div>
-							<!-- bulMgr -->
+							
 							<div class="form-group">
-								<label>내용</label> <input type="text" class="form-control"
-									name="boContent" value='<c:out value ="${list.boContent}"/>'
-									readonly="readonly" />
+								<!-- 작성자 -->
+								<span style="margin-right:20px;">
+									<label>작성자 </label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.memId}"/></span>
+								</span>
+								<!-- 작성일 -->
+								<span style="margin:20px;">
+									<label>작성일</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boRegdate}"/></span>
+								</span>
+								<span style="margin:20px;">
+									<label>조회수</label> <span>&nbsp;&nbsp;&nbsp;${list.boViews}</span>
+								</span>
 							</div>
-							<!-- bulMgr -->
+							<!-- content -->
 							<div class="form-group">
-								<label>작성자</label> <input type="text" class="form-control"
-									name="memId" value='<c:out value ="${list.memId}"/>'
-									readonly="readonly" />
+								<label>내용</label>
+								 <textarea  class="form-control" name="boContent" rows='15' style="resize: none;"
+														readonly="readonly" ><c:out value ="${list.boContent}"/></textarea>
 							</div>
-							<!-- bulPhoneNum -->
-							<div class="form-group">
-								<label>업데이트날짜</label> <input type="text"class="form-control" name="boUpdateDate"
-									value='<c:out value ="${list.boUpdateDate}"/>'
-									readonly="readonly" />
-							</div>
+							<!-- content -->
 							
 							<!-- files -->
 							<div class="panel panel-default">
@@ -95,11 +84,11 @@
 									onclick="location.href='/mypage/board/dlt/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">삭제</button>
 								<button data-oper="list" class="btn btn-default"
 									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
-								<div class="pull-right">
+								<%-- <div class="pull-right">
 									<button type="button" class="btn btn-default btn-xs">
 											<i class="fa fa-eye"></i>${list.boViews}
 									</button>
-								</div>
+								</div> --%>
 							</div>
 					<!-- /.box-footer -->
 						<div class='row'>
@@ -122,6 +111,7 @@
 				</div>
 			</div>
 		</section>
+	</div>
 	</div>
 </body>
 <script type="text/javascript"
