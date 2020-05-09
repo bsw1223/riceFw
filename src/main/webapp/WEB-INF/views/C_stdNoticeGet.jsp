@@ -32,9 +32,23 @@
 	
 }
 
+#banner{
+border: 1px solid;
+width: 200px;
+float: left;
+padding: 10px;
+margin-left: 30px;
+margin-top: 90px;
+min-width:150px;
+}
+
+@media screen and (max-width: 1700px){
+#banner{
+	display: none;
+}}
+
 </style>
 <body>
-	<%@ include file="F_Fixedsidebar.jsp"%>
 	<div class="content-wrapper">
 		<section class="content-header"style="width:83%">
 			<h1>
@@ -50,7 +64,9 @@
 	<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-xs-10">
+			<div class="col-xs-2">
+			</div>
+				<div class="col-xs-8">
 					<div class="box box-primary">
 						<div class="box-header">
 							<h2 class="box-title">공지사항게시판</h2>
@@ -105,6 +121,9 @@
 				</div>
 			</div>
 		</div>
+			<div id="banner">
+				<%@ include file="banner.jsp"%>
+			</div>
 	</section>
 </div>
 </body>

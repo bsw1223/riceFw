@@ -49,6 +49,20 @@ min-width:150px;
 	display: none;
 }}
 
+#banner_left{
+/* border: 1px solid; */
+width: 193px;
+float: right;
+margin-right: 20px;
+margin-top: 160px;
+min-width:150px;
+}
+
+@media screen and (max-width: 1500px){
+#banner_left{
+	display: none;
+}}
+
 
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
@@ -68,17 +82,19 @@ min-width:150px;
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-			<div class="col-md-2"></div>
+			<div class="col-md-2">
+				<div id="banner_left">
+				
+					<img id="pp" src="">
+					
+					<%@ include file="left_banner1.jsp"%>
+				</div>
+			</div>
 				<div class="col-md-8">
 					<div class="box box-primary" style="height: 650px">
 						<div class="box-header">
 							<h2 class="box-title" style="padding: 10px">공지사항게시판</h2>
 						</div>
-						<!-- /.box-header -->
-						
-						
-						
-						
 						
 					<%-- 	<div style="float: right;margin-top:7px; margin-right:20px" class="amount">
 								<select id="getListWithPaging" name="sel" onchange="selChange()">
