@@ -8,7 +8,6 @@
 	
 </script>
 <body>
-
 	<div class="content-wrapper">
 		<section class="content-header"style="width:83%">
 			<h1>
@@ -60,8 +59,7 @@
 								<div class="panel-heading">Files</div>
 								<div class="panel-body">
 									<div class="uploadResult">
-										<ul>
-										</ul>
+										<ul></ul>
 									</div>
 								</div>
 							</div>

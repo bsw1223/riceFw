@@ -74,15 +74,13 @@
 								</tbody>
 							</table>
 						</div>
-
+						<!-- /table -->
 						<div>
 							<ul class="pagination">
-
 								<c:if test='${pageMaker.prev}'>
 									<li class="page-item"><a class="page-link"
 										href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum}&amount=${pageMaker.cri.amount}page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">Previous</a></li>
 								</c:if>
-
 								<c:forEach begin="${pageMaker.startPage }"
 									end="${pageMaker.endPage}" var="pnum">
 									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
@@ -97,18 +95,11 @@
 								</c:if>
 							</ul>
 						</div>
-						<!-- /.box-body -->
 					</div>
-					<!-- /.box -->
 				</div>
-				<!-- /.box-body -->
 			</div>
-			<!-- /.box -->
 		</div>
-		<!-- /.col -->
-
 	</section>
-	<!-- /.content -->
 </div>
 
 
