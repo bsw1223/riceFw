@@ -7,6 +7,30 @@
 	crossorigin="anonymous">
 	
 </script>
+
+<style>
+
+#nav{
+	border:1px;
+	border-left:0px;
+	border-right:0px;
+	border-color:#e0e0e0;
+	border-style:solid;
+	padding:5px;
+	background-color:#f5f5f5;
+
+}
+#boContent{
+	resize: none;
+	background-color:#FFFFFF;
+	border:0px;
+}
+#boTitle{
+	font-size:1.4em;
+	
+}
+</style>
+
 <body>
 	<div class="content-wrapper">
 		<section class="content-header"style="width:83%">
@@ -26,40 +50,39 @@
 			<div class="col-md-2"></div>
 				<div class="col-md-8">
 					<div class="box box-primary">
-						<div class="box-body">
+						<div class="box-header">
 							<h2 class="box-title">공지사항게시판</h2>
+						</div>
+						<div class="box-body">
 							<!--title -->
-							<div class="form-group">
-								<label>제목</label> <h4><c:out value ="${list.boTitle}"/></h4>
+							<div class="form-group" id='boTitle'>
+								<c:out value ="${list.boTitle}"/>
 							</div>
-							
-							<div class="form-group">
-								<!-- 작성자 -->
-								<span style="margin-right:20px;">
-									<label>작성자 </label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.memId}"/></span>
-								</span>
-								<!-- 작성일 -->
-								<span style="margin:20px;">
-									<label>작성일</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boRegdate}"/></span>
-								</span>
-								<span style="margin:20px;">
-									<label>조회수</label> <span>&nbsp;&nbsp;&nbsp;${list.boViews}</span>
-								</span>
-							</div>
-							<!-- content -->
-							<div class="form-group">
-								<label>내용</label>
-								 <textarea  class="form-control" name="boContent" rows='15' style="resize: none;"
-														readonly="readonly" ><c:out value ="${list.boContent}"/></textarea>
+							<div class="form-group" id="nav">
+									<!-- 작성자 -->
+									<span style="margin-right:20px;">
+										<label>작성자 </label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.memId}"/></span>
+									</span>
+									<!-- 작성일 -->
+									<span style="margin:20px;">
+										<label>작성일</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boRegdate}"/></span>
+									</span>
+									<span style="margin:20px;">
+										<label>조회수</label> <span>&nbsp;&nbsp;&nbsp;${list.boViews}</span>
+									</span>
 							</div>
 							<!-- content -->
-							
-							<!-- file -->
-							<div class="panel panel-default">
-								<div class="panel-heading">Files</div>
-								<div class="panel-body">
-									<div class="uploadResult">
-										<ul></ul>
+							<div class="form-group">
+								 <textarea  class="form-control" name="boContent" id="boContent"rows='15' 
+											readonly="readonly" ><c:out value ="${list.boContent}"/></textarea>
+							</div>
+								<!-- file -->
+								<div class="panel panel-default">
+									<div class="panel-heading">Files</div>
+									<div class="panel-body">
+										<div class="uploadResult">
+											<ul></ul>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -69,13 +92,12 @@
 									onclick="location.href='/mypage/board/mdfyForm/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">수정</button>
 								<button data-oper="submit" class="btn btn-primary"
 									onclick="location.href='/mypage/board/dlt/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">삭제</button>
-								<button data-oper="list" class="btn btn-default"
+								<button data-oper="list" class="btn btn-default pull-right"
 									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
 							</div>
-						</div>	
+						</div>
 					</div>
 				</div>
-			</div>
 		</section>
 	</div>
 </body>

@@ -75,11 +75,6 @@ min-width:150px;
 							<h2 class="box-title" style="padding: 10px">공지사항게시판</h2>
 						</div>
 						<!-- /.box-header -->
-						
-						
-						
-						
-						
 					<%-- 	<div style="float: right;margin-top:7px; margin-right:20px" class="amount">
 								<select id="getListWithPaging" name="sel" onchange="selChange()">
 									<option value="5"
