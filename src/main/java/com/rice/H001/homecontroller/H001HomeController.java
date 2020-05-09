@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,8 +21,12 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,8 +36,6 @@ import com.rice.H001.homevo.H001HomeVO;
 
 import com.fasterxml.jackson.core.JsonProcessingException; 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-
 
 @Controller
 @RequestMapping("/*")
@@ -53,8 +56,6 @@ public class H001HomeController {
 		//토익 접수 크롤링
 
 		//인터넷접수, 추가접수, 시험일자, 성적발표일
-
-		
 		SimpleDateFormat today = new SimpleDateFormat ("yy.MM.dd");
 		Date time = new Date();
 		//�삤�뒛�궇吏� 諛쏆븘�샂
@@ -63,10 +64,6 @@ public class H001HomeController {
 		
 		//System.out.println("�삤�뒛 : " +toDayAll);
 		//System.out.println("�삤�뒛2 : " +todayDate);
-		
-		
-
-
 
 		
 		//db�궇吏� 諛쏆븘���꽌 鍮꾧탳 諛� 鍮쇨린, 鍮쇨린�뒗 dday�뿉 �궗�슜
@@ -157,14 +154,6 @@ public class H001HomeController {
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
 		return "index";
 	}
 
@@ -173,6 +162,7 @@ public class H001HomeController {
 	public String main(Model model, HttpServletRequest request) throws JsonProcessingException {
 		ObjectMapper mapper = new ObjectMapper();
 		String authId= request.getParameter("authId");
+		String locale= request.getParameter("locale");
 		List<Map<String, Object>>map = h001HomeService.getMenuList((String)authId);//1000은 테스트용  authId로 변경해야함
 		String mapList = mapper.writeValueAsString(map);
 		
@@ -198,10 +188,7 @@ public class H001HomeController {
 		
 		return  selectSysdate;
 	}
-	
-	
-	
-	
+
 	@RequestMapping(value = "dateClassChoice", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public List<Map<String, Object>> dateClassChoice(H001HomeVO h001HomeVO, HttpServletRequest request) {
@@ -219,4 +206,16 @@ public class H001HomeController {
 		
 		return  selectDateToday;
 	}
+	
+	
+	// 오늘 수업 목록 가져오기
+	@RequestMapping(value = "/getTodayClass", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=utf8")
+	@ResponseBody
+	public ResponseEntity<?> getTodayClass(@RequestBody Map<String, Object> info, HttpServletRequest request, HttpServletResponse response) throws DataAccessException {
+		logger.info("get/post /getTodayClass");
+		List<Map<String, Object>> resultList = h001HomeService.getTodayClass(info);
+		
+		return new ResponseEntity(resultList, HttpStatus.OK);
+	}
+	
 }

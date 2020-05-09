@@ -9,6 +9,14 @@ public interface H001HomeService {
 
 	public List<Map<String, Object>> getMenuList(String authId);
 	
+	public List<Map<String, Object>> getMenuListEN(String authId);
+	
+	public List<Map<String, Object>> getMenuListCN(String authId);
+	
+	public List<Map<String, Object>> getMenuListJP(String authId);
+	
+	public List<Map<String, Object>> getMenuListES(String authId);
+	
 	public List<Map<String, Object>> selectSubjectList(String memnum);
 
 	public Map<String, Object> selectSysdate();
@@ -22,4 +30,7 @@ public interface H001HomeService {
 	public String selectToeicDate();
 
 	public List<Map<String, Object>> selectDdayList();
+	
+	// 오늘 수업 목록 get
+	public List<Map<String, Object>> getTodayClass(Map info);
 }

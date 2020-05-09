@@ -51,7 +51,7 @@
 		]]>
 		<if test=" memNum != ''  and  memNum != null">
 		<![CDATA[
-			memNum = #{memNum,jdbcType=VARCHAR}
+			and memNum = #{memNum,jdbcType=VARCHAR}
 		]]>
 		</if>
 	</select>

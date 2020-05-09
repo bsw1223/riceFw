@@ -25,6 +25,38 @@ public class H001HomeDAOImpl implements H001HomeDAO {
 		 List<Map<String, Object>> menuList= sqlsession.selectList("mapper.Home.getMenuList",authId);
 				return menuList;
 	}
+	
+	@Override
+	public List<Map<String, Object>> menuGetListEN(String authId) {
+		
+		 String stringMap = null;
+		 List<Map<String, Object>> menuList= sqlsession.selectList("mapper.Home.getMenuListEN",authId);
+				return menuList;
+	}
+	
+	@Override
+	public List<Map<String, Object>> menuGetListCN(String authId) {
+		
+		 String stringMap = null;
+		 List<Map<String, Object>> menuList= sqlsession.selectList("mapper.Home.getMenuListCN",authId);
+				return menuList;
+	}
+	
+	@Override
+	public List<Map<String, Object>> menuGetListJP(String authId) {
+		
+		 String stringMap = null;
+		 List<Map<String, Object>> menuList= sqlsession.selectList("mapper.Home.getMenuListJP",authId);
+				return menuList;
+	}
+	
+	@Override
+	public List<Map<String, Object>> menuGetListES(String authId) {
+		
+		 String stringMap = null;
+		 List<Map<String, Object>> menuList= sqlsession.selectList("mapper.Home.getMenuListES",authId);
+				return menuList;
+	}
 
 	@Override
 	public List<Map<String, Object>> getSubList(String memnum) {
@@ -71,5 +103,11 @@ public class H001HomeDAOImpl implements H001HomeDAO {
 	public List<Map<String, Object>> selectDdayList() {
 		List<Map<String, Object>> selectDdayList= sqlsession.selectList("mapper.Home.selectDdayList");
 		return selectDdayList;
+	}
+	
+	// 오늘 수업 목록 get
+	@Override
+	public List<Map<String, Object>> getTodayClass(Map info) {
+		return sqlsession.selectList("mapper.Home.getTodayClass", info);
 	}
 }

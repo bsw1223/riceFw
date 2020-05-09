@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <head>
-<script
-  src="https://code.jquery.com/jquery-2.2.4.js"
-  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-  crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js"
+	integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+	crossorigin="anonymous"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -30,77 +28,71 @@
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// 
 [if lt IE 9]>-->
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
-  <!-- Google Font -->
+<!-- Google Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
 </head>
 <body class="hold-transition skin-black-light sidebar-mini">
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-
+<script src="${contextPath}/resources/js/rice_homejs.js"></script>
 <script>
 $(document).ready(function(){
-var memName ="${loginMem.memName}";
-var memLevel =" ${loginMem.memLevel}";
-var authId ="${loginMem.authId}";
-var authName ='';
+	setmemNum("${loginMem.memNum}");
+	setmemName("${loginMem.memName}");
+	setauthId("${loginMem.authId}");
+	setauthName();
 
-if(authId==1000)
-	{
-		authName="관리자";
-	}else if(authId==1001)
-		{
-			authName="학생";
-		}else
-			{
-			 authName="강사";
-			}
-
-/* var memNum = ${member.memNum}; */
-var preLogInTag = "<li class=\"\">"
-			     +"<a href=\"../../../member/login\" data-toggle=\"\">"
-				 +"	<button type=\"button\" class=\"btn btn-block btn-warning btn-xs\">L o g I n -  H e r e</button>"
-				 +"	</a>"
-				 +"</li> ";
+	var preLogInTag = "<li class=\"\">"
+				     +"<a href=\"../../../member/login\" data-toggle=\"\">"
+					 +"	<button type=\"button\" class=\"btn btn-block btn-warning btn-xs\">L o g I n -  H e r e</button>"
+					 +"	</a>"
+					 +"</li> ";
 			
 			
-var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
-			       +"<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">"
-				   +"<button type=\"button\" class=\"btn btn-block btn-info btn-xs\">마 이 페 이 지 </button>"
-		           +"	</a>"
-		           +"<ul class=\"dropdown-menu\">"
-				   +"	<li class=\"user-header\">"
-				   /* +"	 <img src=\"${contextPath}/resources/dist/img/user2-160x160.jpg\" class=\"img-circle\" alt=\"User Image\">" */
-				   +"<p>"
-				   +memName+" "+"-"+" "+authName
-				  /*  +" <small>Member since Nov. 2012</small>" */
-				   +" </p>"
-				   +"</li>"
-				   +"</li>"
-				   +"<li class=\"user-footer\">"
-				   +" <div class=\"pull-left\">"
-				   +"  <a href=\"../../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
-				   +" </div>"
-				   +" <div class=\"pull-right\">"
-				   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
-				   +" </div></li></ul></li>";
+	var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
+				       +"<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">"
+					   +"<button type=\"button\" class=\"btn btn-block btn-info btn-xs\">마 이 페 이 지 </button>"
+			           +"	</a>"
+			           +"<ul class=\"dropdown-menu\">"
+					   +"	<li class=\"user-header\">"
+					   /* +"	 <img src=\"${contextPath}/resources/dist/img/user2-160x160.jpg\" class=\"img-circle\" alt=\"User Image\">" */
+					   +"<p>"
+					   +memName+" "+"-"+" "+authName
+					  /*  +" <small>Member since Nov. 2012</small>" */
+					   +" </p>"
+					   +"</li>"
+					   +"</li>"
+					   +"<li class=\"user-footer\">"
+					   +" <div class=\"pull-left\">"
+					   +"  <a href=\"../../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
+					   +" </div>"
+					   +" <div class=\"pull-right\">"
+					   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
+					   +" </div></li></ul></li>";
 				   
 
-	if(eval("${loginMem.memNum}")==undefined)
-		{
-			$('li#insertTag').after(preLogInTag);
-		}else{
-				$('li#insertTag').after(afterLogInTag);
-			  }
-								});
-	 
-
-
+	if(eval(memNum)==undefined) {
+		$('li#insertTag').after(preLogInTag);
+	}else{
+		$('li#insertTag').after(afterLogInTag);
+	}
+	
+	$(".logo").click(function (e) {
+		setcookie("m1",null);
+		setcookie("m2",null);
+		setcookie("m3",null);
+	});
+	
+	function setcookie(aa, bb) { // 쿠키생성함수
+		document.cookie = aa + "=" + bb + "; path=/;"
+		return false;
+	}
+});
 </script>
 	<div class="wrapper">
-
 		<header class="main-header">
 			<!-- Logo -->
 			<a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -119,10 +111,10 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
 						<!-- Messages: style can be found in dropdown.less-->
-						
+
 						<!-- Notifications: style can be found in dropdown.less -->
-						<li class="dropdown notifications-menu" id="insertTag"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"> <i
+						<li class="dropdown notifications-menu" id="insertTag"><a
+							href="#" class="dropdown-toggle" data-toggle="dropdown"> <i
 								class="fa fa-bell-o"></i> <span class="label label-warning">10</span>
 						</a>
 							<ul class="dropdown-menu">
@@ -155,11 +147,10 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 
 						<!-- User Account: style can be found in dropdown.less -->
 						<!-- 로그인메뉴 삽입부 -->
-				
+
 					</ul>
 				</div>
 			</nav>
 		</header>
-	
+
 		<%@ include file="sidebar.jsp"%>
-		

@@ -26,6 +26,39 @@ public class H001HomeServiceImpl implements H001HomeService{
 		
 		return menuList;
 	}
+	
+	@Override
+	public List<Map<String, Object>> getMenuListEN(String authId) {
+		List<Map<String, Object>> menuList = new ArrayList<Map<String,Object>>();
+		menuList= h001HomeDAO.menuGetListEN(authId);
+		
+		return menuList;
+	}
+	
+	@Override
+	public List<Map<String, Object>> getMenuListCN(String authId) {
+		List<Map<String, Object>> menuList = new ArrayList<Map<String,Object>>();
+		menuList= h001HomeDAO.menuGetListCN(authId);
+		
+		return menuList;
+	}
+	
+	@Override
+	public List<Map<String, Object>> getMenuListJP(String authId) {
+		List<Map<String, Object>> menuList = new ArrayList<Map<String,Object>>();
+		menuList= h001HomeDAO.menuGetListJP(authId);
+		
+		return menuList;
+	}
+	
+	@Override
+	public List<Map<String, Object>> getMenuListES(String authId) {
+		List<Map<String, Object>> menuList = new ArrayList<Map<String,Object>>();
+		menuList= h001HomeDAO.menuGetListES(authId);
+		
+		return menuList;
+	}
+	
 
 	@Override
 	public List<Map<String, Object>> selectSubjectList(String memnum) {
@@ -72,6 +105,10 @@ public class H001HomeServiceImpl implements H001HomeService{
 		return selectDdayList;
 	}
 
-	
+	// 오늘 수업 목록 get
+	@Override
+	public List<Map<String, Object>> getTodayClass(Map info) {
+		return h001HomeDAO.getTodayClass(info);
+	}
 	
 }
