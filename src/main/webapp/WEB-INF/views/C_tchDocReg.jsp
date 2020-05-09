@@ -27,16 +27,15 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<!-- left column -->
-			<div class="col-md-12">
-				<!-- general form elements -->
+		<div class="col-md-2"></div>
+			<div class="col-md-8">
 				<div class="box box-info">
 					<div class="box-header">
 						<h3 class="box-title"><c:out value='${pageTitle}' /></h3>
 					</div>
-					<!-- /.box-header -->
 					<div class="box-body">
 						<form role="form" name="writeForm" action="/mypage/board/reg/${boCode}/${boURL}" method='get'>
+							<!-- boTitle -->
 							<div class="form-group">
 								<label>제목</label> <input type="text" class="form-control"
 									name='boTitle'>
@@ -47,7 +46,7 @@
 								<textarea class="form-control" id="editor" rows="3"
 									name='boContent'></textarea>
 							</div>
-
+							<!-- memNum -->
 							<div class="form-group">
 								<label>작성자</label> <input type="text" class="form-control"
 									value="${memId}" readonly="readonly">
@@ -56,24 +55,18 @@
 							<input type="hidden" class="form-control" name='memNum' value="${memNum}"> 
 							<input type="hidden" class="form-control" name='boViews' value="0"> 
 							<input type="hidden" class="form-control" name='boLikes' value="0">
-
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="panel panel-default">
-										<div class="panel-heading">File Attach</div>
-										<div class="panel-body">
-											<div class="form-group uploadDiv">
-												<input type="file" name="uploadFile" multiple>
-											</div>
-											
-											<div class='uploadResult'>
-												<ul>
-												
-												</ul>
-											</div>
+							<!-- file -->
+							<div class="panel panel-default">
+								<div class="panel-heading">File Attach</div>
+									<div class="panel-body">
+										<div class="form-group uploadDiv">
+											<input type="file" name="uploadFile" multiple>
+										</div>
+										<div class='uploadResult'>
+											<ul>
+											</ul>
 										</div>
 									</div>
-								</div>
 							</div>
 							<!-- /.box-body -->
 							<div class="box-footer">
@@ -82,23 +75,17 @@
 							</div>
 							<!-- /.box-footer -->
 						</form>
-						<!--  </form> -->
 					</div>
-					<!-- /.box -->
 				</div>
-				<!-- /.col-->
 			</div>
 		</div>
-		<!-- ./row -->
 	</section>
-	<!-- /.content -->
 </div>
 
 
-<form id="actionForm" action="/mypage/board/${boCode}/${boURL}"
-	method='get'>
-	<input type="hidden" name="boCode" value='${boCode}'> <input
-		type="hidden" name="boURL" value='${boURL}'>
+<form id="actionForm" action="/mypage/board/${boCode}/${boURL}"method='get'>
+	<input type="hidden" name="boCode" value='${boCode}'>
+	<input type="hidden" name="boURL" value='${boURL}'>
 </form>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
