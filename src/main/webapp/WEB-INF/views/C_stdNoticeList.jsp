@@ -52,9 +52,10 @@ min-width:150px;
 #banner_left{
 /* border: 1px solid; */
 width: 193px;
-float: right;
-margin-right: 20px;
-margin-top: 160px;
+/* float: right; */
+margin: auto;
+padding-top: 200px;
+vertical-align: middle;
 min-width:150px;
 }
 
