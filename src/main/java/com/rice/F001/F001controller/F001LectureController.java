@@ -366,7 +366,7 @@ public class F001LectureController {	// 회원관리
 	@RequestMapping(value = "cartInfo", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public List<Map<String, Object>> cartInfo(@RequestBody String memNum, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//System.out.println("memNum : "+ memNum);
+		System.out.println("memNum : "+ memNum);
 		List<Map<String, Object>> cartInfo = f001LectureService.cartInfo(memNum);
 		//System.out.println("controller_ cartInfo : "+ cartInfo);
 		//System.out.println("cartInfo : "+cartInfo);
