@@ -35,7 +35,7 @@
 <body>
 	
 	<div class="content-wrapper">
-		<section class="content-header"style="width:83%">
+		<section class="content-header">
 			<h1>
 				<c:out value='${sjctName}' />
 			</h1>

@@ -68,7 +68,7 @@ min-width:150px;
 </style>
 <body>
 	<div class="content-wrapper">
-		<section class="content-header"style="width:83%">
+		<section class="content-header">
 			<div class="col-md-2" style="margin: 20px;"></div>
 			<h1>
 				<c:out value='${sjctName}' />

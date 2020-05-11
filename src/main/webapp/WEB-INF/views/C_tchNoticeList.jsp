@@ -27,7 +27,6 @@
 float: right;
 }
 
-a:link { color: red; text-decoration: none; }
 
 </style>
 

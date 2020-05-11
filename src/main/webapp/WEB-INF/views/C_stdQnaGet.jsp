@@ -37,7 +37,7 @@
 
 <body>
 <div class="content-wrapper">
-	<section class="content-header" style="width:83%"> 
+	<section class="content-header"> 
 		<div class="col-md-2" style="margin: 20px;"></div>
 		<h1>
 			<c:out value='${sjctName}' />
@@ -108,10 +108,11 @@
 							<!-- box-footer -->
 							<!-- 로그인한 사람과 글쓴 사람이 일치할 경우에만 수정삭제버튼 뜨도록 변경해야함 -->
 							<div class="box-footer">
-								<button data-oper="submit" class="btn btn-primary"
+								<button data-oper="submit" class="btn btn-warning"
 									onclick="location.href='/mypage/board/mdfyForm/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">수정</button>
-								<button data-oper="submit" class="btn btn-primary"
+								<button data-oper="submit" class="btn btn-warning"
 									onclick="location.href='/mypage/board/dlt/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">삭제</button>
+								<div class="pull-right">
 								<button data-oper="list" class="btn btn-default"
 									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
 								<%-- <div class="pull-right">
@@ -119,6 +120,7 @@
 											<i class="fa fa-eye"></i>${list.boViews}
 									</button>
 								</div> --%>
+								</div>
 							</div>
 							<!-- chat  -->
 							<div class="panel panel-default">
