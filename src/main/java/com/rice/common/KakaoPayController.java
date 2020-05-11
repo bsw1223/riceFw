@@ -70,11 +70,11 @@ public class KakaoPayController {
 		
 		ArrayList classIdList = new ArrayList();
 		for(int i =0 ; i<whoelSub.size();i++) {
-		Object stringTextO = whoelSub.get(i);
-		String stringText = stringTextO.toString();
-		String splitId = stringText.substring(stringText.length()-5, stringText.length()-1);//ClassId 하나씩 스트링으로 잘라냄
-		classIdList.add(splitId);
-		System.out.println("classIdList : "+classIdList);
+			Object stringTextO = whoelSub.get(i);
+			String stringText = stringTextO.toString();
+			String splitId = stringText.substring(stringText.length()-5, stringText.length()-1);//ClassId 하나씩 스트링으로 잘라냄
+			classIdList.add(splitId);
+			System.out.println("classIdList : "+classIdList);
 		}
 				
 		HttpSession session = request.getSession(false);

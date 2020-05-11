@@ -64,9 +64,25 @@ public interface F001LectureDAO {
 
 	public void insertOrderList(Map<String, Object> map);
 
-	public List<Map<String, Object>> selectPaidListR(String memNum);
+	public List<Map<String, Object>> selectPaidListR(Map<String, Object> memNum);
 
 	public List<Map<String, Object>> cartInfo(String memNum);
+
+	public void delCartList(Map<String, Object> memNum);
+
+	public void wholeDelButton(Map<String, Object> memNum);
+
+	public void selectDelButton(Map<String, Object> memNum);
+
+	public List<Map<String, Object>> paidList(Map<String, Object> memNum);
+
+	public List<Map<String, Object>> paidListDetail(Map<String, Object> detailCart);
+
+	public Map<String, Object> selectBulCl(Map<String, Object> detailCart);
+
+	public List<Map<String, Object>> searchOpenClT(Map<String, Object> detailCart);
+
+	public Map<String, Object> selectCountCapa(Map<String, Object> detailCart);
 
 
 }

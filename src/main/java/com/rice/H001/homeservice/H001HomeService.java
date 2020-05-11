@@ -18,8 +18,12 @@ public interface H001HomeService {
 	public Map<String, Object> selectDateToday();
 
 	public void updateToeicShedule(H001HomeVO h001HomeVO);
+	public void updateToeicSheduleS(H001HomeVO h001HomeVO);
 
 	public String selectToeicDate();
+	public String selectToeicDateS();
 
 	public List<Map<String, Object>> selectDdayList();
+
+	public List<Map<String, Object>> selectDdayListS();
 }

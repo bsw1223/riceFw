@@ -25,6 +25,42 @@ public class H001HomeVO {
 	private String  addrecepSheduleText;
 	private String  subCode;
 	
+	private String  exDateS;
+	private String  dateRlsS;
+	private String  recepSheduleS;
+	private String  addrecepSheduleTextS;
+	
+	public String getExDateS() {
+		return exDateS;
+	}
+	public void setExDateS(String exDateS) {
+		this.exDateS = exDateS;
+	}
+	public String getDateRlsS() {
+		return dateRlsS;
+	}
+	public void setDateRlsS(String dateRlsS) {
+		this.dateRlsS = dateRlsS;
+	}
+	public String getRecepSheduleS() {
+		return recepSheduleS;
+	}
+	public void setRecepSheduleS(String recepSheduleS) {
+		this.recepSheduleS = recepSheduleS;
+	}
+	public String getAddrecepSheduleTextS() {
+		return addrecepSheduleTextS;
+	}
+	public void setAddrecepSheduleTextS(String addrecepSheduleTextS) {
+		this.addrecepSheduleTextS = addrecepSheduleTextS;
+	}
+	public String getSubCodeS() {
+		return subCodeS;
+	}
+	public void setSubCodeS(String subCodeS) {
+		this.subCodeS = subCodeS;
+	}
+	private String  subCodeS;
 	
 	
 	

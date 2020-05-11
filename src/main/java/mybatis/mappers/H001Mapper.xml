@@ -88,19 +88,47 @@
 	    values (e.exDate, e.recepShedule, e.dateRls) 
      ]]>
 	</update>
+	
+	<!-- 	토익일정업데이트 -->
+	<update id="updateToeicSheduleS" parameterType="h001HomeVO">
+	<![CDATA[
+	  merge into EXSCHEDULE m
+		  using ( select '01' as subCode, #{exDateS} as exDate, #{recepSheduleS} as recepShedule
+		  , #{dateRlsS} as dateRls from dual ) e
+		  on (m.subCode = e.subCode)         
+		  when matched then 
+		  update set 
+		  exDate = e.exDate, 
+		  recepShedule = e.recepShedule,
+		  dateRls = e.dateRls
+		  when not matched then
+	    insert (exDate, recepShedule,dateRls)
+	    values (e.exDate, e.recepShedule, e.dateRls) 
+     ]]>
+	</update>
 <!-- 	db에서 날짜받아오기 -->
 	<select id="selectToeicDate" resultType="String">
       <![CDATA[
-		select EXDATE from EXSCHEDULE
+		select EXDATE from EXSCHEDULE WHERE SUBCODE='00'
+      ]]>
+	</select>
+	<select id="selectToeicDateS" resultType="String">
+      <![CDATA[
+		select EXDATE from EXSCHEDULE  WHERE SUBCODE='01'
       ]]>
 	</select>
 	
 	<select id="selectDdayList" resultMap="HomeResult">
       <![CDATA[
-		select * from EXSCHEDULE
+		select * from EXSCHEDULE WHERE SUBCODE='00'
       ]]>
 	</select>
 	
+	<select id="selectDdayListS" resultMap="HomeResult">
+      <![CDATA[
+		select * from EXSCHEDULE WHERE SUBCODE='01'
+      ]]>
+	</select>
 	
 	
 	

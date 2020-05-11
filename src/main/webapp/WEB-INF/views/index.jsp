@@ -81,133 +81,78 @@
             </div>
             <!-- /.box-body -->
           </div>
-          <%-- <div class="box box-primary" id="toeicList">
-            <h4 class="box-title" style="padding-left: 3%;">다음 토익시험 일정</h4>
-
-          <div class="table-responsive">
-            <table class="table">
-              <tr>
-                <th style="width:50%;padding-left: 25%;">시험일자  </th>
-                <td style="padding-left: 10%;"> ${exDate}</td>
-              </tr>
-              <tr>
-                <th style="width:50%;padding-left: 25%;">접수마감  </th>
-                <td style="padding-left: 10%;">${recepShedule}</td>
-              </tr>
-              <tr>
-                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
-                <td style="padding-left: 10%;">${dateRls}</td>
-              </tr>
-            </table>
-          </div>
-				</div> --%>
+        			
 			
 			
-			
-			      <div class="row">
+<div class="row">
         
-        <div class="col-md-12">
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#info" data-toggle="tab"> 토익다음 시험</a></li>
-				<li><a href="#pwd" data-toggle="tab"> 토익스피킹 다음 시험</a></li>
+     <div class="col-md-12">
+       <div class="nav-tabs-custom">
+         <ul class="nav nav-tabs">
+           <li class="active"><a href="#info" data-toggle="tab"> 토익다음 시험</a></li>
+		   <li><a href="#pwd" data-toggle="tab"  aria-expanded="true"> 토익스피킹 다음 시험</a></li>
             </ul>
             
             <!-- form  -->
             
-           	<div class="active tab-pane" id="info">
-<!--               	<form class="form-horizontal"> -->
-             	
-             	
-             	
-                </div>
-    
-
-          <div class="table-responsive"><!-- 내용시작 -->
-            <table class="table">
-              <tr>
-                <th style="width:50%;padding-left: 25%;padding-top: 4%;">시험일자  </th>
-                <td style="padding-left: 10%;padding-top: 4%;"> ${exDate}</td>
-              </tr>
-              <tr>
-                <th style="width:50%;padding-left: 25%;">접수마감  </th>
-                <td style="padding-left: 10%;">${recepShedule}</td>
-              </tr>
-              <tr>
-                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
-                <td style="padding-left: 10%;">${dateRls}</td>
-              </tr>
-            </table>
-          </div> <!-- 내용끝 -->
+           	<div class="tab-content">
+	           	<div class="tab-pane active" id="info"><!-- 상위 태그 -->
+	           		<div class="form-group"><!-- 이안에내용 -->
+		             	 <div class="table-responsive"><!-- 내용시작 -->
+				            <table class="table">
+				              <tr>
+				                <th style="width:50%;padding-left: 25%;padding-top: 4%;">시험일자  </th>
+				                <td style="padding-left: 10%;padding-top: 4%;"><a href="https://appexam.ybmnet.co.kr/toeic/receipt/receipt.asp"> ${exDate}</a></td>
+				              </tr>
+				              <tr>
+				                <th style="width:50%;padding-left: 25%;">접수마감  </th>
+				                <td style="padding-left: 10%;">${recepShedule}</td>
+				              </tr>
+				              <tr>
+				                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
+				                <td style="padding-left: 10%;">${dateRls}</td>
+				              </tr>
+				            </table>
+				          </div> <!-- 내용끝 -->
+		                         	
+		                </div>
+		          </div>
+	    <div class="tab-pane" id="pwd"><!-- 상위 태그 -->
+				<div class="form-group">
+			       <div class="table-responsive"><!-- 내용시작 -->
+		            <table class="table">
+		              <tr>
+		                <th style="width:50%;padding-left: 25%;padding-top: 4%;">시험일자  </th>
+		                <td style="padding-left: 10%;padding-top: 4%;"><a href="https://appexam.ybmnet.co.kr/toeicswt/receipt/receipt.asp"> ${exDateS}</a></td>
+		              </tr>
+		              <tr>
+		                <th style="width:50%;padding-left: 25%;">접수마감  </th>
+		                <td style="padding-left: 10%;">${recepSheduleS}</td>
+		              </tr>
+		              <tr>
+		                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
+		                <td style="padding-left: 10%;">${dateRlsS}</td>
+		              </tr>
+		            </table>
+		          </div> 
+                </div> 
+<!--                 form-group 끝          -->
 	
-	
-			</div>
-             	 <!-- /. -->
-             	 
-             	 
-             	 
-             	 
-<!--                 </form> -->
-                <!-- /.form-horizontal -->
-            
-
-              <div class="tab-pane" id="pwd">
-                <form class="form-horizontal" action="" method="" onsubmit="">
-                  <div class="">
-                <div class="">
-                </div>
-                <div class="">
-                
-                
-                
-                
-                 <!--  내용쓰기 -->
-                  <input type="hidden" class="form-control " placeholder="" id="getPlanId">
-                  
-                  
-                  
-                  
-                  
-                  
-                </div>
-        
-                </div>
-                </form>
-              </div>
-              <!-- /.tab-pane 강사로 변경 -->
-            </div>
-            <!-- /.tab-content -->
-          </div>
-          <!-- /.nav-tabs-custom -->
+         	 </div>
+       			 <!-- /.tab-pane -->
+        </div>
+      <!-- /.tab-content -->
+      </div>
+      <!-- /.nav-tabs-custom -->
+    </div>
         	
 				
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+	
         </div>
 			<!-- /.col -->
-			
+	</div>		
 			
 			
 			
@@ -230,12 +175,10 @@
 					<!-- /.box-body -->
 				</div>
 				<!-- /.box -->
-			</div>
-			<!-- /.col -->
+			
 		</div>
 		<!-- /.row -->
-<div>
-</div>
+
 </section>
 	
 	<!-- 수정모달창(이벤트 클릭) -->
@@ -783,66 +726,6 @@ $(document).ready(function(){
 		});
 });
 
-
-
-//날짜별 수업 받아오기
-/* function dateClassChoice(sysDate) {
-	//날짜 클릭 시 일정번호 받아옴
-	$.ajax({
-		type : "get",
-		async : true,
-		datatype : "textd; charset=utf-8",
-		url : "dateClassChoice",
-		data : {sysDate:sysDate},
-		success : function(dateClassChoice) {
-			
-	
-		}
-	});
-}; */
-
-
-
-
-
-	
-//--------크롤링 테이블------
-//토익테이블
-  /*  var aTagLength = $('#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr');
-	for (var i = 0; i < aTagLength.length + 1; i++) {
-		aTagChange = "'#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(" + i + ") > td:nth-child(1) > a'"
-		$(eval(aTagChange)).attr("href","https://appexam.ybmnet.co.kr/toeic/receipt/receipt.asp");
-		$('td.str > a').attr('style','margin:auto 10px 0 auto; white-space: nowrap; overflow: hidden');
-		$('td.str').attr('style','padding-right:15px; overflow: hidden');
-		$('th > img').remove();
-		$('th:eq(0)').text('시험일자');
-		$('th:eq(1)').text('성적발표일');
-		$('th:eq(2)').text('접수마감');
-		$('#reg_table > tbody > tr:nth-child(1) > td').remove();
-	} 
-		$('#reg_table > tbody > tr:nth-child(2) > td > table > tbody').prepend('<div class=\"box-header with-border style=\"position:relative; bottom:15px;\">'
-																			   +'<h3 class=\"box-title\" style=\"text-align:left; padding-botom:15px; padding-top:3px; margin-top:0px\">TOEIC 일정 안내</h3></div>');
-		$('#reg_table > tbody > tr:nth-child(2) > td > table').removeClass();
-		$('#reg_table > tbody > tr:nth-child(2) > td > table').attr('style','width:100%; margin-left:3%; margin-right:3%; margin-bottom:3%');
-	//스피킹 테이블	
-		$('#toeicSpeakingList > div > table > tbody > tr:nth-child(1) > td:nth-child(2)').attr('style','padding-right:15px; overflow: hidden');
-		$('#toeicSpeakingList > div > table > thead > tr > th:nth-child(1)').attr('style', 'padding-left: 0%');
-		$('#toeicSpeakingList > div > table > thead > tr > th:nth-child(2)').attr('style', 'padding-left: 0%');
-		$('#toeicSpeakingList > div > table > thead > tr > th:nth-child(3)').attr('style', 'padding-left: 6%');
-		$('#toeicSpeakingList').attr('style', 'width:100%; margin-left:0; margin:auto');
-		$('td.left').attr('style','padding-left: 5%');
-		var changeLeft= $('#toeicSpeakingList > div > table > tbody > tr');
-		for(var i=0 ; i < changeLeft.length+1 ; i++){
-			var changeLeftD= $('#toeicSpeakingList > div > table > tbody > tr:nth-child('+i+') > td:nth-child(1)');
-			eval(changeLeftD).attr('style', ' padding-right: 6%');
-		}
-		$('div#toeicSpeakingList').prepend('<div class=\"box-header with-border style=\"position:relative; bottom:15px;\">'
-				  							 +'<h3 class=\"box-title\" style=\"text-align:left; padding-botom:15px; padding-top:0px; margin-top:13px; margin-left:3%; margin-bottom:5px\">TOEIC SPEAKING 일정 안내</h3></div>');
-		$('div.list_schedule_cont').attr('style','margin: 0 3% 5% 12%');
-		$('div#toeicSpeakingList').attr('style','max-height:200px; overflow:auto');
-		$('div#toeicList').attr('style','max-height:200px; overflow:auto; overflow-x:hidden');
-		
-		$('div#toeicSpeakingList > tbody:eq(0)').remove();  */
 		
 </script>
 </body>

@@ -101,7 +101,7 @@
 //---------------------------------메뉴 종류(3단/tree형/nontree형)-----------------------------------------
 //---------------------------------------3단계 폼--------------------------------------------------
 var tree3TopMenuT =	"<li class=\"active treeview\">"
-					+"<li class=\"treeview thirdone a14 a30\">"
+					+"<li class=\"treeview thirdone a14 a30\" id=\"a14\">"
 					+"	<a href=\"#\">"
 					+"	  <i class=\"fa fa-share\"></i> <span>3단 NAME1</span>"
 					+"	    <span class=\"pull-right-container\">"
@@ -150,7 +150,7 @@ var tree2TopMenu =	"<li class=\"treeview\">"
 					+"   <i class=\"fa fa-angle-left pull-right\"></i>"
 					+"  </span>"
 					+"</a>"
-					+"<ul class=\"treeview-menu\">"
+					+"<ul class=\"treeview-menu thirdtwo\">"
 					+" <li class=\"text\" ><a href=\"#\"><i class=\"fa fa-circle-o\"></i>2단 NAME2</a></li>" 
 					
 					//----------------<여기 2단 삽입
@@ -322,7 +322,7 @@ if(authId == "1002")
 }	 
 //--------------------------클래스추가 14&30 아닐때 top메뉴---------------------------
 //배열의 id를 이용하여 클래스를 넣는다.TOP
-
+//topMenuT 전체 메뉴에서 tree가 있는 리스트
 var tempJ =0;
 for(i in topMenuT)
 	{
@@ -333,6 +333,7 @@ for(i in topMenuT)
 	  			{
 					var classN = "a"+tempM;
 					var secondC = "'.second:eq("+tempJ+")'";//총2단인 메뉴의 top메뉴에 클래스 추가
+					$(eval(secondC)).attr('id',classN);
 					$(eval(secondC)).addClass(classN); 
 					tempJ++;
 	  			}	
@@ -344,6 +345,7 @@ for(i in topMenuT)
 	  			{
 					var classN = "a"+tempM;
 					var secondC = "'.second:eq("+tempJ+")'";
+					$(eval(secondC)).attr('id',classN);
 					$(eval(secondC)).addClass(classN); 
 					tempJ++;
 	  			}	
@@ -365,6 +367,7 @@ for(i in remainTopMenu)
 	 	var tempM=remainTopMenu[i];
 		var classN = "a"+tempM;
 		var secondC = "'li.first:eq("+tempT+")'";
+		$(eval(secondC)).attr('id',classN);
 		$(eval(secondC)).addClass(classN); 
 		tempT++;
 	  				
@@ -518,6 +521,7 @@ for(i in newMapList)
 			}	
 			    var className = "subject"; 
 				$(eval(path)).addClass(className); 
+				//$(eval(path)).attr('id',className);
 						if(($(eval(path)).length)+1>0)
 							{
 								tempD++;
@@ -595,7 +599,8 @@ for(i in newMapList)
 					var pathCount="'li.a14 > ul > li.text:eq("+i+") > ul > li'";
 					if($('li').hasClass("a14"))
 						{
-							$(eval(path)).addClass(classIdM); 
+							$(eval(path)).addClass(classIdM);
+							$(eval(path)).attr('id',classIdM);
 							if(($(eval(pathCount)).length)+2>0)
 								{
 										tempF++;
@@ -617,7 +622,8 @@ for(i in newMapList)
 						var pathCount="'li.a30 > ul > li.text:eq("+i+") > ul > li'";
 						if($('li').hasClass("a30"))
 							{
-								$(eval(path)).addClass(classIdM); 
+								$(eval(path)).addClass(classIdM);
+								$(eval(path)).attr('id',classIdM);
 								if(($(eval(pathCount)).length)+2>0)
 									{
 											tempF++;
@@ -682,6 +688,7 @@ for(var i =0; i<newMapList.length ; i++)
 		var selectClC= '\'li.'+parentsCl+' > ul > li\'';
 		var selectCl = '\'li.'+parentsCl+' > ul > li:eq('+tempC+')\'';
 		    $(eval(selectCl)).addClass(classIdM);
+		    $(eval(selectCl)).attr('id',classIdM);
 				if(parentsCl==parentsClP)
 				{
 					tempC++;
@@ -719,11 +726,9 @@ if(authId == "1001"||authId == "1000")
 				var finalPathURL = thirdPathURL+"/"+firstPathId;
 				var finalPathURLS= $(eval(thirdPath)).attr('href',finalPathURL);
 			}
-			
-			
 		}
-		
 }
+
 if(authId == "1002")
 {
 	var firstPath ='\'li.a30 > ul:eq(0) > li.subject\'';

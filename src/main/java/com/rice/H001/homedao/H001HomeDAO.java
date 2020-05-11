@@ -21,4 +21,10 @@ public interface H001HomeDAO {
 	public String selectToeicDate();
 
 	public List<Map<String, Object>> selectDdayList();
+
+	public String selectToeicDateS();
+
+	public void updateToeicSheduleS(H001HomeVO h001HomeVO);
+
+	public List<Map<String, Object>> selectDdayListS();
 }
