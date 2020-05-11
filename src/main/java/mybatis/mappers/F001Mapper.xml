@@ -112,5 +112,9 @@
 			WHERE memNum = #{memNum}
 		]]>
 	</delete>
- 
+ <select id="selectCountCapa" parameterType="java.util.Map">
+		<![CDATA[
+			 select count(openclassid) from enrolment where openclassid=#{openclassId} group by openclassid
+			 ]]>
+			 </select>
 </mapper>

@@ -1,9 +1,14 @@
 package com.rice.F001.F001controller;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -259,35 +264,11 @@ public class F001LectureController {	// 회원관리
 	@RequestMapping(value = "insertCart", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public void insertCart(@RequestBody Map<String,Object> insertEnrolLecS, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		
-		System.out.println(insertEnrolLecS);
-//		JsonUtil jutil = new JsonUtil();
-//		System.out.println(insertEnrolLecS.get("wholeCartList").getClass().getName());
-//		String wholeCartList = (String) insertEnrolLecS.get("wholeCartList");
-//
-//		JSONArray jsonarr = new JSONArray(wholeCartList);
-//		
-//		List<Map<String, Object>> tmp = jutil.getListMapFromJsonArray(jsonarr);
-//		System.out.println("===========" + tmp.toString());
-//		insertEnrolLecS.put("wholeEnrol", tmp);
-		
-					
+		//System.out.println("insertEnrolLecS : "+insertEnrolLecS);
 		f001LectureService.insertCart(insertEnrolLecS);
-			
-				
-		//System.out.println("controller_ selectLecPlanId : "+ selectLecPlanId);
-		//System.out.println("kakaoPayApprovalVO : "+kakaoPayApprovalVO);
-		//System.out.println("amountVO : "+amountVO.toString());
-		//System.out.println("f001LectureVO  : "+f001LectureVO.toString());
-		//System.out.println(f001LectureVO.getClassIdKakao());
 		return;
 		
 	}
-	
-	
-	
-	
 	
 	//결제완료 확인 후 세션정보 저장
 	@RequestMapping(value = "paid", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
@@ -295,8 +276,31 @@ public class F001LectureController {	// 회원관리
 	public void paidlist(@RequestBody Map<String,Object> insertEnrolLecS, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		
-		System.out.println("insertEnrolLecS : "+insertEnrolLecS);
+		//System.out.println("insertEnrolLecS : "+insertEnrolLecS);
 		//{approveTime=Fri May 08 01:59:41 KST 2020, orderId=714, itemName= lc 완전정복 외1건, amountTotal=300000, paidMode=1600}
+		//시간에 3시간 더해서 넣기
+		
+			String paidLDate = (String) insertEnrolLecS.get("approveTime");
+			System.out.println(paidLDate);
+			//날짜 포멧 변경
+			DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd. HH:mm:ss", Locale.KOREA);
+			Date date = dateFormat.parse(paidLDate);//파라미터로 지금형식 넣는다.
+			System.out.println("date1 : "+date);
+			
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			cal.add(Calendar.HOUR, 3);//시간더하기, 변경 안됨
+			
+			System.out.println("date2 : "+date);
+			
+			String afterDate = sdf.format(date); 
+			System.out.println("afterDate : "+afterDate);
+			
+			insertEnrolLecS.put("approveTime",afterDate);
+			System.out.println("insertEnrolLecS :"+insertEnrolLecS);
+	
+		
 		f001LectureService.savePaidlist(insertEnrolLecS);//결제정보 저장
 		
 		Map<String,Object> map = new HashMap<String,Object>();//결제 내역에 저장할 map
@@ -340,8 +344,6 @@ public class F001LectureController {	// 회원관리
 	    	map.put("orderId",orderId);
 	    	System.out.println("map : "+map);	  
 	    	f001LectureService.insertOrderList(map);//과목정보 검색한다.
-	    	
-	    	
 	    }
 	   	    
 	    session.setAttribute("classIdList", "");//classIdList세션 초기화
@@ -360,25 +362,87 @@ public class F001LectureController {	// 회원관리
 		
 		return "F_Cart";
 	}
-	//장바구니
-	@RequestMapping(value = "selectPaidListR", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
-	@ResponseBody
-	public List<Map<String, Object>> selectPaidListR(@RequestBody String memNum, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("memNum : "+ memNum);
-		 List<Map<String, Object>> selectPaidListR = f001LectureService.selectPaidListR(memNum);
-		 //System.out.println("selectPaidListR : "+selectPaidListR);
-		 return selectPaidListR;
-	}
 	
 	@RequestMapping(value = "cartInfo", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public List<Map<String, Object>> cartInfo(@RequestBody String memNum, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("memNum : "+ memNum);
+		//System.out.println("memNum : "+ memNum);
 		List<Map<String, Object>> cartInfo = f001LectureService.cartInfo(memNum);
 		//System.out.println("controller_ cartInfo : "+ cartInfo);
-		System.out.println("cartInfo : "+cartInfo);
+		//System.out.println("cartInfo : "+cartInfo);
 		return cartInfo;
+	}
+	@RequestMapping(value = "delCartList", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public void delCartList(@RequestBody Map<String,Object> memNum, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//System.out.println("memNum : "+ memNum);
+		f001LectureService.delCartList(memNum);
+		//System.out.println("controller_ delCartList : "+ delCartList);
+		return;
+	}
+	@RequestMapping(value = "wholeDelButton", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public void wholeDelButton(@RequestBody Map<String,Object> memNum, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//System.out.println("memNum : "+ memNum);
+		f001LectureService.wholeDelButton(memNum);
+		//System.out.println("controller_ wholeDelButton : "+ wholeDelButton);
+		return;
+	}
+	@RequestMapping(value = "selectDelButton", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public void selectDelButton(@RequestBody Map<String,Object> memNum, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//System.out.println("memNum : "+ memNum);
+		f001LectureService.selectDelButton(memNum);
+		//System.out.println("controller_ selectDelButton : "+ selectDelButton);
+		return;
+	}
+	
+	@RequestMapping(value = "paidList", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> paidList(@RequestBody Map<String,Object> memNum, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//System.out.println("memNum : "+ memNum);
+		List<Map<String, Object>> paidList = f001LectureService.paidList(memNum);
+		//System.out.println("controller_ paidList : "+ paidList);
+		return paidList;
+	}
+	
+	@RequestMapping(value = "paidListDetail", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> paidListDetail(@RequestBody Map<String,Object> DetailCart, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//System.out.println("DetailCart : "+ DetailCart);
+		List<Map<String, Object>> paidListDetail = f001LectureService.paidListDetail(DetailCart);
+		//System.out.println("controller_ paidListDetail : "+ paidListDetail);
+		return paidListDetail;
+	}
+	
+	@RequestMapping(value = "selectBulCl", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public Map<String, Object> selectBulCl(@RequestBody Map<String,Object> DetailCart, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("DetailCart : "+ DetailCart);
+		Map<String, Object> selectBulCl = f001LectureService.selectBulCl(DetailCart);
+		//System.out.println("controller_ selectBulCl : "+ selectBulCl);
+		
+		
+		return selectBulCl;
 	}
 	
 	
+	@RequestMapping(value = "searchOpenClT", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> searchOpenClT(@RequestBody Map<String,Object> DetailCart, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("DetailCart : "+ DetailCart);
+		List<Map<String, Object>> searchOpenClT = f001LectureService.searchOpenClT(DetailCart);
+		System.out.println("controller_ searchOpenClT : "+ searchOpenClT);
+		return searchOpenClT;
+	}
+	@RequestMapping(value = "selectCountCapa", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public Map<String, Object> selectCountCapa(@RequestBody Map<String,Object> DetailCart, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("selectCountCapa : "+ DetailCart);
+		Map<String, Object> selectCountCapa = f001LectureService.selectCountCapa(DetailCart);
+		//System.out.println("controller_ selectCountCapa : "+ selectCountCapa);
+		
+		
+		return selectCountCapa;
+	}
 }

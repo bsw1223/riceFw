@@ -8,12 +8,47 @@
 
 <!-- ckeditor cdn -->
 <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<style>
+#banner{
+border: 1px solid;
+width: 200px;
+float: left;
+padding: 10px;
+margin-left: 30px;
+margin-top: 90px;
+min-width:150px;
+}
 
+@media screen and (max-width: 1500px){
+#banner{
+	display: none;
+}}
+
+#banner_left{
+width: 193px;
+float: right;
+margin: auto;
+padding-top: 90px;
+vertical-align: middle;
+min-width:150px;
+}
+
+@media screen and (max-width: 1300px){
+#banner_left{
+	display: none;
+}
+#banner_left2{
+	display: none;
+
+}
+}
+</style>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
+	<div class="col-md-2" style="margin: 20px;"></div>
 		<h1>
 			<c:out value='${sjctName}' />
 		</h1>
@@ -27,9 +62,25 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
+<<<<<<< HEAD
+			<!-- left column -->
+			<div class="col-md-2">
+				<div id="banner_left">
+					<img id="pp" src="">
+					<%@ include file="left_banner1.jsp"%>
+				</div>
+				<div>
+					<%@ include file="left_banner2.jsp"%>
+				</div>
+			</div>
+				<div class="col-md-8">
+				<!-- general form elements -->
+				<div class="box box-warning">
+=======
 		<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<div class="box box-info">
+>>>>>>> refs/remotes/origin/master
 					<div class="box-header">
 						<h3 class="box-title"><c:out value='${pageTitle}' /></h3>
 					</div>
@@ -55,6 +106,23 @@
 							<input type="hidden" class="form-control" name='memNum' value="${memNum}"> 
 							<input type="hidden" class="form-control" name='boViews' value="0"> 
 							<input type="hidden" class="form-control" name='boLikes' value="0">
+<<<<<<< HEAD
+
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="panel panel-default">
+										<div class="panel-heading">파일첨부</div>
+										<div class="panel-body">
+											<div class="form-group uploadDiv">
+												<input type="file" name="uploadFile" multiple>
+											</div>
+											
+											<div class='uploadResult'>
+												<ul>
+												
+												</ul>
+											</div>
+=======
 							<!-- file -->
 							<div class="panel panel-default">
 								<div class="panel-heading">File Attach</div>
@@ -65,6 +133,7 @@
 										<div class='uploadResult'>
 											<ul>
 											</ul>
+>>>>>>> refs/remotes/origin/master
 										</div>
 									</div>
 							</div>
@@ -77,6 +146,9 @@
 						</form>
 					</div>
 				</div>
+			</div>
+			<div id="banner">
+					<%@ include file="banner.jsp"%>
 			</div>
 		</div>
 	</section>
@@ -189,8 +261,8 @@
 												var fileLink = fileCallPath.replace(new RegExp(/\\/g), "/");
 												str += "<li";
 												str += " data-path='"+obj.filePath+"' data-classfilenum='"+obj.classFileNum+"'data-filename='"+obj.fileName+"' data-type='"+obj.fileCode+"' data-size='"+obj.fileSize+"' data-savefilename='"+obj.saveFileName+"'><div>";
-												str += "<span>" + obj.fileName+ "</span>";
-												str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' data-filename='"+obj.fileName+"'class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+												str += "<span>" + obj.fileName+ "  </span>";
+												str += "<a data-file=\'"+fileCallPath+"\' data-type='file' data-filename='"+obj.fileName+"' class='fa fa-times'></a><br>";
 												str += "</div>"
 												str + "</li>";
 											});;
@@ -199,7 +271,7 @@
 						
 						//파일삭제
 
-						$(".uploadResult").on("click", "button", function(e) {
+						$(".uploadResult").on("click", "a", function(e) {
 
 							console.log("delete");
 							console.log($(this));

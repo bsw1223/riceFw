@@ -261,11 +261,8 @@
 		   b.memname
 		FROM OPENCLASS a, member b
 		where a.memnum=b.memnum
-
 	      ]]>
 	</select>
-
-
 
 <select id="partnerOrderId" resultType="java.util.Map">
       <![CDATA[
@@ -347,31 +344,17 @@
 	</select>
 	
 	
-<!-- 장바구니 -->
-<insert id="insertCart" parameterType="java.util.HashMap">
-		insert
-  	   		INTO 
-    		cart
-	    		(
-			    	cartNum,
-				    openclassId,
-				    classPrice,
-				    buyer
-				)
-  			VALUES
-  				(#{cartOrderId},#{cId},#{cPrice},#{memNum})
-</insert>
-<!-- <update id="insertCart" parameterType="java.util.HashMap"> -->
-<!-- 		  merge into cart m -->
-<!-- 		  using ( select #{cartOrderId} as cartNum, #{cId} as openclassId, #{cPrice} as classPrice, #{memNum} as buyer -->
-<!-- 		          from dual ) e -->
-<!-- 		  on (m.openclassId = e.openclassId and m.buyer=e.buyer )          -->
-<!-- 		  when matched then  -->
-<!-- 			    update set cartNum = e.cartNum, openclassId = e.openclassId, classPrice = e.classPrice, buyer = e.buyer -->
-<!-- 		  when not matched then -->
-<!-- 		  		 insert (openclassId, cartNum, classPrice,buyer) -->
-<!--    		  values (e.openclassId, e.cartNum, e.classPrice, e.buyer)  -->
-<!-- </update> -->
+<update id="insertCart" parameterType="java.util.HashMap">
+		  merge into cart m
+		  using ( select #{cartOrderId} as cartOrderId, #{cId} as cId, #{cPrice} as cPrice, #{memNum} as memNum
+		          from dual ) e
+		  on (m.openclassId = e.cId and m.buyer=e.memNum )         
+		  when matched then 
+			    update set cartNum = e.cartOrderId, classPrice = e.cPrice
+		  when not matched then
+		  		 insert (openclassId, cartNum, classPrice, buyer)
+   		  values (e.cId, e.cartOrderId, e.cPrice, e.memNum) 
+</update>
 	
 	<update id="paidlist" parameterType="String">
 	<![CDATA[
@@ -416,37 +399,180 @@
     VALUES(#{orderId},#{tempId},#{classPrice})
 </insert>
 
-<!-- 결제목록 -->
-<select id="selectPaidListR"  resultType="java.util.Map">
-      <![CDATA[
-		select
-			 bb.ordernum, bb.totalpayamt, 
-			 bb.classprice, bb.openclassid, bb.orderdate,
-			 aa.openclassname  FROM openclass aa,
-			(SELECT a.ordernum, a.totalpayamt, b.classprice, b.openclassid, a.orderdate  
-		FROM 
-			payinfo a, orderlist b where a.orderNum= b.ordernum and a.buyer=#{memNum}) bb 
-	 	where 
-	 		aa.openclassid=bb.openclassid
-	 	order by bb.ordernum desc
-	   ]]>
-</select>
 
 <!-- 장바구니 -->
 <select id="cartInfo"  resultType="java.util.Map">
       <![CDATA[	
-		select 
+			select dd.memnum, dd.memname, cc.classnumber,cc.CLASSCAPACITY, cc.CLASSDESC, cc.SUBID, cc.MEMNUM, cc.OPENENDDATE, cc.CLASSTUE, cc.OPENCLASSDAYS, cc.OPENCLASSID, cc.OPENSTARTDATE,
+			cc.CARTNUM, cc.OPENSTARTTIME, cc.BUYER, cc.CLASSPRICE, cc.CLASSTHUR, cc.OPENCLASSNAME, cc.CLASSID, cc.OPENENDTIME
+    	from(select 
 			bb.classnumber,aa.CLASSCAPACITY, aa.CLASSDESC, aa.SUBID, aa.MEMNUM, aa.OPENENDDATE, aa.CLASSTUE, aa.OPENCLASSDAYS, aa.OPENCLASSID, aa.OPENSTARTDATE,
 			aa.CARTNUM, aa.OPENSTARTTIME, aa.BUYER, aa.CLASSPRICE, aa.CLASSTHUR, aa.OPENCLASSNAME, aa.CLASSID, aa.OPENENDTIME
 		from  (select
 					a.CLASSCAPACITY, a.CLASSDESC, a.SUBID, a.MEMNUM, a.OPENENDDATE, a.CLASSTUE, a.OPENCLASSDAYS, a.OPENCLASSID, a.OPENSTARTDATE,
 					b.CARTNUM, a.OPENSTARTTIME, b.BUYER, a.CLASSPRICE, a.CLASSTHUR, a.OPENCLASSNAME, a.CLASSID, a.OPENENDTIME
-			   from openclass a, cart b where a.openclassId=b.openclassid and b.buyer=#{memNum}) aa, 
+			   from openclass a, cart b where a.openclassId=b.openclassid and b.buyer='101') aa, 
 			  (select 
 			  		classnumber, classId 
 			   from classroom)bb 
-        where aa.classid=bb.classid
+        where aa.classid=bb.classid)cc, member dd where cc.MEMNUM= dd.memnum
 	   ]]>
 </select>	
+
+<delete id="delCartList" parameterType="java.util.Map">
+	<![CDATA[
+		delete from cart where buyer = #{memNum} and openclassid=#{openclassId}
+     ]]>
+</delete>	
+	
+	
+	
+<delete id="wholeDelButton" parameterType="java.util.Map">
+	<![CDATA[
+		delete from cart where buyer=#{memNum} and openclassid=#{openclassId}
+     ]]>
+</delete>
+
+<delete id="selectDelButton" parameterType="java.util.Map">
+	<![CDATA[
+		delete from cart where buyer=#{memNum} and openclassid=#{openclassId}
+     ]]>
+</delete>
+<select id="paidList"  resultType="java.util.Map">
+      <![CDATA[	
+       select 
+	       	min(aa.buyer) as buyer ,min(aa.ordercode) as ordercode, count(aa.ordercode) as countordercode ,
+	        min(aa.orderdate) as orderdate , min(aa.totalpayamt) as totalpayamt, 
+	        min(aa.openclassid ) as openclassid	, min(bb.openclassname) as openclassname
+	   from (select
+			a.buyer , a.ordercode , a.orderdate , a.ordernum , a.totalpayamt ,b.classprice , b.openclassid , b.ordernum  
+	   FROM 
+	    	payinfo a, orderlist b where a.ordernum=b.ordernum  and a.buyer=#{memNum,jdbcType=VARCHAR})aa, openclass bb
+	   where aa.openclassid=bb.openclassid group by aa.ordercode order by to_number(ordercode) desc, openclassname desc
+	   ]]>
+</select>
+
+<select id="paidListDetail"  resultType="java.util.Map">
+      <![CDATA[	
+			select aaa.classdesc classdesc, aaa.classid classid, 
+				aaa.classprice classprice, aaa.openclassname openclassname, 
+				aaa.memnum memnum, aaa.orderdate orderdate, aaa.ordercode,
+				bbb.memname memname, 
+				aaa.openstartdate openstartdate, aaa.openstarttime openstarttime, aaa.openenddate openenddate, 
+				aaa.openendtime openendtime, aaa.classfri classfri, aaa.classmon classmon, aaa.classtue classtue, 
+				aaa.classwed classwed, aaa.classthur classthur, aaa.classsat classsat, aaa.classsun classsun
+			from
+			
+			(select bb.classdesc classdesc, 
+				bb.classid classid, bb.classprice classprice ,
+				bb.openclassname openclassname, bb.memnum memnum,
+				aa.orderdate orderdate, aa.ordercode ordercode, 
+				bb.openstartdate openstartdate,bb.openstarttime openstarttime, bb.openenddate openenddate, bb.openendtime openendtime,
+				bb.classfri classfri, bb.classmon classmon, bb.classtue classtue, bb.classwed classwed, bb.classthur classthur,
+				bb.classsat classsat, bb.classsun classsun
+			from 
+				(select 
+					a.classprice , a.openclassid , a.ordernum , 
+					b.buyer , b.ordercode , b.orderdate , b.ordernum , b.totalpayamt  
+			from 
+					orderlist a,payinfo b 
+			where a.orderNum=b.orderNum and buyer=#{buyer} and a.orderNum=#{cartNum})aa, openclass bb 
+			where aa.openclassid=bb.openclassid) aaa , member bbb where aaa.memnum=bbb.memnum order by aaa.openclassname
+	   ]]>
+</select>
+
+<select id="selectBulCl"  resultType="java.util.Map">
+      <![CDATA[	
+			select b.classnumber, c.bulname from OPENCLASS a, CLASSROOM b, BUILDING c 
+			where a.classid=b.classid and b.bulid=c.bulid and a.openclassid=#{openclassId}
+	   ]]>
+</select>
+
+
+<select id="searchOpenClT"  resultType="java.util.Map">
+      <![CDATA[	
+		   select  DISTINCT
+		   	   b.memname,
+		       c.openStartDate,
+			   c.classDesc,
+			   c.classId,
+			   c.openclassId,
+			   c.classCapacity,
+			   c.classDescFile,
+			   c.memNum,
+			   c.classPrice,
+			   c.openclassName,
+			   c.subId,
+			   c.openEndDate,
+			   c.openStartTime,
+			   c.openEndTime,
+			   c.classSun,
+			   c.classMon,
+			   c.classTue,
+			   c.classWed,
+			   c.classThur,
+			   c.classFri,
+			   c.classSat
+		 from subject a , member b, openclass c
+		 ]]> 
+		<where>
+		  	<![CDATA[ a.subcode=c.subid and c.memnum=b.memnum  ]]>
+		  	
+			<if test="subCode != null and subCode !=''"> 
+		       		<![CDATA[ and a.subCode=#{subCode} ]]></if>	
+			<if test="memNum != null and memNum !=''">  	
+		      		<![CDATA[ and b.memNum=#{memNum} ]]></if>
+		    <if test="searchKey != null and memNum !=''">
+		  		<![CDATA[ and   
+		       (b.authid || b.memid || b.memname || b.memnum ||  
+		       c.classdesc || c.classid || c.memnum || c.openclassdays ||
+		       c.openclassid || c.openclassname || c.openenddate || c.openendtime ||
+		       c.openstartdate || c.openstarttime || c.subid) like 	'%' || #{searchKey} ||'%' ]]> </if>
+		</where>
+	    order by  c.openStartDate
+</select>
+
+
+<!--     <![CDATA[	 -->
+<!-- 		   select  -->
+<!-- 		   	   b.memname, -->
+<!-- 		       c.openStartDate, -->
+<!-- 			   c.classDesc, -->
+<!-- 			   c.classId, -->
+<!-- 			   c.openclassId, -->
+<!-- 			   c.classCapacity, -->
+<!-- 			   c.classDescFile, -->
+<!-- 			   c.memNum, -->
+<!-- 			   c.classPrice, -->
+<!-- 			   c.openclassName, -->
+<!-- 			   c.subId, -->
+<!-- 			   c.openEndDate, -->
+<!-- 			   c.openStartTime, -->
+<!-- 			   c.openEndTime, -->
+<!-- 			   c.classSun, -->
+<!-- 			   c.classMon, -->
+<!-- 			   c.classTue, -->
+<!-- 			   c.classWed, -->
+<!-- 			   c.classThur, -->
+<!-- 			   c.classFri, -->
+<!-- 			   c.classSat -->
+<!-- 		 from subject a , member b, openclass c -->
+<!-- 		 ]]>  -->
+<!-- 		<where> -->
+<!-- 		  	<![CDATA[ a.subcode=c.subid and c.memnum=b.memnum  ]]> -->
+<!-- 			<if test="subCode != null and subCode !=''">  -->
+<!-- 		       		<![CDATA[ and a.subCode=#{subCode} ]]></if>	 -->
+<!-- 			<if test="memNum != null and memNum !=''">  	 -->
+<!-- 		      		<![CDATA[ and b.memNum=#{memNum} ]]></if> -->
+<!-- 		    <if test="searchKey != null and memNum !=''"> -->
+<!-- 		  		<![CDATA[ and    -->
+<!-- 		       (b.authid || b.memid || b.memname || b.memnum ||   -->
+<!-- 		       c.classdesc || c.classid || c.memnum || c.openclassdays || -->
+<!-- 		       c.openclassid || c.openclassname || c.openenddate || c.openendtime || -->
+<!-- 		       c.openstartdate || c.openstarttime || c.subid) like 	'%' || #{searchKey} ||'%' ]]> </if> -->
+<!-- 		</where> -->
+
+
+
 	
 </mapper>

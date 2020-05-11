@@ -105,10 +105,27 @@ public class H001HomeServiceImpl implements H001HomeService{
 		return selectDdayList;
 	}
 
+	@Override
+	public String selectToeicDateS() {
+		String selectToeicDateS = h001HomeDAO.selectToeicDateS();
+		return selectToeicDateS;
+	}
+
+	@Override
+	public void updateToeicSheduleS(H001HomeVO h001HomeVO) {
+		System.out.println("service : "+h001HomeVO.toString());
+		h001HomeDAO.updateToeicSheduleS(h001HomeVO);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectDdayListS() {
+		List<Map<String, Object>> selectDdayListS = h001HomeDAO.selectDdayListS();
+		return selectDdayListS;
+	}
+
 	// 오늘 수업 목록 get
 	@Override
 	public List<Map<String, Object>> getTodayClass(Map info) {
 		return h001HomeDAO.getTodayClass(info);
-	}
-	
+	}	
 }

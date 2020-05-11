@@ -91,21 +91,20 @@
 	
 	<insert id="insertSchInfo" parameterType="H001SchVO">
 			 <![CDATA[ 
-				insert into scott.SCHEDULE
+
+			 insert into scott.SCHEDULE
 	            (SCHTITLE, SCHSTART, SCHEND, SCHDESCRIPTION, SCHALLDAY, MEMNUM, SCHID) 
-	            VALUES(
+	         VALUES(
 	            #{schTitle, jdbcType=VARCHAR},
-	             #{schStart, jdbcType=VARCHAR},
-	             #{schEnd, jdbcType=VARCHAR},
-	             #{schDescription, jdbcType=VARCHAR},
-	             #{schAllDay, jdbcType=VARCHAR},
-	             #{memNum, jdbcType=VARCHAR},
-	             #{schId, jdbcType=VARCHAR}
-	             )						
+	            #{schStart, jdbcType=VARCHAR},
+	            #{schEnd, jdbcType=VARCHAR},
+	            #{schDescription, jdbcType=VARCHAR},
+	            #{schAllDay, jdbcType=VARCHAR},
+	            #{memNum, jdbcType=VARCHAR},
+	            #{schId, jdbcType=VARCHAR}
+             )
 			 ]]>
 	</insert>
-	
-
 	
 	
 	<delete id="deleteSchInfo">

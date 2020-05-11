@@ -17,18 +17,18 @@
 
 	if(authId==1000)
 		{
-			authName="관리자";
+			authName="愿由ъ옄";
 		}else if(authId==1001)
 			{
-				authName="학생";
+				authName="?숈깮";
 			}else
 				{
-				 authName="강사";
+				 authName="媛뺤궗";
 				}
 
 		$("p#profile").text(authName);
 	 
-	/* 	if(${member.authId}==1000)//관리자(1000),학생(1001),강사(1002) */
+	/* 	if(${member.authId}==1000)//愿由ъ옄(1000),?숈깮(1001),媛뺤궗(1002) */
 	/* var authId= ${member.authId}; */
 	var newMapListSub = null;
 	
@@ -66,25 +66,25 @@
 			authId:authId
 		},
 		success:  function(mapList) {
-										//newMapList : 자바스크립트 객체를 담은 배열
-										var newMapList = JSON.parse(mapList);//전체 리스트
+										//newMapList : ?먮컮?ㅽ겕由쏀듃 媛앹껜瑜??댁? 諛곗뿴
+										var newMapList = JSON.parse(mapList);//?꾩껜 由ъ뒪??
 										var topMenu = new Array();
 										var topMenuNon = new Array();
 										var menuIdJ = "";
 										var parentMenuIdJ = "";
 
 										for ( var i in newMapList) {
-											menuIdJ = newMapList[i].menuId;//메뉴아이디
+											menuIdJ = newMapList[i].menuId;//硫붾돱?꾩씠??
 											for ( var j in newMapList) {
 												parentMenuIdJ = newMapList[j].parentMenuId;
-												if (menuIdJ == parentMenuIdJ) {//페어런츠 아이디와 비교
+												if (menuIdJ == parentMenuIdJ) {//?섏뼱?곗툩 ?꾩씠?붿? 鍮꾧탳
 													topMenu.push(menuIdJ);
 
 												}
 											}
-										}//for문 종료
+										}//for臾?醫낅즺
 
-										//상위메뉴 없는 것 -top메뉴,
+										//?곸쐞硫붾돱 ?녿뒗 寃?-top硫붾돱,
 										for ( var i in newMapList) {
 											menuIdJ = newMapList[i].menuId;
 											parentMenuIdJ = newMapList[i].parentMenuId;
@@ -93,86 +93,86 @@
 											}
 										}
 
-										//-----------------------중복값 제거--------------------	 
+										//-----------------------以묐났媛??쒓굅--------------------	 
 										var topMenuT = topMenu.reduce(function(
 												a, b) {
 											if (a.indexOf(b) < 0)
 												a.push(b);
 											return a;
-										}, []);//부모 ID와 ID가 같은 리스트, TREE 있는 리스트?
+										}, []);//遺紐?ID? ID媛 媛숈? 由ъ뒪?? TREE ?덈뒗 由ъ뒪??
 
 										var topMenuN = topMenuNon.reduce(
 												function(a, b) {
 													if (a.indexOf(b) < 0)
 														a.push(b);
 													return a;
-												}, []);//상위메뉴가 없는 리스트(top메뉴)
-										//-----------------------중복값 제거 끝--------------------	 
+												}, []);//?곸쐞硫붾돱媛 ?녿뒗 由ъ뒪??top硫붾돱)
+										//-----------------------以묐났媛??쒓굅 ??-------------------	 
 
-										//---------------------------------메뉴 종류(3단/tree형/nontree형)-----------------------------------------
-										//---------------------------------------3단계 폼--------------------------------------------------
+										//---------------------------------硫붾돱 醫낅쪟(3??tree??nontree??-----------------------------------------
+										//---------------------------------------3?④퀎 ??-------------------------------------------------
 										var tree3TopMenuT = "<li class=\"active treeview\">"
 												+ "<li class=\"treeview thirdone a14 a30\" id=\"a14\">"
 												+ "	<a href=\"#\">"
-												+ "	  <i class=\"fa fa-share\"></i> <span>3단 NAME1</span>"
+												+ "	  <i class=\"fa fa-share\"></i> <span>3??NAME1</span>"
 												+ "	    <span class=\"pull-right-container\">"
 												+ "	      <i class=\"fa fa-angle-left pull-right\"></i>"
 												+ "	    </span>" + "	 </a>"
 
-												//----------------------<------여기에 2단계 붙이기
+												//----------------------<------?ш린??2?④퀎 遺숈씠湲?
 
-												+ "</li>"//--------------------1단 마지막 li
+												+ "</li>"//--------------------1??留덉?留?li
 
-												//---------------------------2/3단계--------------------------
+												//---------------------------2/3?④퀎--------------------------
 										var tree3TopMenuM = " <ul class=\"treeview-menu thirdtwo\">"
 												+ " <li class=\"treeview addtwo text\">"
-												+ "	       <a href=\"#\"><i class=\"fa fa-circle-o\"></i>3단 NAME2"//과목명
+												+ "	       <a href=\"#\"><i class=\"fa fa-circle-o\"></i>3??NAME2"//怨쇰ぉ紐?
 												+ "	           <span class=\"pull-right-container\">"
 												+ "	              <i class=\"fa fa-angle-left pull-right\"></i>"
 												+ "	               </span>"
 												+ "	             </a>"
-												//--------------------<---여기에 3단계 붙이기
+												//--------------------<---?ш린??3?④퀎 遺숈씠湲?
 
-												+ "	    </li>"//--------------------3단붙는 2단의 마지막 li
-												+ " </ul>"//------------2단 마지막 ul
+												+ "	    </li>"//--------------------3?⑤텤??2?⑥쓽 留덉?留?li
+												+ " </ul>"//------------2??留덉?留?ul
 
 										var tree3TopMenuMAdd = " <li class=\"treeview addtwot text\">"
-												+ "	       <a href=\"#\"><i class=\"fa fa-circle-o\"></i>3단 NAME2"//과목명
+												+ "	       <a href=\"#\"><i class=\"fa fa-circle-o\"></i>3??NAME2"//怨쇰ぉ紐?
 												+ "	           <span class=\"pull-right-container\">"
 												+ "	              <i class=\"fa fa-angle-left pull-right\"></i>"
 												+ "	               </span>"
 												+ "	             </a>"
 
-										//--------------------------------3/3단계------------------                 
+										//--------------------------------3/3?④퀎------------------                 
 										var tree3TopMenuL = "<ul class=\"treeview-menu thirdthree \">"
-												+ "  <li><a href=\"#\"><i class=\"fa fa-circle-o\"></i>3단 NAME3</a></li>"
-												+ "</ul>"//-----------------3단 마지막 ul
+												+ "  <li><a href=\"#\"><i class=\"fa fa-circle-o\"></i>3??NAME3</a></li>"
+												+ "</ul>"//-----------------3??留덉?留?ul
 
-										var tree3TopMenuLO = " <li><a href=\"#\"><i class=\"fa fa-circle-o\"></i>3단 NAME3</a></li>"
+										var tree3TopMenuLO = " <li><a href=\"#\"><i class=\"fa fa-circle-o\"></i>3??NAME3</a></li>"
 
-										//----------------------------------------2단 폼--------------------------------------------------------------------------		
+										//----------------------------------------2????-------------------------------------------------------------------------		
 										var tree2TopMenu = "<li class=\"treeview\">"
 												+ "<li class=\"treeview second\">"
 												+ "<a href=\"#\">"
-												+ "  <i class=\"fa fa-table\"></i> <span>2단 NAME1</span>"
+												+ "  <i class=\"fa fa-table\"></i> <span>2??NAME1</span>"
 												+ " <span class=\"pull-right-container\">"
 												+ "   <i class=\"fa fa-angle-left pull-right\"></i>"
 												+ "  </span>"
 												+ "</a>"
 												+ "<ul class=\"treeview-menu thirdtwo\">"
-												+ " <li class=\"text\" ><a href=\"#\"><i class=\"fa fa-circle-o\"></i>2단 NAME2</a></li>"
+												+ " <li class=\"text\" ><a href=\"#\"><i class=\"fa fa-circle-o\"></i>2??NAME2</a></li>"
 
-												//----------------<여기 2단 삽입
-												+ "</ul>" + "</li>"//--------------1단 li마지막
+												//----------------<?ш린 2???쎌엯
+												+ "</ul>" + "</li>"//--------------1??li留덉?留?
 
-										var tree2TopMenuM = " <li class=\"text\"><a href=\"#\"><i class=\"fa fa-circle-o\"></i>2단 NAME2</a></li>"
+										var tree2TopMenuM = " <li class=\"text\"><a href=\"#\"><i class=\"fa fa-circle-o\"></i>2??NAME2</a></li>"
 
-										//-------------------------------------------1단 폼----------------------------------
+										//-------------------------------------------1????---------------------------------
 
-										var tree1TopMenu = "<li class=\"first\"><a href=\"#\"><i class=\"fa fa-book\"></i> <span>1단 NAME1</span></a></li>"
+										var tree1TopMenu = "<li class=\"first\"><a href=\"#\"><i class=\"fa fa-book\"></i> <span>1??NAME1</span></a></li>"
 
-										//---------------------------------------------------메뉴 틀 추가--------------------------------------------------
-										//-----------3단중 1단------------
+										//---------------------------------------------------硫붾돱 ? 異붽?--------------------------------------------------
+										//-----------3?⑥쨷 1??-----------
 										for ( var i in newMapList) {
 											var checkMenId = newMapList[i].menuId;
 											if (checkMenId == "14"
@@ -182,9 +182,9 @@
 
 											}
 										}
-										//-----------3단중 2단------------								 
+										//-----------3?⑥쨷 2??-----------								 
 
-										//부모가 14번 인것 들 넣기 thirdone클래스에 li.thirdone > a
+										//遺紐④? 14踰??멸쾬 ???ｊ린 thirdone?대옒?ㅼ뿉 li.thirdone > a
 										//newMapListSub[i].openClassname
 
 										for ( var i in newMapListSub) {
@@ -210,7 +210,7 @@
 											}
 										}
 
-										//-----------3단중 3단------------
+										//-----------3?⑥쨷 3??-----------
 
 										for ( var i in newMapList) {
 											var parentMenuId = newMapList[i].parentMenuId;
@@ -257,7 +257,7 @@
 											}
 										}
 
-										//-----------------------------트리종류 구별 1&2단 구별?-------------------------------------------
+										//-----------------------------?몃━醫낅쪟 援щ퀎 1&2??援щ퀎?-------------------------------------------
 
 										for ( var i in topMenuN) {
 											if (authId == "1001"
@@ -272,14 +272,14 @@
 
 													}
 													if (check == true) {
-														//tree메뉴
+														//tree硫붾돱
 														$('.start').append(
 																tree2TopMenu);
 
 													}
 
 													if (check == false) {
-														//nontree메뉴
+														//nontree硫붾돱
 														$('.start').append(
 																tree1TopMenu);
 													}
@@ -297,23 +297,23 @@
 
 													}
 													if (check == true) {
-														//tree메뉴
+														//tree硫붾돱
 														$('.start').append(
 																tree2TopMenu);
 
 													}
 
 													if (check == false) {
-														//nontree메뉴
+														//nontree硫붾돱
 														$('.start').append(
 																tree1TopMenu);
 													}
 												}
 											}
 										}
-										//--------------------------클래스추가 14&30 아닐때 top메뉴---------------------------
-										//배열의 id를 이용하여 클래스를 넣는다.TOP
-										//topMenuT 전체 메뉴에서 tree가 있는 리스트
+										//--------------------------?대옒?ㅼ텛媛 14&30 ?꾨땺??top硫붾돱---------------------------
+										//諛곗뿴??id瑜??댁슜?섏뿬 ?대옒?ㅻ? ?ｋ뒗??TOP
+										//topMenuT ?꾩껜 硫붾돱?먯꽌 tree媛 ?덈뒗 由ъ뒪??
 										var tempJ = 0;
 										for (i in topMenuT) {
 											if (authId == "1001"
@@ -322,7 +322,7 @@
 												if (tempM != '14') {
 													var classN = "a" + tempM;
 													var secondC = "'.second:eq("
-															+ tempJ + ")'";//총2단인 메뉴의 top메뉴에 클래스 추가
+															+ tempJ + ")'";//珥??⑥씤 硫붾돱??top硫붾돱???대옒??異붽?
 													$(eval(secondC)).attr('id',
 															classN);
 													$(eval(secondC)).addClass(
@@ -345,15 +345,15 @@
 											}
 										}
 										var remainTopMenu = $(topMenuN).not(
-												topMenuT).get();//트리없는 TOP메뉴 리스트
+												topMenuT).get();//?몃━?녿뒗 TOP硫붾돱 由ъ뒪??
 										if (authId == "1001"
 												|| authId == "1000") {
 											remainTopMenu.splice(remainTopMenu
-													.indexOf("14"), 1); // "14"를 찾아서 삭제한다.
+													.indexOf("14"), 1); // "14"瑜?李얠븘????젣?쒕떎.
 										}
 										if (authId == "1002") {
 											remainTopMenu.splice(remainTopMenu
-													.indexOf("30"), 1); // "30"를 찾아서 삭제한다. */
+													.indexOf("30"), 1); // "30"瑜?李얠븘????젣?쒕떎. */
 										}
 
 										var tempT = 0;
@@ -368,7 +368,7 @@
 
 										}
 										//------------ok-------------------
-										//---------------------------top타이틀 추가-------------------------------------
+										//---------------------------top??댄? 異붽?-------------------------------------
 
 										for (i in newMapList) {
 											var classId = "a"
@@ -383,8 +383,8 @@
 										}
 										//---------------ok
 
-										//----------------------2단 폼 넣기------------------
-										//클래스 네임 검색 후 맞으면 폼추가
+										//----------------------2?????ｊ린------------------
+										//?대옒???ㅼ엫 寃????留욎쑝硫??쇱텛媛
 										for (i in newMapList) {
 											if (authId == "1001"
 													|| authId == "1000") {
@@ -414,7 +414,7 @@
 
 										}
 
-										//---------------------------sub타이틀 추가3단아닐때-------------------------------------
+										//---------------------------sub??댄? 異붽?3?⑥븘?먮븣-------------------------------------
 
 										var tempC = 0;
 										var tempD = 1;
@@ -455,7 +455,7 @@
 										}
 										//-------------------------ok
 
-										//3단일때, 2단 제목 추가?
+										//3?⑥씪?? 2???쒕ぉ 異붽??
 
 										var tempZ = 0;
 										var path = null;
@@ -477,7 +477,7 @@
 											var name = newMapListSub[i].openClassname;
 											var subId = newMapListSub[i].openClassId;
 											$(eval(path)).text(name);
-											$(eval(paPath)).attr('id', subId); //개설과목id를 과목li태그의id로 추가
+											$(eval(paPath)).attr('id', subId); //媛쒖꽕怨쇰ぉid瑜?怨쇰ぉli?쒓렇?쁦d濡?異붽?
 											if (($(eval(path)).length) + 1 > 0) {
 												tempZ++;
 											} else {
@@ -486,7 +486,7 @@
 										}
 										//------------------------ok
 
-										//----------마지막 하나 삭제------
+										//----------留덉?留??섎굹 ??젣------
 										for (i in newMapList) {
 											if (authId == "1001"
 													|| authId == "1000") {
@@ -516,8 +516,8 @@
 										}
 										//--------------------ok
 
-										//-------------------------------3단 ul.thirdthree > li에 각자의 class명 넣기-------------------------------------
-										//과목 PARENTS 이용해서 class명 넣기, "subject" 클래스 추가
+										//-------------------------------3??ul.thirdthree > li??媛곸옄??class紐??ｊ린-------------------------------------
+										//怨쇰ぉ PARENTS ?댁슜?댁꽌 class紐??ｊ린, "subject" ?대옒??異붽?
 										var tempD = 0;
 										for (i in newMapList) {
 											if (authId == "1001"
@@ -540,7 +540,7 @@
 										}
 										//----------------------ok
 
-										//------------------각각 메뉴 넣기--------------------
+										//------------------媛곴컖 硫붾돱 ?ｊ린--------------------
 										var tempD = 0;
 
 										for (i in newMapList) {
@@ -596,7 +596,7 @@
 										}
 										//------------------ok
 
-										//-------------------------------3단 클래스 넣기-------------------------------------
+										//-------------------------------3???대옒???ｊ린-------------------------------------
 										var tempF = 0;
 
 										for (i in newMapList) {
@@ -627,7 +627,7 @@
 															if (($(eval(pathCount)).length) + 2 > 0) {
 																tempF++;
 															}
-															if ($(eval(pathCount)).length - 1 == (tempF - 1))//태그개수로 반복횟수 정함.
+															if ($(eval(pathCount)).length - 1 == (tempF - 1))//?쒓렇媛쒖닔濡?諛섎났?잛닔 ?뺥븿.
 															{
 																tempF = 0;
 															}
@@ -659,7 +659,7 @@
 															if (($(eval(pathCount)).length) + 2 > 0) {
 																tempF++;
 															}
-															if ($(eval(pathCount)).length - 1 == (tempF - 1))//태그개수로 반복횟수 정함.
+															if ($(eval(pathCount)).length - 1 == (tempF - 1))//?쒓렇媛쒖닔濡?諛섎났?잛닔 ?뺥븿.
 															{
 																tempF = 0;
 															}
@@ -671,7 +671,7 @@
 										}
 										//----------------------------ok
 
-										//-----------------------------3단 title붙이기-------------------------
+										//-----------------------------3??title遺숈씠湲?------------------------
 
 										for (i in newMapList) {
 											var classIdM = "a"
@@ -683,7 +683,7 @@
 										}
 										//--------------------ok	
 
-										//-------------------------------3단 링크 걸기--------------------------------------
+										//-------------------------------3??留곹겕 嫄멸린--------------------------------------
 										for (i in newMapList) {
 											var classIdM = "a"
 													+ newMapList[i].menuId;
@@ -694,7 +694,7 @@
 													title);
 										}
 										//---------------------------------ok
-										//-------------------------------1단 URL 추가-------------------------------------
+										//-------------------------------1??URL 異붽?-------------------------------------
 
 										for (i in newMapList) {
 											var classIdM = "a"
@@ -707,7 +707,7 @@
 										}
 										//----------ok
 
-										//-------------------------------2단 클래스 추가-------------------------------------
+										//-------------------------------2???대옒??異붽?-------------------------------------
 										var tempC = 0;
 										var parentsClP = null;
 										for (var i = 0; i < newMapList.length; i++) {
@@ -716,7 +716,7 @@
 														+ newMapList[i + 1].parentMenuId;
 											}
 											var parentsCl = "a"
-													+ newMapList[i].parentMenuId;//부모아이디로 검색
+													+ newMapList[i].parentMenuId;//遺紐⑥븘?대뵒濡?寃??
 											var compared = newMapList[i].menuId;
 											var classIdM = "a"
 													+ newMapList[i].menuId;
@@ -737,7 +737,7 @@
 											parentsClP = parentsCl;
 
 										}
-										//-------------------2단 url추가
+										//-------------------2??url異붽?
 										for (i in newMapList) {
 											for (j in newMapList) {
 												var classIdT = "a"
@@ -752,7 +752,7 @@
 
 										}
 
-										//-----------------3단 추가 url  URL에 과목코드 추가
+										//-----------------3??異붽? url  URL??怨쇰ぉ肄붾뱶 異붽?
 										if (authId == "1001"
 												|| authId == "1000") {
 											var firstPath = '\'li.a14 > ul:eq(0) > li.subject\'';
@@ -808,7 +808,7 @@
 												}
 											}
 										}
-										//-------------------3단url 추가 끝
+										//-------------------3?쮞rl 異붽? ??
 										$('ul.start > li.first:eq(-1)').remove();
 
 										$(".sidebar-menu").click( function(e) {
@@ -836,11 +836,11 @@
 					}
 
 	function getmenuCookie() {
-		var m1_id = getcookie('m1'); // 기존 저장된 쿠키값을 가져온다.
-		var m2_id = getcookie('m2'); // 기존 저장된 쿠키값을 가져온다.
-		var m3_id = getcookie('m3'); // 기존 저장된 쿠키값을 가져온다.
+		var m1_id = getcookie('m1'); // 湲곗〈 ??λ맂 荑좏궎媛믪쓣 媛?몄삩??
+		var m2_id = getcookie('m2'); // 湲곗〈 ??λ맂 荑좏궎媛믪쓣 媛?몄삩??
+		var m3_id = getcookie('m3'); // 湲곗〈 ??λ맂 荑좏궎媛믪쓣 媛?몄삩??
 
-		if (m1_id) { // 기존 저장된 쿠키값이 있으면 그 값으로 ch 함수 호출
+		if (m1_id) { // 湲곗〈 ??λ맂 荑좏궎媛믪씠 ?덉쑝硫?洹?媛믪쑝濡?ch ?⑥닔 ?몄텧
 			ch(m1_id);
 		}
 
@@ -853,7 +853,7 @@
 		}
 	}
 
-	function ch(num) { // 클릭한 li 의 탭기능 구현함수
+	function ch(num) { // ?대┃??li ????린??援ы쁽?⑥닔
 		$(".sidebar-menu #" + num + "").addClass("menu-open");
 // 		$(".sidebar-menu #" + num + "").addClass("active");
 		$(".sidebar-menu #" + num + "").children("ul").attr("style", "display:block;")
@@ -863,12 +863,12 @@
 // 		$(".sidebar-menu #" + num + "").addClass("active");
 	}
 
-	function setcookie(aa, bb) { // 쿠키생성함수
+	function setcookie(aa, bb) { // 荑좏궎?앹꽦?⑥닔
 		document.cookie = aa + "=" + bb + "; path=/;"
 		return false;
 	}
 
-	function getcookie(Key) { // 쿠키호출함수
+	function getcookie(Key) { // 荑좏궎?몄텧?⑥닔
 		var cookies = document.cookie.split("; ");
 		for (var i = 0; i < cookies.length; i++) {
 			var coValues = cookies[i].split("=");
@@ -910,7 +910,7 @@
 	<!-- locale -->
 <!-- 	<div style="position: fixed; bottom: 0;"> -->
 <!-- 		<select name='locale' class="form-control"> -->
-<!-- 			<option value="ko" selected="selected">한국어</option> -->
+<!-- 			<option value="ko" selected="selected">?쒓뎅??/option> -->
 <!-- 			<option value="en">EN</option> -->
 <!-- 			<option value="cn">CN</option> -->
 <!-- 			<option value="jp">JP</option> -->

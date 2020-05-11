@@ -70,110 +70,90 @@
 										src="http://placehold.it/900x300/f39c12/ffffff&text=I+Love+Bootstrap"
 										alt="Third slide">
 
-									<div class="carousel-caption"></div>
-								</div>
-							</div>
-							<a class="left carousel-control" href="#carousel-example-generic"
-								data-slide="prev"> <span class="fa fa-angle-left"></span>
-							</a> <a class="right carousel-control"
-								href="#carousel-example-generic" data-slide="next"> <span
-								class="fa fa-angle-right"></span>
-							</a>
-						</div>
-					</div>
-					<!-- /.box-body -->
-				</div>
-				<%-- <div class="box box-primary" id="toeicList">
-            <h4 class="box-title" style="padding-left: 3%;">다음 토익시험 일정</h4>
-
-          <div class="table-responsive">
-            <table class="table">
-              <tr>
-                <th style="width:50%;padding-left: 25%;">시험일자  </th>
-                <td style="padding-left: 10%;"> ${exDate}</td>
-              </tr>
-              <tr>
-                <th style="width:50%;padding-left: 25%;">접수마감  </th>
-                <td style="padding-left: 10%;">${recepShedule}</td>
-              </tr>
-              <tr>
-                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
-                <td style="padding-left: 10%;">${dateRls}</td>
-              </tr>
-            </table>
+                    <div class="carousel-caption">
+                      
+                    </div>
+                  </div>
+                </div>
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                  <span class="fa fa-angle-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                  <span class="fa fa-angle-right"></span>
+                </a>
+              </div>
+            </div>
+            <!-- /.box-body -->
           </div>
-				</div> --%>
+		
+	<div class="row">
+     <div class="col-md-12">
+       <div class="nav-tabs-custom">
+         <ul class="nav nav-tabs">
+           <li class="active"><a href="#info" data-toggle="tab"> 토익다음 시험</a></li>
+		   <li><a href="#pwd" data-toggle="tab"  aria-expanded="true"> 토익스피킹 다음 시험</a></li>
+            </ul>
+            
+            <!-- form  -->
+            
+           	<div class="tab-content">
+	           	<div class="tab-pane active" id="info"><!-- 상위 태그 -->
+	           		<div class="form-group"><!-- 이안에내용 -->
+		             	 <div class="table-responsive"><!-- 내용시작 -->
+				            <table class="table">
+				              <tr>
+				                <th style="width:50%;padding-left: 25%;padding-top: 4%;">시험일자  </th>
+				                <td style="padding-left: 10%;padding-top: 4%;"><a href="https://appexam.ybmnet.co.kr/toeic/receipt/receipt.asp"> ${exDate}</a></td>
+				              </tr>
+				              <tr>
+				                <th style="width:50%;padding-left: 25%;">접수마감  </th>
+				                <td style="padding-left: 10%;">${recepShedule}</td>
+				              </tr>
+				              <tr>
+				                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
+				                <td style="padding-left: 10%;">${dateRls}</td>
+				              </tr>
+				            </table>
+				          </div> <!-- 내용끝 -->
+		                         	
+		                </div>
+		          </div>
+	    <div class="tab-pane" id="pwd"><!-- 상위 태그 -->
+				<div class="form-group">
+			       <div class="table-responsive"><!-- 내용시작 -->
+		            <table class="table">
+		              <tr>
+		                <th style="width:50%;padding-left: 25%;padding-top: 4%;">시험일자  </th>
+		                <td style="padding-left: 10%;padding-top: 4%;"><a href="https://appexam.ybmnet.co.kr/toeicswt/receipt/receipt.asp"> ${exDateS}</a></td>
+		              </tr>
+		              <tr>
+		                <th style="width:50%;padding-left: 25%;">접수마감  </th>
+		                <td style="padding-left: 10%;">${recepSheduleS}</td>
+		              </tr>
+		              <tr>
+		                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
+		                <td style="padding-left: 10%;">${dateRlsS}</td>
+		              </tr>
+		            </table>
+		          </div> 
+                </div> 
+		<!--  form-group 끝          -->
+	
+         	 </div>
+       <!-- /.tab-pane -->
+        </div>
+      <!-- /.tab-content -->
+      </div>
+      <!-- /.nav-tabs-custom -->
+    </div>
+	<!-- /.col -->
+   </div>
+   <!-- /.row -->
+        
+</div>
+<!-- /.col -->
 
-				<div class="row">
-
-					<div class="col-md-12">
-						<div class="nav-tabs-custom">
-							<ul class="nav nav-tabs">
-								<li class="active"><a href="#info" data-toggle="tab">
-										토익다음 시험</a></li>
-								<li><a href="#pwd" data-toggle="tab"> 토익스피킹 다음 시험</a></li>
-							</ul>
-
-							<!-- form  -->
-
-							<div class="active tab-pane" id="info">
-								<!--               	<form class="form-horizontal"> -->
-
-							</div>
-							<div class="table-responsive">
-								<!-- 내용시작 -->
-								<table class="table">
-									<tr>
-										<th style="width: 50%; padding-left: 25%; padding-top: 4%;">시험일자
-										</th>
-										<td style="padding-left: 10%; padding-top: 4%;">
-											${exDate}</td>
-									</tr>
-									<tr>
-										<th style="width: 50%; padding-left: 25%;">접수마감</th>
-										<td style="padding-left: 10%;">${recepShedule}</td>
-									</tr>
-									<tr>
-										<th style="width: 50%; padding-left: 25%;">성적발표일</th>
-										<td style="padding-left: 10%;">${dateRls}</td>
-									</tr>
-								</table>
-							</div>
-							<!-- 내용끝 -->
-
-
-						</div>
-						<!-- /. -->
-
-						<!--                 </form> -->
-						<!-- /.form-horizontal -->
-
-						<div class="tab-pane" id="pwd">
-							<form class="form-horizontal" action="" method="" onsubmit="">
-								<div class="">
-									<div class=""></div>
-									<div class="">
-
-
-										<!--  내용쓰기 -->
-										<input type="hidden" class="form-control " placeholder=""
-											id="getPlanId">
-
-									</div>
-
-								</div>
-							</form>
-						</div>
-						<!-- /.tab-pane 강사로 변경 -->
-					</div>
-					<!-- /.tab-content -->
-				</div>
-				<!-- /.nav-tabs-custom -->
-
-			</div>
-			<!-- /.col -->
-
-			<div class="col-md-6">
+		<div class="col-md-6">
 
 				<!-- Full Calendar -->
 				<div class="box box-primary">
@@ -184,15 +164,15 @@
 					<!-- /.box-body -->
 				</div>
 				<!-- /.box -->
-			</div>
-			<!-- /.col -->
+			
+		</div>
+		<!-- /.col -->
 		</div>
 		<!-- /.row -->
-		<div></div>
-	</section>
+</section>
+<!-- /.content -->
 
 	<!-- 수정모달창(이벤트 클릭) -->
-
 	<div class="modal fade" id="modalPop">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -432,7 +412,6 @@
 		
 		todayClass();
 	});
-	
 </script>
 </body>
 </html>

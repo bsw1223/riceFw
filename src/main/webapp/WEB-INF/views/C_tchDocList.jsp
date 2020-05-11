@@ -13,6 +13,7 @@
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
+	<div class="col-md-2" style="margin: 20px;"></div>
 		<h1>
 			<c:out value='${sjctName}' />
 		</h1>

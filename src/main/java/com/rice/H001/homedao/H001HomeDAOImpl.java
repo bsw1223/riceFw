@@ -98,11 +98,30 @@ public class H001HomeDAOImpl implements H001HomeDAO {
 		String selectToeicDate= sqlsession.selectOne("mapper.Home.selectToeicDate");
 		return selectToeicDate;
 	}
+	@Override
+	public String selectToeicDateS() {
+		
+		String selectToeicDateS= sqlsession.selectOne("mapper.Home.selectToeicDateS");
+		return selectToeicDateS;
+	}
 
 	@Override
 	public List<Map<String, Object>> selectDdayList() {
 		List<Map<String, Object>> selectDdayList= sqlsession.selectList("mapper.Home.selectDdayList");
 		return selectDdayList;
+	}
+
+	@Override
+	public void updateToeicSheduleS(H001HomeVO h001HomeVO) {
+		//System.out.println("dao : "+h001HomeVO.toString());
+				sqlsession.update("mapper.Home.updateToeicSheduleS",h001HomeVO);
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> selectDdayListS() {
+		List<Map<String, Object>> selectDdayListS= sqlsession.selectList("mapper.Home.selectDdayListS");
+		return selectDdayListS;
 	}
 	
 	// 오늘 수업 목록 get
