@@ -51,9 +51,7 @@ $(document).ready(function(){
 					 +"	</a>"
 					 +"</li> ";
 			
-			
-<<<<<<< HEAD
-var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
+	var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
 			       +"<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">"
 				   +"<button type=\"button\" class=\"btn btn-block btn-info btn-xs btn-warning\">마 이 페 이 지 </button>"
 		           +"	</a>"
@@ -72,30 +70,7 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 				   +" </div>"
 				   +" <div class=\"pull-right\">"
 				   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
-				   +" </div></li></ul></li>";
-=======
-	var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
-				       +"<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">"
-					   +"<button type=\"button\" class=\"btn btn-block btn-info btn-xs\">마 이 페 이 지 </button>"
-			           +"	</a>"
-			           +"<ul class=\"dropdown-menu\">"
-					   +"	<li class=\"user-header\">"
-					   /* +"	 <img src=\"${contextPath}/resources/dist/img/user2-160x160.jpg\" class=\"img-circle\" alt=\"User Image\">" */
-					   +"<p>"
-					   +memName+" "+"-"+" "+authName
-					  /*  +" <small>Member since Nov. 2012</small>" */
-					   +" </p>"
-					   +"</li>"
-					   +"</li>"
-					   +"<li class=\"user-footer\">"
-					   +" <div class=\"pull-left\">"
-					   +"  <a href=\"../../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
-					   +" </div>"
-					   +" <div class=\"pull-right\">"
-					   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
-					   +" </div></li></ul></li>";
->>>>>>> refs/remotes/origin/master
-				   
+				   +" </div></li></ul></li>";				   
 
 	if(eval(memNum)==undefined) {
 		$('li#insertTag').after(preLogInTag);
