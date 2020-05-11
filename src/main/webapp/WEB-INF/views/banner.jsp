@@ -12,10 +12,10 @@
 <body>
     <div id="carousel_section">
         <ul>
-            <li> <img src="https://postfiles.pstatic.net/MjAyMDA1MDdfMTAx/MDAxNTg4ODI3ODM2NDgx.C801SmNAwwUzChDuskoY-Yrak83FcDzZLb5KXMycds8g._Dw3B4qBOIA3tXmspqf5V8dsrogjU89JVlw4nLc5MVQg.PNG.heeee154/banner1.png?type=w773"></li>
-            <li> <img src="https://postfiles.pstatic.net/MjAyMDA1MDdfMjky/MDAxNTg4ODI3ODUxNzAx.iXvHglSTUnUkLEg9GJiNO-UTXFThc7QyI3Lobj9HHu8g.XxSTxYGU2645-BGDYCmnMCNJ9cUH5GP-OxcUnMM4H6sg.PNG.heeee154/banner2.png?type=w773"></li>
-            <li> <img src="https://postfiles.pstatic.net/MjAyMDA1MDdfMjAw/MDAxNTg4ODI3ODUxNzEx.qWIg21Dd8RxurEiGfv6v6wue1-JpJUFqOO9DB5qO1zcg.1w_W3_lVc2ROZzhzitlsd62CZkGiyx_AuqK4JBgi-Bwg.PNG.heeee154/banner3.png?type=w773"></li>
-            <li> <img src="https://postfiles.pstatic.net/MjAyMDA1MDdfMTAw/MDAxNTg4ODI3ODUxNzE0.UbV_YrbSL1rDKCbxR7B7VpEzztXV2iLf06iHccjkfAcg.3RFmNIKwQxuvnMd3YjCQUOoI4ccWyjACgGc8AWQLk4gg.PNG.heeee154/banner4.png?type=w773"></li>
+            <li> <img src="${contextPath}/resources/img/banner1.png"></li>
+            <li> <img src="${contextPath}/resources/img/banner2.png"></li>
+            <li> <img src="${contextPath}/resources/img/banner3.png"></li>
+            <li> <img src="${contextPath}/resources/img/banner4.png"></li>
         </ul>
     </div>
 </body>

@@ -3,7 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%@ include file="header.jsp"%>
+<style>
+#banner{
+border: 1px solid;
+width: 200px;
+float: left;
+padding: 10px;
+margin-left: 30px;
+margin-top: 90px;
+min-width:150px;
+}
 
+@media screen and (max-width: 1500px){
+#banner{
+	display: none;
+}}
+</style>
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -115,6 +130,9 @@
 			
 		</div>
 		<!-- /.col -->
+			<div id="banner">
+				<%@ include file="banner.jsp"%>
+			</div>
 		</div>
 		<!-- /.row -->
 </section>
