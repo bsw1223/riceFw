@@ -70,6 +70,7 @@ min-width:150px;
 
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400,700&display=swap&subset=korean" rel="stylesheet">
 <body>
 	<div class="content-wrapper">
 		<section class="content-header">

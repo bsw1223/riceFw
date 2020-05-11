@@ -119,7 +119,7 @@ min-width:150px;
 		<div class="col-md-6">
 
 				<!-- Full Calendar -->
-				<div class="box box-primary">
+				<div class="box box-warning">
 					<div class="box-body">
 						<div id='calendar'></div>
 						<!-- /#calendar -->

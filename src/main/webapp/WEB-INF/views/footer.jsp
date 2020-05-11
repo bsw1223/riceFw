@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
+
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.18
@@ -10,7 +11,6 @@
     <strong>Copyright &copy; 2014-2019 <a href="../../../">RiceLMS</a>.</strong> All rights reserved.
   </footer>
 
-</div>
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
