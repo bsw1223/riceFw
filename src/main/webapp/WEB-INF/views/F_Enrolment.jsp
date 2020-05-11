@@ -33,7 +33,7 @@
 				                <div class="form-group  col-sm-12">
 				                 <label for="" class="col-sm-12" id="searchTeacherJsp">강사선택</label>
 										 <select class="form-control" id="teacherIdJsp">
-				                     <option class="" id="" value="teaINJsp">강사를 선택해 주세요</option>
+				                     <option class="" id="teaINJsp" value="">강사를 선택해 주세요</option>
 				                  </select>
 								</div>
 								<div class="form-group  col-sm-12">
@@ -43,10 +43,6 @@
 								<button type="button" class="btn btn-primary col-sm-12" id="searchOpenClT">검색</button>
 								</div>
 							</form>	
-		
-		
-						
-						
 						
 						</div>
 					</div>
@@ -59,19 +55,16 @@
 						<h3 class="box-title">강의 목록</h3>
 						
 						<div class="box-tools pull-right">
-		                	<button type="button" class="btn btn-box-tool" data-widget="collapse">
-		                		<i class="fa fa-minus"></i>
-		                	</button>
 		              	</div>
 					</div>
 					<!-- /.box-header -->
-					<div class="box-body table-responsive no-padding">
+					<div class="box-body table-responsive no-padding"  style="overflow: auto; height:550px">
 						<table class="table table-hover">
-							<tbody id="openClassList">
-								<tr>
+							<tbody id="openClassList" >
+								<tr class="sticky-header">
 									<th>선택</th>
 									<th>과정명</th>
-									<th>선생님</th>
+									<th>강사명</th>
 									<th>일 시</th>
 									<th>강의 설명</th>
 									<th>수강료</th>
@@ -79,7 +72,10 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="form-group">
+						
+					</div>
+					<!-- /.box-body -->
+					<div class="box-body ">
 							<button id="cartButton" class="btn btn-primary pull-right"
 								style="margin-right: 5px;">
 								<i class=""></i> 장바구니
@@ -88,9 +84,7 @@
 								onclick="">수강신청</button>
 								<i></i> 
 							
-						</div>
 					</div>
-					<!-- /.box-body -->
 				</div>
 				<!-- /.box -->
 			</div>
@@ -131,6 +125,92 @@
 					</div>
 				</form>
 <!-- 				/.modal-footer -->
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	
+	
+	
+	<!-- 	강의목록 클릭  modal -->
+	<div class="modal fade" id="lecClickModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">강의정보</h4>
+					
+				</div>
+<!-- 				/.modal-header -->
+			 <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Bordered Table</h3>
+            </div>
+<!--             /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered" id ="clInfoTable">
+              
+                <tr>
+                  <th>일수/시간</th>
+                  <td>Task</td>
+                  <th>장소</th>
+                  <td>Label</td>
+                </tr>
+                <tr>
+                  <th>강의실</th>
+                  <td>Update software</td>
+                  <th>강사</th>
+                  <td>55%</td>
+                </tr>
+                <tr>
+                  <th>인원</th>
+                  <td>Clean database</td>
+                  <th>가격</th>
+                  <td>70%</td>
+                </tr>
+               
+              </table>
+            </div>
+<!--             /.box-body -->
+          
+          </div>
+<!--           /.box -->
+
+			          <div class="box">
+			            <div class="box-header">
+			              <h3 class="box-title">교육 과정  & 일정</h3>
+			            </div>
+			<!--             /.box-header -->
+			            <div class="box-body no-padding">
+				          <div class="box-body">
+				            <!-- /.box-header -->
+				              
+				                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+				              
+				            <!-- /.box-body -->
+				          </div>
+					          <!-- /.box -->
+			            </div>
+			<!--             /.box-body -->
+			          </div>
+			<!--           /.box -->
+			        </div>
+			<!--         /.col -->
+					<div class="modal-footer modalBtnContainer-addEvent">
+						<button id="cartButtonModal" class="btn btn-primary pull-right"
+							style="margin-right: 5px;">
+							<i class=""></i> 장바구니
+						</button>
+						<button  id="insertSubModal"	class="btn btn-primary pull-right" style="margin-right: 5px;" onclick="">수강신청</button>
+							<i></i> 
+					</div>
+				
 			</div>
 			<!-- /.modal-content -->
 		</div>
@@ -211,67 +291,117 @@ $(document).ready(function(){
 		data : {},
 		success : function(enrolmentInfo) 
 				{
-					for(i in enrolmentInfo){
-						
-					getMemName = enrolmentInfo[i].MEMNAME;
-					getOpenClassName = enrolmentInfo[i].OPENCLASSNAME;
-					getClassCapacity = enrolmentInfo[i].CLASSCAPACITY;
-					getClassdesc = enrolmentInfo[i].CLASSDESC;
-					getSubid = enrolmentInfo[i].SUBID;
-					getMemNum = enrolmentInfo[i].MEMNUM;
-					getOpenclassId = enrolmentInfo[i].OPENCLASSID;
-					
-					getOpenStartTime = enrolmentInfo[i].OPENSTARTTIME
-					getOpenEndTime = enrolmentInfo[i].OPENENDTIME
-					getOpenStartDate = enrolmentInfo[i].OPENSTARTDATE;
-					getOpenEndDate = enrolmentInfo[i].OPENENDDATE;
-					
-					getClassPrice = enrolmentInfo[i].CLASSPRICE;
-					getClassId = enrolmentInfo[i].CLASSID;
-					
-					classMon = enrolmentInfo[i].CLASSMON;
-					classTue = enrolmentInfo[i].CLASSTUE;
-					classWed = enrolmentInfo[i].CLASSWED;
-					classThur = enrolmentInfo[i].CLASSTHUR;
-					classFri = enrolmentInfo[i].CLASSFRI;
-					classSat = enrolmentInfo[i].CLASSSAT;
-					classSun = enrolmentInfo[i].CLASSSUN;
-
-					if(classSun=='y'){dayArray.push(" 일  ");}
-					if(classMon=='y'){dayArray.push(" 월  ");}
-					if(classTue=='y'){dayArray.push(" 화  ");}
-					if(classWed=='y'){dayArray.push(" 수  ");}
-					if(classThur=='y'){dayArray.push(" 목  ");}
-					if(classFri=='y'){dayArray.push(" 금  ");}
-					if(classSat=='y'){dayArray.push(" 토  ");}
-					var tempString =''; 
-					//console.log("dayArray : "+dayArray);
-					for(j in dayArray)(
-										tempString += dayArray[j]
-										)
-					//getClassDescFile = conrolmentInfo[i].CLASSDESCFILE;
-					addTagEnrolTable = "<tr id=\'a"+getOpenclassId+"\'>"
-										+"<td><input type=\"checkbox\" name=\"radioTagEnrol\" class=\"flat-red\" value=\""+ getOpenclassId +"\"></td>"
-										+"<td>"+ getOpenClassName + "</td>"
-										+"<td value=\'"+getMemNum+"\' calss=\"classMemName\">"+ getMemName + "</td>"
-										+"<td>"+ getOpenStartDate+"~"+ getOpenEndDate +", "+getOpenStartTime+"~"+getOpenEndTime+" , "+ tempString+ "</td>"
-										+"<td>"+ getClassdesc + "</td>"
-										+"<td value=\'"+getClassPrice+"\ class=\"classPrice\"'>"+ getClassPrice + "</td>"
-										+"<td>"+ getClassCapacity + "</td>"
-										+"</tr>"
-					$("tbody#openClassList").append(addTagEnrolTable);		
-					//console.log("tempString : "+tempString);		
-					delSubReg();
-					dayArray = [];
-					tempString = '';
-					}
-					dayArray=[];
+					startList(enrolmentInfo);
 				} 
 	});
 });
 
+function startList(enrolmentInfo){
+	console.log(enrolmentInfo);
+	for(i in enrolmentInfo){
+	
+		getMemName = enrolmentInfo[i].MEMNAME;
+		getOpenClassName = enrolmentInfo[i].OPENCLASSNAME;
+		getClassCapacity = enrolmentInfo[i].CLASSCAPACITY;
+		getClassdesc = enrolmentInfo[i].CLASSDESC;
+		getSubid = enrolmentInfo[i].SUBID;
+		getMemNum = enrolmentInfo[i].MEMNUM;
+		getOpenclassId = enrolmentInfo[i].OPENCLASSID;
+		
+		getOpenStartTime = enrolmentInfo[i].OPENSTARTTIME;
+		getOpenEndTime = enrolmentInfo[i].OPENENDTIME;
+		getOpenStartDate = enrolmentInfo[i].OPENSTARTDATE;
+		getOpenEndDate = enrolmentInfo[i].OPENENDDATE;
+		
+		getClassPrice = enrolmentInfo[i].CLASSPRICE;
+		getClassId = enrolmentInfo[i].CLASSID;
+		
+		classMon = enrolmentInfo[i].CLASSMON;
+		classTue = enrolmentInfo[i].CLASSTUE;
+		classWed = enrolmentInfo[i].CLASSWED;
+		classThur = enrolmentInfo[i].CLASSTHUR;
+		classFri = enrolmentInfo[i].CLASSFRI;
+		classSat = enrolmentInfo[i].CLASSSAT;
+		classSun = enrolmentInfo[i].CLASSSUN;
+
+		if(classSun=='y'){dayArray.push(" 일  ");}
+		if(classMon=='y'){dayArray.push(" 월  ");}
+		if(classTue=='y'){dayArray.push(" 화  ");}
+		if(classWed=='y'){dayArray.push(" 수  ");}
+		if(classThur=='y'){dayArray.push(" 목  ");}
+		if(classFri=='y'){dayArray.push(" 금  ");}
+		if(classSat=='y'){dayArray.push(" 토  ");}
+		var tempString =''; 
+		//console.log("dayArray : "+dayArray);
+	for(j in dayArray)(
+						tempString += dayArray[j]
+						)
+	//selectCountCapa(getOpenclassId);//강의실 수 세기
+	//getClassDescFile = conrolmentInfo[i].CLASSDESCFILE;
+	addTagEnrolTable = "<tr id=\'a"+getOpenclassId+"\' style=\"cursor:pointer;\">"
+						+"<td><input onclick=\"event.cancelBubble=true\" type=\"checkbox\" name=\"radioTagEnrol\" class=\"flat-red\" value=\""+ getOpenclassId +"\"></td>"
+						+"<td>"+ getOpenClassName + "</td>"
+						+"<input type=\"hidden\" value=\""+getOpenclassId+"\" class=\"hiddenId\">"
+						+"<td value=\'"+getMemNum+"\' calss=\"classMemName\">"+ getMemName + "</td>"
+						+"<td>"+ getOpenStartDate+"~"+ getOpenEndDate +", "+getOpenStartTime+"~"+getOpenEndTime+" , "+ tempString+ "</td>"
+						+"<td>"+ getClassdesc + "</td>"
+						+"<td value=\'"+getClassPrice+"\ class=\"classPrice\"'>"+ getClassPrice + "</td>"
+						+"<td>"+ getClassCapacity + "</td>"
+						+"</tr>"
+	
+	$("tbody#openClassList").append(addTagEnrolTable);		
+	//console.log("tempString : "+tempString);		
+	delSubReg();
+	dayArray = [];
+	tempString = '';
+	}
+	dayArray=[];
+	
+	getMemName = null;
+	getOpenClassName = null;
+	getClassCapacity = null;
+	getClassdesc  = null;
+	getSubid =  null;
+	getMemNum =  null;
+	getOpenclassId = null;
+	
+	getOpenStartTime = null;
+	getOpenEndTime = null;
+	getOpenStartDate = null;
+	getOpenEndDate = null;
+	
+	getClassPrice = null;
+	getClassId = null;
+	
+};
+
+
+//강의인원 추가
+
+// function selectCountCapa(getOpenclassId){
+// 	getOpenclassId=eval(getOpenclassId);
+// 	console.log("getOpenclassId:"+getOpenclassId);
+// 	var getOpenclassIdJ = {
+// 			openclassId:getOpenclassId
+// 	};
+// 	//getOpenclassIdJ=eval(getOpenclassIdJ);
+// 	console.log(getOpenclassIdJ);
+// 	$.ajax({
+// 		type : "post",
+// 		async : true,
+// 		contentType: 'application/json',
+// 		url : "selectCountCapa",
+// 		data : JSON.stringify(getOpenclassIdJ),
+// 		success : function(selectCountCapa) 
+// 				{
+// 					console.log("selectCountCapa : "+selectCountCapa);
+// 				} 
+// 	});
+// }
+
 //체크된 값 추출
 $(document).on('click','#insertSub',function(){
+	holdDel();
 	payClassTag =null;
 	// 체크 되어 있는 값 추출
 	for (var i = 1; i < $('table tr').length; i++) {
@@ -483,7 +613,7 @@ function teaBasic(){
 	if(!getSubIdJsp){
 	//console.log("체크된 값 없음");
 	$('#teacherIdJsp > option').remove();
-	var tempMassage = "<option class=\"\" id=\"\" value=\"teaINJsp\">강사를 선택해 주세요</option>";
+	var tempMassage = "<option class=\"\" id=\"teaINJsp\" value=\"\">강사를 선택해 주세요</option>";
 	$('#teacherIdJsp').append(tempMassage);
 	//console.log("getSubIdJsp : "+getSubIdJsp);
 	$.ajax({
@@ -529,7 +659,7 @@ function teacherClick(){
 	if(getSubIdJsp){
 	//console.log("체크된 값 있음");
 	$('#teacherIdJsp > option').remove();
-	var tempMassage = "<option class=\"\" id=\"\" value=\"teaINJsp\">강사를 선택해 주세요</option>";
+	var tempMassage = "<option class=\"\" id=\"teaINJsp\" value=\"\">강사를 선택해 주세요</option>";
 	$('#teacherIdJsp').append(tempMassage);
 	//console.log(getSubIdJsp);
 	$.ajax({
@@ -561,7 +691,7 @@ function teacherClick(){
 				}//for문 종료
 				
 				$('#teacherIdJsp > option').remove();
-				var tempMassage = "<option class=\"\" id=\"\" value=\"teaINJsp\">강사를 선택해 주세요</option>";
+				var tempMassage = "<option class=\"\" id=\"teaINJsp\" value=\"\">강사를 선택해 주세요</option>";
 				$('#teacherIdJsp').append(tempMassage);
 			for(i in teaIdSearch){
 				var searchTeaIdNameS = "<option class=\"\" id=\"\" value=\""+teaIdSearch[i]+"\">"
@@ -644,8 +774,10 @@ $(document).on("click","#cartButton",function(){
 	wholeCartT= [];
 	wholeCartA = null;
 	holeCartMap = null;
-	
+	var tempLength = 0;
+	var nullCheck = 0;
 	// 체크 되어 있는 값 추출
+	
 	for (var i = 1; i < $('table tr').length; i++) {
 	// table 중 tr이 i번째 있는 자식중에 체크박스가 체크중이면
 	//#openClassList > tr:nth-child(18) > td:nth-child(1) > input
@@ -654,6 +786,7 @@ $(document).on("click","#cartButton",function(){
 	
 	
 	if (chk == true) {
+	nullCheck++
 	// 그 i 번째 input text의 값을 가져온다.
 	//강의 id
 	classIdCart.push($('table tr').eq(i).find('input[type="checkbox"]').val());
@@ -671,23 +804,29 @@ $(document).on("click","#cartButton",function(){
 	var cPriceM =$('table tr').eq(i).find('td:eq(5)').text();
 	
 	
-	orderIdGet(subCartOrderId,cIdM,cNameM,cPriceM,memnum,wholeCartT);//오더넘버 받아오기
+	orderIdGet(subCartOrderId,cIdM,cNameM,cPriceM,memnum,wholeCartT,tempLength);//오더넘버 받아오기
 	//console.log("subCartOrderId(1) :"+subCartOrderId);
 		
-	}//if문 끝	
+	}//if문 끝
+	
 	}//for문 끝
-	//console.log(wholeCartMap);
-	//console.log("wholeCartT type : "+typeof(wholeCartT));
-	//console.log(wholeCartA);
-	//console.log(wholeCartT.pop());
-	//for문 끝나고 실행
-	//console.log("wholeCartA22222 : "+wholeCartA);//값안들어옴
-	//insertCart(wholeCartA);
+
+
+	
+	if(nullCheck==0){
+		alert("선택된 강의가 없습니다.");
+		location.reload();
+	}else{
+		alert("장바구니에 추가되었습니다.");
+		location.reload();
+		tempLength=0;
+	}
+	
 });
 
 
 //주문번호 받기
-function orderIdGet(subCartOrderId,cIdM,cNameM,cPriceM,memnum,wholeCartT){
+function orderIdGet(subCartOrderId,cIdM,cNameM,cPriceM,memnum,wholeCartT,tempLength){
 $.ajax({
 	type : "post",
 	async : true,
@@ -696,7 +835,6 @@ $.ajax({
 	data : {},
 	success : function(partnerOrderId) 
 			{
-				
 				//console.log("orderid : "+partnerOrderId.ENRID);
 				subCartOrderId = partnerOrderId.ENRID;	
 				wholeCartMap= {
@@ -711,16 +849,13 @@ $.ajax({
 				wholeCartA=JSON.stringify(wholeCartT);
 				//console.log(wholeCartA);
 				//컨트롤러로 전송
-				
-					insertCart(wholeCartMapA);
-				
+					insertCart(wholeCartMapA,tempLength);
 				}
-			
 });
 };
 
 //데이터 넣기
-function insertCart(wholeCartT){
+function insertCart(wholeCartT,tempLength){
 	console.log(wholeCartT);
 	$.ajax({
 		type : "post",
@@ -751,8 +886,11 @@ function modalCloseLec() {
 	classDateKakao = [];
 	classPriceKakao = [];
 	classTeaIdKakao = [];
+	wholeEnrolMap='';
+	wholeEnrol='';
 	totalCharge=0;
 	payClassTag ='';
+	wholeEnrolT=[];
 	payTotal =0;
 // 	$('div#allAdd').remove();
 // 	$('div#table-responsive').remove();
@@ -763,11 +901,160 @@ function modalCloseLec() {
 	$('input#openclassNameS').val();
 	$('input#wholeEnrol').val();
 }					
-					
-					
-					
+var cIdHidden = null;
+//강의목록 클릭 이벤트
+//:gt(0) 0보다큰 인덱스
+$(document).on('click',"#openClassList > tr:gt(0)", function(){     
+	//$("#openClassList > tr:gt(0) > td:eq(0)").off();
+    var str = ""
+    var trArr = new Array();    // 배열 선언
+    var tr = $(this);
+    var td = tr.children();
+  
+    // 현재 클릭된 Row(<tr>)
+    td.each(function(i){
+    	trArr.push(td.eq(i).text());
+    });
+    //var classId = td.eq(0).$('input[name=radioTagEnrol]').attr("value");
+    //$("input[name=jmnote]").attr("value")
+
+    console.log("trArr : " + trArr);
+	//강의id
+    cIdHidden = tr.find('.hiddenId').val();
+	console.log(typeof(cIdHidden));
+	var cIdHiddenE = eval(cIdHidden);
+	var openclassIdGet = {
+		openclassId:cIdHiddenE
+	}
+    console.log("cIdHidden : "+ cIdHidden);
+    //강의명
+    var titleCl = trArr[1];
+    //강사명
+    var nameTea = trArr[3];
+    //일 시
+    var timeCl = trArr[4];
+    //설 명 
+    var descCl = trArr[5];
+    //가 격 
+    var priceCl = trArr[6];
+    //인원수
+    var capaCl = trArr[7];
+//     console.log("titleCl : "+titleCl);
+//     console.log("nameTea : "+nameTea);
+//     console.log("timeCl : "+timeCl);
+//     console.log("descCl : "+descCl);
+    //강의실정보 받아와야함
+   $('#clInfoTable > tbody > tr:nth-child(1) > td:nth-child(2)').text(timeCl);
+   $('#clInfoTable > tbody > tr:nth-child(2) > td:nth-child(4)').text(nameTea);
+   $('#lecClickModal > div > div > div.col-md-12 > div:nth-child(2) > div.box-body.no-padding > div > p').text(descCl);
+   $('#clInfoTable > tbody > tr:nth-child(3) > td:nth-child(4)').text(priceCl);
+   $('#clInfoTable > tbody > tr:nth-child(3) > td:nth-child(2)').text(capaCl);
+   $('#lecClickModal > div > div > div.col-md-12 > div:nth-child(1) > div.box-header.with-border > h3').text(titleCl);
+//강의실 정보받아오기
+   $.ajax({
+		type : "post",
+		async : true,
+		contentType: 'application/json',
+		url : "selectBulCl",
+		data : JSON.stringify(openclassIdGet),
+		traditional : true,
+		success : function(selectBulCl) 
+				{
+					console.log(selectBulCl);
+					var clBulName = selectBulCl.BULNAME;
+					var clNum = selectBulCl.CLASSNUMBER;
+					console.log("clBulName : "+clBulName);
+					console.log("clNum : "+clNum);
+					 $('#clInfoTable > tbody > tr:nth-child(1) > td:nth-child(4)').text(clBulName);
+					 $('#clInfoTable > tbody > tr:nth-child(2) > td:nth-child(2)').text(clNum+" 호");
+  				     $('#lecClickModal').modal();
+				}
+  	 });
+});
+
+//결제 클릭하면 모든 클릭 제거 후 openclassId에 해당하는 체크박스만 체크하여 결제 실행
+$(document).on('click','#insertSubModal',function(){
+	 $("input[name=radioTagEnrol]").prop("checked", false);
+	 var checkCheckbox = "a"+cIdHidden;
+	 $(eval('\"tr#'+checkCheckbox+' > td > input\"')).prop("checked", true);//결제할 체크박스에 체크
+	 $('#lecClickModal').modal("hide");
+	 $('#insertSub').trigger("click");
+});
+
+//결제 클릭하면 모든 클릭 제거 후 openclassId에 해당하는 체크박스만 체크하여 장바구니 실행
+$(document).on('click','#cartButtonModal',function(){
+	 $("input[name=radioTagEnrol]").prop("checked", false);
+	 var checkCheckbox = "a"+cIdHidden;
+	 $(eval('\"tr#'+checkCheckbox+' > td > input\"')).prop("checked", true);//결제할 체크박스에 체크
+	 $('#lecClickModal').modal("hide");
+	 $('#cartButton').trigger("click");
+});
+
+//셀렉트 박스 
+	
+	
+	$(document).on('click','#searchOpenClT',function(){
+		//$("#셀렉트박스ID option:selected").val();
+		//subcode,memnum, searchKey 전송 
+// 		var subCode = JSON.stringify($("#subIdJsp option:selected").val());
+		
+// 		var number = subCode;
+// 		var length = 2;
+
+// 		number=number+"";//number를 문자열로 변환하는 작업
+// 		var str="";
+// 		for(var i=0;i<length-number.length;i++){
+// 		  str=str+"0";
+// 		}
+// 		str=str+number;
+// 		console.log(str);
+		
+// 		if(!subCode){subCode=' ';}
+// 		console.log("subcode : "+subCode);
+		
+// 		var memNum = JSON.stringify(eval($("#teacherIdJsp option:selected").val()));
+// 		if(!memNum){memNum=' ';}
+// 		console.log("memNum : "+memNum);
+		
+// 		var searchKey = eval(JSON.stringify($("#searchKeyword").val()));
+// 		console.log("searchKey : "+searchKey);
+// 		var submitData = {
+// 				subCode:str,
+// 				memNum:memNum,
+// 				searchKey:searchKey
+// 		}
+		var submitData = {
+				subCode: $("#subIdJsp option:selected").val(),
+				memNum: $("#teacherIdJsp option:selected").val(),
+				searchKey: $("#searchKeyword").val()
+		}
+		var submitData =JSON.stringify(submitData);
+		
+		$.ajax({
+				type : "post",
+				async : true,
+				contentType: 'application/json',
+				url : "searchOpenClT",
+				data : submitData,
+				traditional : true,
+				success : function(enrolmentInfo) 
+						{
+							$('#openClassList > tr:gt(0)').remove();
+							startList(enrolmentInfo);
+
+						}
+		  	
+		});
+		
+		
+	})
 
 
 
 </script>
+<style>
+
+.sticky-header th { position: sticky; top: -1px; left:0; background-color:white;} 
+</style>
 </html>
+

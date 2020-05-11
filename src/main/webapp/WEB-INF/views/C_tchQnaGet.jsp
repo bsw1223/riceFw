@@ -6,7 +6,29 @@
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous">
 </script>
+<style>
 
+#nav{
+	border:1px;
+	border-left:0px;
+	border-right:0px;
+	border-color:#e0e0e0;
+	border-style:solid;
+	padding:5px;
+	background-color:#f5f5f5;
+
+}
+#boContent{
+	resize: none;
+	background-color:#FFFFFF;
+	border:0px;
+}
+#boTitle{
+	font-size:1.4em;
+	
+}
+
+</style>
 
 <body>
 
@@ -28,24 +50,32 @@
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
 					<div class="box box-primary">
+						<div class="box-header">
+							<h1 class="box-title">QnA 게시판</h1>
+						</div>
 						<div class="box-body">
-							<h2 class="box-title">QnA 게시판</h2>
-
-							<!--title -->
-							<div class="form-group">
-								<label>제목</label> <input class="form-control" name="boTitle" value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
-							</div>
-							<!-- content -->
-							<div class="form-group">
-								<label>내용</label>
-							<textarea  class="form-control" name="boContent" rows='15' style="resize: none;"
-														readonly="readonly" ><c:out value ="${list.boContent}"/></textarea>
-							</div>
-							<!-- content -->
-							<div class="form-group">
-								<label>작성자</label> <input type="text" class="form-control"	name="memId" value='<c:out value ="${list.memId}"/>'
-														readonly="readonly" />
-							</div>
+							<div class="form-group" id='boTitle'>
+							<c:out value ="${list.boTitle}"/>
+						</div>
+						<div class="form-group" id="nav">
+								<!-- 작성자 -->
+								<span style="margin-right:20px;">
+									<label>작성자 </label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.memId}"/></span>
+								</span>
+								<!-- 작성일 -->
+								<span style="margin:20px;">
+									<label>작성일</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boRegdate}"/></span>
+								</span>
+								<span style="margin:20px;">
+									<label>조회수</label> <span>&nbsp;&nbsp;&nbsp;${list.boViews}</span>
+								</span>
+						</div>
+						<!-- content -->
+						<div class="form-group">
+							 <textarea  class="form-control" name="boContent" id="boContent"rows='15' 
+										readonly="readonly" ><c:out value ="${list.boContent}"/></textarea>
+						</div>
+							<!-- /content -->
 							<!-- file -->
 							<div class="panel panel-default">
 								<div class="panel-heading">Files</div>
@@ -58,55 +88,59 @@
 							</div>
 							<!-- box footer -->
 							<div class="box-footer">
-								<button type="button" class="btn btn-default btn-xs">
-									<i class="fa fa-eye"></i> ${list.boViews}</button>
-								<button type="button" class="btn btn-default btn-xs">
-									<i class="fa fa-thumbs-o-up"></i>${list.boLikes}</button>
-								<button data-oper="list" class="btn btn-default" 
-										onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
+								<div class="pull-left">
+									<button type="button" class="btn btn-default btn-xs">
+											<i class="fa fa-thumbs-o-up"></i>${list.boLikes}</button>
+								</div>
+								<div class="pull-right">	
+									<button data-oper="list" class="btn btn-default" 
+											onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+				<!-- comment -->
+					<div class='row'>
+						<div class="col-md-12">
+							<div class="box">
+								<div class="box-header">
+									<i class="fa fa-fw fa-comments"></i>
+										<h3 class="box-title">댓글작성</h3>
+								</div>
+								<form>
+									<input type="hidden" id='boNum' name='boNum' value='<c:out value ="${list.boNum}"/>'>
+										<div class="box-body">
+											<div class="form-group">	
+												<textarea class="form-control" rows='3' style="resize:none;"></textarea>
+											</div>
+											<%-- <div class="form-group">
+												<label for="userId">댓글 작성자</label>
+												 <input class="form-control" id="userId" name="userId" value='<c:out value ="${memId}"/>'
+														readonly="readonly">
+											</div> --%>
+											<div class="pull-right">
+												<input type="button" id="insertButton" value="전송" onclick="replysubmit()" />
+											</div>
+										</div>
+								</form>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<i class="fa fa-comments fa-fw"></i>Reply
+								</div>
+								<div class="panel-body">
+									<ul class='chat'>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-	</div>
-	<!-- comment -->
-	<div class="col-md-12">
-		<div class="box box-primary">
-			<div class="box-header with-border">
-				<i class="fa fa-fw fa-comments"></i>
-					<h3 class="box-title">댓글작성</h3>
-			</div>
-			<form>
-				<input type="hidden" id='boNum' name='boNum' value='<c:out value ="${list.boNum}"/>'>
-					<div class="box-body">
-						<div class="form-group">	
-							<label for="comtContent">댓글내용</label> 
-							<input class="form-control" id="comtContent"name="comtContent" placeholder="comment...">
-						</div>
-						<div class="form-group">
-							<label for="userId">댓글 작성자</label>
-							 <input class="form-control" id="userId" name="userId" value='<c:out value ="${memId}"/>'
-									readonly="readonly">
-						</div>
-							<input type="button" id="insertButton" value="전송" onclick="replysubmit()" />
-					</div>
-			</form>
-		</div>
-	</div>
-	<div class='row'>
-		<div class="col-md-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<i class="fa fa-comments fa-fw"></i>Reply
-				</div>
-				<div class="panel-body">
-					<ul class='chat'>
-					</ul>
-				</div>
-			</div>
-		</div>
 	</div>
 </body>
 

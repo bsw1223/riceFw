@@ -11,10 +11,29 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <html>
-<head>
+<style>
 
+#nav{
+	border:1px;
+	border-left:0px;
+	border-right:0px;
+	border-color:#e0e0e0;
+	border-style:solid;
+	padding:5px;
+	background-color:#f5f5f5;
 
+}
+#boContent{
+	resize: none;
+	background-color:#FFFFFF;
+	border:0px;
+}
+#boTitle{
+	font-size:1.4em;
+	
+}
 
+</style>
 
 <body>
 <div class="content-wrapper">
@@ -30,10 +49,10 @@
 		</ol>
 	</section>
 
-	<div class="content-wrapper">
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
+<<<<<<< HEAD
 				<div class="col-md-2">
 					<div id="banner_left">
 					
@@ -49,14 +68,22 @@
 				<div class="col-md-8">
 					<div class="box box-warning">
 						<div class="box-body">
+=======
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="box box-primary">
+						<div class="box-header">
+>>>>>>> refs/remotes/origin/master
 							<h2 class="box-title">QnA 게시판</h2>
-							
+						</div>
+							<!-- /box-header -->
+						<div class="box-body">
 							<!--title -->
-							<div class="form-group">
-								<!-- <label>제목</label>  --><h4><c:out value ="${list.boTitle}"/></h4>
+							<div class="form-group" id='boTitle'>
+								<c:out value ="${list.boTitle}"/>
 							</div>
 							
-							<div class="form-group">
+							<div class="form-group"id="nav">
 								<!-- 작성자 -->
 								<span style="margin-right:20px;">
 									<label>작성자 </label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.memId}"/></span>
@@ -71,24 +98,20 @@
 							</div>
 							<!-- content -->
 							<div class="form-group">
-								<label>내용</label>
-								 <textarea  class="form-control" name="boContent" rows='15' style="resize: none;"
-														readonly="readonly" ><c:out value ="${list.boContent}"/></textarea>
+								 <textarea  class="form-control" name="boContent" id="boContent"rows='15' 
+											readonly="readonly" ><c:out value ="${list.boContent}"/></textarea>
 							</div>
-							<!-- content -->
 							
 							<!-- files -->
 							<div class="panel panel-default">
 								<div class="panel-heading">Files</div>
-								
 								<div class="panel-body">
 									<div class="uploadResult">
-										<ul>
-										
-										</ul>
+										<ul></ul>
 									</div>
 								</div>
 							</div>
+							<!-- box-footer -->
 							<!-- 로그인한 사람과 글쓴 사람이 일치할 경우에만 수정삭제버튼 뜨도록 변경해야함 -->
 							<div class="box-footer">
 								<button data-oper="submit" class="btn btn-primary"
@@ -103,28 +126,20 @@
 									</button>
 								</div> --%>
 							</div>
-					<!-- /.box-footer -->
-						<div class='row'>
-								<div class="col-md-12">
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<i class="fa fa-comments fa-fw"></i>Reply
-										</div>
-		
-										<div class="panel-body">
-											<ul class='chat'>
-		
-											</ul>
-										</div>
-									</div>
+							<!-- chat  -->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<i class="fa fa-comments fa-fw"></i>Reply
 								</div>
+								<div class="panel-body">
+									<ul class='chat'></ul>
+								</div>
+							</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 		</section>
-	</div>
 	</div>
 </body>
 <script type="text/javascript"

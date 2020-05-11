@@ -62,6 +62,7 @@ min-width:150px;
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
+<<<<<<< HEAD
 			<!-- left column -->
 			<div class="col-md-2">
 				<div id="banner_left">
@@ -75,12 +76,17 @@ min-width:150px;
 				<div class="col-md-8">
 				<!-- general form elements -->
 				<div class="box box-warning">
+=======
+		<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="box box-info">
+>>>>>>> refs/remotes/origin/master
 					<div class="box-header">
 						<h3 class="box-title"><c:out value='${pageTitle}' /></h3>
 					</div>
-					<!-- /.box-header -->
 					<div class="box-body">
 						<form role="form" name="writeForm" action="/mypage/board/reg/${boCode}/${boURL}" method='get'>
+							<!-- boTitle -->
 							<div class="form-group">
 								<label>제목</label> <input type="text" class="form-control"
 									name='boTitle'>
@@ -91,7 +97,7 @@ min-width:150px;
 								<textarea class="form-control" id="editor" rows="3"
 									name='boContent'></textarea>
 							</div>
-
+							<!-- memNum -->
 							<div class="form-group">
 								<label>작성자</label> <input type="text" class="form-control"
 									value="${memId}" readonly="readonly">
@@ -100,6 +106,7 @@ min-width:150px;
 							<input type="hidden" class="form-control" name='memNum' value="${memNum}"> 
 							<input type="hidden" class="form-control" name='boViews' value="0"> 
 							<input type="hidden" class="form-control" name='boLikes' value="0">
+<<<<<<< HEAD
 
 							<div class="row">
 								<div class="col-lg-12">
@@ -115,9 +122,20 @@ min-width:150px;
 												
 												</ul>
 											</div>
+=======
+							<!-- file -->
+							<div class="panel panel-default">
+								<div class="panel-heading">File Attach</div>
+									<div class="panel-body">
+										<div class="form-group uploadDiv">
+											<input type="file" name="uploadFile" multiple>
+										</div>
+										<div class='uploadResult'>
+											<ul>
+											</ul>
+>>>>>>> refs/remotes/origin/master
 										</div>
 									</div>
-								</div>
 							</div>
 							<!-- /.box-body -->
 							<div class="box-footer">
@@ -126,26 +144,20 @@ min-width:150px;
 							</div>
 							<!-- /.box-footer -->
 						</form>
-						<!--  </form> -->
 					</div>
-					<!-- /.box -->
 				</div>
-				<!-- /.col-->
 			</div>
 			<div id="banner">
 					<%@ include file="banner.jsp"%>
 			</div>
 		</div>
-		<!-- ./row -->
 	</section>
-	<!-- /.content -->
 </div>
 
 
-<form id="actionForm" action="/mypage/board/${boCode}/${boURL}"
-	method='get'>
-	<input type="hidden" name="boCode" value='${boCode}'> <input
-		type="hidden" name="boURL" value='${boURL}'>
+<form id="actionForm" action="/mypage/board/${boCode}/${boURL}"method='get'>
+	<input type="hidden" name="boCode" value='${boCode}'>
+	<input type="hidden" name="boURL" value='${boURL}'>
 </form>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
