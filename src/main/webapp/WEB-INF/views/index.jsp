@@ -90,8 +90,8 @@
      <div class="col-md-12">
        <div class="nav-tabs-custom">
          <ul class="nav nav-tabs">
-           <li class="active"><a href="#info" data-toggle="tab"> 토익다음 시험</a></li>
-		   <li><a href="#pwd" data-toggle="tab"  aria-expanded="true"> 토익스피킹 다음 시험</a></li>
+           <li class="active"><a href="#info" data-toggle="tab"> 토익 일정</a></li>
+		   <li><a href="#pwd" data-toggle="tab"  aria-expanded="true"> 토익스피킹 일정</a></li>
             </ul>
             
             <!-- form  -->
@@ -107,11 +107,11 @@
 				              </tr>
 				              <tr>
 				                <th style="width:50%;padding-left: 25%;">접수마감  </th>
-				                <td style="padding-left: 10%;">${recepShedule}</td>
+				                <td style="padding-left: 10%;"><a href="https://appexam.ybmnet.co.kr/toeic/receipt/receipt.asp"> ${recepShedule}</a></td>
 				              </tr>
 				              <tr>
 				                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
-				                <td style="padding-left: 10%;">${dateRls}</td>
+				                <td style="padding-left: 10%;"><a href="https://appexam.ybmnet.co.kr/toeic/receipt/receipt.asp">${dateRls}</a></td>
 				              </tr>
 				            </table>
 				          </div> <!-- 내용끝 -->
@@ -128,11 +128,11 @@
 		              </tr>
 		              <tr>
 		                <th style="width:50%;padding-left: 25%;">접수마감  </th>
-		                <td style="padding-left: 10%;">${recepSheduleS}</td>
+		                <td style="padding-left: 10%;"><a href="https://appexam.ybmnet.co.kr/toeicswt/receipt/receipt.asp"> ${recepSheduleS}</a></td>
 		              </tr>
 		              <tr>
 		                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
-		                <td style="padding-left: 10%;">${dateRlsS}</td>
+		                <td style="padding-left: 10%;"><a href="https://appexam.ybmnet.co.kr/toeicswt/receipt/receipt.asp"> ${dateRlsS}</a></td>
 		              </tr>
 		            </table>
 		          </div> 
