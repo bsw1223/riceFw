@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,19 +13,17 @@
 
 
 </body>
-</html>
-<script language="javascript">
+<script >
 
 var obTimeOut; // clearTimeout() 함수를 이용하여 Timeout 을 취소하기위해 사용됨
 
 
-var ObjectArray = new Array ();
+var ObjectArray = new Array();
 
-ObjectArray[1] = "https://postfiles.pstatic.net/MjAyMDA1MTBfODcg/MDAxNTg5MDc4NTE2MjYx.mWPNFbwG_igTA5VPkt0yBN8-aEHmwDgIcyJH7ndFV1kg.mtK2ETIRKS5rUpaevlfuBSXNTt-wfB9gfVzA5oxzA9sg.PNG.heeee154/left1.png?type=w773";
-ObjectArray[2] = "https://postfiles.pstatic.net/MjAyMDA1MTBfMjg2/MDAxNTg5MDc4NTE2MjYw.YH9iPUMjWZpIihna3pb7lw3i-quz7EpCf_6-weiXSA0g.xjy2ru7s2SJcVdUJebWFPqJSHvUAI7F84YqKPPmdZp0g.PNG.heeee154/left2.png?type=w773";
-ObjectArray[3] = "https://postfiles.pstatic.net/MjAyMDA1MTBfMTI5/MDAxNTg5MDc4NTE2MjY1.BdFbc5PhkhlhFfPrEvsjeve7K4KZyY5XBJxUkj_WbF0g.kbTAo8hUvPsuPhEmRMH_RokwwkH3ou5pa7EzDn58FTgg.PNG.heeee154/left3.png?type=w773";
-
-
+ObjectArray[1] = "${contextPath}/resources/img/left1.png";
+ObjectArray[2] = "${contextPath}/resources/img/left2.png";
+ObjectArray[3] = "${contextPath}/resources/img/left3.png";
+console.log(ObjectArray[3]);
 var nObjectCnt = 0;	
 
 
@@ -54,3 +54,5 @@ window.onload = startAnimation;
 
 
 </script>
+
+</html>

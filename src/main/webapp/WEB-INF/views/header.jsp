@@ -50,10 +50,8 @@ $(document).ready(function(){
 					 +"	<button type=\"button\" class=\"btn btn-block btn-warning btn-xs\">L o g I n -  H e r e</button>"
 					 +"	</a>"
 					 +"</li> ";
-			
-			
-<<<<<<< HEAD
-var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
+
+	var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
 			       +"<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">"
 				   +"<button type=\"button\" class=\"btn btn-block btn-info btn-xs btn-warning\">마 이 페 이 지 </button>"
 		           +"	</a>"
@@ -73,28 +71,6 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 				   +" <div class=\"pull-right\">"
 				   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
 				   +" </div></li></ul></li>";
-=======
-	var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
-				       +"<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">"
-					   +"<button type=\"button\" class=\"btn btn-block btn-info btn-xs\">마 이 페 이 지 </button>"
-			           +"	</a>"
-			           +"<ul class=\"dropdown-menu\">"
-					   +"	<li class=\"user-header\">"
-					   /* +"	 <img src=\"${contextPath}/resources/dist/img/user2-160x160.jpg\" class=\"img-circle\" alt=\"User Image\">" */
-					   +"<p>"
-					   +memName+" "+"-"+" "+authName
-					  /*  +" <small>Member since Nov. 2012</small>" */
-					   +" </p>"
-					   +"</li>"
-					   +"</li>"
-					   +"<li class=\"user-footer\">"
-					   +" <div class=\"pull-left\">"
-					   +"  <a href=\"../../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
-					   +" </div>"
-					   +" <div class=\"pull-right\">"
-					   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
-					   +" </div></li></ul></li>";
->>>>>>> refs/remotes/origin/master
 				   
 
 	if(eval(memNum)==undefined) {
@@ -119,8 +95,8 @@ var afterLogInTag =	"<li class=\"dropdown user user-menu\">"
 		<header class="main-header">
 			<!-- Logo -->
 			<a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><img src="https://postfiles.pstatic.net/MjAyMDA1MDhfMjY4/MDAxNTg4OTE1OTczNjI5.u9BpT85POeObO8BfBE1Qxo7bvamo9JgEZ7ZDmkTIQY0g.mNANQ7Mrb9E6ZjBOXzc5DkuRMDkBSFIKDN6fsRibc_Ag.PNG.heeee154/%EB%A1%9C%EA%B3%A0%EC%88%98%EC%A0%95mini.png?type=w773"></span> <!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><img src="https://postfiles.pstatic.net/MjAyMDA1MDhfMTE5/MDAxNTg4OTE1Njc4MTY0.vjeo3DwSqaYplV2MAss1hD6pZ6U9FHHHWg12qLw2pyog.L6vD06g7je77yFACWhHRf4roFl0QJ2elqv2wNOhQET4g.PNG.heeee154/%EB%A1%9C%EA%B3%A0%EC%88%98%EC%A0%95.png?type=w773"></span>
+				<span class="logo-mini"><img src="${contextPath}/resources/img/로고수정mini.png"></span> <!-- logo for regular state and mobile devices -->
+				<span class="logo-lg"><img src="${contextPath}/resources/img/로고수정.png"></span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">

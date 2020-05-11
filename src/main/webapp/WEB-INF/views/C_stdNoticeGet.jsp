@@ -83,7 +83,6 @@ min-width:150px;
 	<!-- Main content -->
 		<section class="content">
 			<div class="row">
-<<<<<<< HEAD
 				<div class="col-md-2">
 					<div id="banner_left">
 						<img id="pp" src="">
@@ -95,11 +94,6 @@ min-width:150px;
 				</div>
 				<div class="col-xs-8">
 					<div class="box box-warning">
-=======
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<div class="box box-primary">
->>>>>>> refs/remotes/origin/master
 						<div class="box-header">
 							<h2 class="box-title">공지사항게시판</h2>
 						</div>

@@ -52,7 +52,6 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-<<<<<<< HEAD
 				<div class="col-md-2">
 					<div id="banner_left">
 					
@@ -68,12 +67,6 @@
 				<div class="col-md-8">
 					<div class="box box-warning">
 						<div class="box-body">
-=======
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<div class="box box-primary">
-						<div class="box-header">
->>>>>>> refs/remotes/origin/master
 							<h2 class="box-title">QnA 게시판</h2>
 						</div>
 							<!-- /box-header -->
