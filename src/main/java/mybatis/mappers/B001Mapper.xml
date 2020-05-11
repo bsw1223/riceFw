@@ -90,9 +90,10 @@
 	
 	<!-- 결석 data insert query -->
 	<insert id="insertAbsent" parameterType="java.util.HashMap">
-		<foreach collection="enrId" item="item" open="INSERT ALL" close=" SELECT * FROM DUAL" separator=" "> 
-			INTO ATTENDANCE(enrId,atdDate,atdCode) VALUES (#{item.enrId}, #{currentDate}, '1803')
-		</foreach>
+		<![CDATA[
+			INSERT INTO ATTENDANCE(enrId,atdDate,atdCode)
+	    		VALUES (#{enrId}, #{currentDate}, '1803')
+		]]>
 	</insert>
 	
 	<!-- 접근 가능한 IP 대역 가져오기 -->

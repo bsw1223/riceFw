@@ -43,7 +43,7 @@
 
 <body>
 
-<%@ include file="F_Fixedsidebar.jsp"%>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -61,7 +61,8 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-xs-10">
+		<div class="col-md-2"></div>
+			<div class="col-xs-8">
 				<div class="box box-primary">
 					<div class="box-header">
 						<h2 class="box-title">QnA 게시판</h2>

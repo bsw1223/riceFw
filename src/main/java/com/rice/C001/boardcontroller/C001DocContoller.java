@@ -139,7 +139,7 @@ public class C001DocContoller {
 					result_view = "C_stdQnaGet";
 				}
 				else {
-					//내가 등록한 게시물일 경우 이동페이지(수정, 삭제 버튼이 없는 페이지)
+					//내가 등록한 게시물이 아닐경우 이동페이지(수정, 삭제 버튼이 없는 페이지)
 					result_view="C_stdQna";
 				}
 			} else if (boCode.equals("2002")) {

@@ -6,9 +6,9 @@
 
 <html>
 <head>
-<!-- Content Wrapper. Contains page content -->
+
+<body>
 <div class="content-wrapper">
-	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
 			<c:out value='${sjctName}' />
@@ -19,12 +19,11 @@
 			<li class="active">스터디</li>
 		</ol>
 	</section>
-
-
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-2"></div>
+			<div class="col-md-10">
 				<div class="box box-info">
 					<div class="box-header">
 						<h3 class="box-title">스터디 게시판</h3>
@@ -84,17 +83,13 @@
 					<button data-oper="list" class="btn btn-default"
 						onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
 
-					<!-- /.box-footer -->
 				</div>
-				<!-- /.box -->
 			</div>
-			<!-- /.col -->
 		</div>
-		<!-- /.row -->
 	</section>
-	<!-- /.content -->
 </div>
-</head>
+</body>
+
 
 <script>
 $(document).ready(function(){

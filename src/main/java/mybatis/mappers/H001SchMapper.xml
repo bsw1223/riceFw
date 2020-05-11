@@ -91,6 +91,7 @@
 	
 	<insert id="insertSchInfo" parameterType="H001SchVO">
 			 <![CDATA[ 
+
 			 insert into scott.SCHEDULE
 	            (SCHTITLE, SCHSTART, SCHEND, SCHDESCRIPTION, SCHALLDAY, MEMNUM, SCHID) 
 	         VALUES(
@@ -102,7 +103,6 @@
 	            #{memNum, jdbcType=VARCHAR},
 	            #{schId, jdbcType=VARCHAR}
              )
-								
 			 ]]>
 	</insert>
 	

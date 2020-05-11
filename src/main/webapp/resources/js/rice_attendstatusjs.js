@@ -99,16 +99,20 @@ function chartRender(info) {
 			indexLabel : "{y}",
 			toolTipContent : "<b>{label}:</b> {y} (#percent%)",
 			dataPoints : [ {
+				color: "green",
 				y : Number(info.attCount),
 				label : "출석",
 				exploded : true
 			}, {
+				color: "yellow",
 				y : Number(info.lateCount),
 				label : "지각"
 			}, {
+				color: "red",
 				y : Number(info.absentCount),
 				label : "결석"
 			}, {
+				color: "gray",
 				y : Number(info.remainCount),
 				label : "남은수업"
 			}, ]

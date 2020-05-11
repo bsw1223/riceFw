@@ -10,6 +10,14 @@ public interface H001HomeDAO {
 
 	public List<Map<String, Object>> menuGetList(String authId);
 	
+	public List<Map<String, Object>> menuGetListEN(String authId);
+	
+	public List<Map<String, Object>> menuGetListCN(String authId);
+	
+	public List<Map<String, Object>> menuGetListJP(String authId);
+	
+	public List<Map<String, Object>> menuGetListES(String authId);
+	
 	public List<Map<String, Object>> getSubList(String memnum);
 
 	public List<Map<String, Object>> dateClassChoice();
@@ -27,4 +35,7 @@ public interface H001HomeDAO {
 	public void updateToeicSheduleS(H001HomeVO h001HomeVO);
 
 	public List<Map<String, Object>> selectDdayListS();
+
+	// 오늘 수업 목록 get
+	public List<Map<String, Object>> getTodayClass(Map info);
 }

@@ -39,7 +39,8 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
 				<div class="box">
 					<div class="box-header">
 						<h2 class="box-title">성적 입력</h2>
@@ -67,7 +68,7 @@
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer">
-						<div class="buttons">
+						<div class="buttons pull-right">
 							<button class="btn btn-primary" id="add-eval">평가 생성</button>
 							<button class="btn btn-primary pull-right" id="save-score" style="display: none;">점수 저장</button>
 						</div>

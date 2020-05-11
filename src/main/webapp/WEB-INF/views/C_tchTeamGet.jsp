@@ -8,8 +8,7 @@
 <head>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
+	<section class="content-header" style="width:83%">
 		<h1>
 			<c:out value='${sjctName}' />
 		</h1>
@@ -23,67 +22,53 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-md-12">
-				<div class="box box-info">
-					<div class="box-header">
-						<h3 class="box-title">스터디 게시판</h3>
-
-					</div>
-					<!-- /.box-header -->
-
-					<!--title -->
-					<div class="form-group">
-						<label>제목</label> <input class="form-control" name="boTitle"
-							value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
-					</div>
-
-					<!-- content -->
-					<div class="form-group">
-						<label>내용</label> <input type="text" class="form-control"
-							name="boContent" value='<c:out value ="${list.boContent}"/>'
-							readonly="readonly" />
-					</div>
-
-					<!-- content -->
-					<div class="form-group">
-						<label>작성자</label> <input type="text" class="form-control"
-							name="memId" value='<c:out value ="${list.memId}"/>'
-							readonly="readonly" />
-					</div>
-					<div class="row">
-						<div class="col-lg-12">
+			<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="box box-info">
+						<div class="box-body">
+							<h3 class="box-title">스터디 게시판</h3>
+							<!--title -->
+							<div class="form-group">
+								<label>제목</label> <h4><c:out value ="${list.boTitle}"/></h4>
+							</div>
+								<div class="form-group">
+								<!-- 작성자 -->
+								<span style="margin-right:20px;">
+									<label>작성자 </label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.memId}"/></span>
+								</span>
+								<!-- 작성일 -->
+								<span style="margin:20px;">
+									<label>작성일</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boRegdate}"/></span>
+								</span>
+								<span style="margin:20px;">
+									<label>조회수</label> <span>&nbsp;&nbsp;&nbsp;${list.boViews}</span>
+								</span>
+							</div>
+							<!-- content -->
+							<div class="form-group">
+								<label>내용</label>
+								 <textarea  class="form-control" name="boContent" rows='15' style="resize: none;"
+														readonly="readonly" ><c:out value ="${list.boContent}"/></textarea>
+							</div>
+							<!-- file -->				
 							<div class="panel panel-default">
 								<div class="panel-heading">Files</div>
-								
-								<div class="panel-body">
+									<div class="panel-body">
 									<div class="uploadResult">
-										<ul>
-										
-										</ul>
+											<ul></ul>
+										</div>
 									</div>
-								</div>
+							</div>
+							<!-- box-footer -->
+							<div class="box-footer">
+							<button data-oper="list" class="btn btn-default"
+									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
 							</div>
 						</div>
 					</div>
-
-					<div class="box-body">
-						<button type="button" class="btn btn-default btn-xs">
-							<i class="fa fa-eye"></i> ${list.boViews}
-						</button>
-					</div>
-
-					<button data-oper="list" class="btn btn-default"
-						onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
-
-					<!-- /.box-footer -->
 				</div>
-				<!-- /.box -->
 			</div>
-			<!-- /.col -->
-		</div>
-		<!-- /.row -->
-	</section>
-	<!-- /.content -->
+		</section>
 </div>
 
 <script>

@@ -17,6 +17,7 @@ public class A001MemVO {
 	private String snsId;
 	private String snsType;
 	
+
 	@Override
 	public String toString() {
 		return "A001MemVO [memNum=" + memNum + ", memId=" + memId + ", memPwd=" + memPwd + ", memName=" + memName

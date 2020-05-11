@@ -32,14 +32,57 @@
         <result property="addrecepShedule" column="addrecepShedule" />
         <result property="dateRls" column="dateRls" />
 	</resultMap> 
+	
 	<resultMap id="HomeResultString" type="String">
         <result property="recepShedule" column="recepShedule" />
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="todayClass">
+		<result property="openclassId" column="openclassId"/>
+		<result property="openclassName" column="openclassName"/>
 	</resultMap>
 	
 <!--       select * from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid} -->
 	<select id="getMenuList" parameterType="String" resultMap="HomeResult">
       <![CDATA[
-  		 select * from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
+  		 select a.menuId, menuName, parentMenuId, menuOrder, menuURL, authId
+  		 from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
+ 		 order by to_number(a.parentmenuid),to_number(a.menuorder),to_number(a.menuid)
+      ]]>
+	</select>
+	
+	<!-- 영어 -->
+	<select id="getMenuListEN" parameterType="String" resultMap="HomeResult">
+      <![CDATA[
+  		 select a.menuId, A.MENUNAMEEN menuName, parentMenuId, menuOrder, menuURL, authId
+  		 from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
+ 		 order by to_number(a.parentmenuid),to_number(a.menuorder),to_number(a.menuid)
+      ]]>
+	</select>
+	
+	<!-- 중국어 -->
+	<select id="getMenuListCN" parameterType="String" resultMap="HomeResult">
+      <![CDATA[
+  		 select a.menuId, A.MENUNAMECN menuName, parentMenuId, menuOrder, menuURL, authId
+  		 from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
+ 		 order by to_number(a.parentmenuid),to_number(a.menuorder),to_number(a.menuid)
+      ]]>
+	</select>
+	
+	<!-- 일본어 -->
+	<select id="getMenuListJP" parameterType="String" resultMap="HomeResult">
+      <![CDATA[
+  		 select a.menuId, A.MENUNAMEJP menuName, parentMenuId, menuOrder, menuURL, authId
+  		 from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
+ 		 order by to_number(a.parentmenuid),to_number(a.menuorder),to_number(a.menuid)
+      ]]>
+	</select>
+	
+	<!-- 스페인어 -->
+	<select id="getMenuListES" parameterType="String" resultMap="HomeResult">
+      <![CDATA[
+  		 select a.menuId, A.MENUNAMEES menuName, parentMenuId, menuOrder, menuURL, authId
+  		 from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
  		 order by to_number(a.parentmenuid),to_number(a.menuorder),to_number(a.menuid)
       ]]>
 	</select>
@@ -130,8 +173,52 @@
       ]]>
 	</select>
 	
-	
-	
+	<!-- 오늘 수업 목록 GET -->
+	<select id="getTodayClass" resultMap="todayClass" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT B.OPENCLASSID, B.OPENCLASSNAME || '  ' || B.OPENSTARTTIME || '~' || B.OPENENDTIME OPENCLASSNAME
+			FROM ENROLMENT A, OPENCLASS B
+			WHERE A.OPENCLASSID=B.OPENCLASSID
+			    AND A.MEMNUM=#{memNum}
+			    AND TO_DATE(B.OPENSTARTDATE) < TO_DATE(#{currentDate})
+			    AND TO_DATE(B.OPENENDDATE) > TO_DATE(#{currentDate})
+		]]>
+		<if test="currentDay == 0">
+			<![CDATA[
+				AND B.CLASSSUN = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 1">
+			<![CDATA[
+				AND B.CLASSMON = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 2">
+			<![CDATA[
+				AND B.CLASSTUE = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 3">
+			<![CDATA[
+				AND B.CLASSWED = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 4">
+			<![CDATA[
+				AND B.CLASSTHUR = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 5">
+			<![CDATA[
+				AND B.CLASSFRI = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 6">
+			<![CDATA[
+				AND B.CLASSSAT = 'y'
+			]]>
+		</if>
+	</select>
 	
 	
 </mapper>
