@@ -10,10 +10,47 @@
  <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
 
+<style>
+#banner{
+border: 1px solid;
+width: 200px;
+float: left;
+padding: 10px;
+margin-left: 30px;
+margin-top: 90px;
+min-width:150px;
+}
+
+@media screen and (max-width: 1500px){
+#banner{
+	display: none;
+}}
+
+#banner_left{
+width: 193px;
+float: right;
+margin: auto;
+padding-top: 90px;
+vertical-align: middle;
+min-width:150px;
+}
+
+@media screen and (max-width: 1300px){
+#banner_left{
+	display: none;
+}
+#banner_left2{
+	display: none;
+
+}
+}
+
+</style>
 <body>
 
 	<div class="content-wrapper">
 		<section class="content-header"style="width:83%">
+			<div class="col-md-2" style="margin: 20px;"></div>
 			<h1>
 				<c:out value='${sjctName}' />
 			</h1>
@@ -27,12 +64,24 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-			<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<div class="box box-primary">
-						<div class="box-body">
-						<h2 class="box-title"><c:out value='${pageTitle}' /></h2>
+				<div class="col-md-2">
+					<div id="banner_left">
 					
+						<img id="pp" src="">
+						
+						<%@ include file="left_banner1.jsp"%>
+						
+					</div>
+					<div>
+						<%@ include file="left_banner2.jsp"%>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="box box-warning">
+						<div class="box-header">
+						<h2 class="box-title"><c:out value='${pageTitle}' /></h2>
+						</div>
+						<div class="box-body">
 						<!-- action="/mypage/board/mdfy/${list.boCode}/${list.boURL}" -->
 						<form name="updateForm" role="form" method="get">
 							<!-- boTitle -->
@@ -67,15 +116,18 @@
 									</div>
 							</div>
 						</form>
-						<div class="box-footer">
-							<button data-oper="modify" class="btn btn-primary">저장</button>
-							<button data-oper="cancel" class="btn btn-primary"
+							<div class="box-footer">
+								<button data-oper="modify" class="btn btn-primary">저장</button>
+								<button data-oper="cancel" class="btn btn-primary"
 									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'return false;">취소</button>
+							</div>
+						</div>
 						</div>
 					</div>
 				</div>
+				<div id="banner">
+					<%@ include file="banner.jsp"%>
 				</div>
-			</div>
 		</section>
 	</div>
 </body>
@@ -130,7 +182,7 @@
 		}
 
 		
-		$(".uploadResult").on("click","button",function(e){
+		$(".uploadResult").on("click","a",function(e){
 			console.log("delete file");
 			
 			if(confirm("삭제하시겠습니까?")){
@@ -163,7 +215,7 @@
 				formData.append("uploadFile",files[i]);
 				
 			}
-			console.log("되나여"+ gallery_files);
+			
 			if(filesArr==""){
 				console.log("없어");
 			}else{
@@ -202,7 +254,7 @@
 								str += "<li";
 								str += " data-path='"+obj.filePath+"' data-classfilenum='"+obj.classFileNum+"'data-filename='"+obj.fileName+"' data-type='"+obj.fileCode+"' data-size='"+obj.fileSize+"' data-savefilename='"+obj.saveFileName+"'><div>";
 								str += "<span>" + obj.fileName+ "</span>";
-								str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-circle'><i class='fa fa-fw fa-close'></i></button><br>";
+								str += "<a type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='fa fa-fw fa-close'></a><br>";
 								str += "</div>";
 								str + "</li>";
 							});

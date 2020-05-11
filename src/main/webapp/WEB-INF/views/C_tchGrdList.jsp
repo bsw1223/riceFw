@@ -41,7 +41,7 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<div class="box">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h2 class="box-title">성적 입력</h2>
 						<div class="pull-right">

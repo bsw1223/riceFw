@@ -98,8 +98,8 @@
 	</section>
 	<section class="content">
 		<div class="row">
-			<div class="col-xs-12">
-				<div class="box">
+			<div class="col-md-12">
+				<div class="box box-warning">
 					  <div class="main_content">
 					    <div class="exp_product">각 행의 데이터를 수정하거나 입력,삭제시 상태컬럼의 변화를
 								확인하고,저장 버튼 클릭시 서버로 전송되는 데이터를 확인한다.</div>
@@ -109,10 +109,10 @@
 					      </form>
 					    </div>
 					    <div class="ib_function float_right">
-						  <a href="javascript:doAction('reload')" class="f1_btn_gray lightgray">초기화</a>
-						  <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray">추가</a>
-						  <a href="javascript:doAction('search')" class="f1_btn_white gray">조회</a>
-						  <a href="javascript:doAction('save')" class="f1_btn_white gray">저장</a>
+						  <a href="javascript:doAction('reload')" class="btn btn-primary">초기화</a>
+						  <a href="javascript:doAction('insert')" class="btn btn-primary">추가</a>
+						  <a href="javascript:doAction('search')" class="btn btn-primary">조회</a>
+						  <a href="javascript:doAction('save')" class="btn btn-primary">저장</a>
 						</div>
 					
 						<div class="clear hidden"></div>

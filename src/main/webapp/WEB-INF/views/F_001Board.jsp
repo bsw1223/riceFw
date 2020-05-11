@@ -6,7 +6,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>    
-	
+
 <!-- ibsheet -->
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <!-- 라이선스 파일 -->
@@ -109,13 +109,14 @@
 					        ID: <input type='text' id="p_id" name="p_id" /> 
 					      </form>
 					    </div>
-					    <div class="ib_function float_right">
-						  <a href="javascript:doAction('reload')" class="f1_btn_gray lightgray">초기화</a>
-						  <a href="javascript:doAction('insert')" class="f1_btn_gray lightgray">추가</a>
-						  <a href="javascript:doAction('search')" class="f1_btn_white gray">조회</a>
-						  <a href="javascript:doAction('save')" class="f1_btn_white gray">저장</a>
+					    <div class="row"> 
+						    <div class="ib_function float_right">
+							  <a href="javascript:doAction('reload')" class="btn btn-primary">초기화</a>
+							  <a href="javascript:doAction('insert')" class="btn btn-primary">추가</a>
+							  <a href="javascript:doAction('search')" class="btn btn-primary">조회</a>
+							  <a href="javascript:doAction('save')" class="btn btn-primary">저장</a>
+							</div>
 						</div>
-					
 						<div class="clear hidden"></div>
 						<div class="ib_product"><script>createIBSheet("mySheet", "100%", "100%");</script></div>
 					 </div>

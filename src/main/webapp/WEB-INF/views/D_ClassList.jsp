@@ -22,8 +22,8 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-xs-12">
-				<div class="box">
+			<div class="col-md-12">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title">강의실 리스트</h3>
 					</div>

@@ -28,7 +28,7 @@
       <div class="row">
       <div class="col-md-2"></div>
         <div class="col-md-10">
-          <div class="box box-info">
+          <div class="box box-warning">
             <div class="box-header">
               <h3 class="box-title">글보기
                 <small>과목명</small>

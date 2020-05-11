@@ -48,7 +48,7 @@ float: right;
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<div class="box">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title">스터디 게시판</h3>
 							<div class="amount">
@@ -68,11 +68,11 @@ float: right;
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-									<th>No.</th>
+									<th style="width:30px;">No.</th>
 									<th>제목</th>
-									<th>작성자</th>
-									<th>작성날짜</th>
-									<th>조회수</th>
+									<th style="width:100px;">작성자</th>
+									<th style="width:150px;">작성날짜</th>
+									<th style="width:100px;">조회수</th>
 								</tr>
 							</thead>
 								<tbody>
@@ -118,6 +118,22 @@ float: right;
 				</div>
 			</div>
 		</div>
+<!-- 		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="box">
+					<div class="box-header"> header</div>
+					<div class="box-body">
+						<table>
+							<tr>
+							<td>no.</td>
+							</tr>
+						</table>
+					</div>
+				
+				</div>
+			</div>
+		</div> -->
 	</section>
 </div>
 

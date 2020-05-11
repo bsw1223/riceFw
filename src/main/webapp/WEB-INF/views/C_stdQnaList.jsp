@@ -8,7 +8,6 @@
 	
 </script>
 <style>
-
 .box-body{
 	background-color: white;
 }
@@ -30,105 +29,196 @@
 	display:flex;
 	
 }
-.th1{
- width:10px;
+
+h1{
+	font-family: inherit;
+	margin-left: 20px;
+}
+#banner{
+border: 1px solid;
+width: 200px;
+float: left;
+padding: 10px;
+margin-left: 30px;
+margin-top: 90px;
+min-width:150px;
 }
 
-.th2{
- width:100px;
+@media screen and (max-width: 1500px){
+#banner{
+	display: none;
+}}
+
+#banner_left{
+width: 193px;
+float: right;
+margin: auto;
+padding-top: 90px;
+vertical-align: middle;
+min-width:150px;
 }
+
+@media screen and (max-width: 1300px){
+#banner_left{
+	display: none;
+}
+#banner_left2{
+	display: none;
+
+}
+}
+/* .btn-inverse-warning:not(.btn-inverse-light) {
+    color: #ffc100;
+}
+.btn-inverse-warning {
+    background-color: rgba(255, 193, 0, 0.2);
+    background-image: none;
+    border-color: rgba(255, 193, 0, 0);
+}  */
 
 </style>
-
-
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <body>
 
 
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	 <section class="content-header"style="width:83%">
-		<h1>
-			<c:out value='${sjctName}' />
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="#"><c:out value='${sjctName}' /></a></li>
-			<li class="active">QnA 게시판</li>
-		</ol>
-	</section>
-
-	<!-- Main content -->
-	<section class="content">
-		<div class="row">
-		<div class="col-md-2"></div>
-			<div class="col-xs-8">
-				<div class="box box-primary">
-					<div class="box-header">
-						<h2 class="box-title">QnA 게시판</h2>
-						<div style="float: right;" class="amount">
-							<select id="getListWithPaging" name="sel" onchange="selChange()">
-								<option value="5"
-									<c:if test="${pageMaker.cri.amount == 5}">selected</c:if>>5개씩보기</option>
-								<option value="10"
-									<c:if test="${pageMaker.cri.amount == 10}">selected</c:if>>10개씩보기</option>
-								<option value="15"
-									<c:if test="${pageMaker.cri.amount == 15}">selected</c:if>>15개씩보기</option>
-								<option value="20"
-									<c:if test="${pageMaker.cri.amount == 20}">selected</c:if>>20개씩보기</option>
-							</select>
+	<div class="content-wrapper">
+		<section class="content-header" style="width:83%">
+		<div class="col-md-2" style="margin: 20px;"></div>
+			<h1 style="font-size: 40px;">
+				<c:out value='${sjctName}' />
+			</h1>
+			<ol class="breadcrumb">
+				<li class="active"><i class="fa fa-dashboard"></i> Home</li>
+				<li class="active"><c:out value='${sjctName}' /></li>
+				<li class="active">Q&A</li>
+			</ol>
+		</section>
+	
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+			<div class="col-md-2">
+				<div id="banner_left">
+				
+					<img id="pp" src="">
+					
+					<%@ include file="left_banner1.jsp"%>
+					
+				</div>
+				<div>
+					<%@ include file="left_banner2.jsp"%>
+				</div>
+			</div>
+				<div class="col-md-8">
+					<div class="box box-warning" style="height: 650px">
+						<div class="box-header">
+							<h2 class="box-title" style="padding: 10px">Q&A</h2>
 						</div>
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<table class="table table-bordered">
-							<thead>
-								<tr>
-									<th class="th1">No.</th>
-									<th>제목</th>
-									<th class="th2">작성자</th>
-									<th class="th2">작성날짜</th>
-									<th class="th2">조회수</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="listB" items='${listB}'>
-									<tr>
-										<td><c:out value='${listB.boNum}' /> </td>
-										<td><a href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
-												<c:out value='${listB.boTitle}' /></a>
-										</td>
-										<td><c:out value='${listB.memId}' /></td>
-										<td><c:out value='${listB.boRegdate}' /></td>
-										<td><c:out value='${listB.boViews}' /></td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<div class="box-footer">
-							<ul class="pagination pagination-sm no-margin">
-								<c:if test='${pageMaker.prev}'>
-									<li class="paginate_button prev"><a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum}&amount=${pageMaker.cri.amount}page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">Previous</a></li>
-								</c:if>
-								<c:forEach begin="${pageMaker.startPage }"
-											end="${pageMaker.endPage}" var="pnum">
-									<li class="page-item ${pnum == pageMaker.cri.page? "active":"" }">
-										<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">${pnum}</a></li>
-								</c:forEach>
-								<c:if test="${pageMaker.next}">
-									<li class="paginate_button next"><a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pnum }&amount=${ pageMaker.cri.amount}">Next</a></li>
-								</c:if>
-							</ul>
-							<!-- /pagination -->
-							<div class="offset-md-8">
+						<div class="col-lg-12" style="height:100%">
+							<div class="row">
+									<div class="btn-group pull-right" style="margin-top:20px; margin-right:10px;">
+		                 			<button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">게시물 개수 선택</button>
+		                  			<button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		                    			<span class="caret"></span>
+		                    			<span class="sr-only">Toggle Dropdown</span>
+		                		   </button>
+		                  			<ul class="dropdown-menu" role="menu">
+		                    			<li><a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=1&amount=5">5개씩 보기</a></li>
+			       						<li><a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=1&amount=10">10개씩 보기</a></li>
+		                   			    <li><a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=1&amount=15">15개씩 보기</a></li>
+		                   			    <li><a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=1&amount=20">20개씩 보기</a></li>
+		                 		 	</ul>
+		                		</div>
+                			</div>
+                       		 <div class="card">
+                           		 <div class="card-body">
+                               		 <div class="table-responsive" style="height:100%; margin-top:20px">
+                                  		  <table class="table">
+                                        		<thead class="bg-warning text-white">
+		                                            <tr>
+		                                                <th style="width:110px;height: 35px; text-align:center">#</th>
+		                                               	<th style="height: 35px; text-align:center">제목</th>
+														<th style="width:110px;height: 35px; text-align:center">작성자</th>
+														<th style="width:120px;height: 35px; text-align:center">작성날짜</th>
+														<th style="width:100px;height: 35px; text-align:center">조회수</th>
+		                                            </tr>
+                                       		 </thead>
+                                        <tbody class="border border-warning">
+                                            <c:forEach var="listB" items='${listB}'>
+												<tr style="text-align:center; height:36px">
+													<td><c:out value='${listB.boNum}' /></td>
+													<td><a
+														href="/mypage/board/get/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?boNum=<c:out value='${listB.boNum}'/>">
+														<c:out value='${listB.boTitle}' />
+														</a></td>
+													<td><c:out value='${listB.memId}' /></td>
+													<td><c:out value='${listB.boRegdate}' /></td>
+													<td><c:out value='${listB.boViews}' /></td>
+											</c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					<div class="box-footer">
+						  <div class="row">
+		        	      	<div class="offset-md-8" id="reg" style="margin-right:20px;">
 								<form action="/mypage/board/regForm/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}">
-									<button type="submit" class="btn pull-right">질문등록</button>
+									<button id="btn-color" type="submit" class="btn pull-right btn-warning btn-fw">질문등록</button>
 								</form>
 							</div>
 						</div>
+						<ul class="pagination pagination-sm no-margin">
+	              		<c:if test="${pageMaker.prev}">
+							<li class="paginate_button prev">
+								<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
+							</li>
+						</c:if>
+                	    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
+							<li class="page-item ${pageMaker.cri.page==num?" active ":""}">
+								<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${num}&amount=${pageMaker.cri.amount}">${num}</a>
+							</li>
+						</c:forEach>
+	           			<c:if test="${pageMaker.next}">
+							<li class="paginate_button next">
+								<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
+							</li>
+						</c:if>
+	        	     </ul>
+						<div id="search" class="pull-right" style="margin-top: 10px;">
+							<form id='searchForm' action="/mypage/board/qna/list" method ="get">
+								<div class='select'>
+				                  <select name='type' style="width:100px;height:30px;">
+				                    <option value=""
+				                    	<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+				                    <option value="T"
+				                    	<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
+				                    <option value="C"
+				                    	<c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
+				                    <option value="W"
+				                    	<c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자</option>
+				                    <option value="TWC"
+				                    	<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>전체</option>
+				                  </select>
+				                  </div>
+				                  <!-- /select option -->
+				                <div class="input-group input-group-sm hidden-xs" >
+				                    <input type="text" name='keyword'
+				                    	value='<c:out value="${pageMaker.cri.keyword}"/>'class="form-control pull-right">
+				                    <div class="input-group-btn">
+				                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+				                  </div>
+								</div>
+							</form>
+						</div>
+					 </div>
 					</div>
 				</div>
-			  </div>
+				<div id="banner">
+					<%@ include file="banner.jsp"%>
+				</div>
 			</div>
 		</section>
 	</div>
@@ -158,12 +248,11 @@
 		var sel = document.getElementById('getListWithPaging').value;
 		var page = 1;
 
-		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=" + page + "&amount=" + sel;
+		location.href = "/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page="
+				+ page + "&amount=" + sel;
 
 	}
 </script>
-
-
 <%@ include file="footer.jsp"%>
 
 </body>
