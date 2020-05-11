@@ -79,6 +79,9 @@ min-width:150px;
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <body>
+
+
+<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<section class="content-header" style="width:83%">
 		<div class="col-md-2" style="margin: 20px;"></div>

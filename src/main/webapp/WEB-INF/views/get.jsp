@@ -24,7 +24,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="box box-info">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title">
 							글보기 <small>커뮤니티명</small>

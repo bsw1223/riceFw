@@ -19,7 +19,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-10">
-				<div class="box box-success">
+				<div class="box box-warning">
 						<div class="box-header">
 						<h3 class="box-title">강의 목록</h3>
 						

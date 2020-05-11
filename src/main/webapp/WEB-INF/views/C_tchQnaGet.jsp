@@ -49,9 +49,9 @@
 			<div class="row">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<div class="box box-primary">
+					<div class="box box-warning">
 						<div class="box-header">
-							<h1 class="box-title">QnA 게시판</h1>
+							<h2 class="box-title">QnA 게시판</h2s>
 						</div>
 						<div class="box-body">
 							<div class="form-group" id='boTitle'>
@@ -112,13 +112,13 @@
 									<input type="hidden" id='boNum' name='boNum' value='<c:out value ="${list.boNum}"/>'>
 										<div class="box-body">
 											<div class="form-group">	
-												<textarea class="form-control" rows='3' style="resize:none;"></textarea>
+												<textarea name="comtContent" id="comtContent"class="form-control" rows='3' style="resize:none;"></textarea>
 											</div>
-											<%-- <div class="form-group">
+											 <%-- <div class="form-group">
 												<label for="userId">댓글 작성자</label>
 												 <input class="form-control" id="userId" name="userId" value='<c:out value ="${memId}"/>'
 														readonly="readonly">
-											</div> --%>
+											</div>  --%>
 											<div class="pull-right">
 												<input type="button" id="insertButton" value="전송" onclick="replysubmit()" />
 											</div>

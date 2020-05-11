@@ -92,7 +92,7 @@
     <section class="invoice">
       <!-- title row -->
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-12">
           <h2 class="page-header">
             <i class="fa fa-globe"></i> 강의실상세 보기
             <small class="pull-right"></small>
@@ -101,14 +101,14 @@
         <!-- /.col -->
       <!-- Table row -->
       <div class="row">
-        <div class="col-xs-12 table-responsive add">
+        <div class="col-md-12 table-responsive add">
         </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
       <!-- this row will not appear when printing -->
       <div class="row no-print">
-        <div class="col-xs-12">
+        <div class="col-md-12">
           
           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
             <i class=""></i> 수정
@@ -120,6 +120,7 @@
             <i class=""></i> 취소
           </button>
         </div>
+      </div>
       </div>
     </section>
     <!-- /.content -->

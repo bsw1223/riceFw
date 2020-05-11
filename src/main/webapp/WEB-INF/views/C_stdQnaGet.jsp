@@ -71,7 +71,7 @@
 =======
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<div class="box box-primary">
+					<div class="box box-warning">
 						<div class="box-header">
 >>>>>>> refs/remotes/origin/master
 							<h2 class="box-title">QnA 게시판</h2>

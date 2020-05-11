@@ -150,5 +150,6 @@ $(document).ready(function(){
 				</div>
 			</nav>
 		</header>
+		</div>
 
 		<%@ include file="sidebar.jsp"%>
