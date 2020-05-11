@@ -33,10 +33,11 @@
 
 <body>
 	<div class="content-wrapper">
-		<section class="content-header"style="width:83%">
-			<h1>
-				<c:out value='${sjctName}' />
-			</h1>
+		<section class="content-header">
+			<div class="col-md-2" style="margin: 20px;"></div>
+				<h1>
+				  <c:out value='${sjctName}' />
+				</h1>
 			<ol class="breadcrumb">
 				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 				<li><a href="#"><c:out value='${sjctName}' /></a></li>
@@ -88,9 +89,9 @@
 							</div>
 							<!-- box-footer -->
 							<div class="box-footer">
-								<button data-oper="submit" class="btn btn-primary"
+								<button data-oper="submit" class="btn btn-warning"
 									onclick="location.href='/mypage/board/mdfyForm/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">수정</button>
-								<button data-oper="submit" class="btn btn-primary"
+								<button data-oper="submit" class="btn btn-warning"
 									onclick="location.href='/mypage/board/dlt/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">삭제</button>
 								<button data-oper="list" class="btn btn-default pull-right"
 									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>

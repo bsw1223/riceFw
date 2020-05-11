@@ -62,7 +62,6 @@ min-width:150px;
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-<<<<<<< HEAD
 			<!-- left column -->
 			<div class="col-md-2">
 				<div id="banner_left">
@@ -76,11 +75,6 @@ min-width:150px;
 				<div class="col-md-8">
 				<!-- general form elements -->
 				<div class="box box-warning">
-=======
-		<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<div class="box box-info">
->>>>>>> refs/remotes/origin/master
 					<div class="box-header">
 						<h3 class="box-title"><c:out value='${pageTitle}' /></h3>
 					</div>

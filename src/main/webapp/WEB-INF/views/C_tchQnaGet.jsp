@@ -33,10 +33,11 @@
 <body>
 
 	<div class="content-wrapper">
-		<section class="content-header"style="width:83%">
-			<h1>
-				<c:out value='${sjctName}' />
-			</h1>
+		<section class="content-header">
+			<div class="col-md-2" style="margin: 20px;"></div>
+				<h1>
+				  	<c:out value='${sjctName}' />
+				</h1>
 			<ol class="breadcrumb">
 				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 				<li><a href="#"><c:out value='${sjctName}' /></a></li>
