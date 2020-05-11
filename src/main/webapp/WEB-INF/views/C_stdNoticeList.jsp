@@ -100,11 +100,12 @@ min-width:150px;
 				</div>
 			</div>
 				<div class="col-md-8">
-					<div class="box box-warning" style="height: 650px">
+					<div class="box box-warning" >
 						<div class="box-header">
 							<h2 class="box-title" style="padding: 10px">공지사항</h2>
 						</div>
 						<div class="col-lg-12" style="height:100%">
+
 							<div class="row">
 									<div class="btn-group pull-right" style="margin-top:20px; margin-right:10px;">
 		                 			<button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">게시물 개수 선택</button>

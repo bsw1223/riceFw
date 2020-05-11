@@ -67,6 +67,7 @@
 				<div class="col-md-8">
 					<div class="box box-warning">
 						<div class="box-body">
+						<div class="box-header">
 							<h2 class="box-title">QnA 게시판</h2>
 						</div>
 							<!-- /box-header -->

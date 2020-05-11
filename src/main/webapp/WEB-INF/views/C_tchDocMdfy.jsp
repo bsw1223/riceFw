@@ -78,9 +78,10 @@ min-width:150px;
 				</div>
 				<div class="col-md-8">
 					<div class="box box-warning">
-						<div class="box-body">
+						<div class="box-header">
 						<h2 class="box-title"><c:out value='${pageTitle}' /></h2>
-					
+						</div>
+						<div class="box-body">
 						<!-- action="/mypage/board/mdfy/${list.boCode}/${list.boURL}" -->
 						<form name="updateForm" role="form" method="get">
 							<!-- boTitle -->
@@ -121,12 +122,12 @@ min-width:150px;
 									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'return false;">취소</button>
 							</div>
 						</div>
+						</div>
 					</div>
 				</div>
 				<div id="banner">
 					<%@ include file="banner.jsp"%>
 				</div>
-			</div>
 		</section>
 	</div>
 </body>

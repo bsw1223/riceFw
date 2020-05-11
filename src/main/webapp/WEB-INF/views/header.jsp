@@ -9,7 +9,7 @@
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>RiceLMS</title> 
+<title>RiceLMS</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.7 -->
@@ -50,7 +50,6 @@ $(document).ready(function(){
 					 +"	<button type=\"button\" class=\"btn btn-block btn-warning btn-xs\">L o g I n -  H e r e</button>"
 					 +"	</a>"
 					 +"</li> ";
-
 	var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
 			       +"<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">"
 				   +"<button type=\"button\" class=\"btn btn-block btn-info btn-xs btn-warning\">마 이 페 이 지 </button>"
@@ -71,6 +70,7 @@ $(document).ready(function(){
 				   +" <div class=\"pull-right\">"
 				   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
 				   +" </div></li></ul></li>";
+
 				   
 
 	if(eval(memNum)==undefined) {
@@ -85,7 +85,7 @@ $(document).ready(function(){
 		setcookie("m3",null);
 	});
 	
-	function setcookie(aa, bb) { // 쿠키생성함수
+	function setcookie(aa, bb) { // 荑좏궎?앹꽦?⑥닔
 		document.cookie = aa + "=" + bb + "; path=/;"
 		return false;
 	}
@@ -95,6 +95,7 @@ $(document).ready(function(){
 		<header class="main-header">
 			<!-- Logo -->
 			<a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+
 				<span class="logo-mini"><img src="${contextPath}/resources/img/로고수정mini.png"></span> <!-- logo for regular state and mobile devices -->
 				<span class="logo-lg"><img src="${contextPath}/resources/img/로고수정.png"></span>
 			</a>
@@ -145,7 +146,7 @@ $(document).ready(function(){
 						<!-- Tasks: style can be found in dropdown.less -->
 
 						<!-- User Account: style can be found in dropdown.less -->
-						<!-- 로그인메뉴 삽입부 -->
+						<!-- 濡쒓렇?몃찓???쎌엯遺 -->
 
 					</ul>
 				</div>

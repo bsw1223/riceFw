@@ -25,7 +25,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="box box-info">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title">
 							건물상세보기 <small>건물정보</small>
