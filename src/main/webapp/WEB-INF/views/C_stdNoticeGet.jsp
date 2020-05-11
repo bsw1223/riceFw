@@ -47,10 +47,30 @@ min-width:150px;
 	display: none;
 }}
 
+#banner_left{
+width: 193px;
+float: right;
+margin: auto;
+padding-top: 90px;
+vertical-align: middle;
+min-width:150px;
+}
+
+@media screen and (max-width: 1300px){
+#banner_left{
+	display: none;
+}
+#banner_left2{
+	display: none;
+
+}
+}
+
 </style>
 <body>
 	<div class="content-wrapper">
 		<section class="content-header"style="width:83%">
+			<div class="col-md-2" style="margin: 20px;"></div>
 			<h1>
 				<c:out value='${sjctName}' />
 			</h1>
@@ -64,57 +84,74 @@ min-width:150px;
 	<!-- Main content -->
 		<section class="content">
 			<div class="row">
-			<div class="col-xs-2">
-			</div>
+				<div class="col-md-2">
+					<div id="banner_left">
+						<img id="pp" src="">
+						<%@ include file="left_banner1.jsp"%>
+					</div>
+					<div>
+						<%@ include file="left_banner2.jsp"%>
+					</div>
+				</div>
 				<div class="col-xs-8">
-					<div class="box box-primary">
+					<div class="box box-warning">
 						<div class="box-header">
 							<h2 class="box-title">공지사항게시판</h2>
 						</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-				<form role="form">
-					<!--title -->
-					<div class="form-group">
-						<label>제목</label>
-						<input class="form-control" name="boTitle" value='<c:out value ="${list.boTitle}"/>' readonly="readonly" />
-					</div>
-					<!-- content -->
-					<div class="form-group">
-						<label>내용</label> <input type="text" class="form-control" name="boContent" value='<c:out value ="${list.boContent}"/>'
-							readonly="readonly" />
-					</div>
-					<!-- content -->
-					<div class="form-group">
-						<label>작성자</label> <input type="text" class="form-control"name="memId" value='<c:out value ="${list.memId}"/>'
-							readonly="readonly" />
-					</div>
-					<input type="hidden" value='<c:out value ="${list.boNum}"/>'>
-					<div class="row">
-						<div class="col-lg-12">
-							<div class="panel panel-default">
-								<div class="panel-heading">Files</div>
-								
-								<div class="panel-body">
-									<div class="uploadResult">
-										<ul>
-										
-										</ul>
+					<form role="form">
+						<!--title -->
+							<div class="form-group">
+								<label>제목</label> <h4><c:out value ="${list.boTitle}"/></h4>
+							</div>
+						<div class="form-group">
+								<!-- 작성자 -->
+								<span style="margin-right:20px;">
+									<label>작성자 </label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.memId}"/></span>
+								</span>
+								<!-- 작성일 -->
+								<span style="margin:20px;">
+									<label>작성일</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boRegdate}"/></span>
+								</span>
+								<span style="margin:20px;">
+									<label>조회수</label> <span>&nbsp;&nbsp;&nbsp;${list.boViews}</span>
+								</span>
+							</div>
+							<!-- content -->
+							<div class="form-group">
+								<label>내용</label>
+								 <textarea  class="form-control" name="boContent" rows='15' style="resize: none;"
+														readonly="readonly" ><c:out value ="${list.boContent}"/></textarea>
+							</div>
+							<!-- content -->
+						<input type="hidden" value='<c:out value ="${list.boNum}"/>'>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="panel panel-default">
+									<div class="panel-heading">Files</div>
+									
+									<div class="panel-body">
+										<div class="uploadResult">
+											<ul>
+											
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-
-					<div class="box-footer">
-						<button type="button" class="btn btn-default btn-xs">
-							<i class="fa fa-eye"></i> ${list.boViews}
-						</button>
-						<button type="button" class="btn btn-default btn-xs">
-							<i class="fa fa-thumbs-o-up"></i>${list.boLikes}
-						</button>
-					</div>
-				</form>
+	
+						<div class="box-footer pull-right">
+							<%-- <button type="button" class="btn btn-default btn-xs">
+								<i class="fa fa-eye"></i> ${list.boViews}
+							</button> --%>
+							<button type="button" class="btn btn-default btn-xs">
+								<i class="fa fa-thumbs-o-up"></i>${list.boLikes}
+							</button>
+							
+						</div>
+					</form>
 					<button data-oper="list" class="btn btn-default"
 						onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
 			<!-- /.box-footer -->

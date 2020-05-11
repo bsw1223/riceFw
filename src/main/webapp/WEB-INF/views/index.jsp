@@ -14,34 +14,211 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-md-5">
-				<!-- Profile Image -->
-				<div class="box box-primary">
-					<div class="box-body box-profile">
-						<img class="profile-user-img img-responsive img-circle"
-							src="${contextPath}/resources/dist/img/user4-128x128.jpg"
-							alt="User profile picture">
-						<h3 class="profile-username text-center">${loginMem.memName}</h3>
-						<p class="text-muted text-center" id="jobName"></p>
-						<ul class="list-group list-group-unbordered">
-							<li class="list-group-item"><b>Followers</b> <a
-								class="pull-right">1,322</a></li>
-							<li class="list-group-item"><b>Following</b> <a
-								class="pull-right">543</a></li>
-							<li class="list-group-item"><b>Friends</b> <a
-								class="pull-right">13,287</a></li>
-						</ul>
-					</div>
-					<!-- /.box-body -->
-				</div>
-				<div class="box box-primary" id="toeicList">
-					${elemStringRep}
-				</div>
-				<div class="box box-primary" id="toeicSpeakingList">
-					${elemStringRepRG}
-				</div>
+		    <div class="col-md-5">
+          <!-- Widget: user widget style 1 -->
+          <div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-yellow">
+              <div class="widget-user-image">
+                <img class="img-circle" src="${contextPath}/resources/dist/img/user7-128x128.jpg" alt="User Avatar">
+              </div>
+              <!-- /.widget-user-image -->
+              <h3 class="widget-user-username">${loginMem.memName}</h3>
+              <h5 class="widget-user-desc"></h5>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                <li><a href="#">Projects <span class="pull-right badge bg-blue">31</span></a></li>
+                <li><a href="#">Tasks <span class="pull-right badge bg-aqua">5</span></a></li>
+                <li><a href="#">Completed Projects <span class="pull-right badge bg-green">12</span></a></li>
+                <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- /.widget-user -->
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">D-day</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+<!--                   <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li> -->
+                </ol>
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <img src="http://placehold.it/900x300/39CCCC/ffffff&text=Toeic :+D+-"+<%=request.getAttribute("compare") %>+"\"" alt="First slide">
+
+                    <div class="carousel-caption" style="text-align: left;padding-left: 100%;">
+                    
+                    </div>
+                  </div>
+                  <div class="item">
+                    <img src="http://placehold.it/900x300/3c8dbc/ffffff&text=I+Love+Bootstrap" alt="Second slide">
+
+                    <div class="carousel-caption">
+                      
+                    </div>
+                  </div>
+                  <div class="item">
+                    <img src="http://placehold.it/900x300/f39c12/ffffff&text=I+Love+Bootstrap" alt="Third slide">
+
+                    <div class="carousel-caption">
+                      
+                    </div>
+                  </div>
+                </div>
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                  <span class="fa fa-angle-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                  <span class="fa fa-angle-right"></span>
+                </a>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <%-- <div class="box box-primary" id="toeicList">
+            <h4 class="box-title" style="padding-left: 3%;">다음 토익시험 일정</h4>
+
+          <div class="table-responsive">
+            <table class="table">
+              <tr>
+                <th style="width:50%;padding-left: 25%;">시험일자  </th>
+                <td style="padding-left: 10%;"> ${exDate}</td>
+              </tr>
+              <tr>
+                <th style="width:50%;padding-left: 25%;">접수마감  </th>
+                <td style="padding-left: 10%;">${recepShedule}</td>
+              </tr>
+              <tr>
+                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
+                <td style="padding-left: 10%;">${dateRls}</td>
+              </tr>
+            </table>
+          </div>
+				</div> --%>
+			
+			
+			
+			      <div class="row">
+        
+        <div class="col-md-12">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#info" data-toggle="tab"> 토익다음 시험</a></li>
+				<li><a href="#pwd" data-toggle="tab"> 토익스피킹 다음 시험</a></li>
+            </ul>
+            
+            <!-- form  -->
+            
+           	<div class="active tab-pane" id="info">
+<!--               	<form class="form-horizontal"> -->
+             	
+             	
+             	
+                </div>
+    
+
+          <div class="table-responsive"><!-- 내용시작 -->
+            <table class="table">
+              <tr>
+                <th style="width:50%;padding-left: 25%;padding-top: 4%;">시험일자  </th>
+                <td style="padding-left: 10%;padding-top: 4%;"> ${exDate}</td>
+              </tr>
+              <tr>
+                <th style="width:50%;padding-left: 25%;">접수마감  </th>
+                <td style="padding-left: 10%;">${recepShedule}</td>
+              </tr>
+              <tr>
+                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
+                <td style="padding-left: 10%;">${dateRls}</td>
+              </tr>
+            </table>
+          </div> <!-- 내용끝 -->
+	
+	
 			</div>
+             	 <!-- /. -->
+             	 
+             	 
+             	 
+             	 
+<!--                 </form> -->
+                <!-- /.form-horizontal -->
+            
+
+              <div class="tab-pane" id="pwd">
+                <form class="form-horizontal" action="" method="" onsubmit="">
+                  <div class="">
+                <div class="">
+                </div>
+                <div class="">
+                
+                
+                
+                
+                 <!--  내용쓰기 -->
+                  <input type="hidden" class="form-control " placeholder="" id="getPlanId">
+                  
+                  
+                  
+                  
+                  
+                  
+                </div>
+        
+                </div>
+                </form>
+              </div>
+              <!-- /.tab-pane 강사로 변경 -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        	
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+        </div>
 			<!-- /.col -->
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<div class="col-md-6">
 			
 				<!-- Full Calendar -->
@@ -268,7 +445,7 @@
 				 authName="강사";
 				}
 	
-	$('p#jobName').text(authName);
+	$('.widget-user-desc').text(authName);
 	
 	$(document).ready(function() {
 		$.ajax({
@@ -558,9 +735,80 @@
 			$('input#iEventAllday').prop("checked", false);
 		}
 	
+//오늘 수업 요일 숫자 받기
+$(document).ready(function(){
+	$.ajax({
+			type : "get",
+			async : true,
+			datatype : "textd; charset=utf-8",
+			url : "selectSysdate",
+			data : {},
+			success : function(selectSysdate) {
+				console.log("selectSysdate : "+selectSysdate.selectSysdate);
+				var sysDate = selectSysdate.selectSysdate;
+				
+				if(sysDate==0)
+					sysDate='classSun';
+				if(sysDate==1)
+					sysDate='classMon';
+				if(sysDate==2)
+					sysDate='classTue';
+				if(sysDate==3)
+					sysDate='classWed';
+				if(sysDate==4)
+					sysDate='classThur';
+				if(sysDate==5)
+					sysDate='classFri';
+				if(sysDate==6)
+					sysDate='classSat';
+				//dateClassChoice(sysDate);
+			}
+		});
+});
+
+//오늘 날짜 받기
+$(document).ready(function(){
+	$.ajax({
+			type : "get",
+			async : true,
+			datatype : "json; charset=utf-8",
+			url : "selectDateToday",
+			data : {},
+			success : function(selectDateToday) {
+				console.log("selectDateToday : "+selectDateToday.selectDateToday);
+			
+				
+			
+			}
+		});
+});
+
+
+
+//날짜별 수업 받아오기
+/* function dateClassChoice(sysDate) {
+	//날짜 클릭 시 일정번호 받아옴
+	$.ajax({
+		type : "get",
+		async : true,
+		datatype : "textd; charset=utf-8",
+		url : "dateClassChoice",
+		data : {sysDate:sysDate},
+		success : function(dateClassChoice) {
+			
+	
+		}
+	});
+}; */
+
+
+
+
+
+	
 //--------크롤링 테이블------
 //토익테이블
-  var aTagLength = $('#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr');
+  /*  var aTagLength = $('#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr');
 	for (var i = 0; i < aTagLength.length + 1; i++) {
 		aTagChange = "'#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(" + i + ") > td:nth-child(1) > a'"
 		$(eval(aTagChange)).attr("href","https://appexam.ybmnet.co.kr/toeic/receipt/receipt.asp");
@@ -578,8 +826,8 @@
 		$('#reg_table > tbody > tr:nth-child(2) > td > table').attr('style','width:100%; margin-left:3%; margin-right:3%; margin-bottom:3%');
 	//스피킹 테이블	
 		$('#toeicSpeakingList > div > table > tbody > tr:nth-child(1) > td:nth-child(2)').attr('style','padding-right:15px; overflow: hidden');
-		$('#toeicSpeakingList > div > table > thead > tr > th:nth-child(1)').attr('style', 'padding-left: 6%');
-		$('#toeicSpeakingList > div > table > thead > tr > th:nth-child(2)').attr('style', 'padding-left: 6%');
+		$('#toeicSpeakingList > div > table > thead > tr > th:nth-child(1)').attr('style', 'padding-left: 0%');
+		$('#toeicSpeakingList > div > table > thead > tr > th:nth-child(2)').attr('style', 'padding-left: 0%');
 		$('#toeicSpeakingList > div > table > thead > tr > th:nth-child(3)').attr('style', 'padding-left: 6%');
 		$('#toeicSpeakingList').attr('style', 'width:100%; margin-left:0; margin:auto');
 		$('td.left').attr('style','padding-left: 5%');
@@ -589,12 +837,12 @@
 			eval(changeLeftD).attr('style', ' padding-right: 6%');
 		}
 		$('div#toeicSpeakingList').prepend('<div class=\"box-header with-border style=\"position:relative; bottom:15px;\">'
-				  							 +'<h3 class=\"box-title\" style=\"text-align:left; padding-botom:15px; padding-top:0px; margin-top:0px; margin-left:4%\">TOEIC SPEAKING 일정 안내</h3></div>');
-		$('div.list_schedule_cont').attr('style','margin: 0 3% 5% 7%');
+				  							 +'<h3 class=\"box-title\" style=\"text-align:left; padding-botom:15px; padding-top:0px; margin-top:13px; margin-left:3%; margin-bottom:5px\">TOEIC SPEAKING 일정 안내</h3></div>');
+		$('div.list_schedule_cont').attr('style','margin: 0 3% 5% 12%');
 		$('div#toeicSpeakingList').attr('style','max-height:200px; overflow:auto');
 		$('div#toeicList').attr('style','max-height:200px; overflow:auto; overflow-x:hidden');
 		
-		$('div#toeicSpeakingList > tbody:eq(0)').remove(); 
+		$('div#toeicSpeakingList > tbody:eq(0)').remove();  */
 		
 </script>
 </body>

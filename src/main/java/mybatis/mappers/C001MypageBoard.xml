@@ -32,7 +32,7 @@
 		<result property="snsId" column="snsId" />
 		<result property="snsType" column="snsType" />
 	</resultMap>
-
+	
 
 	<select id="getListWithPaging" resultType="C001ClassBoardVO">
 	<![CDATA[
@@ -61,7 +61,7 @@
 	    	
 			select a.memName, a.memTel, a.memEmail, a.memLevel, a.memNum, a.memId
 			from enrolment c, member a
-			where c.memNum = a.memNum and c.openclassid=#{boURL}
+			where c.memNum = a.memNum and c.openclassid=#{boURL} and authid=1001
 			order by memName
 	    )
 	    where rownum <= (#{page}*#{amount})
@@ -69,13 +69,15 @@
 	where rn > ((#{page}-1)*#{amount})
 	]]>
 	</select>
-	
+
 	<select id = "subjectName" resultType="String">
 	<![CDATA[
         select	c.openclassName
 		from member a, OPENCLASS c
 		where a.memNum=c.memNum and openclassid=#{boURL}
       ]]>
+      
+      
 	</select>
 
 	<select id="getTotal" resultType="int">

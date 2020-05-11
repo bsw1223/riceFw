@@ -1,12 +1,16 @@
 package com.rice.F001.F001controller;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -15,13 +19,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rice.C001.boardvo.C001ClassBoardVO;
 import com.rice.F001.F001service.F001LectureService;
 import com.rice.F001.F001vo.F001LectureVO;
+import com.rice.common.AmountVO;
+import com.rice.common.JsonUtil;
+import com.rice.common.KakaoPayApprovalVO;
 
 @Controller
 @RequestMapping("/lectureMng/*")
@@ -30,12 +39,12 @@ public class F001LectureController {	// 회원관리
 	
 	@Autowired
 	private F001LectureService f001LectureService;
-	//@Autowired
-	//private F001LectureVO f001LectureVO;
+	@Autowired
+	private F001LectureVO f001LectureVO;
 		
 //--------------------------------------------------강의 등록---------------------------------------------------------
 	// 강의등록페이지로 이동
-	@RequestMapping(value = "/lectureregist", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/lectureregist", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	public String searchInit(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		return "F_LectureAdd";
@@ -70,7 +79,7 @@ public class F001LectureController {	// 회원관리
 	}
 //--------------------------------------------------강의list---------------------------------------------------------
 	
-	@RequestMapping(value = "listlectures", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "listlectures", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	public String listlectures(Model model,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<Map<String, Object>> selectSubInfo = f001LectureService.selectSubInfo();
 		model.addAttribute("listB",selectSubInfo);
@@ -84,7 +93,7 @@ public class F001LectureController {	// 회원관리
 //	}
 	
 	//subject에서 subid와 subname가져옴, id는 value로 넣는다.
-	@RequestMapping(value = "selectsubidname", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "selectsubidname", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public List<Map<String, Object>> selectSubIdName(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<Map<String, Object>> selectSubIdName = f001LectureService.selectSubInfo();
@@ -93,7 +102,7 @@ public class F001LectureController {	// 회원관리
 	}
 	
 	//강의 계획 데이터 읽어옴 select LecturePlanInfo
-	@RequestMapping(value = "selectLecturePlanInfo", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "selectLecturePlanInfo", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public List<Map<String, Object>> selectLecturePlanInfo(F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<Map<String, Object>> selectLecturePlanInfo = f001LectureService.selectLecturePlanInfo(f001LectureVO);
@@ -105,6 +114,7 @@ public class F001LectureController {	// 회원관리
 	@ResponseBody
 	public String selectMemName(C001ClassBoardVO c001ClassBoardVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String selectMemName = f001LectureService.selectMemName(c001ClassBoardVO);
+		//System.out.println("selectMemName : "+ selectMemName);
 		return selectMemName;
 	}
 	
@@ -113,6 +123,7 @@ public class F001LectureController {	// 회원관리
 	@ResponseBody
 	public String reGetTeaName(C001ClassBoardVO c001ClassBoardVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String reGetTeaName = f001LectureService.reGetTeaName(c001ClassBoardVO);
+		//System.out.println("reGetTeaName  : "+reGetTeaName);
 		return reGetTeaName;
 	}
 	
@@ -163,7 +174,7 @@ public class F001LectureController {	// 회원관리
 	@ResponseBody
 	public List<Map<String, Object>> bulCodeLec(F001LectureVO f001LectureVO,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<Map<String, Object>> bulCodeLec=f001LectureService.bulCodeLec(f001LectureVO);
-		System.out.println("controller_ bulCodeLec : "+ bulCodeLec.toString());
+		//System.out.println("controller_ bulCodeLec : "+ bulCodeLec.toString());
 		return bulCodeLec;
 	}
 	
@@ -187,11 +198,187 @@ public class F001LectureController {	// 회원관리
 	@ResponseBody
 	public List<Map<String, Object>> enrolmentInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<Map<String, Object>> enrolmentInfo=f001LectureService.enrolmentInfo();
-		System.out.println("controller_ bulCodeLec : "+ enrolmentInfo.toString());
+		//System.out.println("controller_ enrolmentInfo : "+ enrolmentInfo.toString());
 		return enrolmentInfo;
+	}
+	//결제번호 
+	@RequestMapping(value = "partnerOrderId", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public Map<String, Object> partnerOrderId(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> partnerOrderId=f001LectureService.partnerOrderId();
+		//System.out.println("controller_ partnerOrderId : "+ partnerOrderId.toString());
+		return partnerOrderId;
+	}
+	//검색 과목명 & id
+	@RequestMapping(value = "searchClassIdName", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> searchClassIdName(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<Map<String, Object>> searchClassIdName=f001LectureService.searchClassIdName();
+		//System.out.println("controller_ searchClassIdName : "+ searchClassIdName.toString());
+		return searchClassIdName;
+	}
+	//검색 강사명
+	@RequestMapping(value = "searchClassTea", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> searchClassTea(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<Map<String, Object>> searchClassTea = f001LectureService.searchClassTea();
+		//System.out.println("controller_ searchClassTea : "+ searchClassTea.toString());
+		return searchClassTea;
 	}
 	
 
+	//보류중리스트 삭제
+	@RequestMapping(value = "holdDel", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public void holdDel(F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		f001LectureService.holdDel(f001LectureVO);
+		//System.out.println("controller_ searchClassIdName : "+ searchClassIdName.toString());
+		return;
+	}
+	
+	
+	//듣는과목 리스트 불러오기 
+	@RequestMapping(value = "delRegL", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> delRegL(F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<Map<String, Object>> delRegL = f001LectureService.delRegL(f001LectureVO);
+		//System.out.println("controller_ delRegL : "+ delRegL.toString());
+		return delRegL;
+	}
+	//듣는과목 리스트 불러오기 
+	@RequestMapping(value = "getSubIdJspC", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> getSubIdJspC(F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<Map<String, Object>> getSubIdJspC = f001LectureService.getSubIdJspC(f001LectureVO);
+		//System.out.println("controller_ getSubIdJspC : "+ getSubIdJspC.toString());
+		return getSubIdJspC;
+	}
+	
+	
+	//장바구니
+	@RequestMapping(value = "insertCart", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public void insertCart(@RequestBody Map<String,Object> insertEnrolLecS, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		
+		System.out.println(insertEnrolLecS);
+//		JsonUtil jutil = new JsonUtil();
+//		System.out.println(insertEnrolLecS.get("wholeCartList").getClass().getName());
+//		String wholeCartList = (String) insertEnrolLecS.get("wholeCartList");
+//
+//		JSONArray jsonarr = new JSONArray(wholeCartList);
+//		
+//		List<Map<String, Object>> tmp = jutil.getListMapFromJsonArray(jsonarr);
+//		System.out.println("===========" + tmp.toString());
+//		insertEnrolLecS.put("wholeEnrol", tmp);
+		
+					
+		f001LectureService.insertCart(insertEnrolLecS);
+			
+				
+		//System.out.println("controller_ selectLecPlanId : "+ selectLecPlanId);
+		//System.out.println("kakaoPayApprovalVO : "+kakaoPayApprovalVO);
+		//System.out.println("amountVO : "+amountVO.toString());
+		//System.out.println("f001LectureVO  : "+f001LectureVO.toString());
+		//System.out.println(f001LectureVO.getClassIdKakao());
+		return;
+		
+	}
+	
+	
+	
+	
+	
+	//결제완료 확인 후 세션정보 저장
+	@RequestMapping(value = "paid", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public void paidlist(@RequestBody Map<String,Object> insertEnrolLecS, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		
+		System.out.println("insertEnrolLecS : "+insertEnrolLecS);
+		//{approveTime=Fri May 08 01:59:41 KST 2020, orderId=714, itemName= lc 완전정복 외1건, amountTotal=300000, paidMode=1600}
+		f001LectureService.savePaidlist(insertEnrolLecS);//결제정보 저장
+		
+		Map<String,Object> map = new HashMap<String,Object>();//결제 내역에 저장할 map
+		
+		String orderId = (String) insertEnrolLecS.get("orderId");//멤버넘버
+		String memNum = (String) insertEnrolLecS.get("memNum");//멤버넘버
+		HttpSession session = request.getSession(false);
+	    ArrayList sessionClassIdList = new ArrayList();
+	    sessionClassIdList.add(session.getAttribute("classIdList"));//세션값을 배열에 넣는다.
+	   
+	    //세션 값 받아 memnum과 openclassid 합쳐 검색 후 classApplycode를 1600으로 변경한다.
+	    ArrayList tempIdO = new ArrayList();
+	    ArrayList tempIdO2 = new ArrayList();
+	    ArrayList mapperList = new ArrayList();
+	    String enrId = null;
+	    for(int i =0; i<sessionClassIdList.size();i++) {
+	    	System.out.println("sessionClassIdList :"+sessionClassIdList);
+	    	//ArrayList tempIdO3 = new ArrayList();
+	    	tempIdO.add(sessionClassIdList.get(i));//리스트로 들어감
+	    	tempIdO2 = (ArrayList) tempIdO.get(i);
+	    	System.out.println("tempIdO2 : "+tempIdO2);
+	    }
+	    
+	    for(int i =0; i<tempIdO2.size();i++) {
+	    	String tempIdO3 =tempIdO2.get(i).toString();
+	    	System.out.println("tempIdO3 : "+tempIdO3);
+	    	
+	    	String tempId =  tempIdO3.toString();//세션에 저장된 아이디를 저장한다.과목id임 이것 이용해서 과목정보 가져옴
+	    	System.out.println("tempId : "+tempId);
+	    	System.out.println(memNum);
+	    	enrId = tempId+memNum;
+	    	System.out.println("enrId :"+enrId);
+	    	
+	    	f001LectureService.paidlist(enrId);//수강신청 상태 1600으로 변경
+	    	//결제 세부내역 id로 검색하여 결과 가져오기, 가져와서 db에 저장, list<map>으로 
+	    	String searchSub = f001LectureService.searchSub(tempId);//과목정보 검색한다.
+	    	System.out.println("searchSub :"+searchSub);
+	    	//결제 내역에 과목 id, 가격, 결제번호 넣기
+	    	map.put("tempId",tempId);
+	    	map.put("classPrice",searchSub);
+	    	map.put("orderId",orderId);
+	    	System.out.println("map : "+map);	  
+	    	f001LectureService.insertOrderList(map);//과목정보 검색한다.
+	    	
+	    	
+	    }
+	   	    
+	    session.setAttribute("classIdList", "");//classIdList세션 초기화
+		return;
+	}
+	
+	@RequestMapping(value = "paidlist", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	public String paid(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		
+		return "F_PaidList";
+	}
+	@RequestMapping(value = "cart", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	public String cart(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		
+		return "F_Cart";
+	}
+	//장바구니
+	@RequestMapping(value = "selectPaidListR", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> selectPaidListR(@RequestBody String memNum, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("memNum : "+ memNum);
+		 List<Map<String, Object>> selectPaidListR = f001LectureService.selectPaidListR(memNum);
+		 //System.out.println("selectPaidListR : "+selectPaidListR);
+		 return selectPaidListR;
+	}
+	
+	@RequestMapping(value = "cartInfo", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> cartInfo(@RequestBody String memNum, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("memNum : "+ memNum);
+		List<Map<String, Object>> cartInfo = f001LectureService.cartInfo(memNum);
+		//System.out.println("controller_ cartInfo : "+ cartInfo);
+		System.out.println("cartInfo : "+cartInfo);
+		return cartInfo;
+	}
 	
 	
 }

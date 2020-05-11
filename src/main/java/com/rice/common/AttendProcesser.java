@@ -38,9 +38,12 @@ public class AttendProcesser {
 		info.put("currentDay", currentDay);
 		
 		List<Map<String, Object>> resultList = b001AttendService.getEnrId(info);
-		info.put("enrId", resultList);
-		logger.info("info===========" + info.toString());
 		
-		b001AttendService.insertAbsent(info);
+		for(int i = 0 ; i < resultList.size() ; i++) {
+			String enrId = (String) resultList.get(i).get("enrId");
+			info.put("enrId", enrId);
+			logger.info("info===========" + info.toString());
+			b001AttendService.insertAbsent(info);
+		}
 	}
 }

@@ -1,19 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%@ include file="header.jsp"%>
 
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<head>
-
-<html>
 <style>
 .form-group {
 	padding: 10px 20px 10px 10px;
 }
 </style>
 
-</head>
-<body>
+
+
 
 <!-- <div class="content-wrapper"> -->
 <!--     Content Header (Page header) -->
@@ -52,7 +50,7 @@
             
             <!-- form  -->
             <div class="tab-content">
-           		   <div class="active tab-pane" id="info">
+           	<div class="active tab-pane" id="info">
               	<form class="form-horizontal">
              	
              	 <!-- <div class="form-group">
@@ -94,7 +92,7 @@
                 </div>
                  <div class="form-group">
                 </div>
-				<div class="form-group">
+				<div class="">
                  <button type="reset" class="btn btn-primary pull-right" style="margin-right: 5px;">
 		            <i class=""></i> 초기화
 		          </button>
@@ -102,19 +100,14 @@
 		            <i ></i> 등록
 		          </button>
              	 </div>
+             	 <!-- /. -->
                 </form>
-             	  </div>
-             
-              
-              
-              
+                <!-- /.form-horizontal -->
+              </div>
               <!-- /.tab-pane 교육과목 개설 -->
 
               <div class="tab-pane" id="pwd">
                 <form class="form-horizontal" action="" method="" onsubmit="">
-                 
-                 
-                 
                   <div class="">
                 <div class="">
                 </div>
@@ -123,8 +116,8 @@
                   <input type="hidden" class="form-control " placeholder="" id="getPlanId">
                 </div>
                   <label>교육과목</label>
-                    <select class="form-control  " id="subName" >
-                    <option style="color:gray" value=""><-  과목을 선택해 주세요  -></option>
+                    <select class="form-control" id="subName">
+                    <option style="color:gray" value="" >-  과목을 선택해 주세요  -</option>
                   </select>
                 </div>
                 <div class="">
@@ -172,10 +165,8 @@
                   <label>강의계획서_첨부파일</label>
                   <input type="text" class="form-control " placeholder="" id="descFileLec">
                 </div>
-                
                 <div class="form-group">
                 </div>
-                
 				<div class="form-group">
                  <button type="reset" class="btn btn-primary pull-right" style="margin-right: 5px;">
 		            <i class=""></i> 초기화
@@ -184,12 +175,8 @@
 		            <i ></i> 등록
 		          </button>
                 </div>
-                 
-                 
-                 
-                 
-                 
                 </form>
+                form-horizontal
               </div>
               <!-- /.tab-pane 강사로 변경 -->
             </div>
@@ -200,12 +187,10 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-
     </section>
     <!-- /.content -->
-  </div>
-<!-- </div> -->
-<%@ include file = "footer.jsp" %>	
+
+	
 
 
 
@@ -214,14 +199,12 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title">강사 선택</h4>
 				</div>
 				<div class="modal-body">
-
 						<form class="form-horizontal">
 							<div class="box-body">
 							
@@ -238,9 +221,9 @@
 								<button type="button" class="btn btn-primary col-sm-12" id="selectTeaName">검색</button>
 								</div>
 							</form>	
+							<!-- /.form-horizontal -->
 			<div class="box-header with-border">
             <div class="box-header">
-              	
               <h3 class="box-title">강사 목록</h3>
             </div>
             <!-- /.box-header -->
@@ -257,7 +240,7 @@
             </div>
             <!-- /.box-body -->
       	  </div>
-
+		<!-- /.box-header-->
 		<div class="box-header with-border">
 			<div class="box-header">
 			<h3 class="box-title">강의 계획 목록</h3>
@@ -277,6 +260,7 @@
 				<!-- /.box-body -->
 		</div>
 			</div>
+				<!-- /.modal-body -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 					<button type="button" class="btn btn-primary" id="saveSub">선택</button>
@@ -287,7 +271,6 @@
 		<!-- /.modal-dialog -->
 	</div>
 <!-- /.modal -->
-</div>
 
 
 
@@ -345,9 +328,10 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
+  </div>
+  <!-- /.content-wrapper -->
 
-
-</body>
+<%@ include file = "footer.jsp" %>
 
 <!-- bootstrap datetimepicker -->
 <link rel="stylesheet" href="${contextPath}/resources/api/css/bootstrap-datetimepicker.min.css" />
@@ -363,6 +347,8 @@ var selectMenu = null;
 var delTag = "<input type=\"text\" class=\"form-control classNumber\" placeholder=\"\" id=\"subAblDate\">"
 
 $(document).ready(function(){
+//subCode 가져오기
+	selectSubCode();
 //날짜 형식
 	dateFunctionL();
 //subId가져오기
@@ -377,8 +363,6 @@ $(document).ready(function(){
 	dateFunction();
 //subId가져오기
 	//selectSubId();
-//subCode 가져오기
-	selectSubCode();
 	
 });
 
@@ -517,7 +501,7 @@ var planDescFileLec = null;
 var planCapacityLec = null;
 var planCodeLec = null;
 var memNumLec = null;
-var reGetTeacher = null;
+var reGetTeacherA = null;
 var classId= null;
 var classPliceLec=null;
 var subCodeLecFin=null;
@@ -641,12 +625,14 @@ var getclassIdLec = null;
 		$.ajax({
 			type : "post",
 			async : true,
-			datatype : "text; charset=utf-8",
+			datatype : "json; charset=utf-8",
 			url : "selectsubidname",
 			data : {},
 			success : function(selectSubIdName) {
-				for (i in selectSubIdName) {
+				   	for(i in selectSubIdName) 
+			     {
 					getSubCodeName = selectSubIdName[i].SUBNAME;
+					//console.log("getSubCodeName : "+getSubCodeName);
 					getSubCode = selectSubIdName[i].SUBCODE;
 					selectMenu = "<option id=\"\"VALUE=\""+ getSubCode+"\">"
 							+ getSubCodeName + "</option>";
@@ -654,6 +640,7 @@ var getclassIdLec = null;
 				}
 				teacherClick(selectSubIdName);
 				lecturePlanInfo();
+				
 			}
 		});
 	};
@@ -688,17 +675,19 @@ var getclassIdLec = null;
 		$.ajax({
 			type : "post",
 			async : true,
-			datatype : "text; charset=utf-8",
+			datatype : "json; charset=utf-8",
 			url : "selectLecturePlanInfo",
 			data : {
 				subCode : getSubCode
 			},
 			success : function(selectLecturePlanInfo) {
 				//이름과 강의명, 강의계획Id 가져오기
-				for (i in selectLecturePlanInfo) {
+				//console.log("selectLecturePlanInfo :"+selectLecturePlanInfo);
+				for(var i=0; i<selectLecturePlanInfo.length;i++) {
 					numI++;
 					//i번째와 앞에 것들과 비교해서 다르면 받기
 					getMemNum = selectLecturePlanInfo[i].MEMNUM;//맴버 넘버 
+					//console.log("getMemNum : "+getMemNum);
 					if (!compare.includes(getMemNum)) {
 						compare.push(getMemNum);
 						selectMemName(getMemNum, numI, getMemNum, memName);//이름가져오기
@@ -717,7 +706,11 @@ var getclassIdLec = null;
 					datatype : "text; charset=utf-8",
 					url : "selectMemName",
 					data : {
-						memNum : getMemNum
+						memNum:getMemNum
+					},
+					error :function(request,status,error) {
+						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+
 					},
 					success : function(selectMemName) {
 						memName = selectMemName;
@@ -729,7 +722,7 @@ var getclassIdLec = null;
 								+ "<td>" + getMemNum + "</td>" + "<td>"
 								+ memName + "</td>";
 						+"<tr>"
-						$("#lecInfoTable").append(addTeacherTag);
+						$('table#lecInfoTable').append(addTeacherTag);
 					}
 				});
 	};
@@ -842,14 +835,15 @@ var getclassIdLec = null;
 		$.ajax({
 			type : "post",
 			async : true,
-			datatype : "json; charset=utf-8",
+			datatype : "text; charset=utf-8",
 			url : "reGetTeaName",
 			data : {
 				memNum : memNumLec
 			},
 			success : function(reGetTeaName) {
-				reGetTeacher = reGetTeaName;
-				$("#teaLec").val(reGetTeacher);//강사명 다시 불러와야함
+				//console.log(reGetTeaName);
+				reGetTeacherA = reGetTeaName;
+				$('input#teaLec').val(reGetTeacherA);//강사명 다시 불러와야함
 			}
 		});
 
@@ -939,7 +933,7 @@ $(document).on('click','#classIdLec',function(){
 	//console.log("selBulNameB : "+selBulNameB);
 	//console.log("selBulNameC : "+selBulNameC);
 	//console.log("selBulNameT : "+selBulNameT);
-	console.log("selBulNameV : "+selBulNameV);//이걸 저장
+	//console.log("selBulNameV : "+selBulNameV);//이걸 저장
 	var bulText = "건물  : "+selBulNameB+" / 강의실  :  " +selBulNameC+" / 수용인원  :  " +selBulNameT;
 	
 	//수용인원 비교시   selBulNameT에서 명 빼서 사용
@@ -1038,7 +1032,7 @@ $(document).on('click','#classIdLec',function(){
 								+ "<td>" + memNumSecond + "</td>" + "<td>"
 								+ memNameSecond + "</td>";
 						+"<tr>"
-						$("#lecInfoTable").append(addTeacherTag);
+						$('table#lecInfoTable').append(addTeacherTag);
 						}
 					}
 					
@@ -1047,15 +1041,6 @@ $(document).on('click','#classIdLec',function(){
 		  
 				});
 	  });
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	//모달창 닫힐 때 셀렉트 메뉴 삭제
 	$('#modalPop').on('hide.bs.modal', function(e) {
 		modalClose();
@@ -1089,9 +1074,6 @@ $(document).on('click','#classIdLec',function(){
 	}
 		
 		
-</script>
-
-
-
-</html>
-
+	</script>
+	</body>
+	</html>

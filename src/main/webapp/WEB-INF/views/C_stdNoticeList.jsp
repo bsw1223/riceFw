@@ -50,32 +50,36 @@ min-width:150px;
 }}
 
 #banner_left{
-/* border: 1px solid; */
 width: 193px;
-/* float: right; */
+float: right;
 margin: auto;
-padding-top: 200px;
+padding-top: 90px;
 vertical-align: middle;
 min-width:150px;
 }
 
-@media screen and (max-width: 1500px){
+@media screen and (max-width: 1300px){
 #banner_left{
 	display: none;
-}}
+}
+#banner_left2{
+	display: none;
 
+}
+}
 
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <body>
 	<div class="content-wrapper">
 		<section class="content-header" style="width:83%">
-			<h1 style="font-size: 40px;margin-left: 20px;">
+		<div class="col-md-2" style="margin: 20px;"></div>
+			<h1 style="font-size: 40px;">
 				<c:out value='${sjctName}' />
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-				<li><a href="#"><c:out value='${sjctName}' /></a></li>
+				<li class="active"><i class="fa fa-dashboard"></i> Home</li>
+				<li class="active"><c:out value='${sjctName}' /></li>
 				<li class="active">공지사항</li>
 			</ol>
 		</section>
@@ -89,26 +93,17 @@ min-width:150px;
 					<img id="pp" src="">
 					
 					<%@ include file="left_banner1.jsp"%>
+					
+				</div>
+				<div>
+					<%@ include file="left_banner2.jsp"%>
 				</div>
 			</div>
 				<div class="col-md-8">
-					<div class="box box-primary" style="height: 650px">
+					<div class="box box-warning" style="height: 650px">
 						<div class="box-header">
-							<h2 class="box-title" style="padding: 10px">공지사항게시판</h2>
+							<h2 class="box-title" style="padding: 10px">공지사항</h2>
 						</div>
-						
-					<%-- 	<div style="float: right;margin-top:7px; margin-right:20px" class="amount">
-								<select id="getListWithPaging" name="sel" onchange="selChange()">
-									<option value="5"
-										<c:if test="${pageMaker.cri.amount == 5}">selected</c:if>>5개씩보기</option>
-									<option value="10"
-										<c:if test="${pageMaker.cri.amount == 10}">selected</c:if>>10개씩보기</option>
-									<option value="15"
-										<c:if test="${pageMaker.cri.amount == 15}">selected</c:if>>15개씩보기</option>
-									<option value="20"
-										<c:if test="${pageMaker.cri.amount == 20}">selected</c:if>>20개씩보기</option>
-								</select>
-							</div> --%>
 						<div class="col-lg-12" style="height:100%">
 							<div class="row">
 									<div class="btn-group pull-right" style="margin-top:20px; margin-right:10px;">

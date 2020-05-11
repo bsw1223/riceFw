@@ -14,10 +14,19 @@
  		<result property="subDesc" column="subDesc"/>
  		<result property="subRegDate" column="subRegDate"/>
  		<result property="subAblDate" column="subAblDate"/>
+ 		<result property="classId" column="classId"/>
+ 		<result property="openclassName" column="openclassName"/>
+ 		
  	</resultMap>
 
-
-
+	<resultMap type="java.util.Map" id="HashMap">
+		<result property="ordernum" column="ordernum"/>
+		<result property="totalpayamt" column="totalpayamt"/>
+		<result property="classprice" column="classprice"/>
+		<result property="openclassid" column="openclassid"/>
+		<result property="orderdate" column="orderdate"/>
+		<result property="openclassname" column="openclassname"/>
+	</resultMap>
 <!-- select subCode -->
 	<select id="selectSubCode" resultType="java.util.Map">
       <![CDATA[
@@ -242,13 +251,13 @@
 		   a.openEndDate,
 		   a.openStartTime,
 		   a.openEndTime,
+		   a.classSun,
 		   a.classMon,
 		   a.classTue,
 		   a.classWed,
 		   a.classThur,
 		   a.classFri,
 		   a.classSat,
-		   a.classSun,
 		   b.memname
 		FROM OPENCLASS a, member b
 		where a.memnum=b.memnum
@@ -258,9 +267,186 @@
 
 
 
-
-
-
+<select id="partnerOrderId" resultType="java.util.Map">
+      <![CDATA[
+			select seq_enrolment.nextval enrId from dual
+      ]]>
+	</select>
+	
+<!-- 	수강신청 -->
+	
+	<insert id="insertEnrolLec" parameterType="java.util.HashMap">
+  	  <foreach collection="wholeEnrol" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+		
+  	   		INTO 
+    		ENROLMENT
+	    		(
+		    		finalScore,
+		    		finalGrade,
+		    		studyApplyCode,
+		    		enrId,
+		    		studyteamId,
+		    		openclassId,
+		    		memNum,
+		    		classApplyCode,
+		    		enrDate,
+		    		openclassName
+	    		)
+  			VALUES
+  				(0,'','1700',#{item.cId}||#{memNum},'',#{item.cId},#{memNum},'1602',TO_CHAR(SYSDATE, 'yyyy-mm-dd'),#{item.cName})
+  			  </foreach>
+	</insert>
 	
  
+<!--  수강신청 시  검색에서 과목선택 -->
+ <select id="searchClassIdName" resultType="java.util.Map">
+      <![CDATA[
+			SELECT 
+			      codeName,
+			      codeId
+			FROM CODE
+			WHERE codeGroup='14'
+
+      ]]>
+	</select>
+ 
+ <select id="searchClassTea" resultType="java.util.Map">
+      <![CDATA[
+		 SELECT 
+		    a.memNum,
+		    b.memName
+		FROM OPENCLASS a, MEMBER b
+		where a.memNum = b.memNum
+    ]]>
+	</select>
+	
+<!--  보류과목삭제 -->
+ <select id="holdDel" resultType="java.util.Map">
+      <![CDATA[
+			delete from enrolment where CLASSAPPLYCODE='1602' and memNum=#{memNum}
+      ]]>
+	</select>
+	
+	
+<!--  듣고있는 과목 id 검색 -->
+ <select id="delRegL"  resultType="java.util.Map">
+      <![CDATA[
+			select openclassid from enrolment where memnum=#{memNum} and classapplycode='1600'
+      ]]>
+	</select>
+	
+	
+<select id="getSubIdJspC"  resultType="java.util.Map">
+      <![CDATA[
+		 SELECT 
+			    a.memNum,
+			    b.memName
+		FROM OPENCLASS a, MEMBER b
+		where a.memNum = b.memNum and a.subid=#{subId}
+	   ]]>
+	</select>
+	
+	
+<!-- 장바구니 -->
+<insert id="insertCart" parameterType="java.util.HashMap">
+		insert
+  	   		INTO 
+    		cart
+	    		(
+			    	cartNum,
+				    openclassId,
+				    classPrice,
+				    buyer
+				)
+  			VALUES
+  				(#{cartOrderId},#{cId},#{cPrice},#{memNum})
+</insert>
+<!-- <update id="insertCart" parameterType="java.util.HashMap"> -->
+<!-- 		  merge into cart m -->
+<!-- 		  using ( select #{cartOrderId} as cartNum, #{cId} as openclassId, #{cPrice} as classPrice, #{memNum} as buyer -->
+<!-- 		          from dual ) e -->
+<!-- 		  on (m.openclassId = e.openclassId and m.buyer=e.buyer )          -->
+<!-- 		  when matched then  -->
+<!-- 			    update set cartNum = e.cartNum, openclassId = e.openclassId, classPrice = e.classPrice, buyer = e.buyer -->
+<!-- 		  when not matched then -->
+<!-- 		  		 insert (openclassId, cartNum, classPrice,buyer) -->
+<!--    		  values (e.openclassId, e.cartNum, e.classPrice, e.buyer)  -->
+<!-- </update> -->
+	
+	<update id="paidlist" parameterType="String">
+	<![CDATA[
+		update enrolment 
+			set 
+			classapplycode='1600' 
+		where enrid=#{enrId}
+     ]]>
+	</update>	
+	
+	
+	<!-- 장바구니 -->
+<insert id="savePaidlist" parameterType="java.util.HashMap">
+	INSERT INTO 
+	PAYINFO
+		(
+			orderNum,
+			totalPayAmt,
+			buyer,
+			orderDate,
+			orderCode
+		)
+	    VALUES(#{orderId},#{amountTotal},#{memNum},#{approveTime},#{orderId})
+</insert>
+
+<select id="searchSub"  resultType="String">
+      <![CDATA[
+		 select classprice from openclass where openclassid=#{tempId}
+	   ]]>
+</select>
+
+
+<insert id="insertOrderList" parameterType="java.util.HashMap">
+	INSERT 
+	INTO 
+	ORDERLIST
+	(
+		orderNum,
+		openclassId,
+		classPrice
+	)
+    VALUES(#{orderId},#{tempId},#{classPrice})
+</insert>
+
+<!-- 결제목록 -->
+<select id="selectPaidListR"  resultType="java.util.Map">
+      <![CDATA[
+		select
+			 bb.ordernum, bb.totalpayamt, 
+			 bb.classprice, bb.openclassid, bb.orderdate,
+			 aa.openclassname  FROM openclass aa,
+			(SELECT a.ordernum, a.totalpayamt, b.classprice, b.openclassid, a.orderdate  
+		FROM 
+			payinfo a, orderlist b where a.orderNum= b.ordernum and a.buyer=#{memNum}) bb 
+	 	where 
+	 		aa.openclassid=bb.openclassid
+	 	order by bb.ordernum desc
+	   ]]>
+</select>
+
+<!-- 장바구니 -->
+<select id="cartInfo"  resultType="java.util.Map">
+      <![CDATA[	
+		select 
+			bb.classnumber,aa.CLASSCAPACITY, aa.CLASSDESC, aa.SUBID, aa.MEMNUM, aa.OPENENDDATE, aa.CLASSTUE, aa.OPENCLASSDAYS, aa.OPENCLASSID, aa.OPENSTARTDATE,
+			aa.CARTNUM, aa.OPENSTARTTIME, aa.BUYER, aa.CLASSPRICE, aa.CLASSTHUR, aa.OPENCLASSNAME, aa.CLASSID, aa.OPENENDTIME
+		from  (select
+					a.CLASSCAPACITY, a.CLASSDESC, a.SUBID, a.MEMNUM, a.OPENENDDATE, a.CLASSTUE, a.OPENCLASSDAYS, a.OPENCLASSID, a.OPENSTARTDATE,
+					b.CARTNUM, a.OPENSTARTTIME, b.BUYER, a.CLASSPRICE, a.CLASSTHUR, a.OPENCLASSNAME, a.CLASSID, a.OPENENDTIME
+			   from openclass a, cart b where a.openclassId=b.openclassid and b.buyer=#{memNum}) aa, 
+			  (select 
+			  		classnumber, classId 
+			   from classroom)bb 
+        where aa.classid=bb.classid
+	   ]]>
+</select>	
+	
 </mapper>

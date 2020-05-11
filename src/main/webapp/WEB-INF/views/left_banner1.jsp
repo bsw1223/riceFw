@@ -19,14 +19,9 @@ var obTimeOut; // clearTimeout() 함수를 이용하여 Timeout 을 취소하기
 
 var ObjectArray = new Array ();
 
-ObjectArray[1] = "https://postfiles.pstatic.net/MjAyMDA1MDhfODkg/MDAxNTg4OTA5MDQ1Mzc0.tQqeCOGmQ7UWeUifZQTkdwBOvck1hWTQisT6MxR-npkg.hAlWgJJrrffxoXRlZPY_hC-ph_Hc3WA0IQw42GxIFDAg.PNG.heeee154/banner_left1.png?type=w773";
-ObjectArray[2] = "https://postfiles.pstatic.net/MjAyMDA1MDhfMTI4/MDAxNTg4OTA4MzA4NDg2.AQPRu9Ui9-aBK3RNwjcqVGxnSpFbdI0AKtyRl0t53aYg.tqk9R7veJQg3wZHmXxs12nAyXUTRb0YNnxqVnXCaKxwg.PNG.heeee154/banner_left2.png?type=w773";
-/* ObjectArray[3] = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRdsTBpQRNoF3TNpoaxI47rcjjDKvWrAstYcmySSkcLSqytHyDd&usqp=CAU";
-ObjectArray[4] = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR9W7GfVhFV158Qy4oG77ZvnbKYB51Xr166rVrKl4zJbs313FMm&usqp=CAU";
-ObjectArray[5] = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRdsTBpQRNoF3TNpoaxI47rcjjDKvWrAstYcmySSkcLSqytHyDd&usqp=CAU";
-ObjectArray[6] = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR9W7GfVhFV158Qy4oG77ZvnbKYB51Xr166rVrKl4zJbs313FMm&usqp=CAU";
-
- */
+ObjectArray[1] = "https://postfiles.pstatic.net/MjAyMDA1MTBfODcg/MDAxNTg5MDc4NTE2MjYx.mWPNFbwG_igTA5VPkt0yBN8-aEHmwDgIcyJH7ndFV1kg.mtK2ETIRKS5rUpaevlfuBSXNTt-wfB9gfVzA5oxzA9sg.PNG.heeee154/left1.png?type=w773";
+ObjectArray[2] = "https://postfiles.pstatic.net/MjAyMDA1MTBfMjg2/MDAxNTg5MDc4NTE2MjYw.YH9iPUMjWZpIihna3pb7lw3i-quz7EpCf_6-weiXSA0g.xjy2ru7s2SJcVdUJebWFPqJSHvUAI7F84YqKPPmdZp0g.PNG.heeee154/left2.png?type=w773";
+ObjectArray[3] = "https://postfiles.pstatic.net/MjAyMDA1MTBfMTI5/MDAxNTg5MDc4NTE2MjY1.BdFbc5PhkhlhFfPrEvsjeve7K4KZyY5XBJxUkj_WbF0g.kbTAo8hUvPsuPhEmRMH_RokwwkH3ou5pa7EzDn58FTgg.PNG.heeee154/left3.png?type=w773";
 
 
 var nObjectCnt = 0;	

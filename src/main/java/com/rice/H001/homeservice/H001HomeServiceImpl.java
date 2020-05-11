@@ -34,6 +34,44 @@ public class H001HomeServiceImpl implements H001HomeService{
 		return subJectInfo;
 	}
 
+	@Override
+	public Map<String, Object> selectSysdate() {
+		Map<String, Object> selectSysdate = h001HomeDAO.selectSysdate();
+		System.out.println("selectSysdate_service : "+selectSysdate);
+		return selectSysdate;
+	}
+
+	@Override
+	public List<Map<String, Object>> dateClassChoice(H001HomeVO h001HomeVO) {
+		List<Map<String, Object>> dateClassChoice = h001HomeDAO.dateClassChoice();
+		return dateClassChoice;
+	}
+
+	@Override
+	public Map<String, Object> selectDateToday() {
+		Map<String, Object> selectDateToday = h001HomeDAO.selectDateToday();
+		return selectDateToday;
+	}
+
+	@Override
+	public void updateToeicShedule(H001HomeVO h001HomeVO) {
+		System.out.println("service : "+h001HomeVO.toString());
+		h001HomeDAO.updateToeicShedule(h001HomeVO);
+		
+	}
+
+	@Override
+	public String selectToeicDate() {
+		String selectToeicDate = h001HomeDAO.selectToeicDate();
+		return selectToeicDate;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectDdayList() {
+		List<Map<String, Object>> selectDdayList = h001HomeDAO.selectDdayList();
+		return selectDdayList;
+	}
+
 	
 	
 }
