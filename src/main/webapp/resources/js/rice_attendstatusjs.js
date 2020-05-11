@@ -83,9 +83,9 @@ function getAttendInfo() {
 }
 
 function chartRender(info) {
-	div_attendChart.append('<div id="'+info.openclassName+'" val="'+ info.openclassId +'" ></div>');
+	div_attendChart.append('<div id="'+info.openclassName+info.openclassId+'" val="'+ info.openclassId +'" ></div>');
 	
-	var chart = new CanvasJS.Chart(info.openclassName, {
+	var chart = new CanvasJS.Chart(info.openclassName+info.openclassId , {
 		theme: "light2",
 		title : {
 			text : info.openclassName,

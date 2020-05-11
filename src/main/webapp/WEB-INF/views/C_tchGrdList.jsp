@@ -68,7 +68,7 @@
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer">
-						<div class="buttons pull-right">
+						<div class="buttons">
 							<button class="btn btn-primary" id="add-eval">평가 생성</button>
 							<button class="btn btn-primary pull-right" id="save-score" style="display: none;">점수 저장</button>
 						</div>
