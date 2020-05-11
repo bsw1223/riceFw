@@ -92,6 +92,7 @@ min-width:150px;
 						<%@ include file="left_banner2.jsp"%>
 					</div>
 				</div>
+
 				<div class="col-md-8">
 					<div class="box box-warning">
 						<div class="box-header">

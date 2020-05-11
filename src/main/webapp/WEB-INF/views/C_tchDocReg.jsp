@@ -100,7 +100,6 @@ min-width:150px;
 							<input type="hidden" class="form-control" name='memNum' value="${memNum}"> 
 							<input type="hidden" class="form-control" name='boViews' value="0"> 
 							<input type="hidden" class="form-control" name='boLikes' value="0">
-<<<<<<< HEAD
 
 							<div class="row">
 								<div class="col-lg-12">
@@ -116,18 +115,6 @@ min-width:150px;
 												
 												</ul>
 											</div>
-=======
-							<!-- file -->
-							<div class="panel panel-default">
-								<div class="panel-heading">File Attach</div>
-									<div class="panel-body">
-										<div class="form-group uploadDiv">
-											<input type="file" name="uploadFile" multiple>
-										</div>
-										<div class='uploadResult'>
-											<ul>
-											</ul>
->>>>>>> refs/remotes/origin/master
 										</div>
 									</div>
 							</div>

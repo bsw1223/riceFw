@@ -50,28 +50,27 @@ $(document).ready(function(){
 					 +"	<button type=\"button\" class=\"btn btn-block btn-warning btn-xs\">L o g I n -  H e r e</button>"
 					 +"	</a>"
 					 +"</li> ";
-			
-			
-	 var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
-	       +"<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">"
-		   +"<button type=\"button\" class=\"btn btn-block btn-info btn-xs\">마 이 페 이 지 </button>"
-           +"	</a>"
-           +"<ul class=\"dropdown-menu\">"
-		   +"	<li class=\"user-header\">"
-		   /* +"	 <img src=\"${contextPath}/resources/dist/img/user2-160x160.jpg\" class=\"img-circle\" alt=\"User Image\">" */
-		   +"<p>"
-		   +memName+" "+"-"+" "+authName
-		  /*  +" <small>Member since Nov. 2012</small>" */
-		   +" </p>"
-		   +"</li>"
-		   +"</li>"
-		   +"<li class=\"user-footer\">"
-		   +" <div class=\"pull-left\">"
-		   +"  <a href=\"../../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
-		   +" </div>"
-		   +" <div class=\"pull-right\">"
-		   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
-		   +" </div></li></ul></li>";
+	var afterLogInTag =	"<li class=\"dropdown user user-menu\">"	
+			       +"<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">"
+				   +"<button type=\"button\" class=\"btn btn-block btn-info btn-xs btn-warning\">마 이 페 이 지 </button>"
+		           +"	</a>"
+		           +"<ul class=\"dropdown-menu\">"
+				   +"	<li class=\"user-header\">"
+				   /* +"	 <img src=\"${contextPath}/resources/dist/img/user2-160x160.jpg\" class=\"img-circle\" alt=\"User Image\">" */
+				   +"<p>"
+				   +memName+" "+"-"+" "+authName
+				  /*  +" <small>Member since Nov. 2012</small>" */
+				   +" </p>"
+				   +"</li>"
+				   +"</li>"
+				   +"<li class=\"user-footer\">"
+				   +" <div class=\"pull-left\">"
+				   +"  <a href=\"../../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
+				   +" </div>"
+				   +" <div class=\"pull-right\">"
+				   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
+				   +" </div></li></ul></li>";
+
 				   
 
 	if(eval(memNum)==undefined) {
@@ -96,8 +95,9 @@ $(document).ready(function(){
 		<header class="main-header">
 			<!-- Logo -->
 			<a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><b>R</b>ice</span> <!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>RiceLMS</b></span>
+
+				<span class="logo-mini"><img src="${contextPath}/resources/img/로고수정mini.png"></span> <!-- logo for regular state and mobile devices -->
+				<span class="logo-lg"><img src="${contextPath}/resources/img/로고수정.png"></span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
