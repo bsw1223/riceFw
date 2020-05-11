@@ -24,7 +24,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="box box-info">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title">
 							교실상세보기 <small>교실정보</small>

@@ -25,7 +25,7 @@
 				</div>
 				<!-- /.box -->
 
-				<div class="box box-default">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title">내 예약 현황</h3>
 						

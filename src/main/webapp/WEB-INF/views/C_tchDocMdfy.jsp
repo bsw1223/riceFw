@@ -29,10 +29,11 @@
 			<div class="row">
 			<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<div class="box box-primary">
-						<div class="box-body">
+					<div class="box box-warning">
+						<div class="box-header">
 						<h2 class="box-title"><c:out value='${pageTitle}' /></h2>
-					
+						</div>
+						<div class="box-body">
 						<!-- action="/mypage/board/mdfy/${list.boCode}/${list.boURL}" -->
 						<form name="updateForm" role="form" method="get">
 							<!-- boTitle -->
@@ -72,8 +73,8 @@
 							<button data-oper="cancel" class="btn btn-primary"
 									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'return false;">취소</button>
 						</div>
+						</div>
 					</div>
-				</div>
 				</div>
 			</div>
 		</section>

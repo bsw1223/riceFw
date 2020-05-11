@@ -51,7 +51,7 @@
 			<div class="row">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<div class="box box-primary">
+					<div class="box box-warning">
 						<div class="box-header">
 							<h2 class="box-title">공지사항게시판</h2>
 						</div>

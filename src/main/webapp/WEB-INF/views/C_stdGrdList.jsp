@@ -48,7 +48,7 @@
 		<div class="row">
 		<div class="col-md-2"></div>
 			<div class="col-md-3">
-				<div class="box box-default">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h2 class="box-title">성적 조회</h2>
 					</div>
@@ -71,7 +71,7 @@
 			
 			<div class="col-md-5">
 				<!-- general form elements -->
-				<div class="box box-default">
+				<div class="box box-warning">
 <!-- 					<div class="box-header"> -->
 <!-- 						<h2 class="box-title">차트 넣는곳</h2> -->
 <!-- 					</div> -->

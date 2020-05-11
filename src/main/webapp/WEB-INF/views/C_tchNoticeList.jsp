@@ -27,6 +27,8 @@
 float: right;
 }
 
+a:link { color: red; text-decoration: none; }
+
 </style>
 
 <body>
@@ -48,7 +50,7 @@ float: right;
 		<div class="row">
 		<div class="col-md-2"></div>
 			<div class="col-md-8">
-				<div class="box">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h2 class="box-title">공지사항 게시판</h2>
 							<div class="amount">
@@ -112,7 +114,7 @@ float: right;
 	        		 <!-- /pagination --> 
 						<div class="offset-md-8">
 							<form action="/mypage/board/regForm/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}">
-								<button class="btn btn-primary pull-right"type="submit">공지사항 등록</button>
+								<button class="btn btn-warning pull-right"type="submit">공지사항 등록</button>
 							</form>
 						</div>
 						<!-- /button -->

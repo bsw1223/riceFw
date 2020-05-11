@@ -28,7 +28,7 @@
 		<div class="row">
 		<div class="col-md-2"></div>
 			<div class="col-md-10">
-				<div class="box">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title">스터디 게시판</h3>
 					</div>
