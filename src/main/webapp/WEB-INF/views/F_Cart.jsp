@@ -56,7 +56,7 @@
 				</div>
 				<!-- /.box -->
 
-				<div class="box box-success">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title">결제 정보</h3>
 						
