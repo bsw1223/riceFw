@@ -50,7 +50,7 @@
 				</div>
 				<!-- /.box -->
 
-				<div class="box box-success">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title">강의 목록</h3>
 						
