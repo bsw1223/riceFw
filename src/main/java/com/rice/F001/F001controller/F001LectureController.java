@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.rice.C001.boardvo.C001ClassBoardVO;
 import com.rice.F001.F001service.F001LectureService;
@@ -445,4 +446,26 @@ public class F001LectureController {	// 회원관리
 		
 		return selectCountCapa;
 	}
+	@RequestMapping(value = "readyLecturePlanAdd", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> readyLecturePlanAdd( F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<Map<String, Object>> lecCodeVal = f001LectureService.lecCodeVal();
+		return lecCodeVal;
+	}
+	
+	@RequestMapping(value = "appformteacher", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	public String appformteacher(ModelAndView modelAndView , HttpServletRequest request, HttpServletResponse response) {
+		return "F_LecturePlanAdd";
+	}
+	
+	@RequestMapping(value = "lecturePlanAdd", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public void lecturePlanAdd(@RequestBody Map<String,Object> memNum, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("memNum : "+ memNum);
+		f001LectureService.lecturePlanAdd(memNum);
+		//System.out.println("controller_ selectDelButton : "+ selectDelButton);
+		return;
+	}	
+	
+	
 }

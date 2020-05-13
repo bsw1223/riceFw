@@ -286,6 +286,21 @@ public class F001LectureServiceImpl implements F001LectureService {
 	}
 
 
+	@Override
+	public List<Map<String, Object>> lecCodeVal() {
+		List<Map<String, Object>> lecCodeVal = f001LectureDAO.lecCodeVal();
+		return lecCodeVal;
+	}
+
+
+	@Override
+	public void lecturePlanAdd(Map<String, Object> memNum) {
+		System.out.println("service memNum:" +memNum);
+		f001LectureDAO.lecturePlanAdd(memNum);
+		
+	}
+
+
 
 
 

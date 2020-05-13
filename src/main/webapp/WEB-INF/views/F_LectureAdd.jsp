@@ -23,7 +23,7 @@
 
 
    <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper ">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -41,7 +41,7 @@
 
       <div class="row">
         
-        <div class="col-md-12">
+        <div class="col-md-10">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#info" data-toggle="tab">교육과목 등록</a></li>
@@ -92,7 +92,7 @@
                 </div>
                  <div class="form-group">
                 </div>
-				<div class="">
+				<div class="form-group">
                  <button type="reset" class="btn btn-primary pull-right" style="margin-right: 5px;">
 		            <i class=""></i> 초기화
 		          </button>
@@ -150,7 +150,7 @@
                 </div>
                 <div class="">
                   <label>수강정원</label>
-                  <input type="text" class="form-control " placeholder="" id="lecCapacity">
+                  <input type="number" class="form-control " placeholder="" id="lecCapacity">
                 </div>
                 <div class="">
                   <label>강의실</label>
@@ -159,12 +159,12 @@
                 </div>
                 <div class="">
                   <label>과정금액</label>
-                  <input type="text" class="form-control " placeholder="" id="costLec">
+                  <input type="number" class="form-control " placeholder="" id="costLec">
                 </div>
-                <div class="">
-                  <label>강의계획서_첨부파일</label>
-                  <input type="text" class="form-control " placeholder="" id="descFileLec">
-                </div>
+                <!-- <div class=""> -->
+                  <!-- <label>강의계획서_첨부파일</label> -->
+                  <!-- <input type="text" class="form-control " placeholder="" id="descFileLec"> -->
+                <!--  </div> -->
                 <div class="form-group">
                 </div>
 				<div class="form-group">
@@ -176,7 +176,7 @@
 		          </button>
                 </div>
                 </form>
-                form-horizontal
+                <!-- form-horizontal -->
               </div>
               <!-- /.tab-pane 강사로 변경 -->
             </div>
@@ -616,7 +616,7 @@ var getclassIdLec = null;
 			format : 'hh:mm',
 		});
 	};
-
+var searchSubCode = '';
 	//seq로 subId, subName받아오기
 	function selectSubCode() {
 		getSubCode = $("#subName").val();
@@ -632,10 +632,13 @@ var getclassIdLec = null;
 				   	for(i in selectSubIdName) 
 			     {
 					getSubCodeName = selectSubIdName[i].SUBNAME;
-					//console.log("getSubCodeName : "+getSubCodeName);
-					getSubCode = selectSubIdName[i].SUBCODE;
-					selectMenu = "<option id=\"\"VALUE=\""+ getSubCode+"\">"
-							+ getSubCodeName + "</option>";
+					//console.log(selectSubIdName);
+					searchSubCode = selectSubIdName[i].SUBCODE;//과목코드임
+					getSubCode = selectSubIdName[i].SUBID;//교육과목 id임
+					console.log("searchSubCode : "+searchSubCode);//과목코드
+					console.log("getSubCode : "+getSubCode);//교육과목 id
+					selectMenu = "<option id=\"\"VALUE=\""+ getSubCode+"\" label='"+getSubCodeName+"'>"
+							+ searchSubCode + "</option>";
 					$('#subName').append(selectMenu);
 				}
 				teacherClick(selectSubIdName);
@@ -644,41 +647,50 @@ var getclassIdLec = null;
 			}
 		});
 	};
-
+var subCodeBasic ='';
 	//교과코드 정하고 강사 클릭시 교과코드로, 강사정보 받아오기	
 	function teacherClick(selectSubIdName) {
 		$(document).on("click",	"#teaLec",function() {
-							getSubCode = $("#subName").val();
+							//라벨값이 이름으로 변경, text값이 subCode로 변경
+							getSubCode = $("#subName").val();//subCode
 							getSubName = $("#subName option:checked").text();
+							getLabelName = $("#subName option:checked").attr("label");
+							//getSelectCode = 
 							if (getSubCode == '') {
 								for (i in selectSubIdName) {
+									console.log(selectSubIdName);
 									getSubCodeName = selectSubIdName[i].SUBNAME;
-									getSubCode = selectSubIdName[i].SUBCODE;
-									selectMenu = "<option class=\"selectMenuSub\" value=\""+getSubCode+"\">"
-											+ getSubCodeName + "</option>";
+									getSubCode = selectSubIdName[i].SUBID;
+									subCodeBasic= selectSubIdName[i].SUBCODE;//코드값
+									//console.log("subCodeBasic : "+subCodeBasic);
+									selectMenu = "<option class=\"selectMenuSub\" value=\""+getSubCode+"\" label='"+getSubCodeName+"'>"//subId값이 들어감
+											+ subCodeBasic + "</option>";
 									$("#subId2").append(selectMenu);//모달에 메뉴 추가
 								}
 								//과목선택 후 모달 띄우면 과목 고정							
 							} else {
-								selectMenu = "<option class=\"selectMenuSub\"  value=\""+getSubCode+"\">"
-										+ getSubName + "</option>";
+								selectMenu = "<option class=\"selectMenuSub\"  value=\""+getSubCode+"\" label='"+getLabelName+"'>"
+										+ getSubName + "</option>";//ok
 								$("#subId2").append(selectMenu);//모달에 메뉴 추가
+								
 							}
 							lecturePlanInfo();
 							$('#modalPop').modal();
 						});
 	};
 
-	//강의계획 정보 가져오기, 강사번호, 이름사용
+	//강의계획 정보 가져오기, 강사번호, 이름사용--ok
 	function lecturePlanInfo() {
-		getSubCode = $("#subId2").val();
+		var getSelectCode = $("#subId2 option:checked").text();//코드
+		//getSubCode = $("#subId2").val();
+		console.log("getSelectCode : "+getSelectCode);
 		$.ajax({
 			type : "post",
 			async : true,
 			datatype : "json; charset=utf-8",
 			url : "selectLecturePlanInfo",
 			data : {
-				subCode : getSubCode
+				subCode : getSelectCode
 			},
 			success : function(selectLecturePlanInfo) {
 				//이름과 강의명, 강의계획Id 가져오기
@@ -718,7 +730,7 @@ var getclassIdLec = null;
 								+ "<td>"
 								+ numI
 								+ "</td>"
-								+ "<td><input type=\"radio\" name=\"selectTeacher\" class=\"flat-red\" value=\""+getMemNum+"\"></td>"
+								+ "<td><input type=\"radio\" name=\"selectTeacher\" class=\"flat-red radioCheck\" value=\""+getMemNum+"\"></td>"
 								+ "<td>" + getMemNum + "</td>" + "<td>"
 								+ memName + "</td>";
 						+"<tr>"
@@ -733,13 +745,18 @@ var getclassIdLec = null;
 		$(document).on("click", "input:radio[name=selectTeacher]", function() {
 			var selectMemNum = $('input[name=selectTeacher]:checked').val();
 			//subId2의  벨류받기
+			console.log("selectMemNum : "+ selectMemNum);
 			modalSelSub = $("#subId2").val();
+			console.log("modalSelSub : "+ modalSelSub);
 			lecturePlanInfoND(selectMemNum, modalSelSub);
 		});
 	};
 
 	//강의계획 정보 가져오기, 강의 계획명, 강의 설명 사용
 	function lecturePlanInfoND(selectMemNum, modalSelSub) {
+		var getSelectCodeSecond = $("#subId2 option:checked").text();//코드
+		console.log("subCodeBasic : "+subCodeBasic);
+		console.log("modalSelSub : "+modalSelSub);
 		$.ajax({
 					type : "post",
 					async : true,
@@ -748,9 +765,10 @@ var getclassIdLec = null;
 					//subId2의 셀랙트 벨류도 전송 해야함_과목코드
 					data : {
 						memNum : selectMemNum,
-						subCode : modalSelSub
+						subCode : getSelectCodeSecond
 					},
 					success : function(lecturePlanInfoND) {
+						console.log(lecturePlanInfoND);
 						//이름과 강의명, 강의계획Id, 강의설명 가져오기
 							$('tr#addSubTr').remove();
 						for (i in lecturePlanInfoND) {
@@ -1000,7 +1018,7 @@ $(document).on('click','#classIdLec',function(){
 	 //강사검색 버튼이벤트
 	  $(document).on( "click","button#selectTeaName", function() { 
 		  teaMemName=$('input#eventTitle').val();
-		  teaSubCode= $('#subId2 option:selected').val();
+		  teaSubCode= $('#subId2 option:selected').text();//코드로변경
 		  //console.log("teaMemName : " +teaMemName);
 		  //console.log("teaSubCode : " +teaSubCode);
 		  compareLecTea=[];
@@ -1013,7 +1031,7 @@ $(document).on('click','#classIdLec',function(){
 				url : "selectTeaName",
 				data : {
 						memName:teaMemName,
-						subCode:teaSubCode
+						subId:teaSubCode
 						},
 				success : function(selectTeaName) {
 					for(i in selectTeaName){
