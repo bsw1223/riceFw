@@ -411,7 +411,7 @@
 		from  (select
 					a.CLASSCAPACITY, a.CLASSDESC, a.SUBID, a.MEMNUM, a.OPENENDDATE, a.CLASSTUE, a.OPENCLASSDAYS, a.OPENCLASSID, a.OPENSTARTDATE,
 					b.CARTNUM, a.OPENSTARTTIME, b.BUYER, a.CLASSPRICE, a.CLASSTHUR, a.OPENCLASSNAME, a.CLASSID, a.OPENENDTIME
-			   from openclass a, cart b where a.openclassId=b.openclassid and b.buyer='101') aa, 
+			   from openclass a, cart b where a.openclassId=b.openclassid and b.buyer=#{memNum}) aa, 
 			  (select 
 			  		classnumber, classId 
 			   from classroom)bb 
@@ -533,44 +533,7 @@
 </select>
 
 
-<!--     <![CDATA[	 -->
-<!-- 		   select  -->
-<!-- 		   	   b.memname, -->
-<!-- 		       c.openStartDate, -->
-<!-- 			   c.classDesc, -->
-<!-- 			   c.classId, -->
-<!-- 			   c.openclassId, -->
-<!-- 			   c.classCapacity, -->
-<!-- 			   c.classDescFile, -->
-<!-- 			   c.memNum, -->
-<!-- 			   c.classPrice, -->
-<!-- 			   c.openclassName, -->
-<!-- 			   c.subId, -->
-<!-- 			   c.openEndDate, -->
-<!-- 			   c.openStartTime, -->
-<!-- 			   c.openEndTime, -->
-<!-- 			   c.classSun, -->
-<!-- 			   c.classMon, -->
-<!-- 			   c.classTue, -->
-<!-- 			   c.classWed, -->
-<!-- 			   c.classThur, -->
-<!-- 			   c.classFri, -->
-<!-- 			   c.classSat -->
-<!-- 		 from subject a , member b, openclass c -->
-<!-- 		 ]]>  -->
-<!-- 		<where> -->
-<!-- 		  	<![CDATA[ a.subcode=c.subid and c.memnum=b.memnum  ]]> -->
-<!-- 			<if test="subCode != null and subCode !=''">  -->
-<!-- 		       		<![CDATA[ and a.subCode=#{subCode} ]]></if>	 -->
-<!-- 			<if test="memNum != null and memNum !=''">  	 -->
-<!-- 		      		<![CDATA[ and b.memNum=#{memNum} ]]></if> -->
-<!-- 		    <if test="searchKey != null and memNum !=''"> -->
-<!-- 		  		<![CDATA[ and    -->
-<!-- 		       (b.authid || b.memid || b.memname || b.memnum ||   -->
-<!-- 		       c.classdesc || c.classid || c.memnum || c.openclassdays || -->
-<!-- 		       c.openclassid || c.openclassname || c.openenddate || c.openendtime || -->
-<!-- 		       c.openstartdate || c.openstarttime || c.subid) like 	'%' || #{searchKey} ||'%' ]]> </if> -->
-<!-- 		</where> -->
+
 
 
 

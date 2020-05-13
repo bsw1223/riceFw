@@ -51,7 +51,7 @@
 			<div class="row">
 				<div class="col-md-2"></div>
 					<div class="col-md-8">
-						<div class="box box-primary">
+						<div class="box box-warning">
 							<div class="box-header">
 								<h2 class="box-title">QnA 게시판</h2>
 							</div>
@@ -73,7 +73,7 @@
 								</span>
 								<!-- 업데이트 날짜 -->
 								<span style="margin:20px;">
-									<label>업데이트 날짜</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boUpdatedate}"/></span>
+									<label>업데이트 날짜</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boUpdateDate}"/></span>
 								</span>
 								<span style="margin:20px;">
 									<label>조회수</label> <span>&nbsp;&nbsp;&nbsp;${list.boViews}</span>

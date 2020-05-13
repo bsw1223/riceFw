@@ -27,8 +27,17 @@
 float: right;
 }
 
+#main{
+ font-family: "Nanum Gothic"
+
+}
+h1{
+
+}
 
 </style>
+
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400,700&display=swap&subset=korean" rel="stylesheet">
 
 <body>
 
@@ -52,7 +61,7 @@ float: right;
 			<div class="col-md-8">
 				<div class="box box-warning">
 					<div class="box-header">
-						<h2 class="box-title">공지사항 게시판</h2>
+						<h2 class="box-title" id="main">공지사항 게시판</h2>
 							<div class="amount">
 								<select id="getListWithPaging" name="sel" onchange="selChange()">
 								<option value="5"

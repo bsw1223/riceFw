@@ -66,11 +66,8 @@ min-width:150px;
 			<div class="row">
 				<div class="col-md-2">
 					<div id="banner_left">
-					
 						<img id="pp" src="">
-						
 						<%@ include file="left_banner1.jsp"%>
-						
 					</div>
 					<div>
 						<%@ include file="left_banner2.jsp"%>
@@ -115,12 +112,13 @@ min-width:150px;
 										</div>
 									</div>
 							</div>
-						</form>
 							<div class="box-footer">
 								<button data-oper="modify" class="btn btn-primary">저장</button>
 								<button data-oper="cancel" class="btn btn-primary"
 									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'return false;">취소</button>
 							</div>
+						</form>
+							
 						</div>
 						</div>
 					</div>

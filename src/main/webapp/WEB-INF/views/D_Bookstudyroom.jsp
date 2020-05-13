@@ -17,7 +17,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="box box-default">
+				<div class="box box-warning">
 					<div class="box-body">
 						<div id='timeline_cal'></div>
 					</div>
