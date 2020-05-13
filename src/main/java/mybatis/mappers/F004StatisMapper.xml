@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.f004statis">
+	<resultMap type="java.util.Map" id="tchsalesList">
+		<result property="memNum" column="MEMNUM"/>
+		<result property="label" column="MEMNAME"/>
+		<result property="cnt" column="cnt"/>
+		<result property="y" column="sales"/>
+	</resultMap>
+	
+	<resultMap type="java.util.Map" id="monthsalesList">
+		<result property="x" column="DAY"/>
+		<result property="y" column="SALES"/>
+	</resultMap>
+	
+	<select id="getTchSales" resultMap="tchsalesList" parameterType="java.util.Map">
+		<![CDATA[
+			SELECT MEMNUM, MEMNAME, cnt, sales
+			FROM (
+			    SELECT rownum rn, MEMNUM, MEMNAME, cnt, sales
+			    FROM (
+			        SELECT A.MEMNUM, C.MEMNAME, COUNT(*) cnt, SUM(A.CLASSPRICE) sales
+			        FROM OPENCLASS A, ENROLMENT B, MEMBER C
+			        WHERE A.OPENCLASSID=B.OPENCLASSID
+			            AND A.MEMNUM=C.MEMNUM
+			            AND TO_DATE(B.ENRDATE, 'YYYY-MM-DD') > TO_DATE(#{currentDate}, 'YYYY-MM')
+			        GROUP BY A.MEMNUM, C.MEMNAME
+			        ORDER BY SUM(A.CLASSPRICE) DESC
+			        ) t
+			    ) tt
+			WHERE rn <= 10
+		]]>
+	</select>
+	
+	<select id="getmonthSales" resultMap="monthsalesList" parameterType="java.util.Map">
+		<![CDATA[
+			SELECT TO_CHAR(TT.DD, 'DD') DAY, NVL(SUM(C.CLASSPRICE), 0) SALES
+			FROM ENROLMENT A, 
+			    (
+			    SELECT TO_DATE(TO_CHAR(TO_DATE(SDAY),'YYYY-MM') || '-' || CNT) DD
+			    FROM (
+			        select level cnt, trunc(TO_DATE(#{currentDate}, 'YYYY-MM'),'mm') sday
+			        from dual
+			        connect by level<=LAST_DAY(TO_DATE(#{currentDate}, 'YYYY-MM'))-trunc(TO_DATE(#{currentDate}, 'YYYY-MM'),'mm')+1
+			        ) T
+			    ) TT, OPENCLASS C
+			WHERE A.ENRDATE (+)=TT.DD
+			    AND A.OPENCLASSID = C.OPENCLASSID(+)
+			    AND TT.DD >= TO_DATE(#{currentDate}, 'YYYY-MM')
+			GROUP BY TT.DD
+			ORDER BY TT.DD
+		]]>
+	</select>
+</mapper>

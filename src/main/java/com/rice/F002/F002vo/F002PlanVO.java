@@ -15,6 +15,14 @@ public class F002PlanVO {
 	private String planEndTime;
 	private int planCapacity;
 	
+	private String classMon;
+	private String classTue;
+	private String classWed;
+	private String classThur;
+	private String classFri;
+	private String classSat;
+	private String classSun;
+	
 	@Override
 	public String toString() {
 		return "F002PlanVO [planId=" + planId + ", planCode=" + planCode + ", planName=" + planName
@@ -82,4 +90,47 @@ public class F002PlanVO {
 	public void setPlanCapacity(int planCapacity) {
 		this.planCapacity = planCapacity;
 	}
+	public String getClassMon() {
+		return classMon;
+	}
+	public void setClassMon(String classMon) {
+		this.classMon = classMon;
+	}
+	public String getClassTue() {
+		return classTue;
+	}
+	public void setClassTue(String classTue) {
+		this.classTue = classTue;
+	}
+	public String getClassWed() {
+		return classWed;
+	}
+	public void setClassWed(String classWed) {
+		this.classWed = classWed;
+	}
+	public String getClassThur() {
+		return classThur;
+	}
+	public void setClassThur(String classThur) {
+		this.classThur = classThur;
+	}
+	public String getClassFri() {
+		return classFri;
+	}
+	public void setClassFri(String classFri) {
+		this.classFri = classFri;
+	}
+	public String getClassSat() {
+		return classSat;
+	}
+	public void setClassSat(String classSat) {
+		this.classSat = classSat;
+	}
+	public String getClassSun() {
+		return classSun;
+	}
+	public void setClassSun(String classSun) {
+		this.classSun = classSun;
+	}
+	
 }

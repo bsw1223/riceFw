@@ -33,8 +33,8 @@
 			{Header:"ID",Type:"Text",SaveName:"memId",MinWidth:200,Align:"Center",KeyField:1},		
 			{Header:"이름",Type:"Text",SaveName:"memName",MinWidth:150,KeyField:1 ,MultiLineText:1, Wrap:1},
 			{Header:"이메일",Type:"Text",SaveName:"memEmail",MinWidth:300,KeyField:1},
-			{Header:"권한",Type:"Text",SaveName:"authId",MinWidth:100,KeyField:1, Edit:0},
-			{Header:"가입일",Type:"Date",SaveName:"memJoinDate",MinWidth:200,Edit:0},
+			{Header:"권한",Type:"Text",SaveName:"authId",MinWidth:100,KeyField:1},
+			{Header:"가입일",Type:"Text",SaveName:"memJoinDate",MinWidth:200,Edit:0},
 			{Header:"Level",Type:"Int",SaveName:"memLevel",MinWidth:60},
 			{Header:"Point",Type:"Int",SaveName:"memPoint",MinWidth:60},
 		];   

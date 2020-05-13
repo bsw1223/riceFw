@@ -79,15 +79,15 @@
 	<update id="updatecodeData" parameterType="java.util.Map">
 		<![CDATA[
 			UPDATE CODE
-			SET codeGroup=#{codeGroup},
-				codeName=#{codeName},
+			SET codeName=#{codeName},
 				codeOrder=#{codeOrder},
 				etc1=#{etc1},
 				etc2=#{etc2},
 				etc3=#{etc3},
 				etc4=#{etc4},
-				etc5=#{etc5},
+				etc5=#{etc5}
 			WHERE codeId=#{codeId}
+				and codeGroup=#{codeGroup}
 		]]>
 	</update>
 	
@@ -95,6 +95,7 @@
 		<![CDATA[
 			DELETE CODE
 			WHERE codeId=#{codeId}
+				and codeGroup=#{codeGroup}
 		]]>
 	</delete>
 </mapper>
