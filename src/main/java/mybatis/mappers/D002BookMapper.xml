@@ -85,7 +85,7 @@
 			        WHEN '1301' THEN '<span class="label label-danger">대여신청취소</span>'
 			        WHEN '1302' THEN '<span class="label label-warning">대여신청대기</span>'
 			    ELSE '<span class="label label-warning">오류</span>' END bookState
-			FROM SCOTT.BOOKING B, CLASSROOM C, BUILDING BU
+			FROM BOOKING B, CLASSROOM C, BUILDING BU
      	]]>
      	<where>
 	     	<![CDATA[
@@ -189,7 +189,7 @@
      <!-- 예약 취소 상태 업데이트  -->
      <update id="deleteBooking" parameterType="D002BookVO">
      	<![CDATA[
-     		UPDATE SCOTT.BOOKING
+     		UPDATE BOOKING
 			SET bookCode='1301'
 			where bookNum=#{bookNum, jdbcType=VARCHAR}
      	]]>     	
@@ -198,7 +198,7 @@
      <!-- 예약 정보 수정 업데이트  -->
      <update id="updateBooking" parameterType="D002BookVO">
     	 <![CDATA[
-     		update SCOTT.BOOKING 
+     		update BOOKING 
 			set bookStartTime=#{bookStartTime, jdbcType=VARCHAR},
 			    bookEndTime=#{bookEndTime, jdbcType=VARCHAR},
 			    bookPurpose=#{bookPurpose, jdbcType=VARCHAR},

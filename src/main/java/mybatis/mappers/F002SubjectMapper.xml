@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mapper.f002subject">
+	<resultMap type="F002SubjectVO" id="subjectList">
+		<result property="subId" column="SUBID"/>
+		<result property="subCode" column="SUBCODE"/>
+		<result property="codeName" column="CODENAME"/>
+		<result property="subName" column="SUBNAME"/>
+		<result property="subDesc" column="SUBDESC"/>
+		<result property="subRegDate" column="SUBREGDATE"/>
+		<result property="subAblDate" column="SUBABLDATE"/>
+	</resultMap>
+	
+	<select id="searchList" resultMap="subjectList" parameterType="java.util.Map">
+		<![CDATA[
+			SELECT A.SUBID, A.SUBCODE, B.CODENAME, A.SUBNAME, A.SUBDESC, A.SUBREGDATE, A.SUBABLDATE
+			FROM SUBJECT A, CODE B
+			WHERE A.SUBCODE=B.CODEID
+			    and B.CODEGROUP='14'
+			ORDER BY TO_NUMBER(A.SUBID) DESC
+		]]>
+	</select>
+	
+	<insert id="insertData" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO SUBJECT(subId,subCode,subName,subDesc,subRegDate)
+	    		VALUES(SEQ_SUBJECT.nextval,#{subCode},#{subName},#{subDesc},TO_CHAR(SYSDATE,'YYYY-MM-DD'))
+		]]>
+	</insert>
+	
+	<update id="updateData" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE SUBJECT
+			SET SUBCODE=#{subCode}
+			    , SUBNAME=#{subName}
+			    , SUBDESC=#{subDesc}
+			WHERE SUBID = #{subId}
+		]]>
+	</update>
+
+	<delete id="deleteData" parameterType="java.util.Map">
+		<![CDATA[
+			DELETE SUBJECT
+			WHERE subId = #{subId}
+		]]>
+	</delete>
+
+</mapper>
