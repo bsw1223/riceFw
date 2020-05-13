@@ -22,7 +22,7 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-10">
 				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title">건물리스트</h3>
@@ -97,19 +97,19 @@
 								</c:if>
 							</ul>
 						</div>
-						<div class="offset-md-8">
-							<form action="#" method="get" class="sidebar-form">
-								<div class="input-group">
-									<input type="text" name="q" class="form-control"
-										placeholder="Search..."> <span class="input-group-btn">
-										<button type="submit" name="search" id="search-btn"
-											class="btn btn-flat">
-											<i class="fa fa-search"></i>
-										</button>
-									</span>
-								</div>
-							</form>
-						</div>
+<!-- 						<div class="offset-md-8"> -->
+<!-- 							<form action="#" method="get" class="sidebar-form"> -->
+<!-- 								<div class="input-group"> -->
+<!-- 									<input type="text" name="q" class="form-control" -->
+<!-- 										placeholder="Search..."> <span class="input-group-btn"> -->
+<!-- 										<button type="submit" name="search" id="search-btn" -->
+<!-- 											class="btn btn-flat"> -->
+<!-- 											<i class="fa fa-search"></i> -->
+<!-- 										</button> -->
+<!-- 									</span> -->
+<!-- 								</div> -->
+<!-- 							</form> -->
+<!-- 						</div> -->
 						<div class="offset-md-8">
 							<form action="../../classMng/MngBld/Bldregist">
 								<button type="submit" class="btn pull-right">건물등록</button>
@@ -127,28 +127,6 @@
 
 	</section>
 	<!-- /.content -->
-</div>
-
-<!-- Main row -->
-      <div class="row">
-        <!-- Left col -->
-        <section class="col-lg-7 connectedSortable">
-          <!-- Custom tabs (Charts with tabs)-->
-          <div class="nav-tabs-custom">
-            <!-- Tabs within a box -->
-            <ul class="nav nav-tabs pull-right">
-              <li class="active"><a href="#revenue-chart" data-toggle="tab">최신글/인기글</a></li>
-              <li><a href="#sales-chart" data-toggle="tab"></a>전체커뮤니티   </li>
-              <li class="pull-left header"><i class="fa fa-inbox"></i> S</li>
-            </ul>
-            <div class="tab-content no-padding">
-              <!-- Morris chart - Sales -->
-              <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-              <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
-            </div>
-          </div>
-          <!-- /.nav-tabs-custom -->
-</section>
 </div>
 
 <form id="actionForm" action="/classMng/MngBld/Bld" method='get'>

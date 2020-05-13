@@ -22,7 +22,7 @@
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-10">
 				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title">강의실 리스트</h3>
@@ -95,19 +95,19 @@
 								</c:if>
 							</ul>
 						</div>
-						<div class="offset-md-8">
-							<form action="#" method="get" class="sidebar-form">
-								<div class="input-group">
-									<input type="text" name="q" class="form-control"
-										placeholder="Search..."> <span class="input-group-btn">
-										<button type="submit" name="search" id="search-btn"
-											class="btn btn-flat">
-											<i class="fa fa-search"></i>
-										</button>
-									</span>
-								</div>
-							</form>
-						</div>
+<!-- 						<div class="offset-md-8"> -->
+<!-- 							<form action="#" method="get" class="sidebar-form"> -->
+<!-- 								<div class="input-group"> -->
+<!-- 									<input type="text" name="q" class="form-control" -->
+<!-- 										placeholder="Search..."> <span class="input-group-btn"> -->
+<!-- 										<button type="submit" name="search" id="search-btn" -->
+<!-- 											class="btn btn-flat"> -->
+<!-- 											<i class="fa fa-search"></i> -->
+<!-- 										</button> -->
+<!-- 									</span> -->
+<!-- 								</div> -->
+<!-- 							</form> -->
+<!-- 						</div> -->
 						<div class="offset-md-8">
 							<form action="/classMng/MngBld/classadd">
 								<button type="submit" class="btn pull-right">강의실등록</button>

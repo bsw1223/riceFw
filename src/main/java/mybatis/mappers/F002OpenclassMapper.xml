@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.f002openclass">
+	<resultMap type="F002OpenclassVO" id="openclassList">
+		<result property="openclassId" column="OPENCLASSID"/>
+		<result property="openclassName" column="OPENCLASSNAME"/>
+		
+		<result property="classId" column="CLASSID"/>
+		<result property="className" column="CLASSNAME"/>
+		<result property="classCapacity" column="CLASSCAPACITY"/>
+		
+		<result property="classDesc" column="CLASSDESC"/>
+		<result property="classPrice" column="CLASSPRICE"/>
+		
+		<result property="openStartDate" column="OPENSTARTDATE"/>
+		<result property="openEndDate" column="OPENENDDATE"/>
+		<result property="openStartTime" column="OPENSTARTTIME"/>
+		<result property="openEndTime" column="OPENENDTIME"/>
+		<result property="openclassDays" column="OPENCLASSDAYS"/>
+		
+		<result property="classMon" column="CLASSMON"/>
+		<result property="classTue" column="CLASSTUE"/>
+		<result property="classWed" column="CLASSWED"/>
+		<result property="classThur" column="CLASSTHUR"/>
+		<result property="classFri" column="CLASSFRI"/>
+		<result property="classSat" column="CLASSSAT"/>
+		<result property="classSun" column="CLASSSUN"/>
+		
+		<result property="subId" column="SUBID"/>
+		<result property="memNum" column="MEMNUM"/>
+		<result property="memName" column="MEMNAME"/>
+	</resultMap>
+
+	<select id="searchList" resultMap="openclassList" parameterType="java.util.Map">
+		<![CDATA[
+			SELECT A.OPENCLASSID, A.OPENCLASSNAME,
+			    A.CLASSID, D.BULNAME || ' ' || C.CLASSNUMBER || '호' CLASSNAME, A.CLASSCAPACITY,
+			    A.CLASSDESC, A.CLASSPRICE,
+			    A.OPENSTARTDATE, A.OPENENDDATE, A.OPENSTARTTIME, A.OPENENDTIME, A.OPENCLASSDAYS, 
+			    A.CLASSMON, A.CLASSTUE, A.CLASSWED, A.CLASSTHUR, A.CLASSFRI, A.CLASSSAT, A.CLASSSUN,
+			    A.SUBID, A.MEMNUM, E.MEMNAME
+			FROM OPENCLASS A, CLASSROOM C, BUILDING D, MEMBER E
+			WHERE A.CLASSID=C.CLASSID
+			    AND C.BULID=D.BULID
+			    AND A.MEMNUM=E.MEMNUM
+			ORDER BY TO_NUMBER(A.OPENCLASSID) DESC
+		]]>
+	</select>
+	
+	<insert id="insertData" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO OPENCLASS (
+				openclassId,
+				openclassName,subId,classId,classCapacity,
+				memNum,classDesc,classPrice,
+				openStartDate,openEndDate,openStartTime,openEndTime,openclassDays,
+				classMon,classTue,classWed,classThur,classFri,classSat,classSun
+			)
+    		VALUES( 
+	    		seq_lecOpen.nextval,
+	    		#{openclassName},#{subId},#{classId},#{classCapacity},
+	    		#{memNum},#{classDesc},#{classPrice},
+	    		#{openStartDate},#{openEndDate},#{openStartTime},#{openEndTime},#{openclassDays},
+	    		#{classMon},#{classTue},#{classWed},#{classThur},#{classFri},#{classSat},#{classSun}
+	    	)
+		]]>
+	</insert>
+	
+	<update id="updateData" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE OPENCLASS
+			SET openclassName=#{openclassName}, subId=#{subId}, classId=#{classId}, classCapacity=#{classCapacity},
+				memNum=#{memNum}, classDesc=#{classDesc}, classPrice=#{classPrice},
+				openStartDate=#{openStartDate}, openEndDate=#{openEndDate}, 
+				openStartTime=#{openStartTime}, openEndTime=#{openEndTime}, openclassDays=#{openclassDays},
+				classMon=#{classMon}, classTue=#{classTue}, classWed=#{classWed}, 
+				classThur=#{classThur}, classFri=#{classFri}, classSat=#{classSat}, classSun=#{classSun}
+			WHERE openclassId = #{openclassId}
+		]]>
+	</update>
+	
+	<delete id="deleteData" parameterType="java.util.Map">
+		<![CDATA[
+			DELETE OPENCLASS
+			WHERE openclassId = #{openclassId}
+		]]>
+	</delete>
+</mapper>

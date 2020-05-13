@@ -44,21 +44,21 @@
       <![CDATA[
   
         SELECT bulName, bulMgr, bulPhoneNum, bulAddress, bulClassNum, bulFloor, bulId, bulRemark 
-        FROM scott.BUILDING 
+        FROM BUILDING 
         where bulId = #{bulId,jdbcType=VARCHAR}
       ]]>
 	</select>
 
 	
 	<delete id="deleteClassroom">
-		delete from scott.CLASSROOM where classId = #{classId,jdbcType=VARCHAR}
+		delete from CLASSROOM where classId = #{classId,jdbcType=VARCHAR}
 	</delete>
 	
 	<select id="getClassInfo" parameterType="String" resultMap="ClassResult">
       <![CDATA[
   
   		 SELECT a.classCode, a.classNumber, a.classFloorNum, a.classCapacity, a.bulId, a.classId, a.classRemark, b.bulname
-	  	 FROM scott.CLASSROOM  a, building b      
+	  	 FROM CLASSROOM  a, building b      
 	  	 where a.bulid=b.bulid and classId = #{classId,jdbcType=VARCHAR}
       ]]>
 	</select>

@@ -40,7 +40,7 @@
 	<select id="searchList" resultMap="f001Result" parameterType="java.util.Map">
 		<![CDATA[
 			SELECT memNum, memId, memName, memEmail, memJoinDate, memLevel, memPoint, authId
-			FROM scott.member a
+			FROM member a
 		]]>
 		<where>
 			<if test=" authId != ''  and  authId != null">
@@ -55,13 +55,13 @@
 			</if>
 		</where>
 		<![CDATA[
-			ORDER BY memNum desc	
+			ORDER BY TO_NUMBER(memNum) desc	
 		]]>
 	</select>
 	
 	<update id="updateData" parameterType="java.util.Map">
 		<![CDATA[
-			UPDATE scott.member
+			UPDATE member
 			SET memId=#{memId}
 				, memName=#{memName}
 				, memEmail=#{memEmail}
@@ -73,7 +73,7 @@
 	
 	<update id="updateData2" parameterType="java.util.Map">
 		<![CDATA[
-			UPDATE scott.authmember
+			UPDATE authmember
 			SET authId=#{authId}
 			WHERE memNum = #{memNum}
 		]]>
@@ -81,7 +81,7 @@
 	
 	<insert id="insertData" parameterType="java.util.Map">
 		<![CDATA[
-			INSERT INTO SCOTT.MEMBER (memNum, memid, memname, mememail, memJoinDate, memModifyDate)
+			INSERT INTO MEMBER (memNum, memid, memname, mememail, memJoinDate, memModifyDate)
 				values (SEQ_MEMBER.nextval, #{memId}, #{memName}, #{memEmail}, TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(SYSDATE,'YYYY-MM-DD'))
  		]]>
 	</insert>
@@ -89,32 +89,33 @@
 	<insert id='insertData2' parameterType="java.util.Map">
 		<selectKey resultType="String" keyProperty="memNum" order="BEFORE">
 			<![CDATA[
-	       		SELECT memNum FROM scott.member        
+	       		SELECT memNum FROM member        
 	       			WHERE memId = #{memId}
        		]]>
     	</selectKey>
 		<![CDATA[
-			INSERT INTO SCOTT.AUTHMEMBER(authId,memNum)
+			INSERT INTO AUTHMEMBER(authId,memNum)
 				VALUES(#{authId},#{memNum})
 		]]>
 	</insert>
 	
 	<delete id="deleteData" parameterType="java.util.Map">
 		<![CDATA[
-			DELETE scott.member
+			DELETE member
 			WHERE memNum = #{memNum}
 		]]>
 	</delete>
 	
 	<delete id="deleteData2" parameterType="java.util.Map">
 		<![CDATA[
-			DELETE scott.authmember
+			DELETE authmember
 			WHERE memNum = #{memNum}
 		]]>
 	</delete>
- <select id="selectCountCapa" parameterType="java.util.Map">
+ 	
+ 	<select id="selectCountCapa" parameterType="java.util.Map">
 		<![CDATA[
 			 select count(openclassid) from enrolment where openclassid=#{openclassId} group by openclassid
-			 ]]>
-			 </select>
+		]]>
+	</select>
 </mapper>

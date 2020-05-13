@@ -22,7 +22,7 @@
 			<!-- /.col -->
 			<div class="col-md-6">
 				<!-- Horizontal Form -->
-				<div class="box box-default">
+				<div class="box box-warning">
 					<div class="form-horizontal">
 						<div class="box-body">
 							<div class="form-group">

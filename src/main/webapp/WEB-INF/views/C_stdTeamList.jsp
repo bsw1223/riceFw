@@ -191,7 +191,7 @@ min-width:150px;
 				                    <input type="text" name='keyword'
 				                    	value='<c:out value="${pageMaker.cri.keyword}"/>'class="form-control pull-right">
 				                    <div class="input-group-btn">
-				                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+				                    <button type="submit" class="btn btn-warning btn-flat"><i class="fa fa-search"></i></button>
 				                  </div>
 								</div>
 							</form>

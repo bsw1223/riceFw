@@ -113,7 +113,7 @@
 									<input type="hidden" id='boNum' name='boNum' value='<c:out value ="${list.boNum}"/>'>
 										<div class="box-body">
 											<div class="form-group">	
-												<textarea name="comtContent" id="comtContent"class="form-control" rows='3' style="resize:none;"></textarea>
+												<textarea name="comtContent" id="comtContent"class="form-control" rows='3'></textarea>
 											</div>
 											 <%-- <div class="form-group">
 												<label for="userId">댓글 작성자</label>

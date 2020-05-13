@@ -40,7 +40,7 @@
 				                 <label for="" class="col-sm-12" id="searchKeywordJsp">키워드검색</label>
 										<input type="text" class="form-control" id="searchKeyword" placeholder="">
 								</div>
-								<button type="button" class="btn btn-primary col-sm-12" id="searchOpenClT">검색</button>
+								<button type="button" class="btn btn-warning col-sm-12" id="searchOpenClT">검색</button>
 								</div>
 							</form>	
 						
@@ -76,11 +76,11 @@
 					</div>
 					<!-- /.box-body -->
 					<div class="box-body ">
-							<button id="cartButton" class="btn btn-primary pull-right"
+							<button id="cartButton" class="btn btn-warning pull-right"
 								style="margin-right: 5px;">
 								<i class=""></i> 장바구니
 							</button>
-							<button  id="insertSub"	class="btn btn-primary pull-right" style="margin-right: 5px;"
+							<button  id="insertSub"	class="btn btn-warning pull-right" style="margin-right: 5px;"
 								onclick="">수강신청</button>
 								<i></i> 
 							

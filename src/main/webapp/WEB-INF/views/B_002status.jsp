@@ -19,7 +19,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<!-- Horizontal Form -->
-				<div class="box box-default">
+				<div class="box box-warning">
 					<div class="form-horizontal">
 						<div class="box-body" id="attendChart">
 						</div>
@@ -33,7 +33,7 @@
 			</div>
 			<!-- /.col -->
 			<div class="col-md-6">
-				<div class="box box-default">
+				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title" id="attendTitle"></h3>
 					</div>
