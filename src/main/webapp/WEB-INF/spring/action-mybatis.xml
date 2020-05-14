@@ -58,5 +58,6 @@
 <!-- 	<tx:annotation-driven transaction-manager="txManager"/> -->
 	<tx:annotation-driven/>
 	<!-- scan -->
+
 	<context:component-scan base-package="com.rice.util"></context:component-scan>	
 </beans>
