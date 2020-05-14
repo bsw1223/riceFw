@@ -141,8 +141,8 @@
 			SELECT COUNT(*)
 			FROM OPENCLASS A, ENROLMENT B
 			WHERE A.OPENCLASSID = B.OPENCLASSID
-			    AND TO_DATE(A.OPENSTARTDATE) < TO_DATE(#{currentDate})
-			    AND TO_DATE(A.OPENENDDATE) > TO_DATE(#{currentDate})
+			    AND TO_DATE(A.OPENSTARTDATE,'YYYY-MM-DD') < TO_DATE(#{currentDate},'YYYY-MM-DD')
+			    AND TO_DATE(A.OPENENDDATE,'YYYY-MM-DD') > TO_DATE(#{currentDate},'YYYY-MM-DD')
 			    AND (TO_DATE(A.OPENSTARTTIME, 'HH24:MI')-TO_DATE(#{currentTime}, 'HH24:MI:SS'))  * 24 * 60 <= 10
 			    AND (TO_DATE(A.OPENENDTIME, 'HH24:MI')-TO_DATE(#{currentTime}, 'HH24:MI:SS'))  * 24 * 60 > 0
 			    AND A.OPENCLASSID = #{openclassId}
@@ -275,7 +275,7 @@
 			    AND B.MEMNUM = #{memNum}
 			    AND B.OPENCLASSID= #{openclassId}
 			    AND B.classApplyCode = '1600'
-			ORDER BY TO_DATE(A.ATDDATE)
+			ORDER BY TO_DATE(A.ATDDATE,'YYYY-MM-DD')
 		]]>
 	</select>
 	
