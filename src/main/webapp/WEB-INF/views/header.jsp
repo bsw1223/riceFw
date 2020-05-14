@@ -65,7 +65,7 @@ $(document).ready(function(){
 				   +"</li>"
 				   +"<li class=\"user-footer\">"
 				   +" <div class=\"pull-left\">"
-				   +"  <a href=\"../../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
+				   +"  <a href=\"../../../member/logout\" class=\"btn btn-default btn-flat\" id=\"btn-logout\">L o g - O u t</a>"
 				   +" </div>"
 				   +" <div class=\"pull-right\">"
 				   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
@@ -80,6 +80,12 @@ $(document).ready(function(){
 	}
 	
 	$(".logo").click(function (e) {
+		setcookie("m1",null);
+		setcookie("m2",null);
+		setcookie("m3",null);
+	});
+	
+	$("#btn-logout").click(function (e) {
 		setcookie("m1",null);
 		setcookie("m2",null);
 		setcookie("m3",null);
