@@ -86,6 +86,12 @@ public interface F001LectureService {
 
 	public void lecturePlanAdd(Map<String, Object> memNum);
 
+	public List<Map<String, Object>> selectCountSub(F001LectureVO f001LectureVO);
+
+	public Map<String, Object> selectRecomendInfo(Map<String, Object> memNum);
+
+	public List<Map<String, Object>> selectClassCapa(Map<String, Object> memNum);
+
 
 
 }
