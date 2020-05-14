@@ -49,7 +49,7 @@ public class C001DocServiceImpl implements C001DocService {
 	@Override
 	public void register(C001ClassBoardVO vo) {
 		c001DocDAO.insertSelectKey(vo);
-		
+		System.out.println(vo);
 		if(vo.getFilelist() ==null || vo.getFilelist().size() <= 0) {
 			return;
 		}
@@ -58,7 +58,6 @@ public class C001DocServiceImpl implements C001DocService {
 			c001fileDAO.insert(attach);
 		});
 		
-
 	}
 
 	@Override
