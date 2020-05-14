@@ -131,14 +131,13 @@ min-width:150px;
                         </div>
                     </div>
 					<div class="box-footer">
-<<<<<<< HEAD
-						<div class="row">
+						<%-- <div class="row">
 		        	      	<div class="offset-md-8" id="reg" style="margin-right:20px;">
 								<form action="/mypage/board/regForm/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}">
 									<button id="btn-color" type="submit" class="btn pull-right btn-warning btn-fw">질문등록</button>
 								</form>
 							</div>
-						</div>
+						</div> --%>
 						<ul class="pagination pagination-sm no-margin">
 		              		<c:if test="${pageMaker.prev}">
 								<li class="paginate_button prev">
