@@ -199,7 +199,6 @@ public class C001DocContoller {
 			@PathVariable("boURL") String boURL, @PathVariable("boCode") String boCode, Criteria cri, C001FileUploadVO uploadvo) {
 		cri.setBoURL(boURL);
 		cri.setBoCode(boCode);
-
 		if(boardvo.getFilelist() != null) {
 			boardvo.getFilelist().forEach(attach->System.out.println("출력 "+attach.getFileName()));
 		}
@@ -209,7 +208,6 @@ public class C001DocContoller {
 		return nextPage;
 	}
 
-	//�닔�젙李�
 	@RequestMapping(value = "/mdfyForm/{boCode}/{boURL}", method = RequestMethod.GET)
 	public String update( Model model, @PathVariable("boURL") String boURL, @RequestParam("boNum") String boNum,
 			@PathVariable("boCode") String boCode, HttpServletRequest request,C001ClassBoardVO boardvo) {
@@ -299,13 +297,6 @@ public class C001DocContoller {
 		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
 	
-	private String getFolder() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		String str = sdf.format(date);
-		return str.replace("-", File.separator);
-		
-	}
 	private boolean checkImageType(File file) {
 		try {
 			String contentType = Files.probeContentType(file.toPath());

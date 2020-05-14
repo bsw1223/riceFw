@@ -17,7 +17,7 @@ width: 200px;
 float: left;
 padding: 10px;
 margin-left: 30px;
-margin-top: 90px;
+margin-top: 45px;
 min-width:150px;
 }
 
@@ -102,14 +102,12 @@ min-width:150px;
 										</div>
 									</div>
 								</div>
-							<div class="box-footer">
+							</form>
+								<div class="box-footer">
 									<button data-oper="modify" class="btn btn-primary">저장</button>
 									<button data-oper="list" id="listBtn" class="btn btn-default" onclick="location.href='/mypage/board/${boCode}/${boURL}'">취소</button>
 								</div>
-						</form>
-							</div>
-						</form>
-							
+							</div>						
 						</div>
 					</div>
 					<div id="banner">
@@ -147,7 +145,7 @@ min-width:150px;
 					str += " data-path='"+attach.filePath+"' data-classfilenum='"+attach.classFileNum+"'data-filename='"+attach.fileName+"' data-type='"+attach.fileCode+"' data-size='"+attach.fileSize+"' data-savefilename='"+attach.saveFileName+"'data-boNum='"+attach.boNum+"'><div>";
 					str += "<span>" + attach.fileName+ "</span>";
 					str += "&nbsp&nbsp"
-					str += "<button  type='button' data-file=\'"+fileCallPath+"\' data-type='file' style= font-size:10px;border:0px;><i class='fa fa-fw fa-close'></i></button><br>";
+					str += "<a data-file=\'"+fileCallPath+"\' data-type='file' style= font-size:10px;border:0px; class='fa fa-times'></a></button><br>";
 					str += "</div>"
 					str + "</li>";	
 				});
@@ -245,7 +243,7 @@ min-width:150px;
 								str += "<li";
 								str += " data-path='"+obj.filePath+"' data-classfilenum='"+obj.classFileNum+"'data-filename='"+obj.fileName+"' data-type='"+obj.fileCode+"' data-size='"+obj.fileSize+"' data-savefilename='"+obj.saveFileName+"'><div>";
 								str += "<span>" + obj.fileName+ "</span>";
-								str += "<a type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='fa fa-fw fa-close'></a><br>";
+								str += "<a type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='fa fa-times'></a><br>";
 								str += "</div>";
 								str + "</li>";
 							});

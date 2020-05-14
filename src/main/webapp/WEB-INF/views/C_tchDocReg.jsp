@@ -15,7 +15,7 @@ width: 200px;
 float: left;
 padding: 10px;
 margin-left: 10px;
-margin-top: 90px;
+margin-top: 45px;
 min-width:150px;
 }
 
@@ -268,11 +268,11 @@ min-width:150px;
 							});
 						});
 
-						$("#regBtn").on("click", function() {
+						/* $("#regBtn").on("click", function() {
 
 							self.location="/mypage/board/${boCode}/${boURL}";
 							formObj.submit();
-						});
+						}); */ 
 						 $("#listBtn").on("click",function(){
 						 	self.location="/mypage/board/${boCode}/${boURL}";
 						 });

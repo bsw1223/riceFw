@@ -49,15 +49,14 @@ public class C001DocServiceImpl implements C001DocService {
 	@Override
 	public void register(C001ClassBoardVO vo) {
 		c001DocDAO.insertSelectKey(vo);
-		System.out.println(vo);
-		if(vo.getFilelist() ==null || vo.getFilelist().size() <= 0) {
+		System.out.println("vo는           "+vo);
+		if(vo.getFilelist() == null || vo.getFilelist().size() <= 0) {
 			return;
 		}
 		vo.getFilelist().forEach(attach->{
 			attach.setBoNum(vo.getBoNum());
 			c001fileDAO.insert(attach);
 		});
-		
 	}
 
 	@Override
