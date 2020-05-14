@@ -268,11 +268,11 @@ min-width:150px;
 							});
 						});
 
-						$("#regBtn").on("click", function() {
+						/* $("#regBtn").on("click", function() {
 
 							self.location="/mypage/board/${boCode}/${boURL}";
 							formObj.submit();
-						});
+						}); */ 
 						 $("#listBtn").on("click",function(){
 						 	self.location="/mypage/board/${boCode}/${boURL}";
 						 });

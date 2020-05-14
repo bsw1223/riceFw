@@ -177,7 +177,7 @@ $(document).ready(function(){
 		
 		var path = encodeURIComponent(liObj.data("path")+"\\"+liObj.data("classfilenum")+"_"+liObj.data("filename"));
 		
-		self.location="/mypage/board/download?fileName="+path;
+		self.location="http://52.14.195.150:8080/resources/img/"+liObj.data("classfilenum")+"_"+liObj.data("filename");
 		
 	});
 });
