@@ -37,20 +37,20 @@ public class A001MemController {
 	}
 	
 	// POST 로그인, 로그인 check 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public String postLogin(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		logger.info("post login");
+		logger.info("post loginPost");
 		HttpSession session = request.getSession();
 		
 		A001MemVO login = null;
 		login = a001MemService.login(vo);
 		
-		if(login == null) {	// 로그인 실패
+		if(login == null) {	// 濡쒓렇�씤 �떎�뙣
 			logger.info("login fail");
 			session.setAttribute("loginMem", null);
 			model.addAttribute("loginMsg", "false");
-			return "redirect:/member/login";		// 로그인 실패 메시지, 로그인 실패 메시지. 보여주기
-		} else {		// 로그인 성공
+			return "redirect:/member/login";		
+		} else {		// 濡쒓렇�씤 �꽦怨�
 			logger.info("login ok");
 			session.setAttribute("loginMem", login);
 		}
