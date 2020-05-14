@@ -104,7 +104,7 @@ min-width:150px;
 								</div>
 							</form>
 								<div class="box-footer">
-									<button data-oper="modify" class="btn btn-primary">저장</button>
+									<button data-oper="modify" class="btn btn-warning">저장</button>
 									<button data-oper="list" id="listBtn" class="btn btn-default" onclick="location.href='/mypage/board/${boCode}/${boURL}'">취소</button>
 								</div>
 							</div>						
@@ -145,7 +145,7 @@ min-width:150px;
 					str += " data-path='"+attach.filePath+"' data-classfilenum='"+attach.classFileNum+"'data-filename='"+attach.fileName+"' data-type='"+attach.fileCode+"' data-size='"+attach.fileSize+"' data-savefilename='"+attach.saveFileName+"'data-boNum='"+attach.boNum+"'><div>";
 					str += "<span>" + attach.fileName+ "</span>";
 					str += "&nbsp&nbsp"
-					str += "<a data-file=\'"+fileCallPath+"\' data-type='file' style= font-size:10px;border:0px; class='fa fa-times'></a></button><br>";
+					str += "<a data-file=\'"+fileCallPath+"\' data-type='file' style=color:orange; font-size:10px;border:0px; class='fa fa-times'></a></button><br>";
 					str += "</div>"
 					str + "</li>";	
 				});
