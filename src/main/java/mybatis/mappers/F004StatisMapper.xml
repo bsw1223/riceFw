@@ -40,7 +40,7 @@
 			SELECT TO_CHAR(TT.DD, 'DD') DAY, NVL(SUM(C.CLASSPRICE), 0) SALES
 			FROM ENROLMENT A, 
 			    (
-			    SELECT TO_DATE(TO_CHAR(TO_DATE(SDAY),'YYYY-MM') || '-' || CNT,'YYYY-MM-DD') DD
+			    SELECT TO_DATE(TO_CHAR(TO_DATE(SDAY),'YYYY-MM') || '-' || TO_CHAR(CNT,'09'),'YYYY-MM- DD') DD
 			    FROM (
 			        select level cnt, trunc(TO_DATE('2020-05', 'YYYY-MM'),'mm') sday
 			        from dual

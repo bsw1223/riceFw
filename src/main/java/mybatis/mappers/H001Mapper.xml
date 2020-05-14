@@ -180,8 +180,8 @@
 			FROM ENROLMENT A, OPENCLASS B
 			WHERE A.OPENCLASSID=B.OPENCLASSID
 			    AND A.MEMNUM=#{memNum}
-			    AND TO_DATE(B.OPENSTARTDATE) < TO_DATE(#{currentDate})
-			    AND TO_DATE(B.OPENENDDATE) > TO_DATE(#{currentDate})
+			    AND TO_DATE(B.OPENSTARTDATE, 'YYYY-MM-DD') < TO_DATE(#{currentDate}, 'YYYY-MM-DD')
+			    AND TO_DATE(B.OPENENDDATE, 'YYYY-MM-DD') > TO_DATE(#{currentDate}, 'YYYY-MM-DD')
 		]]>
 		<if test="currentDay == 0">
 			<![CDATA[
