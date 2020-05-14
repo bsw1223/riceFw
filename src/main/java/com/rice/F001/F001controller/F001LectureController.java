@@ -265,7 +265,7 @@ public class F001LectureController {	// 회원관리
 	@RequestMapping(value = "insertCart", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public void insertCart(@RequestBody Map<String,Object> insertEnrolLecS, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//System.out.println("insertEnrolLecS : "+insertEnrolLecS);
+		System.out.println("insertEnrolLecS : "+insertEnrolLecS);
 		f001LectureService.insertCart(insertEnrolLecS);
 		return;
 		
@@ -461,11 +461,34 @@ public class F001LectureController {	// 회원관리
 	@RequestMapping(value = "lecturePlanAdd", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public void lecturePlanAdd(@RequestBody Map<String,Object> memNum, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("memNum : "+ memNum);
+		//System.out.println("memNum : "+ memNum);
 		f001LectureService.lecturePlanAdd(memNum);
 		//System.out.println("controller_ selectDelButton : "+ selectDelButton);
 		return;
 	}	
 	
-	
+	//수강신청 카운트 가져오기
+	@RequestMapping(value = "selectCountSub", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> selectCountSub(F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		List<Map<String, Object>> selectCountSub = f001LectureService.selectCountSub(f001LectureVO);
+		//System.out.println("selectCountSub"+selectCountSub);
+		return selectCountSub;
+	}
+	@RequestMapping(value = "selectRecomendInfo", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public Map<String, Object> selectRecomendInfo(@RequestBody Map<String,Object> memNum, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//System.out.println("memNum : "+ memNum);
+		Map<String, Object> selectRecomendInfo =f001LectureService.selectRecomendInfo(memNum);
+		//System.out.println("controller_ selectRecomendInfo : "+ selectRecomendInfo);
+		return selectRecomendInfo;
+	}	
+	@RequestMapping(value = "selectClassCapa", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Map<String, Object>> selectClassCapa(@RequestBody Map<String,Object> memNum, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("CONTROLLER"+memNum);
+		List<Map<String, Object>> selectClassCapa = f001LectureService.selectClassCapa(memNum);
+		//System.out.println("selectClassCapa"+selectClassCapa);
+		return selectClassCapa;
+	}
 }

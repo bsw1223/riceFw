@@ -38,8 +38,8 @@
 		<appender-ref ref="console" />
 	</root>
 	
-	<!-- SQL Logger -->
-	<!--  SQL 쿼리 문장 -->
+ 	<!-- SQL Logger -->
+ 	<!--  SQL 쿼리 문장 -->
 	<logger name="jdbc.sqlonly" additivity="false"> 
 	    <level value="info"/> 
 	    <appender-ref ref="console"/> 

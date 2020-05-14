@@ -301,6 +301,27 @@ public class F001LectureServiceImpl implements F001LectureService {
 	}
 
 
+	@Override
+	public List<Map<String, Object>> selectCountSub(F001LectureVO f001LectureVO) {
+		List<Map<String, Object>> selectCountSub = f001LectureDAO.selectCountSub();
+		return selectCountSub;
+	}
+
+
+	@Override
+	public Map<String, Object> selectRecomendInfo(Map<String, Object> memNum) {
+		Map<String, Object> selectRecomendInfo = f001LectureDAO.selectRecomendInfo(memNum);
+		return selectRecomendInfo;
+	}
+
+
+	@Override
+	public List<Map<String, Object>> selectClassCapa(Map<String, Object> memNum) {
+		List<Map<String, Object>> selectClassCapa = f001LectureDAO.selectClassCapa(memNum);
+		return selectClassCapa;
+	}
+
+
 
 
 

@@ -39,11 +39,61 @@ public class F001LectureVO {
 	String cName= null;
 	String cPrice= null;
 	String cartOrderId= null;
+	String classSun = null;
+	String classMon = null;
+	String classTue = null;
+	String classWed = null;
+	String classThur = null;
+	String classFri = null;
+	String classSat = null;
+	
 	
 	
 	
     
   
+	public String getClassSun() {
+		return classSun;
+	}
+	public void setClassSun(String classSun) {
+		this.classSun = classSun;
+	}
+	public String getClassMon() {
+		return classMon;
+	}
+	public void setClassMon(String classMon) {
+		this.classMon = classMon;
+	}
+	public String getClassTue() {
+		return classTue;
+	}
+	public void setClassTue(String classTue) {
+		this.classTue = classTue;
+	}
+	public String getClassWed() {
+		return classWed;
+	}
+	public void setClassWed(String classWed) {
+		this.classWed = classWed;
+	}
+	public String getClassThur() {
+		return classThur;
+	}
+	public void setClassThur(String classThur) {
+		this.classThur = classThur;
+	}
+	public String getClassFri() {
+		return classFri;
+	}
+	public void setClassFri(String classFri) {
+		this.classFri = classFri;
+	}
+	public String getClassSat() {
+		return classSat;
+	}
+	public void setClassSat(String classSat) {
+		this.classSat = classSat;
+	}
 	public String getcId() {
 		return cId;
 	}

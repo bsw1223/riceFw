@@ -46,13 +46,6 @@
 						</table>
 					</div>
 					<!-- /.box-body -->
-				
-				
-				
-				
-					
-					
-					<!-- /.box-body -->
 				</div>
 				<!-- /.box -->
 
@@ -218,6 +211,7 @@ function CartInfo(){
 			data : memnum,
 			success : function(cartInfo) 
 					{
+						console.log(cartInfo);
 						var dayArray = new Array();
 						//var totalCharge = 0;	
 						//var tempNum = 0;
@@ -367,7 +361,7 @@ $(document).on('click','#selPay',function(){
 	//classTeaIdKakao.push($('table tr').eq(i).find('td:eq(2)').text());
 	//강의 날짜
 	classDateKakao.push($('tbody#cartClassList > tr').eq(i).find('td:eq(1)').text());
-	
+	//console.log("classDateKakao : "+classDateKakao)
 	var cIdM =$('table tr').eq(i).find('input[type="checkbox"]').val();
 	var cNameM =$('tbody#cartClassList > tr').eq(i).find('td:eq(3)').text();
 	var cPriceM =$('tbody#cartClassList > tr').eq(i).find('td:eq(5)').text();
@@ -683,7 +677,6 @@ function wholePaidButton(){
 //장바구니 전체 삭제버튼 클릭한 반번호와 멤버네임으로 삭제
 function wholeDelButton(){
 	$(document).on('click','#wholeDel',function(){
-		
 		var lengthPay = $('tbody#cartClassList > tr').length;
 		// 체크 되어 있는 값 추출
 		for (var i = 1; i < eval(lengthPay); i++) {
@@ -710,7 +703,7 @@ function wholeDelButton(){
 		location.reload();
 		})
 };
-		
+var tempValCheck = 0;		
 //장바구니 선택 삭제버튼 클릭한 반번호와 멤버네임으로 삭제
 function selectDelButton(){
 	$(document).on('click','#selDel',function(){
@@ -720,6 +713,7 @@ function selectDelButton(){
 			var chk = $('tbody#cartClassList > tr').eq(i).children().find('input[type="checkbox"]').is(':checked');
 			//console.log(chk);
 			if (chk == true) {
+				tempValCheck++;
 				// 그 i 번째 input text의 값을 가져온다.
 				var selectDelText = '';
 				//강의 id
@@ -741,16 +735,18 @@ function selectDelButton(){
 			});
 			}
 		};
+		if(tempValCheck==0){
+		alert("선택된 과목이 없습니다.");
+		location.reload();
+			
+		}else{
 		alert("삭제되었습니다.");
 		location.reload();
+		tempValCheck=0;
+		}
 	})
 };
 		
-		
-
-
-
-
 
 
 function modalCloseLec() {
@@ -777,6 +773,9 @@ function modalCloseLec() {
 }						
 </script>
 <style>
+input[type=checkbox] {
+    transform: scale(1.3);
+	}
 
 .sticky-header th { position: sticky; top: -1px; left:0; background-color:white;} 
 </style>

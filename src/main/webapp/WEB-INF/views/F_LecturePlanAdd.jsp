@@ -294,14 +294,16 @@ function addLecPlan(){
 
 //JSON.parse & eval 실행안됨
 
-
-
-
-
 	});
 };
 
 
-	</script>
+</script>
+<style>
+input[type=checkbox] {
+    transform: scale(1.3);
+	}
+
+</style>
 	</body>
 	</html>
