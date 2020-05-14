@@ -39,7 +39,7 @@ border: 1px solid;
 width: 200px;
 float: left;
 padding: 10px;
-margin-left: 30px;
+margin-left: 10px;
 margin-top: 90px;
 min-width:150px;
 }
@@ -49,32 +49,13 @@ min-width:150px;
 	display: none;
 }}
 
-#banner_left{
-width: 193px;
-float: right;
-margin: auto;
-padding-top: 90px;
-vertical-align: middle;
-min-width:150px;
-}
 
-@media screen and (max-width: 1300px){
-#banner_left{
-	display: none;
-}
+@media screen and (max-width: 1700px){
 #banner_left2{
 	display: none;
 
 }
 }
-/* .btn-inverse-warning:not(.btn-inverse-light) {
-    color: #ffc100;
-}
-.btn-inverse-warning {
-    background-color: rgba(255, 193, 0, 0.2);
-    background-image: none;
-    border-color: rgba(255, 193, 0, 0);
-}  */
 
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
@@ -84,7 +65,6 @@ min-width:150px;
 <!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<section class="content-header">
-		<div class="col-md-2" style="margin: 20px;"></div>
 			<h1 style="font-size: 40px;">
 				<c:out value='${sjctName}' />
 			</h1>
@@ -98,24 +78,12 @@ min-width:150px;
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-			<div class="col-md-2">
-				<div id="banner_left">
-				
-					<img id="pp" src="">
-					
-					<%@ include file="left_banner1.jsp"%>
-					
-				</div>
-				<div>
-					<%@ include file="left_banner2.jsp"%>
-				</div>
-			</div>
-				<div class="col-md-8">
-					<div class="box box-warning" style="height: 650px">
+				<div class="col-md-10">
+					<div class="box box-warning">
 						<div class="box-header">
 							<h2 class="box-title" style="padding: 10px">Q&A</h2>
 						</div>
-						<div class="col-lg-12" style="height:100%">
+						<div class="col-lg-12" style="height:100%;min-height:700px;">
 							<div class="row">
 									<div class="btn-group pull-right" style="margin-top:20px; margin-right:10px;">
 		                 			<button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown" aria-expanded="false">게시물 개수 선택</button>
@@ -163,7 +131,7 @@ min-width:150px;
                         </div>
                     </div>
 					<div class="box-footer">
-						  <div class="row">
+						<div class="row">
 		        	      	<div class="offset-md-8" id="reg" style="margin-right:20px;">
 								<form action="/mypage/board/regForm/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}">
 									<button id="btn-color" type="submit" class="btn pull-right btn-warning btn-fw">질문등록</button>
@@ -218,6 +186,9 @@ min-width:150px;
 				</div>
 				<div id="banner">
 					<%@ include file="banner.jsp"%>
+				</div>
+				<div id="banner_left2">
+					<%@ include file="left_banner2.jsp"%>
 				</div>
 			</div>
 		</section>

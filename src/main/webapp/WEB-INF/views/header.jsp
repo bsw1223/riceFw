@@ -96,8 +96,8 @@ $(document).ready(function(){
 			<!-- Logo -->
 			<a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 
-				<span class="logo-mini"><img src="${contextPath}/resources/img/로고수정mini.png"></span> <!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><img src="${contextPath}/resources/img/로고수정.png"></span>
+				<span class="logo-mini"><img src="http://52.14.195.150:8080/resources/img/logomini.png"></span> <!-- logo for regular state and mobile devices -->
+				<span class="logo-lg"><img src="http://52.14.195.150:8080/resources/img/logo.png"></span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">

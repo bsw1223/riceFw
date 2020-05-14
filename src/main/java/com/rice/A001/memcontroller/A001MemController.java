@@ -30,14 +30,14 @@ public class A001MemController {
 
 
 	// GET 濡쒓렇�씤, 濡쒓렇�씤 �럹�씠吏� �씠�룞
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = {RequestMethod.GET,RequestMethod.POST})
 	public String getLogin(Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("get login");
 		return "Alogin";
 	}
 	
 	// POST 濡쒓렇�씤, 濡쒓렇�씤 check 
-	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginPost", method ={RequestMethod.GET,RequestMethod.POST})
 	public String postLogin(A001MemVO vo, Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		logger.info("post loginPost");
 		HttpSession session = request.getSession();

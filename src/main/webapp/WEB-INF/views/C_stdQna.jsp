@@ -28,6 +28,37 @@
 	font-size:1.4em;
 	
 }
+#banner{
+border: 1px solid;
+width: 200px;
+float: left;
+padding: 10px;
+margin-left: 10px;
+margin-top: 90px;
+min-width:150px;
+}
+
+@media screen and (max-width: 1500px){
+#banner{
+	display: none;
+}}
+
+#banner_left{
+width: 193px;
+float: right;
+margin: auto;
+padding-top: 90px;
+vertical-align: middle;
+min-width:150px;
+}
+
+@media screen and (max-width: 1700px){
+
+#banner_left2{
+	display: none;
+
+}
+}
 
 </style>
 
@@ -49,8 +80,7 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-md-2"></div>
-					<div class="col-md-8">
+					<div class="col-md-10">
 						<div class="box box-primary">
 							<div class="box-header">
 								<h2 class="box-title">QnA 게시판</h2>
@@ -73,7 +103,7 @@
 								</span>
 								<!-- 업데이트 날짜 -->
 								<span style="margin:20px;">
-									<label>업데이트 날짜</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boUpdatedate}"/></span>
+									<label>업데이트 날짜</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boUpdateDate}"/></span>
 								</span>
 								<span style="margin:20px;">
 									<label>조회수</label> <span>&nbsp;&nbsp;&nbsp;${list.boViews}</span>
@@ -105,6 +135,12 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div id="banner">
+				<%@ include file="banner.jsp"%>
+			</div>
+			<div id="banner_left2">
+					<%@ include file="left_banner2.jsp"%>
 			</div>
 		</div>
 	</section>
