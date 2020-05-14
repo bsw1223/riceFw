@@ -51,7 +51,7 @@
 
 				<div class="box box-warning">
 					<div class="box-header">
-						<h3 class="box-title">인기 강의 목록</h3>
+						<h3 class="box-title">추천 강의 목록</h3>
 					</div>
 						<div class="box-body table-responsive no-padding"  style="overflow: auto; height:200px">
 							<table class="table table-hover">
@@ -410,6 +410,7 @@ function startList(enrolmentInfo){
 	
 	getClassPrice = null;
 	getClassId = null;
+	selectCountSubTable();
 	
 };
 
