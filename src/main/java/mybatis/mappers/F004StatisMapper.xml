@@ -37,21 +37,20 @@
 	
 	<select id="getmonthSales" resultMap="monthsalesList" parameterType="java.util.Map">
 		<![CDATA[
-			SELECT TO_CHAR(TT.DD, 'DD') DAY, NVL(SUM(C.CLASSPRICE), 0) SALES
-			FROM ENROLMENT A, 
-			    (
-			    SELECT TO_DATE(TO_CHAR(TO_DATE(SDAY),'YYYY-MM') || '-' || TO_CHAR(CNT,'09'),'YYYY-MM- DD') DD
-			    FROM (
-			        select level cnt, trunc(TO_DATE('2020-05', 'YYYY-MM'),'mm') sday
-			        from dual
-			        connect by level<=LAST_DAY(TO_DATE('2020-05', 'YYYY-MM'))-trunc(TO_DATE('2020-05', 'YYYY-MM'),'mm')+1
-			        ) T
-			    ) TT, OPENCLASS C
-			WHERE A.ENRDATE (+)=TT.DD
-			    AND A.OPENCLASSID = C.OPENCLASSID(+)
-			    AND TT.DD >= TO_DATE('2020-05', 'YYYY-MM')
-			GROUP BY TT.DD
-			ORDER BY TT.DD
+			SELECT SUBSTR(TT.DD, -2) DAY, NVL(SUM(C.CLASSPRICE), 0) SALES
+	         FROM ENROLMENT A, 
+	             (
+	             SELECT TO_CHAR(TO_DATE(SDAY),'YYYY-MM') || '-' || LPAD(CNT,2,'0') AS DD
+	             FROM (
+	                 select level cnt, trunc(TO_DATE(#{currentDate}, 'YYYY-MM'),'mm') sday
+	                 from dual
+	                 connect by level<=LAST_DAY(TO_DATE(#{currentDate}, 'YYYY-MM'))-trunc(TO_DATE(#{currentDate}, 'YYYY-MM'),'mm')+1
+	                 ) T
+	             ) TT, OPENCLASS C
+	         WHERE A.ENRDATE (+)=TT.DD
+	             AND A.OPENCLASSID = C.OPENCLASSID(+)
+	         GROUP BY TT.DD
+	         ORDER BY TT.DD
 		]]>
 	</select>
 </mapper>

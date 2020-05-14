@@ -44,7 +44,7 @@
 
 	<select id="findByboNum" resultType="C001FileUploadVO">
 	<![CDATA[
-		select * from CLASSATTACHEDFILE where boNum=#{boNum}
+		select * from CLASSATTACHEDFILE where boNum=#{boNum} and fileCode='1'
 		]]>
 	</select>
 
