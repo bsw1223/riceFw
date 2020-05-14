@@ -38,19 +38,19 @@
 	<select id="getmonthSales" resultMap="monthsalesList" parameterType="java.util.Map">
 		<![CDATA[
 			SELECT SUBSTR(TT.DD, -2) DAY, NVL(SUM(C.CLASSPRICE), 0) SALES
-	         FROM ENROLMENT A, 
-	             (
-	             SELECT TO_CHAR(TO_DATE(SDAY),'YYYY-MM') || '-' || LPAD(CNT,2,'0') AS DD
-	             FROM (
-	                 select level cnt, trunc(TO_DATE(#{currentDate}, 'YYYY-MM'),'mm') sday
-	                 from dual
-	                 connect by level<=LAST_DAY(TO_DATE(#{currentDate}, 'YYYY-MM'))-trunc(TO_DATE(#{currentDate}, 'YYYY-MM'),'mm')+1
-	                 ) T
-	             ) TT, OPENCLASS C
-	         WHERE A.ENRDATE (+)=TT.DD
-	             AND A.OPENCLASSID = C.OPENCLASSID(+)
-	         GROUP BY TT.DD
-	         ORDER BY TT.DD
+			FROM ENROLMENT A, 
+			    (
+			    SELECT TO_CHAR(TO_DATE(SDAY),'YYYY-MM') || '-' || LPAD(CNT,2,'0') AS DD
+			    FROM (
+			        select level cnt, trunc(TO_DATE(#{currentDate}, 'YYYY-MM'),'mm') sday
+			        from dual
+			        connect by level<=LAST_DAY(TO_DATE(#{currentDate}, 'YYYY-MM'))-trunc(TO_DATE(#{currentDate}, 'YYYY-MM'),'mm')+1
+			        ) T
+			    ) TT, OPENCLASS C
+			WHERE A.ENRDATE (+)=TT.DD
+			    AND A.OPENCLASSID = C.OPENCLASSID(+)
+			GROUP BY TT.DD
+			ORDER BY TT.DD
 		]]>
 	</select>
 </mapper>

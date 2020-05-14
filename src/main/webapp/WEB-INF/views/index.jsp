@@ -4,6 +4,9 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%@ include file="header.jsp"%>
 <style>
+.fc-day-number {
+	font-size: 15px;
+}
 #banner{
 border: 1px solid;
 width: 200px;
@@ -65,15 +68,15 @@ min-width:150px;
 		             	 <div class="table-responsive"><!-- 내용시작 -->
 				            <table class="table">
 				              <tr>
-				                <th style="width:50%;padding-left: 25%;padding-top: 4%;">시험일자  </th>
+				                <th style="width:50%;padding-left: 25%;padding-top: 4%;">시험 일자  </th>
 				                <td style="padding-left: 10%;padding-top: 4%;"><a href="https://appexam.ybmnet.co.kr/toeic/receipt/receipt.asp"> ${exDate}</a></td>
 				              </tr>
 				              <tr>
-				                <th style="width:50%;padding-left: 25%;">접수마감  </th>
+				                <th style="width:50%;padding-left: 25%;">접수 마감  </th>
 				                <td style="padding-left: 10%;"><a href="https://appexam.ybmnet.co.kr/toeic/receipt/receipt.asp"> ${recepShedule}</a></td>
 				              </tr>
 				              <tr>
-				                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
+				                <th style="width:50%;padding-left: 25%;">성적 발표  </th>
 				                <td style="padding-left: 10%;"><a href="https://appexam.ybmnet.co.kr/toeic/receipt/receipt.asp">${dateRls}</a></td>
 				              </tr>
 				            </table>
@@ -86,15 +89,15 @@ min-width:150px;
 			       <div class="table-responsive"><!-- 내용시작 -->
 		            <table class="table">
 		              <tr>
-		                <th style="width:50%;padding-left: 25%;padding-top: 4%;">시험일자  </th>
+		                <th style="width:50%;padding-left: 25%;padding-top: 4%;">시험 일자  </th>
 		                <td style="padding-left: 10%;padding-top: 4%;"><a href="https://appexam.ybmnet.co.kr/toeicswt/receipt/receipt.asp"> ${exDateS}</a></td>
 		              </tr>
 		              <tr>
-		                <th style="width:50%;padding-left: 25%;">접수마감  </th>
+		                <th style="width:50%;padding-left: 25%;">접수 마감  </th>
 		                <td style="padding-left: 10%;"><a href="https://appexam.ybmnet.co.kr/toeicswt/receipt/receipt.asp"> ${recepSheduleS}</a></td>
 		              </tr>
 		              <tr>
-		                <th style="width:50%;padding-left: 25%;">성적발표일  </th>
+		                <th style="width:50%;padding-left: 25%;">성적 발표  </th>
 		                <td style="padding-left: 10%;"><a href="https://appexam.ybmnet.co.kr/toeicswt/receipt/receipt.asp"> ${dateRlsS}</a></td>
 		              </tr>
 		            </table>
