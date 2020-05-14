@@ -21,7 +21,7 @@ margin-top: 90px;
 min-width:150px;
 }
 
-@media screen and (max-width: 1500px){
+@media screen and (max-width: 1700px){
 #banner{
 	display: none;
 }}
@@ -35,7 +35,7 @@ vertical-align: middle;
 min-width:150px;
 }
 
-@media screen and (max-width: 1300px){
+@media screen and (max-width: 1700px){
 #banner_left{
 	display: none;
 }
@@ -50,13 +50,12 @@ min-width:150px;
 
 	<div class="content-wrapper">
 		<section class="content-header">
-			<div class="col-md-2" style="margin: 20px;"></div>
 			<h1>
 				<c:out value='${sjctName}' />
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-				<li><a href="#"><c:out value='${sjctName}' /></a></li>
+				<li class="active"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+				<li class="active"><a href="#"><c:out value='${sjctName}' /></a></li>
 				<li class="active">QnA 게시판</li>
 			</ol>
 		</section>
@@ -64,16 +63,7 @@ min-width:150px;
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-md-2">
-					<div id="banner_left">
-						<img id="pp" src="">
-						<%@ include file="left_banner1.jsp"%>
-					</div>
-					<div>
-						<%@ include file="left_banner2.jsp"%>
-					</div>
-				</div>
-				<div class="col-md-8">
+				<div class="col-md-10">
 					<div class="box box-warning">
 						<div class="box-header">
 						<h2 class="box-title"><c:out value='${pageTitle}' /></h2>
@@ -111,20 +101,23 @@ min-width:150px;
 											</ul>
 										</div>
 									</div>
-							</div>
+								</div>
 							<div class="box-footer">
-								<button data-oper="modify" class="btn btn-primary">저장</button>
-								<button data-oper="cancel" class="btn btn-primary"
-									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'return false;">취소</button>
+									<button data-oper="modify" class="btn btn-primary">저장</button>
+									<button data-oper="list" id="listBtn" class="btn btn-default" onclick="location.href='/mypage/board/${boCode}/${boURL}'">취소</button>
+								</div>
+						</form>
 							</div>
 						</form>
 							
 						</div>
-						</div>
 					</div>
-				</div>
-				<div id="banner">
-					<%@ include file="banner.jsp"%>
+					<div id="banner">
+						<%@ include file="banner.jsp"%>
+					</div>
+					<div id="banner_left2">
+						<%@ include file="left_banner2.jsp"%>
+					</div>
 				</div>
 		</section>
 	</div>
@@ -260,33 +253,6 @@ min-width:150px;
 			uploadResult.append(str);
 		};
 		
-
-		 
-		/* $("#modify").on("click", function() {
-			var str ="";
-			
-			$(".uploadResult ul li").each(function(i,obj){
-				var jobj=$(obj);
-				
-				str += "<input type='hidden' name='filelist["+i+"].fileName' value='"+jobj.data("filename")+"'>";
-				str += "<input type='hidden' name='filelist["+i+"].classFileNum' value='"+jobj.data("classfilenum")+"'>";
-				str += "<input type='hidden' name='filelist["+i+"].filePath' value='"+jobj.data("path")+"'>";
-				str += "<input type='hidden' name='filelist["+i+"].fileCode' value='"+jobj.data("type")+"'>";
-				str += "<input type='hidden' name='filelist["+i+"].fileSize' value='"+jobj.data("size")+"'>";
-				str += "<input type='hidden' name='filelist["+i+"].saveFileName' value='"+jobj.data("saveFileName")+"'>";
-				str += "<input type='hidden' name='filelist["+i+"].boNum' value='"+jobj.data("boNum")+"'>";
-				str += "<input type='hidden' name='filelist["+i+"].memId' value='${list.memId}'>";
-				console.log(str);
-			});
-			formObj.append(str).submit();
-			formObj.attr("action", "/mypage/board/mdfy/${list.boCode}/${list.boURL}");
-			formObj.attr("method", "get");
-			formObj.submit();
-		})
-		$("#cancel").on("click", function() {
-			event.preventDefault();
-			location.href = "/mypage/board/${list.boCode}/${list.boURL}"
-		}) */
 	});
 </script>
 
@@ -351,7 +317,7 @@ $(document).ready(function() {
 	    formObj.submit();
 	  });
 
-});
+	});
 
 	CKEDITOR.replace( 'boContent',{
  		enterMode : CKEDITOR.ENTER_BR,

@@ -257,10 +257,10 @@ public class C001DocContoller {
 		
 		List<C001FileUploadVO> list = new ArrayList<>();
 		
-		String uploadFolder ="C:\\upload";
-		String uploadFolderPath= getFolder();
+		String uploadFolder ="/var/lib/tomcat8/webapps/img/";
+		//String uploadFolderPath= getFolder();
 		//날짜별 폴더 만들기
-		File uploadPath = new File(uploadFolder, uploadFolderPath);
+		File uploadPath = new File(uploadFolder);
 		if(uploadPath.exists() == false) {
 			uploadPath.mkdirs();
 		}
@@ -282,7 +282,7 @@ public class C001DocContoller {
 				File saveFile = new File(uploadPath, uploadFileName);
 				multipartFile.transferTo(saveFile);
 				attachVO.setClassFileNum(uuid.toString());
-				attachVO.setFilePath(uploadFolderPath);
+				attachVO.setFilePath(uploadFolder);
 				
 				if(checkImageType(saveFile)) {
 					
@@ -321,7 +321,7 @@ public class C001DocContoller {
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String fileName){
-		File file = new File("C:\\upload"+fileName);
+		File file = new File("/var/lib/tomcat8/webapps/img"+fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		
@@ -336,13 +336,11 @@ public class C001DocContoller {
 		return result;
 	}
 
-	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@RequestMapping(value = "/download", method = {RequestMethod.GET,RequestMethod.POST}, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	@ResponseBody
 	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, C001FileUploadVO vo){
 		
-		
-		//占쏙옙澍【占� 占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙 占쌔야듸옙
-		Resource resource = new FileSystemResource("C:\\upload\\"+vo.getFileName());
+		Resource resource = new FileSystemResource("http://52.14.195.150:8080/resources/img/"+vo.getFileName());
 		
 		if(resource.exists() ==false) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -379,7 +377,7 @@ public class C001DocContoller {
 		File file;
 		
 		try {
-			file = new File("C:\\upload\\"+URLDecoder.decode(fileName,"UTF-8"));
+			file = new File("http://52.14.195.150:8080/resources/img/"+URLDecoder.decode(fileName,"UTF-8"));
 			file.delete();
 			if(type.equals("image")) {
 				String largeFileName = file.getAbsolutePath().replace("s_", "");
@@ -406,7 +404,7 @@ public class C001DocContoller {
 		}
 		vo.forEach(attach->{
 			try {
-				Path file = Paths.get("C:\\upload\\"+attach.getFilePath()+"\\s_"+attach.getClassFileNum()+"_"+attach.getFileName());
+				Path file = Paths.get("http://52.14.195.150:8080/resources/img/"+attach.getFilePath()+"\\s_"+attach.getClassFileNum()+"_"+attach.getFileName());
 				
 				Files.deleteIfExists(file);
 				

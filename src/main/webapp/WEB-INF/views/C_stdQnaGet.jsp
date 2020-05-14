@@ -32,13 +32,34 @@
 	font-size:1.4em;
 	
 }
+#banner{
+border: 1px solid;
+width: 200px;
+float: left;
+padding: 10px;
+margin-left: 10px;
+margin-top: 90px;
+min-width:150px;
+}
 
+@media screen and (max-width: 1500px){
+#banner{
+	display: none;
+}}
+
+
+@media screen and (max-width: 1700px){
+
+#banner_left2{
+	display: none;
+
+}
+}
 </style>
 
 <body>
 <div class="content-wrapper">
 	<section class="content-header"> 
-		<div class="col-md-2" style="margin: 20px;"></div>
 		<h1>
 			<c:out value='${sjctName}' />
 		</h1>
@@ -52,19 +73,7 @@
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-md-2">
-					<div id="banner_left">
-					
-						<img id="pp" src="">
-						
-						<%@ include file="left_banner1.jsp"%>
-						
-					</div>
-					<div>
-						<%@ include file="left_banner2.jsp"%>
-					</div>
-				</div>
-				<div class="col-md-8">
+				<div class="col-md-10">
 					<div class="box box-warning">
 						<div class="box-body">
 						<div class="box-header">
@@ -77,62 +86,65 @@
 								<c:out value ="${list.boTitle}"/>
 							</div>
 							
-							<div class="form-group"id="nav">
-								<!-- 작성자 -->
-								<span style="margin-right:20px;">
-									<label>작성자 </label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.memId}"/></span>
-								</span>
-								<!-- 작성일 -->
-								<span style="margin:20px;">
-									<label>작성일</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boRegdate}"/></span>
-								</span>
-								<span style="margin:20px;">
-									<label>조회수</label> <span>&nbsp;&nbsp;&nbsp;${list.boViews}</span>
-								</span>
-							</div>
+								<div class="form-group"id="nav">
+									<!-- 작성자 -->
+									<span style="margin-right:20px;">
+										<label>작성자 </label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.memId}"/></span>
+									</span>
+									<!-- 작성일 -->
+									<span style="margin:20px;">
+										<label>작성일</label><span>&nbsp;&nbsp;&nbsp;<c:out value ="${list.boRegdate}"/></span>
+									</span>
+									<span style="margin:20px;">
+										<label>조회수</label> <span>&nbsp;&nbsp;&nbsp;${list.boViews}</span>
+									</span>
+								</div>
 							<!-- content -->
-							<div class="form-group">
-								 <textarea  class="form-control" name="boContent" id="boContent"rows='15' 
-											readonly="readonly" ><c:out value ="${list.boContent}"/></textarea>
-							</div>
+								<div class="form-group">
+									 <textarea  class="form-control" name="boContent" id="boContent"rows='15' 
+												readonly="readonly" ><c:out value ="${list.boContent}"/></textarea>
+								</div>
 							
 							<!-- files -->
-							<div class="panel panel-default">
-								<div class="panel-heading">Files</div>
-								<div class="panel-body">
-									<div class="uploadResult">
-										<ul></ul>
+								<div class="panel panel-default">
+									<div class="panel-heading">Files</div>
+									<div class="panel-body">
+										<div class="uploadResult">
+											<ul>
+											</ul>
+										</div>
 									</div>
 								</div>
-							</div>
 							<!-- box-footer -->
 							<!-- 로그인한 사람과 글쓴 사람이 일치할 경우에만 수정삭제버튼 뜨도록 변경해야함 -->
-							<div class="box-footer">
-								<button data-oper="submit" class="btn btn-warning"
-									onclick="location.href='/mypage/board/mdfyForm/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">수정</button>
-								<button data-oper="submit" class="btn btn-warning"
-									onclick="location.href='/mypage/board/dlt/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">삭제</button>
-								<div class="pull-right">
-								<button data-oper="list" class="btn btn-default"
-									onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
-								<%-- <div class="pull-right">
-									<button type="button" class="btn btn-default btn-xs">
-											<i class="fa fa-eye"></i>${list.boViews}
-									</button>
-								</div> --%>
+								<div class="box-footer">
+									<button data-oper="submit" class="btn btn-warning"
+										onclick="location.href='/mypage/board/mdfyForm/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">수정</button>
+									<button data-oper="submit" class="btn btn-warning"
+										onclick="location.href='/mypage/board/dlt/${list.boCode}/${list.boURL}?boNum=<c:out value="${list.boNum}"/>'">삭제</button>
+									<div class="pull-right">
+									<button data-oper="list" class="btn btn-default"
+										onclick="location.href='/mypage/board/${list.boCode}/${list.boURL}'">뒤로가기</button>
+									</div>
 								</div>
-							</div>
 							<!-- chat  -->
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<i class="fa fa-comments fa-fw"></i>Reply
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<i class="fa fa-comments fa-fw"></i>Reply
+									</div>
+									<div class="panel-body">
+										<ul class='chat'></ul>
+									</div>
 								</div>
-								<div class="panel-body">
-									<ul class='chat'></ul>
 								</div>
-							</div>
 							</div>
 						</div>
+					</div>
+					<div id="banner">
+						<%@ include file="banner.jsp"%>
+					</div>
+					<div id="banner_left2">
+						<%@ include file="left_banner2.jsp"%>
 					</div>
 				</div>
 		</section>
@@ -235,8 +247,6 @@ $(document).ready(function(){
 	
 	$(".uploadResult").on("click","li",function(e){
 		
-		console.log("view image");
-		
 		var liObj=$(this);
 		
 		 var str ="";
@@ -247,8 +257,8 @@ $(document).ready(function(){
 		$(".uploadResult li").append(str).submit(); 
 		
 		var path = encodeURIComponent(liObj.data("path")+"\\"+liObj.data("classfilenum")+"_"+liObj.data("filename"));
-		
-		self.location="/mypage/board/download?fileName="+path;
+		//self.href="/mypage/board/download?fileName="+path;
+		self.location="http://52.14.195.150:8080/resources/img/"+liObj.data("classfilenum")+"_"+liObj.data("filename");
 		
 	});
 });

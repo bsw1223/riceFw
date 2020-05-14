@@ -22,7 +22,8 @@ a#top_banner {
 	vertical-align: middle;
 	width:185px;
 	height:80px;
-	margin-top: 50px;
+	margin-top: 20px;
+	margin-right:80px;
   background:url('${contextPath}/resources/img/down.png') no-repeat;
 }
 
@@ -36,6 +37,7 @@ a#bottom_banner {
 	vertical-align: middle;
 	width:185px;
 	height:80px;
+	margin-right:80px;
   background:url('${contextPath}/resources/img/down2.png') no-repeat;
 }
 

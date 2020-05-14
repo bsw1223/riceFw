@@ -14,7 +14,7 @@ border: 1px solid;
 width: 200px;
 float: left;
 padding: 10px;
-margin-left: 30px;
+margin-left: 10px;
 margin-top: 90px;
 min-width:150px;
 }
@@ -24,19 +24,8 @@ min-width:150px;
 	display: none;
 }}
 
-#banner_left{
-width: 193px;
-float: right;
-margin: auto;
-padding-top: 90px;
-vertical-align: middle;
-min-width:150px;
-}
 
-@media screen and (max-width: 1300px){
-#banner_left{
-	display: none;
-}
+@media screen and (max-width: 1700px){
 #banner_left2{
 	display: none;
 
@@ -48,7 +37,6 @@ min-width:150px;
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-	<div class="col-md-2" style="margin: 20px;"></div>
 		<h1>
 			<c:out value='${sjctName}' />
 		</h1>
@@ -63,16 +51,7 @@ min-width:150px;
 	<section class="content">
 		<div class="row">
 			<!-- left column -->
-			<div class="col-md-2">
-				<div id="banner_left">
-					<img id="pp" src="">
-					<%@ include file="left_banner1.jsp"%>
-				</div>
-				<div>
-					<%@ include file="left_banner2.jsp"%>
-				</div>
-			</div>
-				<div class="col-md-8">
+				<div class="col-md-10">
 				<!-- general form elements -->
 				<div class="box box-warning">
 					<div class="box-header">
@@ -100,9 +79,10 @@ min-width:150px;
 							<input type="hidden" class="form-control" name='memNum' value="${memNum}"> 
 							<input type="hidden" class="form-control" name='boViews' value="0"> 
 							<input type="hidden" class="form-control" name='boLikes' value="0">
-
+							<input type="hidden" class="form-control" name='boCode' value="${boCode}">
+							<input type="hidden" class="form-control" name='boURL' value="${boURL}">
 							<div class="row">
-								<div class="col-lg-12">
+								<div class="col-lg-10">
 									<div class="panel panel-default">
 										<div class="panel-heading">파일첨부</div>
 										<div class="panel-body">
@@ -117,19 +97,23 @@ min-width:150px;
 											</div>
 										</div>
 									</div>
+								</div>
 							</div>
 							<!-- /.box-body -->
-							<div class="box-footer">
-								<button type="submit" id="regBtn" class="btn btn-primary" name="regBtn">등록</button>
-								<button id="listBtn" data-oper="list" class="btn btn-default">뒤로가기</button>
-							</div>
 							<!-- /.box-footer -->
 						</form>
+						<div class="box-footer">
+								<button type="submit" id="regBtn" class="btn btn-primary" name="regBtn">등록</button>
+								<button id="listBtn" class="btn btn-default" onclick="location.href='/mypage/board/${boCode}/${boURL}'">뒤로가기</button>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div id="banner">
 					<%@ include file="banner.jsp"%>
+			</div>
+			<div id="banner_left2">
+					<%@ include file="left_banner2.jsp"%>
 			</div>
 		</div>
 	</section>

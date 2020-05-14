@@ -76,6 +76,7 @@ function getChartScore() {		// 차트 점수 불러오기
 function chartRender(info) {
 	var chart = new CanvasJS.Chart("chartContainer", {
 	    theme: "light2",
+	    height: 400,
 		toolTip: {
 			shared: true
 		},

@@ -25,6 +25,7 @@
 	resize: none;
 	background-color:#FFFFFF;
 	border:0px;
+	height: 440px;
 }
 #boTitle{
 	font-size:1.4em;
@@ -36,26 +37,18 @@ border: 1px solid;
 width: 200px;
 float: left;
 padding: 10px;
-margin-left: 30px;
+margin-left: 10px;
 margin-top: 90px;
 min-width:150px;
 }
 
-@media screen and (max-width: 1700px){
+@media screen and (max-width: 1500px){
 #banner{
 	display: none;
 }}
 
-#banner_left{
-width: 193px;
-float: right;
-margin: auto;
-padding-top: 90px;
-vertical-align: middle;
-min-width:150px;
-}
 
-@media screen and (max-width: 1300px){
+@media screen and (max-width: 1700px){
 #banner_left{
 	display: none;
 }
@@ -69,7 +62,6 @@ min-width:150px;
 <body>
 	<div class="content-wrapper">
 		<section class="content-header">
-			<div class="col-md-2" style="margin: 20px;"></div>
 			<h1>
 				<c:out value='${sjctName}' />
 			</h1>
@@ -83,17 +75,7 @@ min-width:150px;
 	<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-md-2">
-					<div id="banner_left">
-						<img id="pp" src="">
-						<%@ include file="left_banner1.jsp"%>
-					</div>
-					<div>
-						<%@ include file="left_banner2.jsp"%>
-					</div>
-				</div>
-
-				<div class="col-md-8">
+				<div class="col-md-10">
 					<div class="box box-warning">
 						<div class="box-header">
 							<h2 class="box-title">공지사항게시판</h2>
@@ -152,7 +134,10 @@ min-width:150px;
 			<div id="banner">
 				<%@ include file="banner.jsp"%>
 			</div>
-			</div>
+			<div id="banner_left2">
+					<%@ include file="left_banner2.jsp"%>
+				</div>
+		</div>
 	</section>
 </div>
 </body>
