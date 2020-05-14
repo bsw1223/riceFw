@@ -17,7 +17,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="box box-default">
+				<div class="box box-warning">
 					<div class="box-body">
 						<div id='timeline_cal'></div>
 					</div>
@@ -38,7 +38,7 @@
 					<!-- /.box-header -->
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
-							<tbody id="mybookList">
+							<thead>
 								<tr>
 									<th>예약번호</th>
 									<th>장소</th>
@@ -47,6 +47,8 @@
 									<th>예약종료시간</th>
 									<th>예약상태</th>
 								</tr>
+							
+							<tbody id="mybookList">
 							</tbody>
 						</table>
 					</div>

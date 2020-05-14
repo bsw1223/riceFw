@@ -131,6 +131,7 @@ min-width:150px;
                         </div>
                     </div>
 					<div class="box-footer">
+<<<<<<< HEAD
 						<div class="row">
 		        	      	<div class="offset-md-8" id="reg" style="margin-right:20px;">
 								<form action="/mypage/board/regForm/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}">
@@ -139,24 +140,25 @@ min-width:150px;
 							</div>
 						</div>
 						<ul class="pagination pagination-sm no-margin">
-	              		<c:if test="${pageMaker.prev}">
-							<li class="paginate_button prev">
-								<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
-							</li>
-						</c:if>
-                	    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
-							<li class="page-item ${pageMaker.cri.page==num?" active ":""}">
-								<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${num}&amount=${pageMaker.cri.amount}">${num}</a>
-							</li>
-						</c:forEach>
-	           			<c:if test="${pageMaker.next}">
-							<li class="paginate_button next">
-								<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
-							</li>
-						</c:if>
-	        	     </ul>
+		              		<c:if test="${pageMaker.prev}">
+								<li class="paginate_button prev">
+									<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.startPage-1}&amount=${pageMaker.cri.amount}">prev</a>
+								</li>
+							</c:if>
+	                	    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
+								<li class="page-item ${pageMaker.cri.page==num?" active ":""}">
+									<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${num}&amount=${pageMaker.cri.amount}">${num}</a>
+								</li>
+							</c:forEach>
+		           			<c:if test="${pageMaker.next}">
+								<li class="paginate_button next">
+									<a href="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}?page=${pageMaker.endPage+1}&amount=${pageMaker.cri.amount}">next</a>
+								</li>
+							</c:if>
+	        	    	 </ul>
+	        	     <!-- search -->
 						<div id="search" class="pull-right" style="margin-top: 10px;">
-							<form id='searchForm' action="/mypage/board/qna/list" method ="get">
+							<form id='searchForm' action="/mypage/board//${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method ="get">
 								<div class='select'>
 				                  <select name='type' style="width:100px;height:30px;">
 				                    <option value=""
@@ -171,25 +173,30 @@ min-width:150px;
 				                    	<c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>전체</option>
 				                  </select>
 				                  </div>
-				                  <!-- /select option -->
+				                 <!-- /select option -->
 				                <div class="input-group input-group-sm hidden-xs" >
 				                    <input type="text" name='keyword'
 				                    	value='<c:out value="${pageMaker.cri.keyword}"/>'class="form-control pull-right">
 				                    <div class="input-group-btn">
-				                    <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+				                    <button type="submit" class="btn btn-warning btn-flat"><i class="fa fa-search"></i></button>
 				                  </div>
 								</div>
 							</form>
+							<div class="offset-md-8" id="reg" style="margin-left:20px;">
+							<form action="/mypage/board/regForm/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}">
+								<button id="btn-color" type="submit" class="btn pull-right btn-warning btn-fw">질문등록</button>
+							</form>
 						</div>
-					 </div>
 					</div>
 				</div>
+			</div>
 				<div id="banner">
 					<%@ include file="banner.jsp"%>
 				</div>
 				<div id="banner_left2">
 					<%@ include file="left_banner2.jsp"%>
 				</div>
+			</div>
 			</div>
 		</section>
 	</div>

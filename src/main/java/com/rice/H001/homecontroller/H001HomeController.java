@@ -60,7 +60,7 @@ public class H001HomeController {
 		//�삤�뒛�궇吏� 諛쏆븘�샂
 		String todayDate = today.format(time);
 		Date toDayAll= today.parse(todayDate);
-		
+		System.out.println("toDayAll : "+toDayAll);
 		//System.out.println("�삤�뒛 : " +toDayAll);
 		//System.out.println("�삤�뒛2 : " +todayDate);
 		String toeicDate = h001HomeService.selectToeicDate();
@@ -86,14 +86,17 @@ public class H001HomeController {
 	        Date startDate = sdf.parse(inputStartDate);
 	        Date endDate = sdf.parse(inputEndDate);
 	        Date endDateS = sdf.parse(inputEndDateS);
-	        long difference = (endDate.getTime() - startDate.getTime()) / MILLI_SECONDS_PER_DAY;
-	        long differenceS = (endDateS.getTime() - startDate.getTime()) / MILLI_SECONDS_PER_DAY;
-	        System.out.println("differenceS :"+differenceS);
+	        System.out.println("startDate : "+startDate);
+	        System.out.println("endDate : "+endDate);
+	        System.out.println("endDateS : "+endDateS);
+	        long difference = ( startDate.getTime() - endDate.getTime()) / MILLI_SECONDS_PER_DAY;
+	        long differenceS = ( startDate.getTime() - endDateS.getTime() ) / MILLI_SECONDS_PER_DAY;
+	        System.out.println("differenceS :"+differenceS);//ok
 	        System.out.println("difference :"+difference);
 		
 		
 		
-		if(difference == 0 )
+		if(difference > 0 )
 		{		
 		//System.out.println("ybm �젒�냽�빐�꽌 諛쏆븘�샂");
 		String URL = "https://exam.ybmnet.co.kr/toeic/"; 
@@ -150,7 +153,7 @@ public class H001HomeController {
 			
 		}
 
-		if(differenceS == 0 )
+		if(differenceS > 0 )
 		{		
 			System.out.println("TS 접속해서 정보가져오기 ");
 		String URLS = "https://exam.ybmnet.co.kr/toeicswt/"; 

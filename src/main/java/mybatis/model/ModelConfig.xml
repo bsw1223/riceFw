@@ -25,6 +25,11 @@
 		<typeAlias alias="C001ClassBoardVO" type="com.rice.C001.boardvo.C001ClassBoardVO" />
 		<typeAlias alias="C001QnAVO" type="com.rice.C001.qnavo.C001QnAVO"/>
 		<typeAlias alias="C002ChatroomVO" type="com.rice.C002.chatvo.C002ChatroomVO"/>
+		<typeAlias alias="F002SubjectVO" type="com.rice.F002.F002vo.F002SubjectVO"/>
+		<typeAlias alias="F002OpenclassVO" type="com.rice.F002.F002vo.F002OpenclassVO"/>
+		<typeAlias alias="F002PlanVO" type="com.rice.F002.F002vo.F002PlanVO"/>
+		<typeAlias alias="F003CodegroupVO" type="com.rice.F003.F003vo.F003CodegroupVO"/>
+		<typeAlias alias="F003CodeVO" type="com.rice.F003.F003vo.F003CodeVO"/>
 	</typeAliases>
 
 </configuration>

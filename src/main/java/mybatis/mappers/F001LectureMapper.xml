@@ -227,7 +227,7 @@
 	from 
 		LECTUREPLAN
 	where 
-		plancode=#{subCode,jdbcType=VARCHAR}
+		planCode=#{subId,jdbcType=VARCHAR}
 		) b 
 	where 
 	a.memnum=b.memnum
@@ -411,7 +411,7 @@
 		from  (select
 					a.CLASSCAPACITY, a.CLASSDESC, a.SUBID, a.MEMNUM, a.OPENENDDATE, a.CLASSTUE, a.OPENCLASSDAYS, a.OPENCLASSID, a.OPENSTARTDATE,
 					b.CARTNUM, a.OPENSTARTTIME, b.BUYER, a.CLASSPRICE, a.CLASSTHUR, a.OPENCLASSNAME, a.CLASSID, a.OPENENDTIME
-			   from openclass a, cart b where a.openclassId=b.openclassid and b.buyer='101') aa, 
+			   from openclass a, cart b where a.openclassId=b.openclassid and b.buyer=#{memNum}) aa, 
 			  (select 
 			  		classnumber, classId 
 			   from classroom)bb 
@@ -522,57 +522,51 @@
 		       		<![CDATA[ and a.subCode=#{subCode} ]]></if>	
 			<if test="memNum != null and memNum !=''">  	
 		      		<![CDATA[ and b.memNum=#{memNum} ]]></if>
-		    <if test="searchKey != null and memNum !=''">
+		    <if test="searchKey != null and searchKey !=''">
 		  		<![CDATA[ and   
-		       (b.authid || b.memid || b.memname || b.memnum ||  
-		       c.classdesc || c.classid || c.memnum || c.openclassdays ||
-		       c.openclassid || c.openclassname || c.openenddate || c.openendtime ||
-		       c.openstartdate || c.openstarttime || c.subid) like 	'%' || #{searchKey} ||'%' ]]> </if>
+		       ( b.memname || c.classdesc ||
+		       c.openclassname || c.openenddate ||
+		         c.subid) like 	'%' || #{searchKey} ||'%' ]]> </if>
 		</where>
 	    order by  c.openStartDate
 </select>
 
 
-<!--     <![CDATA[	 -->
-<!-- 		   select  -->
-<!-- 		   	   b.memname, -->
-<!-- 		       c.openStartDate, -->
-<!-- 			   c.classDesc, -->
-<!-- 			   c.classId, -->
-<!-- 			   c.openclassId, -->
-<!-- 			   c.classCapacity, -->
-<!-- 			   c.classDescFile, -->
-<!-- 			   c.memNum, -->
-<!-- 			   c.classPrice, -->
-<!-- 			   c.openclassName, -->
-<!-- 			   c.subId, -->
-<!-- 			   c.openEndDate, -->
-<!-- 			   c.openStartTime, -->
-<!-- 			   c.openEndTime, -->
-<!-- 			   c.classSun, -->
-<!-- 			   c.classMon, -->
-<!-- 			   c.classTue, -->
-<!-- 			   c.classWed, -->
-<!-- 			   c.classThur, -->
-<!-- 			   c.classFri, -->
-<!-- 			   c.classSat -->
-<!-- 		 from subject a , member b, openclass c -->
-<!-- 		 ]]>  -->
-<!-- 		<where> -->
-<!-- 		  	<![CDATA[ a.subcode=c.subid and c.memnum=b.memnum  ]]> -->
-<!-- 			<if test="subCode != null and subCode !=''">  -->
-<!-- 		       		<![CDATA[ and a.subCode=#{subCode} ]]></if>	 -->
-<!-- 			<if test="memNum != null and memNum !=''">  	 -->
-<!-- 		      		<![CDATA[ and b.memNum=#{memNum} ]]></if> -->
-<!-- 		    <if test="searchKey != null and memNum !=''"> -->
-<!-- 		  		<![CDATA[ and    -->
-<!-- 		       (b.authid || b.memid || b.memname || b.memnum ||   -->
-<!-- 		       c.classdesc || c.classid || c.memnum || c.openclassdays || -->
-<!-- 		       c.openclassid || c.openclassname || c.openenddate || c.openendtime || -->
-<!-- 		       c.openstartdate || c.openstarttime || c.subid) like 	'%' || #{searchKey} ||'%' ]]> </if> -->
-<!-- 		</where> -->
+
+<select id="lecCodeVal"  resultType="java.util.Map">
+      <![CDATA[	
+			select codeid , codename from code where codegroup='14'
+	   ]]>
+</select>
 
 
-
+<insert id="lecturePlanAdd" parameterType="java.util.HashMap">
+	<![CDATA[
+	Insert into LECTUREPLAN (
 	
+		PLANSTARTDATE,PLANLECTURECONTENT,
+		PLANID,PLANENDDATE,
+		PLANSTARTTIME,PLANENDTIME,
+		PLANNAME,
+		PLANCAPACITY,PLANCODE,
+		MEMNUM,CLASSMON,
+		CLASSTUE,CLASSWED,
+		CLASSTHUR,CLASSFRI,
+		CLASSSAT,CLASSSUN
+	) 
+	values (
+		#{planStartDate,jdbcType=VARCHAR},#{planLectureContent,jdbcType=VARCHAR},
+		(seq_PLANID.nextval),#{planEndDate,jdbcType=VARCHAR},
+		#{planStartTime,jdbcType=VARCHAR},#{planEndTime,jdbcType=VARCHAR},
+		#{planName,jdbcType=VARCHAR},
+		#{planCapacity,jdbcType=VARCHAR},#{planCode,jdbcType=VARCHAR},
+		#{memNum,jdbcType=VARCHAR},#{classMon,jdbcType=VARCHAR},
+		#{classTue,jdbcType=VARCHAR},#{classWed,jdbcType=VARCHAR},
+		#{classThur,jdbcType=VARCHAR},#{classFri,jdbcType=VARCHAR},
+		#{classSat,jdbcType=VARCHAR},#{classSun,jdbcType=VARCHAR}
+	)
+	]]>
+</insert>
+		
+				
 </mapper>

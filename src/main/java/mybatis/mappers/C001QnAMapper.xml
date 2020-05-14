@@ -31,7 +31,7 @@
 
 	<!-- <insert id="insert" parameterType="C001QnAVO">
 		<![CDATA[
-			INSERT INTO SCOTT.CLASSBOARD (boNum, boTitle, boRegDate, boContent, memNum, boCode)
+			INSERT INTO CLASSBOARD (boNum, boTitle, boRegDate, boContent, memNum, boCode)
 				values (SEQ_CLASSBOARD.nextval, #{boTitle}, TO_CHAR(SYSDATE,'YYYY-MM-DD'), #{boContent}, 1, 23)
 		]]>
 	</insert> -->

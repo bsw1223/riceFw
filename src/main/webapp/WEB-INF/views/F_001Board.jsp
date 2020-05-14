@@ -18,7 +18,7 @@
 
 <script language="javascript">
 	//시트 높이 계산용
-	var pageheightoffset = 200;
+	var pageheightoffset = 500;
 	
 	/*Sheet 기본 설정 */
 	function LoadPage() {
@@ -30,12 +30,12 @@
 		initSheet.Cols = [
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
-			{Header:"회원번호",Type:"Int",SaveName:"memNum",MinWidth:60, Edit:0},
+			{Header:"회원번호",Type:"Text",SaveName:"memNum",MinWidth:60, Edit:0},
 			{Header:"ID",Type:"Text",SaveName:"memId",MinWidth:200,Align:"Center",KeyField:1},		
 			{Header:"이름",Type:"Text",SaveName:"memName",MinWidth:150,KeyField:1 ,MultiLineText:1, Wrap:1},
 			{Header:"이메일",Type:"Text",SaveName:"memEmail",MinWidth:300,KeyField:1},
 			{Header:"권한",Type:"Text",SaveName:"authId",MinWidth:100,KeyField:1},
-			{Header:"가입일",Type:"Date",SaveName:"memJoinDate",MinWidth:200,Edit:0},
+			{Header:"가입일",Type:"Text",SaveName:"memJoinDate",MinWidth:200,Edit:0},
 			{Header:"Level",Type:"Int",SaveName:"memLevel",MinWidth:60},
 			{Header:"Point",Type:"Int",SaveName:"memPoint",MinWidth:60},
 		];   
@@ -91,40 +91,58 @@
 
 
 <div class="content-wrapper">
+	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<div class="page_title">
-	   		 <span><a class="closeDepth" href="#">closeDepth</a></span> 
-	   		 <span class="title">기본기능 > <b>트랜젝션관리</b></span>
-		</div>
+		<h1>학생관리</h1>
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li class="active">학생관리</li>
+		</ol>
 	</section>
+	
+	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-			<div class="col-xs-12">
-				<div class="box">
-					  <div class="main_content">
-					    <div class="exp_product">각 행의 데이터를 수정하거나 입력,삭제시 상태컬럼의 변화를
-								확인하고,저장 버튼 클릭시 서버로 전송되는 데이터를 확인한다.</div>
-					    <div class="exp_product">
-					      <form name='frm'>
-					        ID: <input type='text' id="p_id" name="p_id" /> 
-					      </form>
-					    </div>
-					    <div class="row"> 
-						    <div class="ib_function float_right">
-							  <a href="javascript:doAction('reload')" class="btn btn-primary">초기화</a>
-							  <a href="javascript:doAction('insert')" class="btn btn-primary">추가</a>
-							  <a href="javascript:doAction('search')" class="btn btn-primary">조회</a>
-							  <a href="javascript:doAction('save')" class="btn btn-primary">저장</a>
+			<div class="col-md-10">
+				<div class="box box-warning">
+						<div class="box-header with-border">
+							<h3 class="box-title">학생목록</h3>
+			
+							<form name='frm'>
+<!-- 								<div class="box-tools pull-right"> -->
+<!-- 									<div class="has-feedback"> -->
+<!-- 										<input type="text" class="form-control input-sm" id="p_id" name="p_id" placeholder="search"> -->
+<!-- 										<span class="glyphicon glyphicon-search form-control-feedback"></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+								<!-- /.box-tools -->
+			                </form>
+			            </div>
+			            <!-- /.box-header -->
+				
+					  <div class="box-body">
+					  	<div class="col-md-12"> 
+						    <div class="ib_function pull-right" style="margin: 0px 10px 10px 0px;">
+						    	<a href="javascript:doAction('reload')" class="btn btn-primary btn-sm">초기화</a>
+						    	<a href="javascript:doAction('insert')" class="btn btn-primary btn-sm">추가</a>
+						    	<a href="javascript:doAction('search')" class="btn btn-primary btn-sm">조회</a>
+						    	<a href="javascript:doAction('save')" class="btn btn-primary btn-sm">저장</a>
 							</div>
 						</div>
-						<div class="clear hidden"></div>
-						<div class="ib_product"><script>createIBSheet("mySheet", "100%", "100%");</script></div>
+						<!-- /.col -->
+						<div class="col-md-12"> 
+							<div class="clear hidden"></div>
+							<div class="ib_product" style="margin: auto">
+								<script>createIBSheet("mySheet", "100%", "600px");</script>
+							</div>
+						</div>
+						<!-- /.col -->
 					 </div>
-					 <!-- .main_content -->
+					 <!-- /.box-body -->
 				</div>
 				<!-- .box -->
 			</div>
-			<!-- .col-xs-12 -->
+			<!-- .col -->
 		</div>
 		<!-- .row  -->
 	</section>
@@ -132,8 +150,6 @@
 </div>
 <!-- .content-wrapper -->
 
-
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <%@ include file="footer.jsp"%>
 </body>
 </html>

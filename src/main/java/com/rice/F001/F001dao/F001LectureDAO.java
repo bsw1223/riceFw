@@ -84,5 +84,9 @@ public interface F001LectureDAO {
 
 	public Map<String, Object> selectCountCapa(Map<String, Object> detailCart);
 
+	public List<Map<String, Object>> lecCodeVal();
+
+	public void lecturePlanAdd(Map<String, Object> memNum);
+
 
 }

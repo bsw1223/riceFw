@@ -82,6 +82,10 @@ public interface F001LectureService {
 
 	public Map<String, Object> selectCountCapa(Map<String, Object> detailCart);
 
+	public List<Map<String, Object>> lecCodeVal();
+
+	public void lecturePlanAdd(Map<String, Object> memNum);
+
 
 
 }

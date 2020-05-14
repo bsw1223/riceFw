@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.f003code">
+	<resultMap type="F003CodegroupVO" id="codegroupList">
+		<result property="codeGroup" column="codeGroup"/>
+		<result property="codeGroupName" column="codeGroupName"/>
+	</resultMap>
+	
+	<resultMap type="F003CodeVO" id="codeList">
+		<result property="codeGroup" column="codeGroup"/>
+		<result property="codeGroupName" column="codeGroupName"/>
+		<result property="codeId" column="codeId"/>
+		<result property="codeName" column="codeName"/>
+		<result property="codeOrder" column="codeOrder"/>
+		<result property="etc1" column="etc1"/>
+		<result property="etc2" column="etc2"/>
+		<result property="etc3" column="etc3"/>
+		<result property="etc4" column="etc4"/>
+		<result property="etc5" column="etc5"/>
+	</resultMap>
+	
+	<select id="searchgroupList" resultMap="codegroupList" parameterType="java.util.Map">
+		<![CDATA[
+			SELECT CODEGROUP, CODEGROUPNAME
+			FROM CODEGROUP 
+		]]>
+	</select>
+	
+	<insert id="insertgroupData" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO CODEGROUP(codeGroup,codeGroupName)
+			    VALUES(SEQ_CODEGROUP.nextval, #{codeGroupName})
+		]]>
+	</insert>
+	
+	<update id="updategroupData" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE CODEGROUP
+			SET codeGroupName=#{codeGroupName}
+			WHERE codeGroup=#{codeGroup}
+		]]>
+	</update>
+	
+	<delete id="deletegroupData" parameterType="java.util.Map">
+		<![CDATA[
+			DELETE CODEGROUP
+			WHERE codeGroup=#{codeGroup}
+		]]>
+	</delete>
+	
+	<select id="searchcodeList" resultMap="codeList" parameterType="java.util.Map">
+		<![CDATA[
+			SELECT A.codeGroup, B.codeGroupName, A.codeId, A.codeName, A.codeOrder,  
+			     A.etc1, A.etc2, A.etc3, A.etc4, A.etc5
+			FROM CODE A, CODEGROUP B
+			WHERE A.CODEGROUP=B.CODEGROUP
+			ORDER BY TO_NUMBER(A.codeGroup) DESC, A.codeOrder
+		]]>
+	</select>
+	
+	<insert id="insertcodeData" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO CODE(
+					codeGroup,codeId,
+					codeName,codeOrder,
+					etc1,etc2,etc3,etc4,etc5
+				)
+    			VALUES(
+    			#{codeGroup},#{codeId},
+    			#{codeName},#{codeOrder},
+    			#{etc1},#{etc2},#{etc3},#{etc4},#{etc5}
+    			)
+		]]>
+	</insert>
+	
+	<update id="updatecodeData" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE CODE
+			SET codeName=#{codeName},
+				codeOrder=#{codeOrder},
+				etc1=#{etc1},
+				etc2=#{etc2},
+				etc3=#{etc3},
+				etc4=#{etc4},
+				etc5=#{etc5}
+			WHERE codeId=#{codeId}
+				and codeGroup=#{codeGroup}
+		]]>
+	</update>
+	
+	<delete id="deletecodeData" parameterType="java.util.Map">
+		<![CDATA[
+			DELETE CODE
+			WHERE codeId=#{codeId}
+				and codeGroup=#{codeGroup}
+		]]>
+	</delete>
+</mapper>

@@ -108,6 +108,8 @@ min-width:150px;
 								</div>
 						</form>
 							</div>
+						</form>
+							
 						</div>
 					</div>
 					<div id="banner">

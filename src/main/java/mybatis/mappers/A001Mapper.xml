@@ -24,7 +24,7 @@
 	<!-- 회원가입 -->
 	<insert id='signup'>
 		<![CDATA[
-			INSERT INTO SCOTT.MEMBER (memNum, memid, mempwd, memname, memtel, mememail, authId, memJoinDate, memModifyDate)
+			INSERT INTO MEMBER (memNum, memid, mempwd, memname, memtel, mememail, authId, memJoinDate, memModifyDate)
 				values (SEQ_MEMBER.nextval, #{memId}, #{memPwd}, #{memName}, #{memTel}, #{memEmail}, #{authId}, TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(SYSDATE,'YYYY-MM-DD'))
 		]]>
 	</insert>
@@ -32,12 +32,12 @@
 	<insert id='signupauthmember'>
 		<selectKey resultType="String" keyProperty="memNum" order="BEFORE">
 			<![CDATA[
-	       		SELECT memNum FROM scott.member        
+	       		SELECT memNum FROM member        
 	       			WHERE memId = #{memId}
        		]]>
     	</selectKey>
 		<![CDATA[
-			INSERT INTO SCOTT.AUTHMEMBER(authId,memNum)
+			INSERT INTO AUTHMEMBER(authId,memNum)
 				VALUES(#{authId},#{memNum})
 		]]>
 	</insert>
@@ -45,7 +45,7 @@
 	<!-- 아이디 중복체크-->
 	<select id="idCheck" parameterType="String" resultType="Integer">
 		<![CDATA[
-			SELECT COUNT(*) FROM SCOTT.MEMBER
+			SELECT COUNT(*) FROM MEMBER
 				WHERE memId = #{memId}
 		]]>
 	</select>
@@ -56,7 +56,7 @@
         	select
         		memNum, memId, authId, memName, memLevel
         	from
-        		scott.member
+        		member
         	where memId = #{memId}
         		and memPwd = #{memPwd}
       ]]>
@@ -68,7 +68,7 @@
         	select
         		memName, memTel, memEmail,memNum
         	from
-        		scott.member
+        		member
         	where memNum = #{memNum}
       ]]>
 	</select>
@@ -76,7 +76,7 @@
 	<!-- 회원정보 수정 -->
 	<update id="updateInfo" parameterType="com.rice.A001.memvo.A001MemVO">
 		<![CDATA[
-			UPDATE SCOTT.MEMBER
+			UPDATE MEMBER
 				SET memName=#{memName}, memTel=#{memTel}, memEmail=#{memEmail}, memModifyDate=TO_CHAR(SYSDATE,'YYYY-MM-DD')
 			WHERE
 				memNum=#{memNum}
@@ -86,7 +86,7 @@
 	<!-- 비밀번호 수정 -->
 	<update id="updatePwd" parameterType="com.rice.A001.memvo.A001MemVO">
 		<![CDATA[
-			UPDATE SCOTT.MEMBER
+			UPDATE MEMBER
 				SET memPwd=#{memPwd}, memModifyDate=TO_CHAR(SYSDATE,'YYYY-MM-DD')
 			WHERE
 				memNum=#{memNum}
@@ -96,7 +96,7 @@
 	<!-- 회원테이블 권한 수정 -->
 	<update id="updateMemAuth" parameterType="com.rice.A001.memvo.A001MemVO">
 		<![CDATA[
-			UPDATE SCOTT.MEMBER
+			UPDATE MEMBER
 				SET authId=#{authId}, memModifyDate=TO_CHAR(SYSDATE,'YYYY-MM-DD')
 			WHERE
 				memNum=#{memNum}
@@ -106,7 +106,7 @@
 	<!-- 권한매칭 테이블 권한 수정 -->
 	<update id="updateMatchAuth" parameterType="com.rice.A001.memvo.A001MemVO">
 		<![CDATA[
-			UPDATE SCOTT.AUTHMEMBER
+			UPDATE AUTHMEMBER
 				SET authId=#{authId}
 			WHERE
 				memNum=#{memNum}
@@ -117,7 +117,7 @@
 	<!-- SNS 아이디 중복체크-->
 	<select id="snsIdCheck" parameterType="String" resultType="Integer">
 		<![CDATA[
-			SELECT COUNT(*) FROM SCOTT.MEMBER
+			SELECT COUNT(*) FROM MEMBER
 				WHERE snsId = #{snsId}
 		]]>
 	</select>
@@ -125,7 +125,7 @@
 	<!-- SNS NAVER 회원가입-->
 	<insert id='snsSignup'>
 		<![CDATA[
-			INSERT INTO SCOTT.MEMBER (memNum, memId, memName, memEmail, snsId, snsType)
+			INSERT INTO MEMBER (memNum, memId, memName, memEmail, snsId, snsType)
 				values (SEQ_MEMBER.nextval, #{memId}, #{memName}, #{memEmail}, #{snsId}, #{snsType})
 		]]>
 	</insert>
@@ -133,7 +133,7 @@
 	<!-- SNS KAKAO 회원가입-->
 	<insert id='snsKakaoSignup'>
 		<![CDATA[
-			INSERT INTO SCOTT.MEMBER (memNum, memId, memName, snsId, snsType)
+			INSERT INTO MEMBER (memNum, memId, memName, snsId, snsType)
 				values (SEQ_MEMBER.nextval, #{memId}, #{memName}, #{snsId}, #{snsType})
 		]]>
 	</insert>
@@ -144,7 +144,7 @@
         	select
         		memNum, memEmail, authId, snsId
         	from
-        		scott.member
+        		member
         	where snsId = #{snsId}
       ]]>
 	</select>
@@ -156,9 +156,9 @@
         	select
         		memId
         	from
-        		scott.member
-      ]]>
+        		member
         	where memName = #{memName}
+       ]]>
         	<if test="memTel != null">
         		and memTel = #{memTel}
         	</if>
@@ -174,7 +174,7 @@
         	SELECT
         		memNum
         	FROM
-        		scott.member
+        		member
         	WHERE memName = #{memName}
         		and memId = #{memId}
         		and memEmail = #{memEmail}

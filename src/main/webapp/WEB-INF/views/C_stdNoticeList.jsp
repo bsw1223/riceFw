@@ -60,6 +60,7 @@ min-width:150px;
 
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400,700&display=swap&subset=korean" rel="stylesheet">
 <body>
 	<div class="content-wrapper">
 		<section class="content-header">
@@ -131,6 +132,7 @@ min-width:150px;
                     </div>
 	
 					<div class="box-footer">
+					<!-- pagination -->
 						<ul class="pagination pagination-sm no-margin">
 	              		<c:if test="${pageMaker.prev}">
 							<li class="paginate_button prev">
@@ -148,8 +150,9 @@ min-width:150px;
 							</li>
 						</c:if>
 	        	     </ul>
+	        	     <!-- search -->
 						<div id="search" class="pull-right">
-							<form id='searchForm' action="/mypage/board/qna/list" method ="get">
+							<form id='searchForm' action="/mypage/board//${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method ="get">
 								<div class='select'>
 				                  <select name='type' style="width:100px;height:30px;">
 				                    <option value=""

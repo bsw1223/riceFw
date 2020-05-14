@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="mapper.f002plan">
+	<resultMap type="F002PlanVO" id="planList">
+		<result property="planId" column="PLANID"/>
+		<result property="planCode" column="PLANCODE"/>
+		<result property="planName" column="PLANNAME"/>
+		<result property="planLectureContent" column="PLANLECTURECONTENT"/>
+		
+		<result property="memNum" column="MEMNUM"/>
+		<result property="planCapacity" column="PLANCAPACITY"/>
+		
+		<result property="planStartDate" column="PLANSTARTDATE"/>
+		<result property="planEndDate" column="PLANENDDATE"/>
+		<result property="planStartTime" column="PLANSTARTTIME"/>
+		<result property="planEndTime" column="PLANENDTIME"/>
+		
+		<result property="classMon" column="CLASSMON"/>
+		<result property="classTue" column="CLASSTUE"/>
+		<result property="classWed" column="CLASSWED"/>
+		<result property="classThur" column="CLASSTHUR"/>
+		<result property="classFri" column="CLASSFRI"/>
+		<result property="classSat" column="CLASSSAT"/>
+		<result property="classSun" column="CLASSSUN"/>
+	</resultMap>
+	
+	<select id="searchList" resultMap="planList" parameterType="java.util.Map">
+		<![CDATA[
+			SELECT A.PLANID, A.PLANCODE, A.PLANNAME, A.PLANLECTURECONTENT,
+			    A.MEMNUM, A.PLANCAPACITY,
+			    A.PLANSTARTDATE, A.PLANENDDATE, A.PLANSTARTTIME, A.PLANENDTIME,
+			    A.CLASSMON, A.CLASSTUE, A.CLASSWED, A.CLASSTHUR, A.CLASSFRI, A.CLASSSAT, A.CLASSSUN
+			FROM LECTUREPLAN A 
+			ORDER BY TO_NUMBER(A.PLANID) DESC
+		]]>
+	</select>
+	
+	<insert id="insertData" parameterType="java.util.Map">
+		<![CDATA[
+		]]>
+	</insert>
+	
+	<update id="updateData" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE LECTUREPLAN
+			SET planCode=#{planCode}
+			    , planName=#{planName}
+			    , planLectureContent=#{planLectureContent}
+			    
+			    , memNum=#{memNum}
+			    , planCapacity=#{planCapacity}
+			    
+			    , planStartDate=#{planStartDate}
+			    , planEndDate=#{planEndDate}
+			    , planStartTime=#{planStartTime}
+			    , planEndTime=#{planEndTime}
+			    
+			    , classMon=#{classMon}
+			    , classTue=#{classTue}
+			    , classWed=#{classWed}
+			    , classThur=#{classThur}
+			    , classFri=#{classFri}
+			    , classSat=#{classSat}
+			    , classSun=#{classSun}
+			WHERE planId = #{planId}
+		]]>
+	</update>
+	
+	<delete id="deleteData" parameterType="java.util.Map">
+		<![CDATA[
+			DELETE LECTUREPLAN
+			WHERE planId = #{planId}
+		]]>
+	</delete>
+</mapper>
