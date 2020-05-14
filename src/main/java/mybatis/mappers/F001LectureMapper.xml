@@ -137,7 +137,8 @@
 	       planCapacity,
 	       planCode,
 	       planDescFile,
-	       memNum
+	       memNum,
+	       CLASSMON,CLASSTUE,CLASSWED,CLASSTHUR,CLASSFRI,CLASSSAT,CLASSSUN
 		FROM LECTUREPLAN
 	    where planId = #{planId,jdbcType=VARCHAR}
 		      ]]>
@@ -161,7 +162,8 @@
 			subId,
 			openEndDate,
 			openStartTime,
-			openEndTime
+			openEndTime,
+			classSun,classMon,classTue,classWed,classThur,classFri,classSat
 			)
     VALUES(
 		    #{openStartDate,jdbcType=VARCHAR},
@@ -175,7 +177,14 @@
 		    #{subId,jdbcType=VARCHAR},
 		    #{openEndDate,jdbcType=VARCHAR},
 		    #{openStartTime,jdbcType=VARCHAR},
-		    #{openEndTime,jdbcType=VARCHAR}
+		    #{openEndTime,jdbcType=VARCHAR},
+		    #{classSun,jdbcType=VARCHAR},
+		    #{classMon,jdbcType=VARCHAR},
+		    #{classTue,jdbcType=VARCHAR},
+		    #{classWed,jdbcType=VARCHAR},
+		    #{classThur,jdbcType=VARCHAR},
+		    #{classFri,jdbcType=VARCHAR},
+		    #{classSat,jdbcType=VARCHAR}
 		    )
 		      ]]>
 	</insert>
@@ -260,7 +269,7 @@
 		   a.classSat,
 		   b.memname
 		FROM OPENCLASS a, member b
-		where a.memnum=b.memnum
+		where a.memnum=b.memnum 
 	      ]]>
 	</select>
 
@@ -344,7 +353,7 @@
 	</select>
 	
 	
-<update id="insertCart" parameterType="java.util.HashMap">
+<insert id="insertCart" parameterType="java.util.HashMap">
 		  merge into cart m
 		  using ( select #{cartOrderId} as cartOrderId, #{cId} as cId, #{cPrice} as cPrice, #{memNum} as memNum
 		          from dual ) e
@@ -354,7 +363,7 @@
 		  when not matched then
 		  		 insert (openclassId, cartNum, classPrice, buyer)
    		  values (e.cId, e.cartOrderId, e.cPrice, e.memNum) 
-</update>
+</insert>
 	
 	<update id="paidlist" parameterType="String">
 	<![CDATA[
@@ -403,14 +412,17 @@
 <!-- 장바구니 -->
 <select id="cartInfo"  resultType="java.util.Map">
       <![CDATA[	
-			select dd.memnum, dd.memname, cc.classnumber,cc.CLASSCAPACITY, cc.CLASSDESC, cc.SUBID, cc.MEMNUM, cc.OPENENDDATE, cc.CLASSTUE, cc.OPENCLASSDAYS, cc.OPENCLASSID, cc.OPENSTARTDATE,
-			cc.CARTNUM, cc.OPENSTARTTIME, cc.BUYER, cc.CLASSPRICE, cc.CLASSTHUR, cc.OPENCLASSNAME, cc.CLASSID, cc.OPENENDTIME
+      	select dd.memnum, dd.memname, cc.classnumber,cc.CLASSCAPACITY, cc.CLASSDESC, cc.SUBID, cc.MEMNUM, cc.OPENENDDATE, cc.OPENCLASSDAYS, cc.OPENCLASSID, cc.OPENSTARTDATE,
+			cc.CARTNUM, cc.OPENSTARTTIME, cc.BUYER, cc.CLASSPRICE, cc.OPENCLASSNAME, cc.CLASSID, cc.OPENENDTIME, cc.CLASSMON, cc.CLASSTUE,
+            cc.CLASSWED, cc.CLASSTHUR, cc.CLASSFRI, cc.CLASSSAT, cc.CLASSSUN
     	from(select 
-			bb.classnumber,aa.CLASSCAPACITY, aa.CLASSDESC, aa.SUBID, aa.MEMNUM, aa.OPENENDDATE, aa.CLASSTUE, aa.OPENCLASSDAYS, aa.OPENCLASSID, aa.OPENSTARTDATE,
-			aa.CARTNUM, aa.OPENSTARTTIME, aa.BUYER, aa.CLASSPRICE, aa.CLASSTHUR, aa.OPENCLASSNAME, aa.CLASSID, aa.OPENENDTIME
+			bb.classnumber,aa.CLASSCAPACITY, aa.CLASSDESC, aa.SUBID, aa.MEMNUM, aa.OPENENDDATE, aa.OPENCLASSDAYS, aa.OPENCLASSID, aa.OPENSTARTDATE,
+			aa.CARTNUM, aa.OPENSTARTTIME, aa.BUYER, aa.CLASSPRICE, aa.OPENCLASSNAME, aa.CLASSID, aa.OPENENDTIME, aa.CLASSMON, aa.CLASSTUE,
+            aa.CLASSWED, aa.CLASSTHUR, aa.CLASSFRI, aa.CLASSSAT, aa.CLASSSUN
 		from  (select
-					a.CLASSCAPACITY, a.CLASSDESC, a.SUBID, a.MEMNUM, a.OPENENDDATE, a.CLASSTUE, a.OPENCLASSDAYS, a.OPENCLASSID, a.OPENSTARTDATE,
-					b.CARTNUM, a.OPENSTARTTIME, b.BUYER, a.CLASSPRICE, a.CLASSTHUR, a.OPENCLASSNAME, a.CLASSID, a.OPENENDTIME
+					a.CLASSCAPACITY, a.CLASSDESC, a.SUBID, a.MEMNUM, a.OPENENDDATE, a.OPENCLASSDAYS, a.OPENCLASSID, a.OPENSTARTDATE,
+					b.CARTNUM, a.OPENSTARTTIME, b.BUYER, a.CLASSPRICE, a.OPENCLASSNAME, a.CLASSID, a.OPENENDTIME, a.CLASSMON,
+                    a.CLASSTUE, a.CLASSWED,a.CLASSTHUR,a.CLASSFRI,a.CLASSSAT,a.CLASSSUN
 			   from openclass a, cart b where a.openclassId=b.openclassid and b.buyer=#{memNum}) aa, 
 			  (select 
 			  		classnumber, classId 
@@ -567,6 +579,53 @@
 	)
 	]]>
 </insert>
-		
-				
+<select id="selectCountSub"  resultType="java.util.Map">
+	<![CDATA[	
+		SELECT A.OPENCLASSID, A.OPENCLASSNAME, COUNT(*) count
+		FROM OPENCLASS A, ENROLMENT B
+		WHERE A.OPENCLASSID=B.OPENCLASSID
+		GROUP BY A.OPENCLASSID, A.OPENCLASSNAME
+		ORDER BY COUNT(*) DESC
+   ]]>
+</select>
+	<select id="selectRecomendInfo"  resultType="java.util.Map">
+	<![CDATA[	
+			SELECT 
+			   a.openStartDate,
+			   a.classDesc,
+			   a.classId,
+			   a.openclassId,
+			   a.classCapacity,
+			   a.classDescFile,
+			   a.memNum,
+			   a.classPrice,
+			   a.openclassName,
+			   a.subId,
+			   a.openEndDate,
+			   a.openStartTime,
+			   a.openEndTime,
+			   a.classSun,
+			   a.classMon,
+			   a.classTue,
+			   a.classWed,
+			   a.classThur,
+			   a.classFri,
+			   a.classSat,
+			   b.memname
+			FROM OPENCLASS a, member b
+			where a.memnum=b.memnum  AND OPENCLASSID=#{openClassId}
+				  ]]>
+</select>
+
+<select id="selectClassCapa"  resultType="java.util.Map">
+	<![CDATA[	
+			SELECT 
+			   openclassId,
+			   classCapacity
+			FROM OPENCLASS
+			where OPENCLASSID=#{openClassId}
+				  ]]>
+</select>
+
+
 </mapper>

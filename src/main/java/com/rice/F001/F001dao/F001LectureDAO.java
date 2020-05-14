@@ -88,5 +88,11 @@ public interface F001LectureDAO {
 
 	public void lecturePlanAdd(Map<String, Object> memNum);
 
+	public Map<String, Object> selectRecomendInfo(Map<String, Object> memNum);
+
+	public List<Map<String, Object>> selectCountSub();
+
+	public List<Map<String, Object>> selectClassCapa(Map<String, Object> memNum);
+
 
 }

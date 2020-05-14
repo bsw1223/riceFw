@@ -332,4 +332,28 @@ public class F001LectureDAOImpl implements F001LectureDAO{
 		sqlsession.insert("mapper.f001Lecture.lecturePlanAdd",memNum);
 		
 	}
+
+
+
+	@Override
+	public List<Map<String, Object>> selectCountSub() {
+		List<Map<String, Object>> selectCountSub= sqlsession.selectList("mapper.f001Lecture.selectCountSub");
+		return selectCountSub;
+	}
+
+
+
+	@Override
+	public Map<String, Object> selectRecomendInfo(Map<String, Object> memNum) {
+		Map<String, Object> selectRecomendInfo= (Map<String, Object>) sqlsession.selectOne("mapper.f001Lecture.selectRecomendInfo",memNum);
+		return selectRecomendInfo;
+	}
+
+
+
+	@Override
+	public List<Map<String, Object>> selectClassCapa(Map<String, Object> memNum) {
+		List<Map<String, Object>> selectClassCapa= sqlsession.selectList("mapper.f001Lecture.selectClassCapa",memNum);
+		return selectClassCapa;
+	}
 }

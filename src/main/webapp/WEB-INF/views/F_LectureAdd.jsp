@@ -57,21 +57,21 @@
                   <label>강의번호</label> -->
                   <input type="hidden" class="form-control classNumber" placeholder="" id="subIdInsert">
                <!--  </div> -->
-               <div class="">
+               <div class="" style="margin-bottom: 1%;">
                   <label>강의 명</label>
                     <input type="text" class="form-control classNumber" placeholder="" id="subNameInsert">
                 </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                   <label>생성일자</label>
                   <input type="text" class="form-control classNumber" placeholder="" id="subRegDate">
                 </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                     <label>폐지일자</label>
                  </div>   
-                <div class="" id="delSub">
+                <div class="" id="delSub" style="margin-bottom: 1%;">
                 <label>
                   <input type="radio" name="delSub" class="flat-red" id="nonDel" checked>
-                	미 폐지
+                	미 폐지  &emsp;  &emsp;
                 </label>
                 <label>
                   <input type="radio" name="delSub" id="delSub" class="flat-red">
@@ -79,20 +79,20 @@
                 </label>
                  <input type="text" class="form-control classNumber" placeholder="" id="subAblDate">
                </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                   <label>과목 분류</label>
                   <select class="form-control bulId " id="subCode" >
                   </select>
                   
                   </div>
                 <!-- textarea -->
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                   <label>교육과목 내용</label>
                  <textarea class="form-control classRemark" rows="3" placeholder="Enter ..." id="subDesc"></textarea> 
                 </div>
                  <div class="form-group">
                 </div>
-				<div class="form-group">
+				<div class="form-group" style="margin-bottom: 1%;">
                  <button type="reset" class="btn btn-primary pull-right" style="margin-right: 5px;">
 		            <i class=""></i> 초기화
 		          </button>
@@ -108,56 +108,66 @@
 
               <div class="tab-pane" id="pwd">
                 <form class="form-horizontal" action="" method="" onsubmit="">
-                  <div class="">
-                <div class="">
-                </div>
                 <div class="">
                  <!--  <label>개설교과과정 ID</label> -->
                   <input type="hidden" class="form-control " placeholder="" id="getPlanId">
                 </div>
+                <div class="" style="margin-bottom: 1%;">
                   <label>교육과목</label>
                     <select class="form-control" id="subName">
                     <option style="color:gray" value="" >-  과목을 선택해 주세요  -</option>
                   </select>
                 </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                   <label>강사 및 계획</label>
                   <input type="text" class="form-control " placeholder="" id="teaLec">
                 </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                   <label>개설과목 명</label>
                   <input type="text" class="form-control " placeholder="" id="titleLec">
                 </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                   <label>수업시작일</label>
                   <input type="text" class="form-control " placeholder="" id="startDateLec">
                 </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                   <label>수업종료일</label>
                   <input type="text" class="form-control " placeholder="" id="endEndDateLec">
                 </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                   <label>수업시작시간</label>
                   <input type="text" class="form-control " placeholder="" id="startTimeLec">
                 </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                   <label>수업종료시간</label>
                   <input type="text" class="form-control " placeholder="" id="endTimeLec">
                 </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
+                	  <label>강의 요일</label>
+                	  <div class="checkbox icheckbox_minimal-blue" style=" margin-left: 1%;">
+                	  <label><input class="minimal" type="checkbox" name ="dayList" id="sun" value="y"> 일   &emsp;  &emsp;</label>
+                	  <label><input class="minimal"  type="checkbox" name ="dayList" id="mon" value="y"> 월  &emsp;  &emsp;</label>
+                	  <label><input class="minimal"  type="checkbox" name ="dayList" id="tue" value="y"> 화  &emsp;  &emsp;</label>
+                	  <label><input class="minimal"  type="checkbox" name ="dayList" id="wed" value="y"> 수  &emsp;  &emsp;</label>
+                	  <label><input class="minimal"  type="checkbox" name ="dayList" id="thur" value="y"> 목  &emsp;  &emsp;</label>
+                	  <label><input class="minimal"  type="checkbox" name ="dayList" id="fri" value="y"> 금  &emsp;  &emsp;</label>
+                	  <label><input class="minimal"  type="checkbox" name ="dayList" id="sat" value="y"> 토  &emsp;  &emsp;</label>
+                	  </div>
+                </div>
+                <div class="" style="margin-bottom: 1%;">
                   <label>과정개요</label>
                   <input type="text" class="form-control " placeholder="" id="descLec">
                 </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                   <label>수강정원</label>
                   <input type="number" class="form-control " placeholder="" id="lecCapacity">
                 </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                   <label>강의실</label>
                   <input type="text" class="form-control " placeholder="" id="classIdLec">
                   <input type="hidden" class="form-control " placeholder="" id="hiddenClassIdLec">
                 </div>
-                <div class="">
+                <div class="" style="margin-bottom: 1%;">
                   <label>과정금액</label>
                   <input type="number" class="form-control " placeholder="" id="costLec">
                 </div>
@@ -165,9 +175,7 @@
                   <!-- <label>강의계획서_첨부파일</label> -->
                   <!-- <input type="text" class="form-control " placeholder="" id="descFileLec"> -->
                 <!--  </div> -->
-                <div class="form-group">
-                </div>
-				<div class="form-group">
+				<div class="form-group" style="margin-bottom: 1%;">
                  <button type="reset" class="btn btn-primary pull-right" style="margin-right: 5px;">
 		            <i class=""></i> 초기화
 		          </button>
@@ -562,6 +570,21 @@ var getclassIdLec = null;
 						"planEndDateLec : "+planEndDateLec+"  "+
 						"planStartTimeLec : "+planStartTimeLec+"  "+
 						"planEndTimeLec : "+planEndTimeLec) */
+						
+// 						sunD = $('input[id=sun]:checked').val();
+// 						monD = $('input[id=mon]:checked').val();
+// 						tueD = $('input[id=tue]:checked').val();
+// 						wedD = $('input[id=wed]:checked').val();
+// 						thurD = $('input[id=thur]:checked').val();
+// 						friD = $('input[id=fri]:checked').val();
+// 						satD = $('input[id=sat]:checked').val();
+// 						CLASSSUN;
+// 						CLASSMON;
+// 						CLASSTUE;
+// 						CLASSWED;
+// 						CLASSTHUR;
+// 						CLASSFRI;
+// 						CLASSSAT;
 
 				$.ajax({
 					type : "post",
@@ -573,13 +596,20 @@ var getclassIdLec = null;
 						openStartDate : planStartDateLec,
 						classDesc : planLectureContentLec,
 						classCapacity : planCapacityLec,
-						memNum : memNumLec,
+						memNum : planMemNumLec,
 						classPrice : classPliceLec,
 						openclassName : planNameLec,
 						subId : subCodeLecFin,
 						openEndDate : planEndDateLec,
 						openStartTime : planStartTimeLec,
-						openEndTime : planEndTimeLec
+						openEndTime : planEndTimeLec,
+						classSun:$('input[id=sun]:checked').val(),
+						classMon:$('input[id=mon]:checked').val(),
+						classTue:$('input[id=tue]:checked').val(),
+						classWed:$('input[id=wed]:checked').val(),
+						classThur:$('input[id=thur]:checked').val(),
+						classFri:$('input[id=fri]:checked').val(),
+						classSat:$('input[id=sat]:checked').val()
 					},
 					success : function() {
 						confirm("등록되었습니다.");
@@ -635,8 +665,8 @@ var searchSubCode = '';
 					//console.log(selectSubIdName);
 					searchSubCode = selectSubIdName[i].SUBCODE;//과목코드임
 					getSubCode = selectSubIdName[i].SUBID;//교육과목 id임
-					console.log("searchSubCode : "+searchSubCode);//과목코드
-					console.log("getSubCode : "+getSubCode);//교육과목 id
+					//console.log("searchSubCode : "+searchSubCode);//과목코드
+					//console.log("getSubCode : "+getSubCode);//교육과목 id
 					selectMenu = "<option id=\"\"VALUE=\""+ getSubCode+"\" label='"+getSubCodeName+"'>"
 							+ searchSubCode + "</option>";
 					$('#subName').append(selectMenu);
@@ -655,7 +685,6 @@ var subCodeBasic ='';
 							getSubCode = $("#subName").val();//subCode
 							getSubName = $("#subName option:checked").text();
 							getLabelName = $("#subName option:checked").attr("label");
-							//getSelectCode = 
 							if (getSubCode == '') {
 								for (i in selectSubIdName) {
 									console.log(selectSubIdName);
@@ -683,7 +712,7 @@ var subCodeBasic ='';
 	function lecturePlanInfo() {
 		var getSelectCode = $("#subId2 option:checked").text();//코드
 		//getSubCode = $("#subId2").val();
-		console.log("getSelectCode : "+getSelectCode);
+		//console.log("getSelectCode : "+getSelectCode);
 		$.ajax({
 			type : "post",
 			async : true,
@@ -745,9 +774,9 @@ var subCodeBasic ='';
 		$(document).on("click", "input:radio[name=selectTeacher]", function() {
 			var selectMemNum = $('input[name=selectTeacher]:checked').val();
 			//subId2의  벨류받기
-			console.log("selectMemNum : "+ selectMemNum);
+			//console.log("selectMemNum : "+ selectMemNum);
 			modalSelSub = $("#subId2").val();
-			console.log("modalSelSub : "+ modalSelSub);
+			//console.log("modalSelSub : "+ modalSelSub);
 			lecturePlanInfoND(selectMemNum, modalSelSub);
 		});
 	};
@@ -755,8 +784,8 @@ var subCodeBasic ='';
 	//강의계획 정보 가져오기, 강의 계획명, 강의 설명 사용
 	function lecturePlanInfoND(selectMemNum, modalSelSub) {
 		var getSelectCodeSecond = $("#subId2 option:checked").text();//코드
-		console.log("subCodeBasic : "+subCodeBasic);
-		console.log("modalSelSub : "+modalSelSub);
+		//console.log("subCodeBasic : "+subCodeBasic);
+		//console.log("modalSelSub : "+modalSelSub);
 		$.ajax({
 					type : "post",
 					async : true,
@@ -768,7 +797,7 @@ var subCodeBasic ='';
 						subCode : getSelectCodeSecond
 					},
 					success : function(lecturePlanInfoND) {
-						console.log(lecturePlanInfoND);
+						//console.log(lecturePlanInfoND);
 						//이름과 강의명, 강의계획Id, 강의설명 가져오기
 							$('tr#addSubTr').remove();
 						for (i in lecturePlanInfoND) {
@@ -794,7 +823,7 @@ var subCodeBasic ='';
 
 	//# saveSub버튼 누르면 /lectureMng/openclassadd로 이동하면서 값 뿌려준다.
 	//planId로 데이터 뽑아오기
-
+var planMemNumLec ='';
 	function selectLecPlanId() {
 		$(document).on("click","#saveSub",function() {
 							getPlId = $('input[name=selectPlanId]:checked').val();
@@ -809,6 +838,8 @@ var subCodeBasic ='';
 											planId : getPlId
 										},
 										success : function(selectLecPlanId) {
+											console.log(selectLecPlanId);
+											planMemNumLec = selectLecPlanId[0].MEMNUM; // 개설교과과정 ID
 											planIdLec = selectLecPlanId[0].PLANID; // 개설교과과정 ID
 											planStartDateLec = selectLecPlanId[0].PLANSTARTDATE;//수업시작일
 											planLectureContentLec = selectLecPlanId[0].PLANLECTURECONTENT;//과정개요
@@ -816,11 +847,37 @@ var subCodeBasic ='';
 											planStartTimeLec = selectLecPlanId[0].PLANSTARTTIME;//수업시작시간
 											planEndTimeLec = selectLecPlanId[0].PLANENDTIME;//수업종료시간
 											planNameLec = selectLecPlanId[0].PLANNAME;//교육과목
+											//console.log("planNameLec : "+planNameLec);
 											planCapacityLec = selectLecPlanId[0].PLANCAPACITY;//수용인원
 											planCodeLec = selectLecPlanId[0].PLANCODE;//계획코드-히든
-											memNumLec = selectLecPlanId[0].MEMNUM;//강사코드-->>>이값을 저장할때 사용 강사 번호
+											
+											//CLASSMON,CLASSTUE,CLASSWED,CLASSTHUR,CLASSFRI,CLASSSAT,CLASSSUN
+											var planSun = selectLecPlanId[0].CLASSSUN;
+											var planMon = selectLecPlanId[0].CLASSMON;
+											var planTue = selectLecPlanId[0].CLASSTUE;
+											var planWed = selectLecPlanId[0].CLASSWED;
+											var planThur = selectLecPlanId[0].CLASSTHUR;
+											var planFri = selectLecPlanId[0].CLASSFRI;
+											var planSat = selectLecPlanId[0].CLASSSAT;
+											
+											if(planSun=='y'){$("input:checkbox[id='sun']").prop("checked", true);}
+											if(planMon=='y'){$("input:checkbox[id='mon']").prop("checked", true);}
+											if(planTue=='y'){$("input:checkbox[id='tue']").prop("checked", true);}
+											if(planWed=='y'){$("input:checkbox[id='wed']").prop("checked", true);}
+											if(planThur=='y'){$("input:checkbox[id='thur']").prop("checked", true);}
+											if(planFri=='y'){$("input:checkbox[id='fri']").prop("checked", true);}
+											if(planSat=='y'){$("input:checkbox[id='sat']").prop("checked", true);}
+
+// 											sun
+// 											mon
+// 											tue
+// 											wed
+// 											thur
+// 											fri
+// 											sat
+											
 											//강사명 다시불러옴 
-											reGetTeaName(memNumLec);
+											reGetTeaName(planMemNumLec);
 											subCodeLecFin = $("#subId2").val();
 											$("#subName option").filter(function(){return this.text ==getSelSubName}).attr('selected',true);
 											$("#titleLec").val(planNameLec);
@@ -849,14 +906,14 @@ var subCodeBasic ='';
 						});
 	};
 
-	function reGetTeaName(memNumLec) {
+	function reGetTeaName(planMemNumLec) {
 		$.ajax({
 			type : "post",
 			async : true,
 			datatype : "text; charset=utf-8",
 			url : "reGetTeaName",
 			data : {
-				memNum : memNumLec
+				memNum : planMemNumLec
 			},
 			success : function(reGetTeaName) {
 				//console.log(reGetTeaName);
@@ -1092,6 +1149,17 @@ $(document).on('click','#classIdLec',function(){
 	}
 		
 		
-	</script>
+</script>
+<style>
+	input[type=checkbox] {
+    transform: scale(1.3);
+	}
+	input[type="radio"] {
+    -ms-transform: scale(1.3); /* IE 9 */
+    -webkit-transform: scale(1.3); /* Chrome, Safari, Opera */
+    transform: scale(1.3);
+	}
+	
+</style>
 	</body>
 	</html>
