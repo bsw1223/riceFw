@@ -31,7 +31,7 @@ border: 1px solid;
 width: 200px;
 float: left;
 padding: 10px;
-margin-left: 30px;
+margin-left: 10px;
 margin-top: 90px;
 min-width:150px;
 }
@@ -41,23 +41,11 @@ min-width:150px;
 	display: none;
 }}
 
-#banner_left{
-width: 193px;
-float: right;
-margin: auto;
-padding-top: 90px;
-vertical-align: middle;
-min-width:150px;
-}
 
-@media screen and (max-width: 1300px){
-#banner_left{
-	display: none;
-}
+@media screen and (max-width: 1700px){
 #banner_left2{
 	display: none;
-
-}
+	}
 }
 </style>
 
@@ -65,7 +53,6 @@ min-width:150px;
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-	<div class="col-md-2" style="margin: 20px;"></div>
 		<h1>
 			<c:out value='${sjctName}' />
 		</h1>
@@ -80,24 +67,12 @@ min-width:150px;
 	<!-- Main content -->
 	<section class="content">
 		<div class="row">
-		<div class="col-md-2">
-				<div id="banner_left">
-				
-					<img id="pp" src="">
-					
-					<%@ include file="left_banner1.jsp"%>
-					
-				</div>
-				<div>
-					<%@ include file="left_banner2.jsp"%>
-				</div>
-			</div>
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<div class="box box-warning">
 					<div class="box-header">
 						<h2 class="box-title">성적 조회</h2>
 					</div>
-					<div class="box-body">
+					<div class="box-body" style="min-height:700px;">
 						<table class="table table-bordered">
 							<tr>
 								<th>평가명</th>
@@ -114,14 +89,17 @@ min-width:150px;
 			<!-- /score table -->
 			<!-- /.col -->
 			
-			<div class="col-md-5">
+			<div class="col-md-6">
 				<!-- general form elements -->
 				<div class="box box-warning">
 <!-- 					<div class="box-header"> -->
 <!-- 						<h2 class="box-title">차트 넣는곳</h2> -->
 <!-- 					</div> -->
 					<!-- /.box-header -->
-					<div class="box-body">
+					<div class="box-header">
+						<h2 class="box-title">성적 그래프</h2>
+					</div>
+					<div class="box-body" style="min-height:700px;">
 						<div id="chartContainer" style="height: 300px; width: 100%;">
 						</div>
 					</div>
@@ -132,7 +110,10 @@ min-width:150px;
 			<!-- /.col -->
 			<div id="banner">
 					<%@ include file="banner.jsp"%>
-				</div>
+			</div>
+			<div id="banner_left2">
+					<%@ include file="left_banner2.jsp"%>
+			</div>
 		</div>
 		<!-- /.row -->
 	</section>

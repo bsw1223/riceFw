@@ -31,8 +31,8 @@ function setmemNum(val) {
 	memNum = val;
 }
 
-function eventClick(info) {		
-	var bookNum = info.event.id;
+function eventClick(num) {		
+	var bookNum = num;
 	
 	$.ajax({
 		type : "post",
@@ -287,7 +287,7 @@ function getMybookList() {
 			contentType: 'application/json',
 			success: function(mapList) {
 						for(i = 0 ; i < mapList.length; i++) {
-							var str = "<tr>"
+							var str = "<tr val='"+mapList[i].bookNum +"'>"
 								+ "<td>" + mapList[i].bookNum + "</td>"
 								+ "<td>" + mapList[i].className + "</td>"
 								+ "<td>" + mapList[i].bookTitle + "</td>"
@@ -297,6 +297,11 @@ function getMybookList() {
 							 + "</tr>";
 							 mybookList.append(str);
 						}
+						
+						mybookList.click(function(e) {
+							var getval = $(e.target).parents("tr").attr("val")
+							eventClick(getval);
+						});
 					},
 			error: function(data) {
 						console.log("fail");
@@ -342,7 +347,7 @@ function rendCal(classList, bookingList) {
 				    	selectDate(info);			      	
 				    },
 	    eventClick: function(info){
-	    				eventClick(info);
+	    				eventClick(info.event.id);
 				    }
 	});	// calendar end
 	calendar.render();

@@ -27,10 +27,10 @@
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 // 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
 			
-			{Header:"그룹코드",Type:"Text",SaveName:"codeGroup",MinWidth:50, Align:"Center"},
+			{Header:"그룹코드",Type:"Text",SaveName:"codeGroup",MinWidth:50, Align:"Center",KeyField:1},
 			{Header:"그룹명",Type:"Text",SaveName:"codeGroupName",MinWidth:150, Edit:0},
 			
-			{Header:"코드ID",Type:"Text",SaveName:"codeId",MinWidth:50, Align:"Center"},
+			{Header:"코드ID",Type:"Text",SaveName:"codeId",MinWidth:50, Align:"Center",KeyField:1},
 			{Header:"코드명",Type:"Text",SaveName:"codeName",MinWidth:150},
 			{Header:"순서",Type:"Int",SaveName:"codeOrder",MinWidth:50, Align:"Center"},
 			

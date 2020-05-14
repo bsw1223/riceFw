@@ -106,7 +106,7 @@
 		<selectKey keyProperty="boNum" order="BEFORE"
 			resultType="String">
 
-			select seq_board.nextval from dual
+			select seq_classboard.nextval from dual
 
 		</selectKey>
 		 <![CDATA[ 

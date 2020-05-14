@@ -29,7 +29,7 @@ public class C001EvalController {
 	@Autowired
 	private C001EvalService c001EvalService;
 	
-	// 새로운 평가 생성하기
+	// �깉濡쒖슫 �룊媛� �깮�꽦�븯湲�
 	@RequestMapping(value = "/insertEval", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=utf8")
 	@ResponseBody
 	public ResponseEntity<?> insertEval(@RequestBody Map<String, Object> info, HttpServletRequest request, HttpServletResponse response) throws DataAccessException {
@@ -54,7 +54,7 @@ public class C001EvalController {
 		return new ResponseEntity(resultMap, HttpStatus.OK);
 	}
 	
-	// 평가 목록 불러오기
+	// �룊媛� 紐⑸줉 遺덈윭�삤湲�
 	@RequestMapping(value = "/getEvalList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=utf8")
 	@ResponseBody
 	public ResponseEntity<?> getEvalList(@RequestBody Map<String, Object> info, HttpServletRequest request, HttpServletResponse response) throws DataAccessException {
@@ -65,7 +65,7 @@ public class C001EvalController {
 		return new ResponseEntity(resultMap, HttpStatus.OK);
 	}
 	
-	// 평가 학생 점수 목록 불러오기
+	// �룊媛� �븰�깮 �젏�닔 紐⑸줉 遺덈윭�삤湲�
 	@RequestMapping(value = "/getEvalScore", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=utf8")
 	@ResponseBody
 	public ResponseEntity<?> getEvalScore(@RequestBody Map<String, Object> info, HttpServletRequest request, HttpServletResponse response) throws DataAccessException {
@@ -76,7 +76,7 @@ public class C001EvalController {
 		return new ResponseEntity(resultMap, HttpStatus.OK);
 	}
 	
-	// 평가 점수 업데이트
+	// �룊媛� �젏�닔 �뾽�뜲�씠�듃
 	@RequestMapping(value = "/updateScore", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=utf8")
 	@ResponseBody
 	public ResponseEntity<?> updateScore(@RequestBody List<Map<String, Object>> info, HttpServletRequest request, HttpServletResponse response) throws DataAccessException {
@@ -93,18 +93,19 @@ public class C001EvalController {
 		return new ResponseEntity(resultMap, HttpStatus.OK);
 	}
 	
-	/////////////////////////학생///////////////////////////////
-	// 성적 리스트 가져오기 
+	/////////////////////////�븰�깮///////////////////////////////
+	// �꽦�쟻 由ъ뒪�듃 媛��졇�삤湲� 
 	@RequestMapping(value = "/getStuScoreList", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=utf8")
 	@ResponseBody
 	public ResponseEntity<?> getStuScoreList(@RequestBody Map<String, Object> info, HttpServletRequest request, HttpServletResponse response) throws DataAccessException {
 		logger.info("get/post /getStuScoreList");
 		List<Map<String, Object>> resultMap = c001EvalService.getStuScoreList(info);
+		logger.info("ajax log testtest" + resultMap.toString());		
 		
 		return new ResponseEntity(resultMap, HttpStatus.OK);
 	}
 	
-	// 차트 성적 가져오기 
+	// 李⑦듃 �꽦�쟻 媛��졇�삤湲� 
 	@RequestMapping(value = "/getChartScore", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/json; charset=utf8")
 	@ResponseBody
 	public ResponseEntity<?> getChartScore(@RequestBody Map<String, Object> info, HttpServletRequest request, HttpServletResponse response) throws DataAccessException {

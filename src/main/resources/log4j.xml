@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.rice">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
@@ -34,15 +34,8 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="warn" />
+		<priority value="debug" />
 		<appender-ref ref="console" />
 	</root>
-	
- 	<!-- SQL Logger -->
- 	<!--  SQL 쿼리 문장 -->
-	<logger name="jdbc.sqlonly" additivity="false"> 
-	    <level value="info"/> 
-	    <appender-ref ref="console"/> 
-	</logger>
-	 
+
 </log4j:configuration>

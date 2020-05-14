@@ -13,6 +13,7 @@ public interface F001DAO {
 	// insert
 	public void insertData(Map<String, String> row) throws DataAccessException;
 	public void insertData2(Map<String, String> row) throws DataAccessException;
+	
 	// update
 	public void updateData(Map<String, String> row) throws DataAccessException;
 	public void updateData2(Map<String, String> row) throws DataAccessException;

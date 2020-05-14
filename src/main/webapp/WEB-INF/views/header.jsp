@@ -65,7 +65,7 @@ $(document).ready(function(){
 				   +"</li>"
 				   +"<li class=\"user-footer\">"
 				   +" <div class=\"pull-left\">"
-				   +"  <a href=\"../../../member/logout\" class=\"btn btn-default btn-flat\">L o g - O u t</a>"
+				   +"  <a href=\"../../../member/logout\" class=\"btn btn-default btn-flat\" id=\"btn-logout\">L o g - O u t</a>"
 				   +" </div>"
 				   +" <div class=\"pull-right\">"
 				   +"   <a href=\"../../../member/modify/info\" class=\"btn btn-default btn-flat\">회원정보 변경</a>"
@@ -85,6 +85,12 @@ $(document).ready(function(){
 		setcookie("m3",null);
 	});
 	
+	$("#btn-logout").click(function (e) {
+		setcookie("m1",null);
+		setcookie("m2",null);
+		setcookie("m3",null);
+	});
+	
 	function setcookie(aa, bb) { // 荑좏궎?앹꽦?⑥닔
 		document.cookie = aa + "=" + bb + "; path=/;"
 		return false;
@@ -96,8 +102,8 @@ $(document).ready(function(){
 			<!-- Logo -->
 			<a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 
-				<span class="logo-mini"><img src="${contextPath}/resources/img/로고수정mini.png"></span> <!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><img src="${contextPath}/resources/img/로고수정.png"></span>
+				<span class="logo-mini"><img src="http://52.14.195.150:8080/resources/img/logomini.png"></span> <!-- logo for regular state and mobile devices -->
+				<span class="logo-lg"><img src="http://52.14.195.150:8080/resources/img/logo.png"></span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">

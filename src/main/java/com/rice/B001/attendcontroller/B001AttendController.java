@@ -121,7 +121,7 @@ public class B001AttendController {
 	}
 	
 	// 출석 현황 페이지
-	@RequestMapping(value = "/status", method = RequestMethod.GET)
+	@RequestMapping(value = "/status", method = {RequestMethod.GET, RequestMethod.POST})
 	public String getStatusPage(Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("get /attend/status");
 		

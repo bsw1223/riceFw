@@ -81,8 +81,8 @@
 	
 	<insert id="insertData" parameterType="java.util.Map">
 		<![CDATA[
-			INSERT INTO MEMBER (memNum, memid, memname, mememail, memJoinDate, memModifyDate)
-				values (SEQ_MEMBER.nextval, #{memId}, #{memName}, #{memEmail}, TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(SYSDATE,'YYYY-MM-DD'))
+			INSERT INTO MEMBER (memNum, memid, memname, mememail, memJoinDate, memModifyDate, authId)
+				values (SEQ_MEMBER.nextval, #{memId}, #{memName}, #{memEmail}, TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(SYSDATE,'YYYY-MM-DD'), #{authId})
  		]]>
 	</insert>
 	

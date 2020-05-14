@@ -107,7 +107,7 @@
 			    AND B.ENRID=C.ENRID
 			    AND C.MEMNUM=#{memNum}
 			    AND C.OPENCLASSID=#{openclassId}
-			ORDER BY TO_DATE(A.EVALDATE)
+			ORDER BY B.EVALID
 		]]>
 	</select>
 	

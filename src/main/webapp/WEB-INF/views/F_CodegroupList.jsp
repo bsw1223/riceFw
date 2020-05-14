@@ -27,8 +27,8 @@
 			{Header:"상태",Type:"Status",SaveName:"STATUS",MinWidth:50, Align:"Center"},
 // 			{Header:"삭제",Type:"DelCheck",SaveName:"DEL_CHK",MinWidth:50},
 			
-			{Header:"그룹코드",Type:"Text",SaveName:"codeGroup",MinWidth:100, Align:"Center", Edit:0},
-			{Header:"그룹명",Type:"Text",SaveName:"codeGroupName",MinWidth:200}		
+			{Header:"그룹코드",Type:"Text",SaveName:"codeGroup",MinWidth:50, Align:"Center", Edit:0},
+			{Header:"그룹명",Type:"Text",SaveName:"codeGroupName",MinWidth:300}		
 		];   
 		IBS_InitSheet( mySheet , initSheet);
 
@@ -83,10 +83,10 @@
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>코드 관리</h1>
+		<h1>코드그룹 관리</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">코드 관리</li>
+			<li class="active">코드그룹 관리</li>
 		</ol>
 	</section>
 
@@ -96,7 +96,7 @@
 			<div class="col-md-10">
 				<div class="box box-warning">
 					<div class="box-header with-border">
-						<h3 class="box-title">코드 목록</h3>
+						<h3 class="box-title">코드그룹 목록</h3>
 						
 						<form name='frm'>
 <!-- 							<div class="box-tools pull-right"> -->

@@ -17,13 +17,22 @@
 		<result property="planEndDate" column="PLANENDDATE"/>
 		<result property="planStartTime" column="PLANSTARTTIME"/>
 		<result property="planEndTime" column="PLANENDTIME"/>
+		
+		<result property="classMon" column="CLASSMON"/>
+		<result property="classTue" column="CLASSTUE"/>
+		<result property="classWed" column="CLASSWED"/>
+		<result property="classThur" column="CLASSTHUR"/>
+		<result property="classFri" column="CLASSFRI"/>
+		<result property="classSat" column="CLASSSAT"/>
+		<result property="classSun" column="CLASSSUN"/>
 	</resultMap>
 	
 	<select id="searchList" resultMap="planList" parameterType="java.util.Map">
 		<![CDATA[
 			SELECT A.PLANID, A.PLANCODE, A.PLANNAME, A.PLANLECTURECONTENT,
 			    A.MEMNUM, A.PLANCAPACITY,
-			    A.PLANSTARTDATE, A.PLANENDDATE, A.PLANSTARTTIME, A.PLANENDTIME
+			    A.PLANSTARTDATE, A.PLANENDDATE, A.PLANSTARTTIME, A.PLANENDTIME,
+			    A.CLASSMON, A.CLASSTUE, A.CLASSWED, A.CLASSTHUR, A.CLASSFRI, A.CLASSSAT, A.CLASSSUN
 			FROM LECTUREPLAN A 
 			ORDER BY TO_NUMBER(A.PLANID) DESC
 		]]>
@@ -48,6 +57,14 @@
 			    , planEndDate=#{planEndDate}
 			    , planStartTime=#{planStartTime}
 			    , planEndTime=#{planEndTime}
+			    
+			    , classMon=#{classMon}
+			    , classTue=#{classTue}
+			    , classWed=#{classWed}
+			    , classThur=#{classThur}
+			    , classFri=#{classFri}
+			    , classSat=#{classSat}
+			    , classSun=#{classSun}
 			WHERE planId = #{planId}
 		]]>
 	</update>

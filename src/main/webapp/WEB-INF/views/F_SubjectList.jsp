@@ -32,7 +32,7 @@
 			{Header:"교육과목명",Type:"Text",SaveName:"subName",MinWidth:200,KeyField:1 ,MultiLineText:1, Wrap:1},
 			{Header:"교육과목내용",Type:"Text",SaveName:"subDesc",MinWidth:500},
 			{Header:"생성일자",Type:"Text",SaveName:"subRegDate",MinWidth:100,Edit:0},
-			{Header:"폐지일자",Type:"Date",SaveName:"subAblDate",MinWidth:100,Edit:0},
+			{Header:"폐지일자",Type:"Text",SaveName:"subAblDate",MinWidth:100,Edit:0},
 		];   
 		IBS_InitSheet( mySheet , initSheet);
 
