@@ -687,7 +687,7 @@ var subCodeBasic ='';
 							getLabelName = $("#subName option:checked").attr("label");
 							if (getSubCode == '') {
 								for (i in selectSubIdName) {
-									console.log(selectSubIdName);
+									//console.log(selectSubIdName);
 									getSubCodeName = selectSubIdName[i].SUBNAME;
 									getSubCode = selectSubIdName[i].SUBID;
 									subCodeBasic= selectSubIdName[i].SUBCODE;//코드값
@@ -750,7 +750,7 @@ var subCodeBasic ='';
 						memNum:getMemNum
 					},
 					error :function(request,status,error) {
-						console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						//console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 
 					},
 					success : function(selectMemName) {

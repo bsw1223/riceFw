@@ -110,15 +110,15 @@
       <div class="row no-print">
         <div class="col-md-12">
           
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class=""></i> 수정
-          </button>
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class=""></i> 삭제
-          </button>
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class=""></i> 취소
-          </button>
+<!--           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;"> -->
+<!--             <i class=""></i> 수정 -->
+<!--           </button> -->
+<!--           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;"> -->
+<!--             <i class=""></i> 삭제 -->
+<!--           </button> -->
+<!--           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;"> -->
+<!--             <i class=""></i> 취소 -->
+<!--           </button> -->
         </div>
       </div>
       </div>

@@ -60,13 +60,13 @@ public class KakaoPayController {
 		
 		insertEnrolLecS.put("wholeEnrol", tmp);
 		
-		System.out.println("컨트롤러 : "+insertEnrolLecS.get("wholeEnrol"));
-		System.out.println(insertEnrolLecS.get("wholeEnrol").getClass().getName());
+//		System.out.println("컨트롤러 : "+insertEnrolLecS.get("wholeEnrol"));
+//		System.out.println(insertEnrolLecS.get("wholeEnrol").getClass().getName());
 		List whoelSub = new ArrayList();
 		 whoelSub =  (List) insertEnrolLecS.get("wholeEnrol");
-		System.out.println("size : "+whoelSub.size());	
-		System.out.println("type : "+whoelSub.get(0).getClass().getName());	
-		System.out.println("whoelSub.get(0) :"+whoelSub.get(0));	
+//		System.out.println("size : "+whoelSub.size());	
+//		System.out.println("type : "+whoelSub.get(0).getClass().getName());	
+//		System.out.println("whoelSub.get(0) :"+whoelSub.get(0));	
 		
 		ArrayList classIdList = new ArrayList();
 		for(int i =0 ; i<whoelSub.size();i++) {
@@ -74,7 +74,7 @@ public class KakaoPayController {
 			String stringText = stringTextO.toString();
 			String splitId = stringText.substring(stringText.length()-5, stringText.length()-1);//ClassId 하나씩 스트링으로 잘라냄
 			classIdList.add(splitId);
-			System.out.println("classIdList : "+classIdList);
+//			System.out.println("classIdList : "+classIdList);
 		}
 				
 		HttpSession session = request.getSession(false);

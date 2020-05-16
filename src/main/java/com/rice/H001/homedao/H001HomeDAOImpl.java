@@ -69,7 +69,7 @@ public class H001HomeDAOImpl implements H001HomeDAO {
 	@Override
 	public Map<String, Object> selectSysdate() {
 		Map<String, Object> selectSysdate= sqlsession.selectOne("mapper.Home.selectSysdate");
-		System.out.println("selectSysdate_dao : "+selectSysdate);
+		//System.out.println("selectSysdate_dao : "+selectSysdate);
 		return selectSysdate;
 	}
 

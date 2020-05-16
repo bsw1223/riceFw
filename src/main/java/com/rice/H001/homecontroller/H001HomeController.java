@@ -60,7 +60,7 @@ public class H001HomeController {
 		//�삤�뒛�궇吏� 諛쏆븘�샂
 		String todayDate = today.format(time);
 		Date toDayAll= today.parse(todayDate);
-		System.out.println("toDayAll : "+toDayAll);
+		//System.out.println("toDayAll : "+toDayAll);
 		//System.out.println("�삤�뒛 : " +toDayAll);
 		//System.out.println("�삤�뒛2 : " +todayDate);
 		String toeicDate = h001HomeService.selectToeicDate();
@@ -86,13 +86,13 @@ public class H001HomeController {
 	        Date startDate = sdf.parse(inputStartDate);
 	        Date endDate = sdf.parse(inputEndDate);
 	        Date endDateS = sdf.parse(inputEndDateS);
-	        System.out.println("startDate : "+startDate);
-	        System.out.println("endDate : "+endDate);
-	        System.out.println("endDateS : "+endDateS);
+	        //System.out.println("startDate : "+startDate);
+	        //System.out.println("endDate : "+endDate);
+	        //System.out.println("endDateS : "+endDateS);
 	        long difference = ( startDate.getTime() - endDate.getTime()) / MILLI_SECONDS_PER_DAY;
 	        long differenceS = ( startDate.getTime() - endDateS.getTime() ) / MILLI_SECONDS_PER_DAY;
-	        System.out.println("differenceS :"+differenceS);//ok
-	        System.out.println("difference :"+difference);
+	        //System.out.println("differenceS :"+differenceS);//ok
+	        //System.out.println("difference :"+difference);
 		
 		
 		
@@ -103,9 +103,11 @@ public class H001HomeController {
 		Document doc =Jsoup.connect(URL).get(); 
 		Elements elemExDate = doc.select("#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td:nth-child(1) > a");
 		String exDatet = elemExDate.toString();
-		String exDate = exDatet.replace("<a href=\"/YBMSisacom.asp?SiteURL=https://appexam.ybmnet.co.kr&amp;pageURL=/toeic/receipt/receipt.asp?toeic_times=404\">", "")
-				.replace("<span style=\"color:#dc2f3c\">(일)</span> 09:20</a>", "")
-				.replace("<span style=\"color:#5384d0\">(토)</span> 14:20</a>", "");//�떆�뿕�씪
+		int exNum = 700;
+		String exDate="";
+		exDate= exDatet.replace("<span style=\"color:#dc2f3c\">(일)</span> 09:20</a>", "").replace("<span style=\"color:#5384d0\">(토)</span> 14:20</a>", "");
+		exDate = exDate.substring(exDate.length()-8, exDate.length());
+		
 		h001HomeVO.setExDate(exDate);//�떆�뿕�씪
 		//System.out.println("exDate : " +exDate);
 		Elements elemrecepShedule = doc.select("#reg_table > tbody > tr:nth-child(2) > td > table > tbody > tr:nth-child(2) > td:nth-child(3)");
@@ -155,20 +157,20 @@ public class H001HomeController {
 
 		if(differenceS > 0 )
 		{		
-			System.out.println("TS 접속해서 정보가져오기 ");
+		//System.out.println("TS 접속해서 정보가져오기 ");
 		String URLS = "https://exam.ybmnet.co.kr/toeicswt/"; 
 		Document docS =Jsoup.connect(URLS).get(); 
 		//System.out.println("docS :" +docS);
 		Elements elemExDateS = docS.select("#tabSchedule1sub > table > tbody > tr > td > div > table > tbody > tr:nth-child(1) > td:nth-child(1) > strong");
 		String exDatetS = elemExDateS.toString();
-		System.out.println("exDatestS : "+exDatetS);
+		//System.out.println("exDatestS : "+exDatetS);
 		String exDateS = exDatetS.replace("<strong>", "").replace("<span style=\"color:#458ace\">(토)</span></strong>", "")
 								.replace("2020년 ", "20.")
 								.replace("월 ", ".")
 								.replace("일", "");
 								
 								
-		System.out.println("exDateS : "+exDateS);//시험일
+		//System.out.println("exDateS : "+exDateS);//시험일
 			
 		h001HomeVO.setExDateS(exDateS);//�떆�뿕�씪
 		
@@ -180,13 +182,13 @@ public class H001HomeController {
 												.replace("2020년 ", "20.")
 												.replace("월 ", ".")
 												.replace("일", "");
-		System.out.println("recepSheduleS: "+recepSheduleS);
+		//System.out.println("recepSheduleS: "+recepSheduleS);
 		
 		h001HomeVO.setRecepSheduleS(recepSheduleS);//성적발표 예정일
 		
 		
 		Elements elemDateRlsS = docS.select("#tabSchedule1sub > table > tbody > tr > td > div > table > tbody > tr:nth-child(1) > td.left");
-		System.out.println("elemDateRlsS : "+elemDateRlsS);
+		//System.out.println("elemDateRlsS : "+elemDateRlsS);
 		String dateRlstS = elemDateRlsS.toString();
 		String dateRlsS = dateRlstS.replace("<td class=\"left\"><span class=\"dday\">", "")
 									.replace("D-10", "")
@@ -206,7 +208,7 @@ public class H001HomeController {
 									.replace("월 ", ".")
 									.replace("일", "");
 		
-		System.out.println("dateRlsS : "+dateRlsS);
+		//System.out.println("dateRlsS : "+dateRlsS);
 		h001HomeVO.setDateRlsS(dateRlsS);//접수마감일
 		
 		h001HomeService.updateToeicSheduleS(h001HomeVO);
@@ -218,7 +220,7 @@ public class H001HomeController {
 		}else {
 			System.out.println("TS 접속안함 ");
 			List<Map<String, Object>>selectDdayListS = h001HomeService.selectDdayListS();	
-			System.out.println("�넗�씡 �젙蹂대━�뒪�듃 : "+selectDdayListS);
+			//System.out.println("�넗�씡 �젙蹂대━�뒪�듃 : "+selectDdayListS);
 			
 			String dateRlsS = (String) selectDdayListS.get(0).get("dateRls");
 			String exDateS = selectDdayListS.get(0).get("exDate").toString();
@@ -229,9 +231,9 @@ public class H001HomeController {
 			model.addAttribute("exDateS",exDateS);
 			model.addAttribute("recepSheduleS",recepSheduleS);
 			
-			System.out.println(" exDateS  : "+exDateS);
-			System.out.println(" recepSheduleS  : "+recepSheduleS);
-			System.out.println(" dateRlsS  : "+dateRlsS);
+//			System.out.println(" exDateS  : "+exDateS);
+//			System.out.println(" recepSheduleS  : "+recepSheduleS);
+//			System.out.println(" dateRlsS  : "+dateRlsS);
 		}
 		return "index";
 	}
@@ -263,7 +265,7 @@ public class H001HomeController {
 	@ResponseBody
 	public Map<String, Object> selectSysdate(HttpServletRequest request) {
 		Map<String, Object> selectSysdate = h001HomeService.selectSysdate();//1000은 테스트용  authId로 변경해야함
-		System.out.println("selectSysdate_controller : "+selectSysdate);
+		//System.out.println("selectSysdate_controller : "+selectSysdate);
 		
 		return  selectSysdate;
 	}
@@ -281,7 +283,7 @@ public class H001HomeController {
 	@ResponseBody
 	public Map<String, Object> selectDateToday(HttpServletRequest request) {
 		Map<String, Object> selectDateToday = h001HomeService.selectDateToday();
-		System.out.println("selectDateToday : "+selectDateToday);
+		//System.out.println("selectDateToday : "+selectDateToday);
 		
 		return  selectDateToday;
 	}

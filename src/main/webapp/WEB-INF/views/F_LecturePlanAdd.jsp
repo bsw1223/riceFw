@@ -171,8 +171,8 @@ function readyLecturePlanAdd(){
 						for(i in lecCodeVal){
 							var codeId = lecCodeVal[i].CODEID;
 							var CODENAME = lecCodeVal[i].CODENAME;
-							console.log("codeId : "+codeId);
-							console.log("CODENAME : "+CODENAME);
+							//console.log("codeId : "+codeId);
+							//console.log("CODENAME : "+CODENAME);
 							var addTag = '<option class="" id="" value="'+codeId+'">'+CODENAME+'</option>';
 							$('#lecCode').append(addTag);
 						}
@@ -257,10 +257,10 @@ function addLecPlan(){
     } 
 	submitData= eval(submitData);
 	//submitData= eval(submitData);
-	console.log(submitData);
+	//console.log(submitData);
 	submitData= JSON.stringify(submitData);
 	//submitData= eval(submitData);
-	console.log(submitData);
+	//console.log(submitData);
 	
 	
 // 			console.log("sunD  : "+sunD);
@@ -278,7 +278,7 @@ function addLecPlan(){
 		url: "lecturePlanAdd",
 		data: submitData,
 		success: function(){
-						console.log("insert complete");
+						//console.log("insert complete");
 						alert("등록되었습니다.");
 						location.reload();
 						}

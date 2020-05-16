@@ -146,7 +146,7 @@ public class F001LectureDAOImpl implements F001LectureDAO{
 
 	@Override
 	public void insertEnrolLec(Map<String, Object> insertEnrolLecS) {
-		System.out.println("Dao : "+insertEnrolLecS);
+//		System.out.println("Dao : "+insertEnrolLecS);
 	sqlsession.insert("mapper.f001Lecture.insertEnrolLec", insertEnrolLecS);
 		
 	}
@@ -196,7 +196,7 @@ public class F001LectureDAOImpl implements F001LectureDAO{
 	@Override
 	public void insertCart(Map<String, Object> insertEnrolLecS) {
 		sqlsession.insert("mapper.f001Lecture.insertCart",insertEnrolLecS);
-		System.out.println("dao insertEnrolLecS : " +insertEnrolLecS);
+//		System.out.println("dao insertEnrolLecS : " +insertEnrolLecS);
 
 		return;
 	}
@@ -238,7 +238,7 @@ public class F001LectureDAOImpl implements F001LectureDAO{
 	@Override
 	public List<Map<String, Object>> selectPaidListR(Map<String, Object> memNum) {
 		List<Map<String, Object>> selectPaidListR= sqlsession.selectList("mapper.f001Lecture.selectPaidListR",memNum);
-		System.out.println("dao selectPaidListR : " + selectPaidListR);
+//		System.out.println("dao selectPaidListR : " + selectPaidListR);
 		return selectPaidListR;
 	}
 
@@ -304,7 +304,7 @@ public class F001LectureDAOImpl implements F001LectureDAO{
 	@Override
 	public List<Map<String, Object>> searchOpenClT(Map<String, Object> detailCart) {
 		List<Map<String, Object>> searchOpenClT= sqlsession.selectList("mapper.f001Lecture.searchOpenClT",detailCart);
-		System.out.println("dao_ searchOpenClT : "+ searchOpenClT);
+//		System.out.println("dao_ searchOpenClT : "+ searchOpenClT);
 		return searchOpenClT;
 	}
 

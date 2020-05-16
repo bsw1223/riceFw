@@ -133,7 +133,7 @@ public class F001LectureServiceImpl implements F001LectureService {
 
 	@Override
 	public void insertEnrolLec(Map<String,Object> insertEnrolLecS) {
-		System.out.println("service : "+insertEnrolLecS);
+//		System.out.println("service : "+insertEnrolLecS);
 		f001LectureDAO.insertEnrolLec(insertEnrolLecS);
 		
 	}
@@ -179,7 +179,7 @@ public class F001LectureServiceImpl implements F001LectureService {
 	@Override
 	public void insertCart(Map<String, Object> insertEnrolLecS) {
 		f001LectureDAO.insertCart(insertEnrolLecS);
-		System.out.println("controller_ insertEnrolLecS : " +insertEnrolLecS);
+//		System.out.println("controller_ insertEnrolLecS : " +insertEnrolLecS);
 		return;
 	}
 
@@ -187,7 +187,7 @@ public class F001LectureServiceImpl implements F001LectureService {
 	@Override
 	public void paidlist(String enrId) {
 		f001LectureDAO.paidlist(enrId);
-		System.out.println("service 실행");
+//		System.out.println("service 실행");
 		
 	}
 
@@ -216,7 +216,7 @@ public class F001LectureServiceImpl implements F001LectureService {
 	@Override
 	public List<Map<String, Object>> selectPaidListR(Map<String, Object> memNum) {
 		List<Map<String, Object>> selectPaidListR = f001LectureDAO.selectPaidListR(memNum);
-		System.out.println("service selectPaidListR : " + selectPaidListR);
+//		System.out.println("service selectPaidListR : " + selectPaidListR);
 		return selectPaidListR;
 	}
 
@@ -274,7 +274,7 @@ public class F001LectureServiceImpl implements F001LectureService {
 	@Override
 	public List<Map<String, Object>> searchOpenClT(Map<String, Object> detailCart) {
 		List<Map<String, Object>> searchOpenClT = f001LectureDAO.searchOpenClT(detailCart);
-		System.out.println("controller_ searchOpenClT : "+ searchOpenClT);
+//		System.out.println("controller_ searchOpenClT : "+ searchOpenClT);
 		return searchOpenClT;
 	}
 
@@ -295,7 +295,7 @@ public class F001LectureServiceImpl implements F001LectureService {
 
 	@Override
 	public void lecturePlanAdd(Map<String, Object> memNum) {
-		System.out.println("service memNum:" +memNum);
+//		System.out.println("service memNum:" +memNum);
 		f001LectureDAO.lecturePlanAdd(memNum);
 		
 	}

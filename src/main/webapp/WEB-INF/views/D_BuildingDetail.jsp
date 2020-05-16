@@ -8,7 +8,7 @@
 	var infoList = new Array();
 	/* var bulId  = ; */
 	var bulId  = {bulId:"${building}"};
-	console.log(bulId);
+	//console.log(bulId);
 	$(document).ready(function(){
 		$.ajax({
 		type : "post",
@@ -18,7 +18,7 @@
 		data: bulId,
 		success: function(mapList)
 					{
-						console.log("success");			
+						//console.log("success");			
 						//newMapList : 자바스크립트 객체를 담은 배열
 						 var DBuildingDetail = JSON.parse(mapList);//전체 리스트
 							var bulPhoneNum = DBuildingDetail[0].bulPhoneNum;
@@ -93,15 +93,15 @@
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-md-12">
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class=""></i> 수정
-          </button>
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class=""></i> 삭제
-          </button>
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class=""></i> 취소
-          </button>
+<!--           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;"> -->
+<!--             <i class=""></i> 수정 -->
+<!--           </button> -->
+<!--           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;"> -->
+<!--             <i class=""></i> 삭제 -->
+<!--           </button> -->
+<!--           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;"> -->
+<!--             <i class=""></i> 취소 -->
+<!--           </button> -->
         </div>
       </div>
       </div>

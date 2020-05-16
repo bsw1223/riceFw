@@ -29,9 +29,9 @@ public class KakaoPay {
     KakaoPayApprovalVO kakaoPayApprovalVO;
     
     public String kakaoPayReady(KakaoPayApprovalVO kakaoPayApprovalVO,AmountVO amountVO) {
-    	System.out.println("카카오자바 kakaoPayApprovalVO: "+kakaoPayApprovalVO);
+//    	System.out.println("카카오자바 kakaoPayApprovalVO: "+kakaoPayApprovalVO);
     	item_name= kakaoPayApprovalVO.getItem_name();
-    	System.out.println("카카오자바 amountVO : "+amountVO.toString());
+//    	System.out.println("카카오자바 amountVO : "+amountVO.toString());
     	total_amount= amountVO.getTotal_amount();
     	partner_order_id = kakaoPayApprovalVO.getPartner_order_id();
         RestTemplate restTemplate = new RestTemplate();
