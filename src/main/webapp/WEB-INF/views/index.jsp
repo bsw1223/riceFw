@@ -4,13 +4,16 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%@ include file="header.jsp"%>
 <style>
+.fc-day-number {
+	font-size: 15px;
+}
 #banner{
 border: 1px solid;
 width: 200px;
 float: left;
 padding: 10px;
 margin-left: 30px;
-margin-top: 90px;
+margin-top: 45px;
 min-width:150px;
 }
 

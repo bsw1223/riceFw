@@ -159,7 +159,7 @@ $(document).on('click','.paidClassListDetail',function(){
 	var tr = $(this);
 	var td = tr.children();
 	var trVal=td.eq(0).text();
-	console.log("$(this).val()  : "+trVal);
+	//console.log("$(this).val()  : "+trVal);
 	paidListDetail(trVal);
 });
 
@@ -176,7 +176,7 @@ function paidListDetail(trVal){
 		data : JSON.stringify(subInfoDetail),
 		success : function(paidListDetail) 
 				{
-					console.log(paidListDetail);
+					//console.log(paidListDetail);
 					var dayArray = new Array();
 					var totalCharge = 0;	
 					var tempNum = 0;

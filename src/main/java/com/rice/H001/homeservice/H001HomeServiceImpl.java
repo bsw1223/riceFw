@@ -70,7 +70,7 @@ public class H001HomeServiceImpl implements H001HomeService{
 	@Override
 	public Map<String, Object> selectSysdate() {
 		Map<String, Object> selectSysdate = h001HomeDAO.selectSysdate();
-		System.out.println("selectSysdate_service : "+selectSysdate);
+		//System.out.println("selectSysdate_service : "+selectSysdate);
 		return selectSysdate;
 	}
 
@@ -88,7 +88,7 @@ public class H001HomeServiceImpl implements H001HomeService{
 
 	@Override
 	public void updateToeicShedule(H001HomeVO h001HomeVO) {
-		System.out.println("service : "+h001HomeVO.toString());
+		//System.out.println("service : "+h001HomeVO.toString());
 		h001HomeDAO.updateToeicShedule(h001HomeVO);
 		
 	}
@@ -113,7 +113,7 @@ public class H001HomeServiceImpl implements H001HomeService{
 
 	@Override
 	public void updateToeicSheduleS(H001HomeVO h001HomeVO) {
-		System.out.println("service : "+h001HomeVO.toString());
+		//System.out.println("service : "+h001HomeVO.toString());
 		h001HomeDAO.updateToeicSheduleS(h001HomeVO);
 	}
 

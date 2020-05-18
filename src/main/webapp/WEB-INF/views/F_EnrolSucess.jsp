@@ -180,12 +180,12 @@ var totalClass = {
 		memNum:memnum
 }
 var totalClassS = JSON.stringify(totalClass);
-console.log(approveTime);//결제시간
-console.log(orderId);//대표오더 id
-console.log(itemName);//아이템이름
-console.log(quantity);//수량_ 안씀
-console.log(amountTotal);//총 금액
-console.log(payment);//지불방법_ 안씀
+// console.log(approveTime);//결제시간
+// console.log(orderId);//대표오더 id
+// console.log(itemName);//아이템이름
+// console.log(quantity);//수량_ 안씀
+// console.log(amountTotal);//총 금액
+// console.log(payment);//지불방법_ 안씀
 
 //페이지 이동
 function nextPage(){
@@ -197,7 +197,7 @@ function nextPage(){
 		data : totalClassS,
 		success : function() 
 				{
-					console.log("success");
+					//console.log("success");
 					}
 	});
 };

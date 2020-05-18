@@ -157,7 +157,7 @@ min-width:150px;
 	        	    	 </ul>
 	        	     <!-- search -->
 						<div id="search" class="pull-right" style="margin-top: 10px;">
-							<form id='searchForm' action="/mypage/board//${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method ="get">
+							<form id='searchForm' action="/mypage/board/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}" method ="get">
 								<div class='select'>
 				                  <select name='type' style="width:100px;height:30px;">
 				                    <option value=""
@@ -182,20 +182,20 @@ min-width:150px;
 								</div>
 							</form>
 							<div class="offset-md-8" id="reg" style="margin-left:20px;">
-							<form action="/mypage/board/regForm/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}">
-								<button id="btn-color" type="submit" class="btn pull-right btn-warning btn-fw">질문등록</button>
-							</form>
+								<form action="/mypage/board/regForm/${pageMaker.cri.boCode}/${pageMaker.cri.boURL}">
+									<button id="btn-color" type="submit" class="btn pull-right btn-warning btn-fw">질문등록</button>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-				<div id="banner">
+			<div id="banner">
 					<%@ include file="banner.jsp"%>
 				</div>
 				<div id="banner_left2">
 					<%@ include file="left_banner2.jsp"%>
 				</div>
-			</div>
 			</div>
 		</section>
 	</div>

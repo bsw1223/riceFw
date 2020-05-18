@@ -40,7 +40,7 @@ public class F001ServiceImpl implements F001Service {
 			if("I".equals(str)) {
 				f001DAO.insertData(row);
 				f001DAO.insertData2(row);
-				System.out.println("------------------------>>" + row.get("key_id"));
+//				System.out.println("------------------------>>" + row.get("key_id"));
 			} else if("U".equals(str)) {
 				f001DAO.updateData(row);
 				f001DAO.updateData2(row);

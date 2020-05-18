@@ -265,7 +265,7 @@ public class F001LectureController {	// 회원관리
 	@RequestMapping(value = "insertCart", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public void insertCart(@RequestBody Map<String,Object> insertEnrolLecS, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("insertEnrolLecS : "+insertEnrolLecS);
+		//System.out.println("insertEnrolLecS : "+insertEnrolLecS);
 		f001LectureService.insertCart(insertEnrolLecS);
 		return;
 		
@@ -282,24 +282,24 @@ public class F001LectureController {	// 회원관리
 		//시간에 3시간 더해서 넣기
 		
 			String paidLDate = (String) insertEnrolLecS.get("approveTime");
-			System.out.println(paidLDate);
+			//System.out.println(paidLDate);
 			//날짜 포멧 변경
 			DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd. HH:mm:ss", Locale.KOREA);
 			Date date = dateFormat.parse(paidLDate);//파라미터로 지금형식 넣는다.
-			System.out.println("date1 : "+date);
+			//System.out.println("date1 : "+date);
 			
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(date);
 			cal.add(Calendar.HOUR, 3);//시간더하기, 변경 안됨
 			
-			System.out.println("date2 : "+date);
+			//System.out.println("date2 : "+date);
 			
 			String afterDate = sdf.format(date); 
-			System.out.println("afterDate : "+afterDate);
+			//System.out.println("afterDate : "+afterDate);
 			
 			insertEnrolLecS.put("approveTime",afterDate);
-			System.out.println("insertEnrolLecS :"+insertEnrolLecS);
+			//System.out.println("insertEnrolLecS :"+insertEnrolLecS);
 	
 		
 		f001LectureService.savePaidlist(insertEnrolLecS);//결제정보 저장
@@ -318,32 +318,32 @@ public class F001LectureController {	// 회원관리
 	    ArrayList mapperList = new ArrayList();
 	    String enrId = null;
 	    for(int i =0; i<sessionClassIdList.size();i++) {
-	    	System.out.println("sessionClassIdList :"+sessionClassIdList);
+	    	//System.out.println("sessionClassIdList :"+sessionClassIdList);
 	    	//ArrayList tempIdO3 = new ArrayList();
 	    	tempIdO.add(sessionClassIdList.get(i));//리스트로 들어감
 	    	tempIdO2 = (ArrayList) tempIdO.get(i);
-	    	System.out.println("tempIdO2 : "+tempIdO2);
+	    	//System.out.println("tempIdO2 : "+tempIdO2);
 	    }
 	    
 	    for(int i =0; i<tempIdO2.size();i++) {
 	    	String tempIdO3 =tempIdO2.get(i).toString();
-	    	System.out.println("tempIdO3 : "+tempIdO3);
+//	    	System.out.println("tempIdO3 : "+tempIdO3);
 	    	
 	    	String tempId =  tempIdO3.toString();//세션에 저장된 아이디를 저장한다.과목id임 이것 이용해서 과목정보 가져옴
-	    	System.out.println("tempId : "+tempId);
-	    	System.out.println(memNum);
+//	    	System.out.println("tempId : "+tempId);
+//	    	System.out.println(memNum);
 	    	enrId = tempId+memNum;
-	    	System.out.println("enrId :"+enrId);
+//	    	System.out.println("enrId :"+enrId);
 	    	
 	    	f001LectureService.paidlist(enrId);//수강신청 상태 1600으로 변경
 	    	//결제 세부내역 id로 검색하여 결과 가져오기, 가져와서 db에 저장, list<map>으로 
 	    	String searchSub = f001LectureService.searchSub(tempId);//과목정보 검색한다.
-	    	System.out.println("searchSub :"+searchSub);
+//	    	System.out.println("searchSub :"+searchSub);
 	    	//결제 내역에 과목 id, 가격, 결제번호 넣기
 	    	map.put("tempId",tempId);
 	    	map.put("classPrice",searchSub);
 	    	map.put("orderId",orderId);
-	    	System.out.println("map : "+map);	  
+//	    	System.out.println("map : "+map);	  
 	    	f001LectureService.insertOrderList(map);//과목정보 검색한다.
 	    }
 	   	    
@@ -367,7 +367,7 @@ public class F001LectureController {	// 회원관리
 	@RequestMapping(value = "cartInfo", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public List<Map<String, Object>> cartInfo(@RequestBody String memNum, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("memNum : "+ memNum);
+//		System.out.println("memNum : "+ memNum);
 		List<Map<String, Object>> cartInfo = f001LectureService.cartInfo(memNum);
 		//System.out.println("controller_ cartInfo : "+ cartInfo);
 		//System.out.println("cartInfo : "+cartInfo);
@@ -419,7 +419,7 @@ public class F001LectureController {	// 회원관리
 	@RequestMapping(value = "selectBulCl", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, Object> selectBulCl(@RequestBody Map<String,Object> DetailCart, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//System.out.println("DetailCart : "+ DetailCart);
+
 		Map<String, Object> selectBulCl = f001LectureService.selectBulCl(DetailCart);
 		//System.out.println("controller_ selectBulCl : "+ selectBulCl);
 		
@@ -431,15 +431,15 @@ public class F001LectureController {	// 회원관리
 	@RequestMapping(value = "searchOpenClT", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public List<Map<String, Object>> searchOpenClT(@RequestBody Map<String,Object> DetailCart, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("DetailCart : "+ DetailCart);
+//		System.out.println("DetailCart : "+ DetailCart);
 		List<Map<String, Object>> searchOpenClT = f001LectureService.searchOpenClT(DetailCart);
-		//System.out.println("controller_ searchOpenClT : "+ searchOpenClT);
+
 		return searchOpenClT;
 	}
 	@RequestMapping(value = "selectCountCapa", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, Object> selectCountCapa(@RequestBody Map<String,Object> DetailCart, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//System.out.println("selectCountCapa : "+ DetailCart);
+
 		Map<String, Object> selectCountCapa = f001LectureService.selectCountCapa(DetailCart);
 		//System.out.println("controller_ selectCountCapa : "+ selectCountCapa);
 		
@@ -486,7 +486,7 @@ public class F001LectureController {	// 회원관리
 	@RequestMapping(value = "selectClassCapa", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public List<Map<String, Object>> selectClassCapa(@RequestBody Map<String,Object> memNum, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//System.out.println("CONTROLLER"+memNum);
+
 		List<Map<String, Object>> selectClassCapa = f001LectureService.selectClassCapa(memNum);
 		//System.out.println("selectClassCapa"+selectClassCapa);
 		return selectClassCapa;

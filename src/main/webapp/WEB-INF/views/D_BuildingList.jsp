@@ -142,7 +142,7 @@
 		$(".page-item").on("click", function(e) {
 			e.preventDafault();
 
-			console.log('click');
+			//console.log('click');
 			actionForm.find("input[name='page']").val($(this).attr("href"));
 			actionForm.submit();
 		});

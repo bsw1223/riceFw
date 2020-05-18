@@ -34,7 +34,7 @@ width: 200px;
 float: left;
 padding: 10px;
 margin-left: 10px;
-margin-top: 90px;
+margin-top: 45px;
 min-width:150px;
 }
 
@@ -81,7 +81,7 @@ min-width:150px;
 		<section class="content">
 			<div class="row">
 					<div class="col-md-10">
-						<div class="box box-primary">
+						<div class="box box-warning">
 							<div class="box-header">
 								<h2 class="box-title">QnA 게시판</h2>
 							</div>
@@ -256,7 +256,7 @@ $(document).ready(function(){
 		
 		var path = encodeURIComponent(liObj.data("path")+"\\"+liObj.data("classfilenum")+"_"+liObj.data("filename"));
 		
-		self.location="/mypage/board/download?fileName="+path;
+		self.location="http://52.14.195.150:8080/resources/img/"+liObj.data("classfilenum")+"_"+liObj.data("filename");
 		
 	});
 });
