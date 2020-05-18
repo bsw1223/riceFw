@@ -419,7 +419,7 @@ public class F001LectureController {	// 회원관리
 	@RequestMapping(value = "selectBulCl", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, Object> selectBulCl(@RequestBody Map<String,Object> DetailCart, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("DetailCart : "+ DetailCart);
+		//System.out.println("DetailCart : "+ DetailCart);
 		Map<String, Object> selectBulCl = f001LectureService.selectBulCl(DetailCart);
 		//System.out.println("controller_ selectBulCl : "+ selectBulCl);
 		
@@ -433,13 +433,13 @@ public class F001LectureController {	// 회원관리
 	public List<Map<String, Object>> searchOpenClT(@RequestBody Map<String,Object> DetailCart, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("DetailCart : "+ DetailCart);
 		List<Map<String, Object>> searchOpenClT = f001LectureService.searchOpenClT(DetailCart);
-		System.out.println("controller_ searchOpenClT : "+ searchOpenClT);
+		//System.out.println("controller_ searchOpenClT : "+ searchOpenClT);
 		return searchOpenClT;
 	}
 	@RequestMapping(value = "selectCountCapa", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public Map<String, Object> selectCountCapa(@RequestBody Map<String,Object> DetailCart, F001LectureVO f001LectureVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("selectCountCapa : "+ DetailCart);
+		//System.out.println("selectCountCapa : "+ DetailCart);
 		Map<String, Object> selectCountCapa = f001LectureService.selectCountCapa(DetailCart);
 		//System.out.println("controller_ selectCountCapa : "+ selectCountCapa);
 		
@@ -486,7 +486,7 @@ public class F001LectureController {	// 회원관리
 	@RequestMapping(value = "selectClassCapa", method= {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=utf8")
 	@ResponseBody
 	public List<Map<String, Object>> selectClassCapa(@RequestBody Map<String,Object> memNum, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("CONTROLLER"+memNum);
+		//System.out.println("CONTROLLER"+memNum);
 		List<Map<String, Object>> selectClassCapa = f001LectureService.selectClassCapa(memNum);
 		//System.out.println("selectClassCapa"+selectClassCapa);
 		return selectClassCapa;

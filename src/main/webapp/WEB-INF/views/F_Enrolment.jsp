@@ -1275,6 +1275,7 @@ $(document).on('click','#cartButtonModal',function(){
 });
 
 //셀렉트 박스 
+
 	$(document).on('click','#searchOpenClT',function(){
 		var submitData = {
 				subCode: $("#subIdJsp option:selected").val(),
@@ -1297,6 +1298,11 @@ $(document).on('click','#cartButtonModal',function(){
 						}
 		});
 	})
+
+
+
+
+
 	
 //인기강의 td 길이가 3 이하이면 강의목록에서 가져감
 function addRecommend(){

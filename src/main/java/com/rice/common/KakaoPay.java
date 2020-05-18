@@ -52,9 +52,9 @@ public class KakaoPay {
         params.add("quantity", "1");
         params.add("total_amount", total_amount);
         params.add("tax_free_amount", "100");
-        params.add("approval_url", "http://localhost:8085/kakaoPaySuccess");
-        params.add("cancel_url", "http://localhost:8085/kakaoPayCancel");
-        params.add("fail_url", "http://localhost:8085/kakaoPaySuccessFail");
+        params.add("approval_url", "http://52.14.195.150:8080/kakaoPaySuccess");
+        params.add("cancel_url", "http://52.14.195.150:8080/kakaoPayCancel");
+        params.add("fail_url", "http://52.14.195.150:8080/kakaoPaySuccessFail");
        // System.out.println("kakaoPayReady(2)");
  
          HttpEntity<MultiValueMap<String, Object>> body = new HttpEntity<MultiValueMap<String, Object>>(params, headers);
