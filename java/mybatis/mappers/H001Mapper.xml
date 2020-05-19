@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.Home">
+	<resultMap id="HomeResult" type="java.util.HashMap">
+		<result property="menuId" column="menuId" />
+        <result property="menuName" column="menuName" />
+        <result property="parentMenuId" column="parentMenuId" />
+        
+		<result property="menuOrder" column="menuOrder" />
+        <result property="menuURL" column="menuURL" />
+        <result property="authId" column="authId" />
+        
+		<result property="authName" column="authName" />
+        <result property="memNum" column="memNum" />
+        <result property="memId" column="memId" />
+
+		<result property="memPwd" column="memPwd" />
+        <result property="memEmail" column="memEmail" />
+        <result property="memTel" column="memTel" />
+        <result property="memJoinDate" column="memJoinDate" />
+        <result property="openClassname" column="openClassname" />
+        <result property="openClassId" column="openClassId" />
+        <result property="selectSysdate" column="selectSysdate" />
+        <result property="dateClassChoice" column="dateClassChoice" />
+        
+        <result property="subCode" column="subCode" />
+        <result property="exDate" column="exDate" />
+        <result property="recepShedule" column="recepShedule" />
+        <result property="addrecepShedule" column="addrecepShedule" />
+        <result property="dateRls" column="dateRls" />
+	</resultMap> 
+	
+	<resultMap id="HomeResultString" type="String">
+        <result property="recepShedule" column="recepShedule" />
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="todayClass">
+		<result property="openclassId" column="openclassId"/>
+		<result property="openclassName" column="openclassName"/>
+	</resultMap>
+	
+<!--       select * from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid} -->
+	<select id="getMenuList" parameterType="String" resultMap="HomeResult">
+      <![CDATA[
+  		 select a.menuId, menuName, parentMenuId, menuOrder, menuURL, authId
+  		 from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
+ 		 order by to_number(a.parentmenuid),to_number(a.menuorder),to_number(a.menuid)
+      ]]>
+	</select>
+	
+	<!-- 영어 -->
+	<select id="getMenuListEN" parameterType="String" resultMap="HomeResult">
+      <![CDATA[
+  		 select a.menuId, A.MENUNAMEEN menuName, parentMenuId, menuOrder, menuURL, authId
+  		 from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
+ 		 order by to_number(a.parentmenuid),to_number(a.menuorder),to_number(a.menuid)
+      ]]>
+	</select>
+	
+	<!-- 중국어 -->
+	<select id="getMenuListCN" parameterType="String" resultMap="HomeResult">
+      <![CDATA[
+  		 select a.menuId, A.MENUNAMECN menuName, parentMenuId, menuOrder, menuURL, authId
+  		 from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
+ 		 order by to_number(a.parentmenuid),to_number(a.menuorder),to_number(a.menuid)
+      ]]>
+	</select>
+	
+	<!-- 일본어 -->
+	<select id="getMenuListJP" parameterType="String" resultMap="HomeResult">
+      <![CDATA[
+  		 select a.menuId, A.MENUNAMEJP menuName, parentMenuId, menuOrder, menuURL, authId
+  		 from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
+ 		 order by to_number(a.parentmenuid),to_number(a.menuorder),to_number(a.menuid)
+      ]]>
+	</select>
+	
+	<!-- 스페인어 -->
+	<select id="getMenuListES" parameterType="String" resultMap="HomeResult">
+      <![CDATA[
+  		 select a.menuId, A.MENUNAMEES menuName, parentMenuId, menuOrder, menuURL, authId
+  		 from menu a, menuauth b where a.menuid=b.menuid and b.authId=#{authid}
+ 		 order by to_number(a.parentmenuid),to_number(a.menuorder),to_number(a.menuid)
+      ]]>
+	</select>
+	
+
+	<select id="getSubList" parameterType="String" resultMap="HomeResult">
+      <![CDATA[
+		 select a.openclassname , a.openClassId from
+		 ( 
+		 select memnum,openclassid, openclassName from ENROLMENT 
+		 union
+		 select memnum, openclassid,openclassname from openclass
+		 )
+		 a, MEMBER b where a.memnum=b.memnum and b.memnum=#{memnum}
+      ]]>
+	</select>
+
+<!--오늘날짜 받아오기 -->
+	<select id="selectSysdate" resultMap="HomeResult">
+      <![CDATA[
+		SELECT to_char(sysdate,'d')as selectSysdate FROM DUAL
+      ]]>
+	</select>
+	
+	<!-- 날짜별 쿼리 -->
+	<select id="selectDateToday" resultMap="HomeResult">
+      <![CDATA[
+		select to_char(sysdate,'yyyy-mm-dd')as selectDateToday from dual
+      ]]>
+	</select>
+	
+<!-- 	토익일정업데이트 -->
+	<update id="updateToeicShedule" parameterType="h001HomeVO">
+	<![CDATA[
+	  merge into EXSCHEDULE m
+		  using ( select '00' as subCode, #{exDate} as exDate, #{recepShedule} as recepShedule
+		  , #{dateRls} as dateRls from dual ) e
+		  on (m.subCode = e.subCode)         
+		  when matched then 
+		  update set 
+		  exDate = e.exDate, 
+		  recepShedule = e.recepShedule,
+		  dateRls = e.dateRls
+		  when not matched then
+	    insert (exDate, recepShedule,dateRls)
+	    values (e.exDate, e.recepShedule, e.dateRls) 
+     ]]>
+	</update>
+	
+	<!-- 	토익일정업데이트 -->
+	<update id="updateToeicSheduleS" parameterType="h001HomeVO">
+	<![CDATA[
+	  merge into EXSCHEDULE m
+		  using ( select '01' as subCode, #{exDateS} as exDate, #{recepSheduleS} as recepShedule
+		  , #{dateRlsS} as dateRls from dual ) e
+		  on (m.subCode = e.subCode)         
+		  when matched then 
+		  update set 
+		  exDate = e.exDate, 
+		  recepShedule = e.recepShedule,
+		  dateRls = e.dateRls
+		  when not matched then
+	    insert (exDate, recepShedule,dateRls)
+	    values (e.exDate, e.recepShedule, e.dateRls) 
+     ]]>
+	</update>
+<!-- 	db에서 날짜받아오기 -->
+	<select id="selectToeicDate" resultType="String">
+      <![CDATA[
+		select EXDATE from EXSCHEDULE WHERE SUBCODE='00'
+      ]]>
+	</select>
+	<select id="selectToeicDateS" resultType="String">
+      <![CDATA[
+		select EXDATE from EXSCHEDULE  WHERE SUBCODE='01'
+      ]]>
+	</select>
+	
+	<select id="selectDdayList" resultMap="HomeResult">
+      <![CDATA[
+		select * from EXSCHEDULE WHERE SUBCODE='00'
+      ]]>
+	</select>
+	
+	<select id="selectDdayListS" resultMap="HomeResult">
+      <![CDATA[
+		select * from EXSCHEDULE WHERE SUBCODE='01'
+      ]]>
+	</select>
+	
+	<!-- 오늘 수업 목록 GET -->
+	<select id="getTodayClass" resultMap="todayClass" parameterType="java.util.HashMap">
+		<![CDATA[
+			SELECT B.OPENCLASSID, B.OPENCLASSNAME || '  ' || B.OPENSTARTTIME || '~' || B.OPENENDTIME OPENCLASSNAME
+			FROM ENROLMENT A, OPENCLASS B
+			WHERE A.OPENCLASSID=B.OPENCLASSID
+			    AND A.MEMNUM=#{memNum}
+			    AND TO_DATE(B.OPENSTARTDATE, 'YYYY-MM-DD') < TO_DATE(#{currentDate}, 'YYYY-MM-DD')
+			    AND TO_DATE(B.OPENENDDATE, 'YYYY-MM-DD') > TO_DATE(#{currentDate}, 'YYYY-MM-DD')
+		]]>
+		<if test="currentDay == 0">
+			<![CDATA[
+				AND B.CLASSSUN = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 1">
+			<![CDATA[
+				AND B.CLASSMON = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 2">
+			<![CDATA[
+				AND B.CLASSTUE = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 3">
+			<![CDATA[
+				AND B.CLASSWED = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 4">
+			<![CDATA[
+				AND B.CLASSTHUR = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 5">
+			<![CDATA[
+				AND B.CLASSFRI = 'y'
+			]]>
+		</if>
+		<if test="currentDay == 6">
+			<![CDATA[
+				AND B.CLASSSAT = 'y'
+			]]>
+		</if>
+	</select>
+	
+	
+</mapper>
+	
+		
