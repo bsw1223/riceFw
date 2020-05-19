@@ -202,7 +202,7 @@ function holdDel(){
 };
 	
 function CartInfo(){
-	console.log(memnum);
+	//console.log(memnum);
 	$.ajax({
 			type : "post",
 			async : true,
@@ -211,7 +211,7 @@ function CartInfo(){
 			data : memnum,
 			success : function(cartInfo) 
 					{
-						console.log(cartInfo);
+					    //console.log(cartInfo);
 						var dayArray = new Array();
 						//var totalCharge = 0;	
 						//var tempNum = 0;

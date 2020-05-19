@@ -81,7 +81,7 @@ min-width:150px;
 		<section class="content">
 			<div class="row">
 					<div class="col-md-10">
-						<div class="box box-primary">
+						<div class="box box-warning">
 							<div class="box-header">
 								<h2 class="box-title">QnA 게시판</h2>
 							</div>
